@@ -1,0 +1,21 @@
+services:
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "5000:${FRONTEND_PORT}"
+    develop:
+      watch:
+        - action: sync
+          path: ./frontend
+          target: /app
+          ignore:
+            - node_modules/
+        - action: rebuild
+          path: ./frontend/package.json
+  
+
+  backend:
+    build: ./backend
+    ports:
+      - "8080:${BACKEND_PORT}"
