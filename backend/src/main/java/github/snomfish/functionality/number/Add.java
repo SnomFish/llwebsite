@@ -31,9 +31,9 @@ public class Add implements INumber {
             for (Branch<Double> existing : outcomes) {
                 for (Branch<Double> next : numberOutcomes) {
 
-                    double value = existing.getValue() + next.getValue();
+                    double value = existing.value() + next.value();
                     double probability =
-                        existing.getProbability() * next.getProbability();
+                        existing.probability() * next.probability();
 
                     newOutcomes.add(new Branch<>(value, probability));
                 }
@@ -42,6 +42,6 @@ public class Add implements INumber {
             outcomes = newOutcomes;
         }
 
-        return BranchUtil.compact(outcomes);
+        return outcomes;
     }
 }

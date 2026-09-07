@@ -4,7 +4,7 @@ public class Branch<T> {
     
 
     private final T value;
-    private final double probability;
+    private double probability;
     
 
     public Branch (
@@ -16,10 +16,11 @@ public class Branch<T> {
 
 
     // getter
-    public T getValue() {
-        return value;
-    }
-    public double getProbability() {
-        return probability;
+    public T value() {return value;}
+    public double probability() {return probability;}
+
+    
+    public void multiplyProbability(double delta) {
+        this.probability *= delta;
     }
 }

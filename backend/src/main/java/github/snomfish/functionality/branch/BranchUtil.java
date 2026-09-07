@@ -1,9 +1,7 @@
 package github.snomfish.functionality.branch;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Function;
 
 public class BranchUtil {
@@ -18,11 +16,11 @@ public class BranchUtil {
         List<Branch<B>> result = new ArrayList<>();
         for (Branch<A> branch : branches) {
 
-            List<Branch<B>> newBranches = function.apply(branch.getValue());   
+            List<Branch<B>> newBranches = function.apply(branch.value());   
             for (Branch<B> newBranch : newBranches) {
                 result.add(new Branch<B>(
-                    newBranch.getValue(), 
-                    branch.getProbability() * newBranch.getProbability()
+                    newBranch.value(), 
+                    branch.probability() * newBranch.probability()
                 ));
             }
         }
@@ -30,19 +28,11 @@ public class BranchUtil {
     }
 
 
-    public static <T> List<Branch<T>> compact(List<Branch<T>> branches) {
-        Map<T, Double> map = new HashMap<>();
+    // multiplies the probability by a set value across all branches
+    public static <T> List<Branch<T>> mulProb(List<Branch<T>> branches, double delta) {
         for (Branch<T> branch : branches) {
-            T value = branch.getValue();
-            Double probability = branch.getProbability();
-            probability += map.get(value) != null ? map.get(value) : 0;
-            map.put(value, probability);
+            branch.multiplyProbability(delta); 
         }
-        List<Branch<T>> newBranches = new ArrayList<>();
-        for (T key : map.keySet()) {
-            Double probability = map.get(key);
-            newBranches.add(new Branch<T>(key, probability));
-        }
-        return newBranches;
+        return branches;
     }
 }

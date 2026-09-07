@@ -4,7 +4,6 @@ import java.util.List;
 
 import github.snomfish.domain.Gamestate;
 import github.snomfish.domain.Side;
-import github.snomfish.functionality.action.IAction;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.event.EventId;
 
@@ -14,34 +13,28 @@ public class BattleContext {
     
     private final Gamestate gamestate;
     private final BattleSide user;
-    private final BattleSide enemy;
-    private final IAction action;
+    private final BattleSide target;
 
 
     public BattleContext(
         Gamestate gamestate, 
         Side userSide, 
-        Side targetSide,
-        IAction action
+        Side targetSide
     ) {
         this.gamestate = gamestate;
         this.user = new BattleSide(userSide);
-        this.enemy = new BattleSide(targetSide);
-        this.action = action;
+        this.target = new BattleSide(targetSide);
     }
 
 
-    public Gamestate getGamestate() {
+    public Gamestate gamestate() {
         return gamestate;
     }
-    public BattleSide getUser() {
+    public BattleSide user() {
         return user;
     }
-    public BattleSide getEnemy() {
-        return enemy;
-    }
-    public IAction getAction() {
-        return action;
+    public BattleSide target() {
+        return target;
     }
 
 

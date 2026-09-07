@@ -6,31 +6,24 @@ public class Side {
 
 
     private List<Loomian> party;
-    private int activeLoomianI;
+    private ActiveLoomian activeLoomian;
 
 
     public Side() {
-
+        setActiveLoomian(0);
     }
 
 
     // getter
-    public List<Loomian> getParty() {
-        return party;
-    }
-    public int getActiveLoomianI() {
-        return activeLoomianI;
-    }
-    public Loomian getActiveLoomian() {
-        return party.get(activeLoomianI);
-    }
+    public List<Loomian> getParty() {return party;}
+    public ActiveLoomian activeLoomian() {return activeLoomian;}
 
 
     // setter
     public void setParty(List<Loomian> party) {
         this.party = party;
     }
-    public void setActiveLoomianI(int activeLoomianI) {
-        this.activeLoomianI = activeLoomianI;
+    public void setActiveLoomian(int activeLoomianI) {
+        this.activeLoomian = new ActiveLoomian(party.get(activeLoomianI));
     }
 }

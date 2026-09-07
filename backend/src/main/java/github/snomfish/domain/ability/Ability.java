@@ -19,15 +19,4 @@ public class Ability implements IAbility {
         this.name = name;
         this.abilityRules = abilityRules;
     }
-
-    
-    public Ability(
-        AbilityId id,
-        String name,
-        AbilityRule abilityRule
-    ) {
-        this.id = id;
-        this.name = name;
-        this.abilityRules.add(abilityRule);
-    }
 }

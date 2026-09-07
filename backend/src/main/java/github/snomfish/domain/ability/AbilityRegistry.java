@@ -4,8 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static github.snomfish.domain.ability.AbilityId.*;
+import github.snomfish.domain.status.StatusId;
+import github.snomfish.functionality.condition.Equals;
+import github.snomfish.functionality.condition.Or;
 
+import static github.snomfish.domain.ability.AbilityId.*;
+import static github.snomfish.functionality.event.EventId.*;
 
 public class AbilityRegistry {
     
@@ -23,409 +27,519 @@ public class AbilityRegistry {
 
     private static void register(
         AbilityId id,
-        String name
+        String name,
+        AbilityRule rule
     ) {
-        Ability ability = new Ability(
-            id, 
-            name,
-            List.of()
-        );
-        registry.put(id, ability);
+        registry.put(id, new Ability(id, name, List.of(rule)));
     }
+
+
+    /*private static void register(
+        AbilityId id,
+        String name,
+        List<AbilityRule> rules
+    ) {
+        registry.put(id, new Ability(id, name, rules));
+    }*/
 
 
     static {
         register(
 	        ABILITY_THIEF,
-            "ability thief"
+            "ability thief",
+			null
         );
         register(
             ADORABLE,
-            "adorable"
+            "adorable",
+			null
         );
         register(
             AGGRESSIVE,
-            "aggressive"
+            "aggressive",
+			null
         );
         register(
             AMBUSH,
-            "ambush"
+            "ambush",
+			null
         );
         register(
             ANALYZE,
-            "analyze"
+            "analyze",
+			null
         );
         register(
             ANOMALY,
-            "anomaly"
+            "anomaly",
+			null
         );
         register(
             APPLIED_FRUSTRATIONS,
-            "applied frustrations"
+            "applied frustrations",
+			null
         );
         register(
             APPREHENSION,
-            "apprehension"
+            "apprehension",
+			null
         );
         register(
             AQUA_BODY,
-            "aqua body"
+            "aqua body",
+			null
         );
         register(
             ASSERTIVE,
-            "assertive"
+            "assertive",
+			null
         );
         register(
             AWAKENING,
-            "awakening"
+            "awakening",
+			null
         );
         register(
             BANEFUL,
-            "baneful"
+            "baneful",
+			new AbilityRule(
+                USER_DAMAGE_MULTIPLIER, 
+                new Or(List.of(
+                    new Equals<>(Value.USER_STATUS_ID, StatusId.POISON),
+                    new Equals<>(Value.USER_STATUS_ID, StatusId.BAD_POISON)
+                )), 
+                new 
+            );
         );
         register(
             BERSERK,
-            "berserk"
+            "berserk",
+			null
         );
         register(
             BITTER_TOUCH,
-            "bitter touch"
+            "bitter touch",
+			null
         );
         register(
             BLISTERING_HEAT,
-            "blistering heat"
+            "blistering heat",
+			null
         );
         register(
             BOAST,
-            "boast"
+            "boast",
+			null
         );
         register(
             BRUTAL_WRATH,
-            "brutal wrath"
+            "brutal wrath",
+			null
         );
         register(
             BRUTE_FORCE,
-            "brute force"
+            "brute force",
+			null
         );
         register(
             BULLY,
-            "bully"
+            "bully",
+			null
         );
         register(
             BURGLER,
-            "burgler"
+            "burgler",
+			null
         );
         register(
             CADDIE,
-            "caddie"
+            "caddie",
+			null
         );
         register(
             CAPTIVATING,
-            "captivating"
+            "captivating",
+			null
         );
         register(
             CAROL,
-            "carol"
+            "carol",
+			null
         );
         register(
             CHARGED_ARC,
-            "charged arc"
+            "charged arc",
+			null
         );
         register(
             CHILL,
-            "chill"
+            "chill",
+			null
         );
         register(
             CLINGY,
-            "clingy"
+            "clingy",
+			null
         );
         register(
             CLUTCH,
-            "clutch"
+            "clutch",
+			null
         );
         register(
             COMBATIVE,
-            "combative"
+            "combative",
+			null
         );
         register(
             COMBUSTIBLE,
-            "combustible"
+            "combustible",
+			null
         );
         register(
             COMMUNICATION,
-            "communication"
+            "communication",
+			null
         );
         register(
             COMPLIANT,
-            "compliant"
+            "compliant",
+			null
         );
         register(
             CONFIDENCE,
-            "confidence"
+            "confidence",
+			null
         );
         register(
             CONSPIRE,
-            "conspire"
+            "conspire",
+			null
         );
         register(
             COURSING_VENOM,
-            "coursing venom"
+            "coursing venom",
+			null
         );
         register(
             DEFENSIVE_PRIORITY,
-            "defensive priority"
+            "defensive priority",
+			null
         );
         register(
             DEMANDING,
-            "demanding"
+            "demanding",
+			null
         );
         register(
             DESIGNATED_CHOMPERS,
-            "designated chompers"
+            "designated chompers",
+			null
         );
         register(
             DEVIOUS,
-            "devious"
+            "devious",
+			null
         );
         register(
             DISENCHANT,
-            "disenchant"
+            "disenchant",
+			null
         );
         register(
             DO_OR_DIE,
-            "do or die"
+            "do or die",
+			null
         );
         register(
             DRAINAGE,
-            "drainage"
+            "drainage",
+			null
         );
         register(
             DRIVEN,
-            "driven"
+            "driven",
+			null
         );
         register(
             ELUSIVE,
-            "elusive"
+            "elusive",
+			null
         );
         register(
             ENCHANTED_COAT,
-            "enchanted coat"
+            "enchanted coat",
+			null
         );
         register(
             EXPERTISE,
-            "expertise"
+            "expertise",
+			null
         );
         register(
             FESTIVE_SPIRIT,
-            "festive spirit"
+            "festive spirit",
+			null
         );
         register(
             FINESSE,
-            "finesse"
+            "finesse",
+			null
         );
         register(
             FOG_SUMMON,
-            "fog summon"
+            "fog summon",
+			null
         );
         register(
             FORTISSIMO,
-            "fortissimo"
+            "fortissimo",
+			null
         );
         register(
             FRAIL_ARMOUR,
-            "frail armour"
+            "frail armour",
+			null
         );
         register(
             FRENZY,
-            "frenzy"
+            "frenzy",
+			null
         );
         register(
             GLIDE,
-            "glide"
+            "glide",
+			null
         );
         register(
             GLUTTON,
-            "glutton"
+            "glutton",
+			null
         );
         register(
             GUARDIAN,
-            "guardian"
+            "guardian",
+			null
         );
         register(
             GUMMY,
-            "gummy"
+            "gummy",
+			null
         );
         register(
             HANDY,
-            "handy"
+            "handy",
+			null
         );
         register(
             HARD_CANDY,
-            "hard candy"
+            "hard candy",
+			null
         );
         register(
             HASTY,
-            "hasty"
+            "hasty",
+			null
         );
         register(
             HEAT_SUMMON,
-            "heat summon"
+            "heat summon",
+			null
         );
         register(
             HOTFOOT,
-            "hotfoot"
+            "hotfoot",
+			null
         );
         register(
             HOVER,
-            "hover"
+            "hover",
+			null
         );
         register(
             HYDRATE,
-            "hydrate"
+            "hydrate",
+			null
         );
         register(
             HYDRO_VORTEX,
-            "hydro vortex"
+            "hydro vortex",
+			null
         );
         register(
             IDIOSYNCRATIC,
-            "idiosyncratic"
+            "idiosyncratic",
+			null
         );
         register(
             IGNORANT,
-            "ignorant"
+            "ignorant",
+			null
         );
         register(
             IMMUNIZED,
-            "immunized"
+            "immunized",
+			null
         );
         register(
             INCANDESCENT,
-            "incandescent"
+            "incandescent",
+			null
         );
         register(
             INSULATED,
-            "insulated"
+            "insulated",
+			null
         );
         register(
             INTERN,
-            "intern"
+            "intern",
+			null
         );
         register(
             LAZY,
-            "lazy"
+            "lazy",
+			null
         );
         register(
             LIFE_FORCE,
-            "life force"
+            "life force",
+			null
         );
         register(
             LIGHTNING_ROD,
-            "lightning rod"
+            "lightning rod",
+			null
         );
         register(
             LUCKY,
-            "lucky"
+            "lucky",
+			null
         );
         register(
             MADCAP,
-            "madcap"
+            "madcap",
+			null
         );
         register(
             MALWARE,
-            "malware"
+            "malware",
+			null
         );
         register(
             MARKSMAN,
-            "marksman"
+            "marksman",
+			null
         );
         register(
             MESMERIZING,
-            "mesmerizing"
+            "mesmerizing",
+			null
         );
         register(
             METAMORPHOSIS,
-            "metamorphosis"
+            "metamorphosis",
+			null
         );
         register(
             MIMIC,
-            "mimic"
+            "mimic",
+			null
         );
         register(
             MOTIVATIONAL,
-            "motivational"
+            "motivational",
+			null
         );
         register(
             MYSTERIOUS_CLOAK,
-            "mysterious cloak"
+            "mysterious cloak",
+			null
         );
         register(
             MYSTERY_TOXINS,
-            "mystery toxins"
+            "mystery toxins",
+			null
         );
         register(
             NEUTRALIZE,
-            "neutralize"
+            "neutralize",
+			null
         );
         register(
             NOXIOUS_WEEDS,
-            "noxious weeds"
+            "noxious weeds",
+			null
         );
         register(
             ODD_HUST,
-            "odd hust"
+            "odd hust",
+			null
         );
         register(
             OVERCHARGED,
-            "overcharged"
+            "overcharged",
+			null
         );
         register(
             OVERCLOCK,
-            "overclock"
+            "overclock",
+			null
         );
         register(
             OXIDIZE,
-            "oxidize"
+            "oxidize",
+			null
         );
         register(
             PARTING_GIFT,
-            "parting gift"
+            "parting gift",
+			null
         );
         register(
             PETRIFYING,
-            "petrifying"
+            "petrifying",
+			null
         );
         register(
             PITCH_BLACK,
-            "pitch black"
+            "pitch black",
+			null
         );
         register(
             PLAYFUL,
-            "playful"
+            "playful",
+			null
         );
         register(
             PLUVIAL,
-            "pluvial"
+            "pluvial",
+			null
         );
         register(
             POWER_CLAW,
-            "power claw"
+            "power claw",
+			null
         );
         register(
             POWER_JAW,
-            "power jaw"
+            "power jaw",
+			null
         );
         register(
             POWER_LEGS,
-            "power legs"
+            "power legs",
+			null
         );
         register(
             POWER_NAPPER,
-            "power napper"
+            "power napper",
+			null
         );
         register(
             PREMONITION,
-            "premonition"
+            "premonition",
+			null
         );
         register(
             PRISMATIC,
@@ -433,291 +547,363 @@ public class AbilityRegistry {
         );
         register(
             PROTECTIVE_SHELL,
-            "protective shell"
+            "protective shell",
+			null
         );
         register(
             PROWLER,
-            "prowler"
+            "prowler",
+			null
         );
         register(
             PUNCTURE,
-            "puncture"
+            "puncture",
+			null
         );
         register(
             PYRO,
-            "pyro"
+            "pyro",
+			null
         );
         register(
             QUICK_RECOVERY,
-            "quick recovery"
+            "quick recovery",
+			null
         );
         register(
             RADIANCE,
-            "radiance"
+            "radiance",
+			null
         );
         register(
             RAGING_FIRE,
-            "raging fire"
+            "raging fire",
+			null
         );
         register(
             RAIN_RUSH,
-            "rain rush"
+            "rain rush",
+			null
         );
         register(
             RAIN_SUMMON,
-            "rain summon"
+            "rain summon",
+			null
         );
         register(
             RAVENOUS,
-            "ravenous"
+            "ravenous",
+			null
         );
         register(
             RAZOR_SHARP,
-            "razor sharp"
+            "razor sharp",
+			null
         );
         register(
             RECURRENT,
-            "recurrent"
+            "recurrent",
+			null
         );
         register(
             REFLECTIVE,
-            "reflective"
+            "reflective",
+			null
         );
         register(
             REGIFT,
-            "regift"
+            "regift",
+			null
         );
         register(
             REGURGITATE,
-            "regurgitate"
+            "regurgitate",
+			null
         );
         register(
             REIGN,
-            "reign"
+            "reign",
+			null
         );
         register(
             REPLICATE,
-            "replicate"
+            "replicate",
+			null
         );
         register(
             REPUGNANT,
-            "repugnant"
+            "repugnant",
+			null
         );
         register(
             RESENTFUL,
-            "resentful"
+            "resentful",
+			null
         );
         register(
             RESILIENCE,
-            "resilience"
+            "resilience",
+			null
         );
         register(
             REV_UP,
-            "rev up"
+            "rev up",
+			null
         );
         register(
             RUSH_HOUR,
-            "rush hour"
+            "rush hour",
+			null
         );
         register(
             SAFETY_POT,
-            "safety pot"
+            "safety pot",
+			null
         );
         register(
             SALVAGE,
-            "salvage"
+            "salvage",
+			null
         );
         register(
             SCORCHING_SKIN,
-            "scorching skin"
+            "scorching skin",
+			null
         );
         register(
             SEIZE,
-            "seize"
+            "seize",
+			null
         );
         register(
             SENDOFF,
-            "sendoff"
+            "sendoff",
+			null
         );
         register(
             SHAKEDOWN,
-            "shakedown"
+            "shakedown",
+			null
         );
         register(
             SHARP_CLAWS,
-            "sharp claws"
+            "sharp claws",
+			null
         );
         register(
             SHARP_EDGES,
-            "sharp edges"
+            "sharp edges",
+			null
         );
         register(
             SLIMY,
-            "slimy"
+            "slimy",
+			null
         );
         register(
             SLY,
-            "sly"
+            "sly",
+			null
         );
         register(
             SOB,
-            "sob"
+            "sob",
+			null
         );
         register(
             SOUL_SIPHON,
-            "soul siphon"
+            "soul siphon",
+			null
         );
         register(
             SPECIALIZATION,
-            "specialization"
+            "specialization",
+			null
         );
         register(
             SPINE_BREAK,
-            "spine break"
+            "spine break",
+			null
         );
         register(
             SPONGE,
-            "sponge"
+            "sponge",
+			null
         );
         register(
             STAUNCH,
-            "staunch"
+            "staunch",
+			null
         );
         register(
             SUGAR_RUSH,
-            "sugar rush"
+            "sugar rush",
+			null
         );
         register(
             SURROGATE,
-            "surrogate"
+            "surrogate",
+			null
         );
         register(
             SWAMPY,
-            "swampy"
+            "swampy",
+			null
         );
         register(
             SWEET_TOUCH,
-            "sweet touch"
+            "sweet touch",
+			null
         );
         register(
             TEMPER,
-            "temper"
+            "temper",
+			null
         );
         register(
             TERRIFYING,
-            "terrifying"
+            "terrifying",
+			null
         );
         register(
             TERRITORIAL,
-            "territorial"
+            "territorial",
+			null
         );
         register(
             THRIVING_PACE,
-            "thriving pace"
+            "thriving pace",
+			null
         );
         register(
             THUNDER_SUMMON,
-            "thunder summon"
+            "thunder summon",
+			null
         );
         register(
             TONE_DEAF,
-            "tone deaf"
+            "tone deaf",
+			null
         );
         register(
             TOXIC_FILTER,
-            "toxic filter"
+            "toxic filter",
+			null
         );
         register(
             TOXIC_SAC,
-            "toxic sac"
+            "toxic sac",
+			null
         );
         register(
             TOXIC_SPINES,
-            "toxic spines"
+            "toxic spines",
+			null
         );
         register(
             TRADER,
-            "trader"
+            "trader",
+			null
         );
         register(
             TRASH_ARMOUR,
-            "trash armour"
+            "trash armour",
+			null
         );
         register(
             TRIUMPH,
-            "triumph"
+            "triumph",
+			null
         );
         register(
             TUMULTUOUS,
-            "tumultuous"
+            "tumultuous",
+			null
         );
         register(
             UNGRACIOUS_HOST,
-            "ungracious host"
+            "ungracious host",
+			null
         );
         register(
             VENGEANCE,
-            "vengeance"
+            "vengeance",
+			null
         );
         register(
             VENOMOUS,
-            "venomous"
+            "venomous",
+			null
         );
         register(
             VICIOUS,
-            "vicious"
+            "vicious",
+			null
         );
         register(
             VIGILANT,
-            "vigilant"
+            "vigilant",
+			null
         );
         register(
             VIGOROUS,
-            "vigorous"
+            "vigorous",
+			null
         );
         register(
             VIRTUOSO,
-            "virtuoso"
+            "virtuoso",
+			null
         );
         register(
             VISCID,
-            "viscid"
+            "viscid",
+			null
         );
         register(
             VIVID_SIGHT,
-            "vivid sight"
+            "vivid sight",
+			null
         );
         register(
             VOLCANIC,
-            "volcanic"
+            "volcanic",
+			null
         );
         register(
             WATCHER,
-            "watcher"
+            "watcher",
+			null
         );
         register(
             WEBBING,
-            "webbing"
+            "webbing",
+			null
         );
         register(
             WHOLESOME,
-            "wholesome"
+            "wholesome",
+			null
         );
         register(
             WILDFIRE,
-            "wildfire"
+            "wildfire",
+			null
         );
         register(
             WIND_SUMMON,
-            "wind summon"
+            "wind summon",
+			null
         );
         register(
             WISE,
-            "wise"
+            "wise",
+			null
         );
         register(
             WOODSMAN,
-            "woodman"
+            "woodman",
+			null
         );
     }
 }

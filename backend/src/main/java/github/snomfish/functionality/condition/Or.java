@@ -31,9 +31,9 @@ public class Or implements ICondition {
             for (Branch<Boolean> existing : outcomes) {
                 for (Branch<Boolean> next : conditionOutcomes) {
 
-                    boolean value = existing.getValue() || next.getValue();
+                    boolean value = existing.value() || next.value();
                     double probability =
-                        existing.getProbability() * next.getProbability();
+                        existing.probability() * next.probability();
 
                     newOutcomes.add(new Branch<>(value, probability));
                 }
@@ -42,6 +42,6 @@ public class Or implements ICondition {
             outcomes = newOutcomes;
         }
 
-        return BranchUtil.compact(outcomes);
+        return outcomes;
     }
 }

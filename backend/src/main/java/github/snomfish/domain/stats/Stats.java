@@ -58,13 +58,13 @@ public class Stats implements DeepCopyable<Stats> {
 
     
     // getters
-    public double getHealth() {return health;}
-    public double getEnergy() {return energy;}
-    public double getMattack() {return mattack;}
-    public double getMdefense() {return mdefense;}
-    public double getRattack() {return rattack;}
-    public double getRdefense() {return rdefense;}
-    public double getSpeed() {return speed;}
+    public double health() {return health;}
+    public double energy() {return energy;}
+    public double mattack() {return mattack;}
+    public double mdefense() {return mdefense;}
+    public double rattack() {return rattack;}
+    public double rdefense() {return rdefense;}
+    public double speed() {return speed;}
     public double get(StatId statId) {
         return switch (statId) {
             case HEALTH -> health;

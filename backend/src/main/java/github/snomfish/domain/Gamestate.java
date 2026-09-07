@@ -3,12 +3,15 @@ package github.snomfish.domain;
 import java.util.HashMap;
 import java.util.Map;
 
+// the gamestate is mutable.
+// then branching the gamestate is copied and the new changes are applied to each gamestate
+// should cut down on garbage collection
 public class Gamestate {
     
     
-    private final Side playerSide;
-    private final Side enemySide;
-    private final Map<FieldEffect, Boolean> fieldEffects = new HashMap<>();
+    private Side playerSide;
+    private Side enemySide;
+    private Map<FieldEffect, Boolean> fieldEffects = new HashMap<>();
 
 
     public Gamestate(
@@ -19,14 +22,11 @@ public class Gamestate {
         this.enemySide = enemySide;
     }
 
+    
     // getters
-    public Side getPlayerSide() {
-        return playerSide;
-    }
-    public Side getEnemySide() {
-        return enemySide;
-    }
-    public Side getSide(SideId sideId) {
+    public Side playerSide() {return playerSide;}
+    public Side enemySide() {return enemySide;}
+    public Side side(SideId sideId) {
         switch (sideId) {
             case PLAYER: return playerSide;
             case ENEMY: return enemySide;

@@ -19,7 +19,6 @@ public class Probability implements ICondition {
 
     @Override
     public List<Branch<Boolean>> execute(BattleContext context) {
-        List<Branch<Double>> penis = probability.execute(context);
         throw new UnsupportedOperationException("not implemented yet lmao");
     }
 }
