@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import github.snomfish.domain.status.StatusId;
+import github.snomfish.functionality.Value;
 import github.snomfish.functionality.condition.Equals;
 import github.snomfish.functionality.condition.Or;
 
@@ -103,13 +104,13 @@ public class AbilityRegistry {
             BANEFUL,
             "baneful",
 			new AbilityRule(
-                USER_DAMAGE_MULTIPLIER, 
+                List.of(USER_DAMAGE_MULTIPLIER), 
                 new Or(List.of(
                     new Equals<>(Value.USER_STATUS_ID, StatusId.POISON),
                     new Equals<>(Value.USER_STATUS_ID, StatusId.BAD_POISON)
-                )), 
-                new 
-            );
+                )),
+                null
+            )
         );
         register(
             BERSERK,
@@ -543,7 +544,8 @@ public class AbilityRegistry {
         );
         register(
             PRISMATIC,
-            "prismatic"  
+            "prismatic",
+            null
         );
         register(
             PROTECTIVE_SHELL,

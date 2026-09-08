@@ -1,45 +1,37 @@
 package github.snomfish.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import github.snomfish.domain.species.SpeciesId;
 import github.snomfish.domain.stats.StatChanges;
 import github.snomfish.domain.stats.Stats;
 import github.snomfish.domain.type.TypeId;
 
+// will simply hold the references for a Loomian from party and ActiveLoomianData
 public class ActiveLoomian extends Loomian {
     
 
     private List<TypeId> types;
     private Stats battleStats;
     private StatChanges statChanges;
-    
 
-    public ActiveLoomian(Loomian loomian) {
+
+    public ActiveLoomian(
+        Loomian loomian,
+        ActiveLoomianData activeLoomianData
+    ) {
         super(loomian);
 
-        this.types = new ArrayList<>(species().baseTypes());
-        this.battleStats = actualStats().deepCopy();
-        this.statChanges = new StatChanges();
+        this.types = activeLoomianData.types();
+        this.battleStats = activeLoomianData.battleStats();
+        this.statChanges = activeLoomianData.statChanges();
     }
 
 
-    // getter;
+    
+
+
+    // getters
     public List<TypeId> types() {return types;}
     public Stats battleStats() {return battleStats;}
     public StatChanges statChanges() {return statChanges;}
-
-
-    // setter
-    public void setTypes(List<TypeId> types) {this.types = types;}
-    public void setBattleStats(Stats battleStats) {this.battleStats = battleStats;}
-    public void setStatChanges(StatChanges statChanges) {this.statChanges = statChanges;} // probably will never be used, may need to set up a Stat changes class that extends Stats
-
-
-    @Override 
-    public void setSpeciesId(SpeciesId speciesId) {
-        this.speciesId = speciesId;
-        this.types = new ArrayList<>(species().baseTypes());
-    }
 }

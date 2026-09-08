@@ -2,8 +2,8 @@ package github.snomfish.domain;
 
 import java.util.List;
 
-import github.snomfish.domain.ability.IAbility;
-import github.snomfish.domain.item.IItem;
+import github.snomfish.domain.ability.AbilityId;
+import github.snomfish.domain.item.ItemId;
 import github.snomfish.domain.move.MoveId;
 import github.snomfish.domain.species.Species;
 import github.snomfish.domain.species.SpeciesId;
@@ -16,10 +16,10 @@ import github.snomfish.functionality.copy.DeepCopyable;
 
 public class Loomian implements DeepCopyable<Loomian> {
     
-    protected SpeciesId speciesId; // doesnt get deep copied
+    private SpeciesId speciesId; // doesnt get deep copied
     private List<MoveId> moves;
-    private IAbility ability;
-    private IItem item;
+    private AbilityId ability;
+    private ItemId item;
     private Stats nature;
     private IAction action;
 
@@ -38,8 +38,8 @@ public class Loomian implements DeepCopyable<Loomian> {
     public Loomian(
         SpeciesId speciesId,
         List<MoveId> moves,
-        IAbility ability,
-        IItem item,
+        AbilityId ability,
+        ItemId item,
         Stats nature,
         Stats tps,
         Stats ups,
@@ -53,11 +53,11 @@ public class Loomian implements DeepCopyable<Loomian> {
         this.status = status;
         this.action = null;
 
+        this.tps = tps;
+        this.ups = ups;
         this.actualStats = StatCalculator.getActualStats(this);
         this.currentHealth = (int) actualStats.health();
         this.currentEnergy = (int) actualStats.energy();
-        this.tps = tps;
-        this.ups = ups;
 
         this.hasAbilityActivated = false;
     }
@@ -91,8 +91,8 @@ public class Loomian implements DeepCopyable<Loomian> {
     public SpeciesId speciesId() {return speciesId;}
     public Species species() {return SpeciesRegistry.get(speciesId);} 
     public List<MoveId> moves() {return moves;}
-    public IAbility ability() {return ability;}
-    public IItem item() {return item;}
+    public AbilityId ability() {return ability;}
+    public ItemId item() {return item;}
     public Stats nature() {return nature;}
     public Status status() {return status;}
     public IAction action() {return action;}
@@ -107,19 +107,72 @@ public class Loomian implements DeepCopyable<Loomian> {
 
 
     // setter
-    public void setSpeciesId(SpeciesId speciesId) {this.speciesId = speciesId;} // activeLoomian overrides this to reset current types, there may be some weird behaviour between imposter and type changing moves
-    public void setMoves(List<MoveId> moves) {this.moves = moves;}
-    public void setAbility(IAbility ability) {this.ability = ability;}
-    public void setItem(IItem item) {this.item = item;}
-    public void setNature(Stats nature) {this.nature = nature;}
-    public void setStatus(Status status) {this.status = status;}
-    public void setAction(IAction action) {this.action = action;}
+    public Builder builder() {
+        return new Builder(this);
+    }
+    public class Builder {
 
-    public void setActualStats(Stats actualStats) {this.actualStats = actualStats;}
-    public void setCurrentHealth(int currentHealth) {this.currentHealth = currentHealth;}
-    public void setCurrentEnergy(int currentEnergy) {this.currentEnergy = currentEnergy;}
-    public void setTps(Stats tps) {this.tps = tps;}
-    public void usetUps(Stats ups) {this.ups = ups;}
+        private final Loomian copy;
 
-    public void setHasAbilityActivated(boolean hasAbilityActivated) {this.hasAbilityActivated = hasAbilityActivated;} 
+        public Builder(Loomian original) {
+            copy = original.deepCopy();
+        }
+
+        public Builder speciesId(SpeciesId speciesId) {
+            copy.speciesId = speciesId;
+            return this;
+        }
+        public Builder moves(List<MoveId> moves) {
+            copy.moves = moves;
+            return this;
+        }
+        public Builder ability(AbilityId ability) {
+            copy.ability = ability;
+            return this;
+        }
+        public Builder item(ItemId item) {
+            copy.item = item;
+            return this;
+        }
+        public Builder nature(Stats nature) {
+            copy.nature = nature;
+            return this;
+        }
+        public Builder action(IAction action) {
+            copy.action = action;
+            return this;
+        }
+        public Builder actualStats(Stats actualStats) {
+            copy.actualStats = actualStats;
+            return this;
+        }
+        public Builder currentHealth(int currentHealth) {
+            copy.currentHealth = currentHealth;
+            return this;
+        }
+        public Builder currentEnergy(int currentEnergy) {
+            copy.currentEnergy = currentEnergy;
+            return this;
+        }
+        public Builder tps(Stats tps) {
+            copy.tps = tps;
+            return this;
+        }
+        public Builder ups(Stats ups) {
+            copy.ups = ups;
+            return this;
+        }
+        public Builder status(Status status) {
+            copy.status = status;
+            return this;
+        }
+        public Builder hasAbilityActivated(boolean hasAbilityActivated) {
+            copy.hasAbilityActivated = hasAbilityActivated;
+            return this;
+        }
+
+        public Loomian build() {
+            return copy;
+        }
+    }
 }

@@ -1,17 +1,17 @@
 package github.snomfish.domain;
 
-import java.util.HashMap;
-import java.util.Map;
+import github.snomfish.functionality.copy.DeepCopyable;
 
 // the gamestate is mutable.
 // then branching the gamestate is copied and the new changes are applied to each gamestate
 // should cut down on garbage collection
-public class Gamestate {
+public class Gamestate implements DeepCopyable<Gamestate> {
     
     
     private Side playerSide;
     private Side enemySide;
-    private Map<FieldEffect, Boolean> fieldEffects = new HashMap<>();
+    // this is silly and should probably be an enum map
+    //private final Map<FieldEffect, Boolean> fieldEffects = new HashMap<>();
 
 
     public Gamestate(
@@ -20,6 +20,15 @@ public class Gamestate {
     ) {
         this.playerSide = playerSide;
         this.enemySide = enemySide;
+    }
+
+    
+    // deepcopy
+    public Gamestate deepCopy() {
+        return new Gamestate(
+            playerSide.deepCopy(),
+            enemySide.deepCopy()
+        );
     }
 
     
@@ -32,6 +41,33 @@ public class Gamestate {
             case ENEMY: return enemySide;
             default: 
                 throw new IllegalArgumentException("Unknown side: " + sideId);
+        }
+    }
+
+
+    // setter/builder
+    public Builder builder() {
+        return new Builder(this);
+    }
+    public class Builder {
+
+        private final Gamestate copy;
+
+        private Builder(Gamestate original) {
+            copy = original.deepCopy();
+        }
+
+        public Builder playerSide(Side playerSide) {
+            copy.playerSide = playerSide;
+            return this;
+        }
+        public Builder enemySide(Side enemySide) {
+            copy.enemySide = enemySide;
+            return this;
+        }
+
+        public Gamestate build() {
+            return copy;
         }
     }
 }

@@ -3,39 +3,38 @@ package github.snomfish.functionality.context;
 import java.util.List;
 
 import github.snomfish.domain.Gamestate;
-import github.snomfish.domain.Side;
+import github.snomfish.domain.SideId;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.event.EventId;
+
+import static github.snomfish.domain.SideId.*;
 
 // this is the context of a loomian using a move
 // this could be a record
 public class BattleContext {
     
-    private final Gamestate gamestate;
-    private final BattleSide user;
-    private final BattleSide target;
+    private Gamestate gamestate;
+    private SideId userState; 
+    private BattleSide user;
+    private BattleSide target;
 
 
     public BattleContext(
         Gamestate gamestate, 
-        Side userSide, 
-        Side targetSide
+        SideId userState
     ) {
         this.gamestate = gamestate;
-        this.user = new BattleSide(userSide);
-        this.target = new BattleSide(targetSide);
+        this.userState = userState;
+        this.user = new BattleSide(userState == PLAYER ? gamestate.playerSide() : gamestate.enemySide());
+        this.target = new BattleSide(userState == PLAYER ? gamestate.enemySide() : gamestate.playerSide());
     }
 
 
-    public Gamestate gamestate() {
-        return gamestate;
-    }
-    public BattleSide user() {
-        return user;
-    }
-    public BattleSide target() {
-        return target;
-    }
+    // getters
+    public Gamestate gamestate() {return gamestate;}
+    public SideId userState() {return userState;}
+    public BattleSide user() {return user;}
+    public BattleSide target() {return target;}
 
 
     // events
