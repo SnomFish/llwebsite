@@ -3,20 +3,22 @@ package github.snomfish.functionality.context;
 import java.util.List;
 
 import github.snomfish.domain.Gamestate;
+import github.snomfish.domain.Side;
 import github.snomfish.domain.SideId;
 import github.snomfish.functionality.branch.Branch;
+import github.snomfish.functionality.copy.DeepCopyable;
 import github.snomfish.functionality.event.EventId;
 
 import static github.snomfish.domain.SideId.*;
 
 // this is the context of a loomian using a move
 // this could be a record
-public class BattleContext {
+public class BattleContext implements DeepCopyable<BattleContext> {
     
     private Gamestate gamestate;
     private SideId userState; 
-    private BattleSide user;
-    private BattleSide target;
+    private Side user;
+    private Side target;
 
 
     public BattleContext(
@@ -25,16 +27,25 @@ public class BattleContext {
     ) {
         this.gamestate = gamestate;
         this.userState = userState;
-        this.user = new BattleSide(userState == PLAYER ? gamestate.playerSide() : gamestate.enemySide());
-        this.target = new BattleSide(userState == PLAYER ? gamestate.enemySide() : gamestate.playerSide());
+        this.user = userState == PLAYER ? gamestate.playerSide() : gamestate.enemySide();
+        this.target = userState == PLAYER ? gamestate.enemySide() : gamestate.playerSide();
+    }
+
+
+    @Override 
+    public BattleContext deepCopy() {
+        return new BattleContext(
+            gamestate.deepCopy(), 
+            userState
+        );
     }
 
 
     // getters
     public Gamestate gamestate() {return gamestate;}
     public SideId userState() {return userState;}
-    public BattleSide user() {return user;}
-    public BattleSide target() {return target;}
+    public Side user() {return user;}
+    public Side target() {return target;}
 
 
     // events

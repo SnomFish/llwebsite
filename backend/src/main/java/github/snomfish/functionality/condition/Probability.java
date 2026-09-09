@@ -17,6 +17,14 @@ public class Probability implements ICondition {
     }
 
 
+    @Override 
+    public Probability deepCopy() {
+        return new Probability(
+            probability.deepCopy()
+        );
+    }
+
+
     @Override
     public List<Branch<Boolean>> execute(BattleContext context) {
         throw new UnsupportedOperationException("not implemented yet lmao");

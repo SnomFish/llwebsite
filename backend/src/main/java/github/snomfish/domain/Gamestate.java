@@ -2,6 +2,8 @@ package github.snomfish.domain;
 
 import github.snomfish.functionality.copy.DeepCopyable;
 
+import static github.snomfish.domain.SideId.*;
+
 // the gamestate is mutable.
 // then branching the gamestate is copied and the new changes are applied to each gamestate
 // should cut down on garbage collection
@@ -45,29 +47,15 @@ public class Gamestate implements DeepCopyable<Gamestate> {
     }
 
 
-    // setter/builder
-    public Builder builder() {
-        return new Builder(this);
-    }
-    public class Builder {
-
-        private final Gamestate copy;
-
-        private Builder(Gamestate original) {
-            copy = original.deepCopy();
-        }
-
-        public Builder playerSide(Side playerSide) {
-            copy.playerSide = playerSide;
-            return this;
-        }
-        public Builder enemySide(Side enemySide) {
-            copy.enemySide = enemySide;
-            return this;
-        }
-
-        public Gamestate build() {
-            return copy;
+    // setter
+    public void setPlayerSide(Side playerSide) {this.playerSide = playerSide;}
+    public void setEnemySide(Side enemySide) {this.enemySide = enemySide;} 
+    public void setSide(SideId sideId, Side side) {
+        switch (sideId) {
+            case PLAYER: this.playerSide = side;
+            case ENEMY: this.enemySide = side;
+            default:
+                throw new IllegalArgumentException("Unkown side: " + sideId);
         }
     }
 }

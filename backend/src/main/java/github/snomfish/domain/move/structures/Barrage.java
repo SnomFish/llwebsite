@@ -3,21 +3,44 @@ package github.snomfish.domain.move.structures;
 import java.util.List;
 
 import github.snomfish.domain.move.IMove;
-import github.snomfish.domain.move.MoveEffect;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 
 // for a move who hits multiple times with the same move
-public record Barrage (
-    MoveEffect moveEffect,
-    int minHits,
-    int maxHits
-    
-) implements IMove {
+public class Barrage implements IMove {
+
+    private MoveEffect perHit;
+    private int minHits;
+    private int maxHits;
+
+
+    public Barrage(
+        MoveEffect perHit,
+        int minHits,
+        int maxHits
+    ) {
+        this.perHit = perHit;
+        this.minHits = minHits;
+        this.maxHits = maxHits;
+    }
+
+
+    @Override
+    public Barrage deepCopy() {
+        return new Barrage(
+            perHit.deepCopy(),
+            minHits,
+            maxHits
+        );
+    }
 
     
     @Override
     public List<Branch<BattleContext>> execute(BattleContext context) {
         return null;
     }
+
+
+    public double damageModifier() {return perHit.damageModifier();}
+    public void setDamageModifier(double damageModifier) {perHit.setDamageModifier(damageModifier);}
 }

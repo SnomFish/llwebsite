@@ -46,25 +46,22 @@ public class TestLoomian {
 
 
     @Test 
+    // tests that a deepCopy() does in fact, deep copy
     void testBuilder1() {
         Loomian original = testLoomian1();
-        Loomian copy = original.builder()
-            .speciesId(AMPOLE)
-            .moves(List.of(AIM, AIM, AIM, AIM))
-            .ability(ABILITY_THIEF)
-            .item(NO_ITEM)
-            .nature(Nature.natureModifiers(List.of(FRAIL, VERY_SMART, SLUGGISH)))
-            .tps(new Stats(100, 100, 100, 100, 100, 100, 100))
-            .ups(new Stats(0, 0, 0, 0, 0, 0, 0))
-            .build();
+        Loomian copy = original.deepCopy();
+
+        copy.setSpeciesId(AMPOLE);
+        copy.setMoves(List.of(AIM, AIM, AIM, AIM));
+        copy.setAbility(ABILITY_THIEF);
+        copy.setItem(NO_ITEM);
+        copy.setNature(Nature.natureModifiers(List.of(VERY_CLEVER)));
         
         assertNotEquals(original.speciesId(), copy.speciesId());
         assertNotEquals(original.moves(), copy.moves());
         assertNotEquals(original.ability(), copy.ability());
         assertNotEquals(original.item(), copy.item());
         assertNotEquals(original.nature(), copy.nature());
-        assertNotEquals(original.tps(), copy.tps());
-        assertNotEquals(original.ups(), copy.ups());
     }
 
 }

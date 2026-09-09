@@ -44,40 +44,25 @@ public class Side implements DeepCopyable<Side> {
 
     // getter
     public List<Loomian> getParty() {return party;}
-    public ActiveLoomian activeLoomian() {return new ActiveLoomian(party.get(activeLoomianIndex), activeLoomianData);}
+    public Loomian activeLoomian() {return party.get(activeLoomianIndex);}
+    public int activeLoomianIndex() {return activeLoomianIndex;}
+    public ActiveLoomianData activeLoomianData() {return activeLoomianData;}
 
 
     // setter
-    public Builder builder() {
-        return new Builder(this);
+    public void setParty(List<Loomian> party) {
+        this.party = party;
     }
-    public class Builder {
-
-        private final Side copy;
-
-        private Builder(Side original) {
-            copy = original.deepCopy();
-        }
-
-        public Builder loomian(Loomian loomian, int index) {
-            copy.party.set(index, loomian);
-            return this;
-        }
-        public Builder activeLoomian(Loomian loomian) {
-            copy.party.set(activeLoomianIndex, loomian);
-            return this;
-        }
-        public Builder activeLoomianIndex(int activeLoomianIndex) {
-            copy.activeLoomianIndex = activeLoomianIndex;
-            return this;
-        }
-        public Builder activeLoomianData(ActiveLoomianData activeLoomianData) {
-            copy.activeLoomianData = activeLoomianData;
-            return this;
-        }
-
-        public Side build() {
-            return copy;
-        }
+    public void setLoomian(int index, Loomian loomian) {
+        this.party.set(index, loomian);
+    }
+    public void setActiveLoomian(Loomian loomian) {
+        this.party.set(activeLoomianIndex, loomian);
+    }
+    public void setActiveLoomianIndex(int activeLoomianIndex) {
+        this.activeLoomianIndex = activeLoomianIndex;
+    }
+    public void setActiveLoomianData(ActiveLoomianData activeLoomianData) {
+        this.activeLoomianData = activeLoomianData;
     }
 }

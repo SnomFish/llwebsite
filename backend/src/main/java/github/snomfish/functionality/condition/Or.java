@@ -3,8 +3,9 @@ package github.snomfish.functionality.condition;
 import java.util.List;
 
 import github.snomfish.functionality.branch.Branch;
-import github.snomfish.functionality.branch.BranchUtil;
 import github.snomfish.functionality.context.BattleContext;
+
+import static github.snomfish.functionality.copy.DeepCopy.*;
 
 public class Or implements ICondition {
     
@@ -14,6 +15,14 @@ public class Or implements ICondition {
 
     public Or(List<ICondition> conditions) {
         this.conditions = conditions;
+    }
+
+
+    @Override 
+    public Or deepCopy() {
+        return new Or(
+            deepCopyList(conditions)
+        );
     }
 
 

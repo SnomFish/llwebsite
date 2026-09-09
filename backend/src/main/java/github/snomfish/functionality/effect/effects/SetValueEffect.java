@@ -7,19 +7,30 @@ import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.effect.IEffect;
 
-public class SetValue implements IEffect {
+public class SetValueEffect implements IEffect {
     
 
-    private final Value value;
-    private final Object newValue;
+    private Value value;
+    private Object newValue;
 
 
-    public SetValue(
+    public SetValueEffect(
         Value value,
         Object newValue
     ) {
         this.value = value;
         this.newValue = newValue;
+    }
+
+
+    // OMG THIS ONE CANNOT BE DEEP COPIED TOO LETS GOO LETS HOPE I ONLY USE SHALLOW VALUES
+    // CHECK EQUALS.JAVA (CONDITION) TO SEE MORE OF THISSSS
+    @Override 
+    public SetValueEffect deepCopy() {
+        return new SetValueEffect(
+            value,
+            newValue
+        );
     }
 
 

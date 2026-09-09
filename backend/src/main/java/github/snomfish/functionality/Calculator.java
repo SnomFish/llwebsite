@@ -3,7 +3,7 @@ package github.snomfish.functionality;
 import github.snomfish.domain.Loomian;
 import github.snomfish.domain.stats.Stats;
 
-public class StatCalculator {
+public class Calculator {
     
 
     public static Stats getActualStats(

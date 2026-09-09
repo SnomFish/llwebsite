@@ -38,8 +38,11 @@ public class EventRegister {
 
 
     static {
-        register(DAMAGE_MULTIPLIER, ALL);
-        register(USER_DAMAGE_MULTIPLIER, USER);
-        register(TARGET_DAMAGE_MULTIPLIER, TARGET);
+        register(BEFORE_MOVE_EVENT, ALL);
+        register(USER_BEFORE_MOVE_EVENT, USER);
+        register(TARGET_BEFORE_MOVE_EVENT, TARGET);
+        register(DAMAGE_MODIFIER_EVENT, ALL);
+        register(USER_DAMAGE_MODIFIER_EVENT, USER);
+        register(TARGET_DAMAGE_MODIFIER_EVENT, TARGET);
     }
 }

@@ -7,10 +7,14 @@ import java.util.Map;
 import github.snomfish.domain.status.StatusId;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.condition.Equals;
+import github.snomfish.functionality.condition.ListContains;
 import github.snomfish.functionality.condition.Or;
+import github.snomfish.functionality.effect.effects.MultiplyValueEffect;
+import github.snomfish.functionality.number.Constant;
 
 import static github.snomfish.domain.ability.AbilityId.*;
 import static github.snomfish.functionality.event.EventId.*;
+import static github.snomfish.functionality.Value.*;
 
 public class AbilityRegistry {
     
@@ -33,15 +37,6 @@ public class AbilityRegistry {
     ) {
         registry.put(id, new Ability(id, name, List.of(rule)));
     }
-
-
-    /*private static void register(
-        AbilityId id,
-        String name,
-        List<AbilityRule> rules
-    ) {
-        registry.put(id, new Ability(id, name, rules));
-    }*/
 
 
     static {
@@ -98,18 +93,22 @@ public class AbilityRegistry {
         register(
             AWAKENING,
             "awakening",
-			null
+			new AbilityRule(
+                List.of(BEFORE_MOVE_EVENT),
+                new ListContains(Value.USER_TYPES, Value.MOVE_TYPE),
+                new MultiplyValueEffect(MOVE_DAMAGE_MODIFIER, new Constant(1.2)) // assumes regular stab has been applied, this brings the stab boost from 1.25 to 1.5
+            )
         );
         register(
             BANEFUL,
             "baneful",
 			new AbilityRule(
-                List.of(USER_DAMAGE_MULTIPLIER), 
+                List.of(USER_DAMAGE_MODIFIER_EVENT), 
                 new Or(List.of(
-                    new Equals<>(Value.USER_STATUS_ID, StatusId.POISON),
-                    new Equals<>(Value.USER_STATUS_ID, StatusId.BAD_POISON)
+                    new Equals(Value.USER_STATUS_ID, StatusId.POISON),
+                    new Equals(Value.USER_STATUS_ID, StatusId.BAD_POISON)
                 )),
-                null
+                new MultiplyValueEffect(MOVE_DAMAGE_MODIFIER, new Constant(1.2))
             )
         );
         register(

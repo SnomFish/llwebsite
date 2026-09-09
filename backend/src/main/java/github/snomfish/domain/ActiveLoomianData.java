@@ -6,6 +6,7 @@ import java.util.List;
 import github.snomfish.domain.stats.StatChanges;
 import github.snomfish.domain.stats.Stats;
 import github.snomfish.domain.type.TypeId;
+import github.snomfish.functionality.action.IAction;
 import github.snomfish.functionality.copy.DeepCopyable;
 
 public class ActiveLoomianData implements DeepCopyable<ActiveLoomianData> {
@@ -14,6 +15,7 @@ public class ActiveLoomianData implements DeepCopyable<ActiveLoomianData> {
     private List<TypeId> types;
     private Stats battleStats;
     private StatChanges statChanges;
+    private IAction action;
     
 
     public ActiveLoomianData(
@@ -22,15 +24,18 @@ public class ActiveLoomianData implements DeepCopyable<ActiveLoomianData> {
         this.types = new ArrayList<>(loomian.species().baseTypes());
         this.battleStats = loomian.actualStats().deepCopy();
         this.statChanges = new StatChanges();
+        this.action = null;
     }
     public ActiveLoomianData(
         List<TypeId> types,
         Stats battleStats,
-        StatChanges statChanges
+        StatChanges statChanges,
+        IAction action
     ) {
         this.types = types;
         this.battleStats = battleStats;
         this.statChanges = statChanges;
+        this.action = action;
     }
 
 
@@ -38,7 +43,8 @@ public class ActiveLoomianData implements DeepCopyable<ActiveLoomianData> {
         return new ActiveLoomianData(
             new ArrayList<>(types),
             battleStats.deepCopy(),
-            statChanges.deepCopy()
+            statChanges.deepCopy(),
+            action.deepCopy()
         );
     }
 
@@ -47,34 +53,20 @@ public class ActiveLoomianData implements DeepCopyable<ActiveLoomianData> {
     public List<TypeId> types() {return types;}
     public Stats battleStats() {return battleStats;}
     public StatChanges statChanges() {return statChanges;}
+    public IAction action() {return action;}
 
 
-    public Builder builder() {
-        return new Builder(this);
+    // setter
+    public void setTypes(List<TypeId> types) {
+        this.types = types;
     }
-    public class Builder {
-
-        private ActiveLoomianData copy;
-
-        public Builder(ActiveLoomianData original) {
-            copy = original.deepCopy();
-        }
-
-        public Builder types(List<TypeId> types) {
-            copy.types = types;
-            return this;
-        }
-        public Builder battleStats(Stats BattleStats) {
-            copy.battleStats = battleStats;
-            return this;
-        }
-        public Builder statCanges(StatChanges statChanges) {
-            copy.statChanges = statChanges;
-            return this;
-        }
-
-        public ActiveLoomianData build() {
-            return copy;
-        }
+    public void setBattleStats(Stats battleStats) {
+        this.battleStats = battleStats;
     } 
+    public void setStatChanges(StatChanges statChanges) {
+        this.statChanges = statChanges;
+    }
+    public void setAction(IAction action) {
+        this.action = action;
+    }
 }

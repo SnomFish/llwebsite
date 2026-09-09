@@ -4,9 +4,14 @@ import java.util.List;
 
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
+import github.snomfish.functionality.copy.DeepCopyable;
 
-public interface IMove {
+public interface IMove extends DeepCopyable<IMove> {
     
 
     List<Branch<BattleContext>> execute(BattleContext context);
+
+
+    double damageModifier();
+    void setDamageModifier(double damageModifier);
 }

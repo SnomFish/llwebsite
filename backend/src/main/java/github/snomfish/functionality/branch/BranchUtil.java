@@ -28,10 +28,10 @@ public class BranchUtil {
     }
 
 
-    // multiplies the probability by a set value across all branches
-    public static <T> List<Branch<T>> mulProb(List<Branch<T>> branches, double delta) {
-        for (Branch<T> branch : branches) {
-            branch.multiplyProbability(delta); 
+    // much better, mutation but it is safe
+    public static <A, B> List<Branch<A>> applyProbability(List<Branch<A>> branches, Branch<B> pBranch) {
+        for (Branch<A> branch : branches) {
+            branch.multiplyProbability(pBranch.probability());
         }
         return branches;
     }

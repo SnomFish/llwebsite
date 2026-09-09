@@ -3,8 +3,9 @@ package github.snomfish.functionality.number;
 import java.util.List;
 
 import github.snomfish.functionality.branch.Branch;
-import github.snomfish.functionality.branch.BranchUtil;
 import github.snomfish.functionality.context.BattleContext;
+
+import static github.snomfish.functionality.copy.DeepCopy.*;
 
 public class Add implements INumber {
     
@@ -14,6 +15,14 @@ public class Add implements INumber {
 
     public Add(List<INumber> numbers) {
         this.numbers = numbers;
+    }
+
+
+    @Override 
+    public Add deepCopy() {
+        return new Add(
+            deepCopyList(numbers)
+        );
     }
 
 
