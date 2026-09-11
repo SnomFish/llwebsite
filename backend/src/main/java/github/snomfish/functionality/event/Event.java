@@ -11,6 +11,8 @@ public record Event (
 ) {
 
 
+    // target.getFunction() points towards one of the three dispatch functions in battleContext
+    // that correspond to dispatching the event to the user, target or both 
     public List<Branch<BattleContext>> execute(BattleContext context) {
         return target.getFunction().apply(context, id);
     }

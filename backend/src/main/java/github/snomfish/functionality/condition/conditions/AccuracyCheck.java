@@ -10,7 +10,7 @@ import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.event.EventRegister;
 import github.snomfish.functionality.number.INumber;
 
-import static github.snomfish.functionality.branch.BranchUtil.optimiseConditionalBranches;
+import static github.snomfish.functionality.condition.ConditionUtil.optimise;
 import static github.snomfish.functionality.event.EventId.*;
 
 public class AccuracyCheck implements ICondition {
@@ -50,6 +50,6 @@ public class AccuracyCheck implements ICondition {
             outcomes.add(new Branch<>(false, 1-accuracyValue));
         }
 
-        return optimiseConditionalBranches(outcomes);
+        return optimise(outcomes);
     }
 }

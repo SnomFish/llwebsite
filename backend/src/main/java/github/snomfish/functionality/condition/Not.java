@@ -32,6 +32,8 @@ public class Not implements ICondition {
             branch.setValue(branch.value() == false);
         }
 
+        // does not need the optimise() function, as this function does nt create new branches
+        // this is true so long as all other functions that create branches have the optimise() function
         return outcomes;
     }
 }

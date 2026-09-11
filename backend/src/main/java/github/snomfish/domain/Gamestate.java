@@ -21,23 +21,22 @@ public class Gamestate implements DeepCopyable<Gamestate> {
 
 
     public Gamestate(
-        Side playerSide, 
-        Side enemySide,
-        List<String> battleLog
+        Side playerSide,
+        Side enemySide
     ) {
         this.playerSide = playerSide;
         this.enemySide = enemySide;
-        this.battleLog = battleLog;
     }
 
-    
+    public Gamestate(Gamestate copy) {
+        this.playerSide = copy.playerSide.deepCopy();
+        this.enemySide = copy.enemySide.deepCopy();
+        this.battleLog = new ArrayList<>(copy.battleLog);
+    }
+
     // deepcopy
     public Gamestate deepCopy() {
-        return new Gamestate(
-            playerSide.deepCopy(),
-            enemySide.deepCopy(),
-            new ArrayList<>(battleLog)
-        );
+        return new Gamestate(this);
     }
 
     

@@ -3,12 +3,10 @@ package github.snomfish.domain.move;
 import java.util.HashMap;
 import java.util.Map;
 
-import github.snomfish.domain.type.TypeId;
-import github.snomfish.functionality.condition.ICondition;
 import github.snomfish.functionality.number.Constant;
-import github.snomfish.functionality.number.INumber;
 
 import static github.snomfish.domain.move.CategoryId.*;
+import static github.snomfish.domain.move.MoveId.*;
 import static github.snomfish.domain.type.TypeId.*;
 
 public class MoveRegistry {
@@ -22,3836 +20,2085 @@ public class MoveRegistry {
 
     public static Move get(MoveId id) {
 		return registry.get(id);
-    } 
-
-
-	private static void register(Move move) {
-		registry.put(id, move);
-	}
+    }
 
 
     static {
-		register(
-			MoveId.ACCELERATE,
-			"Accerlerate",
-			null,
-			SIMPLE,
-			STATUS,
-			new Constant(25),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.AIM,
-			"Aim",
-			null,
-			SIMPLE,
-			STATUS,
-			new Constant(10),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.AIR_BLADE,
-			"Air Blade",
-			null,
-			AIR,
-			RANGED,
-			new Constant(40),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.AIR_SHOT,
-			"Air Shot",
-			null,
-			AIR,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.AIR_WHIP,
-			"Air Whip",
-			null,
-			AIR,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.AQUA_JAWS,
-			"Aqua Jaws",
-			null,
-			WATER,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.AUGMENT,
-			"Augment",
-			null,
-			ANCIENT,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.BAFFLE,
-			"Baffle",
-			null,
-			DARK,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.BAG_OF_TRICKS,
-			"Bag of Tricks",
-			null,
-			DARK,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.BAIT,
-			"Bait",
-			null,
-			SIMPLE,
-			STATUS,
-			new Constant(0),
-			new Constant(2),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.BAMBOOZLE,
-			"Bamboozle",
-			null,
-			DARK,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.BANANA_SPLIT,
-			"Banana Split",
-			null,
-			SIMPLE,
-			STATUS,
-			new Constant(100),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.BANE_OF_HASTE,
-			"Bane of Haste",
-			null,
-			ANCIENT,
-			STATUS,
-			new Constant(0),
-			new Constant(-7),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.BANEFUL_BASH,
-			"Baneful Bash",
-			null,
-			TOXIC,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.BARBS,
-			"Barbs",
-			null,
-			METAL,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.BARTER,
-			"Barter",
-			null,
-			SIMPLE,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.BASH,
-			"Bash",
-			null,
-			METAL,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.BATTERING_RAM,
-			"Battering Ram",
-			null,
-			BUG,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.BATTLE_CHIME,
-			"Battle Chime",
-			null,
-			SIMPLE,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.BATTLE_HORN,
-			"Battle Horn",
-			null,
-			SIMPLE,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.BEQUEATH,
-			"Bequeath",
-			null,
-			SIMPLE,
-			STATUS,
-			new Constant(0),
-			new Constant(-6),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.BITTER_COLD,
-			"Bitter Cold",
-			null,
-			ICE,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.BLAZE_CHOMP,
-			"Blaze Chomp",
-			null,
-			FIRE,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.BLAZE_OF_GLORY,
-			"Blaze of Glory",
-			null,
-			FIRE,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.BLAZE_RUSH,
-			"Blaze Rush",
-			null,
-			FIRE,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.BLINDSPOT_BATTER,
-			"Blindspot Batter",
-			null,
-			LIGHT,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.BLUDGEON,
-			"Bludgeon",
-			null,
-			BRAWLER,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.BODY_CRASH,
-			"Body Crash",
-			null,
-			BRAWLER,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.BODY_SLAM,
-			"Body Slam",
-			null,
-			SIMPLE,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.BOILING_PRESS,
-			"Boiling Press",
-			null,
-			FIRE,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.BOOM_BASH,
-			"Boom Bash",
-			null,
-			BRAWLER,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.BOULDER_BLAST,
-			"Boulder Blast",
-			null,
-			BRAWLER,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.BRACE,
-			"Brace",
-			null,
-			SIMPLE,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.BRAIN_EXERCISE,
-			"Brain Exercise",
-			null,
-			MIND,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.BRAINWASH,
-			"Brainwash",
-			null,
-			MIND,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.BRAWN_BOOST,
-			"Brawn Boost",
-			null,
-			BRAWLER,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.BRIAR_BLOCK,
-			"Briar Block",
-			null,
-			PLANT,
-			STATUS,
-			new Constant(0),
-			new Constant(4),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.BUCK_UP,
-			"Buck Up",
-			null,
-			BRAWLER,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.BUG_BITE,
-			"Bug Bite",
-			null,
-			BUG,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.BULK_UP,
-			"Bulk Up",
-			null,
-			BRAWLER,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.BURN_UP,
-			"Burn Up",
-			null,
-			FIRE,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.BURROW,
-			"Burrow",
-			null,
-			EARTH,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.BUSH_WHACK,
-			"Bush Whack",
-			null,
-			PLANT,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.CANISTER_BURST,
-			"Canister Burst",
-			null,
-			TOXIC,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.CEREBRAL_SLASH,
-			"Cerebral Slash",
-			null,
-			MIND,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.CHARADE,
-			"Charade",
-			null,
-			DARK,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.CHARRED_CLAWS,
-			"Charred Claws",
-			null,
-			FIRE,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.CHASE_DOWN,
-			"Chase Down",
-			null,
-			SIMPLE,
-			MELEE,
-			new Constant(0),
-			new Constant(0), // THIS NEED TO BE CHANGED THIS IS VERY IMPORTANT TO THE EFFECTS OF CHASE DOWWWWWWWWWWWN
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.CHILLY_CHOMP,
-			"Chilly Chomp",
-			null,
-			ICE,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.CHOMP,
-			"Chomp",
-			null,
-			DARK,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.CHOP,
-			"Chop",
-			null,
-			BRAWLER,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.CLAMP,
-			"Clamp",
-			null,
-			METAL,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.CLAY_SLAP,
-			"Clay Slap",
-			null,
-			EARTH,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.CLIMATE_CANNON,
-			"Climate Cannon",
-			null,
-			SIMPLE, // ALSO NEEDS TO BE CHANGED
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.COCONUT_BOMB,
-			"Coconut Bomb",
-			null,
-			PLANT,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.CONFOUND,
-			"Confound",
-			null,
-			ANCIENT,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.CORRODE,
-			"Corrode",
-			null,
-			TOXIC,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.COUNTER_POISE,
-			"Counter Poise",
-			null,
-			BUG,
-			MELEE,
-			new Constant(0),
-			new Constant(0), // SUCKER PUNCHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.CYCLONE_SLAM,
-			"Cyclone Slam",
-			null,
-			AIR,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.DARK_SURGE,
-			"Dark Surge",
-			null,
-			DARK,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.DAWDLE,
-			"Dawdle",
-			null,
-			SIMPLE,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.DAYDREAM,
-			"Daydream",
-			null,
-			SIMPLE,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.DAZZLING_BARRAGE,
-			"Dazzling Barrage",
-			null,
-			LIGHT,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.DEEP_FREEZE,
-			"Deep Freeze",
-			null,
-			ICE,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.DEJA_VU,
-			"Deja Vu",
-			null,
-			MIND,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.DINO_CLAWS,
-			"Dino Claws",
-			null,
-			ANCIENT,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.DISCORDANCE,
-			"Discordance",
-			null,
-			BUG,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.DISPERSE,
-			"Disperse",
-			null,
-			LIGHT,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.DISSIPATE,
-			"Dissipate",
-			null,
-			MIND,
-			STATUS,
-			new Constant(0),
-			new Constant(-6),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.DISSONANT_CHORD,
-			"Dissonant Chord",
-			null,
-			SIMPLE,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.DIVE_BOMB,
-			"Dive Bomb",
-			null,
-			DARK,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.DODGE,
-			"Dodge",
-			null,
-			SIMPLE,
-			STATUS,
-			new Constant(0),
-			new Constant(4),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.DOUBLE_WHACK,
-			"Double Whack",
-			null,
-			METAL,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.DOWNPOUR,
-			"Dounpour",
-			null,
-			WATER,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.DRACO_BEAM,
-			"Draco Beam",
-			null,
-			ANCIENT,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.DRIVING_FORCE,
-			"Driving Force",
-			null,
-			BRAWLER,
-			MELEE,
-			new Constant(0),
-			new Constant(-6),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.DRUDGE,
-			"Drudge",
-			null,
-			SIMPLE,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.EAR_SLAP,
-			"Ear Slap",
-			null,
-			SIMPLE,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.EARTHQUAKE,
-			"Earthquake",
-			null,
-			EARTH,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.EERIE_STARE,
-			"Eerie Stare",
-			null,
-			SIMPLE,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.ELECTRO_PUNCH,
-			"Electro Punch",
-			null,
-			ELECTRIC,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.EMPATHIZE,
-			"Empathize",
-			null,
-			MIND,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.EMULATE,
-			"Emulate",
-			null,
-			SPIRIT,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.ENAMOR,
-			"Enamour",
-			null,
-			SIMPLE,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.ENERGIZE,
-			"Energize",
-			null,
-			ELECTRIC,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.ENERGY_BREAK,
-			"Energy Break",
-			null,
-			ANCIENT,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.ENERGY_SURGE,
-			"Energy Surge",
-			null,
-			LIGHT,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.EXAMINE,
-			"Examine",
-			null,
-			SIMPLE,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.FADE_AWAY,
-			"Fade Away",
-			null,
-			SPIRIT,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.FAR_ENCHANTMENT,
-			"Far Enchantment",
-			null,
-			ANCIENT,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.FINAL_RUSE,
-			"Final Ruse",
-			null,
-			SPIRIT,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.FIRE_BREATH,
-			"Fire Breath",
-			null,
-			FIRE,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.FIRE_SLAM,
-			"Fire Slam",
-			null,
-			FIRE,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.FLABBERGAST,
-			"Flabbergast",
-			null,
-			MIND,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.FLAMING_KICK,
-			"Flaming Kick",
-			null,
-			FIRE,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.FLARE_BLAST,
-			"Flare Blast",
-			null,
-			FIRE,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.FLASH,
-			"Flash",
-			null,
-			LIGHT,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.FLASH_N_FLEE,
-			"Flash n Flee",
-			null,
-			LIGHT,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.FLURRY,
-			"Flurry",
-			null,
-			ICE,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.FROST_BEAM,
-			"Frost Beam",
-			null,
-			ICE,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.FROST_BREATH,
-			"Frost Breath",
-			null,
-			ICE,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.FROST_PUNCH,
-			"Frost Punch",
-			null,
-			ICE,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.FUNGUS_CURSE,
-			"Fungus Curse",
-			null,
-			PLANT,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.GAIN_DRAIN,
-			"Gain Drain",
-			null,
-			DARK,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.GALE_FORCE,
-			"Gale Force",
-			null,
-			AIR,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.GAMMA_PULSE,
-			"Gamma Pulse",
-			null,
-			LIGHT,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.GLOOMINOUS_ROAR,
-			"Gloominous Roar",
-			null,
-			SIMPLE, /// GLOOOOOOOOOOOOOOOOOOOOOOOM
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.GNARLY_GASH,
-			"Gnarly Gash",
-			null,
-			DARK,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.GNAW,
-			"Gnaw",
-			null,
-			SIMPLE,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.GROWL,
-			"Growl",
-			null,
-			SIMPLE,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.GUST,
-			"Gust",
-			null,
-			AIR,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.HARMONIOUS_CHORD,
-			"Harmonious Chord",
-			null,
-			SIMPLE,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.HARROW,
-			"Harrow",
-			null,
-			SPIRIT,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.HARVEST,
-			"Harvest",
-			null,
-			PLANT,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.HASTEN,
-			"Hasten",
-			null,
-			SIMPLE,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.HAZY_SHROUD,
-			"Hazy Shroud",
-			null,
-			SPIRIT,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.HEADBUTT,
-			"Headbutt",
-			null,
-			SIMPLE,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.HEALTH_GIFT,
-			"Health Gift",
-			null,
-			MIND,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.HEART_BREAK,
-			"Heart Break",
-			null,
-			BRAWLER,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.HEAT_WAVE,
-			"Heat Wave",
-			null,
-			FIRE,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.HEAVY_BASH,
-			"Heavy Bash",
-			null,
-			METAL,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.HIGH_PITCH_SCREECH,
-			"High Pitch Screech",
-			null,
-			SIMPLE,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.HOP_KICK,
-			"Hop Kick",
-			null,
-			BRAWLER,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.HULLABALOO,
-			"Hullabaloo",
-			null,
-			SIMPLE,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.HYDRO_BLAST,
-			"Hydro Blast",
-			null,
-			WATER,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.HYDRO_SLASH,
-			"Hydro Slash",
-			null,
-			WATER,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.HYPNOTIZE,
-			"Hypnotize",
-			null,
-			MIND,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.ICE_HAMMER,
-			"Ice Hammer",
-			null,
-			ICE,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.ICICLE_TRAP,
-			"Icicle Trap",
-			null,
-			ICE,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.ILL_WILL,
-			"Ill Will",
-			null,
-			SIMPLE,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.IMPERSONATE,
-			"Impersonate",
-			null,
-			SPIRIT,
-			STATUS,
-			new Constant(0),
-			new Constant(1),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.JET_STREAM,
-			"Jet Stream",
-			null,
-			AIR,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.JOLT,
-			"Jolt",
-			null,
-			ELECTRIC,
-			RANGED,
-			new Constant(0),
-			new Constant(1),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.JUDGEMENT,
-			"Judgement",
-			null,
-			MIND,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.JUMP_START,
-			"Jump Start",
-			null,
-			ELECTRIC,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.LANDSLIDE,
-			"Landslide",
-			null,
-			EARTH,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.LEAF_BARRAGE,
-			"Leaf Barrage",
-			null,
-			PLANT,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.LIFE_DRAIN,
-			"Life Drain",
-			null,
-			PLANT,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.LIGHT_DASH,
-			"Light Dash",
-			null,
-			LIGHT,
-			MELEE,
-			new Constant(0),
-			new Constant(1),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.LIGHTSPEED_RAY,
-			"Lightspeed Ray",
-			null,
-			LIGHT,
-			RANGED,
-			new Constant(0),
-			new Constant(1),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.LUNGE,
-			"Lunge",
-			null,
-			BUG,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.LUSTER_LOOT,
-			"Luster Loot",
-			null,
-			LIGHT,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.MAGMA_BLOCK,
-			"Magma Block",
-			null,
-			FIRE,
-			STATUS,
-			new Constant(0),
-			new Constant(4),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.MAGNIFY,
-			"Magnify",
-			null,
-			LIGHT,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.MAROON,
-			"Maroon",
-			null,
-			WATER,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.MEGA_CHOMP,
-			"Mega Chomp",
-			null,
-			DARK,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.MEGA_KICK,
-			"Mega Kick",
-			null,
-			BRAWLER,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.MEGA_PUNCH,
-			"Mega Punch",
-			null,
-			BRAWLER,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.MEMORIZE,
-			"Memorize",
-			null,
-			MIND,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.METAL_BLAST,
-			"Metal Blast",
-			null,
-			METAL,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.METAL_SHRIEK,
-			"Metal Shriek",
-			null,
-			METAL,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.METAL_SWIPES,
-			"Metal Swipes",
-			null,
-			METAL,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.MIND_DRAIN,
-			"Mind Drain",
-			null,
-			MIND,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.MINDS_EYE,
-			"Minds Eye",
-			null,
-			MIND,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.MUCK_BLAST,
-			"Muck Blast",
-			null,
-			TOXIC,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.MUCK_BUCK,
-			"Muck Buck",
-			null,
-			EARTH,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.MUD_SPATTER,
-			"Mud Spatter",
-			null,
-			EARTH,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.MUDSLIDE,
-			"Mudslide",
-			null,
-			EARTH,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.NAB,
-			"Nab",
-			null,
-			SIMPLE,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.NATURES_FORCE,
-			"Natures Force",
-			null,
-			PLANT,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.NEAR_ENCHANTMENT,
-			"Near Enchantment",
-			null,
-			MIND,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.NOSEDIVE,
-			"Nosedive",
-			null,
-			AIR,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.NOVA_BLAST,
-			"Nova Blast",
-			null,
-			LIGHT,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.OIL_LEAK,
-			"Oil Leak",
-			null,
-			TOXIC,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.OUTBURST,
-			"Outburst",
-			null,
-			ANCIENT,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.PAINT_SHOWER,
-			"Paint Shower",
-			null,
-			TOXIC,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.PARASITIZE,
-			"Parasitize",
-			null,
-			BUG,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.PEACE_OF_MIND,
-			"Peace of Mind",
-			null,
-			MIND,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.PEBBLE_TOSS,
-			"Pebble Toss",
-			null,
-			EARTH,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.PECK,
-			"Peck",
-			null,
-			AIR,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.PEP_JAB,
-			"Pep Jab",
-			null,
-			BRAWLER,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.PEPPER_BURST,
-			"Pepper Burst",
-			null,
-			FIRE,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.PERCH,
-			"Perch",
-			null,
-			AIR,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.PESTER,
-			"Pester",
-			null,
-			BUG,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.PESTILENCE,
-			"Pestilence",
-			null,
-			BUG,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.PETAL_PUMMEL,
-			"Petal Pummel",
-			null,
-			PLANT,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.PHANTOM_BLAST,
-			"Phantom Blast",
-			null,
-			SPIRIT,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.PHANTOM_SLASH,
-			"Phantom Slash",
-			null,
-			SPIRIT,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.PHEROBLAST,
-			"Pheroblast",
-			null,
-			BUG,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.PHOTOSYNTHESIS,
-			"Photosynthesis",
-			null,
-			PLANT,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.PIERCING_DRIVE,
-			"Piercing Drive",
-			null,
-			WATER,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.PILFER,
-			"Pilfer",
-			null,
-			DARK,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.PINE_SHOT,
-			"Pine Shot",
-			null,
-			PLANT,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.PLUNGE,
-			"Plunge",
-			null,
-			WATER,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.POISON,
-			"Poison",
-			null,
-			TOXIC,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.POISON_BARBS,
-			"Poison Barbs",
-			null,
-			TOXIC,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.POUNCE,
-			"Pounce",
-			null,
-			SIMPLE,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.POWER_FOCUS,
-			"Power Focus",
-			null,
-			SIMPLE,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.POWER_SIPHON,
-			"Power Siphon",
-			null,
-			ELECTRIC,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.PRECISION_BOLT,
-			"Precision Bolt",
-			null,
-			ELECTRIC,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.PREEMPTIVE_STRIKE,
-			"Preemptive Strike",
-			null,
-			BRAWLER,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.PRIMAL_SLASH,
-			"Primal Slash",
-			null,
-			ANCIENT,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.PROVOKE,
-			"Provoke",
-			null,
-			DARK,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.PSYCHAL_CHOMP,
-			"Psychal Chomp",
-			null,
-			MIND,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.PSYCHO_BLAST,
-			"Psycho Blast",
-			null,
-			MIND,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.PYROKINESIS,
-			"Pyrokinesis",
-			null,
-			FIRE,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.QUICK_POUNCE,
-			"Quick Pounce",
-			null,
-			SIMPLE,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.QUICK_PUNCH,
-			"Quick Punch",
-			null,
-			BRAWLER,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.QUICKSAND,
-			"Quicksand",
-			null,
-			EARTH,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.RADIANT_RUSH,
-			"Radiant Rush",
-			null,
-			LIGHT,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.RAGING_FLAME,
-			"Raging Flame",
-			null,
-			FIRE,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.RAGING_HOWL,
-			"Raging Howl",
-			null,
-			SIMPLE,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.RAGING_TACKLE,
-			"Raging Tackle",
-			null,
-			SIMPLE,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.RANT,
-			"Rant",
-			null,
-			DARK,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.RECYCLE,
-			"Recycle",
-			null,
-			SIMPLE,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.REFLECTION_BURST,
-			"Reflection Burst",
-			null,
-			METAL,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.REJUVENATE,
-			"Rejuvenate",
-			null,
-			SIMPLE,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.REPEATING_TUNE,
-			"Repeating Tune",
-			null,
-			SIMPLE,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.RESONATE,
-			"Resonate",
-			null,
-			SIMPLE,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.RETURN_TO_SENDER,
-			"Return to Sender",
-			null,
-			MIND,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.ROCK_SLIDE,
-			"Rock Slide",
-			null,
-			EARTH,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.ROGUE_ASSAULT,
-			"Rogue Assault",
-			null,
-			BRAWLER,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.ROUGH_UP,
-			"Rough Up",
-			null,
-			BRAWLER,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.SAFEGUARD,
-			"Safeguard",
-			null,
-			SIMPLE,
-			STATUS,
-			new Constant(0),
-			new Constant(3),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.SAP_PLANT,
-			"Sap Plant",
-			null,
-			PLANT,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.SCAPEGOAT,
-			"Scapegoat",
-			null,
-			SIMPLE,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.SCAVENGE,
-			"Scavenge",
-			null,
-			AIR,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.SHADOW_SPRINT,
-			"Shadow Sprint",
-			null,
-			SPIRIT,
-			MELEE,
-			new Constant(0),
-			new Constant(1),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.SHADOWBOX,
-			"Shadowbox",
-			null,
-			BRAWLER,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.SHARPEN,
-			"Sharpen",
-			null,
-			DARK,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.SHINE,
-			"Shine",
-			null,
-			LIGHT,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.SHREWD_BLAST,
-			"SHrewd Blast",
-			null,
-			ANCIENT,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.SHRIEK,
-			"Shriek",
-			null,
-			SIMPLE,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.SINGE,
-			"Singe",
-			null,
-			FIRE,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.SLAP_DOWN,
-			"Slap Down",
-			null,
-			DARK,
-			MELEE,
-			new Constant(0),
-			new Constant(1),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.SLASH,
-			"Slash",
-			null,
-			SIMPLE,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.SLEET_SHOT,
-			"Sleet Shot",
-			null,
-			ICE,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.SLIME,
-			"Slime",
-			null,
-			TOXIC,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.SLUMBER,
-			"Slumber",
-			null,
-			SIMPLE,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.SNORE_SPORES,
-			"Snore Spores",
-			null,
-			PLANT,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.SNOWDOZER,
-			"Snowdozer",
-			null,
-			ICE,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.SOFT_WATER,
-			"Soft Water",
-			null,
-			WATER,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.SOUL_STORM,
-			"Soul Storm",
-			null,
-			SPIRIT,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.SPARE,
-			"Spare",
-			null,
-			SIMPLE,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.SPECTRAL_BURST,
-			"Spectral Burst",
-			null,
-			SPIRIT,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.SPIKE_RUSH,
-			"Spike Rush",
-			null,
-			ICE,
-			MELEE,
-			new Constant(0),
-			new Constant(1),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.SPIT,
-			"Spit",
-			null,
-			SIMPLE,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.SPITE,
-			"Spite",
-			null,
-			SPIRIT,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.SPLITTING_HEADACHE,
-			"Splitting Headache",
-			null,
-			MIND,
-			RANGED,
-			new Constant(0),
-			new Constant(1),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.SPRAY,
-			"Spray",
-			null,
-			WATER,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.SQUARE_ONE,
-			"Square One",
-			null,
-			DARK,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.SQUAWK,
-			"Squawk",
-			null,
-			AIR,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.STAMPEDE,
-			"Stampede",
-			null,
-			SIMPLE,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.STARE,
-			"Stare",
-			null,
-			SIMPLE,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.STARTLE,
-			"Startle",
-			null,
-			SPIRIT,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.STATIC_SHOCK,
-			"Static Shock",
-			null,
-			ELECTRIC,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.STATIC_SPORES,
-			"Static Spores",
-			null,
-			PLANT,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.STEEL_CRUSHER,
-			"Steel Crusher",
-			null,
-			METAL,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.STING,
-			"Sting",
-			null,
-			TOXIC,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.STRATAGEM,
-			"Stratagem",
-			null,
-			MIND,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.STRETCH,
-			"Stretch",
-			null,
-			SIMPLE,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.STRIKE,
-			"Strike",
-			null,
-			SIMPLE,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.STUN,
-			"Stun",
-			null,
-			ELECTRIC,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.STUPEFY,
-			"Stupefy",
-			null,
-			SPIRIT,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.SUMMON,
-			"Summon",
-			null,
-			SIMPLE,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.SWAT,
-			"Swat",
-			null,
-			BRAWLER,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.SWIPE,
-			"Swipe",
-			null,
-			SIMPLE,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.TAIL_SLAP,
-			"Tail Slap",
-			null,
-			SIMPLE,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.TAKE_ROOT,
-			"Take Root",
-			null,
-			PLANT,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.TALENT_TRADE,
-			"Talent Trade",
-			null,
-			DARK,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.TAMP,
-			"Tamp",
-			null,
-			EARTH,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.TASE,
-			"Tase",
-			null,
-			ELECTRIC,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.TEAMWORK,
-			"Teamwork",
-			null,
-			SIMPLE,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.TEAR_DOWN,
-			"Tear Down",
-			null,
-			SIMPLE,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.TEASE,
-			"Tease",
-			null,
-			DARK,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.THISTLE_SLASH,
-			"Thistle Slash",
-			null,
-			PLANT,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.THUNDER_BLAST,
-			"Thunder Blast",
-			null,
-			ELECTRIC,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.THUNDER_CHOMP,
-			"Thunder Chomp",
-			null,
-			ELECTRIC,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.THUNDER_CLAP,
-			"Thunder Clap",
-			null,
-			ELECTRIC,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.THUNDER_CRASH,
-			"Thunder Crash",
-			null,
-			ELECTRIC,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.THUNDER_SLAM,
-			"Thunder Slam",
-			null,
-			ELECTRIC,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.THUNDERSTORM,
-			"ThunderStorm",
-			null,
-			ELECTRIC,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.THUNDERSTRIKE,
-			"Thunderstrike",
-			null,
-			ELECTRIC,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.TIMBER_THRASH,
-			"Timber Thrash",
-			null,
-			PLANT,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.TONE_BARRIER,
-			"Tone Barrier",
-			null,
-			SIMPLE,
-			STATUS,
-			new Constant(0),
-			new Constant(4),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.TOXIC_SPORES,
-			"Toxic Spores",
-			null,
-			TOXIC,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.TOXIC_TAIL,
-			"Toxic Tail",
-			null,
-			TOXIC,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.TRIBUTE,
-			"Tribute",
-			null,
-			SIMPLE,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.TRICKY_TACTICS,
-			"Tricky Tactics",
-			null,
-			DARK,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.TSUNAMI,
-			"Tsunami",
-			null,
-			WATER,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.TUNE_UP,
-			"Tune Up",
-			null,
-			METAL,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.TYPHOON,
-			"Typhoon",
-			null,
-			AIR,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.UNDERMINE,
-			"Undermine",
-			null,
-			EARTH,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.VENOM_CHOMP,
-			"Venom Chomp",
-			null,
-			TOXIC,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.VENOM_SLASH,
-			"Venom Slash",
-			null,
-			TOXIC,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.VICE_JAWS,
-			"Vice Jaws",
-			null,
-			METAL,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.VINE_LASH,
-			"Vine Lash",
-			null,
-			PLANT,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.VITAL_JAB,
-			"Vital Slash",
-			null,
-			BRAWLER,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.WATER_BOMB,
-			"Water Bomb",
-			null,
-			WATER,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.WAVE_WRECKER,
-			"Wave Wrecker",
-			null,
-			WATER,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.WEB_SHOT,
-			"Web Shot",
-			null,
-			BUG,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.WING_SLAP,
-			"Wing Slap",
-			null,
-			AIR,
-			MELEE,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.WONDER_HERB,
-			"Wonder Herb",
-			null,
-			PLANT,
-			STATUS,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-		);
-		register(
-			MoveId.ZIP_ZAP,
-			"Zip Zap",
-			null,
-			ELECTRIC,
-			RANGED,
-			new Constant(0),
-			new Constant(0),
-			null,
-			null,
-			null,
-			null
-        );
+		registry.put(ACCELERATE, MoveBuilder.newMove(ACCELERATE)
+			.name("Accerlerate")
+			.type(SIMPLE)
+			.category(STATUS)
+			.energyCost(new Constant(25))
+			.build()
+		);
+		registry.put(AIM, MoveBuilder.newMove(AIM)
+			.name("Aim")
+			.type(SIMPLE)
+			.category(STATUS)
+			.energyCost(new Constant(10))
+			.build()
+		);
+		registry.put(AIR_BLADE, MoveBuilder.newMove(AIR_BLADE)
+			.name("Air Blade")
+			.type(AIR)
+			.category(RANGED)
+			.energyCost(new Constant(40))
+			.build()
+		);
+		registry.put(AIR_SHOT, MoveBuilder.newMove(AIR_SHOT)
+			.name("Air Shot")
+			.type(AIR)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(AIR_WHIP, MoveBuilder.newMove(AIR_WHIP)
+			.name("Air Whip")
+			.type(AIR)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(AQUA_JAWS, MoveBuilder.newMove(AQUA_JAWS)
+			.name("Aqua Jaws")
+			.type(WATER)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(AUGMENT, MoveBuilder.newMove(AUGMENT)
+			.name("Augment")
+			.type(ANCIENT)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(BAFFLE, MoveBuilder.newMove(BAFFLE)
+			.name("Baffle")
+			.type(DARK)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(BAG_OF_TRICKS, MoveBuilder.newMove(BAG_OF_TRICKS)
+			.name("Bag of Tricks")
+			.type(DARK)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(BAIT, MoveBuilder.newMove(BAIT)
+			.name("Bait")
+			.type(SIMPLE)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.priority(new Constant(2))
+			.build()
+		);
+		registry.put(BAMBOOZLE, MoveBuilder.newMove(BAMBOOZLE)
+			.name("Bamboozle")
+			.type(DARK)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(BANANA_SPLIT, MoveBuilder.newMove(BANANA_SPLIT)
+			.name("Banana Split")
+			.type(SIMPLE)
+			.category(STATUS)
+			.energyCost(new Constant(100))
+			.build()
+		);
+		registry.put(BANE_OF_HASTE, MoveBuilder.newMove(BANE_OF_HASTE)
+			.name("Bane of Haste")
+			.type(ANCIENT)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.priority(new Constant(-7))
+			.build()
+		);
+		registry.put(BANEFUL_BASH, MoveBuilder.newMove(BANEFUL_BASH)
+			.name("Baneful Bash")
+			.type(TOXIC)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(BARBS, MoveBuilder.newMove(BARBS)
+			.name("Barbs")
+			.type(METAL)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(BARTER, MoveBuilder.newMove(BARTER)
+			.name("Barter")
+			.type(SIMPLE)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(BASH, MoveBuilder.newMove(BASH)
+			.name("Bash")
+			.type(METAL)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(BATTERING_RAM, MoveBuilder.newMove(BATTERING_RAM)
+			.name("Battering Ram")
+			.type(BUG)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(BATTLE_CHIME, MoveBuilder.newMove(BATTLE_CHIME)
+			.name("Battle Chime")
+			.type(SIMPLE)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(BATTLE_HORN, MoveBuilder.newMove(BATTLE_HORN)
+			.name("Battle Horn")
+			.type(SIMPLE)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(BEQUEATH, MoveBuilder.newMove(BEQUEATH)
+			.name("Bequeath")
+			.type(SIMPLE)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.priority(new Constant(-6))
+			.build()
+		);
+		registry.put(BITTER_COLD, MoveBuilder.newMove(BITTER_COLD)
+			.name("Bitter Cold")
+			.type(ICE)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(BLAZE_CHOMP, MoveBuilder.newMove(BLAZE_CHOMP)
+			.name("Blaze Chomp")
+			.type(FIRE)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(BLAZE_OF_GLORY, MoveBuilder.newMove(BLAZE_OF_GLORY)
+			.name("Blaze of Glory")
+			.type(FIRE)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(BLAZE_RUSH, MoveBuilder.newMove(BLAZE_RUSH)
+			.name("Blaze Rush")
+			.type(FIRE)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(BLINDSPOT_BATTER, MoveBuilder.newMove(BLINDSPOT_BATTER)
+			.name("Blindspot Batter")
+			.type(LIGHT)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(BLUDGEON, MoveBuilder.newMove(BLUDGEON)
+			.name("Bludgeon")
+			.type(BRAWLER)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(BODY_CRASH, MoveBuilder.newMove(BODY_CRASH)
+			.name("Body Crash")
+			.type(BRAWLER)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(BODY_SLAM, MoveBuilder.newMove(BODY_SLAM)
+			.name("Body Slam")
+			.type(SIMPLE)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(BOILING_PRESS, MoveBuilder.newMove(BOILING_PRESS)
+			.name("Boiling Press")
+			.type(FIRE)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(BOOM_BASH, MoveBuilder.newMove(BOOM_BASH)
+			.name("Boom Bash")
+			.type(BRAWLER)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(BOULDER_BLAST, MoveBuilder.newMove(BOULDER_BLAST)
+			.name("Boulder Blast")
+			.type(BRAWLER)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(BRACE, MoveBuilder.newMove(BRACE)
+			.name("Brace")
+			.type(SIMPLE)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(BRAIN_EXERCISE, MoveBuilder.newMove(BRAIN_EXERCISE)
+			.name("Brain Exercise")
+			.type(MIND)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(BRAINWASH, MoveBuilder.newMove(BRAINWASH)
+			.name("Brainwash")
+			.type(MIND)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(BRAWN_BOOST, MoveBuilder.newMove(BRAWN_BOOST)
+			.name("Brawn Boost")
+			.type(BRAWLER)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(BRIAR_BLOCK, MoveBuilder.newMove(BRIAR_BLOCK)
+			.name("Briar Block")
+			.type(PLANT)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.priority(new Constant(4))
+			.build()
+		);
+		registry.put(BUCK_UP, MoveBuilder.newMove(BUCK_UP)
+			.name("Buck Up")
+			.type(BRAWLER)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(BUG_BITE, MoveBuilder.newMove(BUG_BITE)
+			.name("Bug Bite")
+			.type(BUG)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(BULK_UP, MoveBuilder.newMove(BULK_UP)
+			.name("Bulk Up")
+			.type(BRAWLER)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(BURN_UP, MoveBuilder.newMove(BURN_UP)
+			.name("Burn Up")
+			.type(FIRE)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(BURROW, MoveBuilder.newMove(BURROW)
+			.name("Burrow")
+			.type(EARTH)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(BUSH_WHACK, MoveBuilder.newMove(BUSH_WHACK)
+			.name("Bush Whack")
+			.type(PLANT)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(CANISTER_BURST, MoveBuilder.newMove(CANISTER_BURST)
+			.name("Canister Burst")
+			.type(TOXIC)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(CEREBRAL_SLASH, MoveBuilder.newMove(CEREBRAL_SLASH)
+			.name("Cerebral Slash")
+			.type(MIND)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(CHARADE, MoveBuilder.newMove(CHARADE)
+			.name("Charade")
+			.type(DARK)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(CHARRED_CLAWS, MoveBuilder.newMove(CHARRED_CLAWS)
+			.name("Charred Claws")
+			.type(FIRE)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(CHASE_DOWN, MoveBuilder.newMove(CHASE_DOWN)
+			.name("Chase Down")
+			.type(SIMPLE)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(CHILLY_CHOMP, MoveBuilder.newMove(CHILLY_CHOMP)
+			.name("Chilly Chomp")
+			.type(ICE)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(CHOMP, MoveBuilder.newMove(CHOMP)
+			.name("Chomp")
+			.type(DARK)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(CHOP, MoveBuilder.newMove(CHOP)
+			.name("Chop")
+			.type(BRAWLER)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(CLAMP, MoveBuilder.newMove(CLAMP)
+			.name("Clamp")
+			.type(METAL)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(CLAY_SLAP, MoveBuilder.newMove(CLAY_SLAP)
+			.name("Clay Slap")
+			.type(EARTH)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(CLIMATE_CANNON, MoveBuilder.newMove(CLIMATE_CANNON)
+			.name("Climate Cannon")
+			.type(SIMPLE)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(COCONUT_BOMB, MoveBuilder.newMove(COCONUT_BOMB)
+			.name("Coconut Bomb")
+			.type(PLANT)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(CONFOUND, MoveBuilder.newMove(CONFOUND)
+			.name("Confound")
+			.type(ANCIENT)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(CORRODE, MoveBuilder.newMove(CORRODE)
+			.name("Corrode")
+			.type(TOXIC)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(COUNTER_POISE, MoveBuilder.newMove(COUNTER_POISE)
+			.name("Counter Poise")
+			.type(BUG)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(CYCLONE_SLAM, MoveBuilder.newMove(CYCLONE_SLAM)
+			.name("Cyclone Slam")
+			.type(AIR)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(DARK_SURGE, MoveBuilder.newMove(DARK_SURGE)
+			.name("Dark Surge")
+			.type(DARK)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(DAWDLE, MoveBuilder.newMove(DAWDLE)
+			.name("Dawdle")
+			.type(SIMPLE)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(DAYDREAM, MoveBuilder.newMove(DAYDREAM)
+			.name("Daydream")
+			.type(SIMPLE)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(DAZZLING_BARRAGE, MoveBuilder.newMove(DAZZLING_BARRAGE)
+			.name("Dazzling Barrage")
+			.type(LIGHT)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(DEEP_FREEZE, MoveBuilder.newMove(DEEP_FREEZE)
+			.name("Deep Freeze")
+			.type(ICE)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(DEJA_VU, MoveBuilder.newMove(DEJA_VU)
+			.name("Deja Vu")
+			.type(MIND)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(DINO_CLAWS, MoveBuilder.newMove(DINO_CLAWS)
+			.name("Dino Claws")
+			.type(ANCIENT)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(DISCORDANCE, MoveBuilder.newMove(DISCORDANCE)
+			.name("Discordance")
+			.type(BUG)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(DISPERSE, MoveBuilder.newMove(DISPERSE)
+			.name("Disperse")
+			.type(LIGHT)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(DISSIPATE, MoveBuilder.newMove(DISSIPATE)
+			.name("Dissipate")
+			.type(MIND)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.priority(new Constant(-6))
+			.build()
+		);
+		registry.put(DISSONANT_CHORD, MoveBuilder.newMove(DISSONANT_CHORD)
+			.name("Dissonant Chord")
+			.type(SIMPLE)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(DIVE_BOMB, MoveBuilder.newMove(DIVE_BOMB)
+			.name("Dive Bomb")
+			.type(DARK)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(DODGE, MoveBuilder.newMove(DODGE)
+			.name("Dodge")
+			.type(SIMPLE)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.priority(new Constant(4))
+			.build()
+		);
+		registry.put(DOUBLE_WHACK, MoveBuilder.newMove(DOUBLE_WHACK)
+			.name("Double Whack")
+			.type(METAL)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(DOWNPOUR, MoveBuilder.newMove(DOWNPOUR)
+			.name("Dounpour")
+			.type(WATER)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(DRACO_BEAM, MoveBuilder.newMove(DRACO_BEAM)
+			.name("Draco Beam")
+			.type(ANCIENT)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(DRIVING_FORCE, MoveBuilder.newMove(DRIVING_FORCE)
+			.name("Driving Force")
+			.type(BRAWLER)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.priority(new Constant(-6))
+			.build()
+		);
+		registry.put(DRUDGE, MoveBuilder.newMove(DRUDGE)
+			.name("Drudge")
+			.type(SIMPLE)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(EAR_SLAP, MoveBuilder.newMove(EAR_SLAP)
+			.name("Ear Slap")
+			.type(SIMPLE)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(EARTHQUAKE, MoveBuilder.newMove(EARTHQUAKE)
+			.name("Earthquake")
+			.type(EARTH)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(EERIE_STARE, MoveBuilder.newMove(EERIE_STARE)
+			.name("Eerie Stare")
+			.type(SIMPLE)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(ELECTRO_PUNCH, MoveBuilder.newMove(ELECTRO_PUNCH)
+			.name("Electro Punch")
+			.type(ELECTRIC)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(EMPATHIZE, MoveBuilder.newMove(EMPATHIZE)
+			.name("Empathize")
+			.type(MIND)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(EMULATE, MoveBuilder.newMove(EMULATE)
+			.name("Emulate")
+			.type(SPIRIT)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(ENAMOR, MoveBuilder.newMove(ENAMOR)
+			.name("Enamour")
+			.type(SIMPLE)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(ENERGIZE, MoveBuilder.newMove(ENERGIZE)
+			.name("Energize")
+			.type(ELECTRIC)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(ENERGY_BREAK, MoveBuilder.newMove(ENERGY_BREAK)
+			.name("Energy Break")
+			.type(ANCIENT)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(ENERGY_SURGE, MoveBuilder.newMove(ENERGY_SURGE)
+			.name("Energy Surge")
+			.type(LIGHT)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(EXAMINE, MoveBuilder.newMove(EXAMINE)
+			.name("Examine")
+			.type(SIMPLE)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(FADE_AWAY, MoveBuilder.newMove(FADE_AWAY)
+			.name("Fade Away")
+			.type(SPIRIT)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(FAR_ENCHANTMENT, MoveBuilder.newMove(FAR_ENCHANTMENT)
+			.name("Far Enchantment")
+			.type(ANCIENT)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(FINAL_RUSE, MoveBuilder.newMove(FINAL_RUSE)
+			.name("Final Ruse")
+			.type(SPIRIT)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(FIRE_BREATH, MoveBuilder.newMove(FIRE_BREATH)
+			.name("Fire Breath")
+			.type(FIRE)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(FIRE_SLAM, MoveBuilder.newMove(FIRE_SLAM)
+			.name("Fire Slam")
+			.type(FIRE)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(FLABBERGAST, MoveBuilder.newMove(FLABBERGAST)
+			.name("Flabbergast")
+			.type(MIND)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(FLAMING_KICK, MoveBuilder.newMove(FLAMING_KICK)
+			.name("Flaming Kick")
+			.type(FIRE)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(FLARE_BLAST, MoveBuilder.newMove(FLARE_BLAST)
+			.name("Flare Blast")
+			.type(FIRE)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(FLASH, MoveBuilder.newMove(FLASH)
+			.name("Flash")
+			.type(LIGHT)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(FLASH_N_FLEE, MoveBuilder.newMove(FLASH_N_FLEE)
+			.name("Flash n Flee")
+			.type(LIGHT)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(FLURRY, MoveBuilder.newMove(FLURRY)
+			.name("Flurry")
+			.type(ICE)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(FROST_BEAM, MoveBuilder.newMove(FROST_BEAM)
+			.name("Frost Beam")
+			.type(ICE)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(FROST_BREATH, MoveBuilder.newMove(FROST_BREATH)
+			.name("Frost Breath")
+			.type(ICE)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(FROST_PUNCH, MoveBuilder.newMove(FROST_PUNCH)
+			.name("Frost Punch")
+			.type(ICE)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(FUNGUS_CURSE, MoveBuilder.newMove(FUNGUS_CURSE)
+			.name("Fungus Curse")
+			.type(PLANT)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(GAIN_DRAIN, MoveBuilder.newMove(GAIN_DRAIN)
+			.name("Gain Drain")
+			.type(DARK)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(GALE_FORCE, MoveBuilder.newMove(GALE_FORCE)
+			.name("Gale Force")
+			.type(AIR)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(GAMMA_PULSE, MoveBuilder.newMove(GAMMA_PULSE)
+			.name("Gamma Pulse")
+			.type(LIGHT)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(GLOOMINOUS_ROAR, MoveBuilder.newMove(GLOOMINOUS_ROAR)
+			.name("Gloominous Roar")
+			.type(SIMPLE)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(GNARLY_GASH, MoveBuilder.newMove(GNARLY_GASH)
+			.name("Gnarly Gash")
+			.type(DARK)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(GNAW, MoveBuilder.newMove(GNAW)
+			.name("Gnaw")
+			.type(SIMPLE)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(GROWL, MoveBuilder.newMove(GROWL)
+			.name("Growl")
+			.type(SIMPLE)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(GUST, MoveBuilder.newMove(GUST)
+			.name("Gust")
+			.type(AIR)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(HARMONIOUS_CHORD, MoveBuilder.newMove(HARMONIOUS_CHORD)
+			.name("Harmonious Chord")
+			.type(SIMPLE)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(HARROW, MoveBuilder.newMove(HARROW)
+			.name("Harrow")
+			.type(SPIRIT)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(HARVEST, MoveBuilder.newMove(HARVEST)
+			.name("Harvest")
+			.type(PLANT)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(HASTEN, MoveBuilder.newMove(HASTEN)
+			.name("Hasten")
+			.type(SIMPLE)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(HAZY_SHROUD, MoveBuilder.newMove(HAZY_SHROUD)
+			.name("Hazy Shroud")
+			.type(SPIRIT)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(HEADBUTT, MoveBuilder.newMove(HEADBUTT)
+			.name("Headbutt")
+			.type(SIMPLE)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(HEALTH_GIFT, MoveBuilder.newMove(HEALTH_GIFT)
+			.name("Health Gift")
+			.type(MIND)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(HEART_BREAK, MoveBuilder.newMove(HEART_BREAK)
+			.name("Heart Break")
+			.type(BRAWLER)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(HEAT_WAVE, MoveBuilder.newMove(HEAT_WAVE)
+			.name("Heat Wave")
+			.type(FIRE)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(HEAVY_BASH, MoveBuilder.newMove(HEAVY_BASH)
+			.name("Heavy Bash")
+			.type(METAL)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(HIGH_PITCH_SCREECH, MoveBuilder.newMove(HIGH_PITCH_SCREECH)
+			.name("High Pitch Screech")
+			.type(SIMPLE)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(HOP_KICK, MoveBuilder.newMove(HOP_KICK)
+			.name("Hop Kick")
+			.type(BRAWLER)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(HULLABALOO, MoveBuilder.newMove(HULLABALOO)
+			.name("Hullabaloo")
+			.type(SIMPLE)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(HYDRO_BLAST, MoveBuilder.newMove(HYDRO_BLAST)
+			.name("Hydro Blast")
+			.type(WATER)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(HYDRO_SLASH, MoveBuilder.newMove(HYDRO_SLASH)
+			.name("Hydro Slash")
+			.type(WATER)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(HYPNOTIZE, MoveBuilder.newMove(HYPNOTIZE)
+			.name("Hypnotize")
+			.type(MIND)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(ICE_HAMMER, MoveBuilder.newMove(ICE_HAMMER)
+			.name("Ice Hammer")
+			.type(ICE)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(ICICLE_TRAP, MoveBuilder.newMove(ICICLE_TRAP)
+			.name("Icicle Trap")
+			.type(ICE)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(ILL_WILL, MoveBuilder.newMove(ILL_WILL)
+			.name("Ill Will")
+			.type(SIMPLE)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(IMPERSONATE, MoveBuilder.newMove(IMPERSONATE)
+			.name("Impersonate")
+			.type(SPIRIT)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.priority(new Constant(1))
+			.build()
+		);
+		registry.put(JET_STREAM, MoveBuilder.newMove(JET_STREAM)
+			.name("Jet Stream")
+			.type(AIR)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(JOLT, MoveBuilder.newMove(JOLT)
+			.name("Jolt")
+			.type(ELECTRIC)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.priority(new Constant(1))
+			.build()
+		);
+		registry.put(JUDGEMENT, MoveBuilder.newMove(JUDGEMENT)
+			.name("Judgement")
+			.type(MIND)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(JUMP_START, MoveBuilder.newMove(JUMP_START)
+			.name("Jump Start")
+			.type(ELECTRIC)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(LANDSLIDE, MoveBuilder.newMove(LANDSLIDE)
+			.name("Landslide")
+			.type(EARTH)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(LEAF_BARRAGE, MoveBuilder.newMove(LEAF_BARRAGE)
+			.name("Leaf Barrage")
+			.type(PLANT)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(LIFE_DRAIN, MoveBuilder.newMove(LIFE_DRAIN)
+			.name("Life Drain")
+			.type(PLANT)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(LIGHT_DASH, MoveBuilder.newMove(LIGHT_DASH)
+			.name("Light Dash")
+			.type(LIGHT)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.priority(new Constant(1))
+			.build()
+		);
+		registry.put(LIGHTSPEED_RAY, MoveBuilder.newMove(LIGHTSPEED_RAY)
+			.name("Lightspeed Ray")
+			.type(LIGHT)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.priority(new Constant(1))
+			.build()
+		);
+		registry.put(LUNGE, MoveBuilder.newMove(LUNGE)
+			.name("Lunge")
+			.type(BUG)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(LUSTER_LOOT, MoveBuilder.newMove(LUSTER_LOOT)
+			.name("Luster Loot")
+			.type(LIGHT)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(MAGMA_BLOCK, MoveBuilder.newMove(MAGMA_BLOCK)
+			.name("Magma Block")
+			.type(FIRE)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.priority(new Constant(4))
+			.build()
+		);
+		registry.put(MAGNIFY, MoveBuilder.newMove(MAGNIFY)
+			.name("Magnify")
+			.type(LIGHT)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(MAROON, MoveBuilder.newMove(MAROON)
+			.name("Maroon")
+			.type(WATER)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(MEGA_CHOMP, MoveBuilder.newMove(MEGA_CHOMP)
+			.name("Mega Chomp")
+			.type(DARK)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(MEGA_KICK, MoveBuilder.newMove(MEGA_KICK)
+			.name("Mega Kick")
+			.type(BRAWLER)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(MEGA_PUNCH, MoveBuilder.newMove(MEGA_PUNCH)
+			.name("Mega Punch")
+			.type(BRAWLER)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(MEMORIZE, MoveBuilder.newMove(MEMORIZE)
+			.name("Memorize")
+			.type(MIND)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(METAL_BLAST, MoveBuilder.newMove(METAL_BLAST)
+			.name("Metal Blast")
+			.type(METAL)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(METAL_SHRIEK, MoveBuilder.newMove(METAL_SHRIEK)
+			.name("Metal Shriek")
+			.type(METAL)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(METAL_SWIPES, MoveBuilder.newMove(METAL_SWIPES)
+			.name("Metal Swipes")
+			.type(METAL)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(MIND_DRAIN, MoveBuilder.newMove(MIND_DRAIN)
+			.name("Mind Drain")
+			.type(MIND)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(MINDS_EYE, MoveBuilder.newMove(MINDS_EYE)
+			.name("Minds Eye")
+			.type(MIND)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(MUCK_BLAST, MoveBuilder.newMove(MUCK_BLAST)
+			.name("Muck Blast")
+			.type(TOXIC)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(MUCK_BUCK, MoveBuilder.newMove(MUCK_BUCK)
+			.name("Muck Buck")
+			.type(EARTH)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(MUD_SPATTER, MoveBuilder.newMove(MUD_SPATTER)
+			.name("Mud Spatter")
+			.type(EARTH)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(MUDSLIDE, MoveBuilder.newMove(MUDSLIDE)
+			.name("Mudslide")
+			.type(EARTH)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(NAB, MoveBuilder.newMove(NAB)
+			.name("Nab")
+			.type(SIMPLE)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(NATURES_FORCE, MoveBuilder.newMove(NATURES_FORCE)
+			.name("Natures Force")
+			.type(PLANT)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(NEAR_ENCHANTMENT, MoveBuilder.newMove(NEAR_ENCHANTMENT)
+			.name("Near Enchantment")
+			.type(MIND)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(NOSEDIVE, MoveBuilder.newMove(NOSEDIVE)
+			.name("Nosedive")
+			.type(AIR)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(NOVA_BLAST, MoveBuilder.newMove(NOVA_BLAST)
+			.name("Nova Blast")
+			.type(LIGHT)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(OIL_LEAK, MoveBuilder.newMove(OIL_LEAK)
+			.name("Oil Leak")
+			.type(TOXIC)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(OUTBURST, MoveBuilder.newMove(OUTBURST)
+			.name("Outburst")
+			.type(ANCIENT)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(PAINT_SHOWER, MoveBuilder.newMove(PAINT_SHOWER)
+			.name("Paint Shower")
+			.type(TOXIC)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(PARASITIZE, MoveBuilder.newMove(PARASITIZE)
+			.name("Parasitize")
+			.type(BUG)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(PEACE_OF_MIND, MoveBuilder.newMove(PEACE_OF_MIND)
+			.name("Peace of Mind")
+			.type(MIND)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(PEBBLE_TOSS, MoveBuilder.newMove(PEBBLE_TOSS)
+			.name("Pebble Toss")
+			.type(EARTH)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(PECK, MoveBuilder.newMove(PECK)
+			.name("Peck")
+			.type(AIR)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(PEP_JAB, MoveBuilder.newMove(PEP_JAB)
+			.name("Pep Jab")
+			.type(BRAWLER)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(PEPPER_BURST, MoveBuilder.newMove(PEPPER_BURST)
+			.name("Pepper Burst")
+			.type(FIRE)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(PERCH, MoveBuilder.newMove(PERCH)
+			.name("Perch")
+			.type(AIR)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(PESTER, MoveBuilder.newMove(PESTER)
+			.name("Pester")
+			.type(BUG)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(PESTILENCE, MoveBuilder.newMove(PESTILENCE)
+			.name("Pestilence")
+			.type(BUG)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(PETAL_PUMMEL, MoveBuilder.newMove(PETAL_PUMMEL)
+			.name("Petal Pummel")
+			.type(PLANT)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(PHANTOM_BLAST, MoveBuilder.newMove(PHANTOM_BLAST)
+			.name("Phantom Blast")
+			.type(SPIRIT)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(PHANTOM_SLASH, MoveBuilder.newMove(PHANTOM_SLASH)
+			.name("Phantom Slash")
+			.type(SPIRIT)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(PHEROBLAST, MoveBuilder.newMove(PHEROBLAST)
+			.name("Pheroblast")
+			.type(BUG)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(PHOTOSYNTHESIS, MoveBuilder.newMove(PHOTOSYNTHESIS)
+			.name("Photosynthesis")
+			.type(PLANT)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(PIERCING_DRIVE, MoveBuilder.newMove(PIERCING_DRIVE)
+			.name("Piercing Drive")
+			.type(WATER)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(PILFER, MoveBuilder.newMove(PILFER)
+			.name("Pilfer")
+			.type(DARK)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(PINE_SHOT, MoveBuilder.newMove(PINE_SHOT)
+			.name("Pine Shot")
+			.type(PLANT)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(PLUNGE, MoveBuilder.newMove(PLUNGE)
+			.name("Plunge")
+			.type(WATER)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(POISON, MoveBuilder.newMove(POISON)
+			.name("Poison")
+			.type(TOXIC)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(POISON_BARBS, MoveBuilder.newMove(POISON_BARBS)
+			.name("Poison Barbs")
+			.type(TOXIC)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(POUNCE, MoveBuilder.newMove(POUNCE)
+			.name("Pounce")
+			.type(SIMPLE)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(POWER_FOCUS, MoveBuilder.newMove(POWER_FOCUS)
+			.name("Power Focus")
+			.type(SIMPLE)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(POWER_SIPHON, MoveBuilder.newMove(POWER_SIPHON)
+			.name("Power Siphon")
+			.type(ELECTRIC)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(PRECISION_BOLT, MoveBuilder.newMove(PRECISION_BOLT)
+			.name("Precision Bolt")
+			.type(ELECTRIC)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(PREEMPTIVE_STRIKE, MoveBuilder.newMove(PREEMPTIVE_STRIKE)
+			.name("Preemptive Strike")
+			.type(BRAWLER)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(PRIMAL_SLASH, MoveBuilder.newMove(PRIMAL_SLASH)
+			.name("Primal Slash")
+			.type(ANCIENT)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(PROVOKE, MoveBuilder.newMove(PROVOKE)
+			.name("Provoke")
+			.type(DARK)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(PSYCHAL_CHOMP, MoveBuilder.newMove(PSYCHAL_CHOMP)
+			.name("Psychal Chomp")
+			.type(MIND)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(PSYCHO_BLAST, MoveBuilder.newMove(PSYCHO_BLAST)
+			.name("Psycho Blast")
+			.type(MIND)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(PYROKINESIS, MoveBuilder.newMove(PYROKINESIS)
+			.name("Pyrokinesis")
+			.type(FIRE)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(QUICK_POUNCE, MoveBuilder.newMove(QUICK_POUNCE)
+			.name("Quick Pounce")
+			.type(SIMPLE)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(QUICK_PUNCH, MoveBuilder.newMove(QUICK_PUNCH)
+			.name("Quick Punch")
+			.type(BRAWLER)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(QUICKSAND, MoveBuilder.newMove(QUICKSAND)
+			.name("Quicksand")
+			.type(EARTH)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(RADIANT_RUSH, MoveBuilder.newMove(RADIANT_RUSH)
+			.name("Radiant Rush")
+			.type(LIGHT)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(RAGING_FLAME, MoveBuilder.newMove(RAGING_FLAME)
+			.name("Raging Flame")
+			.type(FIRE)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(RAGING_HOWL, MoveBuilder.newMove(RAGING_HOWL)
+			.name("Raging Howl")
+			.type(SIMPLE)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(RAGING_TACKLE, MoveBuilder.newMove(RAGING_TACKLE)
+			.name("Raging Tackle")
+			.type(SIMPLE)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(RANT, MoveBuilder.newMove(RANT)
+			.name("Rant")
+			.type(DARK)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(RECYCLE, MoveBuilder.newMove(RECYCLE)
+			.name("Recycle")
+			.type(SIMPLE)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(REFLECTION_BURST, MoveBuilder.newMove(REFLECTION_BURST)
+			.name("Reflection Burst")
+			.type(METAL)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(REJUVENATE, MoveBuilder.newMove(REJUVENATE)
+			.name("Rejuvenate")
+			.type(SIMPLE)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(REPEATING_TUNE, MoveBuilder.newMove(REPEATING_TUNE)
+			.name("Repeating Tune")
+			.type(SIMPLE)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(RESONATE, MoveBuilder.newMove(RESONATE)
+			.name("Resonate")
+			.type(SIMPLE)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(RETURN_TO_SENDER, MoveBuilder.newMove(RETURN_TO_SENDER)
+			.name("Return to Sender")
+			.type(MIND)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(ROCK_SLIDE, MoveBuilder.newMove(ROCK_SLIDE)
+			.name("Rock Slide")
+			.type(EARTH)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(ROGUE_ASSAULT, MoveBuilder.newMove(ROGUE_ASSAULT)
+			.name("Rogue Assault")
+			.type(BRAWLER)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(ROUGH_UP, MoveBuilder.newMove(ROUGH_UP)
+			.name("Rough Up")
+			.type(BRAWLER)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(SAFEGUARD, MoveBuilder.newMove(SAFEGUARD)
+			.name("Safeguard")
+			.type(SIMPLE)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.priority(new Constant(3))
+			.build()
+		);
+		registry.put(SAP_PLANT, MoveBuilder.newMove(SAP_PLANT)
+			.name("Sap Plant")
+			.type(PLANT)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(SCAPEGOAT, MoveBuilder.newMove(SCAPEGOAT)
+			.name("Scapegoat")
+			.type(SIMPLE)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(SCAVENGE, MoveBuilder.newMove(SCAVENGE)
+			.name("Scavenge")
+			.type(AIR)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(SHADOW_SPRINT, MoveBuilder.newMove(SHADOW_SPRINT)
+			.name("Shadow Sprint")
+			.type(SPIRIT)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.priority(new Constant(1))
+			.build()
+		);
+		registry.put(SHADOWBOX, MoveBuilder.newMove(SHADOWBOX)
+			.name("Shadowbox")
+			.type(BRAWLER)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(SHARPEN, MoveBuilder.newMove(SHARPEN)
+			.name("Sharpen")
+			.type(DARK)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(SHINE, MoveBuilder.newMove(SHINE)
+			.name("Shine")
+			.type(LIGHT)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(SHREWD_BLAST, MoveBuilder.newMove(SHREWD_BLAST)
+			.name("SHrewd Blast")
+			.type(ANCIENT)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(SHRIEK, MoveBuilder.newMove(SHRIEK)
+			.name("Shriek")
+			.type(SIMPLE)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(SINGE, MoveBuilder.newMove(SINGE)
+			.name("Singe")
+			.type(FIRE)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(SLAP_DOWN, MoveBuilder.newMove(SLAP_DOWN)
+			.name("Slap Down")
+			.type(DARK)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.priority(new Constant(1))
+			.build()
+		);
+		registry.put(SLASH, MoveBuilder.newMove(SLASH)
+			.name("Slash")
+			.type(SIMPLE)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(SLEET_SHOT, MoveBuilder.newMove(SLEET_SHOT)
+			.name("Sleet Shot")
+			.type(ICE)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(SLIME, MoveBuilder.newMove(SLIME)
+			.name("Slime")
+			.type(TOXIC)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(SLUMBER, MoveBuilder.newMove(SLUMBER)
+			.name("Slumber")
+			.type(SIMPLE)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(SNORE_SPORES, MoveBuilder.newMove(SNORE_SPORES)
+			.name("Snore Spores")
+			.type(PLANT)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(SNOWDOZER, MoveBuilder.newMove(SNOWDOZER)
+			.name("Snowdozer")
+			.type(ICE)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(SOFT_WATER, MoveBuilder.newMove(SOFT_WATER)
+			.name("Soft Water")
+			.type(WATER)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(SOUL_STORM, MoveBuilder.newMove(SOUL_STORM)
+			.name("Soul Storm")
+			.type(SPIRIT)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(SPARE, MoveBuilder.newMove(SPARE)
+			.name("Spare")
+			.type(SIMPLE)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(SPECTRAL_BURST, MoveBuilder.newMove(SPECTRAL_BURST)
+			.name("Spectral Burst")
+			.type(SPIRIT)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(SPIKE_RUSH, MoveBuilder.newMove(SPIKE_RUSH)
+			.name("Spike Rush")
+			.type(ICE)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.priority(new Constant(1))
+			.build()
+		);
+		registry.put(SPIT, MoveBuilder.newMove(SPIT)
+			.name("Spit")
+			.type(SIMPLE)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(SPITE, MoveBuilder.newMove(SPITE)
+			.name("Spite")
+			.type(SPIRIT)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(SPLITTING_HEADACHE, MoveBuilder.newMove(SPLITTING_HEADACHE)
+			.name("Splitting Headache")
+			.type(MIND)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.priority(new Constant(1))
+			.build()
+		);
+		registry.put(SPRAY, MoveBuilder.newMove(SPRAY)
+			.name("Spray")
+			.type(WATER)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(SQUARE_ONE, MoveBuilder.newMove(SQUARE_ONE)
+			.name("Square One")
+			.type(DARK)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(SQUAWK, MoveBuilder.newMove(SQUAWK)
+			.name("Squawk")
+			.type(AIR)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(STAMPEDE, MoveBuilder.newMove(STAMPEDE)
+			.name("Stampede")
+			.type(SIMPLE)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(STARE, MoveBuilder.newMove(STARE)
+			.name("Stare")
+			.type(SIMPLE)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(STARTLE, MoveBuilder.newMove(STARTLE)
+			.name("Startle")
+			.type(SPIRIT)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(STATIC_SHOCK, MoveBuilder.newMove(STATIC_SHOCK)
+			.name("Static Shock")
+			.type(ELECTRIC)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(STATIC_SPORES, MoveBuilder.newMove(STATIC_SPORES)
+			.name("Static Spores")
+			.type(PLANT)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(STEEL_CRUSHER, MoveBuilder.newMove(STEEL_CRUSHER)
+			.name("Steel Crusher")
+			.type(METAL)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(STING, MoveBuilder.newMove(STING)
+			.name("Sting")
+			.type(TOXIC)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(STRATAGEM, MoveBuilder.newMove(STRATAGEM)
+			.name("Stratagem")
+			.type(MIND)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(STRETCH, MoveBuilder.newMove(STRETCH)
+			.name("Stretch")
+			.type(SIMPLE)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(STRIKE, MoveBuilder.newMove(STRIKE)
+			.name("Strike")
+			.type(SIMPLE)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(STUN, MoveBuilder.newMove(STUN)
+			.name("Stun")
+			.type(ELECTRIC)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(STUPEFY, MoveBuilder.newMove(STUPEFY)
+			.name("Stupefy")
+			.type(SPIRIT)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(SUMMON, MoveBuilder.newMove(SUMMON)
+			.name("Summon")
+			.type(SIMPLE)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(SWAT, MoveBuilder.newMove(SWAT)
+			.name("Swat")
+			.type(BRAWLER)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(SWIPE, MoveBuilder.newMove(SWIPE)
+			.name("Swipe")
+			.type(SIMPLE)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(TAIL_SLAP, MoveBuilder.newMove(TAIL_SLAP)
+			.name("Tail Slap")
+			.type(SIMPLE)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(TAKE_ROOT, MoveBuilder.newMove(TAKE_ROOT)
+			.name("Take Root")
+			.type(PLANT)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(TALENT_TRADE, MoveBuilder.newMove(TALENT_TRADE)
+			.name("Talent Trade")
+			.type(DARK)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(TAMP, MoveBuilder.newMove(TAMP)
+			.name("Tamp")
+			.type(EARTH)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(TASE, MoveBuilder.newMove(TASE)
+			.name("Tase")
+			.type(ELECTRIC)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(TEAMWORK, MoveBuilder.newMove(TEAMWORK)
+			.name("Teamwork")
+			.type(SIMPLE)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(TEAR_DOWN, MoveBuilder.newMove(TEAR_DOWN)
+			.name("Tear Down")
+			.type(SIMPLE)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(TEASE, MoveBuilder.newMove(TEASE)
+			.name("Tease")
+			.type(DARK)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(THISTLE_SLASH, MoveBuilder.newMove(THISTLE_SLASH)
+			.name("Thistle Slash")
+			.type(PLANT)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(THUNDER_BLAST, MoveBuilder.newMove(THUNDER_BLAST)
+			.name("Thunder Blast")
+			.type(ELECTRIC)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(THUNDER_CHOMP, MoveBuilder.newMove(THUNDER_CHOMP)
+			.name("Thunder Chomp")
+			.type(ELECTRIC)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(THUNDER_CLAP, MoveBuilder.newMove(THUNDER_CLAP)
+			.name("Thunder Clap")
+			.type(ELECTRIC)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(THUNDER_CRASH, MoveBuilder.newMove(THUNDER_CRASH)
+			.name("Thunder Crash")
+			.type(ELECTRIC)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(THUNDER_SLAM, MoveBuilder.newMove(THUNDER_SLAM)
+			.name("Thunder Slam")
+			.type(ELECTRIC)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(THUNDERSTORM, MoveBuilder.newMove(THUNDERSTORM)
+			.name("ThunderStorm")
+			.type(ELECTRIC)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(THUNDERSTRIKE, MoveBuilder.newMove(THUNDERSTRIKE)
+			.name("Thunderstrike")
+			.type(ELECTRIC)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(TIMBER_THRASH, MoveBuilder.newMove(TIMBER_THRASH)
+			.name("Timber Thrash")
+			.type(PLANT)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(TONE_BARRIER, MoveBuilder.newMove(TONE_BARRIER)
+			.name("Tone Barrier")
+			.type(SIMPLE)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.priority(new Constant(4))
+			.build()
+		);
+		registry.put(TOXIC_SPORES, MoveBuilder.newMove(TOXIC_SPORES)
+			.name("Toxic Spores")
+			.type(TOXIC)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(TOXIC_TAIL, MoveBuilder.newMove(TOXIC_TAIL)
+			.name("Toxic Tail")
+			.type(TOXIC)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(TRIBUTE, MoveBuilder.newMove(TRIBUTE)
+			.name("Tribute")
+			.type(SIMPLE)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(TRICKY_TACTICS, MoveBuilder.newMove(TRICKY_TACTICS)
+			.name("Tricky Tactics")
+			.type(DARK)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(TSUNAMI, MoveBuilder.newMove(TSUNAMI)
+			.name("Tsunami")
+			.type(WATER)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(TUNE_UP, MoveBuilder.newMove(TUNE_UP)
+			.name("Tune Up")
+			.type(METAL)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(TYPHOON, MoveBuilder.newMove(TYPHOON)
+			.name("Typhoon")
+			.type(AIR)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(UNDERMINE, MoveBuilder.newMove(UNDERMINE)
+			.name("Undermine")
+			.type(EARTH)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(VENOM_CHOMP, MoveBuilder.newMove(VENOM_CHOMP)
+			.name("Venom Chomp")
+			.type(TOXIC)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(VENOM_SLASH, MoveBuilder.newMove(VENOM_SLASH)
+			.name("Venom Slash")
+			.type(TOXIC)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(VICE_JAWS, MoveBuilder.newMove(VICE_JAWS)
+			.name("Vice Jaws")
+			.type(METAL)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(VINE_LASH, MoveBuilder.newMove(VINE_LASH)
+			.name("Vine Lash")
+			.type(PLANT)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(VITAL_JAB, MoveBuilder.newMove(VITAL_JAB)
+			.name("Vital Slash")
+			.type(BRAWLER)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(WATER_BOMB, MoveBuilder.newMove(WATER_BOMB)
+			.name("Water Bomb")
+			.type(WATER)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(WAVE_WRECKER, MoveBuilder.newMove(WAVE_WRECKER)
+			.name("Wave Wrecker")
+			.type(WATER)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(WEB_SHOT, MoveBuilder.newMove(WEB_SHOT)
+			.name("Web Shot")
+			.type(BUG)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(WING_SLAP, MoveBuilder.newMove(WING_SLAP)
+			.name("Wing Slap")
+			.type(AIR)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(WONDER_HERB, MoveBuilder.newMove(WONDER_HERB)
+			.name("Wonder Herb")
+			.type(PLANT)
+			.category(STATUS)
+			.energyCost(new Constant(0))
+			.build()
+		);
+		registry.put(ZIP_ZAP, MoveBuilder.newMove(ZIP_ZAP)
+			.name("Zip Zap")
+			.type(ELECTRIC)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.build()
+		);
     }
 }

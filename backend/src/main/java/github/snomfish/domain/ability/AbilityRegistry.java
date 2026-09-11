@@ -90,7 +90,7 @@ public class AbilityRegistry {
 			new AbilityRule(
                 List.of(BEFORE_MOVE_EVENT), 
                 new Equals(MOVE_TYPE, TypeId.FIRE), 
-                new MultiplyValueEffect(MOVE_TYPE_DAMAGE_MODIFIER, new Constant(0.5))
+                new MultiplyValueEffect(MOVE_TYPE_MODIFIER, new Constant(0.5))
             )
         );
         register(

@@ -1,9 +1,7 @@
 package github.snomfish.functionality.branch;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Function;
 
 public class BranchUtil {
@@ -39,28 +37,5 @@ public class BranchUtil {
             branch.multiplyProbability(pBranch.probability());
         }
         return branches;
-    }
-
-
-    // this does not work for complicated objects
-    // for now .......
-    // will probably need another interface for comparable
-    public static List<Branch<Boolean>> optimiseConditionalBranches(List<Branch<Boolean>> branches) {
-        double trueProbability = 0.0;
-        double falseProbability = 0.0;
-        
-        for (Branch<Boolean> branch : branches) {
-            if (branch.value()) {
-                trueProbability += branch.probability();
-            } else {
-                falseProbability += branch.probability();
-            }
-        }
-        List<Branch<Boolean>> result = new ArrayList<>(2);
-        
-        if (trueProbability > 0.0) result.add(new Branch<>(true, trueProbability));
-        if (falseProbability > 0.0) result.add(new Branch<>(false, falseProbability));
-
-        return result;
     }
 }

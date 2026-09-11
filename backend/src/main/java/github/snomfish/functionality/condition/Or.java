@@ -1,10 +1,13 @@
 package github.snomfish.functionality.condition;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 
+import static github.snomfish.functionality.condition.ConditionUtil.applyLogicalOperator;
+import static github.snomfish.functionality.condition.ConditionUtil.optimise;
 import static github.snomfish.functionality.copy.DeepCopy.*;
 
 public class Or implements ICondition {
@@ -29,29 +32,15 @@ public class Or implements ICondition {
     // code also old as fuck
     @Override
     public List<Branch<Boolean>> execute(BattleContext context) {
-        List<Branch<Boolean>> outcomes = List.of(
-            new Branch<>(false, 1.0)
-        );
+
+        List<List<Branch<Boolean>>> outcomeList = new ArrayList<>();
 
         for (ICondition condition : conditions) {
-            List<Branch<Boolean>> conditionOutcomes = condition.execute(context);
-
-            List<Branch<Boolean>> newOutcomes = new java.util.ArrayList<>();
-
-            for (Branch<Boolean> existing : outcomes) {
-                for (Branch<Boolean> next : conditionOutcomes) {
-
-                    boolean value = existing.value() || next.value();
-                    double probability =
-                        existing.probability() * next.probability();
-
-                    newOutcomes.add(new Branch<>(value, probability));
-                }
-            }
-
-            outcomes = newOutcomes;
+            outcomeList.add(condition.execute(context));    
         }
 
-        return outcomes;
+        List<Branch<Boolean>> outcomes = applyLogicalOperator(outcomeList, Boolean::logicalOr);
+
+        return optimise(outcomes);
     }
 }
