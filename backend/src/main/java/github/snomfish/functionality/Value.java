@@ -16,6 +16,15 @@ public enum Value {
         c -> c.target().activeLoomianData().types(),
         (c, v) -> c.target().activeLoomianData().setTypes(v)
     ),
+    
+    USER_ABILITY(
+        c -> c.user().activeLoomian().ability(),
+        (c, v) -> c.user().activeLoomian().setAbility(v)
+    ),
+    TARGET_ABILITY(
+        c -> c.target().activeLoomian().ability(),
+        (c, v) -> c.target().activeLoomian().setAbility(v)
+    ),
 
     USER_STATUS_ID(
         c -> c.user().activeLoomian().status().id(),
@@ -215,9 +224,21 @@ public enum Value {
         c -> c.user().activeLoomianData().action().move().category(),
         (c, v) -> c.user().activeLoomianData().action().move().setCategory(v)
     ),
+    MOVE_ACCURACY_MODIFIER(
+        c -> c.user().activeLoomianData().action().move().accuracyModifier(),
+        (c, v) -> c.user().activeLoomianData().action().move().setAccuracyModifier(v)
+    ),
     MOVE_DAMAGE_MODIFIER(
-        c -> c.user().activeLoomianData().action().move().onHit().damageModifier(),
-        (c, v) -> c.user().activeLoomianData().action().move().onHit().setDamageModifier(v)
+        c -> c.user().activeLoomianData().action().move().damageModifier(),
+        (c, v) -> c.user().activeLoomianData().action().move().setDamageModifier(v)
+    ),
+    MOVE_TYPE_MODIFIER(
+        c -> c.user().activeLoomianData().action().move().typeModifier(),
+        (c, v) -> c.user().activeLoomianData().action().move().setTypeModifier(v)
+    ),
+    MOVE_TYPECHART(
+        c -> c.user().activeLoomianData().action().move().typeChart(),
+        (c, v) -> c.user().activeLoomianData().action().move().setTypeChart(v)
     );
 
 
@@ -242,5 +263,25 @@ public enum Value {
     @SuppressWarnings("unchecked")
     public <T> void set(BattleContext context, T value) {
         ((BiConsumer<BattleContext, T>) setter).accept(context, value);
+    }
+
+
+    public static <T> T resolve(Object obj, Class<T> clazz, BattleContext context) {
+        Object value;
+
+        if (obj instanceof Value enumValue) {
+            value = enumValue.get(context);
+        } else {
+            value = obj;
+        }
+
+        if (!clazz.isInstance(value)) {
+            throw new RuntimeException(
+                "Expected value of type " + clazz.getName()
+                + ", but got " + (value == null ? "null" : value.getClass().getName())
+            );
+        }
+
+        return clazz.cast(value);
     }
 }

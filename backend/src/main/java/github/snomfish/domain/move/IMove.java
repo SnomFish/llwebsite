@@ -10,8 +10,4 @@ public interface IMove extends DeepCopyable<IMove> {
     
 
     List<Branch<BattleContext>> execute(BattleContext context);
-
-
-    double damageModifier();
-    void setDamageModifier(double damageModifier);
 }

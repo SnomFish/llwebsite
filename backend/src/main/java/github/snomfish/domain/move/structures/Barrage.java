@@ -39,8 +39,4 @@ public class Barrage implements IMove {
     public List<Branch<BattleContext>> execute(BattleContext context) {
         return null;
     }
-
-
-    public double damageModifier() {return perHit.damageModifier();}
-    public void setDamageModifier(double damageModifier) {perHit.setDamageModifier(damageModifier);}
 }

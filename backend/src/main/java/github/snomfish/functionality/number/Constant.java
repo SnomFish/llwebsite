@@ -10,8 +10,11 @@ public class Constant implements INumber {
     private Double value;
     
 
-    public Constant(Double value) {
+    public Constant(double value) {
         this.value = value;
+    }
+    public Constant(int value) {
+        this.value = (double) value;
     }
 
 

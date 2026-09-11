@@ -26,6 +26,7 @@ public class Or implements ICondition {
     }
 
 
+    // code also old as fuck
     @Override
     public List<Branch<Boolean>> execute(BattleContext context) {
         List<Branch<Boolean>> outcomes = List.of(

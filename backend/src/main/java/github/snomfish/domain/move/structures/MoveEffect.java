@@ -33,8 +33,4 @@ public class MoveEffect implements IMove {
     public List<Branch<BattleContext>> execute(BattleContext context) {
         return null;
     }
-
-
-    public double damageModifier() {return damageModifier;}
-    public void setDamageModifier(double damageModifier) {this.damageModifier = damageModifier;}
 }

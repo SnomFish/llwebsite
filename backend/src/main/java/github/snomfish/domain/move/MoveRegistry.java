@@ -3,6 +3,14 @@ package github.snomfish.domain.move;
 import java.util.HashMap;
 import java.util.Map;
 
+import github.snomfish.domain.type.TypeId;
+import github.snomfish.functionality.condition.ICondition;
+import github.snomfish.functionality.number.Constant;
+import github.snomfish.functionality.number.INumber;
+
+import static github.snomfish.domain.move.CategoryId.*;
+import static github.snomfish.domain.type.TypeId.*;
+
 public class MoveRegistry {
 
 
@@ -17,912 +25,3833 @@ public class MoveRegistry {
     } 
 
 
-    static {/*
-		registry.put(MoveId.ACCELERATE, new Move(
-			
-		));
-		registry.put(MoveId.AIM, new Move(
-			
-		));
-		registry.put(MoveId.AIR_BLADE, new Move(
-			
-		));
-		registry.put(MoveId.AIR_SHOT, new Move(
-			
-		));
-		registry.put(MoveId.AIR_WHIP, new Move(
-			
-		));
-		registry.put(MoveId.AQUA_JAWS, new Move(
-			
-		));
-		registry.put(MoveId.AUGMENT, new Move(
-			
-		));
-		registry.put(MoveId.BAFFLE, new Move(
-			
-		));
-		registry.put(MoveId.BAG_OF_TRICKS, new Move(
-			
-		));
-		registry.put(MoveId.BAIT, new Move(
-			
-		));
-		registry.put(MoveId.BAMBOOZLE, new Move(
-			
-		));
-		registry.put(MoveId.BANANA_SPLIT, new Move(
-			
-		));
-		registry.put(MoveId.BANE_OF_HASTE, new Move(
-			
-		));
-		registry.put(MoveId.BANEFUL_BASH, new Move(
-			
-		));
-		registry.put(MoveId.BARBS, new Move(
-			
-		));
-		registry.put(MoveId.BARTER, new Move(
-			
-		));
-		registry.put(MoveId.BASH, new Move(
-			
-		));
-		registry.put(MoveId.BATTERING_RAM, new Move(
-			
-		));
-		registry.put(MoveId.BATTLE_CHIME, new Move(
-			
-		));
-		registry.put(MoveId.BATTLE_HORN, new Move(
-			
-		));
-		registry.put(MoveId.BEQUEATH, new Move(
-			
-		));
-		registry.put(MoveId.BITTER_COLD, new Move(
-			
-		));
-		registry.put(MoveId.BLAZE_CHOMP, new Move(
-			
-		));
-		registry.put(MoveId.BLAZE_OF_GLORY, new Move(
-			
-		));
-		registry.put(MoveId.BLAZE_RUSH, new Move(
-			
-		));
-		registry.put(MoveId.BLINDSPOT_BATTER, new Move(
-			
-		));
-		registry.put(MoveId.BLUDGEON, new Move(
-			
-		));
-		registry.put(MoveId.BODY_CRASH, new Move(
-			
-		));
-		registry.put(MoveId.BODY_SLAM, new Move(
-			
-		));
-		registry.put(MoveId.BOILING_PRESS, new Move(
-			
-		));
-		registry.put(MoveId.BOOM_BASH, new Move(
-			
-		));
-		registry.put(MoveId.BOULDER_BLAST, new Move(
-			
-		));
-		registry.put(MoveId.BRACE, new Move(
-			
-		));
-		registry.put(MoveId.BRAIN_EXERCISE, new Move(
-			
-		));
-		registry.put(MoveId.BRAINWASH, new Move(
-			
-		));
-		registry.put(MoveId.BRAWN_BOOST, new Move(
-			
-		));
-		registry.put(MoveId.BRIAR_BLOCK, new Move(
-			
-		));
-		registry.put(MoveId.BUCK_UP, new Move(
-			
-		));
-		registry.put(MoveId.BUG_BITE, new Move(
-			
-		));
-		registry.put(MoveId.BULK_UP, new Move(
-			
-		));
-		registry.put(MoveId.BURN_UP, new Move(
-			
-		));
-		registry.put(MoveId.BURROW, new Move(
-			
-		));
-		registry.put(MoveId.BUSH_WHACK, new Move(
-			
-		));
-		registry.put(MoveId.CANISTER_BURST, new Move(
-			
-		));
-		registry.put(MoveId.CEREBRAL_SLASH, new Move(
-			
-		));
-		registry.put(MoveId.CHARADE, new Move(
-			
-		));
-		registry.put(MoveId.CHARRED_CLAWS, new Move(
-			
-		));
-		registry.put(MoveId.CHASE_DOWN, new Move(
-			
-		));
-		registry.put(MoveId.CHILLY_CHOMP, new Move(
-			
-		));
-		registry.put(MoveId.CHOMP, new Move(
-			
-		));
-		registry.put(MoveId.CHOP, new Move(
-			
-		));
-		registry.put(MoveId.CLAMP, new Move(
-			
-		));
-		registry.put(MoveId.CLAY_SLAP, new Move(
-			
-		));
-		registry.put(MoveId.CLIMATE_CANNON, new Move(
-			
-		));
-		registry.put(MoveId.COCONUT_BOMB, new Move(
-			
-		));
-		registry.put(MoveId.CONFOUND, new Move(
-			
-		));
-		registry.put(MoveId.CORRODE, new Move(
-			
-		));
-		registry.put(MoveId.COUNTER_POISE, new Move(
-			
-		));
-		registry.put(MoveId.CYCLONE_SLAM, new Move(
-			
-		));
-		registry.put(MoveId.DARK_SURGE, new Move(
-			
-		));
-		registry.put(MoveId.DAWDLE, new Move(
-			
-		));
-		registry.put(MoveId.DAYDREAM, new Move(
-			
-		));
-		registry.put(MoveId.DAZZLING_BARRAGE, new Move(
-			
-		));
-		registry.put(MoveId.DEEP_FREEZE, new Move(
-			
-		));
-		registry.put(MoveId.DEJA_VU, new Move(
-			
-		));
-		registry.put(MoveId.DINO_CLAWS, new Move(
-			
-		));
-		registry.put(MoveId.DISCORDANCE, new Move(
-			
-		));
-		registry.put(MoveId.DISPERSE, new Move(
-			
-		));
-		registry.put(MoveId.DISSIPATE, new Move(
-			
-		));
-		registry.put(MoveId.DISSONANT_CHORD, new Move(
-			
-		));
-		registry.put(MoveId.DIVE_BOMB, new Move(
-			
-		));
-		registry.put(MoveId.DODGE, new Move(
-			
-		));
-		registry.put(MoveId.DOUBLE_WHACK, new Move(
-			
-		));
-		registry.put(MoveId.DOWNPOUR, new Move(
-			
-		));
-		registry.put(MoveId.DRACO_BEAM, new Move(
-			
-		));
-		registry.put(MoveId.DRIVING_FORCE, new Move(
-			
-		));
-		registry.put(MoveId.DRUDGE, new Move(
-			
-		));
-		registry.put(MoveId.DÉJÀ_VU, new Move(
-			
-		));
-		registry.put(MoveId.EAR_SLAP, new Move(
-			
-		));
-		registry.put(MoveId.EARTHQUAKE, new Move(
-			
-		));
-		registry.put(MoveId.EERIE_STARE, new Move(
-			
-		));
-		registry.put(MoveId.ELECTRO_PUNCH, new Move(
-			
-		));
-		registry.put(MoveId.EMPATHIZE, new Move(
-			
-		));
-		registry.put(MoveId.EMULATE, new Move(
-			
-		));
-		registry.put(MoveId.ENAMOR, new Move(
-			
-		));
-		registry.put(MoveId.ENERGIZE, new Move(
-			
-		));
-		registry.put(MoveId.ENERGY_BREAK, new Move(
-			
-		));
-		registry.put(MoveId.ENERGY_SURGE, new Move(
-			
-		));
-		registry.put(MoveId.EXAMINE, new Move(
-			
-		));
-		registry.put(MoveId.FADE_AWAY, new Move(
-			
-		));
-		registry.put(MoveId.FAR_ENCHANTMENT, new Move(
-			
-		));
-		registry.put(MoveId.FINAL_RUSE, new Move(
-			
-		));
-		registry.put(MoveId.FIRE_BREATH, new Move(
-			
-		));
-		registry.put(MoveId.FIRE_SLAM, new Move(
-			
-		));
-		registry.put(MoveId.FLABBERGAST, new Move(
-			
-		));
-		registry.put(MoveId.FLAMING_KICK, new Move(
-			
-		));
-		registry.put(MoveId.FLARE_BLAST, new Move(
-			
-		));
-		registry.put(MoveId.FLASH, new Move(
-			
-		));
-		registry.put(MoveId.FLASH_N_FLEE, new Move(
-			
-		));
-		registry.put(MoveId.FLURRY, new Move(
-			
-		));
-		registry.put(MoveId.FROST_BEAM, new Move(
-			
-		));
-		registry.put(MoveId.FROST_BREATH, new Move(
-			
-		));
-		registry.put(MoveId.FROST_PUNCH, new Move(
-			
-		));
-		registry.put(MoveId.FUNGUS_CURSE, new Move(
-			
-		));
-		registry.put(MoveId.GAIN_DRAIN, new Move(
-			
-		));
-		registry.put(MoveId.GALE_FORCE, new Move(
-			
-		));
-		registry.put(MoveId.GAMMA_PULSE, new Move(
-			
-		));
-		registry.put(MoveId.GLOOMINOUS_ROAR, new Move(
-			
-		));
-		registry.put(MoveId.GNARLY_GASH, new Move(
-			
-		));
-		registry.put(MoveId.GNAW, new Move(
-			
-		));
-		registry.put(MoveId.GROWL, new Move(
-			
-		));
-		registry.put(MoveId.GUST, new Move(
-			
-		));
-		registry.put(MoveId.HARMONIOUS_CHORD, new Move(
-			
-		));
-		registry.put(MoveId.HARROW, new Move(
-			
-		));
-		registry.put(MoveId.HARVEST, new Move(
-			
-		));
-		registry.put(MoveId.HASTEN, new Move(
-			
-		));
-		registry.put(MoveId.HAZY_SHROUD, new Move(
-			
-		));
-		registry.put(MoveId.HEADBUTT, new Move(
-			
-		));
-		registry.put(MoveId.HEALTH_GIFT, new Move(
-			
-		));
-		registry.put(MoveId.HEART_BREAK, new Move(
-			
-		));
-		registry.put(MoveId.HEAT_WAVE, new Move(
-			
-		));
-		registry.put(MoveId.HEAVY_BASH, new Move(
-			
-		));
-		registry.put(MoveId.HIGH_PITCH_SCREECH, new Move(
-			
-		));
-		registry.put(MoveId.HOP_KICK, new Move(
-			
-		));
-		registry.put(MoveId.HULLABALOO, new Move(
-			
-		));
-		registry.put(MoveId.HYDRO_BLAST, new Move(
-			
-		));
-		registry.put(MoveId.HYDRO_SLASH, new Move(
-			
-		));
-		registry.put(MoveId.HYPNOTIZE, new Move(
-			
-		));
-		registry.put(MoveId.ICE_HAMMER, new Move(
-			
-		));
-		registry.put(MoveId.ICICLE_TRAP, new Move(
-			
-		));
-		registry.put(MoveId.ILL_WILL, new Move(
-			
-		));
-		registry.put(MoveId.IMPERSONATE, new Move(
-			
-		));
-		registry.put(MoveId.JET_STREAM, new Move(
-			
-		));
-		registry.put(MoveId.JOLT, new Move(
-			
-		));
-		registry.put(MoveId.JUDGEMENT, new Move(
-			
-		));
-		registry.put(MoveId.JUMP_START, new Move(
-			
-		));
-		registry.put(MoveId.LANDSILDE, new Move(
-			
-		));
-		registry.put(MoveId.LANDSLDE, new Move(
-			
-		));
-		registry.put(MoveId.LANDSLIDE, new Move(
-			
-		));
-		registry.put(MoveId.LANDSLLIDE, new Move(
-			
-		));
-		registry.put(MoveId.LEAF_BARRAGE, new Move(
-			
-		));
-		registry.put(MoveId.LIFE_DRAIN, new Move(
-			
-		));
-		registry.put(MoveId.LIGHT_DASH, new Move(
-			
-		));
-		registry.put(MoveId.LIGHTSPEED_RAY, new Move(
-			
-		));
-		registry.put(MoveId.LUNGE, new Move(
-			
-		));
-		registry.put(MoveId.LUSTER_LOOT, new Move(
-			
-		));
-		registry.put(MoveId.MAGMA_BLOCK, new Move(
-			
-		));
-		registry.put(MoveId.MAGNIFY, new Move(
-			
-		));
-		registry.put(MoveId.MAROON, new Move(
-			
-		));
-		registry.put(MoveId.MEGA_CHOMP, new Move(
-			
-		));
-		registry.put(MoveId.MEGA_KICK, new Move(
-			
-		));
-		registry.put(MoveId.MEGA_PUNCH, new Move(
-			
-		));
-		registry.put(MoveId.MEMORIZE, new Move(
-			
-		));
-		registry.put(MoveId.METAL_BLAST, new Move(
-			
-		));
-		registry.put(MoveId.METAL_SHRIEK, new Move(
-			
-		));
-		registry.put(MoveId.METAL_SWIPES, new Move(
-			
-		));
-		registry.put(MoveId.MIND_DRAIN, new Move(
-			
-		));
-		registry.put(MoveId.MINDS_EYE, new Move(
-			
-		));
-		registry.put(MoveId.MUCK_BLAST, new Move(
-			
-		));
-		registry.put(MoveId.MUCK_BUCK, new Move(
-			
-		));
-		registry.put(MoveId.MUD_SPATTER, new Move(
-			
-		));
-		registry.put(MoveId.MUD_SPLATTER, new Move(
-			
-		));
-		registry.put(MoveId.MUDSLIDE, new Move(
-			
-		));
-		registry.put(MoveId.NAB, new Move(
-			
-		));
-		registry.put(MoveId.NATURES_FORCE, new Move(
-			
-		));
-		registry.put(MoveId.NEAR_ENCHANTMENT, new Move(
-			
-		));
-		registry.put(MoveId.NOSEDIVE, new Move(
-			
-		));
-		registry.put(MoveId.NOVA_BLAST, new Move(
-			
-		));
-		registry.put(MoveId.OIL_LEAK, new Move(
-			
-		));
-		registry.put(MoveId.OUTBURST, new Move(
-			
-		));
-		registry.put(MoveId.PAINT_SHOWER, new Move(
-			
-		));
-		registry.put(MoveId.PARASITIZE, new Move(
-			
-		));
-		registry.put(MoveId.PEACE_OF_MIND, new Move(
-			
-		));
-		registry.put(MoveId.PEBBLE_TOSS, new Move(
-			
-		));
-		registry.put(MoveId.PECK, new Move(
-			
-		));
-		registry.put(MoveId.PEP_JAB, new Move(
-			
-		));
-		registry.put(MoveId.PEPPER_BURST, new Move(
-			
-		));
-		registry.put(MoveId.PERCH, new Move(
-			
-		));
-		registry.put(MoveId.PESTER, new Move(
-			
-		));
-		registry.put(MoveId.PESTILENCE, new Move(
-			
-		));
-		registry.put(MoveId.PETAL_PUMMEL, new Move(
-			
-		));
-		registry.put(MoveId.PHANTOM_BLAST, new Move(
-			
-		));
-		registry.put(MoveId.PHANTOM_SLASH, new Move(
-			
-		));
-		registry.put(MoveId.PHEROBLAST, new Move(
-			
-		));
-		registry.put(MoveId.PHOTOSYNTHESIS, new Move(
-			
-		));
-		registry.put(MoveId.PIERCING_DRIVE, new Move(
-			
-		));
-		registry.put(MoveId.PILFER, new Move(
-			
-		));
-		registry.put(MoveId.PINE_SHOT, new Move(
-			
-		));
-		registry.put(MoveId.PLUNGE, new Move(
-			
-		));
-		registry.put(MoveId.POISON, new Move(
-			
-		));
-		registry.put(MoveId.POISON_BARBS, new Move(
-			
-		));
-		registry.put(MoveId.POUNCE, new Move(
-			
-		));
-		registry.put(MoveId.POWER_FOCUS, new Move(
-			
-		));
-		registry.put(MoveId.POWER_SIPHON, new Move(
-			
-		));
-		registry.put(MoveId.PRECISION_BOLT, new Move(
-			
-		));
-		registry.put(MoveId.PREEMPTIVE_STRIKE, new Move(
-			
-		));
-		registry.put(MoveId.PRIMAL_SLASH, new Move(
-			
-		));
-		registry.put(MoveId.PROVOKE, new Move(
-			
-		));
-		registry.put(MoveId.PSYCHAL_CHOMP, new Move(
-			
-		));
-		registry.put(MoveId.PSYCHO_BLAST, new Move(
-			
-		));
-		registry.put(MoveId.PYROKINESIS, new Move(
-			
-		));
-		registry.put(MoveId.QUICK_POUNCE, new Move(
-			
-		));
-		registry.put(MoveId.QUICK_PUNCH, new Move(
-			
-		));
-		registry.put(MoveId.QUICKSAND, new Move(
-			
-		));
-		registry.put(MoveId.RADIANT_RUSH, new Move(
-			
-		));
-		registry.put(MoveId.RAGING_FLAME, new Move(
-			
-		));
-		registry.put(MoveId.RAGING_HOWL, new Move(
-			
-		));
-		registry.put(MoveId.RAGING_TACKLE, new Move(
-			
-		));
-		registry.put(MoveId.RANT, new Move(
-			
-		));
-		registry.put(MoveId.RECYCLE, new Move(
-			
-		));
-		registry.put(MoveId.REFLECTION_BURST, new Move(
-			
-		));
-		registry.put(MoveId.REJUVENATE, new Move(
-			
-		));
-		registry.put(MoveId.REPEATING_TUNE, new Move(
-			
-		));
-		registry.put(MoveId.RESONATE, new Move(
-			
-		));
-		registry.put(MoveId.RETURN_TO_SENDER, new Move(
-			
-		));
-		registry.put(MoveId.ROCK_SLIDE, new Move(
-			
-		));
-		registry.put(MoveId.ROGUE_ASSAULT, new Move(
-			
-		));
-		registry.put(MoveId.ROUGH_UP, new Move(
-			
-		));
-		registry.put(MoveId.SAFEGUARD, new Move(
-			
-		));
-		registry.put(MoveId.SAP_PLANT, new Move(
-			
-		));
-		registry.put(MoveId.SCAPEGOAT, new Move(
-			
-		));
-		registry.put(MoveId.SCAVENGE, new Move(
-			
-		));
-		registry.put(MoveId.SHADOW_SPRINT, new Move(
-			
-		));
-		registry.put(MoveId.SHADOWBOX, new Move(
-			
-		));
-		registry.put(MoveId.SHARPEN, new Move(
-			
-		));
-		registry.put(MoveId.SHINE, new Move(
-			
-		));
-		registry.put(MoveId.SHREWD_BLAST, new Move(
-			
-		));
-		registry.put(MoveId.SHRIEK, new Move(
-			
-		));
-		registry.put(MoveId.SINGE, new Move(
-			
-		));
-		registry.put(MoveId.SLAP_DOWN, new Move(
-			
-		));
-		registry.put(MoveId.SLASH, new Move(
-			
-		));
-		registry.put(MoveId.SLEET_SHOT, new Move(
-			
-		));
-		registry.put(MoveId.SLIME, new Move(
-			
-		));
-		registry.put(MoveId.SLUMBER, new Move(
-			
-		));
-		registry.put(MoveId.SNORE_SPORES, new Move(
-			
-		));
-		registry.put(MoveId.SNOWDOZER, new Move(
-			
-		));
-		registry.put(MoveId.SOFT_WATER, new Move(
-			
-		));
-		registry.put(MoveId.SOUL_STORM, new Move(
-			
-		));
-		registry.put(MoveId.SPARE, new Move(
-			
-		));
-		registry.put(MoveId.SPECTAL_BURST, new Move(
-			
-		));
-		registry.put(MoveId.SPECTRAL_BURST, new Move(
-			
-		));
-		registry.put(MoveId.SPIKE_RUSH, new Move(
-			
-		));
-		registry.put(MoveId.SPIT, new Move(
-			
-		));
-		registry.put(MoveId.SPITE, new Move(
-			
-		));
-		registry.put(MoveId.SPLITTING_HEADACHE, new Move(
-			
-		));
-		registry.put(MoveId.SPRAY, new Move(
-			
-		));
-		registry.put(MoveId.SQUARE_ONE, new Move(
-			
-		));
-		registry.put(MoveId.SQUAWK, new Move(
-			
-		));
-		registry.put(MoveId.STAMPEDE, new Move(
-			
-		));
-		registry.put(MoveId.STARE, new Move(
-			
-		));
-		registry.put(MoveId.STARTLE, new Move(
-			
-		));
-		registry.put(MoveId.STATIC_SHOCK, new Move(
-			
-		));
-		registry.put(MoveId.STATIC_SPORES, new Move(
-			
-		));
-		registry.put(MoveId.STEEL_CRUSHER, new Move(
-			
-		));
-		registry.put(MoveId.STING, new Move(
-			
-		));
-		registry.put(MoveId.STRATAGEM, new Move(
-			
-		));
-		registry.put(MoveId.STRETCH, new Move(
-			
-		));
-		registry.put(MoveId.STRIKE, new Move(
-			
-		));
-		registry.put(MoveId.STUN, new Move(
-			
-		));
-		registry.put(MoveId.STUPEFY, new Move(
-			
-		));
-		registry.put(MoveId.SUMMON, new Move(
-			
-		));
-		registry.put(MoveId.SWAT, new Move(
-			
-		));
-		registry.put(MoveId.SWIPE, new Move(
-			
-		));
-		registry.put(MoveId.TAIL_SLAP, new Move(
-			
-		));
-		registry.put(MoveId.TAKE_ROOT, new Move(
-			
-		));
-		registry.put(MoveId.TALENT_TRADE, new Move(
-			
-		));
-		registry.put(MoveId.TAMP, new Move(
-			
-		));
-		registry.put(MoveId.TASE, new Move(
-			
-		));
-		registry.put(MoveId.TEAMWORK, new Move(
-			
-		));
-		registry.put(MoveId.TEAR_DOWN, new Move(
-			
-		));
-		registry.put(MoveId.TEASE, new Move(
-			
-		));
-		registry.put(MoveId.THISTLE_SLASH, new Move(
-			
-		));
-		registry.put(MoveId.THUNDER_BLAST, new Move(
-			
-		));
-		registry.put(MoveId.THUNDER_CHOMP, new Move(
-			
-		));
-		registry.put(MoveId.THUNDER_CLAP, new Move(
-			
-		));
-		registry.put(MoveId.THUNDER_CRASH, new Move(
-			
-		));
-		registry.put(MoveId.THUNDER_SLAM, new Move(
-			
-		));
-		registry.put(MoveId.THUNDER_STRIKE, new Move(
-			
-		));
-		registry.put(MoveId.THUNDERSTORM, new Move(
-			
-		));
-		registry.put(MoveId.THUNDERSTRIKE, new Move(
-			
-		));
-		registry.put(MoveId.TIMBER_THRASH, new Move(
-			
-		));
-		registry.put(MoveId.TONE_BARRIER, new Move(
-			
-		));
-		registry.put(MoveId.TOXIC, new Move(
-			
-		));
-		registry.put(MoveId.TOXIC_SPORES, new Move(
-			
-		));
-		registry.put(MoveId.TOXIC_TAIL, new Move(
-			
-		));
-		registry.put(MoveId.TRIBUTE, new Move(
-			
-		));
-		registry.put(MoveId.TRICKY_TACTICS, new Move(
-			
-		));
-		registry.put(MoveId.TSUNAMI, new Move(
-			
-		));
-		registry.put(MoveId.TUNE_UP, new Move(
-			
-		));
-		registry.put(MoveId.TYPHOON, new Move(
-			
-		));
-		registry.put(MoveId.UNDERMINE, new Move(
-			
-		));
-		registry.put(MoveId.VENOM_CHOMP, new Move(
-			
-		));
-		registry.put(MoveId.VENOM_SLASH, new Move(
-			
-		));
-		registry.put(MoveId.VICE_JAWS, new Move(
-			
-		));
-		registry.put(MoveId.VINE_LASH, new Move(
-			
-		));
-		registry.put(MoveId.VITAL_JAB, new Move(
-			
-		));
-		registry.put(MoveId.WATER_BOMB, new Move(
-			
-		));
-		registry.put(MoveId.WAVE_WRECKER, new Move(
-			
-		));
-		registry.put(MoveId.WEB_SHOT, new Move(
-			
-		));
-		registry.put(MoveId.WING_SLAP, new Move(
-			
-		));
-		registry.put(MoveId.WONDER_HERB, new Move(
-			
-		));
-		registry.put(MoveId.ZIP_ZAP, new Move(
+	private static void register(Move move) {
+		registry.put(id, move);
+	}
 
-        ));*/
+
+    static {
+		register(
+			MoveId.ACCELERATE,
+			"Accerlerate",
+			null,
+			SIMPLE,
+			STATUS,
+			new Constant(25),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.AIM,
+			"Aim",
+			null,
+			SIMPLE,
+			STATUS,
+			new Constant(10),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.AIR_BLADE,
+			"Air Blade",
+			null,
+			AIR,
+			RANGED,
+			new Constant(40),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.AIR_SHOT,
+			"Air Shot",
+			null,
+			AIR,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.AIR_WHIP,
+			"Air Whip",
+			null,
+			AIR,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.AQUA_JAWS,
+			"Aqua Jaws",
+			null,
+			WATER,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.AUGMENT,
+			"Augment",
+			null,
+			ANCIENT,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.BAFFLE,
+			"Baffle",
+			null,
+			DARK,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.BAG_OF_TRICKS,
+			"Bag of Tricks",
+			null,
+			DARK,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.BAIT,
+			"Bait",
+			null,
+			SIMPLE,
+			STATUS,
+			new Constant(0),
+			new Constant(2),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.BAMBOOZLE,
+			"Bamboozle",
+			null,
+			DARK,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.BANANA_SPLIT,
+			"Banana Split",
+			null,
+			SIMPLE,
+			STATUS,
+			new Constant(100),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.BANE_OF_HASTE,
+			"Bane of Haste",
+			null,
+			ANCIENT,
+			STATUS,
+			new Constant(0),
+			new Constant(-7),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.BANEFUL_BASH,
+			"Baneful Bash",
+			null,
+			TOXIC,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.BARBS,
+			"Barbs",
+			null,
+			METAL,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.BARTER,
+			"Barter",
+			null,
+			SIMPLE,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.BASH,
+			"Bash",
+			null,
+			METAL,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.BATTERING_RAM,
+			"Battering Ram",
+			null,
+			BUG,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.BATTLE_CHIME,
+			"Battle Chime",
+			null,
+			SIMPLE,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.BATTLE_HORN,
+			"Battle Horn",
+			null,
+			SIMPLE,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.BEQUEATH,
+			"Bequeath",
+			null,
+			SIMPLE,
+			STATUS,
+			new Constant(0),
+			new Constant(-6),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.BITTER_COLD,
+			"Bitter Cold",
+			null,
+			ICE,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.BLAZE_CHOMP,
+			"Blaze Chomp",
+			null,
+			FIRE,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.BLAZE_OF_GLORY,
+			"Blaze of Glory",
+			null,
+			FIRE,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.BLAZE_RUSH,
+			"Blaze Rush",
+			null,
+			FIRE,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.BLINDSPOT_BATTER,
+			"Blindspot Batter",
+			null,
+			LIGHT,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.BLUDGEON,
+			"Bludgeon",
+			null,
+			BRAWLER,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.BODY_CRASH,
+			"Body Crash",
+			null,
+			BRAWLER,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.BODY_SLAM,
+			"Body Slam",
+			null,
+			SIMPLE,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.BOILING_PRESS,
+			"Boiling Press",
+			null,
+			FIRE,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.BOOM_BASH,
+			"Boom Bash",
+			null,
+			BRAWLER,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.BOULDER_BLAST,
+			"Boulder Blast",
+			null,
+			BRAWLER,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.BRACE,
+			"Brace",
+			null,
+			SIMPLE,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.BRAIN_EXERCISE,
+			"Brain Exercise",
+			null,
+			MIND,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.BRAINWASH,
+			"Brainwash",
+			null,
+			MIND,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.BRAWN_BOOST,
+			"Brawn Boost",
+			null,
+			BRAWLER,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.BRIAR_BLOCK,
+			"Briar Block",
+			null,
+			PLANT,
+			STATUS,
+			new Constant(0),
+			new Constant(4),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.BUCK_UP,
+			"Buck Up",
+			null,
+			BRAWLER,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.BUG_BITE,
+			"Bug Bite",
+			null,
+			BUG,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.BULK_UP,
+			"Bulk Up",
+			null,
+			BRAWLER,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.BURN_UP,
+			"Burn Up",
+			null,
+			FIRE,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.BURROW,
+			"Burrow",
+			null,
+			EARTH,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.BUSH_WHACK,
+			"Bush Whack",
+			null,
+			PLANT,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.CANISTER_BURST,
+			"Canister Burst",
+			null,
+			TOXIC,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.CEREBRAL_SLASH,
+			"Cerebral Slash",
+			null,
+			MIND,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.CHARADE,
+			"Charade",
+			null,
+			DARK,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.CHARRED_CLAWS,
+			"Charred Claws",
+			null,
+			FIRE,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.CHASE_DOWN,
+			"Chase Down",
+			null,
+			SIMPLE,
+			MELEE,
+			new Constant(0),
+			new Constant(0), // THIS NEED TO BE CHANGED THIS IS VERY IMPORTANT TO THE EFFECTS OF CHASE DOWWWWWWWWWWWN
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.CHILLY_CHOMP,
+			"Chilly Chomp",
+			null,
+			ICE,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.CHOMP,
+			"Chomp",
+			null,
+			DARK,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.CHOP,
+			"Chop",
+			null,
+			BRAWLER,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.CLAMP,
+			"Clamp",
+			null,
+			METAL,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.CLAY_SLAP,
+			"Clay Slap",
+			null,
+			EARTH,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.CLIMATE_CANNON,
+			"Climate Cannon",
+			null,
+			SIMPLE, // ALSO NEEDS TO BE CHANGED
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.COCONUT_BOMB,
+			"Coconut Bomb",
+			null,
+			PLANT,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.CONFOUND,
+			"Confound",
+			null,
+			ANCIENT,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.CORRODE,
+			"Corrode",
+			null,
+			TOXIC,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.COUNTER_POISE,
+			"Counter Poise",
+			null,
+			BUG,
+			MELEE,
+			new Constant(0),
+			new Constant(0), // SUCKER PUNCHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.CYCLONE_SLAM,
+			"Cyclone Slam",
+			null,
+			AIR,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.DARK_SURGE,
+			"Dark Surge",
+			null,
+			DARK,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.DAWDLE,
+			"Dawdle",
+			null,
+			SIMPLE,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.DAYDREAM,
+			"Daydream",
+			null,
+			SIMPLE,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.DAZZLING_BARRAGE,
+			"Dazzling Barrage",
+			null,
+			LIGHT,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.DEEP_FREEZE,
+			"Deep Freeze",
+			null,
+			ICE,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.DEJA_VU,
+			"Deja Vu",
+			null,
+			MIND,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.DINO_CLAWS,
+			"Dino Claws",
+			null,
+			ANCIENT,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.DISCORDANCE,
+			"Discordance",
+			null,
+			BUG,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.DISPERSE,
+			"Disperse",
+			null,
+			LIGHT,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.DISSIPATE,
+			"Dissipate",
+			null,
+			MIND,
+			STATUS,
+			new Constant(0),
+			new Constant(-6),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.DISSONANT_CHORD,
+			"Dissonant Chord",
+			null,
+			SIMPLE,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.DIVE_BOMB,
+			"Dive Bomb",
+			null,
+			DARK,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.DODGE,
+			"Dodge",
+			null,
+			SIMPLE,
+			STATUS,
+			new Constant(0),
+			new Constant(4),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.DOUBLE_WHACK,
+			"Double Whack",
+			null,
+			METAL,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.DOWNPOUR,
+			"Dounpour",
+			null,
+			WATER,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.DRACO_BEAM,
+			"Draco Beam",
+			null,
+			ANCIENT,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.DRIVING_FORCE,
+			"Driving Force",
+			null,
+			BRAWLER,
+			MELEE,
+			new Constant(0),
+			new Constant(-6),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.DRUDGE,
+			"Drudge",
+			null,
+			SIMPLE,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.EAR_SLAP,
+			"Ear Slap",
+			null,
+			SIMPLE,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.EARTHQUAKE,
+			"Earthquake",
+			null,
+			EARTH,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.EERIE_STARE,
+			"Eerie Stare",
+			null,
+			SIMPLE,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.ELECTRO_PUNCH,
+			"Electro Punch",
+			null,
+			ELECTRIC,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.EMPATHIZE,
+			"Empathize",
+			null,
+			MIND,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.EMULATE,
+			"Emulate",
+			null,
+			SPIRIT,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.ENAMOR,
+			"Enamour",
+			null,
+			SIMPLE,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.ENERGIZE,
+			"Energize",
+			null,
+			ELECTRIC,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.ENERGY_BREAK,
+			"Energy Break",
+			null,
+			ANCIENT,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.ENERGY_SURGE,
+			"Energy Surge",
+			null,
+			LIGHT,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.EXAMINE,
+			"Examine",
+			null,
+			SIMPLE,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.FADE_AWAY,
+			"Fade Away",
+			null,
+			SPIRIT,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.FAR_ENCHANTMENT,
+			"Far Enchantment",
+			null,
+			ANCIENT,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.FINAL_RUSE,
+			"Final Ruse",
+			null,
+			SPIRIT,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.FIRE_BREATH,
+			"Fire Breath",
+			null,
+			FIRE,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.FIRE_SLAM,
+			"Fire Slam",
+			null,
+			FIRE,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.FLABBERGAST,
+			"Flabbergast",
+			null,
+			MIND,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.FLAMING_KICK,
+			"Flaming Kick",
+			null,
+			FIRE,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.FLARE_BLAST,
+			"Flare Blast",
+			null,
+			FIRE,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.FLASH,
+			"Flash",
+			null,
+			LIGHT,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.FLASH_N_FLEE,
+			"Flash n Flee",
+			null,
+			LIGHT,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.FLURRY,
+			"Flurry",
+			null,
+			ICE,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.FROST_BEAM,
+			"Frost Beam",
+			null,
+			ICE,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.FROST_BREATH,
+			"Frost Breath",
+			null,
+			ICE,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.FROST_PUNCH,
+			"Frost Punch",
+			null,
+			ICE,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.FUNGUS_CURSE,
+			"Fungus Curse",
+			null,
+			PLANT,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.GAIN_DRAIN,
+			"Gain Drain",
+			null,
+			DARK,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.GALE_FORCE,
+			"Gale Force",
+			null,
+			AIR,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.GAMMA_PULSE,
+			"Gamma Pulse",
+			null,
+			LIGHT,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.GLOOMINOUS_ROAR,
+			"Gloominous Roar",
+			null,
+			SIMPLE, /// GLOOOOOOOOOOOOOOOOOOOOOOOM
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.GNARLY_GASH,
+			"Gnarly Gash",
+			null,
+			DARK,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.GNAW,
+			"Gnaw",
+			null,
+			SIMPLE,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.GROWL,
+			"Growl",
+			null,
+			SIMPLE,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.GUST,
+			"Gust",
+			null,
+			AIR,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.HARMONIOUS_CHORD,
+			"Harmonious Chord",
+			null,
+			SIMPLE,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.HARROW,
+			"Harrow",
+			null,
+			SPIRIT,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.HARVEST,
+			"Harvest",
+			null,
+			PLANT,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.HASTEN,
+			"Hasten",
+			null,
+			SIMPLE,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.HAZY_SHROUD,
+			"Hazy Shroud",
+			null,
+			SPIRIT,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.HEADBUTT,
+			"Headbutt",
+			null,
+			SIMPLE,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.HEALTH_GIFT,
+			"Health Gift",
+			null,
+			MIND,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.HEART_BREAK,
+			"Heart Break",
+			null,
+			BRAWLER,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.HEAT_WAVE,
+			"Heat Wave",
+			null,
+			FIRE,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.HEAVY_BASH,
+			"Heavy Bash",
+			null,
+			METAL,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.HIGH_PITCH_SCREECH,
+			"High Pitch Screech",
+			null,
+			SIMPLE,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.HOP_KICK,
+			"Hop Kick",
+			null,
+			BRAWLER,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.HULLABALOO,
+			"Hullabaloo",
+			null,
+			SIMPLE,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.HYDRO_BLAST,
+			"Hydro Blast",
+			null,
+			WATER,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.HYDRO_SLASH,
+			"Hydro Slash",
+			null,
+			WATER,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.HYPNOTIZE,
+			"Hypnotize",
+			null,
+			MIND,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.ICE_HAMMER,
+			"Ice Hammer",
+			null,
+			ICE,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.ICICLE_TRAP,
+			"Icicle Trap",
+			null,
+			ICE,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.ILL_WILL,
+			"Ill Will",
+			null,
+			SIMPLE,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.IMPERSONATE,
+			"Impersonate",
+			null,
+			SPIRIT,
+			STATUS,
+			new Constant(0),
+			new Constant(1),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.JET_STREAM,
+			"Jet Stream",
+			null,
+			AIR,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.JOLT,
+			"Jolt",
+			null,
+			ELECTRIC,
+			RANGED,
+			new Constant(0),
+			new Constant(1),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.JUDGEMENT,
+			"Judgement",
+			null,
+			MIND,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.JUMP_START,
+			"Jump Start",
+			null,
+			ELECTRIC,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.LANDSLIDE,
+			"Landslide",
+			null,
+			EARTH,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.LEAF_BARRAGE,
+			"Leaf Barrage",
+			null,
+			PLANT,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.LIFE_DRAIN,
+			"Life Drain",
+			null,
+			PLANT,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.LIGHT_DASH,
+			"Light Dash",
+			null,
+			LIGHT,
+			MELEE,
+			new Constant(0),
+			new Constant(1),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.LIGHTSPEED_RAY,
+			"Lightspeed Ray",
+			null,
+			LIGHT,
+			RANGED,
+			new Constant(0),
+			new Constant(1),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.LUNGE,
+			"Lunge",
+			null,
+			BUG,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.LUSTER_LOOT,
+			"Luster Loot",
+			null,
+			LIGHT,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.MAGMA_BLOCK,
+			"Magma Block",
+			null,
+			FIRE,
+			STATUS,
+			new Constant(0),
+			new Constant(4),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.MAGNIFY,
+			"Magnify",
+			null,
+			LIGHT,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.MAROON,
+			"Maroon",
+			null,
+			WATER,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.MEGA_CHOMP,
+			"Mega Chomp",
+			null,
+			DARK,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.MEGA_KICK,
+			"Mega Kick",
+			null,
+			BRAWLER,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.MEGA_PUNCH,
+			"Mega Punch",
+			null,
+			BRAWLER,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.MEMORIZE,
+			"Memorize",
+			null,
+			MIND,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.METAL_BLAST,
+			"Metal Blast",
+			null,
+			METAL,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.METAL_SHRIEK,
+			"Metal Shriek",
+			null,
+			METAL,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.METAL_SWIPES,
+			"Metal Swipes",
+			null,
+			METAL,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.MIND_DRAIN,
+			"Mind Drain",
+			null,
+			MIND,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.MINDS_EYE,
+			"Minds Eye",
+			null,
+			MIND,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.MUCK_BLAST,
+			"Muck Blast",
+			null,
+			TOXIC,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.MUCK_BUCK,
+			"Muck Buck",
+			null,
+			EARTH,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.MUD_SPATTER,
+			"Mud Spatter",
+			null,
+			EARTH,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.MUDSLIDE,
+			"Mudslide",
+			null,
+			EARTH,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.NAB,
+			"Nab",
+			null,
+			SIMPLE,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.NATURES_FORCE,
+			"Natures Force",
+			null,
+			PLANT,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.NEAR_ENCHANTMENT,
+			"Near Enchantment",
+			null,
+			MIND,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.NOSEDIVE,
+			"Nosedive",
+			null,
+			AIR,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.NOVA_BLAST,
+			"Nova Blast",
+			null,
+			LIGHT,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.OIL_LEAK,
+			"Oil Leak",
+			null,
+			TOXIC,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.OUTBURST,
+			"Outburst",
+			null,
+			ANCIENT,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.PAINT_SHOWER,
+			"Paint Shower",
+			null,
+			TOXIC,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.PARASITIZE,
+			"Parasitize",
+			null,
+			BUG,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.PEACE_OF_MIND,
+			"Peace of Mind",
+			null,
+			MIND,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.PEBBLE_TOSS,
+			"Pebble Toss",
+			null,
+			EARTH,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.PECK,
+			"Peck",
+			null,
+			AIR,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.PEP_JAB,
+			"Pep Jab",
+			null,
+			BRAWLER,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.PEPPER_BURST,
+			"Pepper Burst",
+			null,
+			FIRE,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.PERCH,
+			"Perch",
+			null,
+			AIR,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.PESTER,
+			"Pester",
+			null,
+			BUG,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.PESTILENCE,
+			"Pestilence",
+			null,
+			BUG,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.PETAL_PUMMEL,
+			"Petal Pummel",
+			null,
+			PLANT,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.PHANTOM_BLAST,
+			"Phantom Blast",
+			null,
+			SPIRIT,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.PHANTOM_SLASH,
+			"Phantom Slash",
+			null,
+			SPIRIT,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.PHEROBLAST,
+			"Pheroblast",
+			null,
+			BUG,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.PHOTOSYNTHESIS,
+			"Photosynthesis",
+			null,
+			PLANT,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.PIERCING_DRIVE,
+			"Piercing Drive",
+			null,
+			WATER,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.PILFER,
+			"Pilfer",
+			null,
+			DARK,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.PINE_SHOT,
+			"Pine Shot",
+			null,
+			PLANT,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.PLUNGE,
+			"Plunge",
+			null,
+			WATER,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.POISON,
+			"Poison",
+			null,
+			TOXIC,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.POISON_BARBS,
+			"Poison Barbs",
+			null,
+			TOXIC,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.POUNCE,
+			"Pounce",
+			null,
+			SIMPLE,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.POWER_FOCUS,
+			"Power Focus",
+			null,
+			SIMPLE,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.POWER_SIPHON,
+			"Power Siphon",
+			null,
+			ELECTRIC,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.PRECISION_BOLT,
+			"Precision Bolt",
+			null,
+			ELECTRIC,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.PREEMPTIVE_STRIKE,
+			"Preemptive Strike",
+			null,
+			BRAWLER,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.PRIMAL_SLASH,
+			"Primal Slash",
+			null,
+			ANCIENT,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.PROVOKE,
+			"Provoke",
+			null,
+			DARK,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.PSYCHAL_CHOMP,
+			"Psychal Chomp",
+			null,
+			MIND,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.PSYCHO_BLAST,
+			"Psycho Blast",
+			null,
+			MIND,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.PYROKINESIS,
+			"Pyrokinesis",
+			null,
+			FIRE,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.QUICK_POUNCE,
+			"Quick Pounce",
+			null,
+			SIMPLE,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.QUICK_PUNCH,
+			"Quick Punch",
+			null,
+			BRAWLER,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.QUICKSAND,
+			"Quicksand",
+			null,
+			EARTH,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.RADIANT_RUSH,
+			"Radiant Rush",
+			null,
+			LIGHT,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.RAGING_FLAME,
+			"Raging Flame",
+			null,
+			FIRE,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.RAGING_HOWL,
+			"Raging Howl",
+			null,
+			SIMPLE,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.RAGING_TACKLE,
+			"Raging Tackle",
+			null,
+			SIMPLE,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.RANT,
+			"Rant",
+			null,
+			DARK,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.RECYCLE,
+			"Recycle",
+			null,
+			SIMPLE,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.REFLECTION_BURST,
+			"Reflection Burst",
+			null,
+			METAL,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.REJUVENATE,
+			"Rejuvenate",
+			null,
+			SIMPLE,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.REPEATING_TUNE,
+			"Repeating Tune",
+			null,
+			SIMPLE,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.RESONATE,
+			"Resonate",
+			null,
+			SIMPLE,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.RETURN_TO_SENDER,
+			"Return to Sender",
+			null,
+			MIND,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.ROCK_SLIDE,
+			"Rock Slide",
+			null,
+			EARTH,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.ROGUE_ASSAULT,
+			"Rogue Assault",
+			null,
+			BRAWLER,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.ROUGH_UP,
+			"Rough Up",
+			null,
+			BRAWLER,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.SAFEGUARD,
+			"Safeguard",
+			null,
+			SIMPLE,
+			STATUS,
+			new Constant(0),
+			new Constant(3),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.SAP_PLANT,
+			"Sap Plant",
+			null,
+			PLANT,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.SCAPEGOAT,
+			"Scapegoat",
+			null,
+			SIMPLE,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.SCAVENGE,
+			"Scavenge",
+			null,
+			AIR,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.SHADOW_SPRINT,
+			"Shadow Sprint",
+			null,
+			SPIRIT,
+			MELEE,
+			new Constant(0),
+			new Constant(1),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.SHADOWBOX,
+			"Shadowbox",
+			null,
+			BRAWLER,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.SHARPEN,
+			"Sharpen",
+			null,
+			DARK,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.SHINE,
+			"Shine",
+			null,
+			LIGHT,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.SHREWD_BLAST,
+			"SHrewd Blast",
+			null,
+			ANCIENT,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.SHRIEK,
+			"Shriek",
+			null,
+			SIMPLE,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.SINGE,
+			"Singe",
+			null,
+			FIRE,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.SLAP_DOWN,
+			"Slap Down",
+			null,
+			DARK,
+			MELEE,
+			new Constant(0),
+			new Constant(1),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.SLASH,
+			"Slash",
+			null,
+			SIMPLE,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.SLEET_SHOT,
+			"Sleet Shot",
+			null,
+			ICE,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.SLIME,
+			"Slime",
+			null,
+			TOXIC,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.SLUMBER,
+			"Slumber",
+			null,
+			SIMPLE,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.SNORE_SPORES,
+			"Snore Spores",
+			null,
+			PLANT,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.SNOWDOZER,
+			"Snowdozer",
+			null,
+			ICE,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.SOFT_WATER,
+			"Soft Water",
+			null,
+			WATER,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.SOUL_STORM,
+			"Soul Storm",
+			null,
+			SPIRIT,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.SPARE,
+			"Spare",
+			null,
+			SIMPLE,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.SPECTRAL_BURST,
+			"Spectral Burst",
+			null,
+			SPIRIT,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.SPIKE_RUSH,
+			"Spike Rush",
+			null,
+			ICE,
+			MELEE,
+			new Constant(0),
+			new Constant(1),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.SPIT,
+			"Spit",
+			null,
+			SIMPLE,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.SPITE,
+			"Spite",
+			null,
+			SPIRIT,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.SPLITTING_HEADACHE,
+			"Splitting Headache",
+			null,
+			MIND,
+			RANGED,
+			new Constant(0),
+			new Constant(1),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.SPRAY,
+			"Spray",
+			null,
+			WATER,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.SQUARE_ONE,
+			"Square One",
+			null,
+			DARK,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.SQUAWK,
+			"Squawk",
+			null,
+			AIR,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.STAMPEDE,
+			"Stampede",
+			null,
+			SIMPLE,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.STARE,
+			"Stare",
+			null,
+			SIMPLE,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.STARTLE,
+			"Startle",
+			null,
+			SPIRIT,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.STATIC_SHOCK,
+			"Static Shock",
+			null,
+			ELECTRIC,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.STATIC_SPORES,
+			"Static Spores",
+			null,
+			PLANT,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.STEEL_CRUSHER,
+			"Steel Crusher",
+			null,
+			METAL,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.STING,
+			"Sting",
+			null,
+			TOXIC,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.STRATAGEM,
+			"Stratagem",
+			null,
+			MIND,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.STRETCH,
+			"Stretch",
+			null,
+			SIMPLE,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.STRIKE,
+			"Strike",
+			null,
+			SIMPLE,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.STUN,
+			"Stun",
+			null,
+			ELECTRIC,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.STUPEFY,
+			"Stupefy",
+			null,
+			SPIRIT,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.SUMMON,
+			"Summon",
+			null,
+			SIMPLE,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.SWAT,
+			"Swat",
+			null,
+			BRAWLER,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.SWIPE,
+			"Swipe",
+			null,
+			SIMPLE,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.TAIL_SLAP,
+			"Tail Slap",
+			null,
+			SIMPLE,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.TAKE_ROOT,
+			"Take Root",
+			null,
+			PLANT,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.TALENT_TRADE,
+			"Talent Trade",
+			null,
+			DARK,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.TAMP,
+			"Tamp",
+			null,
+			EARTH,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.TASE,
+			"Tase",
+			null,
+			ELECTRIC,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.TEAMWORK,
+			"Teamwork",
+			null,
+			SIMPLE,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.TEAR_DOWN,
+			"Tear Down",
+			null,
+			SIMPLE,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.TEASE,
+			"Tease",
+			null,
+			DARK,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.THISTLE_SLASH,
+			"Thistle Slash",
+			null,
+			PLANT,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.THUNDER_BLAST,
+			"Thunder Blast",
+			null,
+			ELECTRIC,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.THUNDER_CHOMP,
+			"Thunder Chomp",
+			null,
+			ELECTRIC,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.THUNDER_CLAP,
+			"Thunder Clap",
+			null,
+			ELECTRIC,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.THUNDER_CRASH,
+			"Thunder Crash",
+			null,
+			ELECTRIC,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.THUNDER_SLAM,
+			"Thunder Slam",
+			null,
+			ELECTRIC,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.THUNDERSTORM,
+			"ThunderStorm",
+			null,
+			ELECTRIC,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.THUNDERSTRIKE,
+			"Thunderstrike",
+			null,
+			ELECTRIC,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.TIMBER_THRASH,
+			"Timber Thrash",
+			null,
+			PLANT,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.TONE_BARRIER,
+			"Tone Barrier",
+			null,
+			SIMPLE,
+			STATUS,
+			new Constant(0),
+			new Constant(4),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.TOXIC_SPORES,
+			"Toxic Spores",
+			null,
+			TOXIC,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.TOXIC_TAIL,
+			"Toxic Tail",
+			null,
+			TOXIC,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.TRIBUTE,
+			"Tribute",
+			null,
+			SIMPLE,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.TRICKY_TACTICS,
+			"Tricky Tactics",
+			null,
+			DARK,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.TSUNAMI,
+			"Tsunami",
+			null,
+			WATER,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.TUNE_UP,
+			"Tune Up",
+			null,
+			METAL,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.TYPHOON,
+			"Typhoon",
+			null,
+			AIR,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.UNDERMINE,
+			"Undermine",
+			null,
+			EARTH,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.VENOM_CHOMP,
+			"Venom Chomp",
+			null,
+			TOXIC,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.VENOM_SLASH,
+			"Venom Slash",
+			null,
+			TOXIC,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.VICE_JAWS,
+			"Vice Jaws",
+			null,
+			METAL,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.VINE_LASH,
+			"Vine Lash",
+			null,
+			PLANT,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.VITAL_JAB,
+			"Vital Slash",
+			null,
+			BRAWLER,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.WATER_BOMB,
+			"Water Bomb",
+			null,
+			WATER,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.WAVE_WRECKER,
+			"Wave Wrecker",
+			null,
+			WATER,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.WEB_SHOT,
+			"Web Shot",
+			null,
+			BUG,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.WING_SLAP,
+			"Wing Slap",
+			null,
+			AIR,
+			MELEE,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.WONDER_HERB,
+			"Wonder Herb",
+			null,
+			PLANT,
+			STATUS,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+		);
+		register(
+			MoveId.ZIP_ZAP,
+			"Zip Zap",
+			null,
+			ELECTRIC,
+			RANGED,
+			new Constant(0),
+			new Constant(0),
+			null,
+			null,
+			null,
+			null
+        );
     }
 }

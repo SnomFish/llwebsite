@@ -5,21 +5,25 @@ import java.util.List;
 import java.util.Map;
 
 import github.snomfish.domain.status.StatusId;
+import github.snomfish.domain.type.TypeId;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.condition.Equals;
 import github.snomfish.functionality.condition.ListContains;
+import github.snomfish.functionality.condition.NoCondition;
 import github.snomfish.functionality.condition.Or;
+import github.snomfish.functionality.effect.effects.AlterTypeChart;
 import github.snomfish.functionality.effect.effects.MultiplyValueEffect;
 import github.snomfish.functionality.number.Constant;
 
 import static github.snomfish.domain.ability.AbilityId.*;
+import static github.snomfish.domain.type.TypeId.*;
 import static github.snomfish.functionality.event.EventId.*;
 import static github.snomfish.functionality.Value.*;
 
 public class AbilityRegistry {
     
 
-    private static final Map<AbilityId, Ability> registry = new HashMap();
+    private static final Map<AbilityId, Ability> registry = new HashMap<>();
 
 
     private AbilityRegistry() {}
@@ -83,12 +87,20 @@ public class AbilityRegistry {
         register(
             AQUA_BODY,
             "aqua body",
-			null
+			new AbilityRule(
+                List.of(BEFORE_MOVE_EVENT), 
+                new Equals(MOVE_TYPE, TypeId.FIRE), 
+                new MultiplyValueEffect(MOVE_TYPE_DAMAGE_MODIFIER, new Constant(0.5))
+            )
         );
         register(
             ASSERTIVE,
             "assertive",
-			null
+			new AbilityRule(
+                List.of(BEFORE_MOVE_EVENT), 
+                new NoCondition(), 
+                new AlterTypeChart(BRAWLER, SPIRIT, 1)
+            )
         );
         register(
             AWAKENING,

@@ -49,6 +49,7 @@ public class Equals implements ICondition {
     }
 
 
+    // this is bad and shoud be using the Value resolve() one, i think
     private Object resolve(Object value, BattleContext context) {
         if (value instanceof Value dynamicValue) {
             return dynamicValue.get(context);

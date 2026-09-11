@@ -25,31 +25,10 @@ public class And implements ICondition {
         );
     } 
 
-
+    // this code is old as fuck, consider running the first condition, then discarding/auto returning any that are false, then only focus on the ones that are true still
     @Override
     public List<Branch<Boolean>> execute(BattleContext context) {
-        List<Branch<Boolean>> outcomes = List.of(
-            new Branch<>(true, 1.0)
-        );
-
-        for (ICondition condition : conditions) {
-            List<Branch<Boolean>> conditionOutcomes = condition.execute(context);
-
-            List<Branch<Boolean>> newOutcomes = new java.util.ArrayList<>();
-
-            for (Branch<Boolean> existing : outcomes) {
-                for (Branch<Boolean> next : conditionOutcomes) {
-
-                    boolean value = existing.value() && next.value();
-                    double probability =
-                        existing.probability() * next.probability();
-
-                    newOutcomes.add(new Branch<>(value, probability));
-                }
-            }
-
-            outcomes = newOutcomes;
-        }
+        
 
         return outcomes;
     }

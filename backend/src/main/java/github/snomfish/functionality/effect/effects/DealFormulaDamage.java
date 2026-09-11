@@ -8,15 +8,15 @@ import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.effect.IEffect;
 import github.snomfish.functionality.number.INumber;
 
-public class EnemyNormalDamage implements IEffect {
-    
+public class DealFormulaDamage implements IEffect {
+    // deals formula damage to the target
     
     private StatId attackingStat;
     private StatId defendingStat;
     private INumber basePower;
     
  
-    public EnemyNormalDamage(
+    public DealFormulaDamage(
         StatId attackingStat,
         StatId defendingStat,
         INumber basePower
@@ -28,8 +28,8 @@ public class EnemyNormalDamage implements IEffect {
 
 
     @Override 
-    public EnemyNormalDamage deepCopy() {
-        return new EnemyNormalDamage(
+    public DealFormulaDamage deepCopy() {
+        return new DealFormulaDamage(
             attackingStat, 
             defendingStat, 
             basePower.deepCopy()

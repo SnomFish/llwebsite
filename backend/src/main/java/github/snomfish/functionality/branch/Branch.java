@@ -3,7 +3,7 @@ package github.snomfish.functionality.branch;
 public class Branch<T> {
     
 
-    private final T value;
+    private T value;
     private double probability;
     
 
@@ -19,6 +19,10 @@ public class Branch<T> {
     public T value() {return value;}
     public double probability() {return probability;}
 
+    
+    // setter
+    public void setValue(T value) {this.value = value;}
+    public void setProbability(double probability) {this.probability = probability;}
     
     public void multiplyProbability(double delta) {
         this.probability *= delta;
