@@ -10,7 +10,7 @@ import github.snomfish.functionality.context.BattleContext;
 public class Barrage implements IMove {
 
     private MoveEffect perHit;
-    private int minHits;
+    private int minHits; // for now this doesnt need to be an INumber
     private int maxHits;
 
 

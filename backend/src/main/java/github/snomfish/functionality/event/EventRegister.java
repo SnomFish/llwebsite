@@ -29,6 +29,7 @@ public class EventRegister {
     }
 
 
+    // places the events into the registry on static startup
     private static void register(
         EventId id, EventTarget target
     ) {
