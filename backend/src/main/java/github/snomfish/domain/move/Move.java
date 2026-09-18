@@ -29,6 +29,7 @@ public class Move implements DeepCopyable<Move> {
     private IMove afterHit;
     private IMove onMiss;
 
+    private double damage;
     private double accuracyModifier;
     private double damageModifier;
     private double typeModifier;
@@ -63,6 +64,7 @@ public class Move implements DeepCopyable<Move> {
         this.onMiss = onMiss;
 
         this.accuracyModifier = 1.0;
+        this.damage = 0.0;
         this.damageModifier = 1.0;
         this.typeModifier = 1.0;
         this.typeChart = TypeChart.get();
@@ -83,6 +85,7 @@ public class Move implements DeepCopyable<Move> {
         this.onMiss = move.onMiss.deepCopy();
 
         this.accuracyModifier = move.accuracyModifier;
+        this.damage = move.damage;
         this.damageModifier = move.damageModifier;
         this.typeModifier = move.typeModifier;
         this.typeChart = typeChart.deepCopy();
@@ -108,6 +111,7 @@ public class Move implements DeepCopyable<Move> {
     public IMove onMiss() {return onMiss;}
 
     public double accuracyModifier() {return accuracyModifier;}
+    public double damage() {return damage;}
     public double damageModifier() {return damageModifier;}
     public double typeModifier() {return typeModifier;}
     public TypeChart typeChart() {return typeChart;}
@@ -128,6 +132,7 @@ public class Move implements DeepCopyable<Move> {
     public void setOnMiss(IMove onMiss) {this.onMiss = onMiss;}
 
     public void setAccuracyModifier(double accuracyModifier) {this.accuracyModifier = accuracyModifier;}
+    public void setDamage(double damage) {this.damage = damage;}
     public void setDamageModifier(double damageModifier) {this.damageModifier = damageModifier;}
     public void setTypeModifier(double typeModifier) {this.typeModifier = typeModifier;}
     public void setTypeChart(TypeChart typeChart) {this.typeChart = typeChart;}

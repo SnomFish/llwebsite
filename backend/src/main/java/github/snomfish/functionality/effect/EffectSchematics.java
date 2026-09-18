@@ -17,7 +17,7 @@ public class EffectSchematics {
     public static IEffect secondaryEffects(IEffect effects) {
         return new ConditionalEffect(
             new And(List.of(
-                new Not(new Equals(Value.USER_ABILITY, AbilityId.BRUTE_FORCE)) // this is bad code, but I dont know how to do suppression in this engine
+                new Not(new Equals(Value.USER_ABILITY_ID, AbilityId.BRUTE_FORCE)) // this is bad code, but I dont know how to do suppression in this engine
             )),
             effects
         );

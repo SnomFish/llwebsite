@@ -9,21 +9,21 @@ public enum Value {
 
 
     USER_TYPES(
-        c -> c.user().activeLoomianData().types(),
-        (c, v) -> c.user().activeLoomianData().setTypes(v)
+        c -> c.user().activeLoomian().types(),
+        (c, v) -> c.user().activeLoomian().setTypes(v)
     ),
     TARGET_TYPES(
-        c -> c.target().activeLoomianData().types(),
-        (c, v) -> c.target().activeLoomianData().setTypes(v)
+        c -> c.target().activeLoomian().types(),
+        (c, v) -> c.target().activeLoomian().setTypes(v)
     ),
     
-    USER_ABILITY(
-        c -> c.user().activeLoomian().ability(),
-        (c, v) -> c.user().activeLoomian().setAbility(v)
+    USER_ABILITY_ID(
+        c -> c.user().activeLoomian().abilityId(),
+        (c, v) -> c.user().activeLoomian().setAbilityId(v)
     ),
-    TARGET_ABILITY(
-        c -> c.target().activeLoomian().ability(),
-        (c, v) -> c.target().activeLoomian().setAbility(v)
+    TARGET_ABILITY_ID(
+        c -> c.target().activeLoomian().abilityId(),
+        (c, v) -> c.target().activeLoomian().setAbilityId(v)
     ),
 
     USER_STATUS_ID(
@@ -97,32 +97,32 @@ public enum Value {
     ),
     // USER BATTLE STATS
     USER_BATTLE_HEALTH(
-        c -> c.user().activeLoomianData().battleStats().health(),
-        (c, v) -> c.user().activeLoomianData().battleStats().setHealth(v)
+        c -> c.user().activeLoomian().battleStats().health(),
+        (c, v) -> c.user().activeLoomian().battleStats().setHealth(v)
     ),
     USER_BATTLE_ENERGY(
-        c -> c.user().activeLoomianData().battleStats().energy(),
-        (c, v) -> c.user().activeLoomianData().battleStats().setEnergy(v)
+        c -> c.user().activeLoomian().battleStats().energy(),
+        (c, v) -> c.user().activeLoomian().battleStats().setEnergy(v)
     ),
     USER_BATTLE_MATTACK(
-        c -> c.user().activeLoomianData().battleStats().mattack(),
-        (c, v) -> c.user().activeLoomianData().battleStats().setMattack(v)
+        c -> c.user().activeLoomian().battleStats().mattack(),
+        (c, v) -> c.user().activeLoomian().battleStats().setMattack(v)
     ),
     USER_BATTLE_MDEFENSE(
-        c -> c.user().activeLoomianData().battleStats().mdefense(),
-        (c, v) -> c.user().activeLoomianData().battleStats().setMdefense(v)
+        c -> c.user().activeLoomian().battleStats().mdefense(),
+        (c, v) -> c.user().activeLoomian().battleStats().setMdefense(v)
     ),  
     USER_BATTLE_RATTACK(
-        c -> c.user().activeLoomianData().battleStats().rattack(),
-        (c, v) -> c.user().activeLoomianData().battleStats().setRattack(v)
+        c -> c.user().activeLoomian().battleStats().rattack(),
+        (c, v) -> c.user().activeLoomian().battleStats().setRattack(v)
     ),
     USER_BATTLE_RDEFENSE(
-        c -> c.user().activeLoomianData().battleStats().rdefense(),
-        (c, v) -> c.user().activeLoomianData().battleStats().setRdefense(v)
+        c -> c.user().activeLoomian().battleStats().rdefense(),
+        (c, v) -> c.user().activeLoomian().battleStats().setRdefense(v)
     ),
     USER_BATTLE_SPEED(
-        c -> c.user().activeLoomianData().battleStats().speed(),
-        (c, v) -> c.user().activeLoomianData().battleStats().setSpeed(v)
+        c -> c.user().activeLoomian().battleStats().speed(),
+        (c, v) -> c.user().activeLoomian().battleStats().setSpeed(v)
     ),
 
 
@@ -187,58 +187,58 @@ public enum Value {
     ),
     // TARGET BATTLE STATS
     TARGET_BATTLE_HEALTH(
-        c -> c.target().activeLoomianData().battleStats().health(),
-        (c, v) -> c.target().activeLoomianData().battleStats().setHealth(v)
+        c -> c.target().activeLoomian().battleStats().health(),
+        (c, v) -> c.target().activeLoomian().battleStats().setHealth(v)
     ),
     TARGET_BATTLE_ENERGY(
-        c -> c.target().activeLoomianData().battleStats().energy(),
-        (c, v) -> c.target().activeLoomianData().battleStats().setEnergy(v)
+        c -> c.target().activeLoomian().battleStats().energy(),
+        (c, v) -> c.target().activeLoomian().battleStats().setEnergy(v)
     ),
     TARGET_BATTLE_MATTACK(
-        c -> c.target().activeLoomianData().battleStats().mattack(),
-        (c, v) -> c.target().activeLoomianData().battleStats().setMattack(v)
+        c -> c.target().activeLoomian().battleStats().mattack(),
+        (c, v) -> c.target().activeLoomian().battleStats().setMattack(v)
     ),
     TARGET_BATTLE_MDEFENSE(
-        c -> c.target().activeLoomianData().battleStats().mdefense(),
-        (c, v) -> c.target().activeLoomianData().battleStats().setMdefense(v)
+        c -> c.target().activeLoomian().battleStats().mdefense(),
+        (c, v) -> c.target().activeLoomian().battleStats().setMdefense(v)
     ),  
     TARGET_BATTLE_RATTACK(
-        c -> c.target().activeLoomianData().battleStats().rattack(),
-        (c, v) -> c.target().activeLoomianData().battleStats().setRattack(v)
+        c -> c.target().activeLoomian().battleStats().rattack(),
+        (c, v) -> c.target().activeLoomian().battleStats().setRattack(v)
     ),
     TARGET_BATTLE_RDEFENSE(
-        c -> c.target().activeLoomianData().battleStats().rdefense(),
-        (c, v) -> c.target().activeLoomianData().battleStats().setRdefense(v)
+        c -> c.target().activeLoomian().battleStats().rdefense(),
+        (c, v) -> c.target().activeLoomian().battleStats().setRdefense(v)
     ),
     TARGET_BATTLE_SPEED(
-        c -> c.target().activeLoomianData().battleStats().speed(),
-        (c, v) -> c.target().activeLoomianData().battleStats().setSpeed(v)
+        c -> c.target().activeLoomian().battleStats().speed(),
+        (c, v) -> c.target().activeLoomian().battleStats().setSpeed(v)
     ),
 
 
     MOVE_TYPE(
-        c -> c.user().activeLoomianData().action().move().type(),
-        (c, v) -> c.user().activeLoomianData().action().move().setType(v)
+        c -> c.user().activeLoomian().action().move().type(),
+        (c, v) -> c.user().activeLoomian().action().move().setType(v)
     ),
     MOVE_CATEGORY(
-        c -> c.user().activeLoomianData().action().move().category(),
-        (c, v) -> c.user().activeLoomianData().action().move().setCategory(v)
+        c -> c.user().activeLoomian().action().move().category(),
+        (c, v) -> c.user().activeLoomian().action().move().setCategory(v)
     ),
     MOVE_ACCURACY_MODIFIER(
-        c -> c.user().activeLoomianData().action().move().accuracyModifier(),
-        (c, v) -> c.user().activeLoomianData().action().move().setAccuracyModifier(v)
+        c -> c.user().activeLoomian().action().move().accuracyModifier(),
+        (c, v) -> c.user().activeLoomian().action().move().setAccuracyModifier(v)
     ),
     MOVE_DAMAGE_MODIFIER(
-        c -> c.user().activeLoomianData().action().move().damageModifier(),
-        (c, v) -> c.user().activeLoomianData().action().move().setDamageModifier(v)
+        c -> c.user().activeLoomian().action().move().damageModifier(),
+        (c, v) -> c.user().activeLoomian().action().move().setDamageModifier(v)
     ),
     MOVE_TYPE_MODIFIER(
-        c -> c.user().activeLoomianData().action().move().typeModifier(),
-        (c, v) -> c.user().activeLoomianData().action().move().setTypeModifier(v)
+        c -> c.user().activeLoomian().action().move().typeModifier(),
+        (c, v) -> c.user().activeLoomian().action().move().setTypeModifier(v)
     ),
     MOVE_TYPECHART(
-        c -> c.user().activeLoomianData().action().move().typeChart(),
-        (c, v) -> c.user().activeLoomianData().action().move().setTypeChart(v)
+        c -> c.user().activeLoomian().action().move().typeChart(),
+        (c, v) -> c.user().activeLoomian().action().move().setTypeChart(v)
     );
 
 

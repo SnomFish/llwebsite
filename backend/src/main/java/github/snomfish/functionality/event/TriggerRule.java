@@ -1,4 +1,4 @@
-package github.snomfish.domain.ability;
+package github.snomfish.functionality.event;
 
 import java.util.List;
 
@@ -7,17 +7,17 @@ import github.snomfish.functionality.branch.BranchUtil;
 import github.snomfish.functionality.condition.ICondition;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.effect.IEffect;
-import github.snomfish.functionality.event.EventId;
 
-public class AbilityRule {
-    
-    private List<EventId> events;
+public class TriggerRule {
+     
+
+    private List<Event> events;
     private ICondition condition;
     private IEffect effect;
 
 
-    public AbilityRule(
-        List<EventId> events,
+    public TriggerRule(
+        List<Event> events,
         ICondition condition,
         IEffect effect
     ) {
@@ -27,13 +27,7 @@ public class AbilityRule {
     }
 
 
-    // getter
-    public List<EventId> events() {return events;}
-    public ICondition condition() {return condition;}
-    public IEffect effect() {return effect;}
-
-
-    public List<Branch<BattleContext>> execute(BattleContext context, EventId event) {
+    public List<Branch<BattleContext>> execute(BattleContext context, Event event) {
         if (!events.contains(event)) {
             return List.of(new Branch<>(context, 1.0));
         }

@@ -7,10 +7,15 @@ import github.snomfish.domain.stats.StatChanges;
 import github.snomfish.domain.stats.Stats;
 import github.snomfish.domain.type.TypeId;
 import github.snomfish.functionality.action.IAction;
-import github.snomfish.functionality.copy.DeepCopyable;
+import github.snomfish.functionality.branch.Branch;
+import github.snomfish.functionality.context.BattleContext;
+import github.snomfish.functionality.event.Event;
+import github.snomfish.functionality.event.EventId;
+import github.snomfish.functionality.event.EventSideId;
 
-public class ActiveLoomianData implements DeepCopyable<ActiveLoomianData> {
-    
+// ALL LOOMIAN PARAMETERS ARE PRIVATE BY CHOICE
+public class ActiveLoomian extends Loomian {
+
 
     private List<TypeId> types;
     private Stats battleStats;
@@ -18,34 +23,34 @@ public class ActiveLoomianData implements DeepCopyable<ActiveLoomianData> {
     private IAction action;
     
 
-    public ActiveLoomianData(
+    public ActiveLoomian(
         Loomian loomian
     ) {
+        super(loomian);
         this.types = new ArrayList<>(loomian.species().baseTypes());
         this.battleStats = loomian.actualStats().deepCopy();
         this.statChanges = new StatChanges();
         this.action = null;
     }
-    public ActiveLoomianData(
-        List<TypeId> types,
-        Stats battleStats,
-        StatChanges statChanges,
-        IAction action
-    ) {
-        this.types = types;
-        this.battleStats = battleStats;
-        this.statChanges = statChanges;
-        this.action = action;
+    public ActiveLoomian(ActiveLoomian activeLoomian) {
+        super(activeLoomian.deepCopy());
+        this.types = new ArrayList<>(activeLoomian.types);
+        this.battleStats = activeLoomian.battleStats.deepCopy();
+        this.statChanges = activeLoomian.statChanges.deepCopy();
+        this.action = activeLoomian.action.deepCopy();
     }
 
 
-    public ActiveLoomianData deepCopy() {
-        return new ActiveLoomianData(
-            new ArrayList<>(types),
-            battleStats.deepCopy(),
-            statChanges.deepCopy(),
-            action.deepCopy()
-        );
+    public ActiveLoomian deepCopy() {
+        return new ActiveLoomian(this);
+    }
+
+    public List<Branch<BattleContext>> dispatchEvent(BattleContext context, Event event) {
+        List<Branch<BattleContext>> outcomes = new ArrayList<>();
+
+        outcomes = ability().handleEvent(context, event); 
+
+        return outcomes;
     }
 
 

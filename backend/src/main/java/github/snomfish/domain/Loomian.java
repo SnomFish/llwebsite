@@ -2,8 +2,12 @@ package github.snomfish.domain;
 
 import java.util.List;
 
+import github.snomfish.domain.ability.Ability;
 import github.snomfish.domain.ability.AbilityId;
+import github.snomfish.domain.ability.AbilityRegistry;
+import github.snomfish.domain.item.Item;
 import github.snomfish.domain.item.ItemId;
+import github.snomfish.domain.item.ItemRegistry;
 import github.snomfish.domain.move.MoveId;
 import github.snomfish.domain.species.Species;
 import github.snomfish.domain.species.SpeciesId;
@@ -18,10 +22,9 @@ public class Loomian implements DeepCopyable<Loomian> {
     
     private SpeciesId speciesId; // doesnt get deep copied
     private List<MoveId> moves;
-    private AbilityId ability;
-    private ItemId item;
+    private AbilityId abilityId;
+    private ItemId itemId;
     private Stats nature;
-    private IAction action;
 
     private Stats actualStats;
     private int currentHealth;
@@ -33,13 +36,14 @@ public class Loomian implements DeepCopyable<Loomian> {
 
     // eventually have these bools in an enum map
     private boolean hasAbilityActivated;
+    private boolean canHaveItemRemoved;
 
 
     public Loomian(
         SpeciesId speciesId,
         List<MoveId> moves,
-        AbilityId ability,
-        ItemId item,
+        AbilityId abilityId,
+        ItemId itemId,
         Stats nature,
         Stats tps,
         Stats ups,
@@ -47,8 +51,8 @@ public class Loomian implements DeepCopyable<Loomian> {
     ) {
         this.speciesId = speciesId;
         this.moves = moves;
-        this.ability = ability;
-        this.item = item;
+        this.abilityId = abilityId;
+        this.itemId = itemId;
         this.nature = nature;
         this.status = status;
 
@@ -59,14 +63,15 @@ public class Loomian implements DeepCopyable<Loomian> {
         this.currentEnergy = (int) actualStats.energy();
 
         this.hasAbilityActivated = false;
+        this.canHaveItemRemoved = false;
     }
 
 
     protected Loomian(Loomian loomian) {
         this.speciesId = loomian.speciesId;
         this.moves = loomian.moves();
-        this.ability = loomian.ability();
-        this.item = loomian.item();
+        this.abilityId = loomian.abilityId();
+        this.itemId = loomian.itemId();
         this.nature = loomian.nature();
         this.status = loomian.status();
 
@@ -77,6 +82,7 @@ public class Loomian implements DeepCopyable<Loomian> {
         this.ups = loomian.ups;
 
         this.hasAbilityActivated = loomian.hasAbilityActivated;
+        canHaveItemRemoved = loomian.canHaveItemRemoved;
     }
 
 
@@ -89,8 +95,10 @@ public class Loomian implements DeepCopyable<Loomian> {
     public SpeciesId speciesId() {return speciesId;}
     public Species species() {return SpeciesRegistry.get(speciesId);} 
     public List<MoveId> moves() {return moves;}
-    public AbilityId ability() {return ability;}
-    public ItemId item() {return item;}
+    public AbilityId abilityId() {return abilityId;}
+    public Ability ability() {return AbilityRegistry.get(abilityId);}
+    public ItemId itemId() {return itemId;}
+    public Item item() {return ItemRegistry.get(itemId);}
     public Stats nature() {return nature;}
     public Status status() {return status;}
 
@@ -101,6 +109,7 @@ public class Loomian implements DeepCopyable<Loomian> {
     public Stats ups() {return ups;}
 
     public boolean hasAbilityActivated() {return hasAbilityActivated;}
+    public boolean canHaveItemRemoved() {return canHaveItemRemoved;}
 
 
     // setter
@@ -110,11 +119,11 @@ public class Loomian implements DeepCopyable<Loomian> {
     public void setMoves(List<MoveId> moves) {
         this.moves = moves;
     }
-    public void setAbility(AbilityId ability) {
-        this.ability = ability;
+    public void setAbilityId(AbilityId abilityId) {
+        this.abilityId = abilityId;
     }
-    public void setItem(ItemId item) {
-        this.item = item;
+    public void setItemId(ItemId itemId) {
+        this.itemId = itemId;
     }
     public void setNature(Stats nature) {
         this.nature = nature;
@@ -139,5 +148,8 @@ public class Loomian implements DeepCopyable<Loomian> {
     }
     public void setHasAbilityActivated(boolean hasAbilityActivated) {
         this.hasAbilityActivated = hasAbilityActivated;
+    }
+    public void setCanHaveItemRemoved(boolean canHaveItemRemoved) {
+        this.canHaveItemRemoved = canHaveItemRemoved;
     }
 }

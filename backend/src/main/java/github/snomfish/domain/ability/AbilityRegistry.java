@@ -13,12 +13,14 @@ import github.snomfish.functionality.condition.NoCondition;
 import github.snomfish.functionality.condition.Or;
 import github.snomfish.functionality.effect.effects.AlterTypeChart;
 import github.snomfish.functionality.effect.effects.MultiplyValueEffect;
+import github.snomfish.functionality.event.Event;
+import github.snomfish.functionality.event.TriggerRule;
 import github.snomfish.functionality.number.Constant;
 
 import static github.snomfish.domain.ability.AbilityId.*;
 import static github.snomfish.domain.type.TypeId.*;
 import static github.snomfish.functionality.event.EventId.*;
-import static github.snomfish.functionality.Value.*;
+import static github.snomfish.functionality.event.EventSideId.*;
 
 public class AbilityRegistry {
     
@@ -29,7 +31,7 @@ public class AbilityRegistry {
     private AbilityRegistry() {}
 
 
-    public Ability get(AbilityId id) {
+    public static Ability get(AbilityId id) {
         return registry.get(id);
     }
 
@@ -37,7 +39,7 @@ public class AbilityRegistry {
     private static void register(
         AbilityId id,
         String name,
-        AbilityRule rule
+        TriggerRule rule
     ) {
         registry.put(id, new Ability(id, name, List.of(rule)));
     }
@@ -87,17 +89,17 @@ public class AbilityRegistry {
         register(
             AQUA_BODY,
             "aqua body",
-			new AbilityRule(
-                List.of(BEFORE_MOVE_EVENT), 
-                new Equals(MOVE_TYPE, TypeId.FIRE), 
-                new MultiplyValueEffect(MOVE_TYPE_MODIFIER, new Constant(0.5))
+			new TriggerRule(
+                List.of(new Event(DAMAGE_MODIFIER, TARGET)), // before the targets move damage is calculated 
+                new Equals(Value.MOVE_TYPE, TypeId.FIRE), 
+                new MultiplyValueEffect(Value.MOVE_TYPE_MODIFIER, new Constant(0.5))
             )
         );
         register(
             ASSERTIVE,
             "assertive",
-			new AbilityRule(
-                List.of(BEFORE_MOVE_EVENT), 
+			new TriggerRule(
+                List.of(new Event(BEFORE_MOVE, USER)), // before anything about the move is actually used
                 new NoCondition(), 
                 new AlterTypeChart(BRAWLER, SPIRIT, 1)
             )
@@ -105,22 +107,22 @@ public class AbilityRegistry {
         register(
             AWAKENING,
             "awakening",
-			new AbilityRule(
-                List.of(BEFORE_MOVE_EVENT),
+			new TriggerRule(
+                List.of(new Event(DAMAGE_MODIFIER, USER)), // right before a moves damage is calculated
                 new ListContains(Value.USER_TYPES, Value.MOVE_TYPE),
-                new MultiplyValueEffect(MOVE_DAMAGE_MODIFIER, new Constant(1.2)) // assumes regular stab has been applied, this brings the stab boost from 1.25 to 1.5
+                new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2)) // assumes regular stab has been applied, this brings the stab boost from 1.25 to 1.5
             )
         );
         register(
             BANEFUL,
             "baneful",
-			new AbilityRule(
-                List.of(USER_DAMAGE_MODIFIER_EVENT), 
+			new TriggerRule(
+                List.of(new Event(DAMAGE_MODIFIER, USER)), 
                 new Or(List.of(
                     new Equals(Value.USER_STATUS_ID, StatusId.POISON),
                     new Equals(Value.USER_STATUS_ID, StatusId.BAD_POISON)
                 )),
-                new MultiplyValueEffect(MOVE_DAMAGE_MODIFIER, new Constant(1.2))
+                new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
             )
         );
         register(

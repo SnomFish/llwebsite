@@ -53,8 +53,8 @@ public class TestLoomian {
 
         copy.setSpeciesId(AMPOLE);
         copy.setMoves(List.of(AIM, AIM, AIM, AIM));
-        copy.setAbility(ABILITY_THIEF);
-        copy.setItem(NO_ITEM);
+        copy.setAbilityId(ABILITY_THIEF);
+        copy.setItemId(NO_ITEM);
         copy.setNature(Nature.natureModifiers(List.of(VERY_CLEVER)));
         
         assertNotEquals(original.speciesId(), copy.speciesId());

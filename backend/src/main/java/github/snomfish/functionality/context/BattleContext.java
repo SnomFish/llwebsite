@@ -1,5 +1,6 @@
 package github.snomfish.functionality.context;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import github.snomfish.domain.Gamestate;
@@ -7,12 +8,15 @@ import github.snomfish.domain.Side;
 import github.snomfish.domain.SideId;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.copy.DeepCopyable;
+import github.snomfish.functionality.event.Event;
 import github.snomfish.functionality.event.EventId;
+import github.snomfish.functionality.event.EventSideId;
 
 import static github.snomfish.domain.SideId.*;
+import static github.snomfish.functionality.branch.BranchUtil.flatMap;
 
 // this is the context of a loomian using a move
-// this could be a record
+// this could be a record // no it cant, I like mutation
 public class BattleContext implements DeepCopyable<BattleContext> {
     
     private Gamestate gamestate;
@@ -49,13 +53,12 @@ public class BattleContext implements DeepCopyable<BattleContext> {
 
 
     // events
-    public List<Branch<BattleContext>> dispatch(EventId eventId) {
-        throw new UnsupportedOperationException("not implemented yet");
-    }
-    public List<Branch<BattleContext>> dispatchToUser(EventId eventId) {
-        throw new UnsupportedOperationException("not implemented yet");
-    } 
-    public List<Branch<BattleContext>> dispatchToTarget(EventId eventId) {
-        throw new UnsupportedOperationException("not implemented yet");
+    public List<Branch<BattleContext>> dispatchEvent(EventId eventId) { // I could crush this down to one line
+        List<Branch<BattleContext>> outcomes = List.of(new Branch<>(this, 1.0));
+
+        outcomes = flatMap(outcomes, context -> user().dispatchEvent(context, new Event(eventId, EventSideId.USER)));
+        outcomes = flatMap(outcomes, context -> target().dispatchEvent(context, new Event(eventId, EventSideId.TARGET)));
+
+        return outcomes;
     }
 }

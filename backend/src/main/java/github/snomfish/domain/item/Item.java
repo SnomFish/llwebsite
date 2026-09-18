@@ -1,4 +1,6 @@
-package github.snomfish.domain.ability;
+package github.snomfish.domain.item;
+
+import static github.snomfish.functionality.Value.resolve;
 
 import java.util.List;
 
@@ -7,32 +9,31 @@ import github.snomfish.functionality.branch.BranchUtil;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.event.Event;
 import github.snomfish.functionality.event.EventId;
-import github.snomfish.functionality.event.EventSideId;
 import github.snomfish.functionality.event.TriggerRule;
 
-// ability is only ever called from the registry, therefore it should remain constant
-// same with item
-public class Ability {
-
+// item is only ever called from the registry, therefore it should remain constant
+// same with ability
+public class Item {
     
-    private final AbilityId id;
+
+    private final ItemId id;
     private final String name;
     private final List<TriggerRule> triggerRules;
 
 
-    public Ability(
-        AbilityId id,
+    public Item(
+        ItemId id,
         String name,
         List<TriggerRule> triggerRules
     ) {
-        this.id = id;
+        this.id = id;     
         this.name = name;
         this.triggerRules = triggerRules;
     }
 
 
     // getter
-    public AbilityId id() {return id;}
+    public ItemId id() {return id;}
     public String name() {return name;}
     public List<TriggerRule> triggerRules() {return triggerRules;}
 

@@ -1,8 +1,14 @@
 package github.snomfish.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import github.snomfish.functionality.branch.Branch;
+import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.copy.DeepCopyable;
+import github.snomfish.functionality.event.Event;
+import github.snomfish.functionality.event.EventId;
+import github.snomfish.functionality.event.EventSideId;
 
 import static github.snomfish.functionality.copy.DeepCopy.deepCopyList;
 
@@ -10,43 +16,51 @@ public class Side implements DeepCopyable<Side> {
 
 
     private List<Loomian> party;
-    private int activeLoomianIndex;
-    private ActiveLoomianData activeLoomianData;
+    private int activeLoomianI;
+    private ActiveLoomian activeLoomian;
 
 
     public Side(
         List<Loomian> party,
-        int activeLoomianIndex
+        int activeLoomianI
     ) {
         this.party = party;
-        this.activeLoomianIndex = activeLoomianIndex;
-        this.activeLoomianData = new ActiveLoomianData(party.get(activeLoomianIndex));
+        this.activeLoomianI = activeLoomianI;
+        this.activeLoomian = new ActiveLoomian(party.get(activeLoomianI));
     }
     public Side(
         List<Loomian> party,
         int activeLoomianIndex,
-        ActiveLoomianData activeLoomianData
+        ActiveLoomian activeLoomian
     ) {
         this.party = party;
-        this.activeLoomianIndex = activeLoomianIndex;
-        this.activeLoomianData = activeLoomianData.deepCopy(); 
+        this.activeLoomianI = activeLoomianIndex;
+        this.activeLoomian = activeLoomian.deepCopy(); 
     }
 
 
     public Side deepCopy() {
         return new Side(
             deepCopyList(party),
-            activeLoomianIndex,
-            activeLoomianData.deepCopy()
+            activeLoomianI,
+            activeLoomian.deepCopy()
         );
+    }
+
+
+    public List<Branch<BattleContext>> dispatchEvent(BattleContext context, Event event) {
+        List<Branch<BattleContext>> outcomes = new ArrayList<>();
+
+        outcomes = activeLoomian().dispatchEvent(context, event);
+
+        return outcomes;
     }
 
 
     // getter
     public List<Loomian> getParty() {return party;}
-    public Loomian activeLoomian() {return party.get(activeLoomianIndex);}
-    public int activeLoomianIndex() {return activeLoomianIndex;}
-    public ActiveLoomianData activeLoomianData() {return activeLoomianData;}
+    public int activeLoomianI() {return activeLoomianI;}
+    public ActiveLoomian activeLoomian() {return activeLoomian;}
 
 
     // setter
@@ -56,13 +70,10 @@ public class Side implements DeepCopyable<Side> {
     public void setLoomian(int index, Loomian loomian) {
         this.party.set(index, loomian);
     }
-    public void setActiveLoomian(Loomian loomian) {
-        this.party.set(activeLoomianIndex, loomian);
+    public void setActiveLoomianI(int activeLoomianI) {
+        this.activeLoomianI = activeLoomianI;
     }
-    public void setActiveLoomianIndex(int activeLoomianIndex) {
-        this.activeLoomianIndex = activeLoomianIndex;
-    }
-    public void setActiveLoomianData(ActiveLoomianData activeLoomianData) {
-        this.activeLoomianData = activeLoomianData;
+    public void setActiveLoomian(ActiveLoomian activeLoomian) {
+        this.activeLoomian = activeLoomian;
     }
 }
