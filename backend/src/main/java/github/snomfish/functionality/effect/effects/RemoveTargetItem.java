@@ -9,6 +9,7 @@ import github.snomfish.functionality.effect.IEffect;
 import github.snomfish.functionality.event.EventId;
 
 import static github.snomfish.domain.item.ItemId.*;
+import static github.snomfish.functionality.event.EventId.*;
 
 public class RemoveTargetItem implements IEffect {
     
@@ -30,7 +31,7 @@ public class RemoveTargetItem implements IEffect {
         ActiveLoomian activeLoomian = context.target().activeLoomian();
 
         if (activeLoomian.canHaveItemRemoved()) {
-            context.dispatchEvent(EventId.TARGET_ITEM_REMOVED);
+            context.dispatchEvent(TARGET_ITEM_REMOVED_EVENT);
             activeLoomian.setItemId(NO_ITEM);
         }
 

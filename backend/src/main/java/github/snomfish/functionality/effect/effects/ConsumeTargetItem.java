@@ -30,7 +30,7 @@ public class ConsumeTargetItem implements IEffect {
         ActiveLoomian activeLoomian = context.target().activeLoomian();
 
         if (true) {
-            context.dispatchEvent(EventId.TARGET_ITEM_CONSUMED);
+            context.dispatchEvent(EventId.TARGET_ITEM_CONSUMED_EVENT);
             activeLoomian.setItemId(NO_ITEM);
         }
 

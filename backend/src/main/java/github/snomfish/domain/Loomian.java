@@ -103,6 +103,8 @@ public class Loomian implements DeepCopyable<Loomian> {
     public Status status() {return status;}
 
     public Stats actualStats() {return actualStats;}
+    public int maxHealth() {return (int) actualStats.health();}
+    public int maxEnergy() {return (int) actualStats.energy();}
     public int currentHealth() {return currentHealth;}
     public int currentEnergy() {return currentEnergy;}
     public Stats tps() {return tps;}
@@ -151,5 +153,14 @@ public class Loomian implements DeepCopyable<Loomian> {
     }
     public void setCanHaveItemRemoved(boolean canHaveItemRemoved) {
         this.canHaveItemRemoved = canHaveItemRemoved;
+    }
+
+
+    // adders
+    public void addToCurrentHealth(int delta) {
+        this.currentHealth += delta;
+    }
+    public void addToCurrentEnergy(int delta) {
+        this.currentEnergy += delta;
     }
 }

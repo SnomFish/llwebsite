@@ -16,7 +16,8 @@ public record Species(
     int bst,
     double height,
     double weight,
-    List<MoveId> learnset
+    List<MoveId> learnset,
+    boolean canEvolve
 ) {}
 
 

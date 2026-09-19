@@ -1,6 +1,8 @@
 package github.snomfish.domain.move;
 
 import github.snomfish.domain.move.structures.NoMove;
+import github.snomfish.domain.move.tags.TagId;
+import github.snomfish.domain.move.tags.Tags;
 import github.snomfish.domain.type.TypeId;
 import github.snomfish.functionality.condition.ICondition;
 import github.snomfish.functionality.condition.NoCondition;
@@ -30,7 +32,8 @@ public class MoveBuilder {
             new NoMove(),
             new NoMove(),
             new NoMove(),
-            new NoMove()
+            new NoMove(),
+            new Tags()
         );
     }
     public Move build() {
@@ -77,6 +80,11 @@ public class MoveBuilder {
     }
     public MoveBuilder onMiss(IMove onMiss) {
         move.setOnMiss(onMiss);
+        return this;
+    }
+
+    public MoveBuilder addTag(TagId tagId) {
+        move.tags().add(tagId);
         return this;
     }
 }

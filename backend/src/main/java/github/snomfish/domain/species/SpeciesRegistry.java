@@ -1,10 +1,5 @@
 package github.snomfish.domain.species;
 
-import static github.snomfish.domain.ability.AbilityId.*;
-import static github.snomfish.domain.move.MoveId.*;
-import static github.snomfish.domain.species.SpeciesId.*;
-import static github.snomfish.domain.type.TypeId.*;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,10 +9,15 @@ import github.snomfish.domain.move.MoveId;
 import github.snomfish.domain.stats.Stats;
 import github.snomfish.domain.type.TypeId;
 
+import static github.snomfish.domain.ability.AbilityId.*;
+import static github.snomfish.domain.move.MoveId.*;
+import static github.snomfish.domain.species.SpeciesId.*;
+import static github.snomfish.domain.type.TypeId.*;
 
 public class SpeciesRegistry {
     
 
+	private static boolean initialised = false;
     private static final Map<SpeciesId, Species> registry = new HashMap<>();
 
 
@@ -25,6 +25,7 @@ public class SpeciesRegistry {
 
 
 	public static Species get(SpeciesId id) {
+		if (!initialised) throw new IllegalArgumentException("species has not been initialised");
 		return registry.get(id);
     } 
 
@@ -44,7 +45,8 @@ public class SpeciesRegistry {
         int bst,
         double weight,
         double height,
-        List<MoveId> learnset
+        List<MoveId> learnset,
+		boolean canEvolve
     ) {
         Species species = new Species(
             speciesId,
@@ -63,3840 +65,3914 @@ public class SpeciesRegistry {
             bst,
             weight,
             height,
-            learnset
+            learnset,
+			canEvolve
         );
         registry.put(speciesId, species);
     }
 
 
-    static {
-        register(
-		 	EMBIT,
-		 	"embit",
-		 	List.of(FIRE),
-		 	List.of(AWAKENING, TERRIFYING),
-		 	57, 51, 60, 67, 36, 50, 40,
-		 	361,
-		 	20.41,
-		 	83.82,
-		 	List.of(
-		 		BARBS,
-		 		BLAZE_OF_GLORY,
-		 		BODY_CRASH,
-		 		BOILING_PRESS,
-		 		BURN_UP,
-		 		BURROW,
-		 		CHASE_DOWN,
-		 		CLAY_SLAP,
-		 		DODGE,
-		 		DRUDGE,
-		 		EAR_SLAP,
-		 		FIRE_BREATH,
-		 		FIRE_SLAM,
-		 		FLAMING_KICK,
-		 		GROWL,
-		 		HOP_KICK,
-		 		MEGA_PUNCH,
-		 		POUNCE,
-		 		POWER_FOCUS,
-		 		PREEMPTIVE_STRIKE,
-		 		PROVOKE,
-		 		RAGING_FLAME,
-		 		SINGE,
-		 		SLAP_DOWN,
-				SPARE
-			)
-		 );
-		 register(
-		 	DRIPPLE,
-		 	"dripple",
-		 	List.of(WATER),
-		 	List.of(AWAKENING, POWER_NAPPER),
-		 	63, 51, 56, 50, 55, 45, 41,
-		 	361,
-		 	17.24,
-		 	76.2,
-		 	List.of(
-		 		BLINDSPOT_BATTER,
-		 		CHILLY_CHOMP,
-		 		DAWDLE,
-		 		DODGE,
-		 		FROST_BEAM,
-		 		GAMMA_PULSE,
-		 		HYDRO_SLASH,
-		 		MAROON,
-		 		MEGA_CHOMP,
-		 		MINDS_EYE,
-		 		NOVA_BLAST,
-		 		PEACE_OF_MIND,
-		 		PLUNGE,
-		 		RADIANT_RUSH,
-		 		REJUVENATE,
-		 		SOFT_WATER,
-		 		SPARE,
-		 		SPRAY,
-		 		STRIKE,
-		 		SWIPE,
-		 		THUNDER_CHOMP,
-		 		TSUNAMI,
-		 		WATER_BOMB,
-				WAVE_WRECKER
-			)
-		 );
-		 register(
-		 	FEVINE,
-		 	"fevine",
-		 	List.of(PLANT),
-		 	List.of(AWAKENING, THRIVING_PACE),
-		 	45, 51, 71, 44, 50, 36, 64,
-		 	361,
-		 	15.88,
-		 	71.12,
-		 	List.of(
-		 		BARTER,
-		 		BOOM_BASH,
-		 		BUSH_WHACK,
-		 		DODGE,
-		 		GROWL,
-		 		ILL_WILL,
-		 		LEAF_BARRAGE,
-		 		LIFE_DRAIN,
-		 		MUD_SPATTER,
-		 		MUDSLIDE,
-		 		NATURES_FORCE,
-		 		PETAL_PUMMEL,
-		 		POISON,
-		 		POUNCE,
-		 		POWER_FOCUS,
-		 		PROVOKE,
-		 		SCAPEGOAT,
-		 		SPARE,
-		 		SPLITTING_HEADACHE,
-		 		STRETCH,
-		 		SWIPE,
-		 		TEASE,
-		 		THISTLE_SLASH,
-		 		TIMBER_THRASH,
-		 		VINE_LASH,
-				WONDER_HERB
-			)
-		 );
-		 register(
-		 	EAGLIT,
-		 	"eaglit",
-		 	List.of(LIGHT),
-		 	List.of(AWAKENING, APPLIED_FRUSTRATIONS),
-		 	45, 51, 36, 36, 71, 62, 60,
-		 	361,
-		 	17.24,
-		 	73.66,
-		 	List.of(
-		 		AIR_BLADE,
-		 		BARBS,
-		 		CYCLONE_SLAM,
-		 		DODGE,
-		 		FLASH_N_FLEE,
-		 		GAMMA_PULSE,
-		 		GROWL,
-		 		GUST,
-		 		HASTEN,
-		 		LIGHTSPEED_RAY,
-		 		LUSTER_LOOT,
-		 		MAGNIFY,
-		 		METAL_BLAST,
-		 		NOSEDIVE,
-		 		NOVA_BLAST,
-		 		PECK,
-		 		POUNCE,
-		 		POWER_FOCUS,
-		 		RADIANT_RUSH,
-		 		RAGING_HOWL,
-		 		SHINE,
-		 		SPARE,
-				STARE
-			)
-		 );
-		 register(
-		 	VAMBAT,
-		 	"vambat",
-		 	List.of(DARK),
-		 	List.of(AWAKENING, DEMANDING),
-		 	47, 51, 47, 50, 47, 50, 69,
-		 	361,
-		 	8.16,
-		 	66.04,
-		 	List.of(
-		 		AIR_BLADE,
-		 		BAMBOOZLE,
-		 		CHOMP,
-		 		DARK_SURGE,
-		 		DIVE_BOMB,
-		 		DODGE,
-		 		GNARLY_GASH,
-		 		GNAW,
-		 		GROWL,
-		 		GUST,
-		 		HARROW,
-		 		MEGA_CHOMP,
-		 		MUDSLIDE,
-		 		PHANTOM_BLAST,
-		 		PHANTOM_SLASH,
-		 		PROVOKE,
-		 		SHADOW_SPRINT,
-		 		SHARPEN,
-		 		SLAP_DOWN,
-		 		SLASH,
-		 		SPECTRAL_BURST,
-		 		TEAR_DOWN,
-				TEASE
-			)
-		 );
-		 register(
-		 	SNOCUB,
-		 	"snocub",
-		 	List.of(ICE),
-		 	List.of(AWAKENING, STAUNCH),
-		 	55, 51, 45, 38, 67, 60, 45,
-		 	361,
-		 	6.35,
-		 	48.26,
-		 	List.of(
-		 		BARBS,
-		 		BODY_SLAM,
-		 		BRACE,
-		 		CHILLY_CHOMP,
-		 		DAWDLE,
-		 		DEEP_FREEZE,
-		 		DODGE,
-		 		EARTHQUAKE,
-		 		FLURRY,
-		 		FROST_BEAM,
-		 		ICE_HAMMER,
-		 		ICICLE_TRAP,
-		 		LANDSLIDE,
-		 		QUICKSAND,
-		 		ROGUE_ASSAULT,
-		 		SNOWDOZER,
-		 		SPARE,
-		 		SPIKE_RUSH,
-		 		SLEET_SHOT,
-				STRIKE
-			)
-		 );
-		 register(
-		 	WEEVOLT,
-		 	"weevolt",
-		 	List.of(ELECTRIC),
-		 	List.of(BRUTE_FORCE),
-		 	51, 51, 36, 36, 67, 55, 65,
-		 	361,
-		 	14.06,
-		 	68.58,
-		 	List.of(
-		 		BLAZE_CHOMP,
-		 		CHILLY_CHOMP,
-		 		DODGE,
-		 		GROWL,
-		 		JOLT,
-		 		POUNCE,
-		 		PRIMAL_SLASH,
-		 		STATIC_SHOCK,
-		 		STRETCH,
-		 		STUN,
-		 		SWIPE,
-		 		THUNDER_CHOMP,
-		 		THUNDER_SLAM,
-		 		THUNDERSTRIKE,
-		 		TYPHOON,
-				ZIP_ZAP
-			)
-		 );
-		 register(
-		 	TWILAT,
-		 	"twilat",
-		 	List.of(SIMPLE),
-		 	List.of(TERRITORIAL, CONFIDENCE, NEUTRALIZE),
-		 	50, 41, 42, 38, 42, 38, 40,
-		 	291,
-		 	10.89,
-		 	35.56,
-		 	List.of(
-		 		BODY_SLAM,
-		 		BRAWN_BOOST,
-		 		CHASE_DOWN,
-		 		DAWDLE,
-		 		DISPERSE,
-		 		DODGE,
-		 		DRUDGE,
-		 		GLOOMINOUS_ROAR,
-		 		GNAW,
-		 		HASTEN,
-		 		HIGH_PITCH_SCREECH,
-		 		MAGNIFY,
-		 		POWER_FOCUS,
-		 		QUICK_POUNCE,
-		 		RAGING_HOWL,
-		 		RAGING_TACKLE,
-		 		SCAPEGOAT,
-		 		SHARPEN,
-		 		STRETCH,
-				SWIPE
-			)
-		 );
-		 register(
-		 	CATHORN,
-		 	"cathorn",
-		 	List.of(BUG),
-		 	List.of(HASTY, DEFENSIVE_PRIORITY),
-		 	35, 37, 40, 24, 55, 24, 47,
-		 	262,
-		 	7.26,
-		 	33.02,
-		 	List.of(
-		 		AIR_BLADE,
-		 		BUG_BITE,
-		 		COUNTER_POISE,
-		 		DODGE,
-		 		GNAW,
-		 		PESTER,
-		 		PESTILENCE,
-		 		PHEROBLAST,
-		 		POISON,
-		 		SPARE,
-				STARE
-			)
-		 );
-		 register(
-		 	TWITTLE,
-		 	"twittle",
-		 	List.of(AIR),
-		 	List.of(CONFIDENCE, MADCAP, REV_UP),
-		 	44, 40, 50, 38, 22, 33, 58,
-		 	285,
-		 	7.71,
-		 	40.64,
-		 	List.of(
-		 		ACCELERATE,
-		 		AIR_SHOT,
-		 		AIR_BLADE,
-		 		AIR_WHIP,
-		 		BODY_SLAM,
-		 		BRAWN_BOOST,
-		 		CYCLONE_SLAM,
-		 		DODGE,
-		 		PECK,
-		 		PERCH,
-		 		POUNCE,
-		 		ROGUE_ASSAULT,
-		 		SHARPEN,
-		 		SLASH,
-		 		SQUAWK,
-		 		STARE,
-		 		STRETCH,
-				THUNDER_CRASH
-			)
-		 );
-		 register(
-		 	PYDER,
-		 	"pyder",
-		 	List.of(BUG, TOXIC),
-		 	List.of(APPREHENSION, WEBBING, COURSING_VENOM),
-		 	45, 43, 60, 40, 30, 40, 45,
-		 	303,
-		 	7.71,
-		 	35.56,
-		 	List.of(
-		 		BANEFUL_BASH,
-		 		BODY_SLAM,
-		 		BUG_BITE,
-		 		BURROW,
-		 		CORRODE,
-		 		COUNTER_POISE,
-		 		DODGE,
-		 		EERIE_STARE,
-		 		MEGA_CHOMP,
-		 		MUDSLIDE,
-		 		PARASITIZE,
-		 		PESTER,
-		 		PESTILENCE,
-		 		REJUVENATE,
-		 		SLIME,
-		 		STING,
-		 		VITAL_JAB,
-				WEB_SHOT
-			)
-		 );
-		 register(
-		 	ANTSEE,
-		 	"antsee",
-		 	List.of(PLANT, BUG),
-		 	List.of(MYSTERY_TOXINS, WOODSMAN, DRAINAGE),
-		 	55, 43, 25, 60, 40, 60, 20,
-		 	303,
-		 	5.44,
-		 	38.1,
-		 	List.of(
-		 		BRIAR_BLOCK,
-		 		BUG_BITE,
-		 		BURROW,
-		 		DAWDLE,
-		 		ENERGY_SURGE,
-		 		GAIN_DRAIN,
-		 		GNAW,
-		 		LIFE_DRAIN,
-		 		MAGNIFY,
-		 		MEGA_CHOMP,
-		 		MUDSLIDE,
-		 		NATURES_FORCE,
-		 		PARASITIZE,
-		 		PESTER,
-		 		PESTILENCE,
-		 		PHEROBLAST,
-		 		PHOTOSYNTHESIS,
-		 		PINE_SHOT,
-		 		POISON,
-		 		SAFEGUARD,
-		 		TAKE_ROOT,
-		 		TAMP,
-		 		THISTLE_SLASH,
-		 		TRICKY_TACTICS,
-		 		VICE_JAWS,
-		 		VINE_LASH,
-				WONDER_HERB
-			)
-		 );
-		 register(
-		 	GRUBBY,
-		 	"grubby",
-		 	List.of(BUG),
-		 	List.of(ODD_HUST, PREMONTITION, DEFENSIVE_PRIORITY),
-		 	35, 39, 50, 40, 35, 33, 42,
-		 	274,
-		 	6.8,
-		 	35.56,
-		 	List.of(
-		 		BANEFUL_BASH,
-		 		BUG_BITE,
-		 		DODGE,
-		 		GNAW,
-		 		LIFE_DRAIN,
-		 		PARASITIZE,
-		 		PESTILENCE,
-		 		PROVOKE,
-		 		ROUGH_UP,
-		 		STARE,
-		 		STING,
-		 		VENOM_CHOMP,
-				WING_SLAP
-			)
-		 );
-		 register(
-		 	KLEPTYKE,
-		 	"kleptyke",
-		 	List.of(DARK),
-		 	List.of(BURGLER, APPREHENSION, ABILITY_THIEF),
-		 	55, 48, 50, 40, 20, 30, 95,
-		 	338,
-		 	14.51,
-		 	81.28,
-		 	List.of(
-		 		CHARADE,
-		 		CHOMP,
-		 		BAG_OF_TRICKS,
-		 		BARBS,
-		 		BARTER,
-		 		BODY_SLAM,
-		 		CHASE_DOWN,
-		 		DARK_SURGE,
-		 		DAWDLE,
-		 		DODGE,
-		 		GNARLY_GASH,
-		 		HOP_KICK,
-		 		ICICLE_TRAP,
-		 		ILL_WILL,
-		 		MEGA_CHOMP,
-		 		MEGA_PUNCH,
-		 		NAB,
-		 		PILFER,
-		 		POUNCE,
-		 		PREEMPTIVE_STRIKE,
-		 		PROVOKE,
-		 		QUICK_POUNCE,
-		 		RANT,
-		 		ROGUE_ASSAULT,
-		 		SCAPEGOAT,
-		 		SHARPEN,
-		 		SPARE,
-				TRICKY_TACTICS
-			)
-		 );
-		 register(
-		 	BABORE,
-		 	"babore",
-		 	List.of(EARTH),
-		 	List.of(BOAST, RESILIENCE),
-		 	62, 46, 60, 60, 30, 30, 38,
-		 	326,
-		 	21.32,
-		 	63.5,
-		 	List.of(
-		 		AIM,
-		 		BODY_CRASH,
-		 		BODY_SLAM,
-		 		BOULDER_BLAST,
-		 		BULK_UP,
-		 		BURROW,
-		 		CHOMP,
-		 		DODGE,
-		 		EARTHQUAKE,
-		 		HEADBUTT,
-		 		MEGA_CHOMP,
-		 		MUD_SPATTER,
-		 		POUNCE,
-		 		QUICK_POUNCE,
-		 		QUICKSAND,
-		 		RAGING_TACKLE,
-				ROGUE_ASSAULT
-			)
-		 );
-		 register(
-		 	GEKLOW,
-		 	"geklow",
-		 	List.of(ELECTRIC, LIGHT),
-		 	List.of(LIGHTNING_ROD, RADIANCE, PRISMATIC),
-		 	50, 55, 50, 45, 68, 50, 67,
-		 	385,
-		 	17.24,
-		 	73.66,
-		 	List.of(
-		 		DAZZLING_BARRAGE,
-		 		DODGE,
-		 		EARTHQUAKE,
-		 		ENERGIZE,
-		 		EXAMINE,
-		 		FLASH_N_FLEE,
-		 		GAMMA_PULSE,
-		 		JOLT,
-		 		LANDSLIDE,
-		 		LIGHT_DASH,
-		 		LUSTER_LOOT,
-		 		MUDSLIDE,
-		 		REJUVENATE,
-		 		SHINE,
-		 		SPARE,
-		 		STARE,
-		 		STATIC_SHOCK,
-		 		TASE,
-		 		THUNDER_BLAST,
-		 		THUNDER_CRASH,
-		 		THUNDERSTRIKE,
-				ZIP_ZAP
-			)
-		 );
-		 register(
-		 	SLUGLING,
-		 	"slugling",
-		 	List.of(PLANT),
-		 	List.of(MYSTERY_TOXINS, UNGRACIOUS_HOST, SLIMY),
-		 	70, 41, 10, 10, 50, 70, 45,
-		 	296,
-		 	12.7,
-		 	38.1,
-		 	List.of(
-		 		DAWDLE,
-		 		DODGE,
-		 		EARTHQUAKE,
-		 		LANDSLIDE,
-		 		LEAF_BARRAGE,
-		 		LIFE_DRAIN,
-		 		MUCK_BLAST,
-		 		MUDSLIDE,
-		 		NATURES_FORCE,
-		 		PETAL_PUMMEL,
-		 		PHOTOSYNTHESIS,
-		 		POISON,
-		 		RETURN_TO_SENDER,
-		 		SAP_PLANT,
-		 		SLIME,
-		 		STRATAGEM,
-		 		STRIKE,
-		 		TAKE_ROOT,
-				TAMP
-			)
-		 );
-		 register(
-		 	KABUNGA,
-		 	"kabunga",
-		 	List.of(PLANT),
-		 	List.of(COMMUNICATION, TERRITORIAL, NOXIOUS_WEEDS),
-		 	52, 53, 76, 43, 64, 34, 86,
-		 	408,
-		 	24.04,
-		 	88.9,
-		 	List.of(
-		 		BRACE,
-		 		BUSH_WHACK,
-		 		COCONUT_BOMB,
-		 		DODGE,
-		 		LIFE_DRAIN,
-		 		MUCK_BLAST,
-		 		NATURES_FORCE,
-		 		PETAL_PUMMEL,
-		 		PHOTOSYNTHESIS,
-		 		PINE_SHOT,
-		 		PROVOKE,
-		 		SCAPEGOAT,
-		 		STRIKE,
-		 		TEAR_DOWN,
-		 		TOXIC_SPORES,
-				WONDER_HERB
-			)
-		 );
-		 register(
-		 	KABUNGAH,
-		 	"kabungaH",
-		 	List.of(PLANT, MIND),
-		 	List.of(COMMUNICATION, EXPERTISE, NOXIOUS_WEEDS),
-		 	65, 68, 23, 58, 99, 74, 5,
-		 	392,
-		 	24.04,
-		 	88.9,
-		 	List.of(
-		 		BAG_OF_TRICKS,
-		 		BANE_OF_HASTE,
-		 		BARTER,
-		 		BRACE,
-		 		BRAINWASH,
-		 		DISSIPATE,
-		 		DODGE,
-		 		FLABBERGAST,
-		 		ILL_WILL,
-		 		LIFE_DRAIN,
-		 		MUCK_BLAST,
-		 		NATURES_FORCE,
-		 		PEACE_OF_MIND,
-		 		PETAL_PUMMEL,
-		 		PHOTOSYNTHESIS,
-		 		PINE_SHOT,
-		 		PROVOKE,
-		 		PSYCHO_BLAST,
-		 		REJUVENATE,
-		 		SCAPEGOAT,
-		 		SPARE,
-		 		STRIKE,
-		 		TEAR_DOWN,
-		 		THUNDERSTRIKE,
-				TOXIC_SPORES
-			)
-		 );
-		 register(
-		 	RAKRAWLA,
-		 	"rakrawla",
-		 	List.of(EARTH),
-		 	List.of(HASTY, INSULATED, LAZY),
-		 	75, 59, 51, 68, 44, 54, 43,
-		 	394,
-		 	15.88,
-		 	76.2,
-		 	List.of(
-		 		BLAZE_CHOMP,
-		 		BODY_SLAM,
-		 		BOULDER_BLAST,
-		 		BURROW,
-		 		CHARRED_CLAWS,
-		 		CHASE_DOWN,
-		 		CHOMP,
-		 		DODGE,
-		 		EARTHQUAKE,
-		 		EXAMINE,
-		 		GNAW,
-		 		HARROW,
-		 		MUD_SPATTER,
-		 		MUDSLIDE,
-		 		PHANTOM_SLASH,
-		 		PROVOKE,
-		 		REJUVENATE,
-		 		SAFEGUARD,
-		 		SHARPEN,
-		 		SLASH,
-		 		SPARE,
-		 		SWAT,
-		 		SWIPE,
-		 		TALENT_TRADE,
-				THUNDER_CHOMP
-			)
-		 );
-		 register(
-		 	GUMPOD,
-		 	"gumpod",
-		 	List.of(WATER),
-		 	List.of(PROTECTIVE_SHELL, SHARP_EDGES),
-		 	60, 55, 42, 98, 42, 43, 33,
-		 	373,
-		 	5.44,
-		 	48.26,
-		 	List.of(
-		 		BATTERING_RAM,
-		 		BRACE,
-		 		BURN_UP,
-		 		DODGE,
-		 		EERIE_STARE,
-		 		FROST_BEAM,
-		 		HYDRO_SLASH,
-		 		MAROON,
-		 		MUDSLIDE,
-		 		SCAPEGOAT,
-		 		SLEET_SHOT,
-		 		SLUMBER,
-		 		SPARE,
-		 		SPRAY,
-		 		SOFT_WATER,
-		 		TEAR_DOWN,
-		 		TSUNAMI,
-				WATER_BOMB
-			)
-		 );
-		 register(
-		 	PHANCUB,
-		 	"phancub",
-		 	List.of(SPIRIT, BRAWLER),
-		 	List.of(PROWLER, ADORABLE),
-		 	46, 60, 65, 50, 46, 55, 60,
-		 	382,
-		 	8.16,
-		 	66.04,
-		 	List.of(
-		 		BARBS,
-		 		CHASE_DOWN,
-		 		DODGE,
-		 		FINAL_RUSE,
-		 		HARROW,
-		 		PEP_JAB,
-		 		PHANTOM_SLASH,
-		 		PROVOKE,
-		 		PUNCH,
-		 		QUICK_PUNCH,
-		 		SHADOW_SPRINT,
-		 		SHADOWBOX,
-		 		SHARPEN,
-		 		SLAP_DOWN,
-		 		SLASH,
-		 		SPARE,
-		 		SPECTRAL_BURST,
-		 		SOUL_STORM,
-		 		STARE,
-				STARTLE
-			)
-		 );
-		 register(
-		 	PHANCUBV,
-		 	"phancubV",
-		 	List.of(SPIRIT, BRAWLER),
-		 	List.of(IGNORANT, CLINGY),
-		 	58, 67, 52, 79, 17, 63, 46,
-		 	382,
-		 	8.16,
-		 	66.04,
-		 	List.of(
-		 		CHASE_DOWN,
-		 		DODGE,
-		 		FINAL_RUSE,
-		 		GAIN_DRAIN,
-		 		HEART_BREAK,
-		 		PEP_JAB,
-		 		PHANTOM_SLASH,
-		 		PUNCH,
-		 		QUICK_PUNCH,
-		 		SHADOW_SPRINT,
-		 		SHARPEN,
-		 		SLAP_DOWN,
-		 		SLASH,
-		 		SPARE,
-		 		SPECTRAL_BURST,
-		 		STARE,
-				STARTLE
-			)
-		 );
-		 register(
-		 	WHISPUP,
-		 	"whispup",
-		 	List.of(SPIRIT, FIRE),
-		 	List.of(TEMPER, SCORCHING_SKIN, VENGEANCE),
-		 	45, 60, 57, 42, 70, 48, 72,
-		 	394,
-		 	1.81,
-		 	96.52,
-		 	List.of(
-		 		ACCELERATE,
-		 		BLAZE_CHOMP,
-		 		DARK_SURGE,
-		 		DODGE,
-		 		FADE_AWAY,
-		 		FINAL_RUSE,
-		 		FIRE_BREATH,
-		 		FLARE_BLAST,
-		 		GNAW,
-		 		HARROW,
-		 		MEGA_CHOMP,
-		 		PHANTOM_BLAST,
-		 		PHANTOM_SLASH,
-		 		POWER_FOCUS,
-		 		SHADOW_SPRINT,
-		 		SINGE,
-		 		SPARE,
-		 		SPECTRAL_BURST,
-		 		SOUL_STORM,
-		 		STARE,
-		 		STARTLE,
-				STRETCH
-			)
-		 );
-		 register(
-		 	SKILAVA,
-		 	"skilava",
-		 	List.of(FIRE),
-		 	List.of(SCORCHING_SKIN, COMBUSTIBLE, PYRO),
-		 	50, 70, 48, 49, 58, 49, 55,
-		 	379,
-		 	6.35,
-		 	55.88,
-		 	List.of(
-		 		BLAZE_CHOMP,
-		 		BLAZE_OF_GLORY,
-		 		BLAZE_RUSH,
-		 		BRAWN_BOOST,
-		 		DARK_SURGE,
-		 		DODGE,
-		 		EARTHQUAKE,
-		 		FIRE_BREATH,
-		 		GNAW,
-		 		GROWL,
-		 		LANDSLIDE,
-		 		MAGMA_BLOCK,
-		 		MAGNIFY,
-		 		MUD_SPATTER,
-		 		MUDSLIDE,
-		 		PHANTOM_SLASH,
-		 		POWER_FOCUS,
-		 		PROVOKE,
-		 		QUICK_POUNCE,
-		 		RAGING_FLAME,
-		 		SINGE,
-		 		SLASH,
-		 		SPARE,
-		 		STRETCH,
-				TEAR_DOWN
-			)
-		 );
-		 register(
-		 	CRAYTAL,
-		 	"craytal",
-		 	List.of(FIRE),
-		 	List.of(VOLCANIC, TERRITORIAL, COMBUSTIBLE),
-		 	76, 74, 34, 43, 76, 43, 62,
-		 	408,
-		 	11.79,
-		 	81.28,
-		 	List.of(
-		 		BLAZE_OF_GLORY,
-		 		BLAZE_RUSH,
-		 		BRACE,
-		 		BRAWN_BOOST,
-		 		CHARRED_CLAWS,
-		 		DODGE,
-		 		FIRE_BREATH,
-		 		FIRE_SLAM,
-		 		FLARE_BLAST,
-		 		HIGH_PITCH_SCREECH,
-		 		MUDSLIDE,
-		 		MUD_SPATTER,
-		 		PHANTOM_SLASH,
-		 		POWER_FOCUS,
-		 		RAGING_FLAME,
-		 		REJUVENATE,
-		 		SINGE,
-		 		SLASH,
-		 		SPARE,
-		 		SWIPE,
-		 		TEAR_DOWN,
-				TRICKY_TACTICS
-			)
-		 );
-		 register(
-		 	CRAYTALC,
-		 	"craytalC",
-		 	List.of(ICE, PLANT),
-		 	List.of(PARTING_GIFT, CHILL, REGIFT),
-		 	76, 74, 76, 43, 14, 63, 62,
-		 	408,
-		 	11.79,
-		 	81.28,
-		 	List.of(
-		 		BRACE,
-		 		BRAWN_BOOST,
-		 		BRIAR_BLOCK,
-		 		BUSH_WHACK,
-		 		DODGE,
-		 		EARTHQUAKE,
-		 		FLURRY,
-		 		FROST_BEAM,
-		 		HYPNOTIZE,
-		 		ICE_HAMMER,
-		 		ICICLE_TRAP,
-		 		ILL_WILL,
-		 		LEAF_BARRAGE,
-		 		PETAL_PUMMEL,
-		 		RAGING_TACKLE,
-		 		REJUVENATE,
-		 		SAP_PLANT,
-		 		SNOWDOZER,
-		 		SPARE,
-		 		THISTLE_SLASH,
-		 		TIMBER_THRASH,
-		 		TRICKY_TACTICS,
-				VINE_LASH
-			)
-		 );
-		 register(
-		 	IGNEOL,
-		 	"igneol",
-		 	List.of(ANCIENT),
-		 	List.of(SHARP_EDGES, PREMONITION, RESILIENCE),
-		 	62, 75, 60, 70, 42, 41, 42,
-		 	392,
-		 	15.88,
-		 	63.5,
-		 	List.of(
-		 		BARBS,
-		 		BODY_CRASH,
-		 		BODY_SLAM,
-		 		BURROW,
-		 		DINO_CLAWS,
-		 		DODGE,
-		 		EARTHQUAKE,
-		 		GNAW,
-		 		HEADBUTT,
-		 		MEGA_CHOMP,
-		 		MUCK_BUCK,
-		 		MUD_SPATTER,
-		 		MUDSLIDE,
-		 		OUTBURST,
-		 		POWER_FOCUS,
-		 		PRIMAL_SLASH,
-		 		PROVOKE,
-		 		RAGING_TACKLE,
-		 		SCAPEGOAT,
-				SHARPEN
-			)
-		 );
-		 register(
-		 	CAFNOTEM,
-		 	"cafnoteM",
-		 	List.of(SIMPLE),
-		 	List.of(TRIUMPH, VIRTUOSO, BRUTE_FORCE),
-		 	60, 60, 42, 62, 42, 58, 53,
-		 	377,
-		 	57.61,
-		 	124.46,
-		 	List.of(
-		 		BATTLE_CHIME,
-		 		BODY_SLAM,
-		 		DRIVING_FORCE,
-		 		DODGE,
-		 		EARTHQUAKE,
-		 		HEADBUTT,
-		 		MEGA_CHOMP,
-		 		PROVOKE,
-		 		QUICK_POUNCE,
-		 		RAGING_TACKLE,
-		 		ROGUE_ASSAULT,
-		 		SPARE,
-		 		STARE,
-		 		STRETCH,
-		 		STRIKE,
-				TONE_BARRIER
-			)
-		 );
-		 register(
-		 	CAFNOTEF,
-		 	"cafnoteF",
-		 	List.of(SIMPLE),
-		 	List.of(ADORABLE, VIRTUOSO, TONE_DEAF),
-		 	60, 60, 42, 58, 42, 62, 53,
-		 	377,
-		 	57.61,
-		 	124.46,
-		 	List.of(
-		 		DISSONANT_CHORD,
-		 		GAMMA_PULSE,
-		 		HARMONIOUS_CHORD,
-		 		HULLABALOO,
-		 		MAGNIFY,
-		 		PEACE_OF_MIND,
-		 		PROVOKE,
-		 		QUICK_POUNCE,
-		 		RAGING_HOWL,
-		 		REPEATING_TUNE,
-		 		SPARE,
-		 		STARE,
-		 		STRETCH,
-				STRIKE
-			)
-		 );
-		 register(
-		 	PYRAMIND,
-		 	"pyramind",
-		 	List.of(MIND),
-		 	List.of(IDIOSYNCRATIC, TEMPER, REIGN),
-		 	88, 60, 45, 69, 84, 99, 35,
-		 	480,
-		 	113.4,
-		 	139.7,
-		 	List.of(
-		 		BANE_OF_HASTE,
-		 		BOULDER_BLAST,
-		 		BRAINWASH,
-		 		BULK_UP,
-		 		CLIMATE_CANNON,
-		 		DARK_SURGE,
-		 		DEJA_VU,
-		 		DISSIPATE,
-		 		DODGE,
-		 		DRACO_BEAM,
-		 		DRUDGE,
-		 		EARTHQUAKE,
-		 		FLABBERGAST,
-		 		GAIN_DRAIN,
-		 		HARROW,
-		 		HASTEN,
-		 		HULLABALOO,
-		 		LANDSLIDE,
-		 		MINDS_EYE,
-		 		MUD_SPATTER,
-		 		MUDSLIDE,
-		 		OUTBURST,
-		 		PEACE_OF_MIND,
-		 		PHANTOM_SLASH,
-		 		PRIMAL_SLASH,
-		 		PROVOKE,
-		 		PSYCHO_BLAST,
-		 		RANT,
-		 		RETURN_TO_SENDER,
-		 		ROCK_SLIDE,
-		 		ROGUE_ASSAULT,
-		 		SAFEGUARD,
-		 		SHREWD_BLAST,
-		 		SPARE,
-		 		SPECTRAL_BURST,
-		 		TALENT_TRADE,
-		 		TEAR_DOWN,
-				TRIBUTE
-			)
-		 );
-		 register(
-		 	BURROACH,
-		 	"burroach",
-		 	List.of(BUG, EARTH),
-		 	List.of(TRASH_ARMOUR, SLIMY, SHARP_CLAWS),
-		 	32, 60, 46, 63, 45, 54, 77,
-		 	377,
-		 	15.88,
-		 	38.1,
-		 	List.of(
-		 		BARBS,
-		 		BODY_CRASH,
-		 		BURROW,
-		 		BUG_BITE,
-		 		CLAY_SLAP,
-		 		DODGE,
-		 		EARTHQUAKE,
-		 		EERIE_STARE,
-		 		GNAW,
-		 		HEADBUTT,
-		 		MUD_SPATTER,
-		 		PARASITIZE,
-		 		POISON,
-		 		PROVOKE,
-		 		SLAP_DOWN,
-		 		SPARE,
-		 		STRETCH,
-				VENOM_CHOMP
-			)
-		 );
-		 register(
-		 	WHIMPOR,
-		 	"whimpor",
-		 	List.of(METAL, AIR),
-		 	List.of(CLUTCH, FRAIL_ARMOUR, TOXIC_FILTER),
-		 	62, 58, 21, 46, 59, 62, 53,
-		 	361,
-		 	31.75,
-		 	78.74,
-		 	List.of(
-		 		AIR_BLADE,
-		 		AIR_SHOT,
-		 		BODY_SLAM,
-		 		BRACE,
-		 		CYCLONE_SLAM,
-		 		DISSONANT_CHORD,
-		 		DODGE,
-		 		ENERGY_SURGE,
-		 		HEAVY_BASH,
-		 		JET_STREAM,
-		 		JUMP_START,
-		 		METAL_BLAST,
-		 		METAL_SHRIEK,
-		 		METAL_SWIPES,
-		 		PERCH,
-		 		REFLECTION_BURST,
-		 		SPARE,
-		 		STUN,
-		 		TAIL_SLAP,
-				TEAR_DOWN
-			)
-		 );
-		 register(
-		 	TERRITI,
-		 	"territi",
-		 	List.of(TOXIC, METAL),
-		 	List.of(IMMUNIZED, CONFIDENCE, HANDY),
-		 	51, 58, 61, 44, 59, 48, 52,
-		 	373,
-		 	29.03,
-		 	101.6,
-		 	List.of(
-		 		BAG_OF_TRICKS,
-		 		BANEFUL_BASH,
-		 		BARTER,
-		 		BASH,
-		 		CANISTER_BURST,
-		 		CLIMATE_CANNON,
-		 		CORRODE,
-		 		DAWDLE,
-		 		DODGE,
-		 		DOWNPOUR,
-		 		FAR_ENCHANTMENT,
-		 		GALE_FORCE,
-		 		HEAVY_BASH,
-		 		HOP_KICK,
-		 		HYPNOTIZE,
-		 		MEGA_PUNCH,
-		 		METAL_BLAST,
-		 		NEAR_ENCHANTMENT,
-		 		PAINT_SHOWER,
-		 		POISON,
-		 		POWER_FOCUS,
-		 		PROVOKE,
-		 		PUNCH,
-		 		SPARE,
-		 		SQUARE_ONE,
-		 		STEEL_CRUSHER,
-		 		STUN,
-				TRICKY_TACTICS
-			)
-		 );
-		 register(
-		 	OPERAPTOR,
-		 	"operaptor",
-		 	List.of(METAL, EARTH),
-		 	List.of(TERRIFYING, POWER_JAW, OVERCLOCK),
-		 	53, 67, 64, 61, 45, 53, 49,
-		 	392,
-		 	39.46,
-		 	106.68,
-		 	List.of(
-		 		BODY_SLAM,
-		 		BURROW,
-		 		CHOMP,
-		 		CLAMP,
-		 		DODGE,
-		 		EARTHQUAKE,
-		 		GNAW,
-		 		HEADBUTT,
-		 		HEAVY_BASH,
-		 		METAL_SHRIEK,
-		 		MUD_SPATTER,
-		 		POWER_FOCUS,
-		 		QUICKSAND,
-		 		SHARPEN,
-		 		SLUMBER,
-		 		SPARE,
-		 		STEEL_CRUSHER,
-		 		TEAR_DOWN,
-		 		THUNDER_CHOMP,
-				VICE_JAWS
-			)
-		 );
-		 register(
-		 	CHOMPACTOR,
-		 	"chompactor",
-		 	List.of(METAL),
-		 	List.of(SALVAGE, REV_UP, SPECIALIZATION),
-		 	58, 55, 61, 73, 32, 51, 45,
-		 	375,
-		 	24.04,
-		 	71.12,
-		 	List.of(
-		 		ACCELERATE,
-		 		AIM,
-		 		AQUA_JAWS,
-		 		BARBS,
-		 		BASH,
-		 		BLAZE_CHOMP,
-		 		BULK_UP,
-		 		CHILLY_CHOMP,
-		 		CHOMP,
-		 		DODGE,
-		 		DOUBLE_WHACK,
-		 		GNAW,
-		 		HEAVY_BASH,
-		 		MEGA_CHOMP,
-		 		METAL_SWIPES,
-		 		OIL_LEAK,
-		 		POISON,
-		 		QUICK_PUNCH,
-		 		RECYCLE,
-		 		SPARE,
-		 		STEEL_CRUSHER,
-		 		THUNDER_CHOMP,
-				VICE_JAWS
-			)
-		 );
-		 register(
-		 	SCORB,
-		 	"scorb",
-		 	List.of(METAL),
-		 	List.of(COMMUNICATION, HOVER, CLUTCH),
-		 	49, 55, 25, 42, 67, 45, 77,
-		 	360,
-		 	10.89,
-		 	38.1,
-		 	List.of(
-		 		BASH,
-		 		DODGE,
-		 		EXAMINE,
-		 		FLURRY,
-		 		METAL_SHRIEK,
-		 		SINGE,
-		 		SPARE,
-				STATIC_SHOCK
-			)
-		 );
-		 register(
-		 	POOCHROL,
-		 	"poochrol",
-		 	List.of(METAL, ELECTRIC),
-		 	List.of(BRUTE_FORCE, POWER_JAW),
-		 	51, 51, 59, 52, 31, 47, 69,
-		 	360,
-		 	8.62,
-		 	63.5,
-		 	List.of(
-		 		BLAZE_CHOMP,
-		 		CHASE_DOWN,
-		 		CHILLY_CHOMP,
-		 		CHOMP,
-		 		DODGE,
-		 		GROWL,
-		 		HEAVY_BASH,
-		 		MEGA_CHOMP,
-		 		METAL_SWIPES,
-		 		MUD_SPATTER,
-		 		PRECISION_BOLT,
-		 		PROVOKE,
-		 		QUICK_POUNCE,
-		 		SHARPEN,
-		 		SPARE,
-		 		STATIC_SHOCK,
-		 		TASE,
-		 		THUNDER_CHOMP,
-		 		THUNDERSTRIKE,
-		 		VICE_JAWS,
-				ZIP_ZAP
-			)
-		 );
-		 register(
-		 	GOPPIE,
-		 	"goppie",
-		 	List.of(WATER),
-		 	List.of(RAIN_RUSH, FINESSE, QUICK_RECOVERY),
-		 	48, 54, 33, 45, 53, 46, 64,
-		 	343,
-		 	6.8,
-		 	43.18,
-		 	List.of(
-		 		BODY_SLAM,
-		 		CHOMP,
-		 		DARK_SURGE,
-		 		DAWDLE,
-		 		DODGE,
-		 		EERIE_STARE,
-		 		FLURRY,
-		 		FROST_BEAM,
-		 		HYDRO_BLAST,
-		 		ILL_WILL,
-		 		MAGNIFY,
-		 		MAROON,
-		 		PLUNGE,
-		 		RANT,
-		 		REJUVENATE,
-		 		SPRAY,
-		 		STARE,
-		 		STRIKE,
-		 		TSUNAMI,
-		 		WATER_BOMB,
-				ZIP_ZAP
-			)
-		 );
-		 register(
-		 	PYKE,
-		 	"pyke",
-		 	List.of(ANCIENT, WATER),
-		 	List.of(BITTER_TOUCH, COMBATIVE, BRUTE_FORCE),
-		 	64, 84, 62, 58, 33, 51, 68,
-		 	420,
-		 	5.44,
-		 	58.42,
-		 	List.of(
-		 		AQUA_JAWS,
-		 		BAFFLE,
-		 		BODY_SLAM,
-		 		BRACE,
-		 		BULK_UP,
-		 		CHILLY_CHOMP,
-		 		CHOMP,
-		 		CHARADE,
-		 		CONFOUND,
-		 		DODGE,
-		 		DRUDGE,
-		 		FADE_AWAY,
-		 		FINAL_RUSE,
-		 		HARROW,
-		 		HYDRO_BLAST,
-		 		ICICLE_TRAP,
-		 		ILL_WILL,
-		 		MAROON,
-		 		MEGA_CHOMP,
-		 		OUTBURST,
-		 		PHANTOM_SLASH,
-		 		PLUNGE,
-		 		PRIMAL_SLASH,
-		 		PROVOKE,
-		 		SOUL_STORM,
-		 		SPECTRAL_BURST,
-		 		SPARE,
-		 		SPRAY,
-		 		SQUARE_ONE,
-		 		TAIL_SLAP,
-		 		TEASE,
-		 		TSUNAMI,
-		 		WAVE_WRECKER,
-				WATER_BOMB
-			)
-		 );
-		 register(
-		 	ZALEO,
-		 	"zaleo",
-		 	List.of(ANCIENT, ELECTRIC),
-		 	List.of(ADORABLE, DRIVEN, OVERCHARGED),
-		 	73, 68, 63, 55, 55, 54, 52,
-		 	420,
-		 	6.35,
-		 	50.8,
-		 	List.of(
-		 		BANE_OF_HASTE,
-		 		BAMBOOZLE,
-		 		BRAWN_BOOST,
-		 		BULK_UP,
-		 		CLAY_SLAP,
-		 		DINO_CLAWS,
-		 		DODGE,
-		 		EARTHQUAKE,
-		 		ILL_WILL,
-		 		JUMP_START,
-		 		MUD_SPATTER,
-		 		POWER_SIPHON,
-		 		PRECISION_BOLT,
-		 		PRIMAL_SLASH,
-		 		SHREWD_BLAST,
-		 		SPARE,
-		 		STATIC_SHOCK,
-		 		TASE,
-		 		THUNDER_CRASH,
-		 		THUNDER_SLAM,
-		 		THUNDERSTRIKE,
-				ZIP_ZAP
-			)
-		 );
-		 register(
-		 	DOBO,
-		 	"dobo",
-		 	List.of(ANCIENT, FIRE),
-		 	List.of(HOTFOOT, PYRO, POWER_NAPPER),
-		 	58, 74, 47, 44, 71, 68, 58,
-		 	420,
-		 	4.54,
-		 	40.64,
-		 	List.of(
-		 		AIR_BLADE,
-		 		BANE_OF_HASTE,
-		 		BEQUEATH,
-		 		BURN_UP,
-		 		CONFOUND,
-		 		DAWDLE,
-		 		DISSIPATE,
-		 		DODGE,
-		 		DRACO_BEAM,
-		 		FIRE_BREATH,
-		 		FLARE_BLAST,
-		 		JET_STREAM,
-		 		MAGNIFY,
-		 		MUD_SPATTER,
-		 		PECK,
-		 		PEACE_OF_MIND,
-		 		POWER_FOCUS,
-		 		PRIMAL_SLASH,
-		 		PROVOKE,
-		 		PYROKINESIS,
-		 		RAGING_FLAME,
-		 		RETURN_TO_SENDER,
-		 		SHREWD_BLAST,
-		 		SINGE,
-		 		SQUAWK,
-				SPARE
-			)
-		 );
-		 register(
-		 	KYOGO,
-		 	"kyogo",
-		 	List.of(ANCIENT, DARK),
-		 	List.of(ANOMALY, SURROGATE),
-		 	51, 63, 55, 64, 51, 62, 74,
-		 	420,
-		 	9.53,
-		 	66.04,
-		 	List.of(
-		 		AUGMENT,
-		 		BARBS,
-		 		BARTER,
-		 		BAFFLE,
-		 		BULK_UP,
-		 		CHOMP,
-		 		CHOP,
-		 		DINO_CLAWS,
-		 		DRACO_BEAM,
-		 		DODGE,
-		 		GNAW,
-		 		HEADBUTT,
-		 		ILL_WILL,
-		 		MEGA_PUNCH,
-		 		MUD_SPATTER,
-		 		PILFER,
-		 		POISON_BARBS,
-		 		POWER_FOCUS,
-		 		PRIMAL_SLASH,
-		 		PROVOKE,
-		 		SCAPEGOAT,
-		 		SCAVENGE,
-		 		SLAP_DOWN,
-		 		SPARE,
-		 		STRETCH,
-		 		TEASE,
-				VENOM_CHOMP
-			)
-		 );
-		 register(
-		 	WILEDILE,
-		 	"wiledile",
-		 	List.of(WATER, PLANT),
-		 	List.of(SWAMPY, WOODSMAN),
-		 	63, 63, 74, 57, 69, 50, 79,
-		 	455,
-		 	24.95,
-		 	93.98,
-		 	List.of(
-		 		AQUA_JAWS,
-		 		BARBS,
-		 		BOOM_BASH,
-		 		BULK_UP,
-		 		BUSH_WHACK,
-		 		CHOMP,
-		 		DODGE,
-		 		DRIVING_FORCE,
-		 		EXAMINE,
-		 		FUNGUS_CURSE,
-		 		GNARLY_GASH,
-		 		GNAW,
-		 		GROWL,
-		 		HYDRO_SLASH,
-		 		LANDSLIDE,
-		 		LIFE_DRAIN,
-		 		MAROON,
-		 		MEGA_CHOMP,
-		 		MUDSLIDE,
-		 		NATURES_FORCE,
-		 		PETAL_PUMMEL,
-		 		PHOTOSYNTHESIS,
-		 		PROVOKE,
-		 		SAP_PLANT,
-		 		SLAP_DOWN,
-		 		SPRAY,
-		 		TEAR_DOWN,
-		 		THISTLE_SLASH,
-		 		TSUNAMI,
-		 		VINE_LASH,
-				WAVE_WRECKER
-			)
-		 );
-		 register(
-		 	AMPOLE,
-		 	"ampole",
-		 	List.of(ELECTRIC),
-		 	List.of(WATCHER, SPECIALIZATION, SLY),
-		 	44, 55, 33, 41, 35, 42, 69,
-		 	319,
-		 	3.63,
-		 	33.02,
-		 	List.of(
-		 		DEJA_VU,
-		 		DODGE,
-		 		POWER_FOCUS,
-		 		PRECISION_BOLT,
-		 		HYPNOTIZE,
-		 		ILL_WILL,
-		 		JUDGEMENT,
-		 		JUMP_START,
-		 		MEGA_PUNCH,
-		 		PEACE_OF_MIND,
-		 		PSYCHO_BLAST,
-		 		SLAP_DOWN,
-		 		SPARE,
-		 		STATIC_SHOCK,
-		 		STRETCH,
-		 		STRIKE,
-		 		TASE,
-		 		THUNDER_BLAST,
-		 		THUNDER_SLAM,
-		 		THUNDERSTRIKE,
-				ZIP_ZAP
-			)
-		 );
-		 register(
-		 	PWUFF,
-		 	"pwuff",
-		 	List.of(WATER, TOXIC),
-		 	List.of(TOXIC_SPINES, SHARP_EDGES, BANEFUL),
-		 	75, 54, 46, 71, 47, 69, 49,
-		 	411,
-		 	7.71,
-		 	53.34,
-		 	List.of(
-		 		AQUA_JAWS,
-		 		BANEFUL_BASH,
-		 		BRACE,
-		 		BRAWN_BOOST,
-		 		CHILLY_CHOMP,
-		 		DODGE,
-		 		FLURRY,
-		 		HEADBUTT,
-		 		HYDRO_SLASH,
-		 		ICICLE_TRAP,
-		 		ILL_WILL,
-		 		MAROON,
-		 		POISON,
-		 		POWER_FOCUS,
-		 		REJUVENATE,
-		 		SHARPEN,
-		 		SPARE,
-		 		SPRAY,
-		 		STRETCH,
-		 		TAIL_SLAP,
-		 		TEASE,
-		 		TSUNAMI,
-		 		VENOM_CHOMP,
-		 		WATER_BOMB,
-				WAVE_WRECKER
-			)
-		 );
-		 register(
-		 	SWIMP,
-		 	"swimp",
-		 	List.of(WATER),
-		 	List.of(APPREHENSION, POWER_JAW, DEVIOUS),
-		 	46, 60, 52, 44, 25, 47, 64,
-		 	338,
-		 	6.8,
-		 	63.5,
-		 	List.of(
-		 		AQUA_JAWS,
-		 		BULK_UP,
-		 		CHARADE,
-		 		CHOMP,
-		 		CLAY_SLAP,
-		 		DODGE,
-		 		ILL_WILL,
-		 		MEGA_CHOMP,
-		 		MUD_SPATTER,
-		 		PLUNGE,
-		 		PRIMAL_SLASH,
-		 		PROVOKE,
-		 		QUICK_POUNCE,
-		 		SHREWD_BLAST,
-		 		SLEET_SHOT,
-		 		SPARE,
-		 		SPRAY,
-		 		STARE,
-		 		STRETCH,
-		 		TAIL_SLAP,
-		 		TEASE,
-		 		TOXIC_TAIL,
-		 		VENOM_CHOMP,
-		 		VICE_JAWS,
-		 		WATER_BOMB,
-				WAVE_WRECKER
-			)
-		 );
-		 register(
-		 	HYDRINI,
-		 	"hydrini",
-		 	List.of(BUG, WATER),
-		 	List.of(RAIN_SUMMON, VIVID_SIGHT, AQUA_BODY),
-		 	40, 52, 41, 48, 56, 56, 45,
-		 	338,
-		 	4.99,
-		 	35.56,
-		 	List.of(
-		 		AQUA_JAWS,
-		 		BANEFUL_BASH,
-		 		BUG_BITE,
-		 		BURROW,
-		 		CLIMATE_CANNON,
-		 		COUNTER_POISE,
-		 		DISSIPATE,
-		 		DODGE,
-		 		DOWNPOUR,
-		 		EERIE_STARE,
-		 		GUST,
-		 		HYDRO_BLAST,
-		 		HYDRO_SLASH,
-		 		ILL_WILL,
-		 		JET_STREAM,
-		 		MAROON,
-		 		PARASITIZE,
-		 		PEACE_OF_MIND,
-		 		PESTER,
-		 		PHEROBLAST,
-		 		SPARE,
-		 		SPRAY,
-		 		THUNDER_CHOMP,
-		 		TSUNAMI,
-		 		VENOM_CHOMP,
-				WATER_BOMB
-			)
-		 );
-		 register(
-		 	CERATOT,
-		 	"ceratot",
-		 	List.of(ANCIENT, PLANT),
-		 	List.of(STAUNCH, FRAIL_ARMOUR, VIGOROUS),
-		 	59, 69, 56, 64, 26, 42, 44,
-		 	360,
-		 	29.48,
-		 	43.18,
-		 	List.of(
-		 		CHOMP,
-		 		BRAWN_BOOST,
-		 		BULK_UP,
-		 		DINO_CLAWS,
-		 		DODGE,
-		 		EARTHQUAKE,
-		 		GNAW,
-		 		HEADBUTT,
-		 		ILL_WILL,
-		 		LEAF_BARRAGE,
-		 		LIFE_DRAIN,
-		 		MEGA_CHOMP,
-		 		MUD_SPATTER,
-		 		OUTBURST,
-		 		PETAL_PUMMEL,
-		 		PRIMAL_SLASH,
-		 		ROGUE_ASSAULT,
-		 		SAP_PLANT,
-		 		SPARE,
-		 		STARE,
-		 		TAKE_ROOT,
-				VINE_LASH
-			)
-		 );
-		 register(
-		 	CUPOINK,
-		 	"cupoink",
-		 	List.of(FIRE),
-		 	List.of(CADDIE, MADCAP, SWEET_TOUCH),
-		 	52, 67, 65, 56, 34, 64, 55,
-		 	393,
-		 	6.8,
-		 	40.64,
-		 	List.of(
-		 		BAIT,
-		 		BANEFUL_BASH,
-		 		BATTLE_CHIME,
-		 		BLAZE_OF_GLORY,
-		 		BODY_SLAM,
-		 		BULK_UP,
-		 		CHOMP,
-		 		DODGE,
-		 		FIRE_SLAM,
-		 		HEADBUTT,
-		 		ILL_WILL,
-		 		MEGA_CHOMP,
-		 		MUCK_BUCK,
-		 		MUDSLIDE,
-		 		POUNCE,
-		 		RAGING_TACKLE,
-		 		REJUVENATE,
-		 		SINGE,
-		 		SHARPEN,
-		 		SPARE,
-		 		STARE,
-		 		TEAR_DOWN,
-				VENOM_CHOMP
-			)
-		 );
-		 register(
-		 	MOCHIBI,
-		 	"mochibi",
-		 	List.of(ICE),
-		 	List.of(SUGAR_RUSH, LUCKY, SHAKEDOWN),
-		 	51, 60, 28, 53, 65, 44, 79,
-		 	380,
-		 	6.35,
-		 	33.02,
-		 	List.of(
-		 		BAMBOOZLE,
-		 		BITTER_COLD,
-		 		BOOM_BASH,
-		 		CHILLY_CHOMP,
-		 		DEEP_FREEZE,
-		 		DODGE,
-		 		ENERGY_BREAK,
-		 		FLURRY,
-		 		FROST_BEAM,
-		 		HOP_KICK,
-		 		HULLABALOO,
-		 		ICICLE_TRAP,
-		 		MINDS_EYE,
-		 		NATURES_FORCE,
-		 		PEACE_OF_MIND,
-		 		PREEMPTIVE_STRIKE,
-		 		SCAPEGOAT,
-		 		SNOWDOZER,
-		 		RETURN_TO_SENDER,
-		 		SLEET_SHOT,
-		 		SPARE,
-		 		STRIKE,
-				TEASE
-			)
-		 );
-		 register(
-		 	GWURM,
-		 	"gwurm",
-		 	List.of(BUG),
-		 	List.of(HARD_CANDY, CLINGY, DEFENSIVE_PRIORITY),
-		 	47, 55, 27, 53, 42, 41, 30,
-		 	295,
-		 	4.99,
-		 	35.56,
-		 	List.of(
-		 		BARBS,
-		 		BURROW,
-		 		BUG_BITE,
-		 		DODGE,
-		 		EERIE_STARE,
-		 		GNAW,
-		 		HYPNOTIZE,
-		 		LIFE_DRAIN,
-		 		PESTILENCE,
-		 		PHEROBLAST,
-		 		POISON_BARBS,
-		 		POWER_FOCUS,
-		 		PROVOKE,
-		 		SAP_PLANT,
-		 		SPARE,
-		 		TALENT_TRADE,
-				TAMP
-			)
-		 );
-		 register(
-		 	PIPSEE,
-		 	"pipsee",
-		 	List.of(PLANT, AIR),
-		 	List.of(GLIDE, WIND_SUMMON, VIGILANT),
-		 	44, 52, 30, 55, 43, 49, 55,
-		 	328,
-		 	0.91,
-		 	33.02,
-		 	List.of(
-		 		AIR_BLADE,
-		 		BEQUEATH,
-		 		BRACE,
-		 		CLIMATE_CANNON,
-		 		CYCLONE_SLAM,
-		 		DODGE,
-		 		GALE_FORCE,
-		 		GUST,
-		 		HASTEN,
-		 		JET_STREAM,
-		 		LEAF_BARRAGE,
-		 		LIFE_DRAIN,
-		 		LUSTER_LOOT,
-		 		MAGNIFY,
-		 		MINDS_EYE,
-		 		NATURES_FORCE,
-		 		PETAL_PUMMEL,
-		 		PHOTOSYNTHESIS,
-		 		SAP_PLANT,
-		 		SNORE_SPORES,
-		 		SPARE,
-		 		STATIC_SPORES,
-		 		TAKE_ROOT,
-		 		TRIBUTE,
-		 		TYPHOON,
-				WONDER_HERB
-			)
-		 );
-		 register(
-		 	VARI,
-		 	"vari",
-		 	List.of(SIMPLE),
-		 	List.of(APPREHENSION, GUARDIAN, ADORABLE),
-		 	49, 60, 52, 43, 52, 43, 57,
-		 	356,
-		 	14.51,
-		 	71.12,
-		 	List.of(
-		 		BODY_SLAM,
-		 		DAWDLE,
-		 		DODGE,
-		 		HEADBUTT,
-		 		POWER_FOCUS,
-		 		QUICK_POUNCE,
-		 		SPARE,
-		 		STRETCH,
-		 		STRIKE,
-				TEAR_DOWN
-			)
-		 );
-		 register(
-		 	COPLING,
-		 	"copling",
-		 	List.of(ANCIENT, METAL),
-		 	List.of(OXIDIZE, DEVIOUS, PLAYFUL),
-		 	34, 70, 55, 61, 25, 51, 99,
-		 	395,
-		 	17.24,
-		 	35.56,
-		 	List.of(
-		 		CHOMP,
-		 		CONFOUND,
-		 		BAMBOOZLE,
-		 		BANE_OF_HASTE,
-		 		BARBS,
-		 		BULK_UP,
-		 		DODGE,
-		 		DOUBLE_WHACK,
-		 		DOWNPOUR,
-		 		GNAW,
-		 		GALE_FORCE,
-		 		HEADBUTT,
-		 		ILL_WILL,
-		 		METAL_SHRIEK,
-		 		METAL_SWIPES,
-		 		PRIMAL_SLASH,
-		 		PROVOKE,
-		 		REJUVENATE,
-		 		SAFEGUARD,
-		 		SHARPEN,
-		 		SHREWD_BLAST,
-		 		SPARE,
-		 		STEEL_CRUSHER,
-		 		TEAR_DOWN,
-		 		TEASE,
-		 		TUNE_UP,
-				VICE_JAWS
-			)
-		 );
-		 register(
-		 	SPIRIVII,
-		 	"spirivii",
-		 	List.of(BUG, SPIRIT),
-		 	List.of(LIFE_FORCE),
-		 	61, 0, 44, 42, 25, 33, 45,
-		 	250,
-		 	3.63,
-		 	45.72,
-		 	List.of(
-		 		BARTER,
-		 		BRAWN_BOOST,
-		 		BUG_BITE,
-		 		BULK_UP,
-		 		COUNTER_POISE,
-		 		CHASE_DOWN,
-		 		DRIVING_FORCE,
-		 		DODGE,
-		 		EARTHQUAKE,
-		 		EERIE_STARE,
-		 		EMPATHIZE,
-		 		FINAL_RUSE,
-		 		GNAW,
-		 		HARROW,
-		 		HAZY_SHROUD,
-		 		ILL_WILL,
-		 		MUD_SPATTER,
-		 		PARASITIZE,
-		 		PESTER,
-		 		PROVOKE,
-		 		PSYCHAL_CHOMP,
-		 		SOUL_STORM,
-		 		SPARE,
-		 		SPECTRAL_BURST,
-		 		STARE,
-		 		STARTLE,
-		 		STUPEFY,
-		 		SWIPE,
-				TEAR_DOWN
-			)
-		 );
-		 register(
-		 	SNOWL,
-		 	"snowl",
-		 	List.of(ICE),
-		 	List.of(WISE, CHILL, GLIDE),
-		 	15, 71, 9, 20, 12, 24, 59,
-		 	210,
-		 	4.08,
-		 	27.94,
-		 	List.of(
-		 		BAFFLE,
-		 		BRAIN_EXERCISE,
-		 		DODGE,
-		 		ICICLE_TRAP,
-		 		JET_STREAM,
-		 		PEACE_OF_MIND,
-		 		PERCH,
-		 		PREEMPTIVE_STRIKE,
-		 		RANT,
-		 		RESONATE,
-		 		SNOWDOZER,
-		 		SPARE,
-				SQUARE_ONE
-			)
-		 );
-		 register(
-		 	SNAGULL,
-		 	"snagull",
-		 	List.of(AIR),
-		 	List.of(CLINGY, IMMUNIZED, MARKSMAN),
-		 	68, 60, 42, 53, 81, 58, 78,
-		 	440,
-		 	5.44,
-		 	58.42,
-		 	List.of(
-		 		AIR_BLADE,
-		 		AIR_SHOT,
-		 		BARTER,
-		 		BUCK_UP,
-		 		DODGE,
-		 		EERIE_STARE,
-		 		GALE_FORCE,
-		 		GNAW,
-		 		GUST,
-		 		JET_STREAM,
-		 		MAROON,
-		 		MUCK_BLAST,
-		 		PECK,
-		 		PERCH,
-		 		POISON,
-		 		PROVOKE,
-		 		RAGING_HOWL,
-		 		SCAVENGE,
-		 		SPARE,
-		 		SQUAWK,
-		 		STRETCH,
-		 		SWIPE,
-		 		TEAR_DOWN,
-				TYPHOON
-			)
-		 );
-		 register(
-		 	MAKAME,
-		 	"makame",
-		 	List.of(WATER),
-		 	List.of(TONE_DEAF, FRAIL_ARMOUR, QUICK_RECOVERY),
-		 	44, 59, 30, 76, 51, 43, 30,
-		 	333,
-		 	7.71,
-		 	43.18,
-		 	List.of(
-		 		BATTLE_HORN,
-		 		BRACE,
-		 		BODY_CRASH,
-		 		CHARADE,
-		 		CHILLY_CHOMP,
-		 		DISSONANT_CHORD,
-		 		DODGE,
-		 		EXAMINE,
-		 		FROST_BEAM,
-		 		GNAW,
-		 		HARMONIOUS_CHORD,
-		 		MAROON,
-		 		PEACE_OF_MIND,
-		 		PLUNGE,
-		 		RANT,
-		 		REJUVENATE,
-		 		REPEATING_TUNE,
-		 		RESONATE,
-		 		SLEET_SHOT,
-		 		SOFT_WATER,
-		 		SPARE,
-		 		SPRAY,
-		 		TSUNAMI,
-				WATER_BOMB
-			)
-		 );
-		 register(
-		 	CAVENISH,
-		 	"cavenish",
-		 	List.of(WATER, PLANT),
-		 	List.of(BULLY, CONSPIRE, SLY),
-		 	51, 66, 31, 79, 61, 52, 86,
-		 	426,
-		 	3.18,
-		 	33.02,
-		 	List.of(
-		 		BAFFLE,
-		 		BANANA_SPLIT,
-		 		CHARADE,
-		 		DODGE,
-		 		FROST_BEAM,
-		 		LEAF_BARRAGE,
-		 		LIFE_DRAIN,
-		 		MAGNIFY,
-		 		MAROON,
-		 		NATURES_FORCE,
-		 		PETAL_PUMMEL,
-		 		PHOTOSYNTHESIS,
-		 		PLUNGE,
-		 		POUNCE,
-		 		PROVOKE,
-		 		SAP_PLANT,
-		 		SCAPEGOAT,
-		 		SLAP_DOWN,
-		 		SPARE,
-		 		SPRAY,
-		 		TEAR_DOWN,
-		 		TEASE,
-		 		TSUNAMI,
-		 		WATER_BOMB,
-				WONDER_HERB
-			)
-		 );
-		 register(
-		 	KANKI,
-		 	"kanki",
-		 	List.of(WATER, BRAWLER),
-		 	List.of(MADCAP, AGGRESSIVE, AMBUSH),
-		 	43, 50, 82, 66, 5, 44, 63,
-		 	353,
-		 	6.8,
-		 	43.18,
-		 	List.of(
-		 		BLUDGEON,
-		 		BODY_SLAM,
-		 		BULK_UP,
-		 		CHASE_DOWN,
-		 		DRIVING_FORCE,
-		 		EERIE_STARE,
-		 		HYDRO_SLASH,
-		 		ICE_HAMMER,
-		 		ILL_WILL,
-		 		PIERCING_DRIVE,
-		 		RAGING_TACKLE,
-		 		ROUGH_UP,
-		 		SHARPEN,
-		 		SPRAY,
-		 		STRIKE,
-		 		SWAT,
-		 		SWIPE,
-				WAVE_WRECKER
-			)
-		 );
-		 register(
-		 	SHARPOD,
-		 	"sharpod",
-		 	List.of(WATER, METAL),
-		 	List.of(REV_UP, TERRIFYING, FRENZY),
-		 	82, 77, 99, 62, 25, 48, 75,
-		 	468,
-		 	51.71,
-		 	71.12,
-		 	List.of(
-		 		AQUA_JAWS,
-		 		BASH,
-		 		BAFFLE,
-		 		CHOMP,
-		 		DODGE,
-		 		DOUBLE_WHACK,
-		 		FADE_AWAY,
-		 		ILL_WILL,
-		 		METAL_SWIPES,
-		 		MUD_SPATTER,
-		 		PLUNGE,
-		 		PROVOKE,
-		 		SHARPEN,
-		 		SPARE,
-		 		SPRAY,
-		 		STEEL_CRUSHER,
-		 		THUNDER_CHOMP,
-		 		TSUNAMI,
-		 		TUNE_UP,
-		 		VICE_JAWS,
-		 		WATER_BOMB,
-				WAVE_WRECKER
-			)
-		 );
-		 register(
-		 	LUMICA,
-		 	"lumica",
-		 	List.of(WATER),
-		 	List.of(SHARP_EDGES, PREMONITION, REPUGNANT),
-		 	66, 85, 69, 63, 33, 71, 15,
-		 	402,
-		 	3.63,
-		 	25.4,
-		 	List.of(
-		 		BARBS,
-		 		BLINDSPOT_BATTER,
-		 		BRACE,
-		 		BULK_UP,
-		 		DODGE,
-		 		EERIE_STARE,
-		 		GNAW,
-		 		HEADBUTT,
-		 		HYDRO_SLASH,
-		 		HYPNOTIZE,
-		 		ICICLE_TRAP,
-		 		PIERCING_DRIVE,
-		 		POISON_BARBS,
-		 		PROVOKE,
-		 		SCAPEGOAT,
-		 		SHARPEN,
-		 		SLUMBER,
-		 		SPARE,
-		 		SPRAY,
-		 		SQUARE_ONE,
-		 		STING,
-		 		TAMP,
-		 		TEAR_DOWN,
-		 		WATER_BOMB,
-				WAVE_WRECKER
-			)
-		 );
-		 register(
-		 	POLYPI,
-		 	"polypi",
-		 	List.of(WATER, LIGHT),
-		 	List.of(TEMPTER, ENCHANTED_COAT, INCANDESCENT),
-		 	42, 77, 10, 24, 54, 54, 39,
-		 	300,
-		 	1.36,
-		 	20.32,
-		 	List.of(
-		 		DAWDLE,
-		 		DISPERSE,
-		 		DEEP_FREEZE,
-		 		DEJA_VU,
-		 		DODGE,
-		 		ENERGY_SURGE,
-		 		FLASH,
-		 		FLASH_N_FLEE,
-		 		FROST_BEAM,
-		 		GAMMA_PULSE,
-		 		MAGNIFY,
-		 		MAROON,
-		 		PEACE_OF_MIND,
-		 		PROVOKE,
-		 		RESONATE,
-		 		SHINE,
-		 		SPARE,
-		 		SPRAY,
-		 		SOFT_WATER,
-		 		STUN,
-		 		TEASE,
-		 		TSUNAMI,
-				WATER_BOMB
-			)
-		 );
-		 register(
-		 	TAOSHI,
-		 	"taoshi",
-		 	List.of(SIMPLE),
-		 	List.of(ENCHANTED_COAT, ADORABLE, SENDOFF),
-		 	70, 57, 49, 64, 18, 64, 50,
-		 	372,
-		 	3.63,
-		 	27.94,
-		 	List.of(
-		 		AUGMENT,
-		 		BARTER,
-		 		BEQUEATH,
-		 		BLINDSPOT_BATTER,
-		 		BODY_SLAM,
-		 		BULK_UP,
-		 		CHOMP,
-		 		DAWDLE,
-		 		DISSIPATE,
-		 		DODGE,
-		 		FAR_ENCHANTMENT,
-		 		GNAW,
-		 		MEGA_CHOMP,
-		 		MUD_SPATTER,
-		 		NEAR_ENCHANTMENT,
-		 		QUICK_POUNCE,
-		 		REJUVENATE,
-		 		SCAPEGOAT,
-		 		SHARPEN,
-		 		SPARE,
-		 		STRETCH,
-		 		STUN,
-		 		SWAT,
-		 		SWIPE,
-				TEAR_DOWN
-			)
-		 );
-		 register(
-		 	KITTONE,
-		 	"kittone",
-		 	List.of(SIMPLE),
-		 	List.of(TONE_DEAF, ADORABLE, SHAKEDOWN),
-		 	45, 65, 44, 37, 57, 39, 85,
-		 	372,
-		 	2.27,
-		 	22.86,
-		 	List.of(
-		 		BAIT,
-		 		BARTER,
-		 		BOOM_BASH,
-		 		DISSONANT_CHORD,
-		 		DISCORDANCE,
-		 		DODGE,
-		 		GNAW,
-		 		HASTEN,
-		 		HARMONIOUS_CHORD,
-		 		HULLABALOO,
-		 		HYPNOTIZE,
-		 		ILL_WILL,
-		 		MAGNIFY,
-		 		PEACE_OF_MIND,
-		 		PREEMPTIVE_STRIKE,
-		 		PROVOKE,
-		 		QUICK_POUNCE,
-		 		RAGING_HOWL,
-		 		RANT,
-		 		REPEATING_TUNE,
-		 		RESONATE,
-		 		SCAPEGOAT,
-		 		SLAP_DOWN,
-		 		SLAP_DOWN,
-		 		SPARE,
-		 		SPLITTING_HEADACHE,
-		 		STARE,
-		 		STRETCH,
-		 		SWAT,
-		 		TAIL_SLAP,
-				TONE_BARRIER
-			)
-		 );
-		 register(
-		 	SOMATA,
-		 	"somata",
-		 	List.of(WATER, MIND),
-		 	List.of(GUARDIAN, REPUGNANT, ADORABLE),
-		 	65, 70, 8, 44, 57, 93, 22,
-		 	359,
-		 	4.08,
-		 	35.56,
-		 	List.of(
-		 		BAIT,
-		 		BRAINWASH,
-		 		DAWDLE,
-		 		DEJA_VU,
-		 		DISSIPATE,
-		 		DODGE,
-		 		DOWNPOUR,
-		 		FLABBERGAST,
-		 		GUST,
-		 		HEALTH_GIFT,
-		 		MAROON,
-		 		MIND_DRAIN,
-		 		MINDS_EYE,
-		 		PEACE_OF_MIND,
-		 		RANT,
-		 		REJUVENATE,
-		 		SPARE,
-		 		SPRAY,
-		 		STRATAGEM,
-		 		TEAR_DOWN,
-		 		TSUNAMI,
-		 		WATER_BOMB,
-				WONDER_HERB
-			)
-		 );
-		 register(
-		 	CINNABOO,
-		 	"cinnaboo",
-		 	List.of(SPIRIT),
-		 	List.of(SWEET_TOUCH, PLAYFUL, SHAKEDOWN),
-		 	51, 55, 11, 40, 63, 60, 70,
-		 	350,
-		 	8.62,
-		 	48.26,
-		 	List.of(
-		 		BAG_OF_TRICKS,
-		 		CHARADE,
-		 		DODGE,
-		 		FADE_AWAY,
-		 		FINAL_RUSE,
-		 		HEADBUTT,
-		 		HEALTH_GIFT,
-		 		MINDS_EYE,
-		 		MUCK_BLAST,
-		 		PEACE_OF_MIND,
-		 		POISON,
-		 		PROVOKE,
-		 		SAFEGUARD,
-		 		SLIME,
-		 		SPARE,
-		 		SPECTRAL_BURST,
-		 		STARE,
-		 		STARTLE,
-		 		STRETCH,
-		 		STUPEFY,
-		 		TEAR_DOWN,
-		 		TRICKY_TACTICS,
-				WONDER_HERB
-			)
-		 );
-		 register(
-		 	SWISHY,
-		 	"swishy",
-		 	List.of(WATER),
-		 	List.of(REGIFT, GUMMY, VISCID),
-		 	39, 53, 15, 51, 52, 77, 72,
-		 	359,
-		 	8.16,
-		 	68.58,
-		 	List.of(
-		 		BRACE,
-		 		DODGE,
-		 		EMPATHIZE,
-		 		EXAMINE,
-		 		FROST_BEAM,
-		 		HEALTH_GIFT,
-		 		HYDRO_BLAST,
-		 		LANDSLIDE,
-		 		MAROON,
-		 		MUDSLIDE,
-		 		PEACE_OF_MIND,
-		 		PLUNGE,
-		 		PROVOKE,
-		 		RECYCLE,
-		 		SCAPEGOAT,
-		 		SOFT_WATER,
-		 		SPARE,
-		 		SPRAY,
-		 		SQUARE_ONE,
-		 		STRATAGEM,
-		 		STRIKE,
-		 		TSUNAMI,
-				WATER_BOMB
-			)
-		 );
-		 register(
-		 	BUNPUFF,
-		 	"bunpuff",
-		 	List.of(PLANT, EARTH),
-		 	List.of(ADORABLE, NOXIOUS_WEEDS, GLUTTON),
-		 	46, 70, 22, 41, 56, 51, 71,
-		 	357,
-		 	11.79,
-		 	76.2,
-		 	List.of(
-		 		BOOM_BASH,
-		 		BRAWN_BOOST,
-		 		BURROW,
-		 		DODGE,
-		 		EARTHQUAKE,
-		 		GNAW,
-		 		HOP_KICK,
-		 		LANDSLIDE,
-		 		LEAF_BARRAGE,
-		 		LIFE_DRAIN,
-		 		MAGNIFY,
-		 		MUD_SPATTER,
-		 		NATURES_FORCE,
-		 		PETAL_PUMMEL,
-		 		PHEROBLAST,
-		 		PINE_SHOT,
-		 		POISON,
-		 		QUICKSAND,
-		 		SAP_PLANT,
-		 		SPARE,
-		 		SWAT,
-		 		TEASE,
-		 		TIMBER_THRASH,
-				WONDER_HERB
-			)
-		 );
-		 register(
-		 	DRACTUS,
-		 	"dractus",
-		 	List.of(PLANT),
-		 	List.of(PROTECTIVE_SHELL, INSULATED, ANOMALY),
-		 	52, 70, 87, 51, 49, 49, 63,
-		 	421,
-		 	21.32,
-		 	83.82,
-		 	List.of(
-		 		BARBS,
-		 		BODY_CRASH,
-		 		BULK_UP,
-		 		BUSH_WHACK,
-		 		COCONUT_BOMB,
-		 		DODGE,
-		 		ENERGY_BREAK,
-		 		GROWL,
-		 		HYDRO_SLASH,
-		 		ILL_WILL,
-		 		LIFE_DRAIN,
-		 		MAROON,
-		 		MUD_SPATTER,
-		 		MUDSLIDE,
-		 		NATURES_FORCE,
-		 		PEACE_OF_MIND,
-		 		PETAL_PUMMEL,
-		 		PINE_SHOT,
-		 		PRIMAL_SLASH,
-		 		PROVOKE,
-		 		SHREWD_BLAST,
-		 		SLASH,
-		 		SPARE,
-		 		SPLITTING_HEADACHE,
-		 		STRETCH,
-		 		TAIL_SLAP,
-		 		THISTLE_SLASH,
-		 		TSUNAMI,
-		 		VINE_LASH,
-		 		WATER_BOMB,
-		 		WAVE_WRECKER,
-				WONDER_HERB
-			)
-		 );
-		 register(
-		 	VOLPUP,
-		 	"volpup",
-		 	List.of(ELECTRIC, TOXIC),
-		 	List.of(AGGRESSIVE, PITCH_BLACK, MYSTERY_TOXINS),
-		 	54, 78, 70, 49, 19, 44, 73,
-		 	387,
-		 	24.95,
-		 	93.98,
-		 	List.of(
-		 		BANEFUL_BASH,
-		 		BULK_UP,
-		 		CHOMP,
-		 		DODGE,
-		 		ELECTRO_PUNCH,
-		 		GNAW,
-		 		ILL_WILL,
-		 		MEGA_CHOMP,
-		 		MUCK_BLAST,
-		 		POISON,
-		 		PRIMAL_SLASH,
-		 		SHARPEN,
-		 		SLASH,
-		 		SPARE,
-		 		STARE,
-		 		STATIC_SHOCK,
-		 		STRETCH,
-		 		STUN,
-		 		SWAT,
-		 		THUNDER_CRASH,
-		 		THUNDER_CHOMP,
-		 		THUNDERSTRIKE,
-		 		VENOM_CHOMP,
-				ZIP_ZAP
-			)
-		 );
-		 register(
-		 	IMPKIN,
-		 	"impkin",
-		 	List.of(DARK),
-		 	List.of(RESENTFUL, DEVIOUS, HANDY),
-		 	54, 50, 47, 29, 71, 27, 72,
-		 	350,
-		 	14.51,
-		 	71.12,
-		 	List.of(
-		 		BAG_OF_TRICKS,
-		 		BAMBOOZLE,
-		 		BARBS,
-		 		BARTER,
-		 		BRAWN_BOOST,
-		 		CHARADE,
-		 		CHASE_DOWN,
-		 		DARK_SURGE,
-		 		DEJA_VU,
-		 		DODGE,
-		 		GNARLY_GASH,
-		 		HEADBUTT,
-		 		HEALTH_GIFT,
-		 		ILL_WILL,
-		 		LUNGE,
-		 		MEMORIZE,
-		 		MINDS_EYE,
-		 		PEACE_OF_MIND,
-		 		PILFER,
-		 		POWER_FOCUS,
-		 		PRIMAL_SLASH,
-		 		PROVOKE,
-		 		RANT,
-		 		SCAPEGOAT,
-		 		SHARPEN,
-		 		SHREWD_BLAST,
-		 		SLAP_DOWN,
-		 		SPARE,
-		 		SPLITTING_HEADACHE,
-		 		STARTLE,
-		 		STRETCH,
-		 		TALENT_TRADE,
-		 		TEASE,
-				TRIBUTE
-			)
-		 );
-		 register(
-		 	MISTLEBUD,
-		 	"mistlebud",
-		 	List.of(PLANT),
-		 	List.of(FESTIVE_SPIRIT),
-		 	25, 50, 9, 75, 0, 75, 16,
-		 	250,
-		 	0.91,
-		 	17.78,
-		 	List.of(
-		 		DAWDLE,
-		 		DISPERSE,
-		 		DODGE,
-		 		ENERGY_SURGE,
-		 		FLASH_N_FLEE,
-		 		GAMMA_PULSE,
-		 		HEALTH_GIFT,
-		 		LEAF_BARRAGE,
-		 		LIFE_DRAIN,
-		 		LUSTER_LOOT,
-		 		NATURES_FORCE,
-		 		PEACE_OF_MIND,
-		 		PETAL_PUMMEL,
-		 		PHEROBLAST,
-		 		SAP_PLANT,
-		 		SHINE,
-		 		SPARE,
-		 		SPECTRAL_BURST,
-		 		SUMMON,
-				WONDER_HERB
-			)
-		 );
-		 register(
-		 	CRYOCUB,
-		 	"cryocub",
-		 	List.of(ICE),
-		 	List.of(ADORABLE, COMMUNICATION, MYSTERIOUS_CLOAK),
-		 	49, 57, 41, 65, 37, 46, 51,
-		 	346,
-		 	10.43,
-		 	76.2,
-		 	List.of(
-		 		BODY_SLAM,
-		 		BRAWN_BOOST,
-		 		BURROW,
-		 		CHILLY_CHOMP,
-		 		CHOMP,
-		 		CLAY_SLAP,
-		 		DAWDLE,
-		 		DODGE,
-		 		FLURRY,
-		 		FROST_BEAM,
-		 		GNAW,
-		 		ICE_HAMMER,
-		 		ICICLE_TRAP,
-		 		SNOWDOZER,
-		 		SPARE,
-		 		SPIKE_RUSH,
-		 		SWIPE,
-				TAMP
-			)
-		 );
-		 register(
-		 	KYEGGO,
-		 	"kyeggo",
-		 	List.of(DARK),
-		 	List.of(ANOMALY, VIVID_SIGHT, VICIOUS),
-		 	67, 62, 26, 54, 66, 56, 44,
-		 	375,
-		 	4.99,
-		 	45.72,
-		 	List.of(
-		 		BAMBOOZLE,
-		 		DARK_SURGE,
-		 		DINO_CLAWS,
-		 		DODGE,
-		 		DRACO_BEAM,
-		 		EERIE_STARE,
-		 		GNARLY_GASH,
-		 		HEADBUTT,
-		 		HIGH_PITCH_SCREECH,
-		 		MEGA_CHOMP,
-		 		MUD_SPATTER,
-		 		NAB,
-		 		OUTBURST,
-		 		PEACE_OF_MIND,
-		 		PROVOKE,
-		 		RANT,
-		 		SHREWD_BLAST,
-		 		SLUMBER,
-		 		SPARE,
-		 		STARE,
-		 		TAIL_SLAP,
-		 		TEAR_DOWN,
-				TEASE
-			)
-		 );
-		 register(
-		 	WISPUR,
-		 	"wispur",
-		 	List.of(SPIRIT, LIGHT),
-		 	List.of(RADIANCE, FOG_SUMMON, CAPTIVATING),
-		 	25, 61, 9, 47, 72, 70, 33,
-		 	317,
-		 	0.45,
-		 	33.02,
-		 	List.of(
-		 		CHASE_DOWN,
-		 		CLIMATE_CANNON,
-		 		DAWDLE,
-		 		FADE_AWAY,
-		 		FLASH,
-		 		FLASH_N_FLEE,
-		 		FLURRY,
-		 		FROST_BEAM,
-		 		GAMMA_PULSE,
-		 		HAZY_SHROUD,
-		 		LUSTER_LOOT,
-		 		MAGNIFY,
-		 		MINDS_EYE,
-		 		NOVA_BLAST,
-		 		PEACE_OF_MIND,
-		 		PHANTOM_BLAST,
-		 		SAFEGUARD,
-		 		SHADOW_SPRINT,
-		 		SHINE,
-		 		SLEET_SHOT,
-		 		SOUL_STORM,
-		 		SPARE,
-		 		SPECTRAL_BURST,
-		 		STARTLE,
-		 		SQUARE_ONE,
-		 		TEAR_DOWN,
-				TRICKY_TACTICS
-			)
-		 );
-		 register(
-		 	SMOAL,
-		 	"smoal",
-		 	List.of(FIRE, TOXIC),
-		 	List.of(HEAT_SUMMON, SCORCHING_SKIN, BLISTERING_HEAT),
-		 	37, 67, 38, 30, 38, 25, 54,
-		 	289,
-		 	20.41,
-		 	48.26,
-		 	List.of(
-		 		BANEFUL_BASH,
-		 		BARBS,
-		 		BASH,
-		 		BOILING_PRESS,
-		 		BULK_UP,
-		 		BURN_UP,
-		 		CLIMATE_CANNON,
-		 		CORRODE,
-		 		DODGE,
-		 		DRIVING_FORCE,
-		 		EARTHQUAKE,
-		 		EERIE_STARE,
-		 		FIRE_BREATH,
-		 		FIRE_SLAM,
-		 		FLARE_BLAST,
-		 		GROWL,
-		 		HEAT_WAVE,
-		 		HEAVY_BASH,
-		 		ILL_WILL,
-		 		LANDSLIDE,
-		 		METAL_BLAST,
-		 		MUCK_BLAST,
-		 		PAINT_SHOWER,
-		 		POISON,
-		 		POWER_FOCUS,
-		 		RAGING_FLAME,
-		 		SINGE,
-		 		SPARE,
-		 		STEEL_CRUSHER,
-		 		TAMP,
-		 		TEAR_DOWN,
-				TRIBUTE
-			)
-		 );
-		 register(
-		 	LLAMBA,
-		 	"llamba",
-		 	List.of(SIMPLE),
-		 	List.of(PLAYFUL, REGURGITATE, WHOLESOME),
-		 	59, 51, 20, 59, 64, 47, 70,
-		 	370,
-		 	10.89,
-		 	71.12,
-		 	List.of(
-		 		ACCELERATE,
-		 		BODY_SLAM,
-		 		BOOM_BASH,
-		 		CHASE_DOWN,
-		 		DAYDREAM,
-		 		DODGE,
-		 		ENERGY_BREAK,
-		 		GROWL,
-		 		HEALTH_GIFT,
-		 		HIGH_PITCH_SCREECH,
-		 		ILL_WILL,
-		 		MEGA_KICK,
-		 		NAB,
-		 		POWER_FOCUS,
-		 		PROVOKE,
-		 		QUICK_POUNCE,
-		 		RAGING_HOWL,
-		 		RAGING_TACKLE,
-		 		RECYCLE,
-		 		SCAPEGOAT,
-		 		SLUMBER,
-		 		SPARE,
-		 		SPIT,
-		 		STAMPEDE,
-				STRETCH
-			)
-		 );
-		 register(
-		 	FENTERN,
-		 	"fentern",
-		 	List.of(SIMPLE),
-		 	List.of(INTERN, RUSH_HOUR, TRADER),
-		 	45, 100, 42, 46, 16, 41, 70,
-		 	360,
-		 	8.16,
-		 	53.34,
-		 	List.of(
-		 		BAIT,
-		 		BARBS,
-		 		BARTER,
-		 		BEQUEATH,
-		 		BAFFLE,
-		 		BODY_SLAM,
-		 		DAWDLE,
-		 		DODGE,
-		 		DRIVING_FORCE,
-		 		HEALTH_GIFT,
-		 		HEADBUTT,
-		 		ILL_WILL,
-		 		PROVOKE,
-		 		QUICK_POUNCE,
-		 		RANT,
-		 		RECYCLE,
-		 		SCAPEGOAT,
-		 		SLASH,
-		 		SLAP_DOWN,
-		 		SLUMBER,
-		 		SPARE,
-		 		STRETCH,
-		 		STRIKE,
-		 		TEAR_DOWN,
-		 		TRIBUTE,
-				TRICKY_TACTICS
-			)
-		 );
-		 register(
-		 	SINGEEL,
-		 	"singeel",
-		 	List.of(ELECTRIC),
-		 	List.of(SAFETY_POT),
-		 	75, 43, 6, 24, 31, 16, 5,
-		 	200,
-		 	7.26,
-		 	63.5,
-		 	List.of(
-		 		BAMBOOZLE,
-		 		BRACE,
-		 		BULK_UP,
-		 		CONFOUND,
-		 		DARK_SURGE,
-		 		DODGE,
-		 		ELECTRO_PUNCH,
-		 		ENERGIZE,
-		 		EARTHQUAKE,
-		 		GAIN_DRAIN,
-		 		GNARLY_GASH,
-		 		HYDRO_SLASH,
-		 		JOLT,
-		 		LANDSLIDE,
-		 		MEGA_CHOMP,
-		 		MEGA_PUNCH,
-		 		MUDSLIDE,
-		 		PESTER,
-		 		PHEROBLAST,
-		 		PLUNGE,
-		 		PRECISION_BOLT,
-		 		PRIMAL_SLASH,
-		 		PROVOKE,
-		 		SAFEGUARD,
-		 		SHREWD_BLAST,
-		 		SLAP_DOWN,
-		 		SOFT_WATER,
-		 		SPARE,
-		 		SPRAY,
-		 		STATIC_SHOCK,
-		 		TAMP,
-		 		TASE,
-		 		THUNDER_CRASH,
-		 		THUNDER_SLAM,
-		 		THUNDERSTRIKE,
-		 		TRICKY_TACTICS,
-		 		WONDER_HERB,
-				ZIP_ZAP
-			)
-		 );
-		 register(
-		 	CRABUSHI,
-		 	"crabushi",
-		 	List.of(METAL, BRAWLER),
-		 	List.of(VENGEANCE, POWER_CLAW, RAZOR_SHARP),
-		 	35, 48, 53, 84, 5, 52, 76,
-		 	353,
-		 	3.63,
-		 	35.56,
-		 	List.of(
-		 		BARBS,
-		 		BULK_UP,
-		 		CHOP,
-		 		DODGE,
-		 		DRUDGE,
-		 		HEAVY_BASH,
-		 		HYDRO_SLASH,
-		 		METAL_SWIPES,
-		 		PLUNGE,
-		 		PROVOKE,
-		 		ROGUE_ASSAULT,
-		 		SCAPEGOAT,
-		 		SHARPEN,
-		 		SLASH,
-		 		SPARE,
-		 		STEEL_CRUSHER,
-		 		STRIKE,
-		 		SWIPE,
-		 		TRIBUTE,
-				WAVE_WRECKER
-			)
-		 );
-		 register(
-		 	TERIPOD,
-		 	"teripod",
-		 	List.of(ANCIENT, LIGHT),
-		 	List.of(),
-		 	79, 90, 49, 74, 15, 52, 61,
-		 	420,
-		 	6.35,
-		 	45.72,
-		 	List.of(
-		 		AQUA_JAWS,
-		 		BANE_OF_HASTE,
-		 		BLINDSPOT_BATTER,
-		 		BODY_SLAM,
-		 		BUG_BITE,
-		 		DAZZLING_BARRAGE,
-		 		DINO_CLAWS,
-		 		DODGE,
-		 		DRUDGE,
-		 		ENERGY_SURGE,
-		 		FLASH,
-		 		FLASH_N_FLEE,
-		 		GAMMA_PULSE,
-		 		HYDRO_SLASH,
-		 		HYPNOTIZE,
-		 		LUNGE,
-		 		LUSTER_LOOT,
-		 		MAROON,
-		 		NOVA_BLAST,
-		 		PARASITIZE,
-		 		PRIMAL_SLASH,
-		 		SHINE,
-		 		SHREWD_BLAST,
-		 		SLASH,
-		 		SPARE,
-				WAVE_WRECKER
-			)
-		 );
-		 register(
-		 	SKAMPI,
-		 	"skampi",
-		 	List.of(WATER),
-		 	List.of(PROTECTIVE_SHELL, CLUTCH, TRASH_ARMOUR),
-		 	10, 72, 7, 97, 7, 67, 110,
-		 	370,
-		 	1.36,
-		 	17.78,
-		 	List.of(
-		 		ACCELERATE,
-		 		BANE_OF_HASTE,
-		 		BATTERING_RAM,
-		 		BODY_CRASH,
-		 		BRACE,
-		 		CHASE_DOWN,
-		 		COUNTER_POISE,
-		 		DODGE,
-		 		EERIE_STARE,
-		 		POUNCE,
-		 		PREEMPTIVE_STRIKE,
-		 		PROVOKE,
-		 		QUICK_POUNCE,
-		 		RECYCLE,
-		 		ROGUE_ASSAULT,
-		 		SPARE,
-		 		SPRAY,
-		 		STARE,
-		 		STRETCH,
-		 		TRIBUTE,
-		 		VITAL_JAB,
-				WAVE_WRECKER
-			)
-		 );
-		 register(
-		 	DOKAN,
-		 	"dokan",
-		 	List.of(EARTH, TOXIC),
-		 	List.of(SPINE_BREAK, IMMUNIZED, SPONGE),
-		 	63, 88, 49, 66, 23, 52, 49,
-		 	390,
-		 	4.08,
-		 	33.02,
-		 	List.of(
-		 		AQUA_JAWS,
-		 		BAFFLE,
-		 		BANEFUL_BASH,
-		 		BULK_UP,
-		 		BURROW,
-		 		CLAY_SLAP,
-		 		DODGE,
-		 		EARTHQUAKE,
-		 		HEADBUTT,
-		 		ILL_WILL,
-		 		LANDSLIDE,
-		 		MAROON,
-		 		MUCK_BLAST,
-		 		MUD_SPATTER,
-		 		PLUNGE,
-		 		QUICKSAND,
-		 		SPARE,
-		 		STARE,
-		 		STING,
-		 		TAMP,
-		 		TOXIC_TAIL,
-				VENOM_CHOMP
-			)
-		 );
-		 register(
-		 	MIRRAMI,
-		 	"mirrami",
-		 	List.of(SPIRIT, METAL),
-		 	List.of(REFLECTIVE, MIMIC, ANALYZE),
-		 	10, 56, 85, 31, 85, 56, 24,
-		 	347,
-		 	1.36,
-		 	50.8,
-		 	List.of(
-		 		BAFFLE,
-		 		BAG_OF_TRICKS,
-		 		BAMBOOZLE,
-		 		BULK_UP,
-		 		CHASE_DOWN,
-		 		DARK_SURGE,
-		 		DEJA_VU,
-		 		DODGE,
-		 		DOUBLE_WHACK,
-		 		FADE_AWAY,
-		 		FAR_ENCHANTMENT,
-		 		FINAL_RUSE,
-		 		ILL_WILL,
-		 		IMPERSONATE,
-		 		METAL_BLAST,
-		 		METAL_SHRIEK,
-		 		METAL_SWIPES,
-		 		NEAR_ENCHANTMENT,
-		 		PEACE_OF_MIND,
-		 		PHANTOM_SLASH,
-		 		POWER_FOCUS,
-		 		REFLECTION_BURST,
-		 		SHADOW_SPRINT,
-		 		SOUL_STORM,
-		 		SPARE,
-		 		SPECTRAL_BURST,
-		 		SQUARE_ONE,
-		 		STEEL_CRUSHER,
-		 		STUPEFY,
-		 		THUNDER_CHOMP,
-				TRICKY_TACTICS
-			)
-		 );
-		 register(
-		 	KAYUTE,
-		 	"kayute",
-		 	List.of(ICE, DARK),
-		 	List.of(RAVENOUS, PLAYFUL, DESIGNATED_CHOMPERS),
-		 	40, 61, 58, 54, 29, 49, 69,
-		 	360,
-		 	29.94,
-		 	81.28,
-		 	List.of(
-		 		BAFFLE,
-		 		BAMBOOZLE,
-		 		BARBS,
-		 		BODY_SLAM,
-		 		BULK_UP,
-		 		CHILLY_CHOMP,
-		 		CHOMP,
-		 		DARK_SURGE,
-		 		DODGE,
-		 		FLURRY,
-		 		FROST_BEAM,
-		 		FROST_BREATH,
-		 		GNARLY_GASH,
-		 		GNAW,
-		 		ICE_HAMMER,
-		 		MEGA_CHOMP,
-		 		METAL_SHRIEK,
-		 		PRIMAL_SLASH,
-		 		PROVOKE,
-		 		SLEET_SHOT,
-		 		SLAP_DOWN,
-		 		SPARE,
-		 		SPIKE_RUSH,
-		 		SQUARE_ONE,
-		 		STRETCH,
-		 		VICE_JAWS,
-				WONDER_HERB
-			)
-		 );
-		 register(
-		 	LEOPAW,
-		 	"leopaw",
-		 	List.of(LIGHT, ICE),
-		 	List.of(SHARP_CLAWS, MESMERIZING, PRISMATIC),
-		 	56, 78, 54, 48, 28, 39, 71,
-		 	374,
-		 	4.99,
-		 	53.34,
-		 	List.of(
-		 		BLINDSPOT_BATTER,
-		 		BODY_SLAM,
-		 		BRAWN_BOOST,
-		 		BULK_UP,
-		 		DAZZLING_BARRAGE,
-		 		DODGE,
-		 		ENERGY_SURGE,
-		 		FLASH,
-		 		FLASH_N_FLEE,
-		 		FROST_BEAM,
-		 		FROST_PUNCH,
-		 		GAMMA_PULSE,
-		 		ICE_HAMMER,
-		 		ICICLE_TRAP,
-		 		LIGHT_DASH,
-		 		POUNCE,
-		 		PRIMAL_SLASH,
-		 		QUICK_POUNCE,
-		 		RADIANT_RUSH,
-		 		SLASH,
-		 		SNOWDOZER,
-		 		SPARE,
-		 		SWAT,
-				TEAMWORK
-			)
-		 );
-		 register(
-		 	EYEBRELLA,
-		 	"eyebrella",
-		 	List.of(WATER),
-		 	List.of(HYDRO_VORTEX, DO_OR_DIE, PLUVIAL),
-		 	64, 62, 69, 60, 34, 48, 47,
-		 	384,
-		 	1.81,
-		 	73.66,
-		 	List.of(
-		 		BAMBOOZLE,
-		 		DARK_SURGE,
-		 		DODGE,
-		 		DOWNPOUR,
-		 		FADE_AWAY,
-		 		FINAL_RUSE,
-		 		GUST,
-		 		HARROW,
-		 		HYDRO_SLASH,
-		 		ILL_WILL,
-		 		MAROON,
-		 		MEGA_CHOMP,
-		 		MUDSLIDE,
-		 		PLUNGE,
-		 		POWER_FOCUS,
-		 		PROVOKE,
-		 		RANT,
-		 		SLAP_DOWN,
-		 		SOFT_WATER,
-		 		SOUL_STORM,
-		 		SPARE,
-		 		SPECTRAL_BURST,
-		 		SPRAY,
-		 		SQUARE_ONE,
-		 		STARTLE,
-		 		STUPEFY,
-		 		THUNDER_CHOMP,
-		 		THUNDER_CRASH,
-		 		TRIBUTE,
-		 		TSUNAMI,
-		 		WATER_BOMB,
-				WAVE_WRECKER
-			)
-		 );
-		 register(
-		 	LISSEN,
-		 	"lissen",
-		 	List.of(MIND),
-		 	List.of(MOTIVATIONAL, DO_OR_DIE, VIRTUOSO),
-		 	69, 62, 31, 58, 68, 58, 38,
-		 	384,
-		 	2.27,
-		 	78.74,
-		 	List.of(
-		 		BAIT,
-		 		BRAINWASH,
-		 		CEREBRAL_SLASH,
-		 		DEJA_VU,
-		 		DISSONANT_CHORD,
-		 		DISSIPATE,
-		 		DODGE,
-		 		FADE_AWAY,
-		 		FINAL_RUSE,
-		 		FLABBERGAST,
-		 		HARMONIOUS_CHORD,
-		 		HIGH_PITCH_SCREECH,
-		 		HULLABALOO,
-		 		ILL_WILL,
-		 		LIFE_DRAIN,
-		 		NATURES_FORCE,
-		 		PEACE_OF_MIND,
-		 		PESTER,
-		 		POWER_FOCUS,
-		 		PROVOKE,
-		 		PSYCHO_BLAST,
-		 		RAGING_HOWL,
-		 		REPEATING_TUNE,
-		 		RESONATE,
-		 		SAFEGUARD,
-		 		SOUL_STORM,
-		 		SPARE,
-		 		SPECTRAL_BURST,
-		 		SPITE,
-		 		SPLITTING_HEADACHE,
-		 		STARTLE,
-		 		STUPEFY,
-		 		TEAMWORK,
-				TRIBUTE
-			)
-		 );
-		 register(
-		 	LANTOT,
-		 	"lantot",
-		 	List.of(FIRE),
-		 	List.of(WILDFIRE, DO_OR_DIE, SENDOFF),
-		 	41, 62, 62, 42, 69, 45, 63,
-		 	384,
-		 	0.91,
-		 	38.1,
-		 	List.of(
-		 		BLAZE_CHOMP,
-		 		BURN_UP,
-		 		DODGE,
-		 		ENERGY_SURGE,
-		 		FADE_AWAY,
-		 		FINAL_RUSE,
-		 		FIRE_BREATH,
-		 		FIRE_SLAM,
-		 		FLASH,
-		 		GAMMA_PULSE,
-		 		HARROW,
-		 		ILL_WILL,
-		 		LUSTER_LOOT,
-		 		POWER_FOCUS,
-		 		PYROKINESIS,
-		 		RADIANT_RUSH,
-		 		RAGING_FLAME,
-		 		SINGE,
-		 		SOUL_STORM,
-		 		SPARE,
-		 		SPECTRAL_BURST,
-		 		STARTLE,
-		 		STUPEFY,
-				TRIBUTE
-			)
-		 );
-		 register(
-		 	MILGOO,
-		 	"milgoo",
-		 	List.of(TOXIC),
-		 	List.of(SOUL_SIPHON, DO_OR_DIE, DEVIOUS),
-		 	62, 62, 27, 33, 66, 65, 69,
-		 	384,
-		 	3.63,
-		 	33.02,
-		 	List.of(
-		 		AUGMENT,
-		 		CONFOUND,
-		 		CORRODE,
-		 		DODGE,
-		 		FADE_AWAY,
-		 		FAR_ENCHANTMENT,
-		 		FINAL_RUSE,
-		 		ILL_WILL,
-		 		MUCK_BLAST,
-		 		NEAR_ENCHANTMENT,
-		 		POISON,
-		 		POWER_FOCUS,
-		 		SLIME,
-		 		SOUL_STORM,
-		 		SPARE,
-		 		SPECTRAL_BURST,
-		 		STARTLE,
-		 		SHREWD_BLAST,
-		 		STUPEFY,
-		 		TRIBUTE,
-				VENOM_SLASH
-			)
-		 );
-		 register(
-		 	NAUTLING,
-		 	"nautling",
-		 	List.of(ANCIENT, SIMPLE),
-		 	List.of(WATCHER, PROTECTIVE_SHELL, VISCID),
-		 	53, 46, 27, 15, 27, 15, 17,
-		 	200,
-		 	3.63,
-		 	35.56,
-		 	List.of(
-		 		CONFOUND,
-		 		DINO_CLAWS,
-		 		DODGE,
-		 		SAFEGUARD,
-		 		SHRIEK,
-		 		SPARE,
-				STRIKE
-			)
-		 );
-		 register(
-		 	YUTINY,
-		 	"yutiny",
-		 	List.of(ANCIENT, AIR),
-		 	List.of(TRIUMPH, PETRIFYING, TUMULTUOUS),
-		 	47, 57, 61, 31, 24, 53, 59,
-		 	332,
-		 	21.32,
-		 	66.04,
-		 	List.of(
-		 		AIR_BLADE,
-		 		AUGMENT,
-		 		AQUA_JAWS,
-		 		BODY_SLAM,
-		 		BULK_UP,
-		 		CYCLONE_SLAM,
-		 		DINO_CLAWS,
-		 		DODGE,
-		 		GUST,
-		 		HEADBUTT,
-		 		ILL_WILL,
-		 		NEAR_ENCHANTMENT,
-		 		NOSEDIVE,
-		 		OUTBURST,
-		 		PECK,
-		 		PERCH,
-		 		PROVOKE,
-		 		SAFEGUARD,
-		 		SHARPEN,
-		 		SLASH,
-		 		SPARE,
-		 		STARE,
-				WAVE_WRECKER
-			)
-		 );
-		 register(
-		 	VENILE,
-		 	"venile",
-		 	List.of(ANCIENT, TOXIC),
-		 	List.of(POWER_CLAW, VENOMOUS, BRUTAL_WRATH),
-		 	47, 57, 61, 53, 24, 31, 59,
-		 	332,
-		 	24.95,
-		 	66.04,
-		 	List.of(
-		 		AUGMENT,
-		 		BAIT,
-		 		BANEFUL_BASH,
-		 		BODY_SLAM,
-		 		DINO_CLAWS,
-		 		DODGE,
-		 		FAR_ENCHANTMENT,
-		 		HEADBUTT,
-		 		ILL_WILL,
-		 		MEGA_PUNCH,
-		 		OUTBURST,
-		 		POISON,
-		 		POISON_BARBS,
-		 		PROVOKE,
-		 		SHARPEN,
-		 		SLASH,
-		 		SPARE,
-		 		STARE,
-		 		TOXIC_TAIL,
-		 		VENOM_CHOMP,
-				VENOM_SLASH
-			)
-		 );
-		 register(
-		 	NYMVOLT,
-		 	"nymvolt",
-		 	List.of(ELECTRIC, BUG),
-		 	List.of(THUNDER_SUMMON, RECURRENT, CHARGED_ARC),
-		 	43, 60, 29, 30, 40, 59, 70,
-		 	331,
-		 	5.44,
-		 	93.98,
-		 	List.of(
-		 		BUG_BITE,
-		 		CLIMATE_CANNON,
-		 		DISSIPATE,
-		 		DODGE,
-		 		ENERGY_BREAK,
-		 		ENERGY_SURGE,
-		 		ENERGIZE,
-		 		FLASH,
-		 		JOLT,
-		 		JUMP_START,
-		 		LIGHTSPEED_RAY,
-		 		PESTER,
-		 		PESTILENCE,
-		 		PHEROBLAST,
-		 		POWER_SIPHON,
-		 		PRECISION_BOLT,
-		 		PREEMPTIVE_STRIKE,
-		 		PROVOKE,
-		 		REJUVENATE,
-		 		SHINE,
-		 		SPARE,
-		 		SQUARE_ONE,
-		 		STATIC_SHOCK,
-		 		STUN,
-		 		TEAMWORK,
-		 		TEAR_DOWN,
-		 		THUNDER_BLAST,
-		 		THUNDERSTRIKE,
-		 		THUNDERSTORM,
-		 		TRIBUTE,
-		 		TRICKY_TACTICS,
-				ZIP_ZAP
-			)
-		 );
-		 register(
-		 	CICALUTE,
-		 	"cicalute",
-		 	List.of(BUG, MIND),
-		 	List.of(METAMORPHOSIS, MESMERIZING, EXPERTISE),
-		 	43, 64, 29, 65, 29, 53, 40,
-		 	323,
-		 	4.08,
-		 	38.1,
-		 	List.of(
-		 		BRACE,
-		 		BRAINWASH,
-		 		BUG_BITE,
-		 		DEJA_VU,
-		 		DISSONANT_CHORD,
-		 		DODGE,
-		 		FLABBERGAST,
-		 		GUST,
-		 		HARMONIOUS_CHORD,
-		 		HIGH_PITCH_SCREECH,
-		 		HULLABALOO,
-		 		LANDSLIDE,
-		 		MINDS_EYE,
-		 		MUD_SPATTER,
-		 		MUDSLIDE,
-		 		PEACE_OF_MIND,
-		 		PESTER,
-		 		PHEROBLAST,
-		 		PSYCHO_BLAST,
-		 		REJUVENATE,
-		 		REPEATING_TUNE,
-		 		RESONATE,
-		 		SHRIEK,
-		 		SPARE,
-		 		SQUARE_ONE,
-		 		STRATAGEM,
-		 		TEAR_DOWN,
-				TONE_BARRIER
-			)
-		 );
-		 register(
-		 	GOSWING,
-		 	"goswing",
-		 	List.of(AIR, SIMPLE),
-		 	List.of(COMPLIANT, BURGLER, HYDRATE),
-		 	50, 92, 59, 43, 34, 41, 66,
-		 	385,
-		 	3.18,
-		 	33.02,
-		 	List.of(
-		 		AIR_SHOT,
-		 		BARBS,
-		 		BARTER,
-		 		BAFFLE,
-		 		BODY_SLAM,
-		 		BULK_UP,
-		 		CHASE_DOWN,
-		 		CHARADE,
-		 		DODGE,
-		 		EMPATHIZE,
-		 		ENAMOR,
-		 		FAR_ENCHANTMENT,
-		 		GUST,
-		 		ICICLE_TRAP,
-		 		ILL_WILL,
-		 		NAB,
-		 		NEAR_ENCHANTMENT,
-		 		NOSEDIVE,
-		 		PECK,
-		 		PERCH,
-		 		PLUNGE,
-		 		POISON_BARBS,
-		 		PREEMPTIVE_STRIKE,
-		 		PROVOKE,
-		 		QUICK_POUNCE,
-		 		RAGING_TACKLE,
-		 		ROGUE_ASSAULT,
-		 		SCAVENGE,
-		 		SHARPEN,
-		 		SLAP_DOWN,
-		 		SLASH,
-		 		SPARE,
-		 		STRIKE,
-		 		TEAMWORK,
-		 		TEAR_DOWN,
-				WAVE_WRECKER
-			)
-		 );
-		 register(
-		 	BANOOH,
-		 	"banooh",
-		 	List.of(SIMPLE),
-		 	List.of(SHAKEDOWN, ASSERTIVE, BERSERK),
-		 	41, 45, 24, 25, 24, 25, 66,
-		 	250,
-		 	3.63,
-		 	33.02,
-		 	List.of(
-		 		BANANA_SPLIT,
-		 		BARTER,
-		 		BODY_SLAM,
-		 		CHASE_DOWN,
-		 		COCONUT_BOMB,
-		 		DAYDREAM,
-		 		DODGE,
-		 		HARVEST,
-		 		HEADBUTT,
-		 		RAGING_TACKLE,
-		 		SCAPEGOAT,
-		 		SPARE,
-		 		STARE,
-		 		STRETCH,
-		 		TAMP,
-		 		TEAMWORK,
-		 		TEAR_DOWN,
-				WONDER_HERB
-			)
-		 );
-		 register(
-		 	SPIRWIX,
-		 	"spirwix",
-		 	List.of(FIRE, SPIRIT),
-		 	List.of(DISENCHANT, RAGING_FIRE, DEVIOUS),
-		 	40, 61, 29, 50, 100, 50, 45,
-		 	375,
-		 	2.27,
-		 	20.32,
-		 	List.of(
-		 		BARBS,
-		 		BEQUEATH,
-		 		BURN_UP,
-		 		CHARADE,
-		 		CHASE_DOWN,
-		 		DEJA_VU,
-		 		DODGE,
-		 		FADE_AWAY,
-		 		FIRE_BREATH,
-		 		FLARE_BLAST,
-		 		GAMMA_PULSE,
-		 		HULLABALOO,
-		 		ILL_WILL,
-		 		PEACE_OF_MIND,
-		 		PEPPER_BURST,
-		 		PHANTOM_BLAST,
-		 		PROVOKE,
-		 		RAGING_FLAME,
-		 		RANT,
-		 		SCAPEGOAT,
-		 		SHINE,
-		 		SHREWD_BLAST,
-		 		SINGE,
-		 		SPARE,
-		 		SPECTRAL_BURST,
-		 		SPLITTING_HEADACHE,
-		 		SQUARE_ONE,
-		 		STARTLE,
-		 		TEAMWORK,
-		 		TRIBUTE,
-				TRICKY_TACTICS
-			)
-		 );
-		 register(
-		 	GRIEVESTONE,
-		 	"grievestone",
-		 	List.of(EARTH, SPIRIT),
-		 	List.of(SOB, BITTER_TOUCH, SEIZE),
-		 	48, 43, 30, 85, 85, 30, 30,
-		 	351,
-		 	85.73,
-		 	88.9,
-		 	List.of(
-		 		AUGMENT,
-		 		BANE_OF_HASTE,
-		 		BARBS,
-		 		BODY_CRASH,
-		 		DEJA_VU,
-		 		DISSONANT_CHORD,
-		 		DODGE,
-		 		EMPATHIZE,
-		 		ENERGY_BREAK,
-		 		EXAMINE,
-		 		ILL_WILL,
-		 		LANDSLIDE,
-		 		MUD_SPATTER,
-		 		MUDSLIDE,
-		 		PEBBLE_TOSS,
-		 		PEACE_OF_MIND,
-		 		PHANTOM_BLAST,
-		 		PROVOKE,
-		 		QUICKSAND,
-		 		ROCK_SLIDE,
-		 		SAP_PLANT,
-		 		SCAPEGOAT,
-		 		SHRIEK,
-		 		SLUMBER,
-		 		SOUL_STORM,
-		 		SPECTRAL_BURST,
-		 		SPLITTING_HEADACHE,
-		 		SQUARE_ONE,
-		 		STUPEFY,
-		 		SUMMON,
-				TRIBUTE
-			)
-		 );
-		 register(
-		 	JIMBY,
-		 	"jimby",
-		 	List.of(SIMPLE),
-		 	List.of(FORTISSIMO, CAROL, VIRTUOSO),
-		 	40, 58, 28, 27, 81, 100, 90,
-		 	424,
-		 	4.08,
-		 	33.02,
-		 	List.of(
-		 		DEJA_VU,
-		 		DISSONANT_CHORD,
-		 		DODGE,
-		 		EMPATHIZE,
-		 		FLURRY,
-		 		FROST_BEAM,
-		 		FROST_BREATH,
-		 		HARMONIOUS_CHORD,
-		 		HEALTH_GIFT,
-		 		ICICLE_TRAP,
-		 		MAGNIFY,
-		 		PEACE_OF_MIND,
-		 		POWER_FOCUS,
-		 		PSYCHO_BLAST,
-		 		RAGING_HOWL,
-		 		RECYCLE,
-		 		REPEATING_TUNE,
-		 		SAP_PLANT,
-		 		SCAPEGOAT,
-		 		SHRIEK,
-		 		SLUMBER,
-		 		SPARE,
-		 		TEAMWORK,
-		 		TEAR_DOWN,
-		 		TONE_BARRIER,
-		 		TRIBUTE,
-				WONDER_HERB
-			)
-		 );
-		 register(
-		 	WASSEL,
-		 	"wassel",
-		 	List.of(ICE),
-		 	List.of(ADORABLE, ELUSIVE),
-		 	29, 35, 38, 10, 14, 21, 53,
-		 	200,
-		 	6.8,
-		 	38.1,
-		 	List.of(
-		 		BITTER_COLD,
-		 		BLINDSPOT_BATTER,
-		 		BULK_UP,
-		 		CHASE_DOWN,
-		 		CHILLY_CHOMP,
-		 		DEEP_FREEZE,
-		 		DODGE,
-		 		DISPERSE,
-		 		FAR_ENCHANTMENT,
-		 		FLURRY,
-		 		FROST_BEAM,
-		 		GAMMA_PULSE,
-		 		GNAW,
-		 		ICICLE_TRAP,
-		 		ILL_WILL,
-		 		LIGHT_DASH,
-		 		LIGHTSPEED_RAY,
-		 		NAB,
-		 		NEAR_ENCHANTMENT,
-		 		NOVA_BLAST,
-		 		PSYCHAL_CHOMP,
-		 		PROVOKE,
-		 		RADIANT_RUSH,
-		 		SLEET_SHOT,
-		 		SLUMBER,
-		 		SPARE,
-		 		STRATAGEM,
-		 		STRETCH,
-				UNDERMINE
-			)
-		 );
-		 register(
-		 	SNICLE,
-		 	"snicle",
-		 	List.of(ICE, DARK),
-		 	List.of(PUNCTURE, TOXIC_SAC),
-		 	30, 30, 53, 49, 34, 29, 47,
-		 	272,
-		 	10.89,
-		 	93.98,
-		 	List.of(
-		 		BAMBOOZLE,
-		 		BULK_UP,
-		 		CHASE_DOWN,
-		 		CHARADE,
-		 		CHILLY_CHOMP,
-		 		CHOMP,
-		 		DARK_SURGE,
-		 		DAYDREAM,
-		 		DEJA_VU,
-		 		DODGE,
-		 		DRUDGE,
-		 		EERIE_STARE,
-		 		FINAL_RUSE,
-		 		FLURRY,
-		 		FROST_BEAM,
-		 		FROST_BREATH,
-		 		GNAW,
-		 		HARROW,
-		 		ICICLE_TRAP,
-		 		ILL_WILL,
-		 		MEGA_CHOMP,
-		 		NAB,
-		 		POISON,
-		 		POWER_FOCUS,
-		 		PREEMPTIVE_STRIKE,
-		 		PROVOKE,
-		 		QUICK_POUNCE,
-		 		ROUGH_UP,
-		 		SLUMBER,
-		 		SOUL_STORM,
-		 		SPIKE_RUSH,
-		 		SQUARE_ONE,
-		 		TRICKY_TACTICS,
-		 		VENOM_CHOMP,
-				VICE_JAWS
-			)
-		 );
-		 register(
-		 	NUKICHI,
-		 	"nukichi",
-		 	List.of(SIMPLE),
-		 	List.of(LUCKY, SLY, HANDY),
-		 	54, 75, 89, 45, 53, 37, 96,
-		 	449,
-		 	5.9,
-		 	53.34,
-		 	List.of(
-		 		BAG_OF_TRICKS,
-		 		BAMBOOZLE,
-		 		BARTER,
-		 		BODY_SLAM,
-		 		BULK_UP,
-		 		COCONUT_BOMB,
-		 		DODGE,
-		 		EMULATE,
-		 		ENAMOR,
-		 		FAR_ENCHANTMENT,
-		 		HARROW,
-		 		HEADBUTT,
-		 		IMPERSONATE,
-		 		NEAR_ENCHANTMENT,
-		 		PHANTOM_SLASH,
-		 		POUNCE,
-		 		RAGING_TACKLE,
-		 		REJUVENATE,
-		 		SCAPEGOAT,
-		 		SHARPEN,
-		 		SHADOW_SPRINT,
-		 		SLASH,
-		 		SPARE,
-		 		STUPEFY,
-		 		SWAT,
-		 		TEAMWORK,
-		 		TEASE,
-		 		TRICKY_TACTICS,
-		 		VITAL_JAB,
-				WONDER_HERB
-			)
-		 );
-		 register(
-		 	TERRACOLT,
-		 	"terracolt",
-		 	List.of(FIRE, EARTH),
-		 	List.of(POWER_LEGS, RUSH_HOUR, CONFIDENCE),
-		 	57, 71, 73, 68, 46, 42, 68,
-		 	425,
-		 	40.37,
-		 	106.68,
-		 	List.of(
-		 		BLAZE_OF_GLORY,
-		 		BLAZE_RUSH,
-		 		BODY_CRASH,
-		 		BODY_SLAM,
-		 		BRACE,
-		 		CLAY_SLAP,
-		 		DODGE,
-		 		EARTHQUAKE,
-		 		FIRE_BREATH,
-		 		FIRE_SLAM,
-		 		FLAMING_KICK,
-		 		HEADBUTT,
-		 		HEAT_WAVE,
-		 		HEAVY_BASH,
-		 		ILL_WILL,
-		 		MAGMA_BLOCK,
-		 		MEGA_KICK,
-		 		MUD_SPATTER,
-		 		MUDSLIDE,
-		 		PEBBLE_TOSS,
-		 		PREEMPTIVE_STRIKE,
-		 		PROVOKE,
-		 		QUICK_POUNCE,
-		 		RAGING_FLAME,
-		 		RAGING_TACKLE,
-		 		SCAPEGOAT,
-		 		SINGE,
-		 		SPARE,
-		 		STRETCH,
-		 		TAMP,
-		 		TEAMWORK,
-				TRIBUTE
-			)
-		 );
-		 register(
-		 	ELEPHAGE,
-		 	"elephage",
-		 	List.of(ELECTRIC),
-		 	List.of(MALWARE, REPLICATE),
-		 	105, 90, 55, 55, 125, 55, 110,
-		 	595,
-		 	9.53,
-		 	88.9,
-		 	List.of(
-		 		BODY_SLAM,
-		 		DEJA_VU,
-		 		DISSONANT_CHORD,
-		 		DODGE,
-		 		ENERGIZE,
-		 		EXAMINE,
-		 		FINAL_RUSE,
-		 		FLASH_N_FLEE,
-		 		HARMONIOUS_CHORD,
-		 		HIGH_PITCH_SCREECH,
-		 		HULLABALOO,
-		 		ILL_WILL,
-		 		JOLT,
-		 		JUMP_START,
-		 		MAGNIFY,
-		 		MEMORIZE,
-		 		POWER_SIPHON,
-		 		PRECISION_BOLT,
-		 		PROVOKE,
-		 		QUICK_POUNCE,
-		 		RANT,
-		 		REJUVENATE,
-		 		REPEATING_TUNE,
-		 		SPARE,
-		 		STATIC_SHOCK,
-		 		STUN,
-		 		TEAR_DOWN,
-		 		THUNDER_BLAST,
-		 		THUNDER_CLAP,
-		 		THUNDER_CRASH,
-		 		THUNDER_SLAM,
-		 		THUNDERSTRIKE,
-		 		THUNDERSTORM,
-				ZIP_ZAP
-			)
-		 );
+    public static void init() {
+		initialised = true;
+		initSpecies1();
+		initSpecies2();
+		initSpecies3();
+		initSpecies4();
+	}
+	private static void initSpecies1() {
+		register(
+			EMBIT,
+			"embit",
+			List.of(FIRE),
+			List.of(AWAKENING, TERRIFYING),
+			57, 51, 60, 67, 36, 50, 40, 
+			361,
+			83.82,
+			45.0,
+			List.of(BARBS, BLAZE_OF_GLORY, BODY_CRASH, BOILING_PRESS, BURN_UP, BURROW, CHASE_DOWN, CLAY_SLAP, DODGE, DRUDGE, EAR_SLAP, FIRE_BREATH, FIRE_SLAM, FLAMING_KICK, GROWL, HOP_KICK, MEGA_PUNCH, POUNCE, POWER_FOCUS, PREEMPTIVE_STRIKE, PROVOKE, RAGING_FLAME, SINGE, SLAP_DOWN, SPARE),
+			true
+		);
+		register(
+			RABBURN,
+			"rabburn",
+			List.of(FIRE),
+			List.of(AWAKENING, TERRIFYING),
+			61, 67, 75, 95, 46, 68, 60, 
+			472,
+			149.86,
+			87.0,
+			List.of(BARBS, BLAZE_OF_GLORY, BODY_CRASH, BOILING_PRESS, BULK_UP, BURN_UP, BURROW, CHASE_DOWN, CLAY_SLAP, DODGE, DRUDGE, EAR_SLAP, FIRE_BREATH, FIRE_SLAM, FLAMING_KICK, GROWL, HOP_KICK, MEGA_PUNCH, POUNCE, POWER_FOCUS, PREEMPTIVE_STRIKE, PROVOKE, RAGING_FLAME, RAPID_FIRE, SINGE, SLAP_DOWN, SPARE),
+			true
+		);
+		register(
+			SEARKNIGHT,
+			"searknight",
+			List.of(FIRE, METAL),
+			List.of(AWAKENING, TERRIFYING),
+			89, 88, 102, 125, 61, 85, 65, 
+			625,
+			208.28,
+			217.0,
+			List.of(ARMOUR_DOWN, BARBS, BLAZE_OF_GLORY, BODY_CRASH, BOILING_PRESS, BULK_UP, BURN_UP, BURROW, CHASE_DOWN, CLAY_SLAP, DODGE, DRUDGE, EAR_SLAP, FIRE_BREATH, FIRE_SLAM, FLAMING_KICK, GROWL, HOP_KICK, MEGA_PUNCH, POUNCE, POWER_FOCUS, PREEMPTIVE_STRIKE, PROVOKE, RAGING_FLAME, RAPID_FIRE, SEARING_STEEL, SINGE, SLAP_DOWN, SPARE),
+			false
+		);
+		register(
+			DRIPPLE,
+			"dripple",
+			List.of(WATER),
+			List.of(AWAKENING, POWER_NAPPER),
+			63, 51, 56, 50, 55, 45, 41, 
+			361,
+			76.2,
+			38.0,
+			List.of(BLINDSPOT_BATTER, CHILLY_CHOMP, DAWDLE, DODGE, FROST_BEAM, GAMMA_PULSE, HYDRO_SLASH, MAROON, MEGA_CHOMP, MINDS_EYE, NOVA_BLAST, PEACE_OF_MIND, PLUNGE, RADIANT_RUSH, REJUVENATE, SOFT_WATER, SPARE, SPRAY, STRIKE, SWIPE, THUNDER_CHOMP, TSUNAMI, WATER_BOMB, WAVE_WRECKER),
+			true
+		);
+		register(
+			REPTIDE,
+			"reptide",
+			List.of(WATER),
+			List.of(AWAKENING, POWER_NAPPER),
+			78, 67, 71, 70, 70, 65, 51, 
+			472,
+			106.68,
+			74.0,
+			List.of(BLINDSPOT_BATTER, CHILLY_CHOMP, DAWDLE, DODGE, FROST_BEAM, GAMMA_PULSE, HYDRO_SLASH, MAROON, MEGA_CHOMP, MINDS_EYE, NOVA_BLAST, PEACE_OF_MIND, PLUNGE, RADIANT_RUSH, REJUVENATE, SLEET_SHOT, SOFT_WATER, SPARE, SPRAY, STRIKE, SUBMERGE, SWIPE, THUNDER_CHOMP, TSUNAMI, WATER_BOMB, WAVE_WRECKER),
+			true
+		);
+		register(
+			LUMINAMI,
+			"luminami",
+			List.of(WATER, LIGHT),
+			List.of(AWAKENING, POWER_NAPPER),
+			105, 88, 94, 95, 98, 85, 60, 
+			625,
+			160.02,
+			202.0,
+			List.of(BLINDSPOT_BATTER, CHILLY_CHOMP, DAWDLE, DODGE, FLASH_N_FLEE, FLASH_PULSE, FROST_BEAM, GAMMA_PULSE, HYDRO_SLASH, MAROON, MEGA_CHOMP, MINDS_EYE, NOVA_BLAST, PEACE_OF_MIND, PLUNGE, RADIANT_RUSH, REJUVENATE, SLEET_SHOT, SOFT_WATER, SPARE, SPRAY, STRIKE, SUBMERGE, SWIPE, THUNDER_CHOMP, TSUNAMI, WATER_BOMB, WAVE_WRECKER),
+			false
+		);
+		register(
+			FEVINE,
+			"fevine",
+			List.of(PLANT),
+			List.of(AWAKENING, THRIVING_PACE),
+			45, 51, 71, 44, 50, 36, 64, 
+			361,
+			71.12,
+			35.0,
+			List.of(BARTER, BOOM_BASH, BUSH_WHACK, DODGE, GROWL, ILL_WILL, LEAF_BARRAGE, LIFE_DRAIN, MUDSLIDE, MUD_SPATTER, NATURES_FORCE, PETAL_PUMMEL, POISON, POUNCE, POWER_FOCUS, PROVOKE, SCAPEGOAT, SPARE, SPLITTING_HEADACHE, STRETCH, SWIPE, TEASE, THISTLE_SLASH, TIMBER_THRASH, VINE_LASH, WONDER_HERB),
+			true
+		);
+		register(
+			FELVER,
+			"felver",
+			List.of(PLANT),
+			List.of(AWAKENING, THRIVING_PACE),
+			55, 67, 96, 55, 70, 45, 84, 
+			472,
+			116.84,
+			82.0,
+			List.of(BARTER, BOOM_BASH, BULK_UP, BUSH_WHACK, DODGE, GROWL, ILL_WILL, LEAF_BARRAGE, LIFE_DRAIN, MUDSLIDE, MUD_SPATTER, NATURES_FORCE, NATURES_RAGE, PETAL_PUMMEL, POISON, POUNCE, POWER_FOCUS, PROVOKE, SCAPEGOAT, SPARE, SPLITTING_HEADACHE, STRETCH, SWIPE, TEASE, THISTLE_SLASH, TIMBER_THRASH, TOXIC_TAIL, VINE_LASH, WONDER_HERB),
+			true
+		);
+		register(
+			TAHTAB,
+			"tahtab",
+			List.of(PLANT, BRAWLER),
+			List.of(AWAKENING, THRIVING_PACE),
+			75, 88, 126, 75, 92, 65, 104, 
+			625,
+			162.56,
+			165.0,
+			List.of(BARTER, BOOM_BASH, BULK_UP, BUSH_WHACK, DODGE, GROWL, ILL_WILL, JUNGLEJUTSU, LEAF_BARRAGE, LIFE_DRAIN, MUDSLIDE, MUD_SPATTER, NATURES_FORCE, NATURES_RAGE, PETAL_PUMMEL, POISON, POUNCE, POWER_FOCUS, PROVOKE, SCAPEGOAT, SPARE, SPLITTING_HEADACHE, STRETCH, SWIPE, TEASE, THISTLE_SLASH, TIMBER_THRASH, TOXIC_TAIL, VINE_LASH, WONDER_HERB),
+			false
+		);
+		register(
+			EAGLIT,
+			"eaglit",
+			List.of(LIGHT),
+			List.of(AWAKENING, APPLIED_FRUSTRATION),
+			45, 51, 36, 36, 71, 62, 60, 
+			361,
+			73.66,
+			38.0,
+			List.of(AIR_BLADE, BARBS, CYCLONE_SLAM, DODGE, FLASH_N_FLEE, GAMMA_PULSE, GROWL, GUST, HASTEN, LIGHTSPEED_RAY, LUSTER_LOOT, MAGNIFY, METAL_BLAST, NOSEDIVE, NOVA_BLAST, PECK, POUNCE, POWER_FOCUS, RADIANT_RUSH, RAGING_HOWL, SHINE, SPARE, STARE),
+			true
+		);
+		register(
+			TORPREY,
+			"torprey",
+			List.of(LIGHT),
+			List.of(AWAKENING, APPLIED_FRUSTRATION),
+			57, 67, 64, 40, 91, 63, 90, 
+			472,
+			132.08,
+			57.0,
+			List.of(AIR_BLADE, BARBS, CYCLONE_SLAM, DODGE, FLASH_N_FLEE, GAMMA_PULSE, GROWL, GUST, HASTEN, LIGHTSPEED_RAY, LUSTER_LOOT, MAGNIFY, METAL_BLAST, NOSEDIVE, NOVA_BLAST, PECK, POUNCE, POWER_FOCUS, RADIANT_FORECAST, RADIANT_RUSH, RAGING_HOWL, SHINE, SPARE, STARE),
+			true
+		);
+		register(
+			FALKYRIE,
+			"falkyrie",
+			List.of(LIGHT, METAL),
+			List.of(AWAKENING, APPLIED_FRUSTRATION),
+			86, 88, 87, 74, 125, 90, 75, 
+			625,
+			195.58,
+			178.0,
+			List.of(AIR_BLADE, ARMOUR_DOWN, BARBS, CYCLONE_SLAM, DODGE, FLASH_N_FLEE, GAMMA_PULSE, GROWL, GUST, HASTEN, HOLY_SLASH, LIGHTSPEED_RAY, LUSTER_LOOT, MAGNIFY, METAL_BLAST, NOSEDIVE, NOVA_BLAST, PECK, POUNCE, POWER_FOCUS, RADIANT_FORECAST, RADIANT_RUSH, RAGING_HOWL, REJUVENATE, SHINE, SPARE, STARE),
+			false
+		);
+		register(
+			VAMBAT,
+			"vambat",
+			List.of(DARK),
+			List.of(AWAKENING, DEMANDING),
+			47, 51, 47, 50, 47, 50, 69, 
+			361,
+			66.04,
+			18.0,
+			List.of(AIR_BLADE, BAMBOOZLE, CHOMP, DARK_SURGE, DIVE_BOMB, DODGE, GNARLY_GASH, GNAW, GROWL, GUST, HARROW, MEGA_CHOMP, MUDSLIDE, PHANTOM_BLAST, PHANTOM_SLASH, PROVOKE, SHADOW_SPRINT, SHARPEN, SLAP_DOWN, SLASH, SPARE, SPECTRAL_BURST, TEAR_DOWN, TEASE),
+			true
+		);
+		register(
+			DIMPIRE,
+			"dimpire",
+			List.of(DARK),
+			List.of(AWAKENING, DEMANDING),
+			60, 67, 65, 75, 60, 60, 85, 
+			472,
+			154.94,
+			67.0,
+			List.of(AIR_BLADE, BAMBOOZLE, BLOOD_DRAIN, CHOMP, DARK_SURGE, DIVE_BOMB, DODGE, GNARLY_GASH, GNAW, GROWL, GUST, HARROW, MEGA_CHOMP, MUDSLIDE, PHANTOM_BLAST, PHANTOM_SLASH, PROVOKE, SHADOW_SPRINT, SHARPEN, SLAP_DOWN, SLASH, SPARE, SPECTRAL_BURST, TEAR_DOWN, TEASE),
+			true
+		);
+		register(
+			VESPERATU,
+			"vesperatu",
+			List.of(DARK, SPIRIT),
+			List.of(AWAKENING, DEMANDING),
+			76, 88, 110, 97, 90, 65, 99, 
+			625,
+			203.2,
+			145.0,
+			List.of(AIR_BLADE, BAMBOOZLE, BLOOD_DRAIN, CHOMP, DARK_SURGE, DIVE_BOMB, DODGE, GNARLY_GASH, GNAW, GROWL, GUST, HARROW, MEGA_CHOMP, MUDSLIDE, PHANTOM_BLAST, PHANTOM_SLASH, PROVOKE, REVIVAL, SHADOW_SPRINT, SHARPEN, SLAP_DOWN, SLASH, SPARE, SPECTRAL_BURST, TEAR_DOWN, TEASE),
+			false
+		);
+		register(
+			SNOCUB,
+			"snocub",
+			List.of(ICE),
+			List.of(AWAKENING, STAUNCH),
+			55, 51, 45, 38, 67, 60, 45, 
+			361,
+			48.26,
+			14.0,
+			List.of(BARBS, BODY_SLAM, BRACE, CHILLY_CHOMP, DAWDLE, DEEP_FREEZE, DODGE, EARTHQUAKE, FLURRY, FROST_BEAM, ICE_HAMMER, ICICLE_TRAP, LANDSLIDE, QUICKSAND, ROGUE_ASSAULT, SLEET_SHOT, SNOWDOZER, SPARE, SPIKE_RUSH, STRIKE),
+			true
+		);
+		register(
+			SNOWKI,
+			"snowki",
+			List.of(ICE),
+			List.of(AWAKENING, STAUNCH),
+			65, 67, 75, 65, 75, 65, 60, 
+			472,
+			144.78,
+			78.0,
+			List.of(BARBS, BODY_SLAM, BRACE, BULK_UP, CHILLY_CHOMP, DAWDLE, DEEP_FREEZE, DODGE, EARTHQUAKE, FLURRY, FROST_BEAM, ICE_HAMMER, ICICLE_TRAP, LANDSLIDE, MUDSLIDE, QUICKSAND, QUICK_PUNCH, ROGUE_ASSAULT, SLEET_SHOT, SNOWDOZER, SPARE, SPIKE_RUSH, STRIKE, WINTERS_FURY),
+			true
+		);
+		register(
+			HIMBRR,
+			"himbrr",
+			List.of(ICE, EARTH),
+			List.of(AWAKENING, STAUNCH),
+			132, 88, 98, 115, 72, 75, 45, 
+			625,
+			233.68,
+			240.0,
+			List.of(BARBS, BODY_SLAM, BRACE, BULK_UP, CHILLY_CHOMP, DAWDLE, DEEP_FREEZE, DODGE, EARTHQUAKE, FLURRY, FROST_BEAM, ICE_HAMMER, ICICLE_TRAP, LANDSLIDE, MUDSLIDE, MUD_SPATTER, QUICKSAND, QUICK_PUNCH, ROGUE_ASSAULT, SLEET_SHOT, SNOWDOZER, SPARE, SPIKE_RUSH, STRIKE, WINTERS_FURY, YETIS_WRATH),
+			false
+		);
+		register(
+			WEEVOLT,
+			"weevolt",
+			List.of(ELECTRIC),
+			List.of(AWAKENING, BRUTE_FORCE),
+			51, 51, 36, 36, 67, 55, 65, 
+			361,
+			68.58,
+			31.0,
+			List.of(BLAZE_CHOMP, CHILLY_CHOMP, DODGE, GROWL, JOLT, POUNCE, PRIMAL_SLASH, SPARE, STATIC_SHOCK, STRETCH, STUN, SWIPE, THUNDERSTRIKE, THUNDER_CHOMP, THUNDER_SLAM, TYPHOON, ZIP_ZAP),
+			true
+		);
+		register(
+			STOZAP,
+			"stozap",
+			List.of(ELECTRIC),
+			List.of(AWAKENING, BRUTE_FORCE),
+			71, 67, 56, 41, 88, 60, 89, 
+			472,
+			124.46,
+			74.0,
+			List.of(BLAZE_CHOMP, CHILLY_CHOMP, DODGE, ELEMENTAL_BURST, GROWL, JOLT, POUNCE, PRIMAL_SLASH, SHREWD_BLAST, SPARE, STATIC_SHOCK, STORM_SUMMON, STRETCH, STUN, SWIPE, THUNDERSTRIKE, THUNDER_CHOMP, THUNDER_SLAM, TYPHOON, ZIP_ZAP),
+			true
+		);
+		register(
+			ZUELONG,
+			"zuelong",
+			List.of(ELECTRIC, ANCIENT),
+			List.of(AWAKENING, BRUTE_FORCE),
+			78, 88, 92, 60, 109, 79, 119, 
+			625,
+			220.98,
+			132.0,
+			List.of(ANCIENT_ROAR, BLAZE_CHOMP, CHILLY_CHOMP, DODGE, ELEMENTAL_BURST, GROWL, JOLT, POUNCE, PRIMAL_SLASH, SHREWD_BLAST, SPARE, STATIC_SHOCK, STORM_SUMMON, STRETCH, STUN, SWIPE, THUNDERSTRIKE, THUNDER_CHOMP, THUNDER_SLAM, TYPHOON, ZIP_ZAP),
+			false
+		);
+		register(
+			TWILAT,
+			"twilat",
+			List.of(SIMPLE),
+			List.of(TERRITORIAL, CONFIDENCE, NEUTRALIZE),
+			50, 41, 42, 38, 42, 38, 40, 
+			291,
+			35.56,
+			24.0,
+			List.of(BODY_SLAM, BRAWN_BOOST, CHASE_DOWN, DAWDLE, DISPERSE, DODGE, DRUDGE, GLOOMINOUS_ROAR, GNAW, HASTEN, HIGH_PITCH_SCREECH, MAGNIFY, POWER_FOCUS, QUICK_POUNCE, RAGING_HOWL, RAGING_TACKLE, SCAPEGOAT, SHARPEN, SPARE, STRETCH, SWIPE),
+			true
+		);
+		register(
+			UMBRAT,
+			"umbrat",
+			List.of(DARK),
+			List.of(DUSK, CONFIDENCE, OVERSHADOW),
+			75, 84, 106, 90, 61, 88, 71, 
+			575,
+			99.06,
+			84.0,
+			List.of(BODY_SLAM, BRAWN_BOOST, BULK_UP, CHASE_DOWN, CHILLY_CHOMP, DARK_SURGE, DAWDLE, DISPERSE, DODGE, DRUDGE, FADE_AWAY, GLOOMINOUS_ROAR, GLOOM_FANGS, GNAW, HASTEN, HIGH_PITCH_SCREECH, MAGNIFY, MEGA_CHOMP, POWER_FOCUS, QUICK_POUNCE, RAGING_HOWL, RAGING_TACKLE, SCAPEGOAT, SHARPEN, SPARE, STRETCH, SWIPE),
+			false
+		);
+		register(
+			LUXOAR,
+			"luxoar",
+			List.of(LIGHT),
+			List.of(DAWN, CONFIDENCE, ILLUMINATE),
+			75, 84, 61, 73, 106, 75, 101, 
+			575,
+			99.06,
+			82.0,
+			List.of(BODY_SLAM, BRAWN_BOOST, CHASE_DOWN, DAWDLE, DISPERSE, DODGE, DRUDGE, FIRE_BREATH, FLASH_N_FLEE, GAMMA_PULSE, GAMMA_PULSE, GLOOMINOUS_ROAR, GNAW, HASTEN, HIGH_PITCH_SCREECH, LUMINOUS_ROAR, MAGNIFY, PEACE_OF_MIND, POWER_FOCUS, QUICK_POUNCE, RAGING_HOWL, RAGING_TACKLE, RESONATE, SCAPEGOAT, SHARPEN, SPARE, STRETCH, SWIFTEN, SWIPE),
+			false
+		);
+		register(
+			TIKLIPSE,
+			"tiklipse",
+			List.of(LIGHT, DARK),
+			List.of(CIRCADIAN, TOTAL_ECLIPSE),
+			75, 84, 106, 90, 106, 75, 89, 
+			625,
+			114.3,
+			94.0,
+			List.of(BLINDSPOT_BATTER, BODY_SLAM, BRAWN_BOOST, BULK_UP, CHASE_DOWN, DARK_SURGE, DAWDLE, DISPERSE, DODGE, DRUDGE, GAMMA_PULSE, GLOOMINOUS_FANGS, GLOOMINOUS_ROAR, GNAW, HASTEN, HIGH_PITCH_SCREECH, MAGNIFY, MEGA_CHOMP, PEACE_OF_MIND, POWER_FOCUS, QUICK_POUNCE, RADIANT_RUSH, RAGING_HOWL, RAGING_TACKLE, SCAPEGOAT, SHARPEN, SPARE, STRETCH, SWIPE),
+			false
+		);
+		register(
+			CATHORN,
+			"cathorn",
+			List.of(BUG),
+			List.of(HASTY, DEFENSIVE_PRIORITY),
+			35, 37, 40, 24, 55, 24, 47, 
+			262,
+			33.02,
+			16.0,
+			List.of(AIR_BLADE, BUG_BITE, COUNTER_POISE, DODGE, GNAW, PESTER, PESTILENCE, PHEROBLAST, POISON, SPARE, STARE),
+			true
+		);
+		register(
+			PROPAE,
+			"propae",
+			List.of(BUG),
+			List.of(HASTY, DEFENSIVE_PRIORITY),
+			50, 46, 39, 60, 39, 55, 37, 
+			326,
+			88.9,
+			31.0,
+			List.of(AIR_BLADE, BRACE, BUG_BITE, COUNTER_POISE, DODGE, GNAW, PESTER, PESTILENCE, PHEROBLAST, POISON, SPARE, STARE),
+			true
+		);
+		register(
+			CYNAMOTH,
+			"cynamoth",
+			List.of(BUG, AIR),
+			List.of(MYSTERIOUS_TOXINS, FLUTTER),
+			70, 80, 55, 85, 98, 99, 88, 
+			575,
+			114.3,
+			45.0,
+			List.of(AIR_BLADE, BRACE, BUG_BITE, COUNTER_POISE, DODGE, GNAW, GUST, HASTEN, JET_STREAM, LIFE_DRAIN, MAGNIFY, MYSTIC_BREEZE, PESTER, PESTILENCE, PHEROBLAST, POISON, SNORE_SPORES, SPARE, STARE, STATIC_SPORES, TOXIC_SPORES, WING_SLAP),
+			false
+		);
+		register(
+			SUMOBITO,
+			"sumobito",
+			List.of(BUG, BRAWLER),
+			List.of(GURU, DOUBLE_STRIKE),
+			72, 80, 110, 106, 51, 101, 55, 
+			575,
+			157.48,
+			340.0,
+			List.of(AIR_BLADE, BAMBOOZLE, BARTER, BODY_SLAM, BRACE, BUG_BITE, BULK_UP, CHOP, COUNTER_POISE, COUNTER_STANCE, DODGE, DOUBLE_BEAT, FIRE_SLAM, GNAW, HORN_DASHI, ILL_WILL, PARASITIZE, PESTER, PESTILENCE, PHEROBLAST, POISON, QUICK_PUNCH, SPARE, STARE),
+			false
+		);
+		register(
+			TWITTLE,
+			"twittle",
+			List.of(AIR),
+			List.of(CONFIDENCE, MADCAP, REV_UP),
+			44, 40, 50, 38, 22, 33, 58, 
+			285,
+			40.64,
+			17.0,
+			List.of(ACCELERATE, AIR_BLADE, AIR_SHOT, AIR_WHIP, BODY_SLAM, BRAWN_BOOST, CYCLONE_SLAM, DODGE, PECK, PERCH, POUNCE, SHARPEN, SLASH, SPARE, SQUAWK, STARE, STRETCH, THUNDER_CRASH),
+			true
+		);
+		register(
+			PARATWEET,
+			"paratweet",
+			List.of(AIR),
+			List.of(CONFIDENCE, MADCAP, REV_UP),
+			54, 56, 75, 48, 32, 43, 88, 
+			396,
+			81.28,
+			35.0,
+			List.of(ACCELERATE, AIR_BLADE, AIR_SHOT, AIR_WHIP, BODY_SLAM, BRAWN_BOOST, CYCLONE_SLAM, DODGE, DRIVING_FORCE, PECK, PERCH, POUNCE, SCAVENGE, SHARPEN, SLASH, SPARE, SQUAWK, STARE, STRETCH, THUNDER_CRASH),
+			true
+		);
+		register(
+			AVITROSS,
+			"avitross",
+			List.of(AIR),
+			List.of(CONFIDENCE, MADCAP, REV_UP),
+			79, 85, 100, 78, 67, 63, 113, 
+			585,
+			160.02,
+			98.0,
+			List.of(ACCELERATE, AIR_BLADE, AIR_SHOT, AIR_WHIP, BODY_SLAM, BRAWN_BOOST, CYCLONE_SLAM, DODGE, DRIVING_FORCE, NOSEDIVE, PECK, PERCH, POUNCE, SCAVENGE, SHARPEN, SLASH, SPARE, SQUAWK, STARE, STRETCH, THUNDER_CRASH),
+			false
+		);
+		register(
+			PYDER,
+			"pyder",
+			List.of(BUG, TOXIC),
+			List.of(APPREHENSION, WEBBING, COURSING_VENOM),
+			45, 43, 60, 40, 30, 40, 45, 
+			303,
+			35.56,
+			17.0,
+			List.of(BANEFUL_BASH, BODY_SLAM, BUG_BITE, BURROW, CORRODE, COUNTER_POISE, DODGE, EERIE_STARE, MEGA_CHOMP, MUDSLIDE, PARASITIZE, PESTER, PESTILENCE, REJUVENATE, SLIME, SPARE, STING, VITAL_JAB, WEB_SHOT),
+			true
+		);
+		register(
+			SWOLDER,
+			"swolder",
+			List.of(BUG, TOXIC),
+			List.of(APPREHENSION, WEBBING, COURSING_VENOM),
+			85, 85, 120, 105, 50, 65, 65, 
+			575,
+			93.98,
+			53.0,
+			List.of(BANEFUL_BASH, BODY_SLAM, BRAWN_BOOST, BUG_BITE, BULK_UP, BURROW, CORRODE, COUNTER_POISE, DODGE, EERIE_STARE, MEGA_CHOMP, MEGA_PUNCH, MUDSLIDE, PARASITIZE, PESTER, PESTILENCE, POISON, REJUVENATE, SLIME, SPARE, STING, VITAL_JAB, WEB_SHOT),
+			true
+		);
+		register(
+			ANTSEE,
+			"antsee",
+			List.of(PLANT, BUG),
+			List.of(MYSTERY_TOXINS, WOODSMAN, DRAINAGE),
+			55, 43, 25, 60, 40, 60, 20, 
+			303,
+			38.1,
+			12.0,
+			List.of(BAIT, BRIAR_BLOCK, BUG_BITE, BURROW, DAWDLE, DODGE, ENERGY_SURGE, GAIN_DRAIN, GNAW, LIFE_DRAIN, MAGNIFY, MEGA_CHOMP, MUDSLIDE, NATURES_FORCE, PARASITIZE, PESTER, PESTILENCE, PHEROBLAST, PHOTOSYNTHESIS, PINE_SHOT, POISON, SAFEGUARD, SPARE, TAKE_ROOT, TAMP, THISTLE_SLASH, TRICKY_TACTICS, VICE_JAWS, VINE_LASH, WONDER_HERB),
+			true
+		);
+		register(
+			FLORANT,
+			"florant",
+			List.of(PLANT, BUG),
+			List.of(MYSTERY_TOXINS, WOODSMAN, DRAINAGE),
+			105, 88, 55, 105, 82, 105, 35, 
+			575,
+			111.76,
+			74.0,
+			List.of(BAIT, BRIAR_BLOCK, BUG_BITE, BULK_UP, BURROW, BUSH_WHACK, DAWDLE, DODGE, ENERGY_SURGE, GAIN_DRAIN, GNAW, LIFE_DRAIN, MAGNIFY, MEGA_CHOMP, MUDSLIDE, NATURES_FORCE, PARASITIZE, PESTER, PESTILENCE, PHEROBLAST, PHOTOSYNTHESIS, PINE_SHOT, POISON, SAFEGUARD, SAP_PLANT, SPARE, TAKE_ROOT, TAMP, THISTLE_SLASH, TRICKY_TACTICS, VICE_JAWS, VINE_LASH, WONDER_HERB),
+			true
+		);
+		register(
+			FLORANT_FLYCHOMP,
+			"florant_flychomp",
+			List.of(PLANT, BUG),
+			List.of(POWER_JAW),
+			105, 88, 123, 112, 55, 112, 50, 
+			645,
+			111.76,
+			74.0,
+			List.of(BAIT, BRIAR_BLOCK, BUG_BITE, BULK_UP, BURROW, BUSH_WHACK, DAWDLE, DODGE, ENERGY_SURGE, GAIN_DRAIN, GNAW, LIFE_DRAIN, MAGNIFY, MEGA_CHOMP, MUDSLIDE, NATURES_FORCE, PARASITIZE, PESTER, PESTILENCE, PHEROBLAST, PHOTOSYNTHESIS, PINE_SHOT, POISON, SAFEGUARD, SAP_PLANT, SPARE, TAKE_ROOT, TAMP, THISTLE_SLASH, TRICKY_TACTICS, VICE_JAWS, VINE_LASH, WONDER_HERB),
+			true
+		);
+		register(
+			GRUBBY,
+			"grubby",
+			List.of(BUG),
+			List.of(ODD_HUSK, PREMONITION, DEFENSIVE_PRIORITY),
+			35, 39, 50, 40, 35, 33, 42, 
+			274,
+			35.56,
+			15.0,
+			List.of(BANEFUL_BASH, BUG_BITE, DODGE, GNAW, LIFE_DRAIN, PARASITIZE, PESTILENCE, PROVOKE, ROUGH_UP, SPARE, STARE, STING, VENOM_CHOMP, WING_SLAP),
+			true
+		);
+		register(
+			COONUCOPIA,
+			"coonucopia",
+			List.of(BUG),
+			List.of(ODD_HUSK, PREMONITION, DEFENSIVE_PRIORITY),
+			60, 48, 45, 65, 35, 48, 37, 
+			338,
+			9999.0,
+			27.0,
+			List.of(BANEFUL_BASH, BRACE, BUG_BITE, DODGE, GNAW, LIFE_DRAIN, PARASITIZE, PESTILENCE, PROVOKE, ROUGH_UP, SPARE, STARE, STING, VENOM_CHOMP, WING_SLAP),
+			true
+		);
+		register(
+			TERRAFLY,
+			"terrafly",
+			List.of(BUG, TOXIC),
+			List.of(HOTFOOT, AMBUSH, BUG_FEVER),
+			75, 85, 112, 87, 61, 60, 95, 
+			575,
+			165.1,
+			83.0,
+			List.of(AIR_WHIP, BANEFUL_BASH, BRACE, BUG_BITE, DODGE, DOUBLE_STING, DRUDGE, GNAW, LIFE_DRAIN, MUCK_BLAST, PARASITIZE, PESTILENCE, POISON_BARBS, PROVOKE, ROUGH_UP, SLIME, SPARE, STARE, STING, VENOM_CHOMP, WING_SLAP),
+			true
+		);
+		register(
+			TERRACLAW,
+			"terraclaw",
+			List.of(BUG),
+			List.of(HOTFOOT, PINCER_TRAP, SLICK_SHELL),
+			94, 87, 121, 116, 60, 54, 43, 
+			575,
+			111.76,
+			73.0,
+			List.of(BANEFUL_BASH, BARBS, BODY_SLAM, BRACE, BUG_BITE, BULK_UP, CLAMP_CLAW, CYCLONE_SLAM, DODGE, DOUBLE_BEAT, EERIE_STARE, GNAW, HEADBUTT, MEGA_CHOMP, MUD_SPATTER, PARASITIZE, PESTILENCE, PROVOKE, ROUGH_UP, SPARE, STARE, STING, VENOM_CHOMP, VITAL_JAB, WING_SLAP),
+			true
+		);
+		register(
+			KLEPTYKE,
+			"kleptyke",
+			List.of(DARK),
+			List.of(BURGLAR, APPREHENSION, ABILITY_THIEF),
+			55, 48, 50, 40, 20, 30, 95, 
+			338,
+			81.28,
+			32.0,
+			List.of(BAG_OF_TRICKS, BARBS, BARTER, BODY_SLAM, CHARADE, CHASE_DOWN, CHOMP, DARK_SURGE, DAWDLE, DODGE, GNARLY_GASH, HOP_KICK, ICICLE_TRAP, ILL_WILL, MEGA_CHOMP, MEGA_PUNCH, NAB, PILFER, POUNCE, PREEMPTIVE_STRIKE, PROVOKE, QUICK_POUNCE, RANT, ROGUE_ASSAULT, SCAPEGOAT, SHARPEN, SPARE, TRICKY_TACTICS),
+			true
+		);
+		register(
+			RAGOON,
+			"ragoon",
+			List.of(DARK),
+			List.of(BURGLAR, APPREHENSION, ABILITY_THIEF),
+			95, 80, 100, 95, 60, 55, 90, 
+			575,
+			121.92,
+			67.0,
+			List.of(BAG_OF_TRICKS, BARBS, BARTER, BODY_SLAM, CHARADE, CHASE_DOWN, CHOMP, DARK_SURGE, DAWDLE, DODGE, GNARLY_GASH, HOP_KICK, ICICLE_TRAP, ILL_WILL, MEGA_CHOMP, MEGA_PUNCH, NAB, PILFER, POUNCE, PREEMPTIVE_STRIKE, PROVOKE, QUICK_POUNCE, RANT, ROGUE_ASSAULT, SCAPEGOAT, SHARPEN, SLAP_DOWN, SPARE, TRICKY_TACTICS),
+			true
+		);
+		register(
+			BABORE,
+			"babore",
+			List.of(EARTH),
+			List.of(BOAST, RESILIENCE),
+			62, 46, 60, 60, 30, 30, 38, 
+			326,
+			63.5,
+			47.0,
+			List.of(AIM, BODY_CRASH, BODY_SLAM, BOULDER_BLAST, BULK_UP, BURROW, CHOMP, DODGE, EARTHQUAKE, HEADBUTT, MEGA_CHOMP, MUD_SPATTER, POUNCE, QUICKSAND, QUICK_POUNCE, RAGING_TACKLE, ROGUE_ASSAULT),
+			true
+		);
+		register(
+			BOARROK,
+			"boarrok",
+			List.of(EARTH),
+			List.of(BOAST, RESILIENCE),
+			102, 71, 110, 95, 59, 70, 68, 
+			575,
+			124.46,
+			118.0,
+			List.of(AIM, BODY_CRASH, BODY_SLAM, BOULDER_BLAST, BULK_UP, BURROW, CHOMP, DODGE, EARTHQUAKE, HEADBUTT, MEGA_CHOMP, MUCK_BUCK, MUD_SPATTER, POUNCE, QUICKSAND, QUICK_POUNCE, RAGING_TACKLE, ROGUE_ASSAULT),
+			true
+		);
+		register(
+			GEKLOW,
+			"geklow",
+			List.of(ELECTRIC, LIGHT),
+			List.of(LIGHTNING_ROD, RADIANCE, PRISMATIC),
+			50, 55, 50, 45, 68, 50, 67, 
+			385,
+			73.66,
+			38.0,
+			List.of(DAZZLING_BARRAGE, DODGE, EARTHQUAKE, ENERGIZE, EXAMINE, FLASH_N_FLEE, GAMMA_PULSE, JOLT, LANDSLIDE, LIGHT_DASH, LUSTER_LOOT, MUDSLIDE, REJUVENATE, SPARE, STARE, STATIC_SHOCK, TASE, THUNDERSTRIKE, THUNDER_BLAST, THUNDER_CRASH, ZIP_ZAP),
+			true
+		);
+		register(
+			ELEGUANA,
+			"eleguana",
+			List.of(ELECTRIC, LIGHT),
+			List.of(LIGHTNING_ROD, RADIANCE, PRISMATIC),
+			80, 80, 55, 85, 90, 115, 80, 
+			585,
+			129.54,
+			126.0,
+			List.of(DAZZLING_BARRAGE, DODGE, EARTHQUAKE, ENERGIZE, EXAMINE, FLASH_N_FLEE, GAMMA_PULSE, JOLT, LANDSLIDE, LIGHT_DASH, LUSTER_LOOT, MAGNIFY, MUDSLIDE, REJUVENATE, SHINE, SPARE, STARE, STATIC_SHOCK, TASE, THUNDERSTRIKE, THUNDER_BLAST, THUNDER_CRASH, ZIP_ZAP),
+			true
+		);
+		register(
+			SLUGLING,
+			"slugling",
+			List.of(PLANT),
+			List.of(MYSTERY_TOXINS, UNGRACIOUS_HOST, SLIMY),
+			70, 41, 10, 10, 50, 70, 45, 
+			296,
+			38.1,
+			28.0,
+			List.of(DAWDLE, DODGE, EARTHQUAKE, LANDSLIDE, LEAF_BARRAGE, LIFE_DRAIN, MUDSLIDE, NATURES_FORCE, PEACE_OF_MIND, PETAL_PUMMEL, PHOTOSYNTHESIS, PINE_SHOT, POISON, RETURN_TO_SENDER, SAP_PLANT, SLIME, SPARE, STRATAGEM, STRIKE, TAKE_ROOT, TAMP),
+			true
+		);
+		register(
+			ESCARGROW,
+			"escargrow",
+			List.of(PLANT),
+			List.of(MYSTERY_TOXINS, UNGRACIOUS_HOST, SLIMY),
+			90, 65, 35, 20, 65, 90, 50, 
+			415,
+			111.76,
+			68.0,
+			List.of(DAWDLE, DODGE, EARTHQUAKE, LANDSLIDE, LEAF_BARRAGE, LIFE_DRAIN, MUDSLIDE, NATURES_FORCE, PEACE_OF_MIND, PETAL_PUMMEL, PHOTOSYNTHESIS, PINE_SHOT, POISON, RETURN_TO_SENDER, SAP_PLANT, SLIME, SPARE, STRATAGEM, STRIKE, TAKE_ROOT, TAMP, TRIP_ROOT),
+			true
+		);
+		register(
+			GASTROAK,
+			"gastroak",
+			List.of(PLANT),
+			List.of(MYSTERY_TOXINS, UNGRACIOUS_HOST, SLIMY),
+			120, 88, 60, 40, 92, 120, 55, 
+			575,
+			236.22,
+			287.0,
+			List.of(BRIAR_BLOCK, DAWDLE, DODGE, EARTHQUAKE, LANDSLIDE, LEAF_BARRAGE, LIFE_DRAIN, MUDSLIDE, NATURES_FORCE, PEACE_OF_MIND, PETAL_PUMMEL, PHOTOSYNTHESIS, PINE_SHOT, POISON, RETURN_TO_SENDER, SAP_PLANT, SLIME, SPARE, STRATAGEM, STRIKE, TAKE_ROOT, TAMP, TRIP_ROOT),
+			true
+		);
+		register(
+			GASTROAK_TERRAFORM,
+			"gastroak_terraform",
+			List.of(PLANT, EARTH),
+			List.of(INSULATED),
+			140, 88, 60, 45, 107, 140, 65, 
+			645,
+			236.22,
+			287.0,
+			List.of(BRIAR_BLOCK, DAWDLE, DODGE, EARTHQUAKE, LANDSLIDE, LEAF_BARRAGE, LIFE_DRAIN, MUDSLIDE, NATURES_FORCE, PEACE_OF_MIND, PETAL_PUMMEL, PHOTOSYNTHESIS, PINE_SHOT, POISON, RETURN_TO_SENDER, SAP_PLANT, SLIME, SPARE, STRATAGEM, STRIKE, TAKE_ROOT, TAMP, TRIP_ROOT),
+			true
+		);
+		register(
+			KABUNGA,
+			"kabunga",
+			List.of(PLANT),
+			List.of(COMMUNICATION, TERRITORIAL, NOXIOUS_WEEDS),
+			52, 53, 76, 43, 64, 34, 86, 
+			408,
+			88.9,
+			53.0,
+			List.of(BARTER, BRACE, BUSH_WHACK, COCONUT_BOMB, DODGE, ILL_WILL, LIFE_DRAIN, MUCK_BLAST, NATURES_FORCE, PETAL_PUMMEL, PHOTOSYNTHESIS, PINE_SHOT, PROVOKE, REJUVENATE, SCAPEGOAT, SPARE, STRIKE, TEAR_DOWN, TOXIC_SPORES, WONDER_HERB),
+			true
+		);
+		register(
+			WIKI_WIKI,
+			"wiki_wiki",
+			List.of(PLANT),
+			List.of(COMMUNICATION, MEDIC, NOXIOUS_WEEDS),
+			162, 125, 49, 70, 62, 70, 47, 
+			585,
+			215.9,
+			260.0,
+			List.of(BAIT, BARTER, BEQUEATH, BRACE, BUSH_WHACK, COCONUT_BOMB, DODGE, HEALTH_GIFT, HERBAL_REMEDY, HYPNOTIZE, ILL_WILL, LIFE_DRAIN, MUCK_BLAST, MUDSLIDE, NATURES_FORCE, PETAL_PUMMEL, PHOTOSYNTHESIS, PINE_SHOT, POISON, PROVOKE, REJUVENATE, SAP_PLANT, SCAPEGOAT, SPARE, STRIKE, TEAR_DOWN, TOXIC_SPORES, WONDER_HERB),
+			true
+		);
+		register(
+			CHARTIKI,
+			"chartiki",
+			List.of(PLANT, FIRE),
+			List.of(COMMUNICATION, INFERNO, COMBUSTIBLE),
+			108, 94, 49, 80, 112, 80, 62, 
+			585,
+			254.0,
+			180.0,
+			List.of(BARTER, BLAZE_PUNCH, BRACE, BRIAR_BLOCK, BURN_UP, BUSH_WHACK, COCONUT_BOMB, DODGE, FIRE_BREATH, FLARE_BLAST, ILL_WILL, LIFE_DRAIN, MUCK_BLAST, NATURES_FORCE, PETAL_PUMMEL, PHOTOSYNTHESIS, PINE_SHOT, PROVOKE, REJUVENATE, SCAPEGOAT, SPARE, STRIKE, TEAR_DOWN, TOXIC_SPORES, WONDER_HERB),
+			true
+		);
+		register(
+			KABUNGA_H,
+			"kabunga_h",
+			List.of(PLANT, MIND),
+			List.of(COMMUNICATION, EXPERTISE, NOXIOUS_WEEDS),
+			65, 68, 23, 58, 99, 74, 5, 
+			392,
+			88.9,
+			53.0,
+			List.of(BAG_OF_TRICKS, BANE_OF_HASTE, BARTER, BRACE, BRAINWASH, DISSIPATE, DODGE, FLABBERGAST, ILL_WILL, LIFE_DRAIN, MUCK_BLAST, NATURES_FORCE, PEACE_OF_MIND, PETAL_PUMMEL, PHOTOSYNTHESIS, PINE_SHOT, PROVOKE, PSYCHO_BLAST, REJUVENATE, SCAPEGOAT, SPARE, STRIKE, TEAR_DOWN, TOXIC_SPORES),
+			true
+		);
+		register(
+			WAKA_LAKA,
+			"waka_laka",
+			List.of(PLANT, MIND),
+			List.of(COMMUNICATION, EXPERTISE, MYCOTIC),
+			104, 73, 49, 86, 124, 108, 41, 
+			585,
+			187.96,
+			245.0,
+			List.of(BAG_OF_TRICKS, BANE_OF_HASTE, BARTER, BRACE, BRAINWASH, DISSIPATE, DODGE, FLABBERGAST, FUNGUS_CURSE, GAMMA_PULSE, ILL_WILL, LIFE_DRAIN, LUSTER_LOOT, MUCK_BLAST, NATURES_FORCE, PEACE_OF_MIND, PETAL_PUMMEL, PHOTOSYNTHESIS, PINE_SHOT, PROVOKE, PSYCHO_BLAST, REJUVENATE, SCAPEGOAT, SPARE, STRIKE, TEAR_DOWN, THUNDERSTRIKE, TOXIC_SPORES, ZIP_ZAP),
+			true
+		);
+		register(
+			SHAWCHI,
+			"shawchi",
+			List.of(MIND),
+			List.of(ENCHANT, DISENCHANT, SHARP_FOCUS),
+			79, 91, 36, 52, 104, 74, 89, 
+			525,
+			114.3,
+			42.0,
+			List.of(AIM, BAG_OF_TRICKS, BANE_OF_HASTE, BARTER, BRAINWASH, DAWDLE, DISSIPATE, DODGE, ELEMENTAL_BURST, FLABBERGAST, FOUL_CHANT, FROST_BEAM, HEALTH_GIFT, MINDS_EYE, PEACE_OF_MIND, PSYCHO_BLAST, PYROKINESIS, QUICK_POUNCE, SPARE, SWIPE, TEAR_DOWN, THUNDERSTRIKE),
+			true
+		);
+		register(
+			RAKRAWLA,
+			"rakrawla",
+			List.of(EARTH),
+			List.of(HASTY, INSULATED, LAZY),
+			75, 59, 51, 68, 44, 54, 43, 
+			394,
+			76.2,
+			35.0,
+			List.of(BLAZE_CHOMP, BODY_SLAM, BOULDER_BLAST, BURROW, CHARRED_CLAWS, CHASE_DOWN, CHOMP, DODGE, EARTHQUAKE, EXAMINE, GNAW, HARROW, MUDSLIDE, MUD_SPATTER, PHANTOM_SLASH, PROVOKE, REJUVENATE, SAFEGUARD, SHARPEN, SLASH, SPARE, SWAT, SWIPE, TALENT_TRADE, THUNDER_CHOMP),
+			true
+		);
+		register(
+			SEDIMARS,
+			"sedimars",
+			List.of(EARTH),
+			List.of(HASTY, INSULATED, LAZY),
+			107, 87, 91, 108, 52, 81, 54, 
+			580,
+			154.94,
+			234.0,
+			List.of(BLAZE_CHOMP, BODY_SLAM, BOULDER_BLAST, BURROW, CHARRED_CLAWS, CHASE_DOWN, CHOMP, DODGE, EARTHQUAKE, EXAMINE, GNAW, HARROW, ILL_WILL, MUDSLIDE, MUD_SPATTER, PHANTOM_SLASH, PROVOKE, RAGING_TACKLE, REJUVENATE, SAFEGUARD, SHARPEN, SLASH, SPARE, SWAT, SWIPE, TALENT_TRADE, THUNDER_CHOMP),
+			true
+		);
+		register(
+			GUMPOD,
+			"gumpod",
+			List.of(WATER),
+			List.of(PROTECTIVE_SHELL, SHARP_EDGES),
+			60, 55, 42, 98, 42, 43, 33, 
+			373,
+			48.26,
+			12.0,
+			List.of(BATTERING_RAM, BRACE, BURN_UP, DODGE, EERIE_STARE, FROST_BEAM, HYDRO_SLASH, MAROON, MUDSLIDE, SCAPEGOAT, SLEET_SHOT, SLUMBER, SOFT_WATER, SPARE, SPRAY, TEAR_DOWN, TSUNAMI, WATER_BOMB),
+			true
+		);
+		register(
+			VENTACEAN,
+			"ventacean",
+			List.of(WATER),
+			List.of(PROTECTIVE_SHELL, SHARP_EDGES),
+			90, 90, 57, 142, 90, 58, 48, 
+			575,
+			157.48,
+			230.0,
+			List.of(BATTERING_RAM, BRACE, BURN_UP, DODGE, EERIE_STARE, FROST_BEAM, GEYSER, HYDRO_SLASH, MAROON, MUDSLIDE, SCAPEGOAT, SLEET_SHOT, SLUMBER, SOFT_WATER, SPARE, SPRAY, TEAR_DOWN, TSUNAMI, WATER_BOMB),
+			true
+		);
+		register(
+			PHANCUB,
+			"phancub",
+			List.of(SPIRIT, BRAWLER),
+			List.of(PROWLER, ADORABLE),
+			46, 60, 65, 50, 46, 55, 60, 
+			382,
+			66.04,
+			18.0,
+			List.of(BARBS, CHASE_DOWN, DODGE, FINAL_RUSE, HARROW, PEP_JAB, PHANTOM_SLASH, PROVOKE, PUNCH, QUICK_PUNCH, SHADOWBOX, SHADOW_SPRINT, SHARPEN, SLAP_DOWN, SLASH, SOUL_STORM, SPARE, SPECTRAL_BURST, STARE, STARTLE),
+			true
+		);
+		register(
+			PHANCUB_V,
+			"phancub_v",
+			List.of(SPIRIT, BRAWLER),
+			List.of(IGNORANT, CLINGY),
+			58, 67, 52, 79, 17, 63, 46, 
+			382,
+			66.04,
+			18.0,
+			List.of(CHASE_DOWN, DODGE, FINAL_RUSE, GAIN_DRAIN, HEART_BREAK, PEP_JAB, PHANTOM_SLASH, PUNCH, QUICK_PUNCH, SHADOW_SPRINT, SHARPEN, SLAP_DOWN, SLASH, SPARE, SPECTRAL_BURST, STARE, STARTLE),
+			true
+		);
+		register(
+			URSOUL,
+			"ursoul",
+			List.of(SPIRIT, BRAWLER),
+			List.of(PROWLER, TERRIFYING),
+			99, 89, 120, 68, 50, 90, 75, 
+			591,
+			203.2,
+			210.0,
+			List.of(BARBS, BULK_UP, CHASE_DOWN, DODGE, FINAL_RUSE, HARROW, HOP_KICK, PEP_JAB, PHANTOM_SLASH, PROVOKE, PUNCH, QUICK_PUNCH, SHADOWBOX, SHADOW_SPRINT, SHARPEN, SLAP_DOWN, SLASH, SOUL_STORM, SPARE, SPECTRAL_BURST, STARE, STARTLE, STEEL_TRAP),
+			true
+		);
+		register(
+			URSNAC,
+			"ursnac",
+			List.of(SPIRIT, BRAWLER),
+			List.of(TANK, BURSTING_SEAMS),
+			99, 89, 95, 113, 50, 90, 55, 
+			591,
+			187.96,
+			160.0,
+			List.of(BAFFLE, CHASE_DOWN, DODGE, FINAL_RUSE, GAIN_DRAIN, HEART_BREAK, PEP_JAB, PHANTOM_SLASH, PUNCH, QUICK_PUNCH, ROUGH_UP, SHADOW_SPRINT, SHARPEN, SLAP_DOWN, SLASH, SPARE, SPECTRAL_BURST, STARE, STARTLE),
+			true
+		);
+		register(
+			WHISPUP,
+			"whispup",
+			List.of(SPIRIT, FIRE),
+			List.of(TEMPER, SCORCHING_SKIN, VENGEANCE),
+			45, 60, 57, 42, 70, 48, 72, 
+			394,
+			96.52,
+			4.0,
+			List.of(ACCELERATE, BLAZE_CHOMP, DARK_SURGE, DODGE, FADE_AWAY, FINAL_RUSE, FIRE_BREATH, FLARE_BLAST, GNAW, HARROW, MEGA_CHOMP, PHANTOM_BLAST, PHANTOM_SLASH, POWER_FOCUS, SHADOW_SPRINT, SINGE, SOUL_STORM, SPARE, SPECTRAL_BURST, STARE, STARTLE, STRETCH),
+			true
+		);
+		register(
+			REVENINE,
+			"revenine",
+			List.of(SPIRIT, FIRE),
+			List.of(TEMPER, PROWLER, VENGEANCE),
+			65, 89, 105, 63, 115, 67, 97, 
+			601,
+			149.86,
+			50.0,
+			List.of(ACCELERATE, BLAZE_CHOMP, DARK_SURGE, DODGE, FADE_AWAY, FINAL_RUSE, FIRE_BREATH, FLARE_BLAST, GHOSTLY_HOWL, GNAW, HARROW, MEGA_CHOMP, PHANTOM_BLAST, PHANTOM_SLASH, POWER_FOCUS, SHADOW_SPRINT, SINGE, SOUL_STORM, SPARE, SPECTRAL_BURST, STARE, STARTLE, STRETCH),
+			true
+		);
+		register(
+			SKILAVA,
+			"skilava",
+			List.of(FIRE),
+			List.of(SCORCHING_SKIN, COMBUSTIBLE, PYRO),
+			50, 70, 48, 49, 58, 49, 55, 
+			379,
+			55.88,
+			14.0,
+			List.of(BLAZE_CHOMP, BLAZE_OF_GLORY, BLAZE_RUSH, BRAWN_BOOST, DARK_SURGE, DODGE, EARTHQUAKE, FIRE_BREATH, GNAW, GROWL, LANDSLIDE, MAGMA_BLOCK, MAGNIFY, MUDSLIDE, MUD_SPATTER, PHANTOM_SLASH, POWER_FOCUS, PROVOKE, QUICK_POUNCE, RAGING_FLAME, SINGE, SLASH, SPARE, STRETCH, TEAR_DOWN),
+			true
+		);
+		register(
+			GEKSPLODE,
+			"geksplode",
+			List.of(FIRE),
+			List.of(SCORCHING_SKIN, COMBUSTIBLE, PYRO),
+			65, 80, 52, 58, 80, 59, 60, 
+			454,
+			88.9,
+			120.0,
+			List.of(BLAZE_CHOMP, BLAZE_OF_GLORY, BLAZE_RUSH, BRAWN_BOOST, DARK_SURGE, DODGE, EARTHQUAKE, FIRE_BREATH, FIRE_SLAM, GNAW, GROWL, LANDSLIDE, MAGMA_BLOCK, MAGNIFY, MUDSLIDE, MUD_SPATTER, PHANTOM_SLASH, POWER_FOCUS, PROVOKE, QUICK_POUNCE, RAGING_FLAME, SINGE, SLASH, SPARE, STRETCH, TEAR_DOWN),
+			true
+		);
+		register(
+			ERUPTIDON,
+			"eruptidon",
+			List.of(FIRE),
+			List.of(SCORCHING_SKIN, COMBUSTIBLE, PYRO),
+			81, 90, 94, 74, 105, 89, 77, 
+			610,
+			266.7,
+			226.0,
+			List.of(BLAZE_CHOMP, BLAZE_OF_GLORY, BLAZE_RUSH, BRAWN_BOOST, DARK_SURGE, DODGE, EARTHQUAKE, FIRE_BREATH, FIRE_SLAM, GNAW, GROWL, LANDSLIDE, LAVA_SLASH, MAGMA_BLOCK, MAGNIFY, MUDSLIDE, MUD_SPATTER, PHANTOM_SLASH, POWER_FOCUS, PROVOKE, QUICK_POUNCE, RAGING_FLAME, SINGE, SLASH, SPARE, STRETCH, TEAR_DOWN),
+			true
+		);
+		register(
+			ERUPTIDON_MAGMADIRE,
+			"eruptidon_magmadire",
+			List.of(FIRE, EARTH),
+			List.of(PYR_PRO),
+			81, 90, 104, 90, 127, 94, 80, 
+			666,
+			266.7,
+			226.0,
+			List.of(BLAZE_CHOMP, BLAZE_OF_GLORY, BLAZE_RUSH, BRAWN_BOOST, DARK_SURGE, DODGE, EARTHQUAKE, FIRE_BREATH, FIRE_SLAM, GNAW, GROWL, LANDSLIDE, LAVA_SLASH, MAGMA_BLOCK, MAGNIFY, MUDSLIDE, MUD_SPATTER, PHANTOM_SLASH, POWER_FOCUS, PROVOKE, QUICK_POUNCE, RAGING_FLAME, SINGE, SLASH, SPARE, STRETCH, TEAR_DOWN),
+			true
+		);
+		register(
+			CRAYTAL,
+			"craytal",
+			List.of(FIRE),
+			List.of(VOLCANIC, TERRITORIAL, COMBUSTIBLE),
+			76, 74, 34, 43, 76, 43, 62, 
+			408,
+			81.28,
+			26.0,
+			List.of(BLAZE_OF_GLORY, BLAZE_RUSH, BRACE, BRAWN_BOOST, CHARRED_CLAWS, DODGE, FIRE_BREATH, FIRE_SLAM, FLARE_BLAST, HIGH_PITCH_SCREECH, MUDSLIDE, MUD_SPATTER, PHANTOM_SLASH, POWER_FOCUS, RAGING_FLAME, REJUVENATE, SINGE, SLASH, SPARE, SWIPE, TEAR_DOWN, TRICKY_TACTICS),
+			true
+		);
+		register(
+			KRAKALOA,
+			"krakaloa",
+			List.of(FIRE),
+			List.of(VOLCANIC, SCORCHING_SKIN, COMBUSTIBLE),
+			95, 125, 58, 95, 91, 99, 22, 
+			585,
+			205.74,
+			343.0,
+			List.of(BLAZE_OF_GLORY, BLAZE_RUSH, BRACE, BRAWN_BOOST, CHARRED_CLAWS, DARK_SURGE, DODGE, EERIE_STARE, FIRE_BREATH, FIRE_SLAM, FLARE_BLAST, HIGH_PITCH_SCREECH, MAGMA_BLOCK, MAGMA_BURST, MUDSLIDE, MUD_SPATTER, PHANTOM_SLASH, POWER_FOCUS, RAGING_FLAME, REJUVENATE, SCAPEGOAT, SINGE, SLASH, SPARE, SPECTRAL_BURST, SWIPE, TEAR_DOWN, TRICKY_TACTICS),
+			true
+		);
+		register(
+			KRAKALOA_LAVAFIEND,
+			"krakaloa_lavafiend",
+			List.of(FIRE, SPIRIT),
+			List.of(HEAT_SUMMON),
+			115, 125, 63, 105, 126, 109, 12, 
+			655,
+			205.74,
+			343.0,
+			List.of(BLAZE_OF_GLORY, BLAZE_RUSH, BRACE, BRAWN_BOOST, CHARRED_CLAWS, DARK_SURGE, DODGE, EERIE_STARE, FIRE_BREATH, FIRE_SLAM, FLARE_BLAST, HIGH_PITCH_SCREECH, MAGMA_BLOCK, MAGMA_BURST, MUDSLIDE, MUD_SPATTER, PHANTOM_SLASH, POWER_FOCUS, RAGING_FLAME, REJUVENATE, SCAPEGOAT, SINGE, SLASH, SPARE, SPECTRAL_BURST, SWIPE, TEAR_DOWN, TRICKY_TACTICS),
+			true
+		);
+		register(
+			VOLKALOA,
+			"volkaloa",
+			List.of(FIRE, ANCIENT),
+			List.of(VOLCANIC, BERSERK, COMBUSTIBLE),
+			81, 90, 110, 74, 64, 64, 102, 
+			585,
+			198.12,
+			238.0,
+			List.of(BLAZE_CHOMP, BLAZE_OF_GLORY, BLAZE_PUNCH, BLAZE_RUSH, BRACE, BRAWN_BOOST, CHARRED_CLAWS, COCONUT_BOMB, DODGE, FIRE_BREATH, FIRE_SLAM, FLARE_BLAST, HIGH_PITCH_SCREECH, ILL_WILL, MUDSLIDE, MUD_SPATTER, PHANTOM_SLASH, POWER_FOCUS, PRIMAL_SLASH, RAGING_FLAME, REJUVENATE, SAVAGE_GREED, SINGE, SLASH, SPARE, SWIPE, TEAR_DOWN, TRICKY_TACTICS),
+			true
+		);
+		register(
+			CRAYTAL_C,
+			"craytal_c",
+			List.of(ICE, PLANT),
+			List.of(PARTING_GIFT, CHILL, REGIFT),
+			76, 74, 76, 43, 14, 63, 62, 
+			408,
+			81.28,
+			26.0,
+			List.of(BRACE, BRAWN_BOOST, BRIAR_BLOCK, BUSH_WHACK, DODGE, EARTHQUAKE, FLURRY, FROST_BEAM, HYPNOTIZE, ICE_HAMMER, ICICLE_TRAP, ILL_WILL, LEAF_BARRAGE, PETAL_PUMMEL, RAGING_TACKLE, REJUVENATE, SAP_PLANT, SNOWDOZER, SPARE, THISTLE_SLASH, TIMBER_THRASH, TRICKY_TACTICS, VINE_LASH),
+			true
+		);
+		register(
+			FESTIFIR,
+			"festifir",
+			List.of(ICE, PLANT),
+			List.of(PARTING_GIFT, CHILL, REGIFT),
+			128, 101, 119, 71, 46, 98, 22, 
+			585,
+			205.74,
+			149.0,
+			List.of(BRACE, BRAWN_BOOST, BRIAR_BLOCK, BUSH_WHACK, DODGE, EARTHQUAKE, FLURRY, FROST_BEAM, FUNGUS_CURSE, HYPNOTIZE, ICE_HAMMER, ICICLE_TRAP, ILL_WILL, LEAF_BARRAGE, PETAL_PUMMEL, RAGING_TACKLE, REJUVENATE, SAP_PLANT, SNOWDOZER, SPARE, THISTLE_SLASH, TIMBER_THRASH, TRICKY_TACTICS, VINE_LASH),
+			true
+		);
+		register(
+			IGNEOL,
+			"igneol",
+			List.of(ANCIENT),
+			List.of(SHARP_EDGES, PREMONITION, RESILIENCE),
+			62, 75, 60, 70, 42, 41, 42, 
+			392,
+			63.5,
+			35.0,
+			List.of(BARBS, BODY_CRASH, BODY_SLAM, BURROW, DINO_CLAWS, DODGE, EARTHQUAKE, GNAW, HEADBUTT, MEGA_CHOMP, MUCK_BUCK, MUDSLIDE, MUD_SPATTER, OUTBURST, POWER_FOCUS, PRIMAL_SLASH, PROVOKE, RAGING_TACKLE, SCAPEGOAT, SHARPEN, SPARE),
+			true
+		);
+		register(
+			CHRYSITE,
+			"chrysite",
+			List.of(ANCIENT),
+			List.of(SHARP_EDGES, PREMONITION, RESILIENCE),
+			82, 80, 64, 99, 47, 46, 42, 
+			460,
+			134.62,
+			170.0,
+			List.of(BARBS, BODY_CRASH, BODY_SLAM, BRACE, BURROW, DINO_CLAWS, DODGE, EARTHQUAKE, GNAW, HEADBUTT, MEGA_CHOMP, MUCK_BUCK, MUDSLIDE, MUD_SPATTER, OUTBURST, POWER_FOCUS, PRIMAL_SLASH, PROVOKE, RAGING_TACKLE, SCAPEGOAT, SHARPEN, SPARE),
+			true
+		);
+		register(
+			OBSIDRUGON,
+			"obsidrugon",
+			List.of(ANCIENT),
+			List.of(SHARP_EDGES, SHARP_CLAWS, RESILIENCE),
+			99, 100, 100, 124, 72, 65, 65, 
+			625,
+			256.54,
+			295.0,
+			List.of(BARBS, BEASTS_SLUMBER, BODY_CRASH, BODY_SLAM, BRACE, BURROW, DINO_CLAWS, DODGE, DRUDGE, EARTHQUAKE, GNAW, HEADBUTT, MEGA_CHOMP, MUCK_BUCK, MUDSLIDE, MUD_SPATTER, OUTBURST, POWER_FOCUS, PRIMAL_SLASH, PROVOKE, RAGING_TACKLE, SCAPEGOAT, SHARPEN, SPARE),
+			true
+		);
+		register(
+			CAFNOTE_M,
+			"cafnote_m",
+			List.of(SIMPLE),
+			List.of(TRIUMPH, VIRTUOSO, BRUTE_FORCE),
+			60, 60, 42, 62, 42, 58, 53, 
+			377,
+			124.46,
+			127.0,
+			List.of(BATTLE_CHIME, BODY_SLAM, DODGE, DRIVING_FORCE, EARTHQUAKE, HEADBUTT, MEGA_CHOMP, PROVOKE, QUICK_POUNCE, RAGING_TACKLE, ROGUE_ASSAULT, SPARE, STARE, STRETCH, STRIKE, TONE_BARRIER),
+			true
+		);
+		register(
+			CAFNOTE_F,
+			"cafnote_f",
+			List.of(SIMPLE),
+			List.of(ADORABLE, VIRTUOSO, TONE_DEAF),
+			60, 60, 42, 58, 42, 62, 53, 
+			377,
+			124.46,
+			127.0,
+			List.of(DISSONANT_CHORD, DODGE, GAMMA_PULSE, HARMONIOUS_CHORD, HULLABALOO, MAGNIFY, PEACE_OF_MIND, PROVOKE, QUICK_POUNCE, RAGING_HOWL, REPEATING_TUNE, SPARE, STARE, STRETCH, STRIKE, TEASE, TEASE),
+			true
+		);
+		register(
+			TRUMBULL,
+			"trumbull",
+			List.of(SIMPLE),
+			List.of(TRIUMPH, VIRTUOSO, BRUTE_FORCE),
+			92, 79, 134, 102, 52, 68, 73, 
+			600,
+			177.8,
+			414.0,
+			List.of(BATTLE_CHIME, BATTLE_HORN, BODY_SLAM, DODGE, DRIVING_FORCE, EARTHQUAKE, HEADBUTT, MEGA_CHOMP, PROVOKE, QUICK_POUNCE, RAGING_TACKLE, ROGUE_ASSAULT, SPARE, STARE, STRETCH, STRIKE, TONE_BARRIER),
+			true
+		);
+		register(
+			MOOTUNE,
+			"mootune",
+			List.of(SIMPLE),
+			List.of(ADORABLE, VIRTUOSO, TONE_DEAF),
+			92, 79, 52, 79, 134, 102, 62, 
+			600,
+			172.72,
+			324.0,
+			List.of(DISSONANT_CHORD, DODGE, GAMMA_PULSE, HARMONIOUS_CHORD, HULLABALOO, MAGNIFY, PEACE_OF_MIND, PROVOKE, QUICK_POUNCE, RAGING_HOWL, REPEATING_TUNE, RESONATE, SPARE, STARE, STRETCH, STRIKE, TEASE, TEASE),
+			true
+		);
+		register(
+			GOBBIDEMIC,
+			"gobbidemic",
+			List.of(TOXIC),
+			List.of(IMMUNIZED, BANEFUL),
+			70, 80, 35, 60, 93, 64, 123, 
+			525,
+			101.6,
+			95.0,
+			List.of(AIR_BLADE, BAIT, BARBS, CORRODE, DODGE, FAR_ENCHANTMENT, GOBBLE_GOOP, GUST, HEALTH_GIFT, HYPNOTIZE, MUCK_BLAST, NEAR_ENCHANTMENT, PECK, POISON, POISON_BARBS, PROVOKE, SLIME, SPARE, SQUAWK, STING, STRETCH, TEAR_DOWN, TRIP_ROOT, WONDER_HERB),
+			true
+		);
+		register(
+			ICIGOOL,
+			"icigool",
+			List.of(SPIRIT, ICE),
+			List.of(PARTING_GIFT, EXPERTISE, POWER_JAW),
+			95, 69, 112, 94, 35, 81, 39, 
+			525,
+			109.22,
+			15.0,
+			List.of(BAFFLE, BAG_OF_TRICKS, BANE_OF_HASTE, BARBS, BARTER, BLAZE_CHOMP, CHILLY_CHOMP, CHOMP, DARK_SURGE, DODGE, FADE_AWAY, FROST_BEAM, GAIN_DRAIN, HEALTH_GIFT, HYPNOTIZE, ICE_HAMMER, ICICLE_FANGS, ICICLE_TRAP, ILL_WILL, IMPERSONATE, MEGA_CHOMP, PHANTOM_SLASH, REJUVENATE, SNOWDOZER, SOUL_STORM, SPARE, SPECTRAL_BURST, STARTLE, THUNDER_CHOMP, TRICKY_TACTICS),
+			true
+		);
+		register(
+			ICIGOOL_INCARNATE,
+			"icigool_incarnate",
+			List.of(SPIRIT, ICE),
+			List.of(PARTING_GIFT, EXPERTISE, POWER_JAW),
+			105, 99, 132, 104, 44, 91, 50, 
+			625,
+			109.22,
+			15.0,
+			List.of(BAFFLE, BAG_OF_TRICKS, BANE_OF_HASTE, BARBS, BARTER, BLAZE_CHOMP, CHILLY_CHOMP, CHOMP, DARK_SURGE, DODGE, FADE_AWAY, FROST_BEAM, GAIN_DRAIN, HEALTH_GIFT, HYPNOTIZE, ICE_HAMMER, ICICLE_FANGS, ICICLE_TRAP, ILL_WILL, IMPERSONATE, MEGA_CHOMP, PHANTOM_SLASH, REJUVENATE, SNOWDOZER, SOUL_STORM, SPARE, SPECTRAL_BURST, STARTLE, THUNDER_CHOMP, TRICKY_TACTICS),
+			true
+		);
+		register(
+			PYRAMIND,
+			"pyramind",
+			List.of(MIND),
+			List.of(IDIOSYNCRATIC, TEMPER, REIGN),
+			88, 60, 45, 69, 84, 99, 35, 
+			480,
+			139.7,
+			250.0,
+			List.of(BANE_OF_HASTE, BOULDER_BLAST, BRAINWASH, BULK_UP, CLIMATE_CANNON, DARK_SURGE, DEJA_VU, DISSIPATE, DODGE, DRACO_BEAM, DRUDGE, EARTHQUAKE, FLABBERGAST, GAIN_DRAIN, HARROW, HASTEN, HULLABALOO, LANDSLIDE, MINDS_EYE, MIND_DRAIN, MUDSLIDE, MUD_SPATTER, OUTBURST, PEACE_OF_MIND, PHANTOM_BLAST, PHANTOM_SLASH, PROVOKE, PSYCHO_BLAST, RANT, RETURN_TO_SENDER, ROCK_SLIDE, ROGUE_ASSAULT, SAFEGUARD, SHREWD_BLAST, SPARE, SPECTRAL_BURST, SPECTRAL_BURST, TALENT_TRADE, TEAR_DOWN, TRIBUTE),
+			true
+		);
+		register(
+			PHAROGLYPH,
+			"pharoglyph",
+			List.of(MIND),
+			List.of(IDIOSYNCRATIC, TEMPER, REIGN),
+			88, 100, 55, 55, 120, 101, 106, 
+			625,
+			218.44,
+			367.0,
+			List.of(BANE_OF_HASTE, BOULDER_BLAST, BRAINWASH, BULK_UP, CEREBRAL_SLASH, CLIMATE_CANNON, DARK_SURGE, DEJA_VU, DISSIPATE, DODGE, DRACO_BEAM, DRUDGE, EARTHQUAKE, FLABBERGAST, GAIN_DRAIN, HARROW, HASTEN, HOP_KICK, HULLABALOO, JUDGEMENT, LANDSLIDE, MEMORIZE, MINDS_EYE, MIND_DRAIN, MUDSLIDE, MUD_SPATTER, OUTBURST, PEACE_OF_MIND, PHANTOM_BLAST, PHANTOM_SLASH, PROVOKE, PSYCHO_BLAST, RANT, RETURN_TO_SENDER, ROCK_SLIDE, ROGUE_ASSAULT, SAFEGUARD, SHREWD_BLAST, SPARE, SPECTRAL_BURST, SPECTRAL_BURST, TALENT_TRADE, TEAR_DOWN, TRIBUTE),
+			true
+		);
+		register(
+			BURROACH,
+			"burroach",
+			List.of(BUG, EARTH),
+			List.of(TRASH_ARMOUR, SLIMY, SHARP_CLAWS),
+			32, 60, 46, 63, 45, 54, 77, 
+			377,
+			38.1,
+			35.0,
+			List.of(BARBS, BODY_CRASH, BUG_BITE, BURROW, CLAY_SLAP, DODGE, EARTHQUAKE, EERIE_STARE, GNAW, HEADBUTT, MUD_SPATTER, PARASITIZE, POISON, PROVOKE, SLAP_DOWN, SPARE, STRETCH, VENOM_CHOMP),
+			true
+		);
+		register(
+			GARBANTIS,
+			"garbantis",
+			List.of(BUG, EARTH),
+			List.of(TRASH_ARMOUR, SLIMY, SHARP_CLAWS),
+			55, 76, 97, 115, 54, 74, 104, 
+			575,
+			165.1,
+			127.0,
+			List.of(BARBS, BATTERING_RAM, BODY_CRASH, BUG_BITE, BULK_UP, BURROW, CLAY_SLAP, DODGE, EARTHQUAKE, EERIE_STARE, GNAW, HEADBUTT, MOLT, MUD_SPATTER, PARASITIZE, POISON, PROVOKE, SLAP_DOWN, SPARE, STRETCH, VENOM_CHOMP),
+			true
+		);
+		register(
+			WHIMPOR,
+			"whimpor",
+			List.of(METAL, AIR),
+			List.of(CLUTCH, FRAIL_ARMOUR, TOXIC_FILTER),
+			62, 58, 21, 46, 59, 62, 53, 
+			361,
+			78.74,
+			70.0,
+			List.of(AIR_BLADE, AIR_SHOT, BODY_SLAM, BRACE, CYCLONE_SLAM, DISSONANT_CHORD, DODGE, ENERGY_SURGE, HEAVY_BASH, JET_STREAM, JUMP_START, METAL_BLAST, METAL_SHRIEK, METAL_SWIPES, PERCH, REFLECTION_BURST, SPARE, STUN, TAIL_SLAP, TEAR_DOWN),
+			true
+		);
+		register(
+			STRATUSOAR,
+			"stratusoar",
+			List.of(METAL, AIR),
+			List.of(CLUTCH, FRAIL_ARMOUR, TOXIC_FILTER),
+			100, 80, 49, 77, 105, 108, 81, 
+			600,
+			228.6,
+			487.0,
+			List.of(AIR_BLADE, AIR_SHOT, BODY_SLAM, BRACE, CYCLONE_SLAM, DISSONANT_CHORD, DODGE, ENERGY_SURGE, HEAVY_BASH, JET_STREAM, JUMP_START, MAGNIFY, METAL_BLAST, METAL_SHRIEK, METAL_SWIPES, PERCH, REFLECTION_BURST, SECOND_WIND, SPARE, STUN, TAIL_SLAP, TEAR_DOWN),
+			true
+		);
+		register(
+			STRATUSOAR_JETWING,
+			"stratusoar_jetwing",
+			List.of(METAL, AIR),
+			List.of(TURBULENT),
+			100, 100, 66, 67, 135, 78, 119, 
+			665,
+			228.6,
+			487.0,
+			List.of(AIR_BLADE, AIR_SHOT, BODY_SLAM, BRACE, CYCLONE_SLAM, DISSONANT_CHORD, DODGE, ENERGY_SURGE, HEAVY_BASH, JET_STREAM, JUMP_START, MAGNIFY, METAL_BLAST, METAL_SHRIEK, METAL_SWIPES, PERCH, REFLECTION_BURST, SECOND_WIND, SPARE, STUN, TAIL_SLAP, TEAR_DOWN),
+			true
+		);
+		register(
+			TERRITI,
+			"territi",
+			List.of(TOXIC, METAL),
+			List.of(IMMUNIZED, CONFIDENCE, HANDY),
+			51, 58, 61, 44, 59, 48, 52, 
+			373,
+			101.6,
+			64.0,
+			List.of(BAG_OF_TRICKS, BARTER, BASH, CANISTER_BURST, CLIMATE_CANNON, CORRODE, DAWDLE, DODGE, DOWNPOUR, FAR_ENCHANTMENT, GALE_FORCE, HEAVY_BASH, HOP_KICK, HYPNOTIZE, MEGA_PUNCH, METAL_BLAST, MUCK_BLAST, NEAR_ENCHANTMENT, PAINT_SHOWER, POISON, POWER_FOCUS, PROVOKE, PUNCH, SPARE, SQUARE_ONE, STEEL_CRUSHER, STUN, TRICKY_TACTICS),
+			true
+		);
+		register(
+			DYEBORG,
+			"dyeborg",
+			List.of(TOXIC, METAL),
+			List.of(IMMUNIZED, TANK, HANDY),
+			78, 86, 97, 83, 93, 87, 68, 
+			592,
+			203.2,
+			396.0,
+			List.of(BAG_OF_TRICKS, BARTER, BASH, CANISTER_BURST, CLIMATE_CANNON, CORRODE, DAWDLE, DODGE, DOWNPOUR, FAR_ENCHANTMENT, GALE_FORCE, GRAFFITI, HEAVY_BASH, HOP_KICK, HYPNOTIZE, MEGA_PUNCH, METAL_BLAST, MUCK_BLAST, NEAR_ENCHANTMENT, PAINT_SHOWER, POISON, POWER_FOCUS, PROVOKE, PUNCH, SPARE, SQUARE_ONE, STEEL_CRUSHER, STUN, TRICKY_TACTICS),
+			true
+		);
+		register(
+			OPERAPTOR,
+			"operaptor",
+			List.of(METAL, EARTH),
+			List.of(TERRIFYING, POWER_JAW, OVERCLOCK),
+			53, 67, 64, 61, 45, 53, 49, 
+			392,
+			106.68,
+			87.0,
+			List.of(BODY_SLAM, BURROW, CHOMP, CLAMP, DODGE, EARTHQUAKE, GNAW, HEADBUTT, HEAVY_BASH, METAL_SHRIEK, MUD_SPATTER, POWER_FOCUS, QUICKSAND, SHARPEN, SLUMBER, SPARE, STEEL_CRUSHER, TEAR_DOWN, THUNDER_CHOMP, VICE_JAWS),
+			true
+		);
+		register(
+			CONCREDON,
+			"concredon",
+			List.of(METAL, EARTH),
+			List.of(TERRIFYING, POWER_JAW, OVERCLOCK),
+			77, 77, 84, 69, 53, 64, 66, 
+			490,
+			180.34,
+			234.0,
+			List.of(BODY_SLAM, BURROW, CHOMP, CLAMP, CLAY_SLAP, DODGE, EARTHQUAKE, GNAW, HEADBUTT, HEAVY_BASH, METAL_SHRIEK, MUD_SPATTER, POWER_FOCUS, QUICKSAND, SHARPEN, SLUMBER, SPARE, STEEL_CRUSHER, TEAR_DOWN, THUNDER_CHOMP, VICE_JAWS),
+			true
+		);
+		register(
+			TYRECKS,
+			"tyrecks",
+			List.of(METAL, EARTH),
+			List.of(TERRIFYING, POWER_JAW, OVERCLOCK),
+			89, 94, 111, 102, 72, 83, 74, 
+			625,
+			299.72,
+			892.0,
+			List.of(BODY_SLAM, BURROW, CHOMP, CLAMP, CLAY_SLAP, COMPLETE_DEMOLITION, DODGE, EARTHQUAKE, GNAW, HEADBUTT, HEAVY_BASH, METAL_SHRIEK, MUD_SPATTER, POWER_FOCUS, QUICKSAND, SHARPEN, SLUMBER, SPARE, STEEL_CRUSHER, TEAR_DOWN, THUNDER_CHOMP, VICE_JAWS),
+			true
+		);
+	}
+	private static void initSpecies2() {
+		register(
+			CHOMPACTOR,
+			"chompactor",
+			List.of(METAL),
+			List.of(SALVAGE, REV_UP, SPECIALIZATION),
+			58, 55, 61, 73, 32, 51, 45, 
+			375,
+			71.12,
+			53.0,
+			List.of(ACCELERATE, AIM, AQUA_JAWS, BARBS, BASH, BLAZE_CHOMP, BULK_UP, CHILLY_CHOMP, CHOMP, DODGE, DOUBLE_WHACK, GNAW, HEAVY_BASH, MEGA_CHOMP, METAL_SWIPES, OIL_LEAK, POISON, QUICK_PUNCH, RECYCLE, SPARE, STEEL_CRUSHER, THUNDER_CHOMP, VICE_JAWS),
+			true
+		);
+		register(
+			MUNCHWHEEL,
+			"munchweel",
+			List.of(METAL),
+			List.of(FORGE, REV_UP, SPECIALIZATION),
+			94, 79, 104, 113, 52, 78, 66, 
+			586,
+			200.66,
+			425.0,
+			List.of(ACCELERATE, AIM, AQUA_JAWS, BARBS, BASH, BLAZE_CHOMP, BULK_UP, CHILLY_CHOMP, CHOMP, CLEAN_UP, DODGE, DOUBLE_WHACK, GNAW, HEAVY_BASH, MEGA_CHOMP, METAL_SWIPES, OIL_LEAK, POISON, QUICK_PUNCH, RECYCLE, SPARE, STEEL_CRUSHER, THUNDER_CHOMP, VICE_JAWS),
+			true
+		);
+		register(
+			SCORB,
+			"scorb",
+			List.of(METAL),
+			List.of(COMMUNICATION, HOVER, CLUTCH),
+			49, 55, 25, 42, 67, 45, 77, 
+			360,
+			38.1,
+			24.0,
+			List.of(BASH, DODGE, EXAMINE, FLURRY, METAL_SHRIEK, SINGE, SPARE, STATIC_SHOCK),
+			true
+		);
+		register(
+			VEYLENS,
+			"veylens",
+			List.of(METAL),
+			List.of(COMMUNICATION, HOVER, CLUTCH),
+			57, 64, 28, 56, 88, 67, 55, 
+			415,
+			127.0,
+			53.0,
+			List.of(ACCELERATE, BASH, DEEP_FREEZE, DODGE, EERIE_STARE, EXAMINE, FIRE_SLAM, FLURRY, HEAVY_BASH, METAL_SHRIEK, MINDS_EYE, PRECISION_BOLT, RAGING_FLAME, REFLECTION_BURST, SINGE, SLEET_SHOT, SNOWDOZER, SPARE, STATIC_SHOCK, THUNDER_SLAM),
+			true
+		);
+		register(
+			GARDRONE,
+			"gardrone",
+			List.of(METAL),
+			List.of(COMMUNICATION, HOVER, CLUTCH),
+			74, 82, 54, 73, 132, 119, 61, 
+			595,
+			187.96,
+			148.0,
+			List.of(ACCELERATE, BASH, DEEP_FREEZE, DODGE, EERIE_STARE, EXAMINE, FIRE_BREATH, FIRE_SLAM, FLURRY, FROST_BEAM, HEAVY_BASH, JUMP_START, METAL_BLAST, METAL_SHRIEK, MINDS_EYE, PRECISION_BOLT, RAGING_FLAME, REFLECTION_BURST, SINGE, SLEET_SHOT, SNOWDOZER, SPARE, STATIC_SHOCK, STEEL_CRUSHER, THUNDERSTRIKE, THUNDER_SLAM),
+			true
+		);
+		register(
+			POOCHROL,
+			"poochrol",
+			List.of(METAL, ELECTRIC),
+			List.of(BRUTE_FORCE, POWER_JAW),
+			51, 51, 59, 52, 31, 47, 69, 
+			360,
+			63.5,
+			19.0,
+			List.of(BLAZE_CHOMP, CHASE_DOWN, CHILLY_CHOMP, CHOMP, DODGE, GROWL, HEAVY_BASH, MEGA_CHOMP, METAL_SWIPES, MUD_SPATTER, PRECISION_BOLT, PROVOKE, QUICK_POUNCE, SHARPEN, SPARE, STATIC_SHOCK, TASE, THUNDERSTRIKE, THUNDER_CHOMP, VICE_JAWS, ZIP_ZAP),
+			true
+		);
+		register(
+			HUNDER,
+			"hunder",
+			List.of(METAL, ELECTRIC),
+			List.of(BRUTE_FORCE, POWER_JAW),
+			78, 84, 94, 83, 63, 69, 116, 
+			587,
+			137.16,
+			94.0,
+			List.of(BLAZE_CHOMP, CHASE_DOWN, CHILLY_CHOMP, CHOMP, DODGE, GROWL, HEAVY_BASH, MEGA_CHOMP, METAL_SWIPES, MUD_SPATTER, PRECISION_BOLT, PROVOKE, QUICK_POUNCE, ROUGH_UP, SHARPEN, SPARE, STATIC_SHOCK, TASE, THUNDERSTRIKE, THUNDER_CHOMP, VICE_JAWS, ZIP_ZAP),
+			true
+		);
+		register(
+			GOPPIE,
+			"goppie",
+			List.of(WATER),
+			List.of(RAIN_RUSH, FINESSE, QUICK_RECOVERY),
+			48, 54, 33, 45, 53, 46, 64, 
+			343,
+			43.18,
+			15.0,
+			List.of(BODY_SLAM, CHOMP, DARK_SURGE, DAWDLE, DODGE, EERIE_STARE, FLURRY, FROST_BEAM, HYDRO_BLAST, ILL_WILL, MAGNIFY, MAROON, PLUNGE, RANT, REJUVENATE, SPARE, SPRAY, STARE, STRIKE, TSUNAMI, WATER_BOMB, ZIP_ZAP),
+			true
+		);
+		register(
+			ARAPAIGO,
+			"arapaigo",
+			List.of(WATER),
+			List.of(RAIN_RUSH, FINESSE, QUICK_RECOVERY),
+			95, 79, 51, 84, 104, 84, 105, 
+			602,
+			251.46,
+			138.0,
+			List.of(BODY_SLAM, CHOMP, DARK_SURGE, DAWDLE, DODGE, EERIE_STARE, FLURRY, FROST_BEAM, HYDRO_BLAST, HYDRO_SLASH, ILL_WILL, MAGNIFY, MAROON, PLUNGE, RANT, REJUVENATE, SLEET_SHOT, SPARE, SPRAY, STARE, STRIKE, TSUNAMI, WATER_BOMB, ZIP_ZAP),
+			true
+		);
+		register(
+			PYKE,
+			"pyke",
+			List.of(ANCIENT, WATER),
+			List.of(BITTER_TOUCH, COMBATIVE, BRUTE_FORCE),
+			64, 84, 62, 58, 33, 51, 68, 
+			420,
+			55.88,
+			12.0,
+			List.of(AQUA_JAWS, BAFFLE, BRACE, BULK_UP, CHARADE, CHILLY_CHOMP, CHOMP, CONFOUND, DODGE, DRUDGE, FADE_AWAY, FINAL_RUSE, HARROW, HYDRO_BLAST, ICICLE_TRAP, ILL_WILL, MAROON, MEGA_CHOMP, OUTBURST, PHANTOM_SLASH, PLUNGE, PRIMAL_SLASH, PROVOKE, SHADOW_SPRINT, SOUL_STORM, SPARE, SPECTRAL_BURST, SPRAY, SQUARE_ONE, TAIL_SLAP, TEASE, TSUNAMI, WATER_BOMB, WAVE_WRECKER),
+			true
+		);
+		register(
+			SKELIC,
+			"skelic",
+			List.of(ANCIENT, WATER),
+			List.of(BITTER_TOUCH, COMBATIVE, BRUTE_FORCE),
+			89, 100, 104, 82, 55, 73, 87, 
+			590,
+			193.04,
+			76.0,
+			List.of(AQUA_JAWS, BAFFLE, BRACE, BULK_UP, CHARADE, CHILLY_CHOMP, CHOMP, CONFOUND, DODGE, DRUDGE, FADE_AWAY, FINAL_RUSE, HARROW, HYDRO_BLAST, ICICLE_TRAP, ILL_WILL, MAROON, MEGA_CHOMP, OUTBURST, PHANTOM_SLASH, PIERCING_DRIVE, PLUNGE, PRIMAL_SLASH, PROVOKE, SHADOW_SPRINT, SOUL_STORM, SPARE, SPECTRAL_BURST, SPRAY, SQUARE_ONE, TAIL_SLAP, TEASE, TSUNAMI, WATER_BOMB, WAVE_WRECKER),
+			true
+		);
+		register(
+			SKELIC_SEASCOURGE,
+			"skelic_seascourge",
+			List.of(ANCIENT, WATER),
+			List.of(RAIN_RUSH),
+			109, 100, 134, 92, 65, 78, 77, 
+			655,
+			193.04,
+			76.0,
+			List.of(AQUA_JAWS, BAFFLE, BRACE, BULK_UP, CHARADE, CHILLY_CHOMP, CHOMP, CONFOUND, DODGE, DRUDGE, FADE_AWAY, FINAL_RUSE, HARROW, HYDRO_BLAST, ICICLE_TRAP, ILL_WILL, MAROON, MEGA_CHOMP, OUTBURST, PHANTOM_SLASH, PIERCING_DRIVE, PLUNGE, PRIMAL_SLASH, PROVOKE, SHADOW_SPRINT, SOUL_STORM, SPARE, SPECTRAL_BURST, SPRAY, SQUARE_ONE, TAIL_SLAP, TEASE, TSUNAMI, WATER_BOMB, WAVE_WRECKER),
+			true
+		);
+		register(
+			ZALEO,
+			"zaleo",
+			List.of(ANCIENT, ELECTRIC),
+			List.of(ADORABLE, DRIVEN, OVERCHARGED),
+			73, 68, 63, 55, 55, 54, 52, 
+			420,
+			50.8,
+			14.0,
+			List.of(BAMBOOZLE, BANE_OF_HASTE, BRAWN_BOOST, BULK_UP, CLAY_SLAP, DINO_CLAWS, DODGE, EARTHQUAKE, ILL_WILL, JUMP_START, MUD_SPATTER, POWER_SIPHON, PRECISION_BOLT, PRIMAL_SLASH, SHARPEN, SHREWD_BLAST, SPARE, STATIC_SHOCK, TASE, THUNDERSTRIKE, THUNDER_CRASH, THUNDER_SLAM, ZIP_ZAP),
+			true
+		);
+		register(
+			JOLTOOTH,
+			"joltooth",
+			List.of(ANCIENT, ELECTRIC),
+			List.of(AMBUSH, DRIVEN, OVERCHARGED),
+			94, 89, 126, 87, 56, 84, 69, 
+			605,
+			154.94,
+			137.0,
+			List.of(BAMBOOZLE, BANE_OF_HASTE, BRAWN_BOOST, BULK_UP, CLAY_SLAP, DINO_CLAWS, DODGE, EARTHQUAKE, ILL_WILL, JUMP_START, MUD_SPATTER, POWER_SIPHON, PRECISION_BOLT, PRIMAL_SLASH, SHARPEN, SHREWD_BLAST, SPARE, STATIC_SHOCK, TASE, THUNDERSTRIKE, THUNDER_CLAP, THUNDER_CRASH, THUNDER_SLAM, ZIP_ZAP),
+			true
+		);
+		register(
+			JOLTOOTH_THUNDERKING,
+			"joltooth_thunderking",
+			List.of(ANCIENT, ELECTRIC),
+			List.of(ROYAL_DECREE),
+			94, 89, 136, 87, 66, 84, 109, 
+			665,
+			154.94,
+			137.0,
+			List.of(BAMBOOZLE, BANE_OF_HASTE, BRAWN_BOOST, BULK_UP, CLAY_SLAP, DINO_CLAWS, DODGE, EARTHQUAKE, ILL_WILL, JUMP_START, MUD_SPATTER, POWER_SIPHON, PRECISION_BOLT, PRIMAL_SLASH, SHARPEN, SHREWD_BLAST, SPARE, STATIC_SHOCK, TASE, THUNDERSTRIKE, THUNDER_CLAP, THUNDER_CRASH, THUNDER_SLAM, ZIP_ZAP),
+			true
+		);
+		register(
+			DOBO,
+			"dobo",
+			List.of(ANCIENT, FIRE),
+			List.of(HOTFOOT, PYRO, POWER_NAPPER),
+			58, 74, 47, 44, 71, 68, 58, 
+			420,
+			40.64,
+			10.0,
+			List.of(AIR_BLADE, BANE_OF_HASTE, BEQUEATH, BURN_UP, CONFOUND, DAWDLE, DISSIPATE, DODGE, DRACO_BEAM, FIRE_BREATH, FLARE_BLAST, JET_STREAM, MAGNIFY, MUD_SPATTER, PEACE_OF_MIND, PECK, POWER_FOCUS, PRIMAL_SLASH, PROVOKE, PYROKINESIS, RAGING_FLAME, RETURN_TO_SENDER, SHREWD_BLAST, SINGE, SPARE, SQUAWK, WONDER_HERB),
+			true
+		);
+		register(
+			INFERNIX,
+			"infernix",
+			List.of(ANCIENT, FIRE),
+			List.of(HOTFOOT, PYRO, POWER_NAPPER),
+			84, 95, 57, 58, 110, 117, 89, 
+			610,
+			187.96,
+			87.0,
+			List.of(AIR_BLADE, BANE_OF_HASTE, BEQUEATH, BURN_UP, CONFOUND, DAWDLE, DISSIPATE, DODGE, DRACO_BEAM, FIRE_BREATH, FLARE_BLAST, JET_STREAM, MAGNIFY, MUD_SPATTER, PEACE_OF_MIND, PECK, PHOENIX_FLAME, POWER_FOCUS, PRIMAL_SLASH, PROVOKE, PYROKINESIS, RAGING_FLAME, RETURN_TO_SENDER, SHREWD_BLAST, SINGE, SPARE, SQUAWK, WONDER_HERB),
+			true
+		);
+		register(
+			KYOGO,
+			"kyogo",
+			List.of(ANCIENT, DARK),
+			List.of(ANOMALY, SURROGATE),
+			51, 63, 55, 64, 51, 62, 74, 
+			420,
+			66.04,
+			21.0,
+			List.of(AUGMENT, BAFFLE, BARBS, BARTER, BULK_UP, CHOMP, CHOP, DINO_CLAWS, DODGE, DRACO_BEAM, GNAW, HEADBUTT, ILL_WILL, MEGA_PUNCH, MUD_SPATTER, PILFER, POISON_BARBS, POWER_FOCUS, PRIMAL_SLASH, PROVOKE, SCAPEGOAT, SCAVENGE, SLAP_DOWN, SPARE, STRETCH, TEASE, VENOM_CHOMP),
+			true
+		);
+		register(
+			DOROGO,
+			"dorogo",
+			List.of(ANCIENT, DARK),
+			List.of(ANOMALY, SURROGATE),
+			66, 86, 86, 72, 90, 69, 116, 
+			585,
+			132.08,
+			68.0,
+			List.of(AUGMENT, BAFFLE, BARBS, BARTER, BULK_UP, CHOMP, CHOP, DARK_SURGE, DINO_CLAWS, DODGE, DRACO_BEAM, EGG_LOB, GNAW, HEADBUTT, ILL_WILL, MEGA_PUNCH, MUD_SPATTER, PILFER, POISON_BARBS, POWER_FOCUS, PRIMAL_SLASH, PROVOKE, SCAPEGOAT, SCAVENGE, SLAP_DOWN, SPARE, STRETCH, TEASE, VENOM_CHOMP),
+			true
+		);
+		register(
+			WILEDILE,
+			"wiledile",
+			List.of(WATER, PLANT),
+			List.of(SWAMPY, WOODSMAN),
+			63, 63, 74, 57, 69, 50, 79, 
+			455,
+			93.98,
+			55.0,
+			List.of(AQUA_JAWS, BARBS, BOOM_BASH, BULK_UP, BUSH_WHACK, CHOMP, DODGE, DRIVING_FORCE, EXAMINE, FUNGUS_CURSE, GNARLY_GASH, GNAW, GROWL, HYDRO_SLASH, ILL_WILL, LANDSLIDE, LIFE_DRAIN, MAROON, MEGA_CHOMP, MUDSLIDE, MUD_SPATTER, NATURES_FORCE, PETAL_PUMMEL, PHOTOSYNTHESIS, PROVOKE, SAP_PLANT, SLAP_DOWN, SPARE, SPRAY, TEAR_DOWN, THISTLE_SLASH, TSUNAMI, VINE_LASH, WAVE_WRECKER),
+			true
+		);
+		register(
+			MAWAMURK,
+			"mawamurk",
+			List.of(WATER, PLANT),
+			List.of(SWAMPY, WOODSMAN),
+			119, 83, 97, 92, 94, 89, 41, 
+			615,
+			261.62,
+			224.0,
+			List.of(AQUA_JAWS, BARBS, BOOM_BASH, BULK_UP, BUSH_WHACK, CHOMP, DODGE, DRIVING_FORCE, EXAMINE, FUNGUS_CURSE, GNARLY_GASH, GNAW, GROWL, HYDRO_SLASH, ILL_WILL, LANDSLIDE, LIFE_DRAIN, MAROON, MARSH_WAVE, MEGA_CHOMP, MUDSLIDE, MUD_SPATTER, NATURES_FORCE, PETAL_PUMMEL, PHOTOSYNTHESIS, PROVOKE, SAP_PLANT, SLAP_DOWN, SPARE, SPRAY, TEAR_DOWN, THISTLE_SLASH, TSUNAMI, VINE_LASH, WAVE_WRECKER),
+			true
+		);
+		register(
+			AMPOLE,
+			"ampole",
+			List.of(ELECTRIC),
+			List.of(WATCHER, SPECIALIZATION, SLY),
+			44, 55, 33, 41, 35, 42, 69, 
+			319,
+			33.02,
+			8.0,
+			List.of(DEJA_VU, DODGE, HYPNOTIZE, ILL_WILL, JUDGEMENT, JUMP_START, MEGA_PUNCH, PEACE_OF_MIND, POWER_FOCUS, PRECISION_BOLT, PSYCHO_BLAST, QUICK_POUNCE, SLAP_DOWN, SPARE, STATIC_SHOCK, STRETCH, STRIKE, TASE, THUNDERSTRIKE, THUNDER_BLAST, THUNDER_SLAM, ZIP_ZAP),
+			true
+		);
+		register(
+			AMPHITON,
+			"amphiton",
+			List.of(ELECTRIC, MIND),
+			List.of(WATCHER, SPECIALIZATION, SLY),
+			59, 72, 59, 61, 60, 64, 81, 
+			456,
+			78.74,
+			35.0,
+			List.of(CEREBRAL_SLASH, DEJA_VU, DODGE, FLABBERGAST, HYPNOTIZE, ILL_WILL, JUDGEMENT, JUMP_START, MEGA_PUNCH, PEACE_OF_MIND, POWER_FOCUS, PRECISION_BOLT, PSYCHO_BLAST, QUICK_POUNCE, SLAP_DOWN, SPARE, STATIC_SHOCK, STRETCH, STRIKE, TASE, THUNDERSTRIKE, THUNDER_BLAST, THUNDER_SLAM, ZIP_ZAP),
+			true
+		);
+		register(
+			MEDITOAD,
+			"meditoad",
+			List.of(ELECTRIC, MIND),
+			List.of(WATCHER, SPECIALIZATION, SLY),
+			99, 86, 95, 92, 99, 96, 43, 
+			610,
+			142.24,
+			122.0,
+			List.of(CEREBRAL_SLASH, DEJA_VU, DODGE, ELECTRO_PUNCH, FLABBERGAST, HYPNOTIZE, ILL_WILL, JUDGEMENT, JUMP_START, MEGA_PUNCH, PEACE_OF_MIND, POWER_FOCUS, PRECISION_BOLT, PSYCHAL_SLAP, PSYCHO_BLAST, QUICK_POUNCE, SLAP_DOWN, SPARE, STATIC_SHOCK, STRETCH, STRIKE, TASE, THUNDERSTRIKE, THUNDER_BLAST, THUNDER_SLAM, ZIP_ZAP),
+			true
+		);
+		register(
+			PWUFF,
+			"pwuff",
+			List.of(WATER, TOXIC),
+			List.of(TOXIC_SPINES, SHARP_EDGES, BANEFUL),
+			75, 54, 46, 71, 47, 69, 49, 
+			411,
+			53.34,
+			17.0,
+			List.of(AQUA_JAWS, BANEFUL_BASH, BRACE, BRAWN_BOOST, CHILLY_CHOMP, DODGE, FLURRY, HEADBUTT, HYDRO_SLASH, ICICLE_TRAP, ILL_WILL, MAROON, POISON, POWER_FOCUS, REJUVENATE, SHARPEN, SPARE, SPRAY, STRETCH, TAIL_SLAP, TEASE, TSUNAMI, VENOM_CHOMP, WATER_BOMB, WAVE_WRECKER),
+			true
+		);
+		register(
+			BLOATOX,
+			"bloatox",
+			List.of(WATER, TOXIC),
+			List.of(TOXIC_SPINES, SHARP_EDGES, BANEFUL),
+			93, 80, 109, 91, 57, 73, 82, 
+			585,
+			73.66,
+			31.0,
+			List.of(AQUA_JAWS, BANEFUL_BASH, BONE_CRUNCH, BRACE, BRAWN_BOOST, BULK_UP, CHILLY_CHOMP, DODGE, FLURRY, HEADBUTT, HYDRO_SLASH, ICICLE_TRAP, ILL_WILL, MAROON, POISON, POWER_FOCUS, REJUVENATE, SHARPEN, SPARE, SPRAY, STRETCH, TAIL_SLAP, TEASE, TSUNAMI, VENOM_CHOMP, WATER_BOMB, WAVE_WRECKER),
+			true
+		);
+		register(
+			BARBLAST,
+			"barblast",
+			List.of(WATER, TOXIC),
+			List.of(TOXIC_SPINES, PARTING_GIFT, HIGH_EXPLOSIVE),
+			96, 88, 72, 107, 89, 88, 37, 
+			577,
+			76.2,
+			74.0,
+			List.of(AQUA_JAWS, BANEFUL_BASH, BRACE, BRAWN_BOOST, CHILLY_CHOMP, DODGE, FLURRY, HEADBUTT, HYDRO_SLASH, ICICLE_TRAP, ILL_WILL, MAROON, POISON, POWER_FOCUS, REJUVENATE, SHARPEN, SPARE, SPRAY, STRETCH, TAIL_SLAP, TEASE, TOXIBLAST, TSUNAMI, VENOM_CHOMP, WATER_BOMB, WAVE_WRECKER),
+			true
+		);
+		register(
+			SWIMP,
+			"swimp",
+			List.of(WATER),
+			List.of(APPREHENSION, POWER_JAW, DEVIOUS),
+			46, 50, 52, 44, 25, 47, 64, 
+			328,
+			63.5,
+			15.0,
+			List.of(AQUA_JAWS, BARTER, BULK_UP, CHARADE, CHOMP, CLAY_SLAP, DODGE, ILL_WILL, MEGA_CHOMP, MUD_SPATTER, PLUNGE, PRIMAL_SLASH, PROVOKE, QUICK_POUNCE, SHREWD_BLAST, SLEET_SHOT, SPARE, SPRAY, STARE, STRETCH, TAIL_SLAP, TEASE, TOXIC_TAIL, VENOM_CHOMP, VICE_JAWS, WATER_BOMB, WAVE_WRECKER),
+			true
+		);
+		register(
+			SNAPR,
+			"snapr",
+			List.of(WATER),
+			List.of(TERRIFYING, POWER_JAW, DEVIOUS),
+			58, 71, 81, 63, 31, 59, 72, 
+			436,
+			101.6,
+			29.0,
+			List.of(AQUA_JAWS, BARTER, BULK_UP, CHARADE, CHILLY_CHOMP, CHOMP, CLAY_SLAP, DODGE, ILL_WILL, MEGA_CHOMP, MUD_SPATTER, PLUNGE, PRIMAL_SLASH, PROVOKE, QUICK_POUNCE, SHREWD_BLAST, SLEET_SHOT, SPARE, SPRAY, STARE, STRETCH, TAIL_SLAP, TEASE, TOXIC_TAIL, VENOM_CHOMP, VICE_JAWS, WATER_BOMB, WAVE_WRECKER),
+			true
+		);
+		register(
+			GARLASH,
+			"garlash",
+			List.of(WATER),
+			List.of(TERRIFYING, POWER_JAW, DEVIOUS),
+			87, 89, 100, 84, 63, 72, 100, 
+			595,
+			165.1,
+			61.0,
+			List.of(AQUA_JAWS, BARTER, BULK_UP, CHARADE, CHILLY_CHOMP, CHOMP, CLAY_SLAP, DODGE, ILL_WILL, MEGA_CHOMP, MUD_SPATTER, PLUNGE, PRIMAL_SLASH, PROVOKE, QUICK_POUNCE, SHREWD_BLAST, SLEET_SHOT, SPARE, SPRAY, STARE, STRETCH, TAIL_SLAP, TEASE, TOXIC_TAIL, VENOM_CHOMP, VICE_JAWS, VICIOUS_SNAP, WATER_BOMB, WAVE_WRECKER),
+			true
+		);
+		register(
+			HYDRINI,
+			"hydrini",
+			List.of(BUG, WATER),
+			List.of(RAIN_SUMMON, VIVID_SIGHT, AQUA_BODY),
+			40, 52, 41, 48, 56, 56, 45, 
+			338,
+			35.56,
+			11.0,
+			List.of(AQUA_JAWS, BANEFUL_BASH, BUG_BITE, BURROW, CLIMATE_CANNON, COUNTER_POISE, DISSIPATE, DODGE, DOWNPOUR, EERIE_STARE, GUST, HYDRO_BLAST, HYDRO_SLASH, ILL_WILL, JET_STREAM, MAROON, PARASITIZE, PEACE_OF_MIND, PESTER, PHEROBLAST, SPARE, SPRAY, THUNDER_CHOMP, TSUNAMI, VENOM_CHOMP, WATER_BOMB),
+			true
+		);
+		register(
+			BEZELDEW,
+			"bezeldew",
+			List.of(BUG, WATER),
+			List.of(RAIN_SUMMON, VIVID_SIGHT, AQUA_BODY),
+			60, 65, 54, 78, 80, 88, 52, 
+			477,
+			71.12,
+			57.0,
+			List.of(AQUA_JAWS, BANEFUL_BASH, BUG_BITE, BURROW, CLAY_SLAP, CLIMATE_CANNON, COUNTER_POISE, DISSIPATE, DODGE, DOWNPOUR, EERIE_STARE, GUST, HYDRO_BLAST, HYDRO_SLASH, ILL_WILL, JET_STREAM, MAROON, PARASITIZE, PEACE_OF_MIND, PESTER, PHEROBLAST, SOFT_WATER, SPARE, SPRAY, THUNDER_CHOMP, TSUNAMI, VENOM_CHOMP, WATER_BOMB),
+			true
+		);
+		register(
+			DELUDRIX,
+			"deludrix",
+			List.of(BUG, WATER),
+			List.of(RAIN_SUMMON, VIVID_SIGHT, AQUA_BODY),
+			60, 85, 114, 58, 122, 67, 94, 
+			600,
+			139.7,
+			126.0,
+			List.of(AQUA_JAWS, BANEFUL_BASH, BUG_BITE, BURROW, CLAY_SLAP, CLIMATE_CANNON, COUNTER_POISE, DISSIPATE, DODGE, DOUSE, DOWNPOUR, EERIE_STARE, GUST, HYDRO_BLAST, HYDRO_SLASH, ILL_WILL, JET_STREAM, MAROON, PARASITIZE, PEACE_OF_MIND, PESTER, PHEROBLAST, SOFT_WATER, SPARE, SPRAY, THUNDER_CHOMP, TSUNAMI, VENOM_CHOMP, WATER_BOMB),
+			true
+		);
+		register(
+			CERATOT,
+			"ceratot",
+			List.of(ANCIENT, PLANT),
+			List.of(STAUNCH, FRAIL_ARMOUR, VIGOROUS),
+			59, 69, 56, 64, 26, 42, 44, 
+			360,
+			43.18,
+			65.0,
+			List.of(BRAWN_BOOST, BULK_UP, CHOMP, DINO_CLAWS, DODGE, EARTHQUAKE, GNAW, HEADBUTT, ILL_WILL, LEAF_BARRAGE, LIFE_DRAIN, MEGA_CHOMP, MUD_SPATTER, OUTBURST, PETAL_PUMMEL, PRIMAL_SLASH, ROGUE_ASSAULT, SAP_PLANT, SPARE, STARE, TAKE_ROOT, VINE_LASH),
+			true
+		);
+		register(
+			TREPODON,
+			"trepodon",
+			List.of(ANCIENT, PLANT),
+			List.of(STAUNCH, FRAIL_ARMOUR, VIGOROUS),
+			74, 80, 84, 86, 32, 56, 48, 
+			460,
+			96.52,
+			324.0,
+			List.of(BRAWN_BOOST, BRIAR_BLOCK, BULK_UP, CHOMP, DINO_CLAWS, DODGE, EARTHQUAKE, GNAW, HEADBUTT, ILL_WILL, LEAF_BARRAGE, LIFE_DRAIN, MEGA_CHOMP, MUD_SPATTER, OUTBURST, PETAL_PUMMEL, PRIMAL_SLASH, ROGUE_ASSAULT, SAP_PLANT, SPARE, STARE, TAKE_ROOT, VINE_LASH),
+			true
+		);
+		register(
+			COLOSSOTROPS,
+			"colossotrops",
+			List.of(ANCIENT, PLANT),
+			List.of(STAUNCH, FRAIL_ARMOUR, VIGOROUS),
+			103, 96, 124, 111, 70, 67, 54, 
+			625,
+			172.72,
+			768.0,
+			List.of(BRAWN_BOOST, BRIAR_BLOCK, BULK_UP, CHOMP, DINO_CLAWS, DODGE, EARTHQUAKE, GNAW, HEADBUTT, ILL_WILL, LEAF_BARRAGE, LIFE_DRAIN, MEGA_CHOMP, MUD_SPATTER, OUTBURST, PETAL_PUMMEL, PRIMAL_SLASH, ROGUE_ASSAULT, SAP_PLANT, SPARE, STARE, TAKE_ROOT, TIMBER_THRASH, VINE_LASH),
+			true
+		);
+		register(
+			CUPOINK,
+			"cupoink",
+			List.of(FIRE),
+			List.of(CADDIE, MADCAP, SWEET_TOUCH),
+			52, 67, 65, 56, 34, 64, 55, 
+			393,
+			40.64,
+			15.0,
+			List.of(BAIT, BANEFUL_BASH, BATTLE_CHIME, BLAZE_OF_GLORY, BODY_SLAM, BULK_UP, CHOMP, DODGE, FIRE_SLAM, HEADBUTT, ILL_WILL, MEGA_CHOMP, MUCK_BUCK, MUDSLIDE, POUNCE, RAGING_TACKLE, REJUVENATE, SHARPEN, SINGE, SPARE, STARE, TEAR_DOWN, VENOM_CHOMP),
+			true
+		);
+		register(
+			HOGANOSH,
+			"hoganosh",
+			List.of(FIRE),
+			List.of(CADDIE, MADCAP, SWEET_TOUCH),
+			84, 88, 109, 90, 57, 109, 41, 
+			578,
+			129.54,
+			89.0,
+			List.of(BAIT, BANEFUL_BASH, BATTLE_CHIME, BLAZE_OF_GLORY, BODY_SLAM, BULK_UP, CHOMP, DODGE, FIERY_FONDANT, FIRE_SLAM, HEADBUTT, ILL_WILL, MEGA_CHOMP, MUCK_BUCK, MUDSLIDE, POUNCE, RAGING_TACKLE, REJUVENATE, SHARPEN, SINGE, SPARE, STARE, TEAR_DOWN, VENOM_CHOMP),
+			true
+		);
+		register(
+			HOGANOSH_ATOMIC,
+			"hoganosh_atomic",
+			List.of(FIRE),
+			List.of(GORGE),
+			89, 93, 129, 95, 67, 114, 61, 
+			648,
+			129.54,
+			89.0,
+			List.of(BAIT, BANEFUL_BASH, BATTLE_CHIME, BLAZE_OF_GLORY, BODY_SLAM, BULK_UP, CHOMP, DODGE, FIERY_FONDANT, FIRE_SLAM, HEADBUTT, ILL_WILL, MEGA_CHOMP, MUCK_BUCK, MUDSLIDE, POUNCE, RAGING_TACKLE, REJUVENATE, SHARPEN, SINGE, SPARE, STARE, TEAR_DOWN, VENOM_CHOMP),
+			true
+		);
+		register(
+			MOCHIBI,
+			"mochibi",
+			List.of(ICE),
+			List.of(SUGAR_RUSH, LUCKY, SHAKEDOWN),
+			51, 60, 28, 53, 65, 44, 79, 
+			380,
+			33.02,
+			14.0,
+			List.of(BAMBOOZLE, BITTER_COLD, BOOM_BASH, CHILLY_CHOMP, DEEP_FREEZE, DODGE, ENERGY_BREAK, FLURRY, FROST_BEAM, FROST_BREATH, HOP_KICK, HULLABALOO, ICICLE_TRAP, MINDS_EYE, NATURES_FORCE, PEACE_OF_MIND, PREEMPTIVE_STRIKE, RETURN_TO_SENDER, SCAPEGOAT, SLEET_SHOT, SNOWDOZER, SPARE, STRIKE, TEASE),
+			true
+		);
+		register(
+			TOTEMOCHI,
+			"totemochi",
+			List.of(ICE),
+			List.of(SUGAR_RUSH, LUCKY, SHAKEDOWN),
+			58, 84, 33, 68, 100, 63, 88, 
+			494,
+			96.52,
+			43.0,
+			List.of(BAMBOOZLE, BITTER_COLD, BOOM_BASH, CHARADE, CHILLY_CHOMP, DEEP_FREEZE, DODGE, ENERGY_BREAK, FLURRY, FROST_BEAM, FROST_BREATH, HOP_KICK, HULLABALOO, ICICLE_TRAP, MINDS_EYE, NATURES_FORCE, PEACE_OF_MIND, PREEMPTIVE_STRIKE, RETURN_TO_SENDER, SCAPEGOAT, SLEET_SHOT, SNOWDOZER, SPARE, STRIKE, TEASE),
+			true
+		);
+		register(
+			MOCHO,
+			"mocho",
+			List.of(ICE),
+			List.of(SUGAR_RUSH, LUCKY, SHAKEDOWN),
+			71, 90, 72, 102, 120, 93, 67, 
+			615,
+			134.62,
+			145.0,
+			List.of(BAMBOOZLE, BITTER_COLD, BOOM_BASH, CHARADE, CHILLY_CHOMP, DEEP_FREEZE, DODGE, ENERGY_BREAK, FLURRY, FROST_BEAM, FROST_BREATH, HOP_KICK, HULLABALOO, ICICLE_TRAP, MINDS_EYE, NATURES_FORCE, PEACE_OF_MIND, PEPPERMINT_BREATH, PREEMPTIVE_STRIKE, RETURN_TO_SENDER, SCAPEGOAT, SLEET_SHOT, SNOWDOZER, SPARE, STRIKE, TEASE),
+			true
+		);
+		register(
+			GWURM,
+			"gwurm",
+			List.of(BUG),
+			List.of(HARD_CANDY, CLINGY, DEFENSIVE_PRIORITY),
+			47, 55, 27, 53, 42, 41, 30, 
+			295,
+			35.56,
+			11.0,
+			List.of(BARBS, BUG_BITE, BURROW, DODGE, EERIE_STARE, GNAW, HYPNOTIZE, LIFE_DRAIN, PESTILENCE, PHEROBLAST, POISON_BARBS, POWER_FOCUS, PROVOKE, SAP_PLANT, SPARE, SPARE, TALENT_TRADE, TAMP),
+			true
+		);
+		register(
+			ODASHO,
+			"odasho",
+			List.of(BUG),
+			List.of(HARD_CANDY, CLINGY, DEFENSIVE_PRIORITY),
+			55, 60, 32, 73, 59, 58, 42, 
+			379,
+			88.9,
+			13.0,
+			List.of(BARBS, BUG_BITE, BURROW, DODGE, EERIE_STARE, GNAW, HYPNOTIZE, LIFE_DRAIN, PESTER, PESTILENCE, PHEROBLAST, POISON_BARBS, POWER_FOCUS, PROVOKE, RETURN_TO_SENDER, SAP_PLANT, SPARE, SPARE, TALENT_TRADE, TAMP),
+			true
+		);
+		register(
+			SPREEZY,
+			"spreezy",
+			List.of(BUG),
+			List.of(HARD_CANDY, CLINGY, SUGAR_RUSH),
+			72, 95, 46, 103, 94, 76, 93, 
+			579,
+			96.52,
+			34.0,
+			List.of(BARBS, BUG_BITE, BURROW, DODGE, EERIE_STARE, GNAW, GUST, HYPNOTIZE, JET_STREAM, LIFE_DRAIN, PESTER, PESTILENCE, PHEROBLAST, POISON_BARBS, POWER_FOCUS, PROVOKE, RETURN_TO_SENDER, SAP_PLANT, SPARE, SPARE, TALENT_TRADE, TAMP, TWIRLY_WHIRL),
+			true
+		);
+		register(
+			PIPSEE,
+			"pipsee",
+			List.of(PLANT, AIR),
+			List.of(GLIDE, WIND_SUMMON, VIGILANT),
+			44, 52, 30, 55, 43, 49, 55, 
+			328,
+			33.02,
+			2.0,
+			List.of(AIR_BLADE, BEQUEATH, BRACE, CLIMATE_CANNON, CYCLONE_SLAM, DODGE, GALE_FORCE, GUST, HASTEN, JET_STREAM, LEAF_BARRAGE, LIFE_DRAIN, LUSTER_LOOT, MAGNIFY, MINDS_EYE, NATURES_FORCE, PETAL_PUMMEL, PHOTOSYNTHESIS, SAP_PLANT, SNORE_SPORES, SPARE, STATIC_SPORES, TAKE_ROOT, TRIBUTE, TYPHOON, WONDER_HERB),
+			true
+		);
+		register(
+			DANDYLIL,
+			"dandylil",
+			List.of(PLANT, AIR),
+			List.of(GLIDE, WIND_SUMMON, VIGILANT),
+			56, 79, 43, 63, 90, 54, 75, 
+			460,
+			78.74,
+			4.0,
+			List.of(AIR_BLADE, BEQUEATH, BRACE, CLIMATE_CANNON, CYCLONE_SLAM, DODGE, GALE_FORCE, GUST, HASTEN, JET_STREAM, LEAF_BARRAGE, LIFE_DRAIN, LUSTER_LOOT, MAGNIFY, MINDS_EYE, NATURES_FORCE, PETAL_PUMMEL, PHOTOSYNTHESIS, PINE_SHOT, SAP_PLANT, SNORE_SPORES, SPARE, STATIC_SPORES, TAKE_ROOT, TRIBUTE, TYPHOON, WONDER_HERB),
+			true
+		);
+		register(
+			WHIPPLEDRIFF,
+			"whippledriff",
+			List.of(PLANT, AIR),
+			List.of(GLIDE, WIND_SUMMON, VIGILANT),
+			72, 90, 53, 115, 110, 71, 89, 
+			600,
+			114.3,
+			6.0,
+			List.of(AIR_BLADE, BEQUEATH, BRACE, CLIMATE_CANNON, CYCLONE_SLAM, DODGE, GALE_FORCE, GUST, HASTEN, JET_STREAM, LEAF_BARRAGE, LIFE_DRAIN, LUSTER_LOOT, MAGNIFY, MINDS_EYE, NATURES_FORCE, PETAL_PUMMEL, PHOTOSYNTHESIS, PINE_SHOT, SAP_PLANT, SNORE_SPORES, SPARE, STATIC_SPORES, TAKE_ROOT, TEMPEST, TRIBUTE, TYPHOON, WONDER_HERB),
+			true
+		);
+		register(
+			VARI,
+			"vari",
+			List.of(SIMPLE),
+			List.of(APPREHENSION, GUARDIAN, ADORABLE),
+			49, 60, 52, 43, 52, 43, 57, 
+			356,
+			71.12,
+			32.0,
+			List.of(BODY_SLAM, DAWDLE, DODGE, HEADBUTT, POWER_FOCUS, QUICK_POUNCE, SPARE, SPARE, STRETCH, STRIKE, TEAR_DOWN),
+			true
+		);
+		register(
+			CERVOLEN,
+			"cervolen",
+			List.of(SIMPLE),
+			List.of(STAUNCH, CONFIDENCE, BONEHEADED),
+			92, 85, 110, 85, 52, 72, 89, 
+			585,
+			172.72,
+			232.0,
+			List.of(ADAPTIVE_ASSAULT_SIMPLE, BAMBOOZLE, BODY_CRASH, BODY_SLAM, BULK_UP, DAWDLE, DODGE, EERIE_STARE, HEADBUTT, ILL_WILL, MEGA_CHOMP, POWER_FOCUS, QUICK_POUNCE, RAGING_TACKLE, SCAPEGOAT, SPARE, SPARE, STAMPEDE, STRETCH, STRIKE, TEAR_DOWN),
+			true
+		);
+		register(
+			WENDOLEN,
+			"wendolen",
+			List.of(SPIRIT),
+			List.of(SHARP_CLAWS, GLOOMY, FINESSE),
+			50, 80, 119, 60, 98, 75, 103, 
+			585,
+			210.82,
+			190.0,
+			List.of(ADAPTIVE_ASSAULT_SPIRIT, BARTER, BODY_SLAM, DARK_SURGE, DAWDLE, DAZZLING_BARRAGE, DODGE, FADE_AWAY, FINAL_RUSE, FROST_BEAM, HEADBUTT, MEGA_CHOMP, PHANTOM_BLAST, PHANTOM_SLASH, POWER_FOCUS, QUICK_POUNCE, SHADOW_SPRINT, SPARE, SPARE, SPECTRAL_BURST, STRETCH, STRIKE, TEAR_DOWN),
+			true
+		);
+		register(
+			KIROLEN,
+			"kirolen",
+			List.of(ANCIENT),
+			List.of(HASTY, SHAKEDOWN, DEVIOUS),
+			78, 83, 137, 69, 73, 63, 82, 
+			585,
+			175.26,
+			213.0,
+			List.of(ADAPTIVE_ASSAULT_ANCIENT, BLAZE_RUSH, BODY_SLAM, DAWDLE, DODGE, DRACO_BEAM, FIRE_BREATH, FIRE_SLAM, HEADBUTT, ILL_WILL, MEGA_KICK, OUTBURST, POWER_FOCUS, PRIMAL_SLASH, QUICK_POUNCE, REJUVENATE, ROUGH_UP, SCAPEGOAT, SHARPEN, SHREWD_BLAST, SPARE, SPARE, STRETCH, STRIKE, TEAR_DOWN),
+			true
+		);
+		register(
+			ZEPHOLEN,
+			"zepholen",
+			List.of(AIR),
+			List.of(SHARP_FOCUS, TUMULTUOUS, TURBULENT),
+			70, 92, 57, 90, 123, 66, 87, 
+			585,
+			185.42,
+			201.0,
+			List.of(ADAPTIVE_ASSAULT_AIR, AIR_BLADE, BODY_SLAM, DAWDLE, DODGE, GUST, HEADBUTT, LANDSLIDE, MUDSLIDE, MUD_SPATTER, PEACE_OF_MIND, PERCH, POWER_FOCUS, PROVOKE, QUICK_POUNCE, RESONATE, SPARE, SPARE, SPITE, STRETCH, STRIKE, TEAR_DOWN, TYPHOON),
+			true
+		);
+		register(
+			VENOLEN,
+			"venolen",
+			List.of(TOXIC),
+			List.of(DEVIOUS, TOXIC_TOUCH, BANEFUL),
+			83, 90, 61, 67, 101, 122, 61, 
+			585,
+			195.58,
+			243.0,
+			List.of(ADAPTIVE_ASSAULT_TOXIC, BARTER, BODY_SLAM, CHARADE, CORRODE, DAWDLE, DISSONANT_CHORD, DODGE, HEADBUTT, LANDSLIDE, MUCK_BLAST, MUDSLIDE, MUD_SPATTER, POISON, POWER_FOCUS, QUICK_POUNCE, REJUVENATE, ROCK_SLIDE, SLIME, SPARE, SPARE, STRETCH, STRIKE, TEAR_DOWN, TOXIC_TAIL, TRICKY_TACTICS),
+			true
+		);
+		register(
+			WRESOLEN,
+			"wresolen",
+			List.of(BRAWLER),
+			List.of(AGGRESSIVE, IGNORANT, ACE),
+			104, 79, 130, 88, 27, 79, 78, 
+			585,
+			205.74,
+			345.0,
+			List.of(ADAPTIVE_ASSAULT_BRAWLER, BLAZE_PUNCH, BODY_SLAM, BOOM_BASH, BUCK_UP, BULK_UP, DAWDLE, DODGE, DRIVING_FORCE, ELECTRO_PUNCH, FROST_PUNCH, HEADBUTT, ILL_WILL, PEP_JAB, POWER_FOCUS, QUICK_POUNCE, SHADOWBOX, SPARE, SPARE, STRETCH, STRIKE, TEAR_DOWN),
+			true
+		);
+		register(
+			BUZZOLEN,
+			"buzzolen",
+			List.of(BUG),
+			List.of(VIGOROUS, MARKSMAN, SWEET_AROMA),
+			69, 100, 99, 75, 45, 96, 101, 
+			585,
+			96.52,
+			42.0,
+			List.of(ADAPTIVE_ASSAULT_BUG, BANEFUL_BASH, BARTER, BODY_SLAM, BUCK_UP, BULK_UP, COUNTER_POISE, CYCLONE_SLAM, DAWDLE, DODGE, DOUBLE_BEAT, DOUBLE_STING, HEADBUTT, HYPER_STING, ILL_WILL, LUNGE, NOSEDIVE, PARASITIZE, POISON_BARBS, POWER_FOCUS, QUICK_POUNCE, SPARE, SPARE, STRETCH, STRIKE, TEAR_DOWN, TOXIC_TAIL, TRIBUTE, VENOM_SLASH),
+			true
+		);
+		register(
+			TUNDROLEN,
+			"tundrolen",
+			List.of(ICE),
+			List.of(INSULATED, MYSTERIOUS_CLOAK, RESILIENCE),
+			91, 86, 91, 130, 71, 66, 50, 
+			585,
+			185.42,
+			341.0,
+			List.of(ADAPTIVE_ASSAULT_ICE, BLINDSPOT_BATTER, BODY_CRASH, BODY_SLAM, BULK_UP, CHILLY_CHOMP, DAWDLE, DODGE, FROST_BEAM, HEADBUTT, ICE_HAMMER, ICICLE_TRAP, ILL_WILL, MUDSLIDE, POWER_FOCUS, PROVOKE, QUICK_POUNCE, REJUVENATE, SLAP_DOWN, SPARE, SPARE, SPIKE_RUSH, STRETCH, STRIKE, TEAR_DOWN),
+			true
+		);
+		register(
+			PYROLEN,
+			"pyrolen",
+			List.of(FIRE),
+			List.of(FANNING_FLAME, VOLCANIC, QUICK_RECOVERY),
+			119, 91, 34, 63, 133, 79, 66, 
+			585,
+			175.26,
+			243.0,
+			List.of(ADAPTIVE_ASSAULT_FIRE, BODY_SLAM, BOOM_BASH, DAWDLE, DODGE, FIRE_BREATH, FIRE_SLAM, FLAMING_KICK, FLARE_BLAST, HEADBUTT, ILL_WILL, MUDSLIDE, MUD_SPATTER, PEACE_OF_MIND, POWER_FOCUS, QUICK_POUNCE, REJUVENATE, SHREWD_BLAST, SPARE, SPARE, STRETCH, STRIKE, TEAR_DOWN),
+			true
+		);
+		register(
+			HYDROLEN,
+			"hydrolen",
+			List.of(WATER),
+			List.of(HYDRATE, VIGILANT, LUCK_OF_THE_SEA),
+			80, 85, 97, 59, 97, 60, 107, 
+			585,
+			160.02,
+			155.0,
+			List.of(ADAPTIVE_ASSAULT_WATER, AIR_BLADE, BODY_SLAM, BULK_UP, DAWDLE, DODGE, HEADBUTT, HYDRO_SLASH, ILL_WILL, MAROON, PEACE_OF_MIND, PLUNGE, POWER_FOCUS, QUICK_POUNCE, SPARE, SPARE, STRETCH, STRIKE, TEAR_DOWN, THISTLE_SLASH, TRIBUTE, TSUNAMI, WATER_BOMB),
+			true
+		);
+		register(
+			COPLING,
+			"copling",
+			List.of(ANCIENT, METAL),
+			List.of(OXIDIZE, DEVIOUS, PLAYFUL),
+			34, 70, 55, 61, 25, 51, 99, 
+			395,
+			35.56,
+			38.0,
+			List.of(BAMBOOZLE, BANE_OF_HASTE, BARBS, BULK_UP, CHOMP, CONFOUND, DODGE, DOUBLE_WHACK, DOWNPOUR, GALE_FORCE, GNAW, HEADBUTT, ILL_WILL, METAL_SHRIEK, METAL_SWIPES, PRIMAL_SLASH, PROVOKE, REJUVENATE, SAFEGUARD, SHARPEN, SHREWD_BLAST, SPARE, STEEL_CRUSHER, TEAR_DOWN, TEASE, TUNE_UP, VICE_JAWS),
+			true
+		);
+		register(
+			COPPERAGE,
+			"copperage",
+			List.of(ANCIENT, METAL),
+			List.of(OXIDIZE, DEVIOUS, PLAYFUL),
+			66, 80, 78, 90, 35, 62, 74, 
+			485,
+			66.04,
+			89.0,
+			List.of(BAMBOOZLE, BANE_OF_HASTE, BARBS, BULK_UP, CHOMP, CONFOUND, DODGE, DOUBLE_WHACK, DOWNPOUR, DRIVING_FORCE, GALE_FORCE, GNAW, HEADBUTT, HEAVY_BASH, ILL_WILL, METAL_SHRIEK, METAL_SWIPES, PRIMAL_SLASH, PROVOKE, REJUVENATE, SAFEGUARD, SHARPEN, SHREWD_BLAST, SPARE, STEEL_CRUSHER, TEAR_DOWN, TEASE, TUNE_UP, VICE_JAWS),
+			true
+		);
+		register(
+			OXIDRAKE,
+			"oxidrake",
+			List.of(ANCIENT, METAL),
+			List.of(OXIDIZE, DEVIOUS, COMBATIVE),
+			87, 90, 123, 113, 63, 76, 63, 
+			615,
+			203.2,
+			367.0,
+			List.of(BAMBOOZLE, BANE_OF_HASTE, BARBS, BULK_UP, CHOMP, CONFOUND, DODGE, DOUBLE_WHACK, DOWNPOUR, DRIVING_FORCE, GALE_FORCE, GNAW, HEADBUTT, HEAVY_BASH, ILL_WILL, METAL_SHRIEK, METAL_SWIPES, OUTBURST, PRIMAL_SLASH, PROVOKE, REJUVENATE, SAFEGUARD, SHARPEN, SHREWD_BLAST, SPARE, STEEL_CRUSHER, TEAR_DOWN, TEASE, TUNE_UP, VICE_JAWS),
+			true
+		);
+		register(
+			SPIRIVII,
+			"spirivii",
+			List.of(BUG, SPIRIT),
+			List.of(LIFE_FORCE),
+			61, 0, 44, 42, 25, 33, 45, 
+			250,
+			45.72,
+			8.0,
+			List.of(BARTER, BRAWN_BOOST, BUG_BITE, BULK_UP, CHASE_DOWN, COUNTER_POISE, DODGE, DRIVING_FORCE, EARTHQUAKE, EERIE_STARE, EMPATHIZE, FINAL_RUSE, GNAW, HARROW, HAZE_SHROUD, ILL_WILL, MUD_SPATTER, PARASITIZE, PESTER, PROVOKE, PSYCHAL_CHOMP, SOUL_STORM, SPARE, SPECTRAL_BURST, STARE, STARTLE, STUPEFY, SWIPE, TEAR_DOWN),
+			true
+		);
+		register(
+			EDIOHUSK,
+			"eidohusk",
+			List.of(BUG, SPIRIT),
+			List.of(LIFE_FORCE),
+			81, 0, 44, 88, 25, 62, 20, 
+			320,
+			109.22,
+			28.0,
+			List.of(BARTER, BRACE, BRAWN_BOOST, BUG_BITE, BULK_UP, CHASE_DOWN, COUNTER_POISE, DODGE, DRIVING_FORCE, EARTHQUAKE, EERIE_STARE, EMPATHIZE, FINAL_RUSE, GNAW, HARROW, HAZE_SHROUD, ILL_WILL, MUD_SPATTER, PARASITIZE, PESTER, PROVOKE, PSYCHAL_CHOMP, SOUL_STORM, SPARE, SPECTRAL_BURST, STARE, STARTLE, STUPEFY, SWIPE, TEAR_DOWN),
+			true
+		);
+		register(
+			HARVESECT,
+			"harvesect",
+			List.of(BUG, SPIRIT),
+			List.of(LIFE_FORCE),
+			116, 0, 100, 119, 57, 77, 56, 
+			525,
+			195.58,
+			173.0,
+			List.of(BARTER, BRACE, BRAWN_BOOST, BUG_BITE, BULK_UP, CHASE_DOWN, COUNTER_POISE, DODGE, DRIVING_FORCE, EARTHQUAKE, EERIE_STARE, EMPATHIZE, FINAL_RUSE, GNAW, HARROW, HAZE_SHROUD, ICICLE_TREMOR, ILL_WILL, MUD_SPATTER, PARASITIZE, PESTER, PROVOKE, PSYCHAL_CHOMP, SOUL_HARVEST, SOUL_STORM, SPARE, SPECTRAL_BURST, STARE, STARTLE, STUPEFY, SWIPE, TEAR_DOWN),
+			true
+		);
+		register(
+			SNOWL,
+			"snowl",
+			List.of(ICE),
+			List.of(WISE, CHILL, GLIDE),
+			15, 71, 9, 20, 12, 24, 59, 
+			210,
+			27.94,
+			9.0,
+			List.of(BAFFLE, BRAIN_EXERCISE, DODGE, ICICLE_TRAP, JET_STREAM, PEACE_OF_MIND, PERCH, PREEMPTIVE_STRIKE, RANT, RESONATE, SNOWDOZER, SPARE, SQUARE_ONE),
+			true
+		);
+		register(
+			STRICICLE,
+			"stricicle",
+			List.of(ICE, AIR),
+			List.of(WISE, CHILL, GLIDE),
+			48, 81, 48, 58, 86, 61, 70, 
+			452,
+			63.5,
+			28.0,
+			List.of(AIR_BLADE, AIR_WHIP, BAFFLE, BRAIN_EXERCISE, CHILLY_CHOMP, DODGE, FROST_BEAM, ICICLE_TRAP, JET_STREAM, MUD_SPATTER, PEACE_OF_MIND, PERCH, POWER_FOCUS, PREEMPTIVE_STRIKE, PROVOKE, RANT, RESONATE, SCAVENGE, SLEET_SHOT, SNOWDOZER, SPARE, SQUARE_ONE),
+			true
+		);
+		register(
+			WINTRIX,
+			"wintrix",
+			List.of(ICE, AIR),
+			List.of(WISE, CHILL, GLIDE),
+			81, 92, 63, 86, 114, 85, 94, 
+			615,
+			157.48,
+			71.0,
+			List.of(AIR_BLADE, AIR_WHIP, BAFFLE, BRAIN_EXERCISE, BRAIN_FREEZE, CHILLY_CHOMP, DODGE, FROST_BEAM, ICICLE_TRAP, JET_STREAM, MUD_SPATTER, PEACE_OF_MIND, PERCH, POWER_FOCUS, PREEMPTIVE_STRIKE, PROVOKE, RANT, RESONATE, SCAVENGE, SLEET_SHOT, SNOWDOZER, SPARE, SQUARE_ONE),
+			true
+		);
+		register(
+			SNAGULL,
+			"snagull",
+			List.of(AIR),
+			List.of(CLINGY, IMMUNIZED, MARKSMAN),
+			68, 60, 42, 53, 81, 58, 78, 
+			440,
+			55.88,
+			12.0,
+			List.of(AIR_BLADE, AIR_SHOT, BARTER, BUCK_UP, DODGE, EERIE_STARE, GALE_FORCE, GNAW, GUST, JET_STREAM, MAROON, MUCK_BLAST, PECK, PERCH, POISON, PROVOKE, RAGING_HOWL, SCAVENGE, SPARE, SQUAWK, STRETCH, SWIPE, TEAR_DOWN, TYPHOON),
+			true
+		);
+		register(
+			SNAGULP,
+			"snagulp",
+			List.of(AIR, TOXIC),
+			List.of(CLINGY, IMMUNIZED, MARKSMAN),
+			59, 79, 50, 59, 91, 69, 98, 
+			505,
+			68.58,
+			21.0,
+			List.of(AIR_BLADE, AIR_SHOT, BARTER, BUCK_UP, DODGE, EERIE_STARE, GALE_FORCE, GNAW, GUST, JET_STREAM, MAROON, MUCK_BLAST, PECK, PERCH, POISON, PROVOKE, RAGING_HOWL, SCAVENGE, SLIME, SPARE, SQUAWK, STRETCH, SWIPE, TEAR_DOWN, TYPHOON, VENOM_CHOMP),
+			true
+		);
+		register(
+			SNAGOOP,
+			"snagoop",
+			List.of(AIR, TOXIC),
+			List.of(CLINGY, IMMUNIZED, MARKSMAN),
+			50, 89, 68, 77, 121, 94, 108, 
+			607,
+			167.64,
+			47.0,
+			List.of(AIR_BLADE, AIR_SHOT, BARTER, BUCK_UP, DODGE, EERIE_STARE, GALE_FORCE, GNAW, GUST, JET_STREAM, MAROON, MUCK_BLAST, PECK, PERCH, POISON, POISON_BARBS, PROVOKE, RAGING_HOWL, SCAVENGE, SLIME, SPARE, SQUAWK, STRETCH, SWIPE, TEAR_DOWN, TYPHOON, VENOM_CHOMP),
+			true
+		);
+		register(
+			MAKAME,
+			"makame",
+			List.of(WATER),
+			List.of(TONE_DEAF, FRAIL_ARMOUR, QUICK_RECOVERY),
+			44, 59, 30, 76, 51, 43, 30, 
+			333,
+			43.18,
+			17.0,
+			List.of(BATTLE_HORN, BODY_CRASH, BRACE, CHARADE, CHILLY_CHOMP, DISSONANT_CHORD, DODGE, EXAMINE, FROST_BEAM, GNAW, HARMONIOUS_CHORD, MAROON, PEACE_OF_MIND, PLUNGE, RANT, REJUVENATE, REPEATING_TUNE, RESONATE, SLEET_SHOT, SOFT_WATER, SPARE, SPRAY, TSUNAMI, WATER_BOMB),
+			true
+		);
+		register(
+			MAKORO,
+			"makoro",
+			List.of(WATER),
+			List.of(TONE_DEAF, FRAIL_ARMOUR, QUICK_RECOVERY),
+			71, 70, 38, 101, 75, 57, 32, 
+			444,
+			101.6,
+			49.0,
+			List.of(AQUA_JAWS, BATTLE_HORN, BODY_CRASH, BRACE, CHARADE, CHILLY_CHOMP, DISSONANT_CHORD, DODGE, EXAMINE, FROST_BEAM, GNAW, HARMONIOUS_CHORD, MAROON, PEACE_OF_MIND, PLUNGE, RANT, REJUVENATE, REPEATING_TUNE, RESONATE, SLEET_SHOT, SOFT_WATER, SPARE, SPRAY, TSUNAMI, WATER_BOMB),
+			true
+		);
+		register(
+			TSUKAME,
+			"tsukame",
+			List.of(WATER),
+			List.of(TONE_DEAF, FRAIL_ARMOUR, QUICK_RECOVERY),
+			91, 80, 67, 120, 116, 77, 34, 
+			585,
+			198.12,
+			298.0,
+			List.of(AQUA_JAWS, BATTLE_HORN, BODY_CRASH, BRACE, CHARADE, CHILLY_CHOMP, DISSONANT_CHORD, DODGE, EXAMINE, FROST_BEAM, GNAW, HARMONIOUS_CHORD, MAROON, PEACE_OF_MIND, PLUNGE, RANT, REJUVENATE, REPEATING_TUNE, RESONATE, SEA_SONG, SLEET_SHOT, SOFT_WATER, SPARE, SPRAY, TSUNAMI, WATER_BOMB),
+			true
+		);
+		register(
+			CAVENISH,
+			"cavenish",
+			List.of(WATER, PLANT),
+			List.of(BULLY, CONSPIRE, SLY),
+			51, 66, 31, 79, 61, 52, 86, 
+			426,
+			33.02,
+			7.0,
+			List.of(BAFFLE, BANANA_SPLIT, CHARADE, DODGE, FROST_BEAM, LEAF_BARRAGE, LIFE_DRAIN, MAGNIFY, MAROON, NATURES_FORCE, PETAL_PUMMEL, PHOTOSYNTHESIS, PLUNGE, POUNCE, PROVOKE, SAP_PLANT, SCAPEGOAT, SLAP_DOWN, SPARE, SPRAY, TEAR_DOWN, TEASE, TSUNAMI, WATER_BOMB, WONDER_HERB),
+			true
+		);
+		register(
+			BANFINO,
+			"banfino",
+			List.of(WATER, PLANT),
+			List.of(BULLY, CONSPIRE, SLY),
+			72, 79, 58, 97, 103, 71, 109, 
+			589,
+			220.98,
+			184.0,
+			List.of(BAFFLE, BANANA_SPLIT, CHARADE, DODGE, FROST_BEAM, HARVEST, LEAF_BARRAGE, LIFE_DRAIN, MAGNIFY, MAROON, NATURES_FORCE, PETAL_PUMMEL, PHOTOSYNTHESIS, PLUNGE, POUNCE, PROVOKE, SAP_PLANT, SCAPEGOAT, SLAP_DOWN, SPARE, SPRAY, TEAR_DOWN, TEASE, TSUNAMI, WATER_BOMB, WONDER_HERB),
+			true
+		);
+		register(
+			KANKI,
+			"kanki",
+			List.of(WATER, BRAWLER),
+			List.of(MADCAP, AGGRESSIVE, AMBUSH),
+			43, 50, 82, 66, 5, 44, 63, 
+			353,
+			43.18,
+			15.0,
+			List.of(BLUDGEON, BODY_SLAM, BULK_UP, CHASE_DOWN, DRIVING_FORCE, EERIE_STARE, HYDRO_SLASH, ICE_HAMMER, ILL_WILL, PIERCING_DRIVE, RAGING_TACKLE, ROUGH_UP, SHARPEN, SPRAY, STRIKE, SWAT, SWIPE, WAVE_WRECKER),
+			true
+		);
+		register(
+			KANIBO,
+			"kanibo",
+			List.of(WATER, BRAWLER),
+			List.of(MADCAP, AGGRESSIVE, AMBUSH),
+			68, 97, 125, 103, 39, 73, 80, 
+			585,
+			129.54,
+			104.0,
+			List.of(BLUDGEON, BODY_SLAM, BULK_UP, CHASE_DOWN, CLAWBER, DRIVING_FORCE, EERIE_STARE, HYDRO_SLASH, ICE_HAMMER, ILL_WILL, PIERCING_DRIVE, RAGING_TACKLE, ROUGH_UP, SHARPEN, SPRAY, STRIKE, SWAT, SWIPE, WAVE_WRECKER),
+			true
+		);
+		register(
+			SHARPOD,
+			"sharpod",
+			List.of(WATER, METAL),
+			List.of(REV_UP, TERRIFYING, FRENZY),
+			82, 77, 99, 62, 25, 48, 75, 
+			468,
+			71.12,
+			114.0,
+			List.of(AQUA_JAWS, BAFFLE, BASH, CHOMP, DODGE, DOUBLE_WHACK, FADE_AWAY, ILL_WILL, METAL_SWIPES, MUD_SPATTER, PLUNGE, PROVOKE, SHARPEN, SPARE, SPRAY, STEEL_CRUSHER, THUNDER_CHOMP, TSUNAMI, TUNE_UP, VICE_JAWS, WATER_BOMB, WAVE_WRECKER),
+			true
+		);
+		register(
+			SAMARINE,
+			"samarine",
+			List.of(WATER, METAL),
+			List.of(REV_UP, TERRIFYING, FRENZY),
+			120, 87, 117, 82, 58, 64, 80, 
+			608,
+			167.64,
+			639.0,
+			List.of(AQUA_JAWS, BAFFLE, BASH, CHOMP, DODGE, DOUBLE_WHACK, FADE_AWAY, ILL_WILL, METAL_SWIPES, MUD_SPATTER, PLUNGE, PROVOKE, SHARPEN, SPARE, SPRAY, STEEL_CRUSHER, THUNDER_CHOMP, TSUNAMI, TUNE_UP, VICE_JAWS, WATER_BOMB, WAVE_WRECKER),
+			true
+		);
+		register(
+			LUMICA,
+			"lumica",
+			List.of(WATER),
+			List.of(SHARP_EDGES, PREMONITION, REPUGNANT),
+			66, 85, 69, 63, 33, 71, 15, 
+			402,
+			25.4,
+			8.0,
+			List.of(BARBS, BLINDSPOT_BATTER, BRACE, BULK_UP, DODGE, EERIE_STARE, GNAW, HEADBUTT, HYDRO_SLASH, HYPNOTIZE, ICICLE_TRAP, PIERCING_DRIVE, POISON_BARBS, PROVOKE, SCAPEGOAT, SHARPEN, SLUMBER, SPARE, SPRAY, SQUARE_ONE, STING, TAMP, TEAR_DOWN, WATER_BOMB, WAVE_WRECKER),
+			true
+		);
+		register(
+			LUMELLO,
+			"lumello",
+			List.of(WATER),
+			List.of(SHARP_EDGES, PREMONITION, REPUGNANT),
+			100, 100, 99, 106, 62, 96, 15, 
+			578,
+			86.36,
+			87.0,
+			List.of(BANEFUL_BASH, BARBS, BLINDSPOT_BATTER, BRACE, BULK_UP, DODGE, EERIE_STARE, GNAW, HEADBUTT, HYDRO_SLASH, HYPNOTIZE, ICICLE_TRAP, PIERCING_DRIVE, POISON_BARBS, PROVOKE, SCAPEGOAT, SHARPEN, SLUMBER, SPARE, SPRAY, SQUARE_ONE, STING, TAMP, TEAR_DOWN, WATER_BOMB, WAVE_WRECKER),
+			true
+		);
+		register(
+			POLYPI,
+			"polypi",
+			List.of(WATER, LIGHT),
+			List.of(TEMPER, ENCHANTED_COAT, INCANDESCENT),
+			42, 77, 10, 24, 54, 54, 39, 
+			300,
+			20.32,
+			3.0,
+			List.of(DAWDLE, DEEP_FREEZE, DEJA_VU, DISPERSE, DODGE, ENERGY_SURGE, FLASH, FLASH_N_FLEE, FROST_BEAM, GAMMA_PULSE, MAGNIFY, MAROON, PEACE_OF_MIND, PROVOKE, RESONATE, SHINE, SOFT_WATER, SPARE, SPRAY, STUN, TEASE, TSUNAMI, WATER_BOMB),
+			true
+		);
+		register(
+			LAPHYRA,
+			"laphyra",
+			List.of(WATER, LIGHT),
+			List.of(TEMPER, ENCHANTED_COAT, INCANDESCENT),
+			75, 88, 15, 44, 72, 85, 71, 
+			450,
+			50.8,
+			12.0,
+			List.of(DAWDLE, DEEP_FREEZE, DEJA_VU, DISPERSE, DODGE, ENERGY_SURGE, FLASH, FLASH_N_FLEE, FROST_BEAM, GAMMA_PULSE, MAGNIFY, MAROON, PEACE_OF_MIND, PROVOKE, RESONATE, SHINE, SOFT_WATER, SPARE, SPRAY, STUN, TEASE, TSUNAMI, WATER_BOMB),
+			true
+		);
+		register(
+			JELLUSA,
+			"jellusa",
+			List.of(WATER, LIGHT),
+			List.of(TEMPER, ENCHANTED_COAT, INCANDESCENT),
+			100, 99, 58, 66, 95, 100, 92, 
+			610,
+			144.78,
+			66.0,
+			List.of(DAWDLE, DEEP_FREEZE, DEJA_VU, DISPERSE, DODGE, ENAMOR, ENERGY_SURGE, FLASH, FLASH_N_FLEE, FROST_BEAM, GAMMA_PULSE, MAGNIFY, MAROON, PEACE_OF_MIND, PROVOKE, RESONATE, SHINE, SOFT_WATER, SPARE, SPRAY, STUN, TEASE, TSUNAMI, WATER_BOMB),
+			true
+		);
+		register(
+			TAOSHI,
+			"taoshi",
+			List.of(SIMPLE),
+			List.of(ENCHANTED_COAT, ADORABLE, SENDOFF),
+			70, 57, 49, 64, 18, 64, 50, 
+			372,
+			27.94,
+			8.0,
+			List.of(AUGMENT, BARTER, BEQUEATH, BLINDSPOT_BATTER, BODY_SLAM, BULK_UP, CHOMP, DAWDLE, DISSIPATE, DODGE, FAR_ENCHANTMENT, GNAW, MEGA_CHOMP, MUD_SPATTER, NEAR_ENCHANTMENT, QUICK_POUNCE, REJUVENATE, SCAPEGOAT, SHARPEN, SPARE, STRETCH, STUN, SWAT, SWIPE, TEAR_DOWN),
+			true
+		);
+		register(
+			TAOSHINU,
+			"taoshinu",
+			List.of(SIMPLE),
+			List.of(ENCHANTED_COAT, GUARDIAN, SENDOFF),
+			110, 90, 93, 94, 48, 89, 62, 
+			586,
+			127.0,
+			65.0,
+			List.of(AUGMENT, BARTER, BEQUEATH, BLINDSPOT_BATTER, BODY_SLAM, BULK_UP, CHOMP, DAWDLE, DISSIPATE, DODGE, EMPATHIZE, FAR_ENCHANTMENT, GNAW, MEGA_CHOMP, MUD_SPATTER, NEAR_ENCHANTMENT, QUICK_POUNCE, REJUVENATE, SCAPEGOAT, SHARPEN, SPARE, STRETCH, STUN, SWAT, SWIPE, TEAR_DOWN),
+			true
+		);
+		register(
+			KITTONE,
+			"kittone",
+			List.of(SIMPLE),
+			List.of(TONE_DEAF, ADORABLE, SHAKEDOWN),
+			45, 65, 44, 37, 57, 39, 85, 
+			372,
+			22.86,
+			5.0,
+			List.of(BAIT, BARTER, BOOM_BASH, DISCORDANCE, DISSONANT_CHORD, DODGE, GNAW, HARMONIOUS_CHORD, HASTEN, HULLABALOO, HYPNOTIZE, ILL_WILL, MAGNIFY, PEACE_OF_MIND, PEACE_OF_MIND, PREEMPTIVE_STRIKE, PROVOKE, QUICK_POUNCE, RAGING_HOWL, RANT, REPEATING_TUNE, RESONATE, SCAPEGOAT, SLAP_DOWN, SPARE, SPLITTING_HEADACHE, STARE, STRETCH, SWAT, TAIL_SLAP, TONE_BARRIER),
+			true
+		);
+		register(
+			LYRICAT,
+			"lyricat",
+			List.of(SIMPLE),
+			List.of(TONE_DEAF, BURGLAR, SHAKEDOWN),
+			90, 93, 69, 62, 107, 64, 101, 
+			586,
+			111.76,
+			48.0,
+			List.of(BAIT, BARTER, BOOM_BASH, DISCORDANCE, DISSONANT_CHORD, DODGE, GNAW, HARMONIOUS_CHORD, HASTEN, HIGH_PITCH_SCREECH, HULLABALOO, HYPNOTIZE, ILL_WILL, MAGNIFY, PEACE_OF_MIND, PEACE_OF_MIND, PREEMPTIVE_STRIKE, PROVOKE, QUICK_POUNCE, RAGING_HOWL, RANT, REPEATING_TUNE, RESONATE, SCAPEGOAT, SLAP_DOWN, SPARE, SPLITTING_HEADACHE, STARE, STRETCH, SWAT, TAIL_SLAP, TONE_BARRIER),
+			true
+		);
+		register(
+			SOMATA,
+			"somata",
+			List.of(WATER, MIND),
+			List.of(GUARDIAN, REPUGNANT, ADORABLE),
+			65, 70, 8, 44, 57, 93, 22, 
+			359,
+			35.56,
+			9.0,
+			List.of(BAIT, BAIT, BRAINWASH, DAWDLE, DEJA_VU, DISSIPATE, DODGE, DOWNPOUR, FLABBERGAST, GUST, HEALTH_GIFT, MAROON, MINDS_EYE, MIND_DRAIN, PEACE_OF_MIND, RANT, REJUVENATE, SPARE, SPRAY, STRATAGEM, TEAR_DOWN, TSUNAMI, WATER_BOMB, WONDER_HERB),
+			true
+		);
+		register(
+			CLIONAE,
+			"clionae",
+			List.of(WATER, MIND),
+			List.of(GUARDIAN, REPUGNANT, PERSISTENCE),
+			97, 91, 44, 66, 95, 127, 70, 
+			590,
+			157.48,
+			73.0,
+			List.of(BAIT, BAIT, BRAINWASH, DAWDLE, DEJA_VU, DISSIPATE, DODGE, DOWNPOUR, FAR_ENCHANTMENT, FLABBERGAST, GUST, HEALTH_GIFT, MAROON, MINDS_EYE, MIND_DRAIN, NEAR_ENCHANTMENT, PEACE_OF_MIND, RANT, REJUVENATE, SPARE, SPRAY, STRATAGEM, TEAR_DOWN, TSUNAMI, WATER_BOMB, WONDER_HERB),
+			true
+		);
+		register(
+			BOONARY,
+			"boonary",
+			List.of(SPIRIT),
+			List.of(TWO_FACE),
+			64, 64, 64, 64, 64, 64, 64, 
+			448,
+			25.4,
+			1.0,
+			List.of(EMULATE, STARTLE, STUPEFY),
+			true
+		);
+		register(
+			CINNABOO,
+			"cinnaboo",
+			List.of(SPIRIT),
+			List.of(SWEET_TOUCH, PLAYFUL, SHAKEDOWN),
+			51, 55, 11, 40, 63, 60, 70, 
+			350,
+			48.26,
+			19.0,
+			List.of(BAG_OF_TRICKS, CHARADE, DODGE, FADE_AWAY, FINAL_RUSE, HEADBUTT, HEALTH_GIFT, MINDS_EYE, MUCK_BLAST, PEACE_OF_MIND, POISON, PROVOKE, SAFEGUARD, SLIME, SPARE, SPECTRAL_BURST, STARE, STARTLE, STRETCH, STUPEFY, TEAR_DOWN, TRICKY_TACTICS, WONDER_HERB),
+			true
+		);
+		register(
+			CINNOGRE,
+			"cinnogre",
+			List.of(SPIRIT),
+			List.of(SWEET_TOUCH, IGNORANT, SHAKEDOWN),
+			112, 99, 55, 71, 115, 86, 77, 
+			615,
+			177.8,
+			242.0,
+			List.of(BAG_OF_TRICKS, BOOM_BASH, CHARADE, DODGE, FADE_AWAY, FINAL_RUSE, HEADBUTT, HEALTH_GIFT, MINDS_EYE, MUCK_BLAST, PEACE_OF_MIND, POISON, PROVOKE, SAFEGUARD, SLIME, SPARE, SPECTRAL_BURST, SPITE, STARE, STARTLE, STRETCH, STUPEFY, TEAR_DOWN, TRICKY_TACTICS, WONDER_HERB),
+			true
+		);
+		register(
+			SWIRELLE,
+			"swirelle",
+			List.of(AIR),
+			List.of(APPETITE),
+			65, 100, 65, 65, 65, 65, 100, 
+			525,
+			86.36,
+			19.0,
+			List.of(AIR_BLADE, AIR_SHOT, DODGE, JET_STREAM, MUD_SPATTER, NOSEDIVE, PERCH, PILFER, PROVOKE, QUICK_POUNCE, SCAVENGE, SPARE, STRETCH, STRIKE, SWAT),
+			true
+		);
+		register(
+			SWISHY,
+			"swishy",
+			List.of(WATER),
+			List.of(REGIFT, GUMMY, VISCID),
+			39, 53, 15, 51, 52, 77, 72, 
+			359,
+			68.58,
+			18.0,
+			List.of(BRACE, DODGE, EMPATHIZE, EXAMINE, FROST_BEAM, HEALTH_GIFT, HYDRO_BLAST, LANDSLIDE, MAROON, MUDSLIDE, PEACE_OF_MIND, PLUNGE, PROVOKE, RECYCLE, SCAPEGOAT, SOFT_WATER, SPARE, SPRAY, SQUARE_ONE, STRATAGEM, STRIKE, TSUNAMI, WATER_BOMB),
+			true
+		);
+		register(
+			FISCARNA,
+			"fiscarna",
+			List.of(WATER),
+			List.of(REGIFT, GUMMY, VISCID),
+			79, 88, 43, 87, 113, 110, 79, 
+			599,
+			193.04,
+			189.0,
+			List.of(BRACE, DODGE, EMPATHIZE, EXAMINE, FROST_BEAM, GULP, HEALTH_GIFT, HYDRO_BLAST, LANDSLIDE, MAROON, MUDSLIDE, PEACE_OF_MIND, PLUNGE, PROVOKE, RECYCLE, SCAPEGOAT, SOFT_WATER, SPARE, SPRAY, SQUARE_ONE, STRATAGEM, STRIKE, TSUNAMI, WATER_BOMB),
+			true
+		);
+		register(
+			BUNPUFF,
+			"bunpuff",
+			List.of(PLANT, EARTH),
+			List.of(ADORABLE, NOXIOUS_WEEDS, GLUTTON),
+			46, 70, 22, 41, 56, 51, 71, 
+			357,
+			76.2,
+			26.0,
+			List.of(BOOM_BASH, BRAWN_BOOST, BURROW, DODGE, EARTHQUAKE, GNAW, HOP_KICK, LANDSLIDE, LEAF_BARRAGE, LIFE_DRAIN, MAGNIFY, MUD_SPATTER, NATURES_FORCE, PETAL_PUMMEL, PHEROBLAST, PINE_SHOT, POISON, QUICKSAND, SAP_PLANT, SPARE, SWAT, TEASE, TIMBER_THRASH, WONDER_HERB),
+			true
+		);
+		register(
+			BUNNECKI,
+			"bunnecki",
+			List.of(PLANT, EARTH),
+			List.of(ADORABLE, NOXIOUS_WEEDS, GLUTTON),
+			77, 94, 73, 72, 102, 80, 102, 
+			600,
+			170.18,
+			89.0,
+			List.of(BOOM_BASH, BOULDER_BLAST, BRAWN_BOOST, BURROW, DODGE, EARTHQUAKE, GNAW, HOP_KICK, LANDSLIDE, LEAF_BARRAGE, LIFE_DRAIN, MAGNIFY, MUD_SPATTER, NAB, NATURES_FORCE, PETAL_PUMMEL, PHEROBLAST, PINE_SHOT, POISON, QUICKSAND, SAP_PLANT, SPARE, SWAT, TEASE, TIMBER_THRASH, WONDER_HERB),
+			true
+		);
+		register(
+			DRACTUS,
+			"dractus",
+			List.of(PLANT),
+			List.of(PROTECTIVE_SHELL, INSULATED, ANOMALY),
+			52, 70, 87, 51, 49, 49, 63, 
+			421,
+			83.82,
+			47.0,
+			List.of(BARBS, BODY_CRASH, BULK_UP, BUSH_WHACK, COCONUT_BOMB, DODGE, ENERGY_BREAK, GROWL, HYDRO_SLASH, ILL_WILL, LIFE_DRAIN, MAROON, MUDSLIDE, MUD_SPATTER, NATURES_FORCE, PEACE_OF_MIND, PETAL_PUMMEL, PINE_SHOT, PRIMAL_SLASH, PROVOKE, SHREWD_BLAST, SLASH, SPARE, SPLITTING_HEADACHE, STRETCH, TAIL_SLAP, THISTLE_SLASH, TSUNAMI, VINE_LASH, WATER_BOMB, WAVE_WRECKER, WONDER_HERB),
+			true
+		);
+	}
+	private static void initSpecies3() {
+		register(
+			FRUTRESS,
+			"frutress",
+			List.of(PLANT),
+			List.of(SHARP_EDGES, INSULATED, ANOMALY),
+			67, 80, 87, 76, 49, 57, 36, 
+			452,
+			91.44,
+			50.0,
+			List.of(BARBS, BEQUEATH, BODY_CRASH, BRIAR_BLOCK, BULK_UP, BUSH_WHACK, COCONUT_BOMB, DODGE, ENERGY_BREAK, GROWL, HARVEST, HYDRO_SLASH, ILL_WILL, LIFE_DRAIN, MAROON, MUDSLIDE, MUD_SPATTER, NATURES_FORCE, PEACE_OF_MIND, PETAL_PUMMEL, PINE_SHOT, PRIMAL_SLASH, PROVOKE, SAP_PLANT, SHREWD_BLAST, SLASH, SPARE, SPLITTING_HEADACHE, STRETCH, TAIL_SLAP, TAKE_ROOT, THISTLE_SLASH, TSUNAMI, VINE_LASH, WATER_BOMB, WAVE_WRECKER, WONDER_HERB),
+			true
+		);
+		register(
+			SEEDRAKE,
+			"seedrake",
+			List.of(PLANT),
+			List.of(SHARP_EDGES, INSULATED, ANOMALY),
+			81, 89, 120, 89, 97, 66, 83, 
+			625,
+			302.26,
+			376.0,
+			List.of(BARBS, BEQUEATH, BODY_CRASH, BRIAR_BLOCK, BULK_UP, BUSH_WHACK, COCONUT_BOMB, DODGE, ENERGY_BREAK, GROWL, HARVEST, HYDRO_SLASH, ILL_WILL, LIFE_DRAIN, MAROON, MUDSLIDE, MUD_SPATTER, NATURES_FORCE, PEACE_OF_MIND, PETAL_PUMMEL, PINE_SHOT, PRIMAL_SLASH, PROVOKE, SAP_PLANT, SHREWD_BLAST, SLASH, SPARE, SPLITTING_HEADACHE, STRETCH, TAIL_SLAP, TAKE_ROOT, THISTLE_SLASH, THORN_SLAM, TSUNAMI, VINE_LASH, WATER_BOMB, WAVE_WRECKER, WONDER_HERB),
+			true
+		);
+		register(
+			VOLPUP,
+			"volpup",
+			List.of(ELECTRIC, TOXIC),
+			List.of(AGGRESSIVE, PITCH_BLACK, MYSTERY_TOXINS),
+			54, 78, 70, 49, 19, 44, 73, 
+			387,
+			93.98,
+			55.0,
+			List.of(BANEFUL_BASH, BULK_UP, CHOMP, DODGE, ELECTRO_PUNCH, GNAW, ILL_WILL, MEGA_CHOMP, MUCK_BLAST, POISON, PRIMAL_SLASH, SHARPEN, SLASH, SPARE, STARE, STATIC_SHOCK, STRETCH, STUN, SWAT, THUNDERSTRIKE, THUNDER_CHOMP, THUNDER_CRASH, VENOM_CHOMP, ZIP_ZAP),
+			true
+		);
+		register(
+			HALVANTIC,
+			"halvantic",
+			List.of(ELECTRIC, TOXIC),
+			List.of(AGGRESSIVE, PITCH_BLACK, MYSTERY_TOXINS),
+			123, 95, 130, 71, 51, 60, 85, 
+			615,
+			218.44,
+			318.0,
+			List.of(BANEFUL_BASH, BULK_UP, CHOMP, DODGE, ELECTRO_PUNCH, GNARLY_GASH, GNAW, ILL_WILL, MEGA_CHOMP, MUCK_BLAST, POISON, PRIMAL_SLASH, SHARPEN, SLASH, SPARE, STARE, STATIC_SHOCK, STRETCH, STUN, SWAT, THUNDERSTRIKE, THUNDER_CHOMP, THUNDER_CRASH, VENOM_CHOMP, ZIP_ZAP),
+			true
+		);
+		register(
+			IMPKIN,
+			"impkin",
+			List.of(DARK),
+			List.of(RESENTFUL, DEVIOUS, HANDY),
+			54, 50, 47, 29, 71, 27, 72, 
+			350,
+			71.12,
+			32.0,
+			List.of(BAG_OF_TRICKS, BAMBOOZLE, BARBS, BARTER, BRAWN_BOOST, CHARADE, CHASE_DOWN, DARK_SURGE, DEJA_VU, DODGE, GNARLY_GASH, HEADBUTT, HEALTH_GIFT, ILL_WILL, LUNGE, MEMORIZE, MINDS_EYE, PEACE_OF_MIND, PILFER, POWER_FOCUS, PRIMAL_SLASH, PROVOKE, RANT, SCAPEGOAT, SHARPEN, SHREWD_BLAST, SLAP_DOWN, SPARE, SPLITTING_HEADACHE, STARTLE, STRETCH, TALENT_TRADE, TEASE, TRIBUTE),
+			true
+		);
+		register(
+			GRIMMICK,
+			"grimmick",
+			List.of(DARK),
+			List.of(RESENTFUL, DEVIOUS, HANDY),
+			72, 72, 61, 39, 95, 35, 92, 
+			466,
+			132.08,
+			68.0,
+			List.of(BAG_OF_TRICKS, BAMBOOZLE, BARBS, BARTER, BRAWN_BOOST, CHARADE, CHASE_DOWN, DARK_SURGE, DEJA_VU, DODGE, GNARLY_GASH, HEADBUTT, HEALTH_GIFT, ILL_WILL, LUNGE, MEMORIZE, MINDS_EYE, PEACE_OF_MIND, PILFER, POWER_FOCUS, PRIMAL_SLASH, PROVOKE, RANT, SCAPEGOAT, SHARPEN, SHREWD_BLAST, SLAP_DOWN, SPARE, SPLITTING_HEADACHE, STARTLE, STRETCH, TALENT_TRADE, TEASE, TRIBUTE),
+			true
+		);
+		register(
+			IMPERIOR,
+			"imperior",
+			List.of(DARK),
+			List.of(RESENTFUL, DEVIOUS, HANDY),
+			97, 91, 93, 62, 115, 57, 100, 
+			615,
+			195.58,
+			145.0,
+			List.of(BAG_OF_TRICKS, BAMBOOZLE, BARBS, BARTER, BOOM_BASH, BRAWN_BOOST, CHARADE, CHASE_DOWN, DARK_SURGE, DEJA_VU, DODGE, GNARLY_GASH, HEADBUTT, HEALTH_GIFT, ILL_WILL, LUNGE, MEMORIZE, MINDS_EYE, PEACE_OF_MIND, PILFER, POWER_FOCUS, PRIMAL_SLASH, PROVOKE, RANT, SAVAGE_HORN, SCAPEGOAT, SHARPEN, SHREWD_BLAST, SLAP_DOWN, SPARE, SPLITTING_HEADACHE, STARTLE, STRETCH, TALENT_TRADE, TEASE, TRIBUTE, TRICKY_TACTICS, VITAL_SURGE),
+			true
+		);
+		register(
+			IMPERIOR_ARCHFIEND,
+			"imperior_archfiend",
+			List.of(DARK),
+			List.of(ACE),
+			97, 91, 133, 52, 140, 47, 110, 
+			670,
+			195.58,
+			145.0,
+			List.of(BAG_OF_TRICKS, BAMBOOZLE, BARBS, BARTER, BOOM_BASH, BRAWN_BOOST, CHARADE, CHASE_DOWN, DARK_SURGE, DEJA_VU, DODGE, GNARLY_GASH, HEADBUTT, HEALTH_GIFT, ILL_WILL, LUNGE, MEMORIZE, MINDS_EYE, PEACE_OF_MIND, PILFER, POWER_FOCUS, PRIMAL_SLASH, PROVOKE, RANT, SAVAGE_HORN, SCAPEGOAT, SHARPEN, SHREWD_BLAST, SLAP_DOWN, SPARE, SPLITTING_HEADACHE, STARTLE, STRETCH, TALENT_TRADE, TEASE, TRIBUTE, TRICKY_TACTICS, VITAL_SURGE),
+			true
+		);
+		register(
+			MISTLEBUD,
+			"mistlebud",
+			List.of(PLANT),
+			List.of(FESTIVE_SPIRIT),
+			25, 50, 9, 75, 0, 75, 16, 
+			250,
+			17.78,
+			2.0,
+			List.of(DAWDLE, DISPERSE, DODGE, ENERGY_SURGE, FLASH_N_FLEE, GAMMA_PULSE, HEALTH_GIFT, LEAF_BARRAGE, LIFE_DRAIN, LUSTER_LOOT, NATURES_FORCE, PEACE_OF_MIND, PETAL_PUMMEL, PHEROBLAST, SAP_PLANT, SHINE, SPARE, SPECTRAL_BURST, SUMMON, WONDER_HERB),
+			true
+		);
+		register(
+			HOLLIBUNCH,
+			"hollibunch",
+			List.of(PLANT, LIGHT),
+			List.of(FESTIVE_SPIRIT),
+			65, 110, 51, 130, 0, 130, 39, 
+			525,
+			63.5,
+			15.0,
+			List.of(DAWDLE, DISPERSE, DODGE, ENERGY_SURGE, FLASH_N_FLEE, GAMMA_PULSE, HEALTH_GIFT, LEAF_BARRAGE, LIFE_DRAIN, LUSTER_LOOT, NATURES_FORCE, NOVA_BLAST, PEACE_OF_MIND, PETAL_PUMMEL, PHEROBLAST, SAP_PLANT, SHINE, SPARE, SPECTRAL_BURST, SUMMON, WONDER_HERB),
+			true
+		);
+		register(
+			CRYOCUB,
+			"cryocub",
+			List.of(ICE),
+			List.of(ADORABLE, COMMUNICATION, MYSTERIOUS_CLOAK),
+			49, 57, 41, 65, 37, 46, 51, 
+			346,
+			76.2,
+			23.0,
+			List.of(BODY_SLAM, BRAWN_BOOST, BURROW, CHILLY_CHOMP, CHOMP, CLAY_SLAP, DAWDLE, DODGE, FLURRY, FROST_BEAM, GNAW, ICE_HAMMER, ICICLE_TRAP, SNOWDOZER, SPARE, SPIKE_RUSH, SWIPE, TAMP),
+			true
+		);
+		register(
+			BARBADGER,
+			"barbadger",
+			List.of(ICE, BRAWLER),
+			List.of(DAUNTLESS, COMMUNICATION, MYSTERIOUS_CLOAK),
+			78, 93, 115, 106, 57, 72, 82, 
+			603,
+			187.96,
+			198.0,
+			List.of(BODY_SLAM, BRAWN_BOOST, BURROW, CHILLY_CHOMP, CHOMP, CLAY_SLAP, DAWDLE, DODGE, FLURRY, FROST_BEAM, GNAW, ICE_HAMMER, ICICLE_TRAP, ILL_WILL, MEGA_PUNCH, ROGUE_ASSAULT, SNOWDOZER, SPARE, SPIKE_RUSH, SWIPE, TAMP),
+			true
+		);
+		register(
+			KYEGGO,
+			"kyeggo",
+			List.of(DARK),
+			List.of(ANOMALY, VIVID_SIGHT, VICIOUS),
+			67, 62, 26, 54, 66, 56, 44, 
+			375,
+			45.72,
+			11.0,
+			List.of(BAMBOOZLE, DARK_SURGE, DINO_CLAWS, DODGE, DRACO_BEAM, EERIE_STARE, GNARLY_GASH, HEADBUTT, HIGH_PITCH_SCREECH, MEGA_CHOMP, MUD_SPATTER, NAB, OUTBURST, PEACE_OF_MIND, PROVOKE, RANT, SHREWD_BLAST, SLUMBER, SPARE, STARE, TAIL_SLAP, TEAR_DOWN, TEASE),
+			true
+		);
+		register(
+			DOREGGO,
+			"doreggo",
+			List.of(DARK, AIR),
+			List.of(ANOMALY, VIVID_SIGHT, VICIOUS),
+			86, 78, 42, 66, 102, 70, 56, 
+			500,
+			88.9,
+			29.0,
+			List.of(AIR_BLADE, BAMBOOZLE, DARK_SURGE, DINO_CLAWS, DODGE, DRACO_BEAM, EERIE_STARE, GNARLY_GASH, HEADBUTT, HIGH_PITCH_SCREECH, JET_STREAM, MEGA_CHOMP, MUD_SPATTER, NAB, OUTBURST, PEACE_OF_MIND, PROVOKE, RANT, SHREWD_BLAST, SLUMBER, SPARE, STARE, TAIL_SLAP, TEAR_DOWN, TEASE),
+			true
+		);
+		register(
+			DREGGODYNE,
+			"dreggodyne",
+			List.of(DARK, AIR),
+			List.of(STAUNCH, VIVID_SIGHT, VICIOUS),
+			96, 92, 73, 77, 135, 82, 70, 
+			625,
+			264.16,
+			322.0,
+			List.of(AIR_BLADE, BAMBOOZLE, DARK_SURGE, DINO_CLAWS, DODGE, DOUBLE_BEAT, DRACO_BEAM, EERIE_STARE, EGG_STORM, GNARLY_GASH, HEADBUTT, HIGH_PITCH_SCREECH, JET_STREAM, MEGA_CHOMP, MUD_SPATTER, NAB, NOSEDIVE, OUTBURST, PEACE_OF_MIND, PROVOKE, RANT, SHREWD_BLAST, SLUMBER, SPARE, STARE, TAIL_SLAP, TEAR_DOWN, TEASE),
+			true
+		);
+		register(
+			DREGGODYNE_TEMPEREIGN,
+			"dreggodyne_tempereign",
+			List.of(DARK, AIR),
+			List.of(REMORSELESS),
+			96, 92, 93, 77, 145, 82, 95, 
+			680,
+			264.16,
+			322.0,
+			List.of(AIR_BLADE, BAMBOOZLE, DARK_SURGE, DINO_CLAWS, DODGE, DOUBLE_BEAT, DRACO_BEAM, EERIE_STARE, EGG_STORM, GNARLY_GASH, HEADBUTT, HIGH_PITCH_SCREECH, JET_STREAM, MEGA_CHOMP, MUD_SPATTER, NAB, NOSEDIVE, OUTBURST, PEACE_OF_MIND, PROVOKE, RANT, SHREWD_BLAST, SLUMBER, SPARE, STARE, TAIL_SLAP, TEAR_DOWN, TEASE),
+			true
+		);
+		register(
+			WISPUR,
+			"wispur",
+			List.of(SPIRIT, LIGHT),
+			List.of(RADIANCE, FOG_SUMMON, CAPTIVATING),
+			25, 61, 9, 47, 72, 70, 33, 
+			317,
+			33.02,
+			1.0,
+			List.of(CHASE_DOWN, CLIMATE_CANNON, DAWDLE, FADE_AWAY, FLASH, FLASH_N_FLEE, FLURRY, FROST_BEAM, GAMMA_PULSE, HAZY_SHROUD, LUSTER_LOOT, MAGNIFY, MINDS_EYE, NOVA_BLAST, PEACE_OF_MIND, PHANTOM_BLAST, SAFEGUARD, SHADOW_SPRINT, SHINE, SLEET_SHOT, SOUL_STORM, SPARE, SPECTRAL_BURST, SQUARE_ONE, STARTLE, TEAR_DOWN, TRICKY_TACTICS),
+			true
+		);
+		register(
+			LAMPURGE,
+			"lampurge",
+			List.of(SPIRIT, LIGHT),
+			List.of(RADIANCE, FOG_SUMMON, CAPTIVATING),
+			42, 81, 39, 78, 97, 91, 40, 
+			468,
+			78.74,
+			8.0,
+			List.of(BLINDSPOT_BATTER, CHARADE, CHASE_DOWN, CLIMATE_CANNON, DAWDLE, FADE_AWAY, FINAL_RUSE, FLASH, FLASH_N_FLEE, FLURRY, FROST_BEAM, GAMMA_PULSE, HAZY_SHROUD, LUSTER_LOOT, MAGNIFY, MINDS_EYE, NOVA_BLAST, PEACE_OF_MIND, PHANTOM_BLAST, SAFEGUARD, SHADOW_SPRINT, SHINE, SLEET_SHOT, SOUL_STORM, SPARE, SPECTRAL_BURST, SQUARE_ONE, STARTLE, TEAR_DOWN, TRICKY_TACTICS),
+			true
+		);
+		register(
+			CHARONYX,
+			"charonyx",
+			List.of(SPIRIT, LIGHT),
+			List.of(RADIANCE, FOG_SUMMON, REAPER),
+			56, 101, 68, 96, 122, 106, 51, 
+			600,
+			124.46,
+			11.0,
+			List.of(APPARITION, BLINDSPOT_BATTER, CHARADE, CHASE_DOWN, CLIMATE_CANNON, DAWDLE, DODGE, FADE_AWAY, FINAL_RUSE, FLASH, FLASH_N_FLEE, FLURRY, FROST_BEAM, GAMMA_PULSE, HAZY_SHROUD, LUSTER_LOOT, MAGNIFY, MINDS_EYE, NOVA_BLAST, PEACE_OF_MIND, PHANTOM_BLAST, SAFEGUARD, SHADOW_SPRINT, SHINE, SLEET_SHOT, SOUL_STORM, SPARE, SPECTRAL_BURST, SQUARE_ONE, STARTLE, TEAR_DOWN, TRICKY_TACTICS),
+			true
+		);
+		register(
+			SMOAL,
+			"smoal",
+			List.of(FIRE, TOXIC),
+			List.of(HEAT_SUMMON, SCORCHING_SKIN, BLISTERING_HEAT),
+			37, 67, 38, 30, 38, 25, 54, 
+			289,
+			48.26,
+			45.0,
+			List.of(BANEFUL_BASH, BARBS, BASH, BOILING_PRESS, BULK_UP, BURN_UP, CLIMATE_CANNON, CORRODE, DODGE, DRIVING_FORCE, EARTHQUAKE, EERIE_STARE, FIRE_BREATH, FIRE_SLAM, FLARE_BLAST, GROWL, HEAT_WAVE, HEAVY_BASH, ILL_WILL, LANDSLIDE, METAL_BLAST, MUCK_BLAST, PAINT_SHOWER, POISON, POWER_FOCUS, SINGE, SPARE, STEEL_CRUSHER, TAMP, TEAR_DOWN, TRIBUTE),
+			true
+		);
+		register(
+			CHARKILN,
+			"charkiln",
+			List.of(FIRE, TOXIC),
+			List.of(HEAT_SUMMON, SCORCHING_SKIN, BLISTERING_HEAT),
+			56, 77, 74, 52, 74, 39, 84, 
+			456,
+			114.3,
+			88.0,
+			List.of(BANEFUL_BASH, BARBS, BASH, BLAZE_PUNCH, BOILING_PRESS, BULK_UP, BURN_UP, CLIMATE_CANNON, CORRODE, DODGE, DOUBLE_WHACK, DRIVING_FORCE, EARTHQUAKE, EERIE_STARE, FIRE_BREATH, FIRE_SLAM, FLARE_BLAST, GROWL, HEAT_WAVE, HEAVY_BASH, ILL_WILL, LANDSLIDE, METAL_BLAST, MUCK_BLAST, PAINT_SHOWER, POISON, POWER_FOCUS, SINGE, SLIME, SPARE, STEEL_CRUSHER, TAMP, TEAR_DOWN, TRIBUTE),
+			true
+		);
+		register(
+			BILLOFORGE,
+			"billoforge",
+			List.of(FIRE, TOXIC),
+			List.of(HEAT_SUMMON, SCORCHING_SKIN, BLISTERING_HEAT),
+			80, 87, 117, 104, 117, 71, 24, 
+			600,
+			193.04,
+			653.0,
+			List.of(BANEFUL_BASH, BARBS, BASH, BLAZE_PUNCH, BOILING_PRESS, BULK_UP, BURN_UP, CLIMATE_CANNON, CORRODE, DODGE, DOUBLE_WHACK, DRIVING_FORCE, EARTHQUAKE, EERIE_STARE, FIRE_BREATH, FIRE_SLAM, FLARE_BLAST, GROWL, HEAT_WAVE, HEAVY_BASH, ILL_WILL, KINDLED_RAGE, LANDSLIDE, METAL_BLAST, MUCK_BLAST, PAINT_SHOWER, POISON, POWER_FOCUS, SINGE, SLIME, SPARE, STEEL_CRUSHER, TAMP, TEAR_DOWN, TRIBUTE),
+			true
+		);
+		register(
+			SHERBOT,
+			"sherbot",
+			List.of(ICE, METAL),
+			List.of(OVERCLOCK, SUGAR_RUSH, CHILL),
+			69, 85, 42, 97, 94, 62, 76, 
+			525,
+			144.78,
+			211.0,
+			List.of(AIR_BLADE, BARBS, BASH, BURN_UP, DEEP_FREEZE, DEJA_VU, DISSONANT_CHORD, DODGE, FLURRY, FROST_BEAM, GUST, HARMONIOUS_CHORD, HEAVY_BASH, ICICLE_TRAP, JET_STREAM, JUMP_START, METAL_BLAST, METAL_SHRIEK, OUT_OF_ORDER, PEACE_OF_MIND, RESONATE, SLEET_SHOT, SPARE, SPLITTING_HEADACHE, SQUAWK, STRIKE, TASE, TEAR_DOWN, TRIBUTE, TUNE_UP, ZIP_ZAP),
+			true
+		);
+		register(
+			LLAMBA,
+			"llamba",
+			List.of(SIMPLE),
+			List.of(PLAYFUL, REGURGITATE, WHOLESOME),
+			59, 51, 20, 59, 64, 47, 70, 
+			370,
+			71.12,
+			24.0,
+			List.of(ACCELERATE, BODY_SLAM, BOOM_BASH, CHASE_DOWN, DAYDREAM, DODGE, ENERGY_BREAK, GROWL, HEALTH_GIFT, HIGH_PITCH_SCREECH, ILL_WILL, MEGA_KICK, NAB, POWER_FOCUS, PROVOKE, QUICK_POUNCE, RAGING_HOWL, RAGING_TACKLE, RECYCLE, SCAPEGOAT, SLUMBER, SPARE, SPIT, STAMPEDE, STRETCH),
+			true
+		);
+		register(
+			CHOOCHEW,
+			"choochew",
+			List.of(SIMPLE),
+			List.of(PLAYFUL, REGURGITATE, WHOLESOME),
+			76, 76, 37, 70, 83, 62, 86, 
+			490,
+			139.7,
+			89.0,
+			List.of(ACCELERATE, BODY_SLAM, BOOM_BASH, BULK_UP, CHASE_DOWN, DAYDREAM, DODGE, ENERGY_BREAK, GROWL, HEADBUTT, HEALTH_GIFT, HIGH_PITCH_SCREECH, ILL_WILL, MEGA_KICK, MUD_SPATTER, NAB, PEACE_OF_MIND, POWER_FOCUS, PROVOKE, QUICK_POUNCE, RAGING_HOWL, RAGING_TACKLE, RECYCLE, SCAPEGOAT, SLUMBER, SPARE, SPIT, STAMPEDE, STRETCH),
+			true
+		);
+		register(
+			LOOMALA,
+			"loomala",
+			List.of(SIMPLE),
+			List.of(HERD_BEHAVIOR, REGURGITATE, WHOLESOME),
+			92, 98, 60, 89, 95, 80, 111, 
+			625,
+			203.2,
+			205.0,
+			List.of(ACCELERATE, BODY_SLAM, BOOM_BASH, BULK_UP, CHASE_DOWN, DAYDREAM, DODGE, ENERGY_BREAK, GROWL, HEADBUTT, HEALTH_GIFT, HIGH_PITCH_SCREECH, ILL_WILL, MEGA_KICK, MUD_SPATTER, NAB, PEACE_OF_MIND, POWER_FOCUS, PROVOKE, QUICK_POUNCE, RAGING_HOWL, RAGING_TACKLE, RECYCLE, SCAPEGOAT, SLUMBER, SPARE, SPIT, SPIT_OUT, STAMPEDE, STRETCH),
+			true
+		);
+		register(
+			FENTERN,
+			"fentern",
+			List.of(SIMPLE),
+			List.of(INTERN, RUSH_HOUR, TRADER),
+			45, 100, 42, 46, 16, 41, 70, 
+			360,
+			53.34,
+			18.0,
+			List.of(BAFFLE, BAIT, BARBS, BARTER, BEQUEATH, BODY_SLAM, DAWDLE, DODGE, DRIVING_FORCE, HEADBUTT, HEALTH_GIFT, ILL_WILL, PROVOKE, QUICK_POUNCE, RANT, RECYCLE, SCAPEGOAT, SLAP_DOWN, SLASH, SLUMBER, SPARE, STRETCH, STRIKE, TEAR_DOWN, TRIBUTE, TRICKY_TACTICS),
+			true
+		);
+		register(
+			WEASELIN,
+			"weaselin",
+			List.of(SIMPLE),
+			List.of(PARTNERSHIP, RUSH_HOUR, TRADER),
+			75, 150, 72, 71, 56, 66, 90, 
+			580,
+			157.48,
+			87.0,
+			List.of(BAFFLE, BAIT, BARBS, BARTER, BEQUEATH, BODY_SLAM, DAWDLE, DODGE, DRIVING_FORCE, HEADBUTT, HEALTH_GIFT, ILL_WILL, PROVOKE, QUICK_POUNCE, RANT, RECYCLE, SCAPEGOAT, SLAP_DOWN, SLASH, SLUMBER, SPARE, STRETCH, STRIKE, TEAMWORK, TEAR_DOWN, TRIBUTE, TRICKY_TACTICS),
+			true
+		);
+		register(
+			SINGEEL,
+			"singeel",
+			List.of(ELECTRIC),
+			List.of(SAFETY_POT),
+			75, 43, 6, 24, 31, 16, 5, 
+			200,
+			63.5,
+			16.0,
+			List.of(BAMBOOZLE, BRACE, BULK_UP, CONFOUND, DARK_SURGE, DODGE, EARTHQUAKE, ELECTRO_PUNCH, ENERGIZE, GAIN_DRAIN, GNARLY_GASH, HYDRO_SLASH, JOLT, LANDSLIDE, MEGA_CHOMP, MEGA_PUNCH, MUDSLIDE, PESTER, PHEROBLAST, PLUNGE, PRECISION_BOLT, PRIMAL_SLASH, PROVOKE, SAFEGUARD, SHREWD_BLAST, SLAP_DOWN, SOFT_WATER, SPARE, SPRAY, STATIC_SHOCK, TAMP, TASE, THUNDERSTRIKE, THUNDER_CRASH, THUNDER_SLAM, TRICKY_TACTICS, WONDER_HERB, ZIP_ZAP),
+			true
+		);
+		register(
+			MOREEL,
+			"moreel",
+			List.of(ELECTRIC),
+			List.of(ONE_OF_MANY),
+			105, 83, 86, 104, 121, 81, 35, 
+			615,
+			200.66,
+			77.0,
+			List.of(BAMBOOZLE, BRACE, BULK_UP, CONFOUND, DARK_SURGE, DODGE, EARTHQUAKE, ELECTRO_PUNCH, ENERGIZE, GAIN_DRAIN, GNARLY_GASH, HYDRO_SLASH, JOLT, LANDSLIDE, MEGA_CHOMP, MEGA_PUNCH, MUDSLIDE, PESTER, PHEROBLAST, PLUNGE, PRECISION_BOLT, PRIMAL_SLASH, PROVOKE, SAFEGUARD, SHADOW_LURK, SHREWD_BLAST, SLAP_DOWN, SOFT_WATER, SPARE, SPRAY, STATIC_SHOCK, TAMP, TASE, THUNDERSTRIKE, THUNDER_CRASH, THUNDER_SLAM, TRICKY_TACTICS, WONDER_HERB, ZIP_ZAP),
+			true
+		);
+		register(
+			CRABUSHI,
+			"crabushi",
+			List.of(METAL, BRAWLER),
+			List.of(VENGEANCE, POWER_CLAW, RAZOR_SHARP),
+			35, 48, 53, 84, 5, 52, 76, 
+			353,
+			35.56,
+			8.0,
+			List.of(BARBS, BULK_UP, CHOP, DODGE, DRUDGE, HEAVY_BASH, HYDRO_SLASH, METAL_SWIPES, PLUNGE, PROVOKE, ROGUE_ASSAULT, SCAPEGOAT, SHARPEN, SLASH, SPARE, STEEL_CRUSHER, STRIKE, SWIPE, TRIBUTE, WAVE_WRECKER),
+			true
+		);
+		register(
+			CRABTANA,
+			"crabtana",
+			List.of(METAL, BRAWLER),
+			List.of(VENGEANCE, POWER_CLAW, RAZOR_SHARP),
+			60, 90, 100, 117, 39, 79, 100, 
+			585,
+			93.98,
+			43.0,
+			List.of(BARBS, BULK_UP, CHOP, DODGE, DRUDGE, HEAVY_BASH, HYDRO_SLASH, METAL_SWIPES, PLUNGE, PROVOKE, RAZOR_SLASH, ROGUE_ASSAULT, SCAPEGOAT, SHARPEN, SLASH, SPARE, STEEL_CRUSHER, STRIKE, SWIPE, TRIBUTE, WAVE_WRECKER),
+			true
+		);
+		register(
+			TERIPOD,
+			"teripod",
+			List.of(ANCIENT, LIGHT),
+			List.of(WATCHER, ILLUMINATE, MESMERIZING),
+			79, 90, 49, 74, 15, 52, 61, 
+			420,
+			45.72,
+			14.0,
+			List.of(AQUA_JAWS, BANE_OF_HASTE, BLINDSPOT_BATTER, BODY_SLAM, BUG_BITE, DAZZLING_BARRAGE, DINO_CLAWS, DODGE, DRUDGE, ENERGY_SURGE, FLASH, FLASH_N_FLEE, GAMMA_PULSE, HYDRO_SLASH, HYPNOTIZE, LUNGE, LUSTER_LOOT, MAROON, NOVA_BLAST, PARASITIZE, PRIMAL_SLASH, SHINE, SHREWD_BLAST, SLASH, SPARE, WAVE_WRECKER),
+			true
+		);
+		register(
+			TERIDESCENT,
+			"teridescent",
+			List.of(ANCIENT, LIGHT),
+			List.of(WATCHER, ILLUMINATE, MESMERIZING),
+			115, 90, 112, 105, 45, 73, 70, 
+			610,
+			127.0,
+			74.0,
+			List.of(AQUA_JAWS, BANE_OF_HASTE, BLINDSPOT_BATTER, BODY_SLAM, BUG_BITE, DAZZLING_BARRAGE, DINO_CLAWS, DODGE, DRUDGE, ENERGY_SURGE, FLASH, FLASH_N_FLEE, GAMMA_PULSE, HYDRO_SLASH, HYPER_STING, HYPNOTIZE, LUNGE, LUSTER_LOOT, MAROON, NOVA_BLAST, PARASITIZE, PRIMAL_SLASH, SHINE, SHREWD_BLAST, SLASH, SPARE, WAVE_WRECKER),
+			true
+		);
+		register(
+			SKAMPI,
+			"skampi",
+			List.of(WATER),
+			List.of(PROTECTIVE_SHELL, CLUTCH, TRASH_ARMOUR),
+			10, 72, 7, 97, 7, 67, 110, 
+			370,
+			17.78,
+			3.0,
+			List.of(ACCELERATE, BANE_OF_HASTE, BATTERING_RAM, BODY_CRASH, BRACE, CHASE_DOWN, COUNTER_POISE, DODGE, EERIE_STARE, POUNCE, PREEMPTIVE_STRIKE, PROVOKE, QUICK_POUNCE, RECYCLE, ROGUE_ASSAULT, SPARE, SPRAY, STARE, STRETCH, TRIBUTE, VITAL_JAB, WAVE_WRECKER),
+			true
+		);
+		register(
+			PRAWNSU,
+			"prawnsu",
+			List.of(WATER),
+			List.of(APPLIED_FRUSTRATION, CLUTCH, VICIOUS),
+			50, 82, 44, 107, 130, 77, 92, 
+			582,
+			83.82,
+			21.0,
+			List.of(ACCELERATE, BANE_OF_HASTE, BATTERING_RAM, BODY_CRASH, BOOM_BASH, BRACE, CHASE_DOWN, COUNTER_POISE, DODGE, EERIE_STARE, MAROON, PEACE_OF_MIND, PHEROBLAST, PLUNGE, POUNCE, PREEMPTIVE_STRIKE, PROVOKE, QUICK_POUNCE, RECYCLE, ROGUE_ASSAULT, SHELL_SHRAPNEL, SPARE, SPRAY, STARE, STRETCH, TRIBUTE, TSUNAMI, VITAL_JAB, WAVE_WRECKER),
+			true
+		);
+		register(
+			SHRIMPOSTE,
+			"shrimposte",
+			List.of(WATER),
+			List.of(COMBATIVE, CLUTCH, VICIOUS),
+			50, 82, 130, 117, 44, 87, 72, 
+			582,
+			93.98,
+			28.0,
+			List.of(ACCELERATE, BANE_OF_HASTE, BATTERING_RAM, BODY_CRASH, BRACE, BULK_UP, CHASE_DOWN, COUNTER_POISE, DODGE, EERIE_STARE, FAR_ENCHANTMENT, HYDRO_SLASH, MAROON, MEGA_PUNCH, NEAR_ENCHANTMENT, PARASITIZE, PLUNGE, POUNCE, PREEMPTIVE_STRIKE, PROVOKE, QUICK_POUNCE, RECYCLE, ROGUE_ASSAULT, SHELL_BASH, SPARE, SPRAY, STARE, STRETCH, TRIBUTE, TSUNAMI, VITAL_JAB, WAVE_WRECKER),
+			true
+		);
+		register(
+			DOKAN,
+			"dokan",
+			List.of(EARTH, TOXIC),
+			List.of(SPINE_BREAK, IMMUNIZED, SPONGE),
+			63, 88, 49, 66, 23, 52, 49, 
+			390,
+			33.02,
+			9.0,
+			List.of(AQUA_JAWS, BAFFLE, BANEFUL_BASH, BULK_UP, BURROW, CLAY_SLAP, DODGE, EARTHQUAKE, HEADBUTT, ILL_WILL, LANDSLIDE, MAROON, MUCK_BLAST, MUD_SPATTER, PLUNGE, QUICKSAND, SPARE, STARE, STING, TAMP, TOXIC_TAIL, VENOM_CHOMP),
+			true
+		);
+		register(
+			DOKUMORI,
+			"dokumori",
+			List.of(EARTH, TOXIC),
+			List.of(SPINE_BREAK, IMMUNIZED, SPONGE),
+			88, 101, 101, 96, 60, 70, 59, 
+			575,
+			106.68,
+			65.0,
+			List.of(AQUA_JAWS, BAFFLE, BANEFUL_BASH, BULK_UP, BURROW, CLAY_SLAP, DODGE, EARTHQUAKE, HEADBUTT, ICICLE_TRAP, ILL_WILL, LANDSLIDE, MAROON, MUCK_BLAST, MUD_SPATTER, PLUNGE, QUICKSAND, SPARE, STARE, STING, TAMP, TOXIC_TAIL, VENOM_CHOMP),
+			true
+		);
+		register(
+			MIRRAMI,
+			"mirrami",
+			List.of(SPIRIT, METAL),
+			List.of(REFLECTIVE, MIMIC, ANALYZE),
+			10, 56, 85, 31, 85, 56, 24, 
+			347,
+			50.8,
+			3.0,
+			List.of(BAFFLE, BAG_OF_TRICKS, BAMBOOZLE, BULK_UP, CHASE_DOWN, DARK_SURGE, DEJA_VU, DODGE, DOUBLE_WHACK, FADE_AWAY, FAR_ENCHANTMENT, FINAL_RUSE, ILL_WILL, IMPERSONATE, METAL_BLAST, METAL_SHRIEK, METAL_SWIPES, NEAR_ENCHANTMENT, PEACE_OF_MIND, PHANTOM_SLASH, POWER_FOCUS, REFLECTION_BURST, SHADOW_SPRINT, SOUL_STORM, SPARE, SPECTRAL_BURST, SQUARE_ONE, STEEL_CRUSHER, STUPEFY, THUNDER_CHOMP, TRICKY_TACTICS),
+			true
+		);
+		register(
+			MIRRAITH,
+			"mirraith",
+			List.of(SPIRIT, METAL),
+			List.of(REFLECTIVE, MIMIC, ANALYZE),
+			50, 84, 125, 72, 125, 105, 44, 
+			605,
+			180.34,
+			54.0,
+			List.of(BAFFLE, BAG_OF_TRICKS, BAMBOOZLE, BULK_UP, CHASE_DOWN, DARK_SURGE, DEJA_VU, DODGE, DOUBLE_WHACK, FADE_AWAY, FAR_ENCHANTMENT, FINAL_RUSE, ILL_WILL, IMPERSONATE, METAL_BLAST, METAL_SHRIEK, METAL_SWIPES, NEAR_ENCHANTMENT, PEACE_OF_MIND, PHANTOM_SLASH, POWER_FOCUS, REFLECTION_BURST, SHADOW_SPRINT, SHATTER, SOUL_STORM, SPARE, SPECTRAL_BURST, SQUARE_ONE, STEEL_CRUSHER, STUPEFY, THUNDER_CHOMP, TRICKY_TACTICS),
+			true
+		);
+		register(
+			THAWMIN,
+			"thawmin",
+			List.of(ICE, MIND),
+			List.of(COMMUNICATION, EXPERTISE, FORESIGHT),
+			77, 92, 49, 58, 118, 92, 99, 
+			585,
+			144.78,
+			74.0,
+			List.of(BAG_OF_TRICKS, BANE_OF_HASTE, BARTER, BRACE, BRAINWASH, DEEP_FREEZE, DISSIPATE, DODGE, FLABBERGAST, FROST_BEAM, ICE_HAMMER, ICICLE_TRAP, ILL_WILL, LIFE_DRAIN, MUCK_BLAST, NATURES_FORCE, PEACE_OF_MIND, PETAL_PUMMEL, PHOTOSYNTHESIS, PINE_SHOT, PROVOKE, PSYCHO_BLAST, REJUVENATE, SCAPEGOAT, SLEET_SHOT, SNOWDOZER, SPARE, STRIKE, TEAR_DOWN, THUNDERSTRIKE, TOXIC_SPORES),
+			true
+		);
+		register(
+			LESHENT,
+			"leshent",
+			List.of(PLANT, DARK),
+			List.of(WATCHER, GLOOMY, PETRIFYING),
+			104, 86, 103, 93, 56, 79, 64, 
+			585,
+			195.58,
+			233.0,
+			List.of(BAMBOOZLE, BRACE, BRAWN_BOOST, BRIAR_BLOCK, BUSH_WHACK, CHOMP, DODGE, EARTHQUAKE, FLURRY, FROST_BEAM, GNARLY_GASH, HYPNOTIZE, ICE_HAMMER, ICICLE_TRAP, ILL_WILL, LEAF_BARRAGE, PETAL_PUMMEL, PROVOKE, RAGING_TACKLE, REJUVENATE, SAP_PLANT, SLAP_DOWN, SNOWDOZER, SPARE, THISTLE_SLASH, TIMBER_THRASH, TRICKY_TACTICS, VINE_LASH),
+			true
+		);
+		register(
+			KAYUTE,
+			"kayute",
+			List.of(ICE, DARK),
+			List.of(RAVENOUS, PLAYFUL, DESIGNATED_CHOMPERS),
+			40, 61, 58, 54, 29, 49, 69, 
+			360,
+			81.28,
+			66.0,
+			List.of(BAFFLE, BAMBOOZLE, BARBS, BODY_SLAM, BULK_UP, CHILLY_CHOMP, CHOMP, DARK_SURGE, DODGE, FLURRY, FROST_BEAM, FROST_BREATH, GNARLY_GASH, GNAW, ICE_HAMMER, MEGA_CHOMP, METAL_SHRIEK, PRIMAL_SLASH, PROVOKE, SLAP_DOWN, SLEET_SHOT, SPARE, SPIKE_RUSH, SQUARE_ONE, STRETCH, VICE_JAWS, WONDER_HERB),
+			true
+		);
+		register(
+			KAYAPPA,
+			"kayappa",
+			List.of(ICE, DARK),
+			List.of(RAVENOUS, PLAYFUL, DESIGNATED_CHOMPERS),
+			52, 78, 79, 75, 39, 70, 81, 
+			474,
+			165.1,
+			188.0,
+			List.of(BAFFLE, BAMBOOZLE, BARBS, BODY_SLAM, BULK_UP, CHILLY_CHOMP, CHOMP, DARK_SURGE, DODGE, FLURRY, FROST_BEAM, FROST_BREATH, GNARLY_GASH, GNAW, ICE_HAMMER, ICICLE_TRAP, ILL_WILL, MEGA_CHOMP, METAL_SHRIEK, PRIMAL_SLASH, PROVOKE, SLAP_DOWN, SLEET_SHOT, SPARE, SPIKE_RUSH, SQUARE_ONE, STRETCH, VICE_JAWS, WONDER_HERB),
+			true
+		);
+		register(
+			KRAMBOSS,
+			"kramboss",
+			List.of(ICE, DARK),
+			List.of(RAVENOUS, BATTLE_ARMOUR, DESIGNATED_CHOMPERS),
+			79, 98, 110, 91, 66, 86, 95, 
+			625,
+			205.74,
+			286.0,
+			List.of(BAFFLE, BAMBOOZLE, BARBS, BATTLE_CHIME, BODY_SLAM, BULK_UP, CHILLY_CHOMP, CHOMP, DARK_SURGE, DODGE, FLURRY, FROST_BEAM, FROST_BREATH, GNARLY_GASH, GNAW, ICE_HAMMER, ICICLE_TRAP, ILL_WILL, MEGA_CHOMP, METAL_SHRIEK, PRIMAL_SLASH, PROVOKE, SLAP_DOWN, SLEET_SHOT, SPARE, SPIKE_RUSH, SQUARE_ONE, STRETCH, VICE_JAWS, WONDER_HERB),
+			true
+		);
+		register(
+			KRAMBOSS_FROSTSHACKLED,
+			"kramboss_frostshackled",
+			List.of(ICE, DARK),
+			List.of(METALLIC),
+			99, 88, 130, 101, 66, 96, 100, 
+			680,
+			205.74,
+			286.0,
+			List.of(BAFFLE, BAMBOOZLE, BARBS, BATTLE_CHIME, BODY_SLAM, BULK_UP, CHILLY_CHOMP, CHOMP, DARK_SURGE, DODGE, FLURRY, FROST_BEAM, FROST_BREATH, GNARLY_GASH, GNAW, ICE_HAMMER, ICICLE_TRAP, ILL_WILL, MEGA_CHOMP, METAL_SHRIEK, PRIMAL_SLASH, PROVOKE, SLAP_DOWN, SLEET_SHOT, SPARE, SPIKE_RUSH, SQUARE_ONE, STRETCH, VICE_JAWS, WONDER_HERB),
+			true
+		);
+		register(
+			LEOPAW,
+			"leopaw",
+			List.of(LIGHT, ICE),
+			List.of(SHARP_CLAWS, MESMERIZING, PRISMATIC),
+			56, 78, 54, 48, 28, 39, 71, 
+			374,
+			53.34,
+			11.0,
+			List.of(BLINDSPOT_BATTER, BODY_SLAM, BRAWN_BOOST, BULK_UP, DAZZLING_BARRAGE, DODGE, ENERGY_SURGE, FLASH, FLASH_N_FLEE, FROST_BEAM, FROST_PUNCH, GAMMA_PULSE, ICE_HAMMER, ICICLE_TRAP, LIGHT_DASH, POUNCE, PRIMAL_SLASH, QUICK_POUNCE, RADIANT_RUSH, SLASH, SNOWDOZER, SPARE, SWAT, TEAMWORK),
+			true
+		);
+		register(
+			CHIENTA,
+			"chienta",
+			List.of(LIGHT, ICE),
+			List.of(SHARP_CLAWS, MESMERIZING, PRISMATIC),
+			98, 97, 95, 73, 73, 57, 115, 
+			608,
+			200.66,
+			196.0,
+			List.of(BLINDSPOT_BATTER, BODY_SLAM, BRAWN_BOOST, BULK_UP, DAZZLING_BARRAGE, DODGE, ENERGY_SURGE, FLASH, FLASH_N_FLEE, FROST_BEAM, FROST_PUNCH, GAMMA_PULSE, ICE_HAMMER, ICICLE_TRAP, ILL_WILL, LIGHT_DASH, MEGA_PUNCH, POUNCE, PRIMAL_SLASH, QUICK_POUNCE, RADIANT_RUSH, SLASH, SNOWDOZER, SOLAR_PUNCH, SPARE, SWAT, TEAMWORK),
+			true
+		);
+		register(
+			EYEBRELLA,
+			"eyebrella",
+			List.of(WATER),
+			List.of(HYDRO_VORTEX, DO_OR_DIE, PLUVIAL),
+			64, 62, 69, 60, 34, 48, 47, 
+			384,
+			73.66,
+			4.0,
+			List.of(BAMBOOZLE, DARK_SURGE, DODGE, DOWNPOUR, FADE_AWAY, FINAL_RUSE, GUST, HARROW, HYDRO_SLASH, ILL_WILL, MAROON, MEGA_CHOMP, MUDSLIDE, PLUNGE, POWER_FOCUS, PROVOKE, RANT, SLAP_DOWN, SOFT_WATER, SOUL_STORM, SPARE, SPECTRAL_BURST, SPRAY, SQUARE_ONE, STARTLE, STUPEFY, THUNDER_CHOMP, THUNDER_CRASH, TRIBUTE, TSUNAMI, WATER_BOMB, WAVE_WRECKER),
+			true
+		);
+		register(
+			PARASOUL,
+			"parasoul",
+			List.of(WATER, DARK),
+			List.of(HYDRO_VORTEX, DO_OR_DIE, PLUVIAL),
+			91, 80, 113, 92, 64, 71, 74, 
+			585,
+			149.86,
+			11.0,
+			List.of(BAMBOOZLE, BULK_UP, DARK_SURGE, DODGE, DOWNPOUR, FADE_AWAY, FINAL_RUSE, GUST, HARROW, HYDRO_SLASH, ILL_WILL, MAROON, MEGA_CHOMP, MUDSLIDE, PLUNGE, POWER_FOCUS, PROVOKE, RANT, REVOLUTION, SLAP_DOWN, SOFT_WATER, SOUL_STORM, SPARE, SPECTRAL_BURST, SPRAY, SQUARE_ONE, STARTLE, STUPEFY, THUNDER_CHOMP, THUNDER_CRASH, TRIBUTE, TSUNAMI, WATER_BOMB, WAVE_WRECKER),
+			true
+		);
+		register(
+			LISSEN,
+			"lissen",
+			List.of(MIND),
+			List.of(MOTIVATIONAL, DO_OR_DIE, VIRTUOSO),
+			69, 62, 31, 58, 68, 58, 38, 
+			384,
+			78.74,
+			5.0,
+			List.of(BAIT, BRAINWASH, CEREBRAL_SLASH, DEJA_VU, DISSIPATE, DISSONANT_CHORD, DODGE, FADE_AWAY, FINAL_RUSE, FLABBERGAST, HARMONIOUS_CHORD, HIGH_PITCH_SCREECH, HULLABALOO, ILL_WILL, LIFE_DRAIN, NATURES_FORCE, PEACE_OF_MIND, PESTER, POWER_FOCUS, PROVOKE, PSYCHO_BLAST, RAGING_HOWL, REPEATING_TUNE, RESONATE, SAFEGUARD, SOUL_STORM, SPARE, SPECTRAL_BURST, SPITE, SPLITTING_HEADACHE, STARTLE, STUPEFY, TEAMWORK, TRIBUTE, WONDER_HERB),
+			true
+		);
+		register(
+			BIWARNED,
+			"biwarned",
+			List.of(MIND, SIMPLE),
+			List.of(MOTIVATIONAL, DO_OR_DIE, VIRTUOSO),
+			113, 80, 44, 97, 98, 97, 56, 
+			585,
+			119.38,
+			28.0,
+			List.of(BAIT, BRAINWASH, CEREBRAL_SLASH, CONCLUSION, DEJA_VU, DISSIPATE, DISSONANT_CHORD, DODGE, FADE_AWAY, FINAL_RUSE, FLABBERGAST, HARMONIOUS_CHORD, HIGH_PITCH_SCREECH, HULLABALOO, HYPNOTIZE, ILL_WILL, LIFE_DRAIN, NATURES_FORCE, PEACE_OF_MIND, PESTER, POWER_FOCUS, PROVOKE, PSYCHO_BLAST, RAGING_HOWL, REPEATING_TUNE, RESONATE, SAFEGUARD, SOUL_STORM, SPARE, SPECTRAL_BURST, SPITE, SPLITTING_HEADACHE, STARTLE, STUPEFY, TEAMWORK, TRIBUTE, WONDER_HERB),
+			true
+		);
+		register(
+			LANTOT,
+			"lantot",
+			List.of(FIRE),
+			List.of(WILDFIRE, DO_OR_DIE, SENDOFF),
+			41, 62, 62, 42, 69, 45, 63, 
+			384,
+			38.1,
+			2.0,
+			List.of(BLAZE_CHOMP, BURN_UP, DODGE, ENERGY_SURGE, FADE_AWAY, FINAL_RUSE, FIRE_BREATH, FIRE_SLAM, FLASH, GAMMA_PULSE, HARROW, ILL_WILL, LUSTER_LOOT, POWER_FOCUS, PYROKINESIS, RADIANT_RUSH, RAGING_FLAME, SINGE, SOUL_STORM, SPARE, SPECTRAL_BURST, STARTLE, STUPEFY, TRIBUTE),
+			true
+		);
+		register(
+			LANTORCH,
+			"lantorch",
+			List.of(FIRE, LIGHT),
+			List.of(WILDFIRE, DO_OR_DIE, SENDOFF),
+			68, 80, 98, 62, 113, 71, 93, 
+			585,
+			101.6,
+			16.0,
+			List.of(BLAZE_CHOMP, BURN_UP, DODGE, ENERGY_SURGE, FADE_AWAY, FINAL_RUSE, FIRE_BREATH, FIRE_SLAM, FLARE, FLASH, GAMMA_PULSE, HARROW, ILL_WILL, LUSTER_LOOT, POWER_FOCUS, PYROKINESIS, RADIANT_RUSH, RAGING_FLAME, SINGE, SOUL_STORM, SPARE, SPECTRAL_BURST, STARTLE, STUPEFY, TRIBUTE),
+			true
+		);
+		register(
+			MILGOO,
+			"milgoo",
+			List.of(TOXIC),
+			List.of(SOUL_SIPHON, DO_OR_DIE, DEVIOUS),
+			62, 62, 27, 33, 66, 65, 69, 
+			384,
+			33.02,
+			8.0,
+			List.of(AUGMENT, CONFOUND, CORRODE, DODGE, ENERGY_BREAK, FADE_AWAY, FAR_ENCHANTMENT, FINAL_RUSE, ILL_WILL, MUCK_BLAST, NEAR_ENCHANTMENT, POISON, POWER_FOCUS, SHREWD_BLAST, SLIME, SOUL_STORM, SPARE, SPECTRAL_BURST, STARTLE, STUPEFY, TRIBUTE, VENOM_SLASH),
+			true
+		);
+		register(
+			RANCIDOR,
+			"rancidor",
+			List.of(TOXIC, ANCIENT),
+			List.of(SOUL_SIPHON, DO_OR_DIE, DEVIOUS),
+			93, 80, 49, 59, 99, 92, 113, 
+			585,
+			160.02,
+			70.0,
+			List.of(AUGMENT, CONFOUND, CORRODE, DODGE, ENERGY_BREAK, FADE_AWAY, FAR_ENCHANTMENT, FINAL_RUSE, GOOP_SPOUT, ILL_WILL, MUCK_BLAST, NEAR_ENCHANTMENT, PEACE_OF_MIND, POISON, POWER_FOCUS, SHREWD_BLAST, SLIME, SOUL_STORM, SPARE, SPECTRAL_BURST, STARTLE, STUPEFY, TRIBUTE, VENOM_SLASH),
+			true
+		);
+		register(
+			NAUTLING,
+			"nautling",
+			List.of(ANCIENT, SIMPLE),
+			List.of(WATCHER, PROTECTIVE_SHELL, VISCID),
+			53, 46, 27, 15, 27, 15, 17, 
+			200,
+			35.56,
+			8.0,
+			List.of(CONFOUND, DINO_CLAWS, DODGE, SAFEGUARD, SHRIEK, SPARE, STRIKE),
+			true
+		);
+		register(
+			NAUTILLECT,
+			"nautillect",
+			List.of(ANCIENT, MIND),
+			List.of(WATCHER, WISE, VISCID),
+			106, 82, 59, 74, 105, 115, 34, 
+			575,
+			129.54,
+			120.0,
+			List.of(BANE_OF_HASTE, BRAINWASH, BRAIN_EXERCISE, CONFOUND, DINO_CLAWS, DODGE, ENERGY_BREAK, FLABBERGAST, MIND_DRAIN, PEACE_OF_MIND, PSYCHO_BLAST, SAFEGUARD, SHRIEK, SPARE, SPLITTING_HEADACHE, STRIKE, TAMP, TSUNAMI),
+			true
+		);
+		register(
+			NAUKOUT,
+			"naukout",
+			List.of(ANCIENT, BRAWLER),
+			List.of(WATCHER, ASSERTIVE, VISCID),
+			106, 82, 105, 115, 59, 74, 34, 
+			575,
+			134.62,
+			101.0,
+			List.of(BANE_OF_HASTE, BULK_UP, CONFOUND, DINO_CLAWS, DODGE, MEGA_PUNCH, PRIMAL_SLASH, PUNCH, QUICK_PUNCH, SAFEGUARD, SHADOWBOX, SHRIEK, SPARE, STRIKE, TAMP, VITAL_JAB, WAVE_WRECKER),
+			true
+		);
+		register(
+			YUTINY,
+			"yutiny",
+			List.of(ANCIENT, AIR),
+			List.of(TRIUMPH, PETRIFYING, TUMULTUOUS),
+			47, 57, 61, 31, 24, 53, 59, 
+			332,
+			66.04,
+			47.0,
+			List.of(AIR_BLADE, AQUA_JAWS, AUGMENT, BODY_SLAM, BULK_UP, CYCLONE_SLAM, DINO_CLAWS, DODGE, GUST, HEADBUTT, ILL_WILL, NEAR_ENCHANTMENT, NOSEDIVE, OUTBURST, PECK, PERCH, PROVOKE, SAFEGUARD, SHARPEN, SLASH, SPARE, STARE, WAVE_WRECKER),
+			true
+		);
+		register(
+			YUTEEN,
+			"yuteen",
+			List.of(ANCIENT, AIR),
+			List.of(TRIUMPH, PETRIFYING, TUMULTUOUS),
+			61, 69, 80, 42, 37, 72, 73, 
+			434,
+			157.48,
+			123.0,
+			List.of(AIR_BLADE, AQUA_JAWS, AUGMENT, BODY_SLAM, BULK_UP, CYCLONE_SLAM, DINO_CLAWS, DODGE, GUST, HEADBUTT, ILL_WILL, NEAR_ENCHANTMENT, NOSEDIVE, OUTBURST, PECK, PERCH, PRIMAL_SLASH, PROVOKE, SAFEGUARD, SHARPEN, SLASH, SPARE, STARE, WAVE_WRECKER),
+			true
+		);
+		register(
+			YUTYPHOON,
+			"yutyphoon",
+			List.of(ANCIENT, AIR),
+			List.of(TRIUMPH, PETRIFYING, TUMULTUOUS),
+			82, 87, 115, 66, 61, 95, 104, 
+			610,
+			279.4,
+			556.0,
+			List.of(AIR_BLADE, AQUA_JAWS, AUGMENT, BODY_SLAM, BULK_UP, CYCLONE_SLAM, DINO_CLAWS, DODGE, GUST, HEADBUTT, ILL_WILL, NEAR_ENCHANTMENT, NOSEDIVE, OUTBURST, PECK, PERCH, PRIMAL_SLASH, PROVOKE, RUFFLED_FEATHERS, SAFEGUARD, SHARPEN, SLASH, SPARE, STARE, WAVE_WRECKER),
+			true
+		);
+		register(
+			VENILE,
+			"venile",
+			List.of(ANCIENT, TOXIC),
+			List.of(POWER_CLAW, VENOMOUS, BRUTAL_WRATH),
+			47, 57, 61, 53, 24, 31, 59, 
+			332,
+			66.04,
+			55.0,
+			List.of(AUGMENT, BAIT, BANEFUL_BASH, BODY_SLAM, DINO_CLAWS, DODGE, FAR_ENCHANTMENT, HEADBUTT, ILL_WILL, MEGA_PUNCH, OUTBURST, POISON, POISON_BARBS, PROVOKE, SHARPEN, SLASH, SPARE, STARE, TOXIC_TAIL, VENOM_CHOMP, VENOM_SLASH),
+			true
+		);
+		register(
+			VERINOX,
+			"verinox",
+			List.of(ANCIENT, TOXIC),
+			List.of(POWER_CLAW, VENOMOUS, BRUTAL_WRATH),
+			61, 69, 80, 72, 37, 42, 73, 
+			434,
+			162.56,
+			133.0,
+			List.of(AUGMENT, BAIT, BANEFUL_BASH, BODY_SLAM, DINO_CLAWS, DODGE, FAR_ENCHANTMENT, HEADBUTT, ILL_WILL, MEGA_PUNCH, OUTBURST, POISON, POISON_BARBS, PRIMAL_SLASH, PROVOKE, SHARPEN, SLASH, SPARE, STARE, TOXIC_TAIL, VENOM_CHOMP, VENOM_SLASH),
+			true
+		);
+		register(
+			VERINOSAUR,
+			"verinosaur",
+			List.of(ANCIENT, TOXIC),
+			List.of(POWER_CLAW, VENOMOUS, BRUTAL_WRATH),
+			82, 87, 115, 95, 61, 66, 104, 
+			610,
+			294.64,
+			637.0,
+			List.of(AUGMENT, BAIT, BANEFUL_BASH, BARB_TRAP, BODY_SLAM, DINO_CLAWS, DODGE, FAR_ENCHANTMENT, HEADBUTT, ILL_WILL, MEGA_PUNCH, OUTBURST, POISON, POISON_BARBS, PRIMAL_SLASH, PROVOKE, SHARPEN, SLASH, SPARE, STARE, TOXIC_TAIL, VENOM_CHOMP, VENOM_SLASH),
+			true
+		);
+		register(
+			NYMVOLT,
+			"nymvolt",
+			List.of(ELECTRIC, BUG),
+			List.of(THUNDER_SUMMON, RECURRENT, CHARGED_ARC),
+			43, 60, 29, 30, 40, 59, 70, 
+			331,
+			93.98,
+			12.0,
+			List.of(BUG_BITE, CLIMATE_CANNON, DISSIPATE, DODGE, ENERGIZE, ENERGY_BREAK, ENERGY_SURGE, FLASH, JOLT, JUMP_START, LIGHTSPEED_RAY, PESTER, PESTILENCE, PHEROBLAST, POWER_SIPHON, PRECISION_BOLT, PREEMPTIVE_STRIKE, PROVOKE, REJUVENATE, SHINE, SPARE, SQUARE_ONE, STATIC_SHOCK, STUN, TEAMWORK, TEAR_DOWN, THUNDERSTORM, THUNDERSTRIKE, THUNDER_BLAST, TRIBUTE, TRICKY_TACTICS, ZIP_ZAP),
+			true
+		);
+		register(
+			OHMBOLT,
+			"ohmbolt",
+			List.of(ELECTRIC, BUG),
+			List.of(THUNDER_SUMMON, RECURRENT, CHARGED_ARC),
+			66, 93, 29, 54, 51, 77, 70, 
+			440,
+			99.06,
+			27.0,
+			List.of(BUG_BITE, CLIMATE_CANNON, DISPERSE, DISSIPATE, DODGE, ENERGIZE, ENERGY_BREAK, ENERGY_SURGE, FLASH, JOLT, JUMP_START, LIGHTSPEED_RAY, PESTER, PESTILENCE, PHEROBLAST, POWER_SIPHON, PRECISION_BOLT, PREEMPTIVE_STRIKE, PROVOKE, REJUVENATE, SHINE, SPARE, SQUARE_ONE, STATIC_SHOCK, STUN, TEAMWORK, TEAR_DOWN, THUNDERSTORM, THUNDERSTRIKE, THUNDER_BLAST, TRIBUTE, TRICKY_TACTICS, ZIP_ZAP),
+			true
+		);
+		register(
+			PLASMOTH,
+			"plasmoth",
+			List.of(ELECTRIC, BUG),
+			List.of(THUNDER_SUMMON, RECURRENT, CHARGED_ARC),
+			86, 93, 49, 67, 84, 109, 112, 
+			600,
+			175.26,
+			106.0,
+			List.of(BUG_BITE, CLIMATE_CANNON, DISPERSE, DISSIPATE, DODGE, ENERGIZE, ENERGY_BREAK, ENERGY_SURGE, FLASH, JOLT, JUMP_START, LIGHTSPEED_RAY, PESTER, PESTILENCE, PHEROBLAST, POWER_SIPHON, POWER_SURGE, PRECISION_BOLT, PREEMPTIVE_STRIKE, PROVOKE, REJUVENATE, SHINE, SPARE, SQUARE_ONE, STATIC_SHOCK, STUN, TEAMWORK, TEAR_DOWN, THUNDERSTORM, THUNDERSTRIKE, THUNDER_BLAST, TRIBUTE, TRICKY_TACTICS, ZIP_ZAP),
+			true
+		);
+		register(
+			CICALUTE,
+			"cicalute",
+			List.of(BUG, MIND),
+			List.of(METAMORPHOSIS, MESMERIZING, EXPERTISE),
+			43, 64, 29, 65, 29, 53, 40, 
+			323,
+			38.1,
+			9.0,
+			List.of(BRACE, BRAINWASH, BUG_BITE, DEJA_VU, DISSONANT_CHORD, DODGE, FLABBERGAST, GUST, HARMONIOUS_CHORD, HIGH_PITCH_SCREECH, HULLABALOO, LANDSLIDE, MINDS_EYE, MUDSLIDE, MUD_SPATTER, PEACE_OF_MIND, PESTER, PHEROBLAST, PSYCHO_BLAST, REJUVENATE, REPEATING_TUNE, RESONATE, SHRIEK, SPARE, SQUARE_ONE, STRATAGEM, TEAR_DOWN, TONE_BARRIER),
+			true
+		);
+		register(
+			VIOLANA,
+			"violana",
+			List.of(BUG, MIND),
+			List.of(METAMORPHOSIS, MESMERIZING, EXPERTISE),
+			68, 97, 43, 116, 89, 112, 61, 
+			586,
+			81.28,
+			29.0,
+			List.of(AIR_BLADE, BRACE, BRAINWASH, BUG_BITE, DEJA_VU, DISCORDANCE, DISSONANT_CHORD, DODGE, FLABBERGAST, GUST, HARMONIOUS_CHORD, HIGH_PITCH_SCREECH, HULLABALOO, LANDSLIDE, MINDS_EYE, MUDSLIDE, MUD_SPATTER, PEACE_OF_MIND, PESTER, PHEROBLAST, PSYCHO_BLAST, REJUVENATE, REPEATING_TUNE, RESONATE, SHRIEK, SPARE, SQUARE_ONE, STRATAGEM, TEAR_DOWN, TEAR_DOWN, TONE_BARRIER),
+			true
+		);
+		register(
+			GOSWING,
+			"goswing",
+			List.of(AIR, SIMPLE),
+			List.of(COMPLIANT, BURGLAR, HYDRATE),
+			50, 92, 59, 43, 34, 41, 66, 
+			385,
+			33.02,
+			7.0,
+			List.of(AIR_SHOT, BAFFLE, BARBS, BARTER, BODY_SLAM, BULK_UP, CHARADE, CHASE_DOWN, DODGE, EMPATHIZE, ENAMOR, EXAMINE, FAR_ENCHANTMENT, GUST, ICICLE_TRAP, ILL_WILL, NAB, NEAR_ENCHANTMENT, NOSEDIVE, PECK, PERCH, PLUNGE, POISON_BARBS, PREEMPTIVE_STRIKE, PROVOKE, QUICK_POUNCE, RAGING_TACKLE, ROGUE_ASSAULT, SCAVENGE, SHARPEN, SLAP_DOWN, SLASH, SPARE, STRIKE, TEAMWORK, TEAR_DOWN, WAVE_WRECKER),
+			true
+		);
+		register(
+			GANDERVEIL,
+			"ganderveil",
+			List.of(AIR, SIMPLE),
+			List.of(COMPLIANT, BURGLAR, HYDRATE),
+			86, 107, 109, 71, 56, 68, 93, 
+			590,
+			101.6,
+			33.0,
+			List.of(AIR_SHOT, BAFFLE, BARBS, BARTER, BODY_SLAM, BULK_UP, CHARADE, CHASE_DOWN, DODGE, DOUBLE_BEAT, EMPATHIZE, ENAMOR, EXAMINE, FAR_ENCHANTMENT, GUST, ICICLE_TRAP, ILL_WILL, NAB, NEAR_ENCHANTMENT, NOSEDIVE, PECK, PERCH, PLUNGE, POISON_BARBS, PREEMPTIVE_STRIKE, PROVOKE, QUICK_POUNCE, RAGING_TACKLE, ROGUE_ASSAULT, SCAVENGE, SHARPEN, SLAP_DOWN, SLASH, SPARE, STRIKE, TEAMWORK, TEAR_DOWN, WAVE_WRECKER),
+			true
+		);
+		register(
+			BANOOH,
+			"banooh",
+			List.of(SIMPLE),
+			List.of(SHAKEDOWN, ASSERTIVE, BERSERK),
+			41, 45, 24, 25, 24, 25, 66, 
+			250,
+			33.02,
+			8.0,
+			List.of(BANANA_SPLIT, BARTER, BODY_SLAM, CHASE_DOWN, COCONUT_BOMB, DAYDREAM, DODGE, HARVEST, HEADBUTT, RAGING_TACKLE, SCAPEGOAT, SPARE, STARE, STRETCH, TAMP, TEAMWORK, TEAR_DOWN, WONDER_HERB),
+			true
+		);
+		register(
+			BANOKEY,
+			"banokey",
+			List.of(SIMPLE, BRAWLER),
+			List.of(SHAKEDOWN, ASSERTIVE, BERSERK),
+			97, 89, 124, 50, 74, 50, 96, 
+			580,
+			104.14,
+			37.0,
+			List.of(BANANA_SLAM, BANANA_SPLIT, BARTER, BODY_SLAM, BRAWN_BOOST, BULK_UP, CHASE_DOWN, COCONUT_BOMB, DAYDREAM, DODGE, FROST_BEAM, FROST_PUNCH, HARVEST, HEADBUTT, ICICLE_TRAP, PREEMPTIVE_STRIKE, RAGING_TACKLE, SCAPEGOAT, SLAP_DOWN, SPARE, STARE, STRETCH, TAMP, TEAMWORK, TEAR_DOWN, WONDER_HERB),
+			true
+		);
+		register(
+			SPIRWIX,
+			"spirwix",
+			List.of(FIRE, SPIRIT),
+			List.of(DISENCHANT, RAGING_FIRE, DEVIOUS),
+			40, 61, 29, 50, 100, 50, 45, 
+			375,
+			20.32,
+			5.0,
+			List.of(BARBS, BEQUEATH, BURN_UP, CHARADE, CHASE_DOWN, DEJA_VU, DODGE, FADE_AWAY, FIRE_BREATH, FLARE_BLAST, GAMMA_PULSE, HULLABALOO, ILL_WILL, PEACE_OF_MIND, PEPPER_BURST, PHANTOM_BLAST, PROVOKE, RAGING_FLAME, RANT, SAFEGUARD, SCAPEGOAT, SHINE, SHREWD_BLAST, SINGE, SPARE, SPECTRAL_BURST, SPLITTING_HEADACHE, SQUARE_ONE, STARE, TEAMWORK, TRIBUTE, TRICKY_TACTICS),
+			true
+		);
+		register(
+			MALEVOWAX,
+			"malevowax",
+			List.of(FIRE, SPIRIT),
+			List.of(DISENCHANT, RAGING_FIRE, DEVIOUS),
+			85, 81, 49, 95, 120, 95, 75, 
+			600,
+			63.5,
+			18.0,
+			List.of(BARBS, BEQUEATH, BURN_UP, CHARADE, CHASE_DOWN, DEJA_VU, DODGE, FADE_AWAY, FIRE_BREATH, FLARE_BLAST, GAMMA_PULSE, HULLABALOO, ILL_WILL, INCINERATE, PEACE_OF_MIND, PEPPER_BURST, PHANTOM_BLAST, PROVOKE, RAGING_FLAME, RANT, SAFEGUARD, SCAPEGOAT, SHINE, SHREWD_BLAST, SINGE, SPARE, SPECTRAL_BURST, SPLITTING_HEADACHE, SQUARE_ONE, STARE, TEAMWORK, TRIBUTE, TRICKY_TACTICS),
+			true
+		);
+		register(
+			GRIEVESTONE,
+			"grievestone",
+			List.of(EARTH, SPIRIT),
+			List.of(SOB, BITTER_TOUCH, SEIZE),
+			48, 43, 30, 85, 85, 30, 30, 
+			351,
+			88.9,
+			189.0,
+			List.of(AUGMENT, BANE_OF_HASTE, BARBS, BODY_CRASH, DEJA_VU, DISSONANT_CHORD, DODGE, EMPATHIZE, ENERGY_BREAK, EXAMINE, ILL_WILL, LANDSLIDE, MUDSLIDE, MUD_SPATTER, PEACE_OF_MIND, PEBBLE_TOSS, PHANTOM_BLAST, PROVOKE, QUICKSAND, ROCK_SLIDE, SAP_PLANT, SCAPEGOAT, SHRIEK, SLUMBER, SOUL_STORM, SPECTRAL_BURST, SPLITTING_HEADACHE, SQUARE_ONE, STUPEFY, SUMMON, TRIBUTE),
+			true
+		);
+		register(
+			OBELOST,
+			"obelost",
+			List.of(EARTH, SPIRIT),
+			List.of(SOB, BITTER_TOUCH, SEIZE),
+			84, 73, 50, 135, 135, 50, 60, 
+			587,
+			218.44,
+			747.0,
+			List.of(AUGMENT, BANE_OF_HASTE, BARBS, BODY_CRASH, DEJA_VU, DISSONANT_CHORD, DODGE, EMPATHIZE, ENERGY_BREAK, EXAMINE, ILL_WILL, LANDSLIDE, MUDSLIDE, MUD_SPATTER, PEACE_OF_MIND, PEBBLE_TOSS, PHANTOM_BLAST, PROVOKE, QUICKSAND, ROCK_SLIDE, SAP_PLANT, SCAPEGOAT, SHRIEK, SLUMBER, SOUL_STORM, SPARE, SPECTRAL_BURST, SPLITTING_HEADACHE, SQUARE_ONE, STUPEFY, SUMMON, TRIBUTE, TRICK_SHOT),
+			true
+		);
+		register(
+			JIMBY,
+			"jimby",
+			List.of(SIMPLE),
+			List.of(FORTISSIMO, CAROL, VIRTUOSO),
+			40, 58, 28, 27, 81, 100, 90, 
+			424,
+			33.02,
+			9.0,
+			List.of(DEJA_VU, DISSONANT_CHORD, DODGE, EMPATHIZE, FLURRY, FROST_BEAM, FROST_BREATH, HARMONIOUS_CHORD, HEALTH_GIFT, ICICLE_TRAP, MAGNIFY, PEACE_OF_MIND, POWER_FOCUS, PSYCHO_BLAST, RAGING_HOWL, RECYCLE, REPEATING_TUNE, SAP_PLANT, SCAPEGOAT, SHRIEK, SLUMBER, SPARE, TEAMWORK, TEAR_DOWN, TONE_BARRIER, TRIBUTE, WONDER_HERB),
+			true
+		);
+		register(
+			PICCOLIO,
+			"piccolio",
+			List.of(SIMPLE),
+			List.of(FORTISSIMO, CAROL, VIRTUOSO),
+			80, 79, 48, 47, 111, 120, 90, 
+			575,
+			81.28,
+			24.0,
+			List.of(DEJA_VU, DISSONANT_CHORD, DODGE, EMPATHIZE, FLURRY, FROST_BEAM, FROST_BREATH, HARMONIOUS_CHORD, HEALTH_GIFT, HULLABALOO, ICICLE_TRAP, MAGNIFY, PEACE_OF_MIND, POWER_FOCUS, PSYCHO_BLAST, RAGING_HOWL, RECYCLE, REPEATING_TUNE, SAP_PLANT, SCAPEGOAT, SHRIEK, SLUMBER, SPARE, TEAMWORK, TEAR_DOWN, TONE_BARRIER, TRIBUTE, WONDER_HERB),
+			true
+		);
+		register(
+			WASSEL,
+			"wassel",
+			List.of(ICE),
+			List.of(ADORABLE, ELUSIVE),
+			29, 35, 38, 10, 14, 21, 53, 
+			200,
+			38.1,
+			15.0,
+			List.of(BITTER_COLD, BLINDSPOT_BATTER, BULK_UP, CHASE_DOWN, CHILLY_CHOMP, DEEP_FREEZE, DEJA_VU, DISPERSE, DODGE, FAR_ENCHANTMENT, FLURRY, FROST_BEAM, GAMMA_PULSE, GNAW, ICICLE_TRAP, ILL_WILL, LIGHTSPEED_RAY, LIGHT_DASH, NAB, NEAR_ENCHANTMENT, NOVA_BLAST, PROVOKE, PSYCHAL_CHOMP, RADIANT_RUSH, SLEET_SHOT, SLUMBER, SPARE, STRATAGEM, STRETCH, UNDERMINE),
+			true
+		);
+		register(
+			BOREALISK,
+			"borealisk",
+			List.of(ICE),
+			List.of(UPPER_HAND, ELUSIVE),
+			98, 70, 118, 57, 68, 101, 103, 
+			615,
+			287.02,
+			187.0,
+			List.of(BITTER_COLD, BLINDSPOT_BATTER, BULK_UP, CHASE_DOWN, CHILLY_CHOMP, DEEP_FREEZE, DEJA_VU, DISPERSE, DODGE, FAR_ENCHANTMENT, FLURRY, FROST_BEAM, GAMMA_PULSE, GNAW, ICICLE_TRAP, ICICLE_TREMOR, ILL_WILL, LIGHTSPEED_RAY, LIGHT_DASH, NAB, NEAR_ENCHANTMENT, NOVA_BLAST, PROVOKE, PSYCHAL_CHOMP, RADIANT_RUSH, SLEET_SHOT, SLUMBER, SPARE, STRATAGEM, STRETCH, UNDERMINE),
+			true
+		);
+		register(
+			SNICLE,
+			"snicle",
+			List.of(ICE, DARK),
+			List.of(PUNCTURE, TOXIC_SAC),
+			30, 30, 53, 49, 34, 29, 47, 
+			272,
+			93.98,
+			24.0,
+			List.of(BAMBOOZLE, BULK_UP, CHARADE, CHASE_DOWN, CHILLY_CHOMP, CHOMP, DARK_SURGE, DAYDREAM, DEJA_VU, DODGE, DRUDGE, EERIE_STARE, FINAL_RUSE, FLURRY, FROST_BEAM, FROST_BREATH, GNAW, HARROW, ICICLE_TRAP, ILL_WILL, MEGA_CHOMP, NAB, POISON, POWER_FOCUS, PREEMPTIVE_STRIKE, PROVOKE, QUICK_POUNCE, ROUGH_UP, SLUMBER, SOUL_STORM, SPIKE_RUSH, SQUARE_ONE, TRICKY_TACTICS, VENOM_CHOMP, VICE_JAWS),
+			true
+		);
+		register(
+			SLIVYCE,
+			"slivyce",
+			List.of(ICE, DARK),
+			List.of(PUNCTURE, TOXIC_SAC),
+			83, 83, 102, 103, 73, 61, 88, 
+			593,
+			218.44,
+			56.0,
+			List.of(BAMBOOZLE, BULK_UP, CHARADE, CHASE_DOWN, CHILLY_CHOMP, CHOMP, DARK_SURGE, DAYDREAM, DEJA_VU, DODGE, DRUDGE, EERIE_STARE, FINAL_RUSE, FLURRY, FROST_BEAM, FROST_BREATH, GNAW, HARROW, ICICLE_FANGS, ICICLE_TRAP, ILL_WILL, MEGA_CHOMP, NAB, POISON, POWER_FOCUS, PREEMPTIVE_STRIKE, PROVOKE, QUICK_POUNCE, ROUGH_UP, SLUMBER, SOUL_STORM, SPIKE_RUSH, SQUARE_ONE, TRICKY_TACTICS, VENOM_CHOMP, VICE_JAWS),
+			true
+		);
+		register(
+			NUKICHI,
+			"nukichi",
+			List.of(SIMPLE),
+			List.of(LUCKY, SLY, HANDY),
+			54, 75, 89, 45, 53, 37, 96, 
+			449,
+			53.34,
+			13.0,
+			List.of(BAG_OF_TRICKS, BAMBOOZLE, BARTER, BODY_SLAM, BULK_UP, COCONUT_BOMB, DODGE, EMULATE, ENAMOR, FAR_ENCHANTMENT, HARROW, HEADBUTT, IMPERSONATE, NEAR_ENCHANTMENT, PHANTOM_SLASH, POUNCE, RAGING_TACKLE, REJUVENATE, SCAPEGOAT, SHADOW_SPRINT, SHARPEN, SLASH, SPARE, STUPEFY, SWAT, TEAMWORK, TEASE, TEASE, TRICKY_TACTICS, VITAL_JAB, WONDER_HERB),
+			true
+		);
+		register(
+			DAINUKI,
+			"dainuki",
+			List.of(SIMPLE),
+			List.of(LUCKY, SLY, HANDY),
+			108, 96, 89, 93, 53, 61, 96, 
+			596,
+			93.98,
+			68.0,
+			List.of(BAG_OF_TRICKS, BAMBOOZLE, BARTER, BODY_SLAM, BULK_UP, COCONUT_BOMB, DODGE, EMULATE, ENAMOR, FAR_ENCHANTMENT, HARROW, HEADBUTT, HOODWINK, IMPERSONATE, NEAR_ENCHANTMENT, PHANTOM_SLASH, POUNCE, RAGING_TACKLE, REJUVENATE, SCAPEGOAT, SHADOW_SPRINT, SHARPEN, SLASH, SPARE, STUPEFY, SWAT, TEAMWORK, TEASE, TEASE, TRICKY_TACTICS, VITAL_JAB, WONDER_HERB),
+			true
+		);
+		register(
+			TERRACOLT,
+			"terracolt",
+			List.of(FIRE, EARTH),
+			List.of(POWER_LEGS, RUSH_HOUR, CONFIDENCE),
+			57, 71, 73, 68, 46, 42, 68, 
+			425,
+			106.68,
+			89.0,
+			List.of(BLAZE_OF_GLORY, BLAZE_RUSH, BODY_CRASH, BODY_SLAM, BRACE, CLAY_SLAP, DODGE, EARTHQUAKE, FIRE_BREATH, FIRE_SLAM, FLAMING_KICK, HEADBUTT, HEAT_WAVE, HEAVY_BASH, ILL_WILL, MAGMA_BLOCK, MEGA_KICK, MUDSLIDE, MUD_SPATTER, PEBBLE_TOSS, PREEMPTIVE_STRIKE, PROVOKE, QUICK_POUNCE, RAGING_FLAME, RAGING_TACKLE, SCAPEGOAT, SINGE, SPARE, STRETCH, TAMP, TEAMWORK, TRIBUTE),
+			true
+		);
+		register(
+			BRONCOTTA,
+			"broncotta",
+			List.of(FIRE, EARTH),
+			List.of(POWER_LEGS, RUSH_HOUR, CONFIDENCE),
+			98, 82, 107, 87, 58, 61, 102, 
+			595,
+			203.2,
+			349.0,
+			List.of(BLAZE_OF_GLORY, BLAZE_RUSH, BODY_CRASH, BODY_SLAM, BRACE, CAPRIOLE, CLAY_SLAP, DODGE, EARTHQUAKE, FIRE_BREATH, FIRE_SLAM, FLAMING_KICK, HEADBUTT, HEAT_WAVE, HEAVY_BASH, ILL_WILL, MAGMA_BLOCK, MEGA_KICK, MUDSLIDE, MUD_SPATTER, PEBBLE_TOSS, PREEMPTIVE_STRIKE, PROVOKE, QUICK_POUNCE, RAGING_FLAME, RAGING_TACKLE, SCAPEGOAT, SINGE, SPARE, STRETCH, TAMP, TEAMWORK, TRIBUTE),
+			true
+		);
+		register(
+			DUSKIT,
+			"duskit",
+			List.of(SPIRIT, MIND),
+			List.of(HARMONIZE, MEAN_SPIRITED),
+			74, 100, 100, 81, 132, 104, 109, 
+			700,
+			93.98,
+			37.0,
+			List.of(BITTER_COLD, BRAINWASH, CEREBRAL_SLASH, CHASE_DOWN, DARK_SURGE, DEJA_VU, DODGE, FADE_AWAY, FINAL_RUSE, FLABBERGAST, HARROW, HASTEN, HYPNOTIZE, OPPRESS, OUTBURST, PEACE_OF_MIND, PHANTOM_BLAST, PHANTOM_SLASH, PYROKINESIS, RAGING_FLAME, RETURN_TO_SENDER, SHADOW_SPRINT, SPARE, SPECTRAL_BURST, STARTLE, STUN, STUPEFY, TRIBUTE),
+			true
+		);
+		register(
+			IKAZUNE,
+			"ikazune",
+			List.of(FIRE, ELECTRIC),
+			List.of(RAGING_FIRE, RECHARGEABLE),
+			72, 115, 119, 62, 149, 89, 94, 
+			700,
+			175.26,
+			84.0,
+			List.of(BLAZE_CHOMP, BLAZE_OF_GLORY, BLAZE_RUSH, BURN_UP, CHARRED_CLAWS, DODGE, ELECTROBURST, ENERGIZE, ENERGY_SURGE, FIRE_BREATH, JOLT, MAGNIFY, POWER_FOCUS, RAGING_FLAME, SINGE, SPARE, STATIC_SHOCK, STUN, THUNDERSTRIKE, THUNDER_CHOMP, THUNDER_CRASH, ZIP_ZAP),
+			true
+		);
+		register(
+			PROTOGON,
+			"protogon",
+			List.of(METAL),
+			List.of(ANALYZE, REPLICATE),
+			58, 118, 82, 99, 121, 101, 121, 
+			700,
+			261.62,
+			297.0,
+			List.of(AUGMENT, BARBS, BASH, DART_BURST, DEJA_VU, DODGE, ELECTRO_PUNCH, ENERGY_SURGE, METAL_BLAST, METAL_SWIPES, POWER_SIPHON, SPARE, STEEL_CRUSHER, TAIL_SLAP, THUNDERSTRIKE, TUNE_UP, ZIP_ZAP),
+			true
+		);
+		register(
+			DAKUDA,
+			"dakuda",
+			List.of(WATER),
+			List.of(BRUTE_FORCE, HYDRATE),
+			99, 119, 127, 86, 95, 77, 97, 
+			700,
+			218.44,
+			298.0,
+			List.of(BULK_UP, DODGE, ENERGIZE, GAMMA_PULSE, GROWL, ILL_WILL, MAROON, PLUNGE, POWER_FOCUS, PROVOKE, SLAP_DOWN, SPARE, SPRAY, STATIC_SHOCK, STUN, SWIPE, THUNDERSTRIKE, THUNDER_BLAST, THUNDER_CRASH, THUNDER_SLAM, TORRENTIAL_SLASH, TSUNAMI, WATER_BOMB),
+			true
+		);
+		register(
+			DAKUDA_OVERCHARGED,
+			"dakuda_overcharged",
+			List.of(WATER, ELECTRIC),
+			List.of(RAIL_GUN),
+			119, 119, 95, 96, 157, 87, 77, 
+			750,
+			218.44,
+			298.0,
+			List.of(BULK_UP, DODGE, ENERGIZE, GAMMA_PULSE, GROWL, ILL_WILL, MAROON, PLUNGE, POWER_FOCUS, PROVOKE, SLAP_DOWN, SPARE, SPRAY, STATIC_SHOCK, STUN, SWIPE, THUNDERSTRIKE, THUNDER_BLAST, THUNDER_CRASH, THUNDER_SLAM, TORRENTIAL_SLASH, TSUNAMI, WATER_BOMB),
+			true
+		);
+		register(
+			COSMELEON,
+			"cosmeleon",
+			List.of(SIMPLE),
+			List.of(ADAPTABLE),
+			100, 100, 100, 100, 100, 100, 100, 
+			700,
+			167.64,
+			18.0,
+			List.of(AIR_BLADE, AIR_SHOT, BLAZE_CHOMP, BULK_UP, CLIMATE_CANNON, CYCLONE_SLAM, DODGE, DOWNPOUR, FAR_ENCHANTMENT, FLARE_BLAST, GALE_FORCE, GUST, HARMONIOUS_CHORD, HAZE_SHROUD, HEAT_WAVE, HIGH_PITCH_SCREECH, HYDRO_BLAST, HYDRO_SLASH, IMPERSONATE, MAROON, PEACE_OF_MIND, PEPPER_BURST, PHANTOM_BLAST, PHANTOM_SLASH, POWER_FOCUS, PRECISION_BOLT, RAGING_FLAME, SHRIEK, SINGE, SLASH, SOFT_WATER, SPARE, SPECTRAL_BURST, SPRAY, STATIC_SHOCK, STRIKE, STUPEFY, SWIPE, THUNDERSTORM, THUNDER_BLAST, THUNDER_SLAM, TRIBUTE, TYPHOON),
+			true
+		);
+		register(
+			MUTAGON,
+			"mutagon",
+			List.of(MIND, BRAWLER),
+			List.of(TANK, HEAVY_FISTS),
+			107, 123, 114, 139, 78, 68, 71, 
+			700,
+			233.68,
+			276.0,
+			List.of(BARTER, BODY_CRASH, BOOM_BASH, BRAINWASH, BRAWN_BOOST, BULK_UP, CEREBRAL_SLASH, CHOP, DODGE, FROST_PUNCH, ILL_WILL, MEGA_PUNCH, PEACE_OF_MIND, PROVOKE, PSYCHO_BLAST, PUNCH, SPARE, STARE, SWIPE, TELEKINETIC_SWEEP),
+			true
+		);
+		register(
+			CEPHALOPS,
+			"cephalops",
+			List.of(WATER, DARK),
+			List.of(BLOODSUCKER, NIGHTMARISH),
+			164, 116, 96, 69, 129, 74, 52, 
+			700,
+			251.46,
+			310.0,
+			List.of(BUG_BITE, DARK_SURGE, DODGE, EERIE_STARE, HYPNOTIZE, ICICLE_TRAP, PARASITIZE, PLUNGE, RANT, SOUL_DRAIN, SPARE, SPRAY, SQUARE_ONE, TEASE, TSUNAMI, WATER_BOMB, WAVE_WRECKER),
+			true
+		);
+		register(
+			ELEPHAGE,
+			"elephage",
+			List.of(ELECTRIC),
+			List.of(MALWARE, REPLICATE),
+			105, 90, 55, 55, 125, 55, 110, 
+			595,
+			88.9,
+			21.0,
+			List.of(BODY_SLAM, DEJA_VU, DISSONANT_CHORD, DODGE, ENERGIZE, EXAMINE, FINAL_RUSE, FLASH_N_FLEE, HARMONIOUS_CHORD, HIGH_PITCH_SCREECH, HULLABALOO, ILL_WILL, JOLT, JUMP_START, MAGNIFY, MEMORIZE, POWER_SIPHON, PRECISION_BOLT, PROVOKE, QUICK_POUNCE, RANT, REJUVENATE, REPEATING_TUNE, SPARE, STATIC_SHOCK, STUN, TEAR_DOWN, THUNDERSTORM, THUNDERSTRIKE, THUNDER_BLAST, THUNDER_CLAP, THUNDER_CRASH, THUNDER_SLAM, ZIP_ZAP),
+			true
+		);
+		register(
+			PHAGENAUT,
+			"phagenaut",
+			List.of(ELECTRIC),
+			List.of(MALWARE, OVERCHARGED),
+			105, 105, 75, 120, 145, 55, 95, 
+			700,
+			271.78,
+			252.0,
+			List.of(BODY_SLAM, DEJA_VU, DISSONANT_CHORD, DODGE, ENERGIZE, EXAMINE, FINAL_RUSE, FLASH_N_FLEE, HARMONIOUS_CHORD, HIGH_PITCH_SCREECH, HULLABALOO, ILL_WILL, JOLT, JUMP_START, MAGNIFY, MEMORIZE, POWER_DRAW, POWER_SIPHON, PRECISION_BOLT, PROVOKE, QUICK_POUNCE, RANT, REJUVENATE, REPEATING_TUNE, SPARE, STATIC_SHOCK, STUN, TEAR_DOWN, THUNDERSTORM, THUNDERSTRIKE, THUNDER_BLAST, THUNDER_CLAP, THUNDER_CRASH, THUNDER_SLAM, ZIP_ZAP),
+			true
+		);
+		register(
+			GLACADIA,
+			"glacadia",
+			List.of(ICE, ANCIENT),
+			List.of(CHILLING_PASSION, DEEP_FROSTBITE),
+			96, 115, 88, 69, 119, 102, 111, 
+			700,
+			309.88,
+			521.0,
+			List.of(BITTER_COLD, CHILLY_CHOMP, CONFOUND, DISPERSE, DODGE, DRACO_BEAM, ENERGY_BREAK, FAR_ENCHANTMENT, FLURRY, FROST_BEAM, FROST_BLAST, FROST_BREATH, GNAW, HIGH_PITCH_SCREECH, ICE_HAMMER, ICICLE_TRAP, ILL_WILL, OUTBURST, PEACE_OF_MIND, PRIMAL_SLASH, RAGING_HOWL, RAGING_TACKLE, SHREWD_BLAST, SLASH, SLUMBER, SPARE),
+			true
+		);
+	}
+	private static void initSpecies4() {
+		register(
+			ARCEROS,
+			"arceros",
+			List.of(FIRE, ANCIENT),
+			List.of(BURNING_RAGE, THIRD_DEGREE_BURN),
+			96, 115, 119, 112, 88, 79, 91, 
+			700,
+			294.64,
+			436.0,
+			List.of(BLAZE_CHOMP, BLAZE_OF_GLORY, BLAZE_RUSH, BULK_UP, BURN_UP, CHARRED_CLAWS, DINO_CLAWS, DODGE, DRACO_BEAM, ENERGY_BREAK, FIRE_BREATH, FLAMING_KICK, GNAW, HIGH_PITCH_SCREECH, ILL_WILL, NEAR_ENCHANTMENT, OUTBURST, PRIMAL_SLASH, PYROKINESIS, RAGING_FLAME, RAGING_HOWL, RAGING_TACKLE, SHARPEN, SHREWD_BLAST, SINGE, SLASH, SLUMBER, SPARE),
+			true
+		);
+		register(
+			NOVADEUS,
+			"novadeaus",
+			List.of(FIRE, ICE),
+			List.of(OBSIDIAN_HEART),
+			96, 115, 134, 90, 134, 80, 101, 
+			750,
+			368.3,
+			946.0,
+			List.of(BITTER_COLD, BLAZE_CHOMP, BLAZE_OF_GLORY, BLAZE_RUSH, BULK_UP, BURN_UP, CHARRED_CLAWS, CHILLY_CHOMP, CONFOUND, DINO_CLAWS, DISPERSE, DODGE, DRACO_BEAM, ENERGY_BREAK, FAR_ENCHANTMENT, FIRE_BREATH, FLAMING_KICK, FLURRY, FROST_BEAM, FROST_BLAST, FROST_BREATH, GNAW, HIGH_PITCH_SCREECH, ICE_HAMMER, ICICLE_TRAP, ILL_WILL, NEAR_ENCHANTMENT, OUTBURST, PEACE_OF_MIND, PRIMAL_SLASH, PYROKINESIS, RAGING_FLAME, RAGING_HOWL, RAGING_TACKLE, SHARPEN, SHREWD_BLAST, SINGE, SLASH, SLUMBER, SPARE),
+			true
+		);
+		register(
+			MORPHEZU,
+			"morphezu",
+			List.of(AIR),
+			List.of(SKY_BORNE, ALL_SEEING),
+			115, 90, 55, 55, 150, 100, 85, 
+			650,
+			999.0,
+			999.0,
+			List.of(AIR_BLADE, AIR_SHOT, AIR_WHIP, CYCLONE_SLAM, DODGE, EERIE_STARE, EXPERT_ONSLAUGHT, HEADBUTT, HIGH_PITCH_SCREECH, HYPNOTIZE, JET_STREAM, METAL_BLAST, NOSEDIVE, PEACE_OF_MIND, POWER_FOCUS, PRIMAL_SLASH, PSYCHO_BLAST, SHREWD_BLAST, SLUMBER, SPARE, STARE, TYPHOON),
+			true
+		);
+		register(
+			BEHEMOROTH,
+			"behemoroth",
+			List.of(EARTH),
+			List.of(LAND_BORNE, ALL_SEEING),
+			115, 90, 150, 100, 55, 55, 85, 
+			650,
+			999.0,
+			999.0,
+			List.of(BULK_UP, BURROW, CLAY_SLAP, DODGE, DRIVING_FORCE, EARTHQUAKE, EERIE_STARE, EXPERT_ONSLAUGHT, HEADBUTT, HIGH_PITCH_SCREECH, HYPNOTIZE, LANDSLIDE, MUDSLIDE, MUD_SPATTER, POWER_FOCUS, PRIMAL_SLASH, QUICKSAND, ROGUE_ASSAULT, SHREWD_BLAST, SLUMBER, SPARE, STARE, TIMBER_THRASH),
+			true
+		);
+		register(
+			LEVIATROSS,
+			"leviatross",
+			List.of(WATER),
+			List.of(DEPTHS_BORNE, ALL_SEEING),
+			115, 90, 100, 55, 85, 55, 150, 
+			650,
+			999.0,
+			999.0,
+			List.of(AQUA_JAWS, BULK_UP, DARK_SURGE, DODGE, EERIE_STARE, EXPERT_ONSLAUGHT, HARROW, HEADBUTT, HIGH_PITCH_SCREECH, HYDRO_BLAST, HYPNOTIZE, ICICLE_TRAP, LUNGE, MAROON, MEGA_CHOMP, PEACE_OF_MIND, PHANTOM_SLASH, PLUNGE, POWER_FOCUS, PRIMAL_SLASH, PROVOKE, SHREWD_BLAST, SLUMBER, SOFT_WATER, SPARE, SPECTRAL_BURST, STARE, TSUNAMI, WATER_BOMB, WAVE_WRECKER),
+			true
+		);
+		register(
+			COSMIORE_U,
+			"cosmiore_u",
+			List.of(ANCIENT, MIND),
+			List.of(COSMIC_PRESSURE, IDIOSYNCRATIC),
+			99, 105, 134, 105, 68, 68, 96, 
+			675,
+			93.98,
+			272.0,
+			List.of(BANE_OF_HASTE, BRACE, BRAINWASH, BULK_UP, CEREBRAL_SLASH, CONFOUND, DISSIPATE, DODGE, FIRE_SLAM, FROST_BREATH, HEADBUTT, HYPNOTIZE, ICICLE_TRAP, ILL_WILL, JUDGEMENT, METEOR_CRASH, METEOR_SMASH, PEACE_OF_MIND, POWER_FOCUS, PSYCHO_BLAST, SLAP_DOWN, SLUMBER, SPARE, WONDER_HERB),
+			true
+		);
+		register(
+			COSMIORE_C,
+			"cosmiore_c",
+			List.of(ANCIENT, MIND),
+			List.of(ENCHANTED_COAT, EAGER),
+			99, 115, 68, 115, 124, 78, 76, 
+			675,
+			93.98,
+			272.0,
+			List.of(BANE_OF_HASTE, BRACE, BRAINWASH, BULK_UP, CEREBRAL_SLASH, CONFOUND, DISSIPATE, DODGE, FIRE_SLAM, FROST_BREATH, HEADBUTT, HYPNOTIZE, ICICLE_TRAP, ILL_WILL, JUDGEMENT, METEOR_CRASH, METEOR_SMASH, PEACE_OF_MIND, POWER_FOCUS, PSYCHO_BLAST, SLAP_DOWN, SLUMBER, SPARE, WONDER_HERB),
+			true
+		);
+		register(
+			COSMIORE_E,
+			"cosmiore_e",
+			List.of(ANCIENT, MIND),
+			List.of(ENCHANTED_COAT, QUICK_RECOVERY),
+			99, 145, 68, 135, 84, 98, 46, 
+			675,
+			93.98,
+			272.0,
+			List.of(BANE_OF_HASTE, BRACE, BRAINWASH, BULK_UP, CEREBRAL_SLASH, CONFOUND, DISSIPATE, DODGE, FIRE_SLAM, FROST_BREATH, HEADBUTT, HYPNOTIZE, ICICLE_TRAP, ILL_WILL, JUDGEMENT, METEOR_CRASH, METEOR_SMASH, PEACE_OF_MIND, POWER_FOCUS, PSYCHO_BLAST, SLAP_DOWN, SLUMBER, SPARE, WONDER_HERB),
+			true
+		);
+		register(
+			SOLNECTA,
+			"solnecta",
+			List.of(BUG, LIGHT),
+			List.of(NIGHT_LIGHT, INTENSIFY),
+			111, 81, 96, 80, 129, 92, 86, 
+			675,
+			101.6,
+			29.0,
+			List.of(AIR_BLADE, AIR_SHOT, AIR_WHIP, BARTER, BLAZE_RUSH, BLINDSPOT_BATTER, BUG_BITE, BULK_UP, CEREBRAL_SLASH, COUNTER_POISE, DISPERSE, DODGE, DOUBLE_BEAT, DOUBLE_STING, ENERGY_SURGE, FIRE_BREATH, FLABBERGAST, FLASH, GAMMA_PULSE, HEALTH_GIFT, HYPER_STING, JUDGEMENT, LIGHTSPEED_RAY, LIGHT_DASH, LUNGE, LUSTER_LOOT, MAGNIFY, MINDS_EYE, PARASITIZE, PEACE_OF_MIND, PEPPER_BURST, PESTER, PHEROBLAST, PSYCHO_BLAST, RADIANT_RUSH, REJUVENATE, SHINE, SINGE, SPARE, STING, TEAR_DOWN, WONDER_HERB),
+			true
+		);
+		register(
+			NYMAURAE,
+			"nymaurae",
+			List.of(LIGHT, AIR),
+			List.of(QUICK_RECOVERY, INCANDESCENT),
+			76, 115, 66, 77, 119, 122, 100, 
+			675,
+			68.58,
+			21.0,
+			List.of(AIR_BLADE, AIR_SHOT, AIR_WHIP, BARTER, DEJA_VU, DISPERSE, DISSONANT_CHORD, DODGE, FLASH_N_FLEE, GAMMA_PULSE, GUST, HARMONIOUS_CHORD, HYPNOTIZE, JET_STREAM, LUSTER_LOOT, PEACE_OF_MIND, PERCH, SHINE, SPARE, TAIL_SLAP, TEAR_DOWN, WONDER_HERB),
+			true
+		);
+		register(
+			NYMESIS,
+			"nymesis",
+			List.of(DARK, AIR),
+			List.of(IMPOSE, PITCH_BLACK),
+			76, 115, 66, 77, 119, 122, 100, 
+			675,
+			93.98,
+			25.0,
+			List.of(AGGRAVATE, AIR_BLADE, AIR_SHOT, AIR_WHIP, BAMBOOZLE, BARTER, CHARADE, DARK_SURGE, DEJA_VU, DODGE, HIGH_PITCH_SCREECH, HYPNOTIZE, JET_STREAM, PEACE_OF_MIND, PEPPER_BURST, PERCH, PROVOKE, RANT, SHADOW_PULSE, SHREWD_BLAST, SLAP_DOWN, SPARE, SQUARE_ONE, SWIPE, TAIL_SLAP, TEAR_DOWN, TEASE),
+			true
+		);
+		register(
+			METRONETTE,
+			"metronette",
+			List.of(DARK, MIND),
+			List.of(MYSTERIOUS_CLOAK, APPLIED_FRUSTRATION),
+			83, 128, 84, 69, 127, 79, 105, 
+			675,
+			96.52,
+			67.0,
+			List.of(BAG_OF_TRICKS, BARBS, BARTER, BRAINWASH, BULK_UP, CEREBRAL_SLASH, CHARADE, CHOMP, DARK_SURGE, DEJA_VU, DODGE, EERIE_STARE, FLABBERGAST, GNARLY_GASH, HARROW, HYPNOTIZE, ILL_WILL, JUDGEMENT, MEGA_PUNCH, MINDS_EYE, MIND_DRAIN, MUD_SPATTER, PEACE_OF_MIND, PHANTOM_SLASH, POWER_FOCUS, PROVOKE, PSYCHO_BLAST, PYROKINESIS, ROGUE_ASSAULT, SOUL_STORM, SPARE, STUPEFY),
+			true
+		);
+		register(
+			METRONETTE_WILLBOUND,
+			"metronette_willbound",
+			List.of(DARK, MIND),
+			List.of(DEMANDING),
+			83, 98, 134, 69, 147, 79, 115, 
+			725,
+			96.52,
+			67.0,
+			List.of(BAG_OF_TRICKS, BARBS, BARTER, BRAINWASH, BULK_UP, CEREBRAL_SLASH, CHARADE, CHOMP, DARK_SURGE, DEJA_VU, DODGE, EERIE_STARE, FLABBERGAST, GNARLY_GASH, HARROW, HYPNOTIZE, ILL_WILL, JUDGEMENT, MEGA_PUNCH, MINDS_EYE, MIND_DRAIN, MUD_SPATTER, PEACE_OF_MIND, PHANTOM_SLASH, POWER_FOCUS, PROVOKE, PSYCHO_BLAST, PYROKINESIS, ROGUE_ASSAULT, SOUL_STORM, SPARE, STUPEFY),
+			true
+		);
+		register(
+			NEVERMARE,
+			"nevermare",
+			List.of(PLANT, SPIRIT),
+			List.of(RAZOR_SHARP, FRENZY),
+			66, 120, 113, 89, 66, 110, 111, 
+			675,
+			248.92,
+			487.0,
+			List.of(BARBS, BULK_UP, BUSH_WHACK, DARK_SURGE, DODGE, HARROW, HEADBUTT, ILL_WILL, MUD_SPATTER, PARASITIZE, PETAL_PUMMEL, PHANTOM_SLASH, PRIMAL_SLASH, PROVOKE, RANT, SHARPEN, SPARE, SPECTRAL_BURST, STARE, STRETCH, STUPEFY, THISTLE_SLASH, VINE_LASH, WONDER_HERB),
+			true
+		);
+		register(
+			GARGOLEM_B,
+			"gargolem_b",
+			List.of(EARTH, AIR),
+			List.of(IMMUNIZED, SLY, MASTER),
+			55, 105, 120, 85, 120, 85, 105, 
+			675,
+			185.42,
+			342.0,
+			List.of(ACCELERATE, AIR_BLADE, AIR_SHOT, BANE_OF_HASTE, BARBS, BODY_SLAM, BOOM_BASH, CEREBRAL_SLASH, CHASE_DOWN, CLAY_SLAP, DARK_SURGE, DINO_CLAWS, DODGE, DRIVING_FORCE, EARTHQUAKE, GNARLY_GASH, ICICLE_TRAP, JET_STREAM, LANDSLIDE, MUDSLIDE, MUD_SPATTER, NAB, NOSEDIVE, PRIMAL_SLASH, PROVOKE, RETURN_TO_SENDER, ROGUE_ASSAULT, SCAPEGOAT, SLAP_DOWN, SLASH, SPARE, SWAT, TAMP, TEAR_DOWN, TRIBUTE, WING_SLAP),
+			true
+		);
+		register(
+			GARGOLEM_A,
+			"gargolem_a",
+			List.of(EARTH, AIR),
+			List.of(IMMUNIZED, BERSERK, MASTER),
+			55, 105, 165, 40, 165, 40, 105, 
+			675,
+			185.42,
+			342.0,
+			List.of(ACCELERATE, AIR_BLADE, AIR_SHOT, BANE_OF_HASTE, BARBS, BODY_SLAM, BOOM_BASH, CEREBRAL_SLASH, CHASE_DOWN, CLAY_SLAP, DARK_SURGE, DINO_CLAWS, DODGE, DRIVING_FORCE, EARTHQUAKE, GNARLY_GASH, ICICLE_TRAP, JET_STREAM, LANDSLIDE, MUDSLIDE, MUD_SPATTER, NAB, NOSEDIVE, PRIMAL_SLASH, PROVOKE, RETURN_TO_SENDER, ROGUE_ASSAULT, SCAPEGOAT, SLAP_DOWN, SLASH, SPARE, SWAT, TAMP, TEAR_DOWN, TRIBUTE, WING_SLAP),
+			true
+		);
+		register(
+			GARGOLEM_D,
+			"gargolem_d",
+			List.of(EARTH, AIR),
+			List.of(IMMUNIZED, BITTER_TOUCH, MASTER),
+			55, 105, 60, 165, 60, 165, 65, 
+			675,
+			185.42,
+			342.0,
+			List.of(ACCELERATE, AIR_BLADE, AIR_SHOT, BANE_OF_HASTE, BARBS, BODY_SLAM, BOOM_BASH, CEREBRAL_SLASH, CHASE_DOWN, CLAY_SLAP, DARK_SURGE, DINO_CLAWS, DODGE, DRIVING_FORCE, EARTHQUAKE, GNARLY_GASH, ICICLE_TRAP, JET_STREAM, LANDSLIDE, MUDSLIDE, MUD_SPATTER, NAB, NOSEDIVE, PRIMAL_SLASH, PROVOKE, RETURN_TO_SENDER, ROGUE_ASSAULT, SCAPEGOAT, SLAP_DOWN, SLASH, SPARE, SWAT, TAMP, TEAR_DOWN, TRIBUTE, WING_SLAP),
+			true
+		);
+		register(
+			GARGOLEM_S,
+			"gargolem_s",
+			List.of(EARTH, AIR),
+			List.of(IMMUNIZED, CLUTCH, MASTER),
+			55, 105, 90, 85, 90, 85, 165, 
+			675,
+			185.42,
+			342.0,
+			List.of(ACCELERATE, AIR_BLADE, AIR_SHOT, BANE_OF_HASTE, BARBS, BODY_SLAM, BOOM_BASH, CEREBRAL_SLASH, CHASE_DOWN, CLAY_SLAP, DARK_SURGE, DINO_CLAWS, DODGE, DRIVING_FORCE, EARTHQUAKE, GNARLY_GASH, ICICLE_TRAP, JET_STREAM, LANDSLIDE, MUDSLIDE, MUD_SPATTER, NAB, NOSEDIVE, PRIMAL_SLASH, PROVOKE, RETURN_TO_SENDER, ROGUE_ASSAULT, SCAPEGOAT, SLAP_DOWN, SLASH, SPARE, SWAT, TAMP, TEAR_DOWN, TRIBUTE, WING_SLAP),
+			true
+		);
+		register(
+			ODOYAGA,
+			"odoyaga",
+			List.of(MIND, AIR),
+			List.of(HAG, FRENZY),
+			93, 95, 103, 109, 131, 73, 71, 
+			675,
+			187.96,
+			422.0,
+			List.of(AIR_BLADE, BANE_OF_HASTE, BLAZE_PUNCH, BRAINWASH, BULK_UP, CEREBRAL_SLASH, CYCLONE_SLAM, DARK_SURGE, DODGE, ELECTRO_PUNCH, FIRE_BREATH, FLABBERGAST, FROST_BEAM, FROST_PUNCH, GNARLY_GASH, GUST, HIGH_PITCH_SCREECH, ICICLE_TRAP, ILL_WILL, JET_STREAM, MINDS_EYE, NOSEDIVE, OUTBURST, PEACE_OF_MIND, PHANTOM_SLASH, PRIMAL_SLASH, PROVOKE, PSYCHO_BLAST, SCAPEGOAT, SHREWD_BLAST, SPARE, SPECTRAL_BURST, SPLITTING_HEADACHE, SUMMON, TEAR_DOWN, THUNDERSTRIKE, TYPHOON),
+			true
+		);
+		register(
+			WABALISC,
+			"wabalisc",
+			List.of(ICE),
+			List.of(IGNORANT, HASTY),
+			106, 103, 99, 88, 112, 98, 69, 
+			675,
+			218.44,
+			131.0,
+			List.of(BARBS, BITTER_COLD, BODY_SLAM, CHILLY_CHOMP, CLAY_SLAP, DEEP_FREEZE, DODGE, DRIVING_FORCE, EARTHQUAKE, EERIE_STARE, ELECTRO_PUNCH, FLURRY, FROST_BEAM, FROST_PUNCH, GROWL, HEADBUTT, ICE_HAMMER, ICICLE_TRAP, ILL_WILL, LUSTER_LOOT, MUD_SPATTER, POWER_FOCUS, RANT, ROGUE_ASSAULT, SCAPEGOAT, SHARPEN, SLAP_DOWN, SLEET_SHOT, SPARE, TALENT_TRADE, VITAL_JAB),
+			true
+		);
+		register(
+			AKHALOS,
+			"akhalos",
+			List.of(ICE, WATER),
+			List.of(AQUA_BODY, AGGRESSIVE),
+			116, 94, 120, 97, 73, 91, 84, 
+			675,
+			177.8,
+			245.0,
+			List.of(AQUA_JAWS, BODY_SLAM, BRAWN_BOOST, CHILLY_CHOMP, DEEP_FREEZE, DODGE, DRIVING_FORCE, DRUDGE, FLURRY, FROST_BEAM, GNARLY_GASH, GROWL, HYDRO_SLASH, ICE_HAMMER, ICICLE_TRAP, MAROON, PLUNGE, ROGUE_ASSAULT, SLASH, SOFT_WATER, SPARE, SPRAY, TSUNAMI, WATER_BOMB, WAVE_WRECKER),
+			true
+		);
+		register(
+			CELESTING,
+			"celesting",
+			List.of(METAL, LIGHT),
+			List.of(REVERBERATE, MYSTIC_TONE),
+			125, 125, 63, 79, 108, 84, 91, 
+			675,
+			83.82,
+			47.0,
+			List.of(BARBS, BARTER, BASH, DEJA_VU, DISPERSE, DISSONANT_CHORD, DODGE, ENERGY_BREAK, FLASH, FLASH_N_FLEE, GAMMA_PULSE, HARMONIOUS_CHORD, HEALTH_GIFT, HEAVY_BASH, HULLABALOO, ICICLE_TRAP, LIGHTSPEED_RAY, LUSTER_LOOT, METAL_BLAST, MINDS_EYE, NOVA_BLAST, PEACE_OF_MIND, REFLECTION_BURST, REPEATING_TUNE, RESONATE, SHINE, SPARE, SUMMON, TEAR_DOWN, TONE_BARRIER),
+			true
+		);
+		register(
+			CELESTING_STELLARCHIME,
+			"celesting_stellarchime",
+			List.of(METAL, LIGHT),
+			List.of(EFFULGENT),
+			150, 111, 82, 19, 128, 114, 121, 
+			725,
+			83.82,
+			47.0,
+			List.of(BARBS, BARTER, BASH, DEJA_VU, DISPERSE, DISSONANT_CHORD, DODGE, ENERGY_BREAK, FLASH, FLASH_N_FLEE, GAMMA_PULSE, HARMONIOUS_CHORD, HEALTH_GIFT, HEAVY_BASH, HULLABALOO, ICICLE_TRAP, LIGHTSPEED_RAY, LUSTER_LOOT, METAL_BLAST, MINDS_EYE, NOVA_BLAST, PEACE_OF_MIND, REFLECTION_BURST, REPEATING_TUNE, RESONATE, SHINE, SPARE, SUMMON, TEAR_DOWN, TONE_BARRIER),
+			true
+		);
+		register(
+			MIMASK,
+			"mimask",
+			List.of(DARK),
+			List.of(MASK_SWAP, FACADE),
+			95, 113, 117, 65, 107, 65, 113, 
+			675,
+			144.78,
+			76.0,
+			List.of(BAG_OF_TRICKS, BAMBOOZLE, BANEFUL_BASH, BARBS, BARTER, BODY_SLAM, BULK_UP, CHASE_DOWN, CHOMP, CLIMATE_CANNON, DARK_SURGE, DODGE, EMULATE, FADE_AWAY, GNARLY_GASH, HARROW, ILL_WILL, MUCK_BLAST, MUD_SPATTER, PEACE_OF_MIND, PHANTOM_SLASH, PILFER, POISON_BARBS, POWER_FOCUS, PRIMAL_SLASH, PROVOKE, QUICK_POUNCE, SHADOW_SPRINT, SHARPEN, SHREWD_BLAST, SLAP_DOWN, SLASH, SOUL_STORM, SPARE, SPECTRAL_BURST, TEAR_DOWN, TRICKY_TACTICS),
+			true
+		);
+		register(
+			GRIMYULINE,
+			"grimyuline",
+			List.of(DARK, BRAWLER),
+			List.of(SHARP_EDGES, SHARP_CLAWS),
+			101, 78, 107, 110, 84, 97, 98, 
+			675,
+			248.92,
+			234.0,
+			List.of(BARBS, BODY_CRASH, BOOM_BASH, BRIAR_BLOCK, BULK_UP, CHASE_DOWN, CHOMP, DARK_SURGE, DODGE, GAIN_DRAIN, GNARLY_GASH, HIGH_PITCH_SCREECH, ILL_WILL, LUSTER_LOOT, MEGA_CHOMP, NAB, PEACE_OF_MIND, PEP_JAB, PILFER, POISON_BARBS, PREEMPTIVE_STRIKE, PROVOKE, QUICK_POUNCE, QUICK_PUNCH, RAGING_HOWL, RAGING_TACKLE, ROGUE_ASSAULT, SHARPEN, SLAP_DOWN, SLUMBER, SPARE, SWAT, SWIPE, THISTLE_SLASH, VITAL_JAB),
+			true
+		);
     }
 }

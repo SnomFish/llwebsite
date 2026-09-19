@@ -27,6 +27,17 @@ public class TriggerRule {
     }
 
 
+    public TriggerRule(
+        Event event,
+        ICondition condition,
+        IEffect effect
+    ) {
+        this.events = List.of(event);
+        this.condition = condition;
+        this.effect = effect;
+    }
+
+
     public List<Branch<BattleContext>> execute(BattleContext context, Event event) {
         if (!events.contains(event)) {
             return List.of(new Branch<>(context, 1.0));

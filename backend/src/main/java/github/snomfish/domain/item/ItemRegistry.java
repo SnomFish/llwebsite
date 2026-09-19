@@ -6,7 +6,10 @@ import java.util.Map;
 
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.condition.Equals;
+import github.snomfish.functionality.condition.NoCondition;
+import github.snomfish.functionality.condition.Or;
 import github.snomfish.functionality.effect.EffectSequence;
+import github.snomfish.functionality.effect.effects.ClutchEffect;
 import github.snomfish.functionality.effect.effects.ConsumeTargetItem;
 import github.snomfish.functionality.effect.effects.ConsumeUserItem;
 import github.snomfish.functionality.effect.effects.MultiplyValueEffect;
@@ -15,6 +18,7 @@ import github.snomfish.functionality.event.TriggerRule;
 import github.snomfish.functionality.number.Constant;
 
 import static github.snomfish.domain.item.ItemId.*;
+import static github.snomfish.domain.species.SpeciesId.*;
 import static github.snomfish.domain.type.TypeId.*;
 import static github.snomfish.functionality.event.EventId.*;
 import static github.snomfish.functionality.event.EventSideId.*;
@@ -72,17 +76,32 @@ public class ItemRegistry {
 		register(
 			CLUTCH_PLUSHIE,
 			"clutch plushie",
-			null
+			new TriggerRule(
+				new Event(CLUTCH_EVENT, TARGET), 
+				new Equals(Value.TARGET_BATTLE_HEALTH, Value.TARGET_CURRENT_HEALTH),
+				new ClutchEffect()
+			)
 		);
 		register(
 			DRAIN_ORB,
 			"drain orb",
-			null
+			new TriggerRule(
+				new Event(HEALTH_DRAIN_EVENT, USER), 
+				new NoCondition(),
+				new MultiplyValueEffect(Value.MOVE_HEALTH_DRAIN_MODIFIER, new Constant(1.2))
+			)
 		);
 		register(
 			DROP_OF_YOUTH,
 			"drop of youth",
-			null
+			new TriggerRule(
+				new Event(DAMAGE_MODIFIER_EVENT, TARGET), 
+				new Equals(Value.TARGET_CAN_EVOLVE, true),
+				new EffectSequence(List.of(
+					new MultiplyValueEffect(Value.TARGET_BATTLE_MDEFENSE, new Constant(1.5)),
+					new MultiplyValueEffect(Value.TARGET_BATTLE_RDEFENSE, new Constant(1.5))
+				))
+			)
 		);
 		register(
 			DRY_ICE,
@@ -193,7 +212,7 @@ public class ItemRegistry {
 			AIR_ESSENCE,
 			"air essence",
 			new TriggerRule(
-                List.of(new Event(DAMAGE_MODIFIER, USER)),
+                new Event(DAMAGE_MODIFIER_EVENT, USER),
                 new Equals(Value.MOVE_TYPE, AIR),
                 new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
             )
@@ -202,7 +221,7 @@ public class ItemRegistry {
 			ANCIENT_ESSENCE,
 			"ancient essence",
 			new TriggerRule(
-                List.of(new Event(DAMAGE_MODIFIER, USER)),
+                new Event(DAMAGE_MODIFIER_EVENT, USER),
                 new Equals(Value.MOVE_TYPE, ANCIENT),
                 new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
             )
@@ -211,7 +230,7 @@ public class ItemRegistry {
 			BRAWLER_ESSENCE,
 			"brawler essence",
 			new TriggerRule(
-                List.of(new Event(DAMAGE_MODIFIER, USER)),
+                new Event(DAMAGE_MODIFIER_EVENT, USER),
                 new Equals(Value.MOVE_TYPE, BRAWLER),
                 new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
             )
@@ -220,7 +239,7 @@ public class ItemRegistry {
 			BUG_ESSENCE,
 			"bug essence",
 			new TriggerRule(
-                List.of(new Event(DAMAGE_MODIFIER, USER)),
+                new Event(DAMAGE_MODIFIER_EVENT, USER),
                 new Equals(Value.MOVE_TYPE, BUG),
                 new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
             )
@@ -229,7 +248,7 @@ public class ItemRegistry {
 			DARK_ESSENCE,
 			"dark essence",
 			new TriggerRule(
-                List.of(new Event(DAMAGE_MODIFIER, USER)),
+                new Event(DAMAGE_MODIFIER_EVENT, USER),
                 new Equals(Value.MOVE_TYPE, DARK),
                 new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
             )
@@ -238,7 +257,7 @@ public class ItemRegistry {
 			EARTH_ESSENCE,
 			"earth essence",
 			new TriggerRule(
-                List.of(new Event(DAMAGE_MODIFIER, USER)),
+                new Event(DAMAGE_MODIFIER_EVENT, USER),
                 new Equals(Value.MOVE_TYPE, EARTH),
                 new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
             )
@@ -247,7 +266,7 @@ public class ItemRegistry {
 			ELECTRIC_ESSENCE,
 			"electric essence",
 			new TriggerRule(
-                List.of(new Event(DAMAGE_MODIFIER, USER)),
+                new Event(DAMAGE_MODIFIER_EVENT, USER),
                 new Equals(Value.MOVE_TYPE, ELECTRIC),
                 new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
             )
@@ -256,7 +275,7 @@ public class ItemRegistry {
 			FIRE_ESSENCE,
 			"fire essence",
 			new TriggerRule(
-                List.of(new Event(DAMAGE_MODIFIER, USER)),
+                new Event(DAMAGE_MODIFIER_EVENT, USER),
                 new Equals(Value.MOVE_TYPE, FIRE),
                 new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
             )
@@ -265,7 +284,7 @@ public class ItemRegistry {
 			ICE_ESSENCE,
 			"ice essence",
 			new TriggerRule(
-                List.of(new Event(DAMAGE_MODIFIER, USER)),
+                new Event(DAMAGE_MODIFIER_EVENT, USER),
                 new Equals(Value.MOVE_TYPE, ICE),
                 new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
             )
@@ -274,7 +293,7 @@ public class ItemRegistry {
 			LIGHT_ESSENCE,
 			"light essence",
 			new TriggerRule(
-                List.of(new Event(DAMAGE_MODIFIER, USER)),
+                new Event(DAMAGE_MODIFIER_EVENT, USER),
                 new Equals(Value.MOVE_TYPE, LIGHT),
                 new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
             )
@@ -283,7 +302,7 @@ public class ItemRegistry {
 			METAL_ESSENCE,
 			"metal essence",
 			new TriggerRule(
-                List.of(new Event(DAMAGE_MODIFIER, USER)),
+                new Event(DAMAGE_MODIFIER_EVENT, USER),
                 new Equals(Value.MOVE_TYPE, METAL),
                 new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
             )
@@ -292,7 +311,7 @@ public class ItemRegistry {
 			MIND_ESSENCE,
 			"mind essence",
 			new TriggerRule(
-                List.of(new Event(DAMAGE_MODIFIER, USER)),
+                new Event(DAMAGE_MODIFIER_EVENT, USER),
                 new Equals(Value.MOVE_TYPE, MIND),
                 new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
             )
@@ -301,7 +320,7 @@ public class ItemRegistry {
 			PLANT_ESSENCE,
 			"plant essence",
 			new TriggerRule(
-                List.of(new Event(DAMAGE_MODIFIER, USER)),
+                new Event(DAMAGE_MODIFIER_EVENT, USER),
                 new Equals(Value.MOVE_TYPE, PLANT),
                 new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
             )
@@ -310,7 +329,7 @@ public class ItemRegistry {
 			SPIRIT_ESSENCE,
 			"spirit essence",
 			new TriggerRule(
-                List.of(new Event(DAMAGE_MODIFIER, USER)),
+                new Event(DAMAGE_MODIFIER_EVENT, USER),
                 new Equals(Value.MOVE_TYPE, SPIRIT),
                 new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
             )
@@ -319,7 +338,7 @@ public class ItemRegistry {
 			SIMPLE_ESSENCE,
 			"simple essence",
 			new TriggerRule(
-                List.of(new Event(DAMAGE_MODIFIER, USER)),
+                new Event(DAMAGE_MODIFIER_EVENT, USER),
                 new Equals(Value.MOVE_TYPE, SIMPLE),
                 new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
             )
@@ -328,7 +347,7 @@ public class ItemRegistry {
 			TOXIC_ESSENCE,
 			"toxic essence",
 			new TriggerRule(
-                List.of(new Event(DAMAGE_MODIFIER, USER)),
+                new Event(DAMAGE_MODIFIER_EVENT, USER),
                 new Equals(Value.MOVE_TYPE, TOXIC),
                 new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
             )
@@ -337,7 +356,7 @@ public class ItemRegistry {
 			WATER_ESSENCE,
 			"water essence",
 			new TriggerRule(
-                List.of(new Event(DAMAGE_MODIFIER, USER)),
+                new Event(DAMAGE_MODIFIER_EVENT, USER),
                 new Equals(Value.MOVE_TYPE, WATER),
                 new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
             )
@@ -346,7 +365,7 @@ public class ItemRegistry {
 			ARCHAIC_PEARL,
 			"archaic pearl",
 			new TriggerRule(
-                List.of(new Event(DAMAGE_MODIFIER, TARGET)),
+                new Event(DAMAGE_MODIFIER_EVENT, TARGET),
                 new Equals(Value.MOVE_TYPE, ANCIENT),
                 new EffectSequence(List.of(
                     new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
@@ -358,7 +377,7 @@ public class ItemRegistry {
 			BLOSSOM_PEARL,
 			"blossom pearl",
 			new TriggerRule(
-                List.of(new Event(DAMAGE_MODIFIER, TARGET)),
+                new Event(DAMAGE_MODIFIER_EVENT, TARGET),
                 new Equals(Value.MOVE_TYPE, PLANT),
                 new EffectSequence(List.of(
                     new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
@@ -370,7 +389,7 @@ public class ItemRegistry {
 			DRAFT_PEARL,
 			"draft pearl",
 			new TriggerRule(
-                List.of(new Event(DAMAGE_MODIFIER, TARGET)),
+                new Event(DAMAGE_MODIFIER_EVENT, TARGET),
                 new Equals(Value.MOVE_TYPE, AIR),
                 new EffectSequence(List.of(
                     new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
@@ -382,7 +401,7 @@ public class ItemRegistry {
 			FLAME_PEARL,
 			"flame pearl",
 			new TriggerRule(
-                List.of(new Event(DAMAGE_MODIFIER, TARGET)),
+                new Event(DAMAGE_MODIFIER_EVENT, TARGET),
                 new Equals(Value.MOVE_TYPE, FIRE),
                 new EffectSequence(List.of(
                     new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
@@ -394,7 +413,7 @@ public class ItemRegistry {
 			FROST_PEARL,
 			"frost pearl",
 			new TriggerRule(
-                List.of(new Event(DAMAGE_MODIFIER, TARGET)),
+                new Event(DAMAGE_MODIFIER_EVENT, TARGET),
                 new Equals(Value.MOVE_TYPE, ICE),
                 new EffectSequence(List.of(
                     new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
@@ -406,7 +425,7 @@ public class ItemRegistry {
 			MARTIAL_PEARL,
 			"martial pearl",
 			new TriggerRule(
-                List.of(new Event(DAMAGE_MODIFIER, TARGET)),
+                new Event(DAMAGE_MODIFIER_EVENT, TARGET),
                 new Equals(Value.MOVE_TYPE, BRAWLER),
                 new EffectSequence(List.of(
                     new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
@@ -418,7 +437,7 @@ public class ItemRegistry {
 			MENTAL_PEARL,
 			"mental pearl",
 			new TriggerRule(
-                List.of(new Event(DAMAGE_MODIFIER, TARGET)),
+                new Event(DAMAGE_MODIFIER_EVENT, TARGET),
                 new Equals(Value.MOVE_TYPE, MIND),
                 new EffectSequence(List.of(
                     new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
@@ -430,7 +449,7 @@ public class ItemRegistry {
 			METALLIC_PEARL,
 			"metallic pearl",
 			new TriggerRule(
-                List.of(new Event(DAMAGE_MODIFIER, TARGET)),
+                new Event(DAMAGE_MODIFIER_EVENT, TARGET),
                 new Equals(Value.MOVE_TYPE, METAL),
                 new EffectSequence(List.of(
                     new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
@@ -442,7 +461,7 @@ public class ItemRegistry {
 			NOXIOUS_PEARL,
 			"noxious pearl",
 			new TriggerRule(
-                List.of(new Event(DAMAGE_MODIFIER, TARGET)),
+                new Event(DAMAGE_MODIFIER_EVENT, TARGET),
                 new Equals(Value.MOVE_TYPE, TOXIC),
                 new EffectSequence(List.of(
                     new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
@@ -454,7 +473,7 @@ public class ItemRegistry {
 			PLAIN_PEARL,
 			"plain pearl",
 			new TriggerRule(
-                List.of(new Event(DAMAGE_MODIFIER, TARGET)),
+                new Event(DAMAGE_MODIFIER_EVENT, TARGET),
                 new Equals(Value.MOVE_TYPE, SIMPLE),
                 new EffectSequence(List.of(
                     new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
@@ -466,7 +485,7 @@ public class ItemRegistry {
 			SHADE_PEARL,
 			"shade pearl",
 			new TriggerRule(
-                List.of(new Event(DAMAGE_MODIFIER, TARGET)),
+                new Event(DAMAGE_MODIFIER_EVENT, TARGET),
                 new Equals(Value.MOVE_TYPE, DARK),
                 new EffectSequence(List.of(
                     new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
@@ -478,7 +497,7 @@ public class ItemRegistry {
 			SHINE_PEARL,
 			"shine pearl",
 			new TriggerRule(
-                List.of(new Event(DAMAGE_MODIFIER, TARGET)),
+                new Event(DAMAGE_MODIFIER_EVENT, TARGET),
                 new Equals(Value.MOVE_TYPE, LIGHT),
                 new EffectSequence(List.of(
                     new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
@@ -490,7 +509,7 @@ public class ItemRegistry {
 			SPECTRAL_PEARL,
 			"spectral pearl",
 			new TriggerRule(
-                List.of(new Event(DAMAGE_MODIFIER, TARGET)),
+                new Event(DAMAGE_MODIFIER_EVENT, TARGET),
                 new Equals(Value.MOVE_TYPE, SPIRIT),
                 new EffectSequence(List.of(
                     new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
@@ -502,7 +521,7 @@ public class ItemRegistry {
 			TERRA_PEARL,
 			"terra pearl",
 			new TriggerRule(
-                List.of(new Event(DAMAGE_MODIFIER, TARGET)),
+                new Event(DAMAGE_MODIFIER_EVENT, TARGET),
                 new Equals(Value.MOVE_TYPE, EARTH),
                 new EffectSequence(List.of(
                     new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
@@ -514,7 +533,7 @@ public class ItemRegistry {
 			VOLT_PEARL,
 			"volt pearl",
 			new TriggerRule(
-                List.of(new Event(DAMAGE_MODIFIER, TARGET)),
+                new Event(DAMAGE_MODIFIER_EVENT, TARGET),
                 new Equals(Value.MOVE_TYPE, ELECTRIC),
                 new EffectSequence(List.of(
                     new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
@@ -526,7 +545,7 @@ public class ItemRegistry {
 			WAVE_PEARL,
 			"wave pearl",
 			new TriggerRule(
-                List.of(new Event(DAMAGE_MODIFIER, TARGET)),
+                new Event(DAMAGE_MODIFIER_EVENT, TARGET),
                 new Equals(Value.MOVE_TYPE, WATER),
                 new EffectSequence(List.of(
                     new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
@@ -538,7 +557,7 @@ public class ItemRegistry {
 			WEB_PEARL,
 			"web pearl",
 			new TriggerRule(
-                List.of(new Event(DAMAGE_MODIFIER, TARGET)),
+                new Event(DAMAGE_MODIFIER_EVENT, TARGET),
                 new Equals(Value.MOVE_TYPE, BUG),
                 new EffectSequence(List.of(
                     new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
@@ -549,92 +568,221 @@ public class ItemRegistry {
 		register(
 			ARCHAIC_SHELL,
 			"archaic shell",
-			null
+			new TriggerRule(
+				new Event(DAMAGE_MODIFIER_EVENT, USER),
+				new Equals(Value.MOVE_TYPE, ANCIENT),
+				new EffectSequence(List.of(
+					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+					new ConsumeUserItem()
+				))
+			)
 		);
 		register(
 			BLOSSOM_SHELL,
 			"blossom shell",
-			null
+			new TriggerRule(
+				new Event(DAMAGE_MODIFIER_EVENT, USER),
+				new Equals(Value.MOVE_TYPE, PLANT),
+				new EffectSequence(List.of(
+					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+					new ConsumeUserItem()
+				))
+			)
 		);
 		register(
 			DRAFT_SHELL,
 			"draft shell",
-			null
+			new TriggerRule(
+				new Event(DAMAGE_MODIFIER_EVENT, USER),
+				new Equals(Value.MOVE_TYPE, AIR),
+				new EffectSequence(List.of(
+					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+					new ConsumeUserItem()
+				))
+			)
 		);
 		register(
 			FLAME_SHELL,
 			"flame shell",
-			null
+			new TriggerRule(
+				new Event(DAMAGE_MODIFIER_EVENT, USER),
+				new Equals(Value.MOVE_TYPE, FIRE),
+				new EffectSequence(List.of(
+					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+					new ConsumeUserItem()
+				))
+			)
 		);
 		register(
 			FROST_SHELL,
 			"frost shell",
-			null
+			new TriggerRule(
+				new Event(DAMAGE_MODIFIER_EVENT, USER),
+				new Equals(Value.MOVE_TYPE, ICE),
+				new EffectSequence(List.of(
+					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+					new ConsumeUserItem()
+				))
+			)
 		);
 		register(
 			MARTIAL_SHELL,
 			"martial shell",
-			null
+			new TriggerRule(
+				new Event(DAMAGE_MODIFIER_EVENT, USER),
+				new Equals(Value.MOVE_TYPE, BRAWLER),
+				new EffectSequence(List.of(
+					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+					new ConsumeUserItem()
+				))
+			)
 		);
 		register(
 			MENTAL_SHELL,
 			"mental shell",
-			null
+			new TriggerRule(
+				new Event(DAMAGE_MODIFIER_EVENT, USER),
+				new Equals(Value.MOVE_TYPE, MIND),
+				new EffectSequence(List.of(
+					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+					new ConsumeUserItem()
+				))
+			)
 		);
 		register(
 			METALLIC_SHELL,
 			"metallic shell",
-			null
+			new TriggerRule(
+				new Event(DAMAGE_MODIFIER_EVENT, USER),
+				new Equals(Value.MOVE_TYPE, METAL),
+				new EffectSequence(List.of(
+					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+					new ConsumeUserItem()
+				))
+			)
 		);
 		register(
 			NOXIOUS_SHELL,
 			"noxious shell",
-			null
+			new TriggerRule(
+				new Event(DAMAGE_MODIFIER_EVENT, USER),
+				new Equals(Value.MOVE_TYPE, TOXIC),
+				new EffectSequence(List.of(
+					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+					new ConsumeUserItem()
+				))
+			)
 		);
 		register(
 			PLAIN_SHELL,
 			"plain shell",
-			null
+			new TriggerRule(
+				new Event(DAMAGE_MODIFIER_EVENT, USER),
+				new Equals(Value.MOVE_TYPE, SIMPLE),
+				new EffectSequence(List.of(
+					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+					new ConsumeUserItem()
+				))
+			)
 		);
 		register(
 			SHADE_SHELL,
 			"shade shell",
-			null
+			new TriggerRule(
+				new Event(DAMAGE_MODIFIER_EVENT, USER),
+				new Equals(Value.MOVE_TYPE, DARK),
+				new EffectSequence(List.of(
+					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+					new ConsumeUserItem()
+				))
+			)
 		);
 		register(
 			SHINE_SHELL,
 			"shine shell",
-			null
+			new TriggerRule(
+				new Event(DAMAGE_MODIFIER_EVENT, USER),
+				new Equals(Value.MOVE_TYPE, LIGHT),
+				new EffectSequence(List.of(
+					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+					new ConsumeUserItem()
+				))
+			)
 		);
 		register(
 			SPECTRAL_SHELL,
 			"spectral shell",
-			null
+			new TriggerRule(
+				new Event(DAMAGE_MODIFIER_EVENT, USER),
+				new Equals(Value.MOVE_TYPE, SPIRIT),
+				new EffectSequence(List.of(
+					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+					new ConsumeUserItem()
+				))
+			)
 		);
 		register(
 			TERRA_SHELL,
 			"terra shell",
-			null
+			new TriggerRule(
+				new Event(DAMAGE_MODIFIER_EVENT, USER),
+				new Equals(Value.MOVE_TYPE, EARTH),
+				new EffectSequence(List.of(
+					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+					new ConsumeUserItem()
+				))
+			)
 		);
 		register(
 			VOLT_SHELL,
 			"volt shell",
-			null
+			new TriggerRule(
+				new Event(DAMAGE_MODIFIER_EVENT, USER),
+				new Equals(Value.MOVE_TYPE, ELECTRIC),
+				new EffectSequence(List.of(
+					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+					new ConsumeUserItem()
+				))
+			)
 		);
 		register(
 			WAVE_SHELL,
 			"wave shell",
-			null
+			new TriggerRule(
+				new Event(DAMAGE_MODIFIER_EVENT, USER),
+				new Equals(Value.MOVE_TYPE, WATER),
+				new EffectSequence(List.of(
+					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+					new ConsumeUserItem()
+				))
+			)
 		);
 		register(
 			WEB_SHELL,
 			"web shell",
-			null
+			new TriggerRule(
+				new Event(DAMAGE_MODIFIER_EVENT, USER),
+				new Equals(Value.MOVE_TYPE, BUG),
+				new EffectSequence(List.of(
+					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+					new ConsumeUserItem()
+				))
+			)
 		);
 		register(
 			SCRAP_METAL,
 			"scrap metal",
-			null
+			new TriggerRule(
+				new Event(DAMAGE_MODIFIER_EVENT, TARGET),
+				new Or(List.of(
+					new Equals(Value.TARGET_SPECIES_ID, SCORB)
+					//new Equals(Value.TARGET_SPECIES_ID, VEYLENS)
+				)),
+				new EffectSequence(List.of(
+					new MultiplyValueEffect(Value.TARGET_BATTLE_MDEFENSE, new Constant(1.5)),
+					new MultiplyValueEffect(Value.TARGET_BATTLE_RDEFENSE, new Constant(1.5))
+				))
+			)
 		);
 		register(
 			SPARE_CABLE,

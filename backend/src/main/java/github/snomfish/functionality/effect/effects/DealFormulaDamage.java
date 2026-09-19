@@ -56,7 +56,7 @@ public class DealFormulaDamage implements IEffect {
 
             //REMEMEBR ME
             damage = Math.floor(damageBranch.value()); // quick n dirty solution to all my problems, could cause a bug
-            context.dispatchEvent(EventId.DAMAGE_MODIFIER);
+            context.dispatchEvent(EventId.DAMAGE_MODIFIER_EVENT);
 
 
             double newTargetCurrentHealth = outcome.target().activeLoomian().currentHealth() - damage;

@@ -8,6 +8,31 @@ import github.snomfish.functionality.context.BattleContext;
 public enum Value {
 
 
+    USER_SPECIES_ID(
+        c -> c.user().activeLoomian().speciesId(),
+        (c, v) -> c.user().activeLoomian().setSpeciesId(v)
+    ),
+    USER_SPECIES(
+        c -> c.user().activeLoomian().species(),
+        null
+    ),
+    USER_CAN_EVOLVE(
+        c -> c.user().activeLoomian().species().canEvolve(),
+        null
+    ),
+    TARGET_SPECIES_ID(
+        c -> c.target().activeLoomian().speciesId(),
+        (c, v) -> c.target().activeLoomian().setSpeciesId(v)
+    ),
+    TARGET_SPECIES(
+        c -> c.target().activeLoomian().species(),
+        null
+    ),
+    TARGET_CAN_EVOLVE(
+        c -> c.target().activeLoomian().species().canEvolve(),
+        null
+    ),
+
     USER_TYPES(
         c -> c.user().activeLoomian().types(),
         (c, v) -> c.user().activeLoomian().setTypes(v)
@@ -26,6 +51,15 @@ public enum Value {
         (c, v) -> c.target().activeLoomian().setAbilityId(v)
     ),
 
+    USER_ITEM_ID(
+        c -> c.user().activeLoomian().itemId(),
+        (c, v) -> c.user().activeLoomian().setItemId(v)
+    ),
+    TARGET_ITEM_ID(
+        c -> c.target().activeLoomian().itemId(),
+        (c, v) -> c.target().activeLoomian().setItemId(v)
+    ),
+
     USER_STATUS_ID(
         c -> c.user().activeLoomian().status().id(),
         null
@@ -33,6 +67,24 @@ public enum Value {
     TARGET_STATUS_ID(
         c -> c.target().activeLoomian().status().id(),
         null
+    ),
+
+
+    USER_CURRENT_HEALTH(
+        c -> c.user().activeLoomian().currentHealth(),
+        (c, v) -> c.user().activeLoomian().setCurrentHealth(v)
+    ),
+    USER_CURRENT_ENERGY(
+        c -> c.user().activeLoomian().currentEnergy(),
+        (c, v) -> c.user().activeLoomian().setCurrentEnergy(v)
+    ),
+    TARGET_CURRENT_HEALTH(
+        c -> c.target().activeLoomian().currentHealth(),
+        (c, v) -> c.target().activeLoomian().setCurrentHealth(v)
+    ),
+    TARGET_CURRENT_ENERGY(
+        c -> c.target().activeLoomian().currentEnergy(),
+        (c, v) -> c.target().activeLoomian().setCurrentEnergy(v)
     ),
 
 
@@ -235,6 +287,14 @@ public enum Value {
     MOVE_TYPE_MODIFIER(
         c -> c.user().activeLoomian().action().move().typeModifier(),
         (c, v) -> c.user().activeLoomian().action().move().setTypeModifier(v)
+    ),
+    MOVE_HEALTH_DRAIN_MODIFIER(
+        c -> c.user().activeLoomian().action().move().healthDrainModifier(),
+        (c, v) -> c.user().activeLoomian().action().move().setHealthDrainModifier(v)
+    ),
+    MOVE_ENERGY_DRAIN_MODIFIER(
+        c -> c.user().activeLoomian().action().move().energyDrainModifier(),
+        (c, v) -> c.user().activeLoomian().action().move().setEnergyDrainModifier(v)
     ),
     MOVE_TYPECHART(
         c -> c.user().activeLoomian().action().move().typeChart(),

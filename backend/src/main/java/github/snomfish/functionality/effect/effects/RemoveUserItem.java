@@ -30,7 +30,7 @@ public class RemoveUserItem implements IEffect {
         ActiveLoomian activeLoomian = context.user().activeLoomian();
 
         if (activeLoomian.canHaveItemRemoved()) {
-            context.dispatchEvent(EventId.USER_ITEM_REMOVED);
+            context.dispatchEvent(EventId.USER_ITEM_REMOVED_EVENT);
             activeLoomian.setItemId(NO_ITEM);
         }
 

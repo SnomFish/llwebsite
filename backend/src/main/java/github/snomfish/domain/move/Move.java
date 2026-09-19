@@ -3,6 +3,7 @@ package github.snomfish.domain.move;
 import java.util.ArrayList;
 import java.util.List;
 
+import github.snomfish.domain.move.tags.Tags;
 import github.snomfish.domain.type.TypeChart;
 import github.snomfish.domain.type.TypeId;
 import github.snomfish.functionality.branch.Branch;
@@ -29,11 +30,15 @@ public class Move implements DeepCopyable<Move> {
     private IMove afterHit;
     private IMove onMiss;
 
+    private Tags tags;
+    private TypeChart typeChart;
+
     private double damage;
     private double accuracyModifier;
     private double damageModifier;
     private double typeModifier;
-    private TypeChart typeChart;
+    private double healthDrainModifier;
+    private double energyDrainModifier;
 
 
     public Move(
@@ -48,7 +53,9 @@ public class Move implements DeepCopyable<Move> {
         IMove beforeHit,
         IMove onHit,
         IMove afterHit,
-        IMove onMiss
+        IMove onMiss,
+
+        Tags tags
     ) {
         this.id = id;
         this.name = name;
@@ -63,11 +70,15 @@ public class Move implements DeepCopyable<Move> {
         this.afterHit = afterHit;
         this.onMiss = onMiss;
 
+        this.tags = tags;
+        this.typeChart = TypeChart.get();
+
         this.accuracyModifier = 1.0;
         this.damage = 0.0;
         this.damageModifier = 1.0;
         this.typeModifier = 1.0;
-        this.typeChart = TypeChart.get();
+        this.healthDrainModifier = 1.0;
+        this.energyDrainModifier = 1.0;
     }
 
     public Move(Move move) {
@@ -84,11 +95,15 @@ public class Move implements DeepCopyable<Move> {
         this.afterHit = move.afterHit.deepCopy();
         this.onMiss = move.onMiss.deepCopy();
 
+        this.tags = move.tags.deepCopy();
+        this.typeChart = typeChart.deepCopy();
+
         this.accuracyModifier = move.accuracyModifier;
         this.damage = move.damage;
         this.damageModifier = move.damageModifier;
         this.typeModifier = move.typeModifier;
-        this.typeChart = typeChart.deepCopy();
+        this.healthDrainModifier = move.healthDrainModifier;
+        this.energyDrainModifier = move.energyDrainModifier;
     }
     @Override 
     public Move deepCopy() {
@@ -110,11 +125,15 @@ public class Move implements DeepCopyable<Move> {
     public IMove afterHit() {return afterHit;}
     public IMove onMiss() {return onMiss;}
 
+    public Tags tags() {return tags;}
+    public TypeChart typeChart() {return typeChart;}
+
     public double accuracyModifier() {return accuracyModifier;}
     public double damage() {return damage;}
     public double damageModifier() {return damageModifier;}
     public double typeModifier() {return typeModifier;}
-    public TypeChart typeChart() {return typeChart;}
+    public double healthDrainModifier() {return healthDrainModifier;}
+    public double energyDrainModifier() {return energyDrainModifier;} 
 
 
     // setter
@@ -131,11 +150,15 @@ public class Move implements DeepCopyable<Move> {
     public void setAfterHit(IMove afterHit) {this.afterHit = afterHit;}
     public void setOnMiss(IMove onMiss) {this.onMiss = onMiss;}
 
+    public void setTags(Tags tags) {this.tags = tags;}
+    public void setTypeChart(TypeChart typeChart) {this.typeChart = typeChart;}
+
     public void setAccuracyModifier(double accuracyModifier) {this.accuracyModifier = accuracyModifier;}
     public void setDamage(double damage) {this.damage = damage;}
     public void setDamageModifier(double damageModifier) {this.damageModifier = damageModifier;}
     public void setTypeModifier(double typeModifier) {this.typeModifier = typeModifier;}
-    public void setTypeChart(TypeChart typeChart) {this.typeChart = typeChart;}
+    public void setHealthDrainModifier(double healthDrainModifier) {this.healthDrainModifier = healthDrainModifier;}
+    public void setEnergyDrainModifier(double energyDrainModifier) {this.energyDrainModifier = energyDrainModifier;}
 
 
     // this bich does not think about energy cost

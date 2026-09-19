@@ -36,7 +36,7 @@ public class AccuracyCheck implements ICondition {
         List<Branch<Double>> accuracyBranches = accuracy.execute(context);
         List<Branch<Boolean>> outcomes = new ArrayList<>();
 
-        context.dispatchEvent(EventId.ACCURACY_CHECK);
+        context.dispatchEvent(EventId.ACCURACY_CHECK_EVENT);
 
         double cachedAccuracyModifier = (double) Value.MOVE_ACCURACY_MODIFIER.get(context);
 
