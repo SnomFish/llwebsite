@@ -1,24 +1,43 @@
 package github.snomfish.domain.status;
 
-import github.snomfish.functionality.copy.DeepCopyable;
+import java.util.List;
 
-public class Status implements DeepCopyable<Status> {
+import github.snomfish.functionality.branch.Branch;
+import github.snomfish.functionality.branch.BranchUtil;
+import github.snomfish.functionality.context.BattleContext;
+import github.snomfish.functionality.event.Event;
+import github.snomfish.functionality.event.TriggerRule;
+
+public class Status {
     
 
-    private StatusId id;
+    private final StatusId id;
+    private final String name;
+    private final List<TriggerRule> rules;
 
 
-    public Status(StatusId id) {
+    public Status(
+        StatusId id,
+        String name,
+        List<TriggerRule> rules
+    ) {
         this.id = id;
+        this.name = name;
+        this.rules = rules;
     }
 
 
-    @Override 
-    public Status deepCopy() {
-        return new Status(id);
-    }
-
-
-    // getters
+    // getter
     public StatusId id() {return id;}
+    public String name() {return name;}
+    public List<TriggerRule> triggerRules() {return rules;}
+    
+    
+    public List<Branch<BattleContext>> handleEvent(BattleContext context, Event event) {
+        List<Branch<BattleContext>> outcomes = List.of(new Branch<>(context, 1.0));
+        for (TriggerRule rule : rules) {
+            outcomes = BranchUtil.flatMap(outcomes, branchContext -> rule.execute(context, event));
+        }
+        return outcomes; 
+    }
 }

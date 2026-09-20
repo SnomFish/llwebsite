@@ -283,6 +283,7 @@ public enum MoveId {
     RAGING_FLAME,
     RAGING_HOWL,
     RAGING_TACKLE,
+    RAINBOW_BLAST,
     RANT,
     RAPID_FIRE,
     RAZOR_SLASH,

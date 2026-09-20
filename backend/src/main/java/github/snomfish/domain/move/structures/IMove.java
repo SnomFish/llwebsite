@@ -1,4 +1,4 @@
-package github.snomfish.domain.move;
+package github.snomfish.domain.move.structures;
 
 import java.util.List;
 

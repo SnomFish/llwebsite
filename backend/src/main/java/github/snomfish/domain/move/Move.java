@@ -3,6 +3,8 @@ package github.snomfish.domain.move;
 import java.util.ArrayList;
 import java.util.List;
 
+import github.snomfish.domain.move.modifiers.Modifiers;
+import github.snomfish.domain.move.structures.IMove;
 import github.snomfish.domain.move.tags.Tags;
 import github.snomfish.domain.type.TypeChart;
 import github.snomfish.domain.type.TypeId;
@@ -31,14 +33,13 @@ public class Move implements DeepCopyable<Move> {
     private IMove onMiss;
 
     private Tags tags;
+    private Modifiers modifiers;
     private TypeChart typeChart;
 
-    private double damage;
-    private double accuracyModifier;
-    private double damageModifier;
-    private double typeModifier;
-    private double healthDrainModifier;
-    private double energyDrainModifier;
+    private int critChance;
+    private int damage;
+
+    private boolean hasCrit; // could be added to tags
 
 
     public Move(
@@ -71,14 +72,13 @@ public class Move implements DeepCopyable<Move> {
         this.onMiss = onMiss;
 
         this.tags = tags;
+        this.modifiers = new Modifiers();
         this.typeChart = TypeChart.get();
 
-        this.accuracyModifier = 1.0;
-        this.damage = 0.0;
-        this.damageModifier = 1.0;
-        this.typeModifier = 1.0;
-        this.healthDrainModifier = 1.0;
-        this.energyDrainModifier = 1.0;
+        this.critChance = 0;
+        this.damage = 0;
+
+        this.hasCrit = false;
     }
 
     public Move(Move move) {
@@ -96,14 +96,13 @@ public class Move implements DeepCopyable<Move> {
         this.onMiss = move.onMiss.deepCopy();
 
         this.tags = move.tags.deepCopy();
-        this.typeChart = typeChart.deepCopy();
+        this.modifiers = move.modifiers.deepCopy();
+        this.typeChart = move.typeChart.deepCopy();
 
-        this.accuracyModifier = move.accuracyModifier;
+        this.critChance = move.critChance;
         this.damage = move.damage;
-        this.damageModifier = move.damageModifier;
-        this.typeModifier = move.typeModifier;
-        this.healthDrainModifier = move.healthDrainModifier;
-        this.energyDrainModifier = move.energyDrainModifier;
+
+        this.hasCrit = move.hasCrit;
     }
     @Override 
     public Move deepCopy() {
@@ -126,14 +125,13 @@ public class Move implements DeepCopyable<Move> {
     public IMove onMiss() {return onMiss;}
 
     public Tags tags() {return tags;}
+    public Modifiers modifiers() {return modifiers;}
     public TypeChart typeChart() {return typeChart;}
 
-    public double accuracyModifier() {return accuracyModifier;}
-    public double damage() {return damage;}
-    public double damageModifier() {return damageModifier;}
-    public double typeModifier() {return typeModifier;}
-    public double healthDrainModifier() {return healthDrainModifier;}
-    public double energyDrainModifier() {return energyDrainModifier;} 
+    public int critChance() {return critChance;}
+    public int damage() {return damage;}
+
+    public boolean hasCrit() {return hasCrit;}
 
 
     // setter
@@ -151,14 +149,13 @@ public class Move implements DeepCopyable<Move> {
     public void setOnMiss(IMove onMiss) {this.onMiss = onMiss;}
 
     public void setTags(Tags tags) {this.tags = tags;}
+    public void setModifiers(Modifiers modifiers) {this.modifiers = modifiers;}
     public void setTypeChart(TypeChart typeChart) {this.typeChart = typeChart;}
 
-    public void setAccuracyModifier(double accuracyModifier) {this.accuracyModifier = accuracyModifier;}
-    public void setDamage(double damage) {this.damage = damage;}
-    public void setDamageModifier(double damageModifier) {this.damageModifier = damageModifier;}
-    public void setTypeModifier(double typeModifier) {this.typeModifier = typeModifier;}
-    public void setHealthDrainModifier(double healthDrainModifier) {this.healthDrainModifier = healthDrainModifier;}
-    public void setEnergyDrainModifier(double energyDrainModifier) {this.energyDrainModifier = energyDrainModifier;}
+    public void setCritChance(int critChance) {this.critChance = critChance;}
+    public void setDamage(int damage) {this.damage = damage;}
+
+    public void setHasCrit(boolean hasCrit) {this.hasCrit = hasCrit;}
 
 
     // this bich does not think about energy cost
@@ -169,10 +166,14 @@ public class Move implements DeepCopyable<Move> {
         for (Branch<Boolean> conditionBranch : condition.execute(context)) {
             if (conditionBranch.value()) {
                 moveOutcomes = applyProbability(
-                    flatMap(beforeHitOutcomes, c -> onHit.execute(c)), conditionBranch);
+                    flatMap(beforeHitOutcomes, c -> onHit.execute(c)), 
+                    conditionBranch
+                );
             } else {
                 moveOutcomes = applyProbability(
-                    flatMap(beforeHitOutcomes, c -> onMiss.execute(c)), conditionBranch);
+                    flatMap(beforeHitOutcomes, c -> onMiss.execute(c)), 
+                    conditionBranch
+                );
             }
         }
 

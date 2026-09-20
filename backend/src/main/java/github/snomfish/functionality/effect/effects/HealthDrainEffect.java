@@ -10,6 +10,7 @@ import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.effect.IEffect;
 import github.snomfish.functionality.number.INumber;
 
+import static github.snomfish.domain.move.modifiers.ModifierId.HEALTH_DRAIN;
 import static github.snomfish.functionality.event.EventId.*;
 
 public class HealthDrainEffect implements IEffect {
@@ -44,7 +45,7 @@ public class HealthDrainEffect implements IEffect {
                 BattleContext outcome = contextBranch.value().deepCopy();
                 ActiveLoomian user	 = outcome.user().activeLoomian();
                 Move move			 = user.action().move();
-                int healthDrain		 = (int) (move.damage() * move.healthDrainModifier() * drainBranch.value());
+                int healthDrain		 = (int) (move.damage() * move.modifiers().get(HEALTH_DRAIN) * drainBranch.value());
     
 				healthDrain = Math.min(healthDrain, user.maxHealth() - user.currentHealth()); // prevents the drain from over healing
 				user.addToCurrentHealth(healthDrain);

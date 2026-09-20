@@ -1,49 +1,63 @@
 package github.snomfish.functionality.effect.effects;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import github.snomfish.domain.move.modifiers.ModifierId;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.effect.IEffect;
+import github.snomfish.functionality.number.INumber;
 
 public class SetValueEffect implements IEffect {
-    
 
     private Value value;
-    private Object newValue;
-
+    private INumber newValue;
 
     public SetValueEffect(
         Value value,
-        Object newValue
+        INumber newValue
     ) {
         this.value = value;
         this.newValue = newValue;
     }
 
 
-    // OMG THIS ONE CANNOT BE DEEP COPIED TOO LETS GOO LETS HOPE I ONLY USE SHALLOW VALUES
-    // CHECK EQUALS.JAVA (CONDITION) TO SEE MORE OF THISSSS
-    @Override 
+    @Override
     public SetValueEffect deepCopy() {
         return new SetValueEffect(
             value,
-            newValue
+            newValue.deepCopy()
         );
     }
 
 
+    // got chatgpt to do this one, altered from my multiplyValueEffect, so if it doesnt work it is not my fault
     @Override
     public List<Branch<BattleContext>> execute(BattleContext context) {
 
-        value.set(context, newValue);
+        List<Branch<BattleContext>> outcomes = new ArrayList<>();
+        List<Branch<Double>> valueBranches = newValue.execute(context);
 
-        return List.of(
-            new Branch<>(
-                context,
-                1.0
-            )
-        );
+        for (Branch<Double> valueBranch : valueBranches) {
+            BattleContext copy = context.deepCopy();
+
+            System.out.println(valueBranch.value());
+
+            value.set(copy, valueBranch.value());
+
+            outcomes.add(new Branch<>(
+                copy,
+                valueBranch.probability()
+            ));
+        }
+
+
+        for (Branch<BattleContext> outcomeBranch : outcomes) {
+            System.out.println(outcomeBranch.value().user().activeLoomian().action().move().modifiers().get(ModifierId.STAB));
+        }
+
+        return outcomes;
     }
 }

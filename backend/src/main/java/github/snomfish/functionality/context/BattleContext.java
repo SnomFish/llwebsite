@@ -61,4 +61,9 @@ public class BattleContext implements DeepCopyable<BattleContext> {
 
         return outcomes;
     }
+
+
+    // helpers
+    public void log(String entry) {gamestate.log(entry);}
+    public void printLog() {gamestate.printLog();}
 }

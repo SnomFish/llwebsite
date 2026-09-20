@@ -1,6 +1,7 @@
 package github.snomfish.domain.type;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import github.snomfish.functionality.copy.DeepCopyable;
@@ -31,6 +32,18 @@ public class TypeChart implements DeepCopyable<TypeChart> {
 
     public static TypeChart get() {
         return new TypeChart();
+    }
+
+
+    public double getModifier(TypeId moveType, List<TypeId> targetTypes) {
+        double modifier = 1.0;
+        for (TypeId targetType : targetTypes) {
+            modifier *= get(moveType, targetType);
+        }
+        return modifier;
+    }
+    public double get(TypeId attackingType, TypeId defendingType) {
+        return chart.get(new TypeChartKey(attackingType, defendingType));
     }
     public void set(TypeId attackingType, TypeId defendingType, double multiplier) {
         chart.put(new TypeChartKey(attackingType, defendingType), multiplier);

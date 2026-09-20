@@ -39,7 +39,7 @@ public class DealStraightDamage implements IEffect {
             // probably needs some events here
 
             double newTargetCurrentHealth = outcome.target().activeLoomian().currentHealth() - damage;
-            outcome.user().activeLoomian().action().move().setDamage(damageBranch.value());
+            outcome.user().activeLoomian().action().move().setDamage(damageBranch.value().intValue());
         }
 
         throw new RuntimeException("not fully implemented");

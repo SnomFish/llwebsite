@@ -14,8 +14,9 @@ import github.snomfish.domain.species.SpeciesId;
 import github.snomfish.domain.species.SpeciesRegistry;
 import github.snomfish.domain.stats.Stats;
 import github.snomfish.domain.status.Status;
+import github.snomfish.domain.status.StatusId;
+import github.snomfish.domain.status.StatusRegistry;
 import github.snomfish.functionality.Calculator;
-import github.snomfish.functionality.action.IAction;
 import github.snomfish.functionality.copy.DeepCopyable;
 
 public class Loomian implements DeepCopyable<Loomian> {
@@ -24,6 +25,8 @@ public class Loomian implements DeepCopyable<Loomian> {
     private List<MoveId> moves;
     private AbilityId abilityId;
     private ItemId itemId;
+    private StatusId statusId;
+    private int statusTurns;
     private Stats nature;
 
     private Stats actualStats;
@@ -31,8 +34,6 @@ public class Loomian implements DeepCopyable<Loomian> {
     private int currentEnergy;
     private Stats tps;
     private Stats ups;
-
-    private Status status;
 
     // eventually have these bools in an enum map
     private boolean hasAbilityActivated;
@@ -44,17 +45,18 @@ public class Loomian implements DeepCopyable<Loomian> {
         List<MoveId> moves,
         AbilityId abilityId,
         ItemId itemId,
+        StatusId statusId,
         Stats nature,
         Stats tps,
-        Stats ups,
-        Status status
+        Stats ups
     ) {
         this.speciesId = speciesId;
         this.moves = moves;
         this.abilityId = abilityId;
         this.itemId = itemId;
+        this.statusId = statusId;
+        this.statusTurns = 0;
         this.nature = nature;
-        this.status = status;
 
         this.tps = tps;
         this.ups = ups;
@@ -69,15 +71,16 @@ public class Loomian implements DeepCopyable<Loomian> {
 
     protected Loomian(Loomian loomian) {
         this.speciesId = loomian.speciesId;
-        this.moves = loomian.moves();
-        this.abilityId = loomian.abilityId();
-        this.itemId = loomian.itemId();
-        this.nature = loomian.nature();
-        this.status = loomian.status();
+        this.moves = loomian.moves;
+        this.abilityId = loomian.abilityId;
+        this.itemId = loomian.itemId;
+        this.statusId = loomian.statusId;
+        this.statusTurns = loomian.statusTurns;
+        this.nature = loomian.nature;
 
-        this.actualStats = loomian.actualStats();
-        this.currentHealth = loomian.currentHealth();
-        this.currentEnergy = loomian.currentEnergy();
+        this.actualStats = loomian.actualStats;
+        this.currentHealth = loomian.currentHealth;
+        this.currentEnergy = loomian.currentEnergy;
         this.tps = loomian.tps;
         this.ups = loomian.ups;
 
@@ -99,8 +102,9 @@ public class Loomian implements DeepCopyable<Loomian> {
     public Ability ability() {return AbilityRegistry.get(abilityId);}
     public ItemId itemId() {return itemId;}
     public Item item() {return ItemRegistry.get(itemId);}
+    public StatusId statusId() {return statusId;}
+    public Status status() {return StatusRegistry.get(statusId);}
     public Stats nature() {return nature;}
-    public Status status() {return status;}
 
     public Stats actualStats() {return actualStats;}
     public int maxHealth() {return (int) actualStats.health();}
@@ -115,52 +119,24 @@ public class Loomian implements DeepCopyable<Loomian> {
 
 
     // setter
-    public void setSpeciesId(SpeciesId speciesId) {
-        this.speciesId = speciesId;
-    }
-    public void setMoves(List<MoveId> moves) {
-        this.moves = moves;
-    }
-    public void setAbilityId(AbilityId abilityId) {
-        this.abilityId = abilityId;
-    }
-    public void setItemId(ItemId itemId) {
-        this.itemId = itemId;
-    }
-    public void setNature(Stats nature) {
-        this.nature = nature;
-    }
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-    public void setActualStats(Stats actualStats) {
-        this.actualStats = actualStats;
-    }
-    public void setCurrentHealth(int currentHealth) {
-        this.currentHealth = currentHealth;
-    }
-    public void setCurrentEnergy(int currentEnergy) {
-        this.currentEnergy = currentEnergy;
-    }
-    public void setTps(Stats tps) {
-        this.tps = tps;
-    }
-    public void setUps(Stats ups) {
-        this.ups = ups;
-    }
-    public void setHasAbilityActivated(boolean hasAbilityActivated) {
-        this.hasAbilityActivated = hasAbilityActivated;
-    }
-    public void setCanHaveItemRemoved(boolean canHaveItemRemoved) {
-        this.canHaveItemRemoved = canHaveItemRemoved;
-    }
+    public void setSpeciesId(SpeciesId speciesId) {this.speciesId = speciesId;}
+    public void setMoves(List<MoveId> moves) {this.moves = moves;}
+    public void setAbilityId(AbilityId abilityId) {this.abilityId = abilityId;}
+    public void setItemId(ItemId itemId) {this.itemId = itemId;}
+    public void setStatusId(StatusId statusId) {this.statusId = statusId;}
+    public void setNature(Stats nature) {this.nature = nature;}
+
+    public void setActualStats(Stats actualStats) {this.actualStats = actualStats;}
+    public void setCurrentHealth(int currentHealth) {this.currentHealth = currentHealth;}
+    public void setCurrentEnergy(int currentEnergy) {this.currentEnergy = currentEnergy;}
+    public void setTps(Stats tps) {this.tps = tps;}
+    public void setUps(Stats ups) {this.ups = ups;}
+
+    public void setHasAbilityActivated(boolean hasAbilityActivated) {this.hasAbilityActivated = hasAbilityActivated;}
+    public void setCanHaveItemRemoved(boolean canHaveItemRemoved) {this.canHaveItemRemoved = canHaveItemRemoved;}
 
 
     // adders
-    public void addToCurrentHealth(int delta) {
-        this.currentHealth += delta;
-    }
-    public void addToCurrentEnergy(int delta) {
-        this.currentEnergy += delta;
-    }
+    public void addToCurrentHealth(int delta) {this.currentHealth += delta;}
+    public void addToCurrentEnergy(int delta) {this.currentEnergy += delta;}
 }

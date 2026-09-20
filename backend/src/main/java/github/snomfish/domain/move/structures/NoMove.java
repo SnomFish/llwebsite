@@ -2,7 +2,6 @@ package github.snomfish.domain.move.structures;
 
 import java.util.List;
 
-import github.snomfish.domain.move.IMove;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 

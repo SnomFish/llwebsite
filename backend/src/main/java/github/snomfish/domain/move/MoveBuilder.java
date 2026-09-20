@@ -1,5 +1,6 @@
 package github.snomfish.domain.move;
 
+import github.snomfish.domain.move.structures.IMove;
 import github.snomfish.domain.move.structures.NoMove;
 import github.snomfish.domain.move.tags.TagId;
 import github.snomfish.domain.move.tags.Tags;

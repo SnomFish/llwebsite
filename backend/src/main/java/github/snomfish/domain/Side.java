@@ -7,8 +7,6 @@ import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.copy.DeepCopyable;
 import github.snomfish.functionality.event.Event;
-import github.snomfish.functionality.event.EventId;
-import github.snomfish.functionality.event.EventSideId;
 
 import static github.snomfish.functionality.copy.DeepCopy.deepCopyList;
 

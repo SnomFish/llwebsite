@@ -2,18 +2,14 @@ package github.snomfish.domain.move.structures;
 
 import java.util.List;
 
-import github.snomfish.domain.move.IMove;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.effect.IEffect;
 
 public class MoveEffect implements IMove {
 
+    
     private IEffect effect;
-
-
-    private double damageModifier;
-    private boolean hasCrit;
     
 
     public MoveEffect(IEffect effect) {
@@ -31,6 +27,6 @@ public class MoveEffect implements IMove {
 
     @Override
     public List<Branch<BattleContext>> execute(BattleContext context) {
-        return null;
+        return effect.execute(context);
     }
 }

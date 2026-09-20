@@ -14,15 +14,15 @@ public class Calculator {
         Stats ups = loomian.ups();
         Stats nature = loomian.nature();
 
-        Stats actual = new Stats(base.mul(2)).add(ups).add(tps.mul(0.25)).mul(Constants.LEVEL); // (2 * base + ups + tps / 4) * level
-
-        actual
-        .mul(new double[]{0.01, 1/65, 0.01, 0.01, 0.01, 0.01, 0.01})
-        .add(new double[]{0, 80, 5, 5, 5, 5, 5})
-        .floor()
-        .addHealth(10 + Constants.LEVEL)
-        .mul(nature)
-        .floor();    
+        Stats actual = new Stats(
+            Math.floor((2 * base.health() + ups.health() + tps.health() / 4)                     * Constants.LEVEL / 100) + Constants.LEVEL + 10,
+            Math.floor(Math.floor((2 * base.energy() + ups.energy() + tps.energy() / 4)          * 50              / 65 + 80) * nature.energy()),
+            Math.floor(Math.floor((2 * base.mattack() + ups.mattack() + tps.mattack() / 4)       * Constants.LEVEL / 100 + 5) * nature.mattack()),
+            Math.floor(Math.floor((2 * base.mdefense() + ups.mdefense() + tps.mdefense() / 4)    * Constants.LEVEL / 100 + 5) * nature.mdefense()),
+            Math.floor(Math.floor((2 * base.rattack() + ups.rattack() + tps.rattack() / 4)       * Constants.LEVEL / 100 + 5) * nature.rattack()),
+            Math.floor(Math.floor((2 * base.rdefense() + ups.rdefense() + tps.rdefense() / 4)    * Constants.LEVEL / 100 + 5) * nature.rdefense()),
+            Math.floor(Math.floor((2 * base.speed() + ups.speed() + tps.speed() / 4)             * Constants.LEVEL / 100 + 5) * nature.speed())
+        );
 
         return actual;
     }

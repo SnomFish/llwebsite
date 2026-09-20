@@ -1,6 +1,8 @@
 package github.snomfish.domain.ability;
 
 public enum AbilityId {
+    NO_ABILITY,
+    
     ABILITY_THIEF,
     ACE,
     ADAPTABLE,

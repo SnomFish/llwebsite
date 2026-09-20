@@ -1,5 +1,6 @@
 package github.snomfish.domain.ability;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import github.snomfish.functionality.condition.NoCondition;
 import github.snomfish.functionality.condition.Or;
 import github.snomfish.functionality.effect.effects.AlterTypeChart;
 import github.snomfish.functionality.effect.effects.MultiplyValueEffect;
+import github.snomfish.functionality.effect.effects.SetValueEffect;
 import github.snomfish.functionality.event.Event;
 import github.snomfish.functionality.event.TriggerRule;
 import github.snomfish.functionality.number.Constant;
@@ -25,6 +27,7 @@ import static github.snomfish.functionality.event.EventSideId.*;
 public class AbilityRegistry {
     
 
+	private static boolean initialised = false;
     private static final Map<AbilityId, Ability> registry = new HashMap<>();
 
 
@@ -32,6 +35,7 @@ public class AbilityRegistry {
 
 
     public static Ability get(AbilityId id) {
+		if (!initialised) throw new IllegalArgumentException("Abilities has not been initialised");
         return registry.get(id);
     }
 
@@ -41,11 +45,22 @@ public class AbilityRegistry {
         String name,
         TriggerRule rule
     ) {
+		if (rule == null) {
+			registry.put(id, new Ability(id, name, new ArrayList<TriggerRule>()));
+			return;
+		}
         registry.put(id, new Ability(id, name, List.of(rule)));
     }
 
 
-    static {
+    public static void init() {
+		if (initialised) return;
+		initialised = true;
+		register(
+			NO_ABILITY,
+			"no ability",
+			null
+		);
         register(
 			ABILITY_THIEF,
 			"ability thief",
@@ -54,7 +69,11 @@ public class AbilityRegistry {
 		register(
 			ACE,
 			"ace",
-			null
+			new TriggerRule(
+                List.of(new Event(DAMAGE_MODIFIER_EVENT, USER)), // right before a moves damage is calculated
+                new ListContains(Value.USER_TYPES, Value.MOVE_TYPE),
+                new SetValueEffect(Value.MOVE_STAB_MODIFIER, new Constant(2.0))
+            )
 		);
 		register(
 			ADAPTABLE,
@@ -111,7 +130,7 @@ public class AbilityRegistry {
 			"apprehension",
 			null
 		);
-		register(
+		register( // this has to use type modifier, you cannot alter the typechart for this as if the target has two types, that fire resistance will be applied twice
             AQUA_BODY,
             "aqua body",
 			new TriggerRule(
@@ -135,7 +154,7 @@ public class AbilityRegistry {
 			new TriggerRule(
                 List.of(new Event(DAMAGE_MODIFIER_EVENT, USER)), // right before a moves damage is calculated
                 new ListContains(Value.USER_TYPES, Value.MOVE_TYPE),
-                new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2)) // assumes regular stab has been applied, this brings the stab boost from 1.25 to 1.5
+                new SetValueEffect(Value.MOVE_STAB_MODIFIER, new Constant(1.5))
             )
         );
         register(
@@ -1314,11 +1333,5 @@ public class AbilityRegistry {
 			"woodman",
 			null
 		);
-		register(
-			WOODSMAN,
-			"woodsman",
-			null
-		);
-        
     }
 }

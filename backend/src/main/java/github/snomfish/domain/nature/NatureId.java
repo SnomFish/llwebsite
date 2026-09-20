@@ -3,6 +3,9 @@ package github.snomfish.domain.nature;
 import github.snomfish.domain.stats.StatId;
 
 public enum NatureId {
+    
+    INDIFFERENT(StatId.HEALTH, 1.0), // no difference
+
     HYPER(StatId.ENERGY, 0.1),
     BRAWNY(StatId.MATTACK, 1.1),
     ROBUST(StatId.MDEFENSE, 1.1),

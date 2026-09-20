@@ -3,6 +3,7 @@ package github.snomfish.functionality;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
+import github.snomfish.domain.move.modifiers.ModifierId;
 import github.snomfish.functionality.context.BattleContext;
 
 public enum Value {
@@ -276,30 +277,43 @@ public enum Value {
         c -> c.user().activeLoomian().action().move().category(),
         (c, v) -> c.user().activeLoomian().action().move().setCategory(v)
     ),
-    MOVE_ACCURACY_MODIFIER(
-        c -> c.user().activeLoomian().action().move().accuracyModifier(),
-        (c, v) -> c.user().activeLoomian().action().move().setAccuracyModifier(v)
-    ),
-    MOVE_DAMAGE_MODIFIER(
-        c -> c.user().activeLoomian().action().move().damageModifier(),
-        (c, v) -> c.user().activeLoomian().action().move().setDamageModifier(v)
-    ),
-    MOVE_TYPE_MODIFIER(
-        c -> c.user().activeLoomian().action().move().typeModifier(),
-        (c, v) -> c.user().activeLoomian().action().move().setTypeModifier(v)
-    ),
-    MOVE_HEALTH_DRAIN_MODIFIER(
-        c -> c.user().activeLoomian().action().move().healthDrainModifier(),
-        (c, v) -> c.user().activeLoomian().action().move().setHealthDrainModifier(v)
-    ),
-    MOVE_ENERGY_DRAIN_MODIFIER(
-        c -> c.user().activeLoomian().action().move().energyDrainModifier(),
-        (c, v) -> c.user().activeLoomian().action().move().setEnergyDrainModifier(v)
-    ),
     MOVE_TYPECHART(
         c -> c.user().activeLoomian().action().move().typeChart(),
         (c, v) -> c.user().activeLoomian().action().move().setTypeChart(v)
-    );
+    ),
+    MOVE_DAMAGE(
+        c -> c.user().activeLoomian().action().move().damage(),
+        (c, v) -> c.user().activeLoomian().action().move().setDamage(v)
+    ),
+    MOVE_DAMAGE_MODIFIER(
+        c -> c.user().activeLoomian().action().move().modifiers().get(ModifierId.DAMAGE),
+        (c, v) -> c.user().activeLoomian().action().move().modifiers().set(ModifierId.DAMAGE, v)
+    ),
+    MOVE_ACCURACY_MODIFIER(
+        c -> c.user().activeLoomian().action().move().modifiers().get(ModifierId.ACCURACY),
+        (c, v) -> c.user().activeLoomian().action().move().modifiers().set(ModifierId.ACCURACY, v)
+    ),
+    MOVE_TYPE_MODIFIER(
+        c -> c.user().activeLoomian().action().move().modifiers().get(ModifierId.TYPE),
+        (c, v) -> c.user().activeLoomian().action().move().modifiers().set(ModifierId.TYPE, v)
+    ),
+    MOVE_STAB_MODIFIER(
+        c -> c.user().activeLoomian().action().move().modifiers().get(ModifierId.STAB),
+        (c, v) -> c.user().activeLoomian().action().move().modifiers().set(ModifierId.STAB, v)
+    ),
+    MOVE_CRIT_MODIFIER(
+        c -> c.user().activeLoomian().action().move().modifiers().get(ModifierId.CRIT),
+        (c, v) -> c.user().activeLoomian().action().move().modifiers().set(ModifierId.CRIT, v)
+    ),
+    MOVE_HEALTH_DRAIN_MODIFIER(
+        c -> c.user().activeLoomian().action().move().modifiers().get(ModifierId.HEALTH_DRAIN),
+        (c, v) -> c.user().activeLoomian().action().move().modifiers().set(ModifierId.HEALTH_DRAIN, v)
+    ),
+    MOVE_ENERGY_DRAIN_MODIFIER(
+        c -> c.user().activeLoomian().action().move().modifiers().get(ModifierId.ENERGY_DRAIN),
+        (c, v) -> c.user().activeLoomian().action().move().modifiers().set(ModifierId.ENERGY_DRAIN, v)
+    ),
+    ;
 
 
     private final Function<BattleContext, ?> getter;

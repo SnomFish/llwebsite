@@ -73,6 +73,7 @@ public class SpeciesRegistry {
 
 
     public static void init() {
+		if (initialised) return;
 		initialised = true;
 		initSpecies1();
 		initSpecies2();

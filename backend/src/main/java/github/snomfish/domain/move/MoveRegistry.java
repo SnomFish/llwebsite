@@ -1,8 +1,13 @@
 package github.snomfish.domain.move;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import github.snomfish.domain.move.structures.MoveEffect;
+import github.snomfish.domain.stats.StatId;
+import github.snomfish.functionality.effect.EffectSequence;
+import github.snomfish.functionality.effect.effects.DealFormulaDamage;
 import github.snomfish.functionality.number.Constant;
 
 import static github.snomfish.domain.move.CategoryId.*;
@@ -319,7 +324,10 @@ public class MoveRegistry {
 			.name("Blaze of Glory")
 			.type(FIRE)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(60))
+			.onHit(new MoveEffect(
+				new DealFormulaDamage(StatId.MATTACK, StatId.MDEFENSE, new Constant(120))
+			))
 			.build()
 		);
 		register(MoveBuilder.newMove(BLAZE_PUNCH)
@@ -2019,6 +2027,16 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.build()
+		);
+		register(MoveBuilder.newMove(RAINBOW_BLAST)
+			.name("Rainbow Blast")
+			.type(SIMPLE)
+			.category(RANGED)
+			.energyCost(new Constant(50))
+			.onHit(new MoveEffect(
+				new DealFormulaDamage(StatId.RATTACK, StatId.RDEFENSE, new Constant(100))
+			))
 			.build()
 		);
 		register(MoveBuilder.newMove(RANT)

@@ -8,10 +8,10 @@ public class Nature {
 
     // THIS ALSO DOESNT WORK AS THE MUL FUNC IN STATS DOESNT DO WHAT IT ADVERTISES
     // update: I think it now works but it hasnt been tested
-    public static Stats natureModifiers(List<NatureId> natures) {
+    public static Stats newNature(List<NatureId> natures) {
         Stats modifiers = new Stats(1, 1, 1, 1, 1, 1, 1);
         for (NatureId nature : natures) {
-            modifiers.mul(nature.StatId(), nature.modifier());
+            modifiers.set(nature.StatId(), nature.modifier());
         }
         return modifiers;
     }

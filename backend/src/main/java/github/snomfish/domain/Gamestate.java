@@ -26,6 +26,7 @@ public class Gamestate implements DeepCopyable<Gamestate> {
     ) {
         this.playerSide = playerSide;
         this.enemySide = enemySide;
+        this.battleLog = new ArrayList<>();
     }
 
     public Gamestate(Gamestate copy) {
@@ -68,7 +69,7 @@ public class Gamestate implements DeepCopyable<Gamestate> {
     public void setBattleLog(List<String> battleLog) {this.battleLog = battleLog;}
 
 
-    public void addEntry(String entry) {battleLog.add(entry);}
+    public void log(String entry) {battleLog.add(entry);}
     public void printLog() {
         System.out.println("BattleLog:");
         for (String entry : battleLog) {

@@ -2,7 +2,6 @@ package github.snomfish.functionality.branch;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class BranchUtil {
@@ -31,28 +30,8 @@ public class BranchUtil {
         return result;
     }
 
-
-    public static <A, B, C> List<Branch<B>> flatMap(
-        List<Branch<A>> branches,
-        C context,
-        BiFunction<A, C, List<Branch<B>>> function
-    ) {
-        List<Branch<B>> result = new ArrayList<>();
-
-        for (Branch<A> branch : branches) {
-            List<Branch<B>> newBranches =
-                function.apply(branch.value(), context);
-
-            for (Branch<B> newBranch : newBranches) {
-                result.add(new Branch<B>(
-                    newBranch.value(),
-                    branch.probability() * newBranch.probability()
-                ));
-            }
-        }
-
-        return result;
-    }
+    
+    
 
 
     // much better, mutation but it is safe

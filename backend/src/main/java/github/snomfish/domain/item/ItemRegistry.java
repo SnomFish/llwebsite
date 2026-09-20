@@ -1,9 +1,11 @@
 package github.snomfish.domain.item;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import github.snomfish.domain.ability.Ability;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.condition.Equals;
 import github.snomfish.functionality.condition.NoCondition;
@@ -28,6 +30,7 @@ import static github.snomfish.functionality.event.EventSideId.*;
 public class ItemRegistry {
 
 
+	private static boolean initialised = false;
     private static final Map<ItemId, Item> registry = new HashMap<>();
 
 
@@ -35,6 +38,7 @@ public class ItemRegistry {
 
 
     public static Item get(ItemId id) {
+		if (!initialised) throw new IllegalArgumentException("Abilities has not been initialised");
         return registry.get(id);
     }
 
@@ -44,20 +48,17 @@ public class ItemRegistry {
         String name,
         TriggerRule rule
     ) {
+		if (rule == null) {
+			registry.put(id, new Item(id, name, new ArrayList<TriggerRule>()));
+			return;
+		}
         registry.put(id, new Item(id, name, List.of(rule)));
     }
 
 
-    /*private static void register(
-        ItemId id,
-        String name,
-        List<TriggerRule> triggerRules
-    ) {
-        registry.put(id, new Item(id, name, triggerRules));
-    }*/
-
-
-    static {
+    public static void init() {
+		if (initialised) return;
+		initialised = true;
         register(
 			NO_ITEM,
 			"no item",

@@ -10,6 +10,7 @@ import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.effect.IEffect;
 import github.snomfish.functionality.number.INumber;
 
+import static github.snomfish.domain.move.modifiers.ModifierId.ENERGY_DRAIN;
 import static github.snomfish.functionality.event.EventId.*;
 
 public class EnergyDrainEffect implements IEffect {
@@ -44,7 +45,7 @@ public class EnergyDrainEffect implements IEffect {
                 BattleContext outcome = contextBranch.value().deepCopy();
                 ActiveLoomian user	 = outcome.user().activeLoomian();
                 Move move			 = user.action().move();
-                int energyDrain      = (int) (move.damage() * move.energyDrainModifier() * drainBranch.value());
+                int energyDrain      = (int) (move.damage() * move.modifiers().get(ENERGY_DRAIN) * drainBranch.value());
     
 				energyDrain = Math.min(energyDrain, user.maxEnergy() - user.currentEnergy()); // prevents the drain from over healing
 				user.addToCurrentEnergy(energyDrain);
