@@ -3,7 +3,6 @@ package github.snomfish.functionality.effect.effects;
 import java.util.List;
 
 import github.snomfish.domain.type.TypeChart;
-import github.snomfish.domain.type.TypeChartKey;
 import github.snomfish.domain.type.TypeId;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.branch.Branch;

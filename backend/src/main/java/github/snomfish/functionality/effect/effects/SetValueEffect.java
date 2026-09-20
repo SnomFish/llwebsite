@@ -43,19 +43,12 @@ public class SetValueEffect implements IEffect {
         for (Branch<Double> valueBranch : valueBranches) {
             BattleContext copy = context.deepCopy();
 
-            System.out.println(valueBranch.value());
-
             value.set(copy, valueBranch.value());
 
             outcomes.add(new Branch<>(
                 copy,
                 valueBranch.probability()
             ));
-        }
-
-
-        for (Branch<BattleContext> outcomeBranch : outcomes) {
-            System.out.println(outcomeBranch.value().user().activeLoomian().action().move().modifiers().get(ModifierId.STAB));
         }
 
         return outcomes;

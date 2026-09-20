@@ -7,7 +7,6 @@ import github.snomfish.domain.ability.AbilityId;
 import github.snomfish.domain.ability.AbilityRegistry;
 import github.snomfish.domain.item.ItemId;
 import github.snomfish.domain.item.ItemRegistry;
-import github.snomfish.domain.move.MoveId;
 import github.snomfish.domain.nature.Nature;
 import github.snomfish.domain.species.SpeciesId;
 import github.snomfish.domain.species.SpeciesRegistry;

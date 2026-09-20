@@ -6,7 +6,6 @@ import github.snomfish.domain.ActiveLoomian;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.effect.IEffect;
-import github.snomfish.functionality.event.EventId;
 
 import static github.snomfish.domain.item.ItemId.*;
 import static github.snomfish.functionality.event.EventId.*;
