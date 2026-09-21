@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import github.snomfish.domain.mechanics.MechanicId;
 import github.snomfish.domain.status.StatusId;
 import github.snomfish.domain.type.TypeId;
 import github.snomfish.functionality.Value;
@@ -12,7 +13,9 @@ import github.snomfish.functionality.condition.Equals;
 import github.snomfish.functionality.condition.ListContains;
 import github.snomfish.functionality.condition.NoCondition;
 import github.snomfish.functionality.condition.Or;
+import github.snomfish.functionality.effect.EffectSequence;
 import github.snomfish.functionality.effect.effects.AlterTypeChart;
+import github.snomfish.functionality.effect.effects.ApplyMechanic;
 import github.snomfish.functionality.effect.effects.MultiplyValueEffect;
 import github.snomfish.functionality.effect.effects.SetValueEffect;
 import github.snomfish.functionality.event.Event;
@@ -70,7 +73,7 @@ public class AbilityRegistry {
 			ACE,
 			"ace",
 			new TriggerRule(
-                List.of(new Event(DAMAGE_MODIFIER_EVENT, USER)), // right before a moves damage is calculated
+                List.of(new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)), // right before a moves damage is calculated
                 new ListContains(Value.USER_TYPES, Value.MOVE_TYPE),
                 new SetValueEffect(Value.MOVE_STAB_MODIFIER, new Constant(2.0))
             )
@@ -134,7 +137,7 @@ public class AbilityRegistry {
             AQUA_BODY,
             "aqua body",
 			new TriggerRule(
-                List.of(new Event(DAMAGE_MODIFIER_EVENT, TARGET)), // before the targets move damage is calculated 
+                List.of(new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET)), // before the targets move damage is calculated 
                 new Equals(Value.MOVE_TYPE, TypeId.FIRE), 
                 new MultiplyValueEffect(Value.MOVE_TYPE_MODIFIER, new Constant(0.5))
             )
@@ -152,7 +155,7 @@ public class AbilityRegistry {
             AWAKENING,
             "awakening",
 			new TriggerRule(
-                List.of(new Event(DAMAGE_MODIFIER_EVENT, USER)), // right before a moves damage is calculated
+                List.of(new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)), // right before a moves damage is calculated
                 new ListContains(Value.USER_TYPES, Value.MOVE_TYPE),
                 new SetValueEffect(Value.MOVE_STAB_MODIFIER, new Constant(1.5))
             )
@@ -161,7 +164,7 @@ public class AbilityRegistry {
             BANEFUL,
             "baneful",
 			new TriggerRule(
-                List.of(new Event(DAMAGE_MODIFIER_EVENT, USER)), 
+                List.of(new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)), 
                 new Or(List.of(
                     new Equals(Value.USER_STATUS_ID, StatusId.POISON),
                     new Equals(Value.USER_STATUS_ID, StatusId.BAD_POISON)
@@ -297,7 +300,14 @@ public class AbilityRegistry {
 		register(
 			COMBUSTIBLE,
 			"combustible",
-			null
+			new TriggerRule(
+				new Event(PRE_DAMAGE_EVENT, TARGET),
+				new Equals(Value.MOVE_TYPE, TypeId.FIRE),
+				new EffectSequence(List.of(
+					new MultiplyValueEffect(Value.MOVE_DAMAGE, new Constant(0.0)),
+					ApplyMechanic.toUser(MechanicId.COMBUSTIBLE)
+				))
+			)
 		);
 		register(
 			COMMUNICATION,
@@ -325,9 +335,16 @@ public class AbilityRegistry {
 			null
 		);
 		register(
-			COURSING_VENOM,
+			COURSING_VENOM, // when hit by a toxic type move, absorb it to boost your own toxic type damage by 1.5x
 			"coursing venom",
-			null
+			new TriggerRule(
+				new Event(PRE_DAMAGE_EVENT, TARGET),
+				new Equals(Value.MOVE_TYPE, TypeId.TOXIC),
+				new EffectSequence(List.of(
+					new MultiplyValueEffect(Value.MOVE_DAMAGE, new Constant(0.0)),
+					ApplyMechanic.toUser(MechanicId.COURSING_VENOM)
+				))
+			)
 		);
 		register(
 			DAUNTLESS,
@@ -661,7 +678,12 @@ public class AbilityRegistry {
 		register(
 			LUCK_OF_THE_SEA,
 			"luck_of_the_sea",
-			null
+			// also needs to increase crit chance
+			new TriggerRule(
+				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
+				new NoCondition(),
+				new MultiplyValueEffect(Value.MOVE_CRIT_MODIFIER, new Constant(1.5)) // generic crit modifier = 1.5 and is always applied, so a 1.5 boost brings it to 2.25
+			)
 		);
 		register(
 			LUCKY,
@@ -681,7 +703,11 @@ public class AbilityRegistry {
 		register(
 			MARKSMAN,
 			"marksman",
-			null
+			new TriggerRule(
+				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
+				new NoCondition(),
+				new MultiplyValueEffect(Value.MOVE_CRIT_MODIFIER, new Constant(1.5)) // generic crit modifier = 1.5 and is always applied, so a 1.5 boost brings it to 2.25
+			)
 		);
 		register(
 			MASK_SWAP,
@@ -771,7 +797,14 @@ public class AbilityRegistry {
 		register(
 			NOXIOUS_WEEDS,
 			"noxious weeds",
-			null
+			new TriggerRule(
+				new Event(PRE_DAMAGE_EVENT, TARGET),
+				new Equals(Value.MOVE_TYPE, TypeId.PLANT),
+				new EffectSequence(List.of(
+					new MultiplyValueEffect(Value.MOVE_DAMAGE, new Constant(0.0)),
+					ApplyMechanic.toUser(MechanicId.NOXIOUS_WEEDS)
+				))
+			)
 		);
 		register(
 			OBSIDIAN_HEART,
@@ -781,11 +814,6 @@ public class AbilityRegistry {
 		register(
 			ODD_HUSK,
 			"odd_husk",
-			null
-		);
-		register(
-			ODD_HUST,
-			"odd hust",
 			null
 		);
 		register(
@@ -881,7 +909,14 @@ public class AbilityRegistry {
 		register(
 			PRISMATIC,
 			"prismatic",
-			null
+			new TriggerRule(
+				new Event(PRE_DAMAGE_EVENT, TARGET),
+				new Equals(Value.MOVE_TYPE, TypeId.LIGHT),
+				new EffectSequence(List.of(
+					new MultiplyValueEffect(Value.MOVE_DAMAGE, new Constant(0.0)),
+					ApplyMechanic.toUser(MechanicId.PRISMATIC)
+				))
+			)
 		);
 		register(
 			PROTECTIVE_SHELL,
@@ -1196,7 +1231,14 @@ public class AbilityRegistry {
 		register(
 			TOXIC_FILTER,
 			"toxic filter",
-			null
+			new TriggerRule(
+				new Event(PRE_DAMAGE_EVENT, TARGET),
+				new Equals(Value.MOVE_TYPE, TypeId.TOXIC),
+				new EffectSequence(List.of(
+					new MultiplyValueEffect(Value.MOVE_DAMAGE, new Constant(0.0)),
+					ApplyMechanic.toUser(MechanicId.TOXIC_FILTER)
+				))
+			)
 		);
 		register(
 			TOXIC_SAC,

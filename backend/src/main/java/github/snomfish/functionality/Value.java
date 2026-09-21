@@ -9,6 +9,14 @@ import github.snomfish.functionality.context.BattleContext;
 public enum Value {
 
 
+    USER(
+        c -> c.user().activeLoomian(),
+        null
+    ),
+    TARGET(
+        c -> c.target().activeLoomian(),
+        null
+    ),
     USER_SPECIES_ID(
         c -> c.user().activeLoomian().speciesId(),
         (c, v) -> c.user().activeLoomian().setSpeciesId(v)
@@ -88,6 +96,15 @@ public enum Value {
         (c, v) -> c.target().activeLoomian().setCurrentEnergy(v)
     ),
 
+
+    USER_STAT_CHANGES(
+        c -> c.user().activeLoomian().statChanges(),
+        null
+    ),
+    TARGET_STAT_CHANGES(
+        c -> c.target().activeLoomian().statChanges(),
+        null
+    ),
 
 
     // USER BASE STATS

@@ -7,6 +7,7 @@ import github.snomfish.domain.ActiveLoomian;
 import github.snomfish.domain.ability.AbilityId;
 import github.snomfish.domain.move.Move;
 import github.snomfish.domain.move.modifiers.Modifiers;
+import github.snomfish.domain.stats.StatChangesId;
 import github.snomfish.domain.stats.StatId;
 import github.snomfish.functionality.Constants;
 import github.snomfish.functionality.branch.Branch;
@@ -16,23 +17,24 @@ import github.snomfish.functionality.number.INumber;
 
 import static github.snomfish.domain.move.modifiers.ModifierId.*;
 import static github.snomfish.functionality.branch.BranchUtil.flatMap;
-import static github.snomfish.functionality.event.EventId.DAMAGE_MODIFIER_EVENT;
+import static github.snomfish.functionality.event.EventId.*;
 
+// the move tricky tactics does not work with this attacking and defending stat implementation, will require probably a new enum or the use of Value
 public class DealFormulaDamage implements IEffect {
     // deals formula damage to the target
     
-    private StatId attackingStat;
-    private StatId defendingStat;
+    private StatId attackingStatId;
+    private StatId defendingStatId;
     private INumber basePowerINumber;
     
  
     public DealFormulaDamage(
-        StatId attackingStat,
-        StatId defendingStat,
+        StatId attackingStatId,
+        StatId defendingStatId,
         INumber basePowerINumber
     ) {
-        this.attackingStat = attackingStat;
-        this.defendingStat = defendingStat;
+        this.attackingStatId = attackingStatId;
+        this.defendingStatId = defendingStatId;
         this.basePowerINumber = basePowerINumber;
     }
 
@@ -40,8 +42,8 @@ public class DealFormulaDamage implements IEffect {
     @Override 
     public DealFormulaDamage deepCopy() {
         return new DealFormulaDamage(
-            attackingStat, 
-            defendingStat, 
+            attackingStatId, 
+            defendingStatId, 
             basePowerINumber.deepCopy()
         );
     } 
@@ -53,12 +55,14 @@ public class DealFormulaDamage implements IEffect {
 
         context.log("executing damage effect");
         
+        outcomes = flatMap(outcomes, c -> c.dispatchEvent(PRE_DEAL_FORMULA_DAMAGE_EVENT));
         outcomes = flatMap(outcomes, c -> basePowerModule(c));
-        outcomes = flatMap(outcomes, c -> critModule(c));
-        outcomes = flatMap(outcomes, c -> c.dispatchEvent(DAMAGE_MODIFIER_EVENT));
+        outcomes = flatMap(outcomes, c -> critChanceModule(c));
         outcomes = flatMap(outcomes, c -> damageModule(c));
-        // insert in an apply crit and modifier here? then do damage roll
+        outcomes = flatMap(outcomes, c -> c.dispatchEvent(PRE_DAMAGE_EVENT));
         outcomes = flatMap(outcomes, c -> damageRollModule(c));
+        //outcomes = flatMap(outcomes, c -> applyDamageModule(c));
+        outcomes = flatMap(outcomes, c -> c.dispatchEvent(POST_DAMAGE_EVENT));
         // separate apply damage from the damage roll?
 
         return outcomes;
@@ -89,11 +93,12 @@ public class DealFormulaDamage implements IEffect {
 
 
     private static final double[] CRIT_CHANCES = {1/24, 1/8, 1/2, 1};
-    private List<Branch<BattleContext>> critModule(BattleContext context) {
+
+    private List<Branch<BattleContext>> critChanceModule(BattleContext context) {
         ActiveLoomian user = context.user().activeLoomian();
         Move move = user.action().move();
         
-        int critChance = user.critChance() + move.critChance();
+        int critChance = user.statChanges().stage(StatChangesId.CRIT_CHANCE) + move.critChance();
         critChance = Math.clamp(critChance, 0, 3);
 
         BattleContext critContext1 = context.deepCopy(); // did crit
@@ -115,10 +120,23 @@ public class DealFormulaDamage implements IEffect {
         ActiveLoomian target = outcome.target().activeLoomian();
         Move move = user.action().move();
 
-        double damage = move.damage();
-        damage *= Math.floor(2 * Constants.LEVEL / 5) + 2;
-        damage *= user.battleStats().get(attackingStat);
-        damage /= target.battleStats().get(defendingStat);
+
+        double attackingStatModifier;
+        double defendingStatModifier;
+        if (move.hasCrit()) {
+            attackingStatModifier = Math.max(user.statChanges().multiplier(attackingStatId), 1.0); // ensures on a crit lowered stats from attacking stat are ignored
+            defendingStatModifier = Math.min(target.statChanges().multiplier(defendingStatId), 1.0); // same with stat raises on defending stat
+        } else {
+            attackingStatModifier = user.statChanges().multiplier(attackingStatId);
+            defendingStatModifier = target.statChanges().multiplier(defendingStatId);
+        }
+        int attackingStat = (int)(user.battleStats().get(attackingStatId) * attackingStatModifier);
+        int defendingStat = (int)(target.battleStats().get(defendingStatId) * defendingStatModifier);
+
+        double damage = Math.floor(2 * Constants.LEVEL / 5) + 2;
+        damage *= move.damage();
+        damage *= attackingStat;
+        damage /= defendingStat;
         damage = Math.floor(damage);
         damage /= 50;
         damage = Math.floor(damage);
@@ -137,9 +155,10 @@ public class DealFormulaDamage implements IEffect {
         // modifier application
         // type modifier is never applied
         // crits natural 1.5 multiplier is never applied, and crit modifier should only be applied if a crit occurs
-        damage = Math.floor(damage * modifiers.get(DAMAGE)); 
+        if (move.hasCrit()) damage = Math.floor(damage * modifiers.get(CRIT) * 1.5); // crit modifier is 1.5
         damage = Math.floor(damage * modifiers.get(STAB)); 
         damage = Math.floor(damage * modifiers.get(TYPE)); 
+        damage = Math.floor(damage * modifiers.get(DAMAGE)); 
 
         move.setDamage((int)damage);
         
@@ -168,5 +187,10 @@ public class DealFormulaDamage implements IEffect {
         }
 
         return outcomes;
-    } 
+    }
+    
+    
+    private List<Branch<BattleContext>> applyDamageModule(BattleContext context) {
+        return null;
+    }
 }

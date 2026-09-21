@@ -3,7 +3,6 @@ package github.snomfish.functionality.effect.effects;
 import java.util.ArrayList;
 import java.util.List;
 
-import github.snomfish.domain.move.modifiers.ModifierId;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;

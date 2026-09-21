@@ -7,5 +7,5 @@ public enum ModifierId {
     TYPE,
     CRIT,
     HEALTH_DRAIN,
-    ENERGY_DRAIN
+    ENERGY_DRAIN,
 }

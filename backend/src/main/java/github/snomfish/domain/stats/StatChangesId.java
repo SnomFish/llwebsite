@@ -7,5 +7,7 @@ public enum StatChangesId {
     RDEFENSE,
     SPEED,
     ACCURACY,
-    EVASION;
+    EVASION,
+    
+    CRIT_CHANCE;
 }

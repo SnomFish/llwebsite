@@ -141,7 +141,6 @@ public enum AbilityId {
     NOXIOUS_WEEDS,
     OBSIDIAN_HEART,
     ODD_HUSK,
-    ODD_HUST,
     ONE_OF_MANY,
     OVERCHARGED,
     OVERCLOCK,

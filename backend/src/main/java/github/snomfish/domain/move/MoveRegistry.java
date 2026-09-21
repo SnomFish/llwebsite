@@ -1,12 +1,10 @@
 package github.snomfish.domain.move;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import github.snomfish.domain.move.structures.MoveEffect;
 import github.snomfish.domain.stats.StatId;
-import github.snomfish.functionality.effect.EffectSequence;
 import github.snomfish.functionality.effect.effects.DealFormulaDamage;
 import github.snomfish.functionality.number.Constant;
 
