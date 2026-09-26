@@ -1,6 +1,9 @@
 package github.snomfish.functionality.event;
 
 public enum EventId {
+    USER_SWITCHED_IN_EVENT,
+    TARGET_SWITCHED_IN_EVENT,
+
     BEFORE_MOVE_EVENT,
     ACCURACY_CHECK_EVENT,
     PRE_DEAL_FORMULA_DAMAGE_EVENT,

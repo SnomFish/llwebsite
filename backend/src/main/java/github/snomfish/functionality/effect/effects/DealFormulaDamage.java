@@ -25,17 +25,14 @@ public class DealFormulaDamage implements IEffect {
     
     private StatId attackingStatId;
     private StatId defendingStatId;
-    private INumber basePowerINumber;
     
  
     public DealFormulaDamage(
         StatId attackingStatId,
-        StatId defendingStatId,
-        INumber basePowerINumber
+        StatId defendingStatId
     ) {
         this.attackingStatId = attackingStatId;
         this.defendingStatId = defendingStatId;
-        this.basePowerINumber = basePowerINumber;
     }
 
 
@@ -43,8 +40,7 @@ public class DealFormulaDamage implements IEffect {
     public DealFormulaDamage deepCopy() {
         return new DealFormulaDamage(
             attackingStatId, 
-            defendingStatId, 
-            basePowerINumber.deepCopy()
+            defendingStatId
         );
     } 
 
@@ -74,6 +70,8 @@ public class DealFormulaDamage implements IEffect {
 
     private List<Branch<BattleContext>> basePowerModule(BattleContext context) {
         List<Branch<BattleContext>> outcomes = new ArrayList<>();
+
+        INumber basePowerINumber = context.user().activeLoomian().action().move().basePower();
 
         for (Branch<Double> basePowerBranch : basePowerINumber.execute(context)) {
             BattleContext outcome = context.deepCopy();
@@ -187,10 +185,5 @@ public class DealFormulaDamage implements IEffect {
         }
 
         return outcomes;
-    }
-    
-    
-    private List<Branch<BattleContext>> applyDamageModule(BattleContext context) {
-        return null;
     }
 }

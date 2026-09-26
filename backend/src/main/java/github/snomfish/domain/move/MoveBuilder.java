@@ -34,6 +34,7 @@ public class MoveBuilder {
             new NoMove(),
             new NoMove(),
             new NoMove(),
+            new Constant(0),
             new Tags()
         );
     }
@@ -84,8 +85,12 @@ public class MoveBuilder {
         return this;
     }
 
+    public MoveBuilder basePower(INumber basePower) {
+        move.setBasePower(basePower);
+        return this;
+    }
     public MoveBuilder addTag(TagId tagId) {
-        move.tags().add(tagId);
+        move.tags().set(tagId, true);
         return this;
     }
 }

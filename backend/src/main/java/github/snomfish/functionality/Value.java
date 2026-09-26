@@ -1,9 +1,13 @@
 package github.snomfish.functionality;
 
+import static github.snomfish.domain.stats.StatChangesId.MATTACK;
+
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
 import github.snomfish.domain.move.modifiers.ModifierId;
+import github.snomfish.domain.move.tags.TagId;
+import github.snomfish.domain.stats.StatChangesId;
 import github.snomfish.functionality.context.BattleContext;
 
 public enum Value {
@@ -96,14 +100,37 @@ public enum Value {
         (c, v) -> c.target().activeLoomian().setCurrentEnergy(v)
     ),
 
-
-    USER_STAT_CHANGES(
-        c -> c.user().activeLoomian().statChanges(),
-        null
+    USER_MATTACK_STAGE_MODIFIER(
+        c -> c.user().activeLoomian().statChanges().stageModifier(StatChangesId.MATTACK),
+        (c, v) -> c.user().activeLoomian(). statChanges().set(StatChangesId.MATTACK, v)
     ),
-    TARGET_STAT_CHANGES(
-        c -> c.target().activeLoomian().statChanges(),
-        null
+    USER_MDEFENSE_STAGE_MODIFIER(
+        c -> c.user().activeLoomian().statChanges().stageModifier(StatChangesId.MDEFENSE),
+        (c, v) -> c.user().activeLoomian(). statChanges().set(StatChangesId.MDEFENSE, v)
+    ),
+    USER_RATTACK_STAGE_MODIFIER(
+        c -> c.user().activeLoomian().statChanges().stageModifier(StatChangesId.RATTACK),
+        (c, v) -> c.user().activeLoomian(). statChanges().set(StatChangesId.RATTACK, v)
+    ),
+    USER_RDEFENSE_STAGE_MODIFIER(
+        c -> c.user().activeLoomian().statChanges().stageModifier(StatChangesId.RDEFENSE),
+        (c, v) -> c.user().activeLoomian(). statChanges().set(StatChangesId.RDEFENSE, v)
+    ),
+    USER_SPEED_STAGE_MODIFIER(
+        c -> c.user().activeLoomian().statChanges().stageModifier(StatChangesId.SPEED),
+        (c, v) -> c.user().activeLoomian(). statChanges().set(StatChangesId.SPEED, v)
+    ),
+    USER_ACCURACY_STAGE_MODIFIER(
+        c -> c.user().activeLoomian().statChanges().stageModifier(StatChangesId.ACCURACY),
+        (c, v) -> c.user().activeLoomian(). statChanges().set(StatChangesId.ACCURACY, v)
+    ),
+    USER_EVASION_STAGE_MODIFIER(
+        c -> c.user().activeLoomian().statChanges().stageModifier(StatChangesId.EVASION),
+        (c, v) -> c.user().activeLoomian(). statChanges().set(StatChangesId.EVASION, v)
+    ),
+    USER_CRIT_CHANCE_STAGE_MODIFIER(
+        c -> c.user().activeLoomian().statChanges().stageModifier(StatChangesId.CRIT_CHANCE),
+        (c, v) -> c.user().activeLoomian(). statChanges().set(StatChangesId.CRIT_CHANCE, v)
     ),
 
 
@@ -193,6 +220,39 @@ public enum Value {
     USER_BATTLE_SPEED(
         c -> c.user().activeLoomian().battleStats().speed(),
         (c, v) -> c.user().activeLoomian().battleStats().setSpeed(v)
+    ),
+
+    TARGET_MATTACK_STAGE_MODIFIER(
+        c -> c.target().activeLoomian().statChanges().stageModifier(StatChangesId.MATTACK),
+        (c, v) -> c.target().activeLoomian(). statChanges().set(StatChangesId.MATTACK, v)
+    ),
+    TARGET_MDEFENSE_STAGE_MODIFIER(
+        c -> c.target().activeLoomian().statChanges().stageModifier(StatChangesId.MDEFENSE),
+        (c, v) -> c.target().activeLoomian(). statChanges().set(StatChangesId.MDEFENSE, v)
+    ),
+    TARGET_RATTACK_STAGE_MODIFIER(
+        c -> c.target().activeLoomian().statChanges().stageModifier(StatChangesId.RATTACK),
+        (c, v) -> c.target().activeLoomian(). statChanges().set(StatChangesId.RATTACK, v)
+    ),
+    TARGET_RDEFENSE_STAGE_MODIFIER(
+        c -> c.target().activeLoomian().statChanges().stageModifier(StatChangesId.RDEFENSE),
+        (c, v) -> c.target().activeLoomian(). statChanges().set(StatChangesId.RDEFENSE, v)
+    ),
+    TARGET_SPEED_STAGE_MODIFIER(
+        c -> c.target().activeLoomian().statChanges().stageModifier(StatChangesId.SPEED),
+        (c, v) -> c.target().activeLoomian(). statChanges().set(StatChangesId.SPEED, v)
+    ),
+    TARGET_ACCURACY_STAGE_MODIFIER(
+        c -> c.target().activeLoomian().statChanges().stageModifier(StatChangesId.ACCURACY),
+        (c, v) -> c.target().activeLoomian(). statChanges().set(StatChangesId.ACCURACY, v)
+    ),
+    TARGET_EVASION_STAGE_MODIFIER(
+        c -> c.target().activeLoomian().statChanges().stageModifier(StatChangesId.EVASION),
+        (c, v) -> c.target().activeLoomian(). statChanges().set(StatChangesId.EVASION, v)
+    ),
+    TARGET_CRIT_CHANCE_STAGE_MODIFIER(
+        c -> c.target().activeLoomian().statChanges().stageModifier(StatChangesId.CRIT_CHANCE),
+        (c, v) -> c.target().activeLoomian(). statChanges().set(StatChangesId.CRIT_CHANCE, v)
     ),
 
 
@@ -330,6 +390,10 @@ public enum Value {
         c -> c.user().activeLoomian().action().move().modifiers().get(ModifierId.ENERGY_DRAIN),
         (c, v) -> c.user().activeLoomian().action().move().modifiers().set(ModifierId.ENERGY_DRAIN, v)
     ),
+    MOVE_EXPLOSIVE_TAG(
+        c -> c.user().activeLoomian().action().move().tags().get(TagId.EXPLOSIVE),
+        (c, v) -> c.user().activeLoomian().action().move().tags().set(TagId.EXPLOSIVE, v)
+    )
     ;
 
 

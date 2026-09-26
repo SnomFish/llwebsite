@@ -10,6 +10,7 @@ import github.snomfish.domain.status.StatusId;
 import github.snomfish.domain.type.TypeId;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.condition.Equals;
+import github.snomfish.functionality.condition.GreaterThan;
 import github.snomfish.functionality.condition.ListContains;
 import github.snomfish.functionality.condition.NoCondition;
 import github.snomfish.functionality.condition.Or;
@@ -18,6 +19,7 @@ import github.snomfish.functionality.effect.effects.AlterTypeChart;
 import github.snomfish.functionality.effect.effects.ApplyMechanic;
 import github.snomfish.functionality.effect.effects.MultiplyValueEffect;
 import github.snomfish.functionality.effect.effects.SetValueEffect;
+import github.snomfish.functionality.effect.effects.StatChangesEffect;
 import github.snomfish.functionality.event.Event;
 import github.snomfish.functionality.event.TriggerRule;
 import github.snomfish.functionality.number.Constant;
@@ -54,6 +56,14 @@ public class AbilityRegistry {
 		}
         registry.put(id, new Ability(id, name, List.of(rule)));
     }
+	private static void register(
+		AbilityId id,
+		String name,
+		List<TriggerRule> rules
+	) {
+		registry.put(id, new Ability(id, name, rules));
+	}
+	private static void register(AbilityId id, String name) {}
 
 
     public static void init() {
@@ -61,13 +71,11 @@ public class AbilityRegistry {
 		initialised = true;
 		register(
 			NO_ABILITY,
-			"no ability",
-			null
+			"no ability"
 		);
         register(
 			ABILITY_THIEF,
-			"ability thief",
-			null
+			"ability thief"
 		);
 		register(
 			ACE,
@@ -80,58 +88,83 @@ public class AbilityRegistry {
 		);
 		register(
 			ADAPTABLE,
-			"adaptable",
-			null
+			"adaptable"
 		);
 		register(
 			ADORABLE,
-			"adorable",
-			null
+			"adorable"
 		);
 		register(
 			AGGRESSIVE,
-			"aggressive",
-			null
+			"aggressive"
 		);
 		register(
 			ALL_SEEING,
-			"all_seeing",
-			null
+			"all_seeing"
 		);
 		register(
 			AMBUSH,
-			"ambush",
-			null
+			"ambush"
 		);
 		register(
 			ANALYZE,
-			"analyze",
-			null
+			"analyze"
 		);
-		register(
+		register( // TODO: contemplate this correct implementation and wonder if I could have done anything differentely to make it better
 			ANOMALY,
 			"anomaly",
-			null
+			List.of(
+				new TriggerRule(
+					new Event(USER_SWITCHED_IN_EVENT, USER), 
+					new NoCondition(), 
+					new EffectSequence(List.of(
+						new MultiplyValueEffect(Value.USER_MATTACK_STAGE_MODIFIER, new Constant(-1)),
+						new MultiplyValueEffect(Value.USER_MDEFENSE_STAGE_MODIFIER, new Constant(-1)),
+						new MultiplyValueEffect(Value.USER_RATTACK_STAGE_MODIFIER, new Constant(-1)),
+						new MultiplyValueEffect(Value.USER_RDEFENSE_STAGE_MODIFIER, new Constant(-1)),
+						new MultiplyValueEffect(Value.USER_SPEED_STAGE_MODIFIER, new Constant(-1)),
+						new MultiplyValueEffect(Value.USER_ACCURACY_STAGE_MODIFIER, new Constant(-1)),
+						new MultiplyValueEffect(Value.USER_EVASION_STAGE_MODIFIER, new Constant(-1))
+					))
+				),
+				new TriggerRule(
+					new Event(TARGET_SWITCHED_IN_EVENT, TARGET), 
+					new NoCondition(), 
+					new EffectSequence(List.of(
+						new MultiplyValueEffect(Value.TARGET_MATTACK_STAGE_MODIFIER, new Constant(-1)),
+						new MultiplyValueEffect(Value.TARGET_MDEFENSE_STAGE_MODIFIER, new Constant(-1)),
+						new MultiplyValueEffect(Value.TARGET_RATTACK_STAGE_MODIFIER, new Constant(-1)),
+						new MultiplyValueEffect(Value.TARGET_RDEFENSE_STAGE_MODIFIER, new Constant(-1)),
+						new MultiplyValueEffect(Value.TARGET_SPEED_STAGE_MODIFIER, new Constant(-1)),
+						new MultiplyValueEffect(Value.TARGET_ACCURACY_STAGE_MODIFIER, new Constant(-1)),
+						new MultiplyValueEffect(Value.TARGET_EVASION_STAGE_MODIFIER, new Constant(-1))
+					))
+				)
+			)
 		);
 		register(
 			APPETITE,
-			"appetite",
-			null
+			"appetite"
 		);
 		register(
 			APPLIED_FRUSTRATION,
 			"applied_frustration",
-			null
-		);
-		register(
-			APPLIED_FRUSTRATIONS,
-			"applied frustrations",
-			null
+			List.of(
+				new TriggerRule(
+					new Event(TARGET_LOWERED_USER_STATS_EVENT, USER),
+					new NoCondition(),
+					StatChangesEffect.userChangingUser(0, 0, 2, 0, 0, 0, 0, 0)	
+				),
+				new TriggerRule(
+					new Event(USER_LOWERED_TARGET_STATS_EVENT, TARGET),
+					new NoCondition(),
+					StatChangesEffect.targetChangingTarget(0, 0, 2, 0, 0, 0, 0, 0)	
+				)
+			)
 		);
 		register(
 			APPREHENSION,
-			"apprehension",
-			null
+			"apprehension"
 		);
 		register( // this has to use type modifier, you cannot alter the typechart for this as if the target has two types, that fire resistance will be applied twice
             AQUA_BODY,
@@ -175,127 +208,122 @@ public class AbilityRegistry {
 		register(
 			BATTLE_ARMOUR,
 			"battle_armour",
-			null
+			List.of(
+				new TriggerRule(
+					new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER), 
+					new Equals(Value.MOVE_TYPE, TypeId.METAL),
+					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.25))
+				)
+				// TODO: battle armour protects the user from the secondary effects of moves
+			)
 		);
 		register(
 			BERSERK,
-			"berserk",
-			null
+			"berserk"
 		);
 		register(
 			BITTER_TOUCH,
-			"bitter touch",
-			null
+			"bitter touch"
 		);
 		register(
 			BLISTERING_HEAT,
-			"blistering heat",
-			null
+			"blistering heat"
 		);
 		register(
 			BLOODSUCKER,
-			"bloodsucker",
-			null
+			"bloodsucker"
 		);
 		register(
 			BOAST,
-			"boast",
-			null
+			"boast"
 		);
 		register(
 			BONEHEADED,
-			"boneheaded",
-			null
+			"boneheaded"
 		);
 		register(
 			BRUTAL_WRATH,
-			"brutal wrath",
-			null
+			"brutal wrath"
 		);
 		register(
 			BRUTE_FORCE,
-			"brute force",
-			null
+			"brute force"
 		);
 		register(
 			BUG_FEVER,
-			"bug_fever",
-			null
+			"bug_fever"
 		);
 		register(
 			BULLY,
-			"bully",
-			null
+			"bully"
 		);
 		register(
 			BURGLAR,
-			"burglar",
-			null
+			"burglar"
 		);
 		register(
 			BURGLAR,
-			"burgler",
-			null
+			"burgler"
 		);
 		register(
 			BURNING_RAGE,
-			"burning_rage",
-			null
+			"burning_rage"
 		);
 		register(
 			BURSTING_SEAMS,
-			"bursting_seams",
-			null
+			"bursting_seams"
 		);
 		register(
 			CADDIE,
-			"caddie",
-			null
+			"caddie"
 		);
 		register(
 			CAPTIVATING,
-			"captivating",
-			null
+			"captivating"
 		);
 		register(
 			CAROL,
-			"carol",
-			null
+			"carol"
 		);
 		register(
 			CHARGED_ARC,
-			"charged arc",
-			null
+			"charged arc"
 		);
 		register(
 			CHILL,
-			"chill",
-			null
+			"chill"
 		);
 		register(
 			CHILLING_PASSION,
-			"chilling_passion",
-			null
+			"chilling_passion"
 		);
 		register(
 			CIRCADIAN,
-			"circadian",
-			null
+			"circadian"
 		);
 		register(
 			CLINGY,
-			"clingy",
-			null
+			"clingy"
 		);
 		register(
 			CLUTCH,
-			"clutch",
-			null
+			"clutch"
 		);
 		register(
 			COMBATIVE,
 			"combative",
-			null
+			List.of(
+				new TriggerRule(
+					new Event(TARGET_LOWERED_USER_STATS_EVENT, USER),
+					new NoCondition(),
+					StatChangesEffect.userChangingUser(1, 0, 0, 0, 0, 0, 0, 0)	
+				),
+				new TriggerRule(
+					new Event(USER_LOWERED_TARGET_STATS_EVENT, TARGET),
+					new NoCondition(),
+					StatChangesEffect.targetChangingTarget(1, 0, 0, 0, 0, 0, 0, 0)	
+				)
+			)
 		);
 		register(
 			COMBUSTIBLE,
@@ -311,28 +339,23 @@ public class AbilityRegistry {
 		);
 		register(
 			COMMUNICATION,
-			"communication",
-			null
+			"communication"
 		);
 		register(
 			COMPLIANT,
-			"compliant",
-			null
+			"compliant"
 		);
 		register(
 			CONFIDENCE,
-			"confidence",
-			null
+			"confidence"
 		);
 		register(
 			CONSPIRE,
-			"conspire",
-			null
+			"conspire"
 		);
 		register(
 			COSMIC_PRESSURE,
-			"cosmic_pressure",
-			null
+			"cosmic_pressure"
 		);
 		register(
 			COURSING_VENOM, // when hit by a toxic type move, absorb it to boost your own toxic type damage by 1.5x
@@ -348,58 +371,64 @@ public class AbilityRegistry {
 		);
 		register(
 			DAUNTLESS,
-			"dauntless",
-			null
+			"dauntless"
 		);
 		register(
 			DAWN,
-			"dawn",
-			null
+			"dawn"
 		);
 		register(
 			DEEP_FROSTBITE,
-			"deep_frostbite",
-			null
+			"deep_frostbite"
 		);
 		register(
 			DEFENSIVE_PRIORITY,
 			"defensive priority",
-			null
+			List.of(
+				new TriggerRule(
+					new Event(USER_SWITCHED_IN_EVENT, USER),
+					new NoCondition(),
+					StatChangesEffect.userChangingUser(0, 1, 0, 1, -2, 0, 0, 0)	
+				),
+				new TriggerRule(
+					new Event(TARGET_SWITCHED_IN_EVENT, TARGET),
+					new NoCondition(),
+					StatChangesEffect.targetChangingTarget(0, 1, 2, 1, -2, 0, 0, 0)	
+				)
+			)
 		);
 		register(
 			DEMANDING,
-			"demanding",
-			null
+			"demanding"
 		);
 		register(
 			DEPTHS_BORNE,
 			"depths_borne",
-			null
+			new TriggerRule(
+				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
+				new Equals(Value.MOVE_TYPE, TypeId.WATER),
+				new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.25))
+			)
 		);
 		register(
 			DESIGNATED_CHOMPERS,
-			"designated chompers",
-			null
+			"designated chompers"
 		);
 		register(
 			DEVIOUS,
-			"devious",
-			null
+			"devious"
 		);
 		register(
 			DISENCHANT,
-			"disenchant",
-			null
+			"disenchant"
 		);
 		register(
 			DO_OR_DIE,
-			"do or die",
-			null
+			"do or die"
 		);
 		register(
 			DOUBLE_STRIKE,
-			"double_strike",
-			null
+			"double_strike"
 		);
 		register(
             DRAINAGE,
@@ -412,268 +441,244 @@ public class AbilityRegistry {
         );
 		register(
 			DRIVEN,
-			"driven",
-			null
+			"driven"
 		);
 		register(
 			DUSK,
-			"dusk",
-			null
+			"dusk"
 		);
 		register(
 			EAGER,
-			"eager",
-			null
+			"eager"
 		);
 		register(
 			EFFULGENT,
-			"effulgent",
-			null
+			"effulgent"
 		);
 		register(
 			ELUSIVE,
-			"elusive",
-			null
+			"elusive"
 		);
 		register(
 			ENCHANT,
-			"enchant",
-			null
+			"enchant"
 		);
 		register(
 			ENCHANTED_COAT,
 			"enchanted coat",
-			null
+			new TriggerRule(
+				new Event(PRE_DAMAGE_EVENT, TARGET),
+				new GreaterThan(Value.MOVE_TYPE_MODIFIER, new Constant(1)),
+				new MultiplyValueEffect(Value.MOVE_DAMAGE, new Constant(0.75))
+			)
 		);
 		register(
 			EXPERTISE,
-			"expertise",
-			null
+			"expertise"
 		);
 		register(
 			FACADE,
-			"facade",
-			null
+			"facade"
 		);
 		register(
 			FANNING_FLAME,
 			"fanning_flame",
-			null
+			List.of(
+				new TriggerRule(
+					new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
+					new Equals(Value.MOVE_TYPE, TypeId.AIR),
+					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5))
+				)// TODO: add +1 ranged attack when hit
+			)
 		);
 		register(
 			FESTIVE_SPIRIT,
-			"festive spirit",
-			null
+			"festive spirit"
 		);
 		register(
 			FINESSE,
-			"finesse",
-			null
+			"finesse"
 		);
 		register(
 			FLUTTER,
-			"flutter",
-			null
+			"flutter"
 		);
 		register(
 			FOG_SUMMON,
-			"fog summon",
-			null
+			"fog summon"
 		);
 		register(
 			FORESIGHT,
-			"foresight",
-			null
+			"foresight"
 		);
 		register(
 			FORGE,
 			"forge",
-			null
+			List.of(
+				new TriggerRule(
+					new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
+					new Equals(Value.MOVE_TYPE, TypeId.FIRE),
+					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5))
+				)
+			)
 		);
 		register(
 			FORTISSIMO,
-			"fortissimo",
-			null
+			"fortissimo"
 		);
 		register(
 			FRAIL_ARMOUR,
-			"frail armour",
-			null
+			"frail armour"
 		);
 		register(
 			FRENZY,
-			"frenzy",
-			null
+			"frenzy"
 		);
 		register(
 			GLIDE,
-			"glide",
-			null
+			"glide"
 		);
 		register(
 			GLOOMY,
-			"gloomy",
-			null
+			"gloomy"
 		);
 		register(
 			GLUTTON,
-			"glutton",
-			null
+			"glutton"
 		);
 		register(
 			GORGE,
-			"gorge",
-			null
+			"gorge"
 		);
-		register(
+		register( // doubles exclusive ability
 			GUARDIAN,
-			"guardian",
-			null
+			"guardian"
 		);
-		register(
+		register( // immunity to bomb moves
 			GUMMY,
 			"gummy",
-			null
+			new TriggerRule(
+				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
+				new Equals(Value.MOVE_EXPLOSIVE_TAG, true),
+				new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0))
+			)
 		);
-		register(
+		register( // technician from pokemon
 			GURU,
 			"guru",
-			null
+			new TriggerRule(
+				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
+				new Equals(Value.MOVE_EXPLOSIVE_TAG, true),
+				new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0))
+			)
 		);
 		register(
 			HAG,
-			"hag",
-			null
+			"hag"
 		);
 		register(
 			HANDY,
-			"handy",
-			null
+			"handy"
 		);
 		register(
 			HARD_CANDY,
-			"hard candy",
-			null
+			"hard candy"
 		);
 		register(
 			HARMONIZE,
-			"harmonize",
-			null
+			"harmonize"
 		);
 		register(
 			HASTY,
-			"hasty",
-			null
+			"hasty"
 		);
 		register(
 			HEAT_SUMMON,
-			"heat summon",
-			null
+			"heat summon"
 		);
 		register(
 			HEAVY_FISTS,
-			"heavy_fists",
-			null
+			"heavy_fists"
 		);
 		register(
 			HERD_BEHAVIOR,
-			"herd_behavior",
-			null
+			"herd_behavior"
 		);
 		register(
 			HIGH_EXPLOSIVE,
-			"high_explosive",
-			null
+			"high_explosive"
 		);
 		register(
 			HOTFOOT,
-			"hotfoot",
-			null
+			"hotfoot"
 		);
 		register(
 			HOVER,
-			"hover",
-			null
+			"hover"
 		);
 		register(
 			HYDRATE,
-			"hydrate",
-			null
+			"hydrate"
 		);
 		register(
 			HYDRO_VORTEX,
-			"hydro vortex",
-			null
+			"hydro vortex"
 		);
 		register(
 			IDIOSYNCRATIC,
-			"idiosyncratic",
-			null
+			"idiosyncratic"
 		);
 		register(
 			IGNORANT,
-			"ignorant",
-			null
+			"ignorant"
 		);
 		register(
 			ILLUMINATE,
-			"illuminate",
-			null
+			"illuminate"
 		);
 		register(
 			IMMUNIZED,
-			"immunized",
-			null
+			"immunized"
 		);
 		register(
 			IMPOSE,
-			"impose",
-			null
+			"impose"
 		);
 		register(
 			INCANDESCENT,
-			"incandescent",
-			null
+			"incandescent"
 		);
 		register(
 			INFERNO,
-			"inferno",
-			null
+			"inferno"
 		);
 		register(
 			INSULATED,
-			"insulated",
-			null
+			"insulated"
 		);
 		register(
 			INTENSIFY,
-			"intensify",
-			null
+			"intensify"
 		);
 		register(
 			INTERN,
-			"intern",
-			null
+			"intern"
 		);
 		register(
 			LAND_BORNE,
-			"land_borne",
-			null
+			"land_borne"
 		);
 		register(
 			LAZY,
-			"lazy",
-			null
+			"lazy"
 		);
 		register(
 			LIFE_FORCE,
-			"life force",
-			null
+			"life force"
 		);
 		register(
 			LIGHTNING_ROD,
-			"lightning rod",
-			null
+			"lightning rod"
 		);
 		register(
 			LUCK_OF_THE_SEA,
@@ -687,18 +692,15 @@ public class AbilityRegistry {
 		);
 		register(
 			LUCKY,
-			"lucky",
-			null
+			"lucky"
 		);
 		register(
 			MADCAP,
-			"madcap",
-			null
+			"madcap"
 		);
 		register(
 			MALWARE,
-			"malware",
-			null
+			"malware"
 		);
 		register(
 			MARKSMAN,
@@ -711,88 +713,71 @@ public class AbilityRegistry {
 		);
 		register(
 			MASK_SWAP,
-			"mask_swap",
-			null
+			"mask_swap"
 		);
 		register(
 			MASTER,
-			"master",
-			null
+			"master"
 		);
 		register(
 			MEAN_SPIRITED,
-			"mean_spirited",
-			null
+			"mean_spirited"
 		);
 		register(
 			MEDIC,
-			"medic",
-			null
+			"medic"
 		);
 		register(
 			MESMERIZING,
-			"mesmerizing",
-			null
+			"mesmerizing"
 		);
 		register(
 			METALLIC,
-			"metallic",
-			null
+			"metallic"
 		);
 		register(
 			METAMORPHOSIS,
-			"metamorphosis",
-			null
+			"metamorphosis"
 		);
 		register(
 			MIMIC,
-			"mimic",
-			null
+			"mimic"
 		);
 		register(
 			MOTIVATIONAL,
-			"motivational",
-			null
+			"motivational"
 		);
 		register(
 			MYCOTIC,
-			"mycotic",
-			null
+			"mycotic"
 		);
 		register(
 			MYSTERIOUS_CLOAK,
-			"mysterious cloak",
-			null
+			"mysterious cloak"
 		);
 		register(
 			MYSTERIOUS_TOXINS,
-			"mysterious_toxins",
-			null
+			"mysterious_toxins"
 		);
 		register(
 			MYSTERY_TOXINS,
-			"mystery toxins",
-			null
+			"mystery toxins"
 		);
 		register(
 			MYSTIC_TONE,
-			"mystic_tone",
-			null
+			"mystic_tone"
 		);
 		register(
 			NEUTRALIZE,
-			"neutralize",
-			null
+			"neutralize"
 		);
 		register(
 			NIGHT_LIGHT,
-			"night_light",
-			null
+			"night_light"
 		);
 		register(
 			NIGHTMARISH,
-			"nightmarish",
-			null
+			"nightmarish"
 		);
 		register(
 			NOXIOUS_WEEDS,
@@ -808,103 +793,83 @@ public class AbilityRegistry {
 		);
 		register(
 			OBSIDIAN_HEART,
-			"obsidian_heart",
-			null
+			"obsidian_heart"
 		);
 		register(
 			ODD_HUSK,
-			"odd_husk",
-			null
+			"odd_husk"
 		);
 		register(
 			ONE_OF_MANY,
-			"one_of_many",
-			null
+			"one_of_many"
 		);
 		register(
 			OVERCHARGED,
-			"overcharged",
-			null
+			"overcharged"
 		);
 		register(
 			OVERCLOCK,
-			"overclock",
-			null
+			"overclock"
 		);
 		register(
 			OVERSHADOW,
-			"overshadow",
-			null
+			"overshadow"
 		);
 		register(
 			OXIDIZE,
-			"oxidize",
-			null
+			"oxidize"
 		);
 		register(
 			PARTING_GIFT,
-			"parting gift",
-			null
+			"parting gift"
 		);
 		register(
 			PARTNERSHIP,
-			"partnership",
-			null
+			"partnership"
 		);
 		register(
 			PERSISTENCE,
-			"persistence",
-			null
+			"persistence"
 		);
 		register(
 			PETRIFYING,
-			"petrifying",
-			null
+			"petrifying"
 		);
 		register(
 			PINCER_TRAP,
-			"pincer_trap",
-			null
+			"pincer_trap"
 		);
 		register(
 			PITCH_BLACK,
-			"pitch black",
-			null
+			"pitch black"
 		);
 		register(
 			PLAYFUL,
-			"playful",
-			null
+			"playful"
 		);
 		register(
 			PLUVIAL,
-			"pluvial",
-			null
+			"pluvial"
 		);
 		register(
 			POWER_CLAW,
-			"power claw",
-			null
+			"power claw"
 		);
 		register(
 			POWER_JAW,
-			"power jaw",
-			null
+			"power jaw"
 		);
 		register(
 			POWER_LEGS,
-			"power legs",
-			null
+			"power legs"
 		);
 		register(
 			POWER_NAPPER,
-			"power napper",
-			null
+			"power napper"
 		);
 		register(
 			PREMONITION,
-			"premonition",
-			null
+			"premonition"
 		);
 		register(
 			PRISMATIC,
@@ -920,313 +885,251 @@ public class AbilityRegistry {
 		);
 		register(
 			PROTECTIVE_SHELL,
-			"protective shell",
-			null
+			"protective shell"
 		);
 		register(
 			PROWLER,
-			"prowler",
-			null
+			"prowler"
 		);
 		register(
 			PUNCTURE,
-			"puncture",
-			null
+			"puncture"
 		);
 		register(
 			PYR_PRO,
-			"pyr_pro",
-			null
+			"pyr_pro"
 		);
 		register(
 			PYRO,
-			"pyro",
-			null
+			"pyro"
 		);
 		register(
 			QUICK_RECOVERY,
-			"quick recovery",
-			null
+			"quick recovery"
 		);
 		register(
 			RADIANCE,
-			"radiance",
-			null
+			"radiance"
 		);
 		register(
 			RAGING_FIRE,
-			"raging fire",
-			null
+			"raging fire"
 		);
 		register(
 			RAIL_GUN,
-			"rail_gun",
-			null
+			"rail_gun"
 		);
 		register(
 			RAIN_RUSH,
-			"rain rush",
-			null
+			"rain rush"
 		);
 		register(
 			RAIN_SUMMON,
-			"rain summon",
-			null
+			"rain summon"
 		);
 		register(
 			RAVENOUS,
-			"ravenous",
-			null
+			"ravenous"
 		);
 		register(
 			RAZOR_SHARP,
-			"razor sharp",
-			null
+			"razor sharp"
 		);
 		register(
 			REAPER,
-			"reaper",
-			null
+			"reaper"
 		);
 		register(
 			RECHARGEABLE,
-			"rechargeable",
-			null
+			"rechargeable"
 		);
 		register(
 			RECURRENT,
-			"recurrent",
-			null
+			"recurrent"
 		);
 		register(
 			REFLECTIVE,
-			"reflective",
-			null
+			"reflective"
 		);
 		register(
 			REGIFT,
-			"regift",
-			null
+			"regift"
 		);
 		register(
 			REGURGITATE,
-			"regurgitate",
-			null
+			"regurgitate"
 		);
 		register(
 			REIGN,
-			"reign",
-			null
+			"reign"
 		);
 		register(
 			REMORSELESS,
-			"remorseless",
-			null
+			"remorseless"
 		);
 		register(
 			REPLICATE,
-			"replicate",
-			null
+			"replicate"
 		);
 		register(
 			REPUGNANT,
-			"repugnant",
-			null
+			"repugnant"
 		);
 		register(
 			RESENTFUL,
-			"resentful",
-			null
+			"resentful"
 		);
 		register(
 			RESILIENCE,
-			"resilience",
-			null
+			"resilience"
 		);
 		register(
 			REV_UP,
-			"rev up",
-			null
+			"rev up"
 		);
 		register(
 			REVERBERATE,
-			"reverberate",
-			null
+			"reverberate"
 		);
 		register(
 			ROYAL_DECREE,
-			"royal_decree",
-			null
+			"royal_decree"
 		);
 		register(
 			RUSH_HOUR,
-			"rush hour",
-			null
+			"rush hour"
 		);
 		register(
 			SAFETY_POT,
-			"safety pot",
-			null
+			"safety pot"
 		);
 		register(
 			SALVAGE,
-			"salvage",
-			null
+			"salvage"
 		);
 		register(
 			SCORCHING_SKIN,
-			"scorching skin",
-			null
+			"scorching skin"
 		);
 		register(
 			SEIZE,
-			"seize",
-			null
+			"seize"
 		);
 		register(
 			SENDOFF,
-			"sendoff",
-			null
+			"sendoff"
 		);
 		register(
 			SHAKEDOWN,
-			"shakedown",
-			null
+			"shakedown"
 		);
 		register(
 			SHARP_CLAWS,
-			"sharp claws",
-			null
+			"sharp claws"
 		);
 		register(
 			SHARP_EDGES,
-			"sharp edges",
-			null
+			"sharp edges"
 		);
 		register(
 			SHARP_FOCUS,
-			"sharp_focus",
-			null
+			"sharp_focus"
 		);
 		register(
 			SKY_BORNE,
-			"sky_borne",
-			null
+			"sky_borne"
 		);
 		register(
 			SLICK_SHELL,
-			"slick_shell",
-			null
+			"slick_shell"
 		);
 		register(
 			SLIMY,
-			"slimy",
-			null
+			"slimy"
 		);
 		register(
 			SLY,
-			"sly",
-			null
+			"sly"
 		);
 		register(
 			SOB,
-			"sob",
-			null
+			"sob"
 		);
 		register(
 			SOUL_SIPHON,
-			"soul siphon",
-			null
+			"soul siphon"
 		);
 		register(
 			SPECIALIZATION,
-			"specialization",
-			null
+			"specialization"
 		);
 		register(
 			SPINE_BREAK,
-			"spine break",
-			null
+			"spine break"
 		);
 		register(
 			SPONGE,
-			"sponge",
-			null
+			"sponge"
 		);
 		register(
 			STAUNCH,
-			"staunch",
-			null
+			"staunch"
 		);
 		register(
 			SUGAR_RUSH,
-			"sugar rush",
-			null
+			"sugar rush"
 		);
 		register(
 			SURROGATE,
-			"surrogate",
-			null
+			"surrogate"
 		);
 		register(
 			SWAMPY,
-			"swampy",
-			null
+			"swampy"
 		);
 		register(
 			SWEET_AROMA,
-			"sweet_aroma",
-			null
+			"sweet_aroma"
 		);
 		register(
 			SWEET_TOUCH,
-			"sweet touch",
-			null
+			"sweet touch"
 		);
 		register(
 			TANK,
-			"tank",
-			null
+			"tank"
 		);
 		register(
 			TEMPER,
-			"temper",
-			null
+			"temper"
 		);
 		register(
 			TERRIFYING,
-			"terrifying",
-			null
+			"terrifying"
 		);
 		register(
 			TERRITORIAL,
-			"territorial",
-			null
+			"territorial"
 		);
 		register(
 			THIRD_DEGREE_BURN,
-			"third_degree_burn",
-			null
+			"third_degree_burn"
 		);
 		register(
 			THRIVING_PACE,
-			"thriving pace",
-			null
+			"thriving pace"
 		);
 		register(
 			THUNDER_SUMMON,
-			"thunder summon",
-			null
+			"thunder summon"
 		);
 		register(
 			TONE_DEAF,
-			"tone deaf",
-			null
+			"tone deaf"
 		);
 		register(
 			TOTAL_ECLIPSE,
-			"total_eclipse",
-			null
+			"total_eclipse"
 		);
 		register(
 			TOXIC_FILTER,
@@ -1242,138 +1145,111 @@ public class AbilityRegistry {
 		);
 		register(
 			TOXIC_SAC,
-			"toxic sac",
-			null
+			"toxic sac"
 		);
 		register(
 			TOXIC_SPINES,
-			"toxic spines",
-			null
+			"toxic spines"
 		);
 		register(
 			TOXIC_TOUCH,
-			"toxic_touch",
-			null
+			"toxic_touch"
 		);
 		register(
 			TRADER,
-			"trader",
-			null
+			"trader"
 		);
 		register(
 			TRASH_ARMOUR,
-			"trash armour",
-			null
+			"trash armour"
 		);
 		register(
 			TRIUMPH,
-			"triumph",
-			null
+			"triumph"
 		);
 		register(
 			TUMULTUOUS,
-			"tumultuous",
-			null
+			"tumultuous"
 		);
 		register(
 			TURBULENT,
-			"turbulent",
-			null
+			"turbulent"
 		);
 		register(
 			TWO_FACE,
-			"two_face",
-			null
+			"two_face"
 		);
 		register(
 			UNGRACIOUS_HOST,
-			"ungracious host",
-			null
+			"ungracious host"
 		);
 		register(
 			UPPER_HAND,
-			"upper_hand",
-			null
+			"upper_hand"
 		);
 		register(
 			VENGEANCE,
-			"vengeance",
-			null
+			"vengeance"
 		);
 		register(
 			VENOMOUS,
-			"venomous",
-			null
+			"venomous"
 		);
 		register(
 			VICIOUS,
-			"vicious",
-			null
+			"vicious"
 		);
 		register(
 			VIGILANT,
-			"vigilant",
-			null
+			"vigilant"
 		);
 		register(
 			VIGOROUS,
-			"vigorous",
-			null
+			"vigorous"
 		);
 		register(
 			VIRTUOSO,
-			"virtuoso",
-			null
+			"virtuoso"
 		);
 		register(
 			VISCID,
-			"viscid",
-			null
+			"viscid"
 		);
 		register(
 			VIVID_SIGHT,
-			"vivid sight",
-			null
+			"vivid sight"
 		);
 		register(
 			VOLCANIC,
-			"volcanic",
-			null
+			"volcanic"
 		);
 		register(
 			WATCHER,
-			"watcher",
-			null
+			"watcher"
 		);
 		register(
 			WEBBING,
-			"webbing",
-			null
+			"webbing"
 		);
 		register(
 			WHOLESOME,
-			"wholesome",
-			null
+			"wholesome"
 		);
 		register(
 			WILDFIRE,
-			"wildfire",
-			null
+			"wildfire"
 		);
 		register(
 			WIND_SUMMON,
-			"wind summon",
-			null
+			"wind summon"
 		);
 		register(
 			WISE,
-			"wise",
-			null
+			"wise"
 		);
 		register(
 			WOODSMAN,
-			"woodman",
-			null
+			"woodman"
 		);
     }
 }

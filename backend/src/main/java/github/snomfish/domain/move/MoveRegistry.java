@@ -39,6 +39,7 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(STATUS)
 			.energyCost(new Constant(25))
+			.basePower(new Constant(75))
 			.build()
 		);
 		register(MoveBuilder.newMove(ADAPTIVE_ASSAULT_AIR)
@@ -46,6 +47,7 @@ public class MoveRegistry {
 			.type(AIR)
 			.category(RANGED)
 			.energyCost(new Constant(35))
+			.basePower(new Constant(75))
 			.build()
 		);
 		register(MoveBuilder.newMove(ADAPTIVE_ASSAULT_ANCIENT)
@@ -53,6 +55,7 @@ public class MoveRegistry {
 			.type(ANCIENT)
 			.category(MELEE)
 			.energyCost(new Constant(35))
+			.basePower(new Constant(75))
 			.build()
 		);
 		register(MoveBuilder.newMove(ADAPTIVE_ASSAULT_BRAWLER)
@@ -60,6 +63,7 @@ public class MoveRegistry {
 			.type(BRAWLER)
 			.category(MELEE)
 			.energyCost(new Constant(35))
+			.basePower(new Constant(75))
 			.build()
 		);
 		register(MoveBuilder.newMove(ADAPTIVE_ASSAULT_BUG)
@@ -67,6 +71,7 @@ public class MoveRegistry {
 			.type(BUG)
 			.category(MELEE)
 			.energyCost(new Constant(35))
+			.basePower(new Constant(75))
 			.build()
 		);
 		register(MoveBuilder.newMove(ADAPTIVE_ASSAULT_FIRE)
@@ -74,6 +79,7 @@ public class MoveRegistry {
 			.type(FIRE)
 			.category(RANGED)
 			.energyCost(new Constant(35))
+			.basePower(new Constant(75))
 			.build()
 		);
 		register(MoveBuilder.newMove(ADAPTIVE_ASSAULT_ICE)
@@ -81,6 +87,7 @@ public class MoveRegistry {
 			.type(ICE)
 			.category(MELEE)
 			.energyCost(new Constant(35))
+			.basePower(new Constant(75))
 			.build()
 		);
 		register(MoveBuilder.newMove(ADAPTIVE_ASSAULT_SIMPLE)
@@ -88,6 +95,7 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(MELEE)
 			.energyCost(new Constant(35))
+			.basePower(new Constant(75))
 			.build()
 		);
 		register(MoveBuilder.newMove(ADAPTIVE_ASSAULT_SPIRIT)
@@ -95,6 +103,7 @@ public class MoveRegistry {
 			.type(SPIRIT)
 			.category(MELEE)
 			.energyCost(new Constant(35))
+			.basePower(new Constant(75))
 			.build()
 		);
 		register(MoveBuilder.newMove(ADAPTIVE_ASSAULT_TOXIC)
@@ -102,6 +111,7 @@ public class MoveRegistry {
 			.type(TOXIC)
 			.category(RANGED)
 			.energyCost(new Constant(35))
+			.basePower(new Constant(75))
 			.build()
 		);
 		register(MoveBuilder.newMove(ADAPTIVE_ASSAULT_WATER)
@@ -109,6 +119,7 @@ public class MoveRegistry {
 			.type(WATER)
 			.category(RANGED)
 			.energyCost(new Constant(35))
+			.basePower(new Constant(75))
 			.build()
 		);
 		register(MoveBuilder.newMove(AGGRAVATE)
@@ -130,6 +141,7 @@ public class MoveRegistry {
 			.type(AIR)
 			.category(RANGED)
 			.energyCost(new Constant(40))
+			.basePower(new Constant(70))
 			.build()
 		);
 		register(MoveBuilder.newMove(AIR_SHOT)
@@ -137,6 +149,7 @@ public class MoveRegistry {
 			.type(AIR)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(40))
 			.build()
 		);
 		register(MoveBuilder.newMove(AIR_WHIP)
@@ -144,6 +157,7 @@ public class MoveRegistry {
 			.type(AIR)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(60))
 			.build()
 		);
 		register(MoveBuilder.newMove(ANCIENT_ROAR)
@@ -158,6 +172,7 @@ public class MoveRegistry {
 			.type(SPIRIT)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(90))
 			.build()
 		);
 		register(MoveBuilder.newMove(AQUA_JAWS)
@@ -165,6 +180,7 @@ public class MoveRegistry {
 			.type(WATER)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(65))
 			.build()
 		);
 		register(MoveBuilder.newMove(ARMOUR_DOWN)
@@ -208,6 +224,7 @@ public class MoveRegistry {
 			.type(DARK)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(60))
 			.build()
 		);
 		register(MoveBuilder.newMove(BANANA_SLAM)
@@ -215,6 +232,7 @@ public class MoveRegistry {
 			.type(BRAWLER)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(95))
 			.build()
 		);
 		register(MoveBuilder.newMove(BANANA_SPLIT)
@@ -237,6 +255,7 @@ public class MoveRegistry {
 			.type(TOXIC)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(85))
 			.build()
 		);
 		register(MoveBuilder.newMove(BARB_TRAP)
@@ -265,6 +284,7 @@ public class MoveRegistry {
 			.type(METAL)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(20))
 			.build()
 		);
 		register(MoveBuilder.newMove(BATTERING_RAM)
@@ -272,6 +292,7 @@ public class MoveRegistry {
 			.type(BUG)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(90))
 			.build()
 		);
 		register(MoveBuilder.newMove(BATTLE_CHIME)
@@ -315,7 +336,8 @@ public class MoveRegistry {
 			.type(FIRE)
 			.category(MELEE)
 			.energyCost(new Constant(0))
-			.addTag(BITING_MOVE)
+			.basePower(new Constant(70))
+			.addTag(BITING)
 			.build()
 		);
 		register(MoveBuilder.newMove(BLAZE_OF_GLORY)
@@ -323,8 +345,9 @@ public class MoveRegistry {
 			.type(FIRE)
 			.category(MELEE)
 			.energyCost(new Constant(60))
+			.basePower(new Constant(120))
 			.onHit(new MoveEffect(
-				new DealFormulaDamage(StatId.MATTACK, StatId.MDEFENSE, new Constant(120))
+				new DealFormulaDamage(StatId.MATTACK, StatId.MDEFENSE)
 			))
 			.build()
 		);
@@ -333,6 +356,7 @@ public class MoveRegistry {
 			.type(FIRE)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(70))
 			.build()
 		);
 		register(MoveBuilder.newMove(BLAZE_RUSH)
@@ -340,6 +364,7 @@ public class MoveRegistry {
 			.type(FIRE)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(60))
 			.build()
 		);
 		register(MoveBuilder.newMove(BLINDSPOT_BATTER)
@@ -347,6 +372,7 @@ public class MoveRegistry {
 			.type(LIGHT)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(75))
 			.build()
 		);
 		register(MoveBuilder.newMove(BLOOD_DRAIN)
@@ -354,6 +380,7 @@ public class MoveRegistry {
 			.type(DARK)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(20))
 			.build()
 		);
 		register(MoveBuilder.newMove(BLUDGEON)
@@ -361,6 +388,7 @@ public class MoveRegistry {
 			.type(BRAWLER)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(65))
 			.build()
 		);
 		register(MoveBuilder.newMove(BODY_CRASH)
@@ -368,6 +396,7 @@ public class MoveRegistry {
 			.type(BRAWLER)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(80))
 			.build()
 		);
 		register(MoveBuilder.newMove(BODY_SLAM)
@@ -375,6 +404,7 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(90))
 			.build()
 		);
 		register(MoveBuilder.newMove(BOILING_PRESS)
@@ -382,6 +412,7 @@ public class MoveRegistry {
 			.type(FIRE)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(75))
 			.build()
 		);
 		register(MoveBuilder.newMove(BONE_CRUNCH)
@@ -389,6 +420,7 @@ public class MoveRegistry {
 			.type(TOXIC)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(80))
 			.build()
 		);
 		register(MoveBuilder.newMove(BOOM_BASH)
@@ -396,6 +428,7 @@ public class MoveRegistry {
 			.type(BRAWLER)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(80))
 			.build()
 		);
 		register(MoveBuilder.newMove(BOULDER_BLAST)
@@ -403,6 +436,7 @@ public class MoveRegistry {
 			.type(BRAWLER)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(25))
 			.build()
 		);
 		register(MoveBuilder.newMove(BRACE)
@@ -424,6 +458,7 @@ public class MoveRegistry {
 			.type(ICE)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(80))
 			.build()
 		);
 		register(MoveBuilder.newMove(BRAINWASH)
@@ -431,6 +466,7 @@ public class MoveRegistry {
 			.type(MIND)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(50))
 			.build()
 		);
 		register(MoveBuilder.newMove(BRAWN_BOOST)
@@ -460,6 +496,7 @@ public class MoveRegistry {
 			.type(BUG)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(30))
 			.build()
 		);
 		register(MoveBuilder.newMove(BULK_UP)
@@ -488,6 +525,7 @@ public class MoveRegistry {
 			.type(PLANT)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(65))
 			.build()
 		);
 		register(MoveBuilder.newMove(CANISTER_BURST)
@@ -495,6 +533,7 @@ public class MoveRegistry {
 			.type(TOXIC)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(25))
 			.build()
 		);
 		register(MoveBuilder.newMove(CAPRIOLE)
@@ -502,6 +541,15 @@ public class MoveRegistry {
 			.type(EARTH)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(105))
+			.build()
+		);
+		register(MoveBuilder.newMove(CARNIVOROUS_SNAP)
+			.name("Carnivorous Snap")
+			.type(PLANT)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.basePower(new Constant(100))
 			.build()
 		);
 		register(MoveBuilder.newMove(CEREBRAL_SLASH)
@@ -509,6 +557,7 @@ public class MoveRegistry {
 			.type(MIND)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(70))
 			.build()
 		);
 		register(MoveBuilder.newMove(CHARADE)
@@ -523,6 +572,7 @@ public class MoveRegistry {
 			.type(FIRE)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(90))
 			.build()
 		);
 		register(MoveBuilder.newMove(CHASE_DOWN)
@@ -530,6 +580,7 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(40))
 			.build()
 		);
 		register(MoveBuilder.newMove(CHILLY_CHOMP)
@@ -537,7 +588,8 @@ public class MoveRegistry {
 			.type(ICE)
 			.category(MELEE)
 			.energyCost(new Constant(0))
-			.addTag(BITING_MOVE)
+			.basePower(new Constant(70))
+			.addTag(BITING)
 			.build()
 		);
 		register(MoveBuilder.newMove(CHOMP)
@@ -545,7 +597,8 @@ public class MoveRegistry {
 			.type(DARK)
 			.category(MELEE)
 			.energyCost(new Constant(0))
-			.addTag(BITING_MOVE)
+			.basePower(new Constant(40))
+			.addTag(BITING)
 			.build()
 		);
 		register(MoveBuilder.newMove(CHOP)
@@ -553,6 +606,7 @@ public class MoveRegistry {
 			.type(BRAWLER)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(60))
 			.build()
 		);
 		register(MoveBuilder.newMove(CLAMP)
@@ -560,6 +614,7 @@ public class MoveRegistry {
 			.type(METAL)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(45))
 			.build()
 		);
 		register(MoveBuilder.newMove(CLAMP_CLAW)
@@ -567,6 +622,7 @@ public class MoveRegistry {
 			.type(BUG)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(85))
 			.build()
 		);
 		register(MoveBuilder.newMove(CLAWBER)
@@ -574,6 +630,7 @@ public class MoveRegistry {
 			.type(BRAWLER)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(100))
 			.build()
 		);
 		register(MoveBuilder.newMove(CLAY_SLAP)
@@ -581,6 +638,7 @@ public class MoveRegistry {
 			.type(EARTH)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(60))
 			.build()
 		);
 		register(MoveBuilder.newMove(CLEAN_UP)
@@ -595,6 +653,7 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(90))
 			.build()
 		);
 		register(MoveBuilder.newMove(COCONUT_BOMB)
@@ -602,6 +661,7 @@ public class MoveRegistry {
 			.type(PLANT)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(90))
 			.build()
 		);
 		register(MoveBuilder.newMove(COMPLETE_DEMOLITION)
@@ -609,6 +669,7 @@ public class MoveRegistry {
 			.type(METAL)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(150))
 			.build()
 		);
 		register(MoveBuilder.newMove(CONCLUSION)
@@ -623,6 +684,7 @@ public class MoveRegistry {
 			.type(ANCIENT)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(40))
 			.build()
 		);
 		register(MoveBuilder.newMove(CORRODE)
@@ -630,6 +692,7 @@ public class MoveRegistry {
 			.type(TOXIC)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(40))
 			.build()
 		);
 		register(MoveBuilder.newMove(COUNTER_POISE)
@@ -637,6 +700,7 @@ public class MoveRegistry {
 			.type(BUG)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(70))
 			.build()
 		);
 		register(MoveBuilder.newMove(COUNTER_STANCE)
@@ -644,6 +708,7 @@ public class MoveRegistry {
 			.type(BRAWLER)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(70))
 			.build()
 		);
 		register(MoveBuilder.newMove(CYCLONE_SLAM)
@@ -651,6 +716,7 @@ public class MoveRegistry {
 			.type(AIR)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(60))
 			.build()
 		);
 		register(MoveBuilder.newMove(DARK_SURGE)
@@ -658,6 +724,7 @@ public class MoveRegistry {
 			.type(DARK)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(80))
 			.build()
 		);
 		register(MoveBuilder.newMove(DART_BURST)
@@ -665,6 +732,7 @@ public class MoveRegistry {
 			.type(METAL)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(15))
 			.build()
 		);
 		register(MoveBuilder.newMove(DAWDLE)
@@ -686,6 +754,7 @@ public class MoveRegistry {
 			.type(LIGHT)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(25))
 			.build()
 		);
 		register(MoveBuilder.newMove(DEEP_FREEZE)
@@ -693,6 +762,7 @@ public class MoveRegistry {
 			.type(ICE)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(75))
 			.build()
 		);
 		register(MoveBuilder.newMove(DEJA_VU)
@@ -707,6 +777,7 @@ public class MoveRegistry {
 			.type(ANCIENT)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(40))
 			.build()
 		);
 		register(MoveBuilder.newMove(DISCORDANCE)
@@ -714,6 +785,7 @@ public class MoveRegistry {
 			.type(BUG)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(90))
 			.build()
 		);
 		register(MoveBuilder.newMove(DISPERSE)
@@ -736,6 +808,7 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(80))
 			.build()
 		);
 		register(MoveBuilder.newMove(DIVE_BOMB)
@@ -743,6 +816,7 @@ public class MoveRegistry {
 			.type(DARK)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(60))
 			.build()
 		);
 		register(MoveBuilder.newMove(DODGE)
@@ -758,6 +832,7 @@ public class MoveRegistry {
 			.type(AIR)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(40))
 			.build()
 		);
 		register(MoveBuilder.newMove(DOUBLE_STING)
@@ -765,6 +840,7 @@ public class MoveRegistry {
 			.type(BUG)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(25))
 			.build()
 		);
 		register(MoveBuilder.newMove(DOUBLE_WHACK)
@@ -772,6 +848,7 @@ public class MoveRegistry {
 			.type(METAL)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(35))
 			.build()
 		);
 		register(MoveBuilder.newMove(DOUSE)
@@ -779,6 +856,7 @@ public class MoveRegistry {
 			.type(WATER)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(90))
 			.build()
 		);
 		register(MoveBuilder.newMove(DOWNPOUR)
@@ -793,6 +871,7 @@ public class MoveRegistry {
 			.type(ANCIENT)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(130))
 			.build()
 		);
 		register(MoveBuilder.newMove(DRIVING_FORCE)
@@ -801,6 +880,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(0))
 			.priority(new Constant(-6))
+			.basePower(new Constant(60))
 			.build()
 		);
 		register(MoveBuilder.newMove(DRUDGE)
@@ -815,6 +895,7 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(15))
 			.build()
 		);
 		register(MoveBuilder.newMove(EARTHQUAKE)
@@ -822,6 +903,7 @@ public class MoveRegistry {
 			.type(EARTH)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(90))
 			.build()
 		);
 		register(MoveBuilder.newMove(EERIE_STARE)
@@ -836,6 +918,15 @@ public class MoveRegistry {
 			.type(DARK)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(100))
+			.build()
+		);
+		register(MoveBuilder.newMove(EGG_ONSLAUGHT)
+			.name("Egg Onslaught")
+			.type(DARK)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.basePower(new Constant(125))
 			.build()
 		);
 		register(MoveBuilder.newMove(EGG_STORM)
@@ -843,6 +934,15 @@ public class MoveRegistry {
 			.type(DARK)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(90))
+			.build()
+		);
+		register(MoveBuilder.newMove(ELECTRO_BLAST)
+			.name("Elctro Blast")
+			.type(ELECTRIC)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.basePower(new Constant(125))
 			.build()
 		);
 		register(MoveBuilder.newMove(ELECTRO_PUNCH)
@@ -850,7 +950,8 @@ public class MoveRegistry {
 			.type(ELECTRIC)
 			.category(MELEE)
 			.energyCost(new Constant(0))
-			.addTag(PUNCHING_MOVE)
+			.basePower(new Constant(70))
+			.addTag(PUNCHING)
 			.build()
 		);
 		register(MoveBuilder.newMove(ELECTROBURST)
@@ -858,6 +959,7 @@ public class MoveRegistry {
 			.type(ELECTRIC)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(100))
 			.build()
 		);
 		register(MoveBuilder.newMove(ELEMENTAL_BURST)
@@ -865,6 +967,7 @@ public class MoveRegistry {
 			.type(ANCIENT)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(80))
 			.build()
 		);
 		register(MoveBuilder.newMove(EMPATHIZE)
@@ -900,6 +1003,7 @@ public class MoveRegistry {
 			.type(ANCIENT)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(85))
 			.build()
 		);
 		register(MoveBuilder.newMove(ENERGY_SURGE)
@@ -907,6 +1011,15 @@ public class MoveRegistry {
 			.type(LIGHT)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(70))
+			.build()
+		);
+		register(MoveBuilder.newMove(ERUPTION)
+			.name("Eruption")
+			.type(FIRE)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.basePower(new Constant(125))
 			.build()
 		);
 		register(MoveBuilder.newMove(EXAMINE)
@@ -922,6 +1035,7 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(75))
 			.build()
 		);
 		register(MoveBuilder.newMove(FADE_AWAY)
@@ -929,6 +1043,7 @@ public class MoveRegistry {
 			.type(SPIRIT)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(70))
 			.build()
 		);
 		register(MoveBuilder.newMove(FAR_ENCHANTMENT)
@@ -943,6 +1058,7 @@ public class MoveRegistry {
 			.type(FIRE)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(90))
 			.build()
 		);
 		register(MoveBuilder.newMove(FINAL_RUSE)
@@ -957,6 +1073,7 @@ public class MoveRegistry {
 			.type(FIRE)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(90))
 			.build()
 		);
 		register(MoveBuilder.newMove(FIRE_SLAM)
@@ -964,6 +1081,7 @@ public class MoveRegistry {
 			.type(FIRE)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(65))
 			.build()
 		);
 		register(MoveBuilder.newMove(FLABBERGAST)
@@ -971,6 +1089,7 @@ public class MoveRegistry {
 			.type(MIND)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(70))
 			.build()
 		);
 		register(MoveBuilder.newMove(FLAMING_KICK)
@@ -978,6 +1097,7 @@ public class MoveRegistry {
 			.type(FIRE)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(90))
 			.build()
 		);
 		register(MoveBuilder.newMove(FLARE)
@@ -985,6 +1105,7 @@ public class MoveRegistry {
 			.type(LIGHT)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(70))
 			.build()
 		);
 		register(MoveBuilder.newMove(FLARE_BLAST)
@@ -992,6 +1113,7 @@ public class MoveRegistry {
 			.type(FIRE)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(110))
 			.build()
 		);
 		register(MoveBuilder.newMove(FLASH)
@@ -1006,6 +1128,7 @@ public class MoveRegistry {
 			.type(LIGHT)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(70))
 			.build()
 		);
 		register(MoveBuilder.newMove(FLASH_PULSE)
@@ -1013,6 +1136,7 @@ public class MoveRegistry {
 			.type(LIGHT)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(85))
 			.build()
 		);
 		register(MoveBuilder.newMove(FLURRY)
@@ -1020,6 +1144,7 @@ public class MoveRegistry {
 			.type(ICE)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(40))
 			.build()
 		);
 		register(MoveBuilder.newMove(FOUL_CHANT)
@@ -1027,6 +1152,7 @@ public class MoveRegistry {
 			.type(MIND)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(110))
 			.build()
 		);
 		register(MoveBuilder.newMove(FROST_BEAM)
@@ -1034,6 +1160,7 @@ public class MoveRegistry {
 			.type(ICE)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(90))
 			.build()
 		);
 		register(MoveBuilder.newMove(FROST_BLAST)
@@ -1041,6 +1168,7 @@ public class MoveRegistry {
 			.type(ICE)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(110))
 			.build()
 		);
 		register(MoveBuilder.newMove(FROST_BREATH)
@@ -1048,6 +1176,7 @@ public class MoveRegistry {
 			.type(ICE)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(60))
 			.build()
 		);
 		register(MoveBuilder.newMove(FROST_PUNCH)
@@ -1055,7 +1184,16 @@ public class MoveRegistry {
 			.type(ICE)
 			.category(MELEE)
 			.energyCost(new Constant(0))
-			.addTag(PUNCHING_MOVE)
+			.basePower(new Constant(70))
+			.addTag(PUNCHING)
+			.build()
+		);
+		register(MoveBuilder.newMove(FULGER_FANGS)
+			.name("Fulgur Fangs")
+			.type(ELECTRIC)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.basePower(new Constant(100))
 			.build()
 		);
 		register(MoveBuilder.newMove(FUNGUS_CURSE)
@@ -1084,6 +1222,7 @@ public class MoveRegistry {
 			.type(LIGHT)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(80))
 			.build()
 		);
 		register(MoveBuilder.newMove(GEYSER)
@@ -1091,6 +1230,7 @@ public class MoveRegistry {
 			.type(WATER)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(90))
 			.build()
 		);
 		register(MoveBuilder.newMove(GHOSTLY_HOWL)
@@ -1098,6 +1238,15 @@ public class MoveRegistry {
 			.type(SPIRIT)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(75))
+			.build()
+		);
+		register(MoveBuilder.newMove(GIVE_UP)
+			.name("Give Up")
+			.type(SIMPLE)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.basePower(new Constant(1))
 			.build()
 		);
 		register(MoveBuilder.newMove(GLOOM_FANGS)
@@ -1105,6 +1254,7 @@ public class MoveRegistry {
 			.type(DARK)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(75))
 			.build()
 		);
 		register(MoveBuilder.newMove(GLOOMINOUS_FANGS)
@@ -1112,6 +1262,7 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(85))
 			.build()
 		);
 		register(MoveBuilder.newMove(GLOOMINOUS_ROAR)
@@ -1119,6 +1270,7 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(85))
 			.build()
 		);
 		register(MoveBuilder.newMove(GNARLY_GASH)
@@ -1126,6 +1278,7 @@ public class MoveRegistry {
 			.type(DARK)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(90))
 			.build()
 		);
 		register(MoveBuilder.newMove(GNAW)
@@ -1133,6 +1286,7 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(40))
 			.build()
 		);
 		register(MoveBuilder.newMove(GOBBLE_GOOP)
@@ -1140,6 +1294,7 @@ public class MoveRegistry {
 			.type(TOXIC)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(60))
 			.build()
 		);
 		register(MoveBuilder.newMove(GOOP_SPOUT)
@@ -1154,6 +1309,7 @@ public class MoveRegistry {
 			.type(TOXIC)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(70))
 			.build()
 		);
 		register(MoveBuilder.newMove(GROWL)
@@ -1168,6 +1324,7 @@ public class MoveRegistry {
 			.type(WATER)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(65))
 			.build()
 		);
 		register(MoveBuilder.newMove(GUST)
@@ -1182,6 +1339,7 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(60))
 			.build()
 		);
 		register(MoveBuilder.newMove(HARROW)
@@ -1189,6 +1347,7 @@ public class MoveRegistry {
 			.type(SPIRIT)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(90))
 			.build()
 		);
 		register(MoveBuilder.newMove(HARVEST)
@@ -1224,6 +1383,7 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(60))
 			.build()
 		);
 		register(MoveBuilder.newMove(HEALTH_GIFT)
@@ -1238,6 +1398,7 @@ public class MoveRegistry {
 			.type(BRAWLER)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(50))
 			.build()
 		);
 		register(MoveBuilder.newMove(HEAT_WAVE)
@@ -1252,6 +1413,7 @@ public class MoveRegistry {
 			.type(METAL)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(70))
 			.build()
 		);
 		register(MoveBuilder.newMove(HERBAL_REMEDY)
@@ -1266,13 +1428,15 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(80))
 			.build()
 		);
 		register(MoveBuilder.newMove(HOLY_SLASH)
 			.name("holy_slash")
 			.type(METAL)
-			.category(MELEE)
+			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(75))
 			.build()
 		);
 		register(MoveBuilder.newMove(HOODWINK)
@@ -1287,6 +1451,7 @@ public class MoveRegistry {
 			.type(BRAWLER)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(60))
 			.build()
 		);
 		register(MoveBuilder.newMove(HORN_DASHI)
@@ -1294,6 +1459,7 @@ public class MoveRegistry {
 			.type(BRAWLER)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(70))
 			.build()
 		);
 		register(MoveBuilder.newMove(HULLABALOO)
@@ -1301,6 +1467,7 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(75))
 			.build()
 		);
 		register(MoveBuilder.newMove(HYDRO_BLAST)
@@ -1308,6 +1475,7 @@ public class MoveRegistry {
 			.type(WATER)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(110))
 			.build()
 		);
 		register(MoveBuilder.newMove(HYDRO_SLASH)
@@ -1315,6 +1483,7 @@ public class MoveRegistry {
 			.type(WATER)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(70))
 			.build()
 		);
 		register(MoveBuilder.newMove(HYPER_STING)
@@ -1322,6 +1491,7 @@ public class MoveRegistry {
 			.type(LIGHT)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(90))
 			.build()
 		);
 		register(MoveBuilder.newMove(HYPNOTIZE)
@@ -1336,6 +1506,7 @@ public class MoveRegistry {
 			.type(ICE)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(95))
 			.build()
 		);
 		register(MoveBuilder.newMove(ICICLE_FANGS)
@@ -1343,6 +1514,7 @@ public class MoveRegistry {
 			.type(ICE)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(80))
 			.build()
 		);
 		register(MoveBuilder.newMove(ICICLE_TRAP)
@@ -1357,6 +1529,7 @@ public class MoveRegistry {
 			.type(ICE)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(90))
 			.build()
 		);
 		register(MoveBuilder.newMove(ILL_WILL)
@@ -1364,6 +1537,7 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(70))
 			.build()
 		);
 		register(MoveBuilder.newMove(IMPERSONATE)
@@ -1379,6 +1553,7 @@ public class MoveRegistry {
 			.type(FIRE)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(130))
 			.build()
 		);
 		register(MoveBuilder.newMove(JET_STREAM)
@@ -1386,6 +1561,7 @@ public class MoveRegistry {
 			.type(AIR)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(90))
 			.build()
 		);
 		register(MoveBuilder.newMove(JOLT)
@@ -1394,6 +1570,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(0))
 			.priority(new Constant(1))
+			.basePower(new Constant(40))
 			.build()
 		);
 		register(MoveBuilder.newMove(JUDGEMENT)
@@ -1401,6 +1578,7 @@ public class MoveRegistry {
 			.type(MIND)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(85))
 			.build()
 		);
 		register(MoveBuilder.newMove(JUMP_START)
@@ -1415,6 +1593,7 @@ public class MoveRegistry {
 			.type(BRAWLER)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(90))
 			.build()
 		);
 		register(MoveBuilder.newMove(KINDLED_RAGE)
@@ -1422,6 +1601,7 @@ public class MoveRegistry {
 			.type(FIRE)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(70))
 			.build()
 		);
 		register(MoveBuilder.newMove(LANDSLIDE)
@@ -1429,6 +1609,15 @@ public class MoveRegistry {
 			.type(EARTH)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(90))
+			.build()
+		);
+		register(MoveBuilder.newMove(LAST_LAUGH)
+			.name("Last Laugh")
+			.type(DARK)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.basePower(new Constant(100))
 			.build()
 		);
 		register(MoveBuilder.newMove(LAVA_SLASH)
@@ -1436,6 +1625,7 @@ public class MoveRegistry {
 			.type(FIRE)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(70))
 			.build()
 		);
 		register(MoveBuilder.newMove(LEAF_BARRAGE)
@@ -1443,6 +1633,7 @@ public class MoveRegistry {
 			.type(PLANT)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(65))
 			.build()
 		);
 		register(MoveBuilder.newMove(LIFE_DRAIN)
@@ -1450,6 +1641,7 @@ public class MoveRegistry {
 			.type(PLANT)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(75))
 			.build()
 		);
 		register(MoveBuilder.newMove(LIGHT_DASH)
@@ -1458,6 +1650,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(0))
 			.priority(new Constant(1))
+			.basePower(new Constant(40))
 			.build()
 		);
 		register(MoveBuilder.newMove(LIGHTSPEED_RAY)
@@ -1466,6 +1659,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(0))
 			.priority(new Constant(1))
+			.basePower(new Constant(40))
 			.build()
 		);
 		register(MoveBuilder.newMove(LUMINOUS_ROAR)
@@ -1473,6 +1667,7 @@ public class MoveRegistry {
 			.type(LIGHT)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(75))
 			.build()
 		);
 		register(MoveBuilder.newMove(LUNGE)
@@ -1480,6 +1675,7 @@ public class MoveRegistry {
 			.type(BUG)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(90))
 			.build()
 		);
 		register(MoveBuilder.newMove(LUSTER_LOOT)
@@ -1487,6 +1683,7 @@ public class MoveRegistry {
 			.type(LIGHT)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(50))
 			.build()
 		);
 		register(MoveBuilder.newMove(MAGMA_BLOCK)
@@ -1502,6 +1699,7 @@ public class MoveRegistry {
 			.type(FIRE)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(85))
 			.build()
 		);
 		register(MoveBuilder.newMove(MAGNIFY)
@@ -1516,6 +1714,7 @@ public class MoveRegistry {
 			.type(WATER)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(70))
 			.build()
 		);
 		register(MoveBuilder.newMove(MARSH_WAVE)
@@ -1523,6 +1722,7 @@ public class MoveRegistry {
 			.type(WATER)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(75))
 			.build()
 		);
 		register(MoveBuilder.newMove(MEGA_CHOMP)
@@ -1530,7 +1730,8 @@ public class MoveRegistry {
 			.type(DARK)
 			.category(MELEE)
 			.energyCost(new Constant(0))
-			.addTag(BITING_MOVE)
+			.basePower(new Constant(80))
+			.addTag(BITING)
 			.build()
 		);
 		register(MoveBuilder.newMove(MEGA_KICK)
@@ -1538,6 +1739,7 @@ public class MoveRegistry {
 			.type(BRAWLER)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(100))
 			.build()
 		);
 		register(MoveBuilder.newMove(MEGA_PUNCH)
@@ -1545,7 +1747,16 @@ public class MoveRegistry {
 			.type(BRAWLER)
 			.category(MELEE)
 			.energyCost(new Constant(0))
-			.addTag(PUNCHING_MOVE)
+			.basePower(new Constant(80))
+			.addTag(PUNCHING)
+			.build()
+		);
+		register(MoveBuilder.newMove(MELTDOWN)
+			.name("Meltdown")
+			.type(FIRE)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.basePower(new Constant(100))
 			.build()
 		);
 		register(MoveBuilder.newMove(MEMORIZE)
@@ -1560,6 +1771,7 @@ public class MoveRegistry {
 			.type(METAL)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(85))
 			.build()
 		);
 		register(MoveBuilder.newMove(METAL_SHRIEK)
@@ -1574,6 +1786,7 @@ public class MoveRegistry {
 			.type(METAL)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(20))
 			.build()
 		);
 		register(MoveBuilder.newMove(METEOR_CRASH)
@@ -1581,6 +1794,7 @@ public class MoveRegistry {
 			.type(ANCIENT)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(90))
 			.build()
 		);
 		register(MoveBuilder.newMove(METEOR_SMASH)
@@ -1588,6 +1802,7 @@ public class MoveRegistry {
 			.type(ANCIENT)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(90))
 			.build()
 		);
 		register(MoveBuilder.newMove(MIND_DRAIN)
@@ -1604,6 +1819,14 @@ public class MoveRegistry {
 			.energyCost(new Constant(0))
 			.build()
 		);
+		register(MoveBuilder.newMove(MIRACLE_BEAM)
+			.name("Miracle Beam")
+			.type(LIGHT)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.basePower(new Constant(100))
+			.build()
+		);
 		register(MoveBuilder.newMove(MOLT)
 			.name("molt")
 			.type(BUG)
@@ -1616,6 +1839,7 @@ public class MoveRegistry {
 			.type(TOXIC)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(90))
 			.build()
 		);
 		register(MoveBuilder.newMove(MUCK_BUCK)
@@ -1623,6 +1847,7 @@ public class MoveRegistry {
 			.type(EARTH)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(95))
 			.build()
 		);
 		register(MoveBuilder.newMove(MUD_SPATTER)
@@ -1630,6 +1855,7 @@ public class MoveRegistry {
 			.type(EARTH)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(55))
 			.build()
 		);
 		register(MoveBuilder.newMove(MUDSLIDE)
@@ -1637,6 +1863,7 @@ public class MoveRegistry {
 			.type(EARTH)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(50))
 			.build()
 		);
 		register(MoveBuilder.newMove(MYSTIC_BREEZE)
@@ -1644,6 +1871,7 @@ public class MoveRegistry {
 			.type(BUG)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(60))
 			.build()
 		);
 		register(MoveBuilder.newMove(NAB)
@@ -1651,6 +1879,7 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(75))
 			.build()
 		);
 		register(MoveBuilder.newMove(NATURES_FORCE)
@@ -1658,6 +1887,7 @@ public class MoveRegistry {
 			.type(PLANT)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(90))
 			.build()
 		);
 		register(MoveBuilder.newMove(NATURES_RAGE)
@@ -1665,6 +1895,7 @@ public class MoveRegistry {
 			.type(PLANT)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(70))
 			.build()
 		);
 		register(MoveBuilder.newMove(NEAR_ENCHANTMENT)
@@ -1679,6 +1910,7 @@ public class MoveRegistry {
 			.type(AIR)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(95))
 			.build()
 		);
 		register(MoveBuilder.newMove(NOVA_BLAST)
@@ -1686,6 +1918,7 @@ public class MoveRegistry {
 			.type(LIGHT)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(95))
 			.build()
 		);
 		register(MoveBuilder.newMove(OIL_LEAK)
@@ -1700,6 +1933,7 @@ public class MoveRegistry {
 			.type(SPIRIT)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(60))
 			.build()
 		);
 		register(MoveBuilder.newMove(OUT_OF_ORDER)
@@ -1707,6 +1941,7 @@ public class MoveRegistry {
 			.type(ICE)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(150))
 			.build()
 		);
 		register(MoveBuilder.newMove(OUTBURST)
@@ -1714,6 +1949,7 @@ public class MoveRegistry {
 			.type(ANCIENT)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(125))
 			.build()
 		);
 		register(MoveBuilder.newMove(PAINT_SHOWER)
@@ -1721,6 +1957,7 @@ public class MoveRegistry {
 			.type(TOXIC)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(110))
 			.build()
 		);
 		register(MoveBuilder.newMove(PARASITIZE)
@@ -1728,7 +1965,8 @@ public class MoveRegistry {
 			.type(BUG)
 			.category(MELEE)
 			.energyCost(new Constant(0))
-			.addTag(BITING_MOVE)
+			.basePower(new Constant(80))
+			.addTag(BITING)
 			.build()
 		);
 		register(MoveBuilder.newMove(PEACE_OF_MIND)
@@ -1743,6 +1981,7 @@ public class MoveRegistry {
 			.type(EARTH)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(30))
 			.build()
 		);
 		register(MoveBuilder.newMove(PECK)
@@ -1750,6 +1989,7 @@ public class MoveRegistry {
 			.type(AIR)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(35))
 			.build()
 		);
 		register(MoveBuilder.newMove(PEP_JAB)
@@ -1757,6 +1997,7 @@ public class MoveRegistry {
 			.type(BRAWLER)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(80))
 			.build()
 		);
 		register(MoveBuilder.newMove(PEPPER_BURST)
@@ -1764,6 +2005,7 @@ public class MoveRegistry {
 			.type(FIRE)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(35))
 			.build()
 		);
 		register(MoveBuilder.newMove(PEPPERMINT_BREATH)
@@ -1771,6 +2013,7 @@ public class MoveRegistry {
 			.type(ICE)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(75))
 			.build()
 		);
 		register(MoveBuilder.newMove(PERCH)
@@ -1785,6 +2028,7 @@ public class MoveRegistry {
 			.type(BUG)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(50))
 			.build()
 		);
 		register(MoveBuilder.newMove(PESTILENCE)
@@ -1792,6 +2036,7 @@ public class MoveRegistry {
 			.type(BUG)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(60))
 			.build()
 		);
 		register(MoveBuilder.newMove(PETAL_PUMMEL)
@@ -1799,6 +2044,7 @@ public class MoveRegistry {
 			.type(PLANT)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(40))
 			.build()
 		);
 		register(MoveBuilder.newMove(PHANTOM_BLAST)
@@ -1806,6 +2052,7 @@ public class MoveRegistry {
 			.type(SPIRIT)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(110))
 			.build()
 		);
 		register(MoveBuilder.newMove(PHANTOM_SLASH)
@@ -1813,6 +2060,7 @@ public class MoveRegistry {
 			.type(SPIRIT)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(70))
 			.build()
 		);
 		register(MoveBuilder.newMove(PHEROBLAST)
@@ -1820,6 +2068,7 @@ public class MoveRegistry {
 			.type(BUG)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(90))
 			.build()
 		);
 		register(MoveBuilder.newMove(PHOENIX_FLAME)
@@ -1841,6 +2090,7 @@ public class MoveRegistry {
 			.type(WATER)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(85))
 			.build()
 		);
 		register(MoveBuilder.newMove(PILFER)
@@ -1848,6 +2098,7 @@ public class MoveRegistry {
 			.type(DARK)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(60))
 			.build()
 		);
 		register(MoveBuilder.newMove(PINE_SHOT)
@@ -1855,6 +2106,7 @@ public class MoveRegistry {
 			.type(PLANT)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(25))
 			.build()
 		);
 		register(MoveBuilder.newMove(PLUNGE)
@@ -1862,6 +2114,7 @@ public class MoveRegistry {
 			.type(WATER)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(90))
 			.build()
 		);
 		register(MoveBuilder.newMove(POISON)
@@ -1883,6 +2136,7 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(40))
 			.build()
 		);
 		register(MoveBuilder.newMove(POWER_DRAW)
@@ -1890,6 +2144,7 @@ public class MoveRegistry {
 			.type(ELECTRIC)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(80))
 			.build()
 		);
 		register(MoveBuilder.newMove(POWER_FOCUS)
@@ -1904,6 +2159,7 @@ public class MoveRegistry {
 			.type(ELECTRIC)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(20))
 			.build()
 		);
 		register(MoveBuilder.newMove(POWER_SURGE)
@@ -1911,6 +2167,7 @@ public class MoveRegistry {
 			.type(ELECTRIC)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(80))
 			.build()
 		);
 		register(MoveBuilder.newMove(PRECISION_BOLT)
@@ -1918,6 +2175,7 @@ public class MoveRegistry {
 			.type(ELECTRIC)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(60))
 			.build()
 		);
 		register(MoveBuilder.newMove(PREEMPTIVE_STRIKE)
@@ -1925,6 +2183,7 @@ public class MoveRegistry {
 			.type(BRAWLER)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(40))
 			.build()
 		);
 		register(MoveBuilder.newMove(PRIMAL_SLASH)
@@ -1932,6 +2191,7 @@ public class MoveRegistry {
 			.type(ANCIENT)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(80))
 			.build()
 		);
 		register(MoveBuilder.newMove(PROVOKE)
@@ -1946,7 +2206,8 @@ public class MoveRegistry {
 			.type(MIND)
 			.category(MELEE)
 			.energyCost(new Constant(0))
-			.addTag(BITING_MOVE)
+			.basePower(new Constant(80))
+			.addTag(BITING)
 			.build()
 		);
 		register(MoveBuilder.newMove(PSYCHAL_SLAP)
@@ -1954,6 +2215,7 @@ public class MoveRegistry {
 			.type(MIND)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(85))
 			.build()
 		);
 		register(MoveBuilder.newMove(PSYCHO_BLAST)
@@ -1961,6 +2223,7 @@ public class MoveRegistry {
 			.type(MIND)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(90))
 			.build()
 		);
 		register(MoveBuilder.newMove(PYROKINESIS)
@@ -1968,6 +2231,7 @@ public class MoveRegistry {
 			.type(FIRE)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(65))
 			.build()
 		);
 		register(MoveBuilder.newMove(QUICK_POUNCE)
@@ -1975,6 +2239,7 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(40))
 			.build()
 		);
 		register(MoveBuilder.newMove(QUICK_PUNCH)
@@ -1982,7 +2247,8 @@ public class MoveRegistry {
 			.type(BRAWLER)
 			.category(MELEE)
 			.energyCost(new Constant(0))
-			.addTag(PUNCHING_MOVE)
+			.basePower(new Constant(40))
+			.addTag(PUNCHING)
 			.build()
 		);
 		register(MoveBuilder.newMove(QUICKSAND)
@@ -1990,6 +2256,7 @@ public class MoveRegistry {
 			.type(EARTH)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(60))
 			.build()
 		);
 		register(MoveBuilder.newMove(RADIANT_FORECAST)
@@ -1997,6 +2264,7 @@ public class MoveRegistry {
 			.type(LIGHT)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(110))
 			.build()
 		);
 		register(MoveBuilder.newMove(RADIANT_RUSH)
@@ -2004,6 +2272,7 @@ public class MoveRegistry {
 			.type(LIGHT)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(100))
 			.build()
 		);
 		register(MoveBuilder.newMove(RAGING_FLAME)
@@ -2018,6 +2287,7 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(120))
 			.build()
 		);
 		register(MoveBuilder.newMove(RAGING_TACKLE)
@@ -2025,6 +2295,7 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(120))
 			.build()
 		);
 		register(MoveBuilder.newMove(RAINBOW_BLAST)
@@ -2032,8 +2303,9 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(RANGED)
 			.energyCost(new Constant(50))
+			.basePower(new Constant(100))
 			.onHit(new MoveEffect(
-				new DealFormulaDamage(StatId.RATTACK, StatId.RDEFENSE, new Constant(100))
+				new DealFormulaDamage(StatId.RATTACK, StatId.RDEFENSE)
 			))
 			.build()
 		);
@@ -2042,6 +2314,7 @@ public class MoveRegistry {
 			.type(DARK)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(65))
 			.build()
 		);
 		register(MoveBuilder.newMove(RAPID_FIRE)
@@ -2049,6 +2322,7 @@ public class MoveRegistry {
 			.type(FIRE)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(20))
 			.build()
 		);
 		register(MoveBuilder.newMove(RAZOR_SLASH)
@@ -2056,6 +2330,7 @@ public class MoveRegistry {
 			.type(METAL)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(90))
 			.build()
 		);
 		register(MoveBuilder.newMove(RECYCLE)
@@ -2070,6 +2345,7 @@ public class MoveRegistry {
 			.type(METAL)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(70))
 			.build()
 		);
 		register(MoveBuilder.newMove(REJUVENATE)
@@ -2084,6 +2360,7 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(25))
 			.build()
 		);
 		register(MoveBuilder.newMove(RESONATE)
@@ -2091,6 +2368,7 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(90))
 			.build()
 		);
 		register(MoveBuilder.newMove(RETURN_TO_SENDER)
@@ -2112,6 +2390,7 @@ public class MoveRegistry {
 			.type(DARK)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(70))
 			.build()
 		);
 		register(MoveBuilder.newMove(ROCK_SLIDE)
@@ -2119,6 +2398,7 @@ public class MoveRegistry {
 			.type(EARTH)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(60))
 			.build()
 		);
 		register(MoveBuilder.newMove(ROGUE_ASSAULT)
@@ -2126,6 +2406,7 @@ public class MoveRegistry {
 			.type(BRAWLER)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(120))
 			.build()
 		);
 		register(MoveBuilder.newMove(ROUGH_UP)
@@ -2133,6 +2414,7 @@ public class MoveRegistry {
 			.type(BRAWLER)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(70))
 			.build()
 		);
 		register(MoveBuilder.newMove(RUFFLED_FEATHERS)
@@ -2140,6 +2422,14 @@ public class MoveRegistry {
 			.type(AIR)
 			.category(STATUS)
 			.energyCost(new Constant(0))
+			.build()
+		);
+		register(MoveBuilder.newMove(RUTHLESS_FEAST)
+			.name("Ruthless Feast")
+			.type(METAL)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.basePower(new Constant(35))
 			.build()
 		);
 		register(MoveBuilder.newMove(SAFEGUARD)
@@ -2162,6 +2452,7 @@ public class MoveRegistry {
 			.type(ANCIENT)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(95))
 			.build()
 		);
 		register(MoveBuilder.newMove(SAVAGE_HORN)
@@ -2169,6 +2460,7 @@ public class MoveRegistry {
 			.type(BUG)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(120))
 			.build()
 		);
 		register(MoveBuilder.newMove(SCAPEGOAT)
@@ -2183,6 +2475,7 @@ public class MoveRegistry {
 			.type(AIR)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(60))
 			.build()
 		);
 		register(MoveBuilder.newMove(SEA_SONG)
@@ -2190,6 +2483,7 @@ public class MoveRegistry {
 			.type(WATER)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(60))
 			.build()
 		);
 		register(MoveBuilder.newMove(SEARING_STEEL)
@@ -2197,6 +2491,7 @@ public class MoveRegistry {
 			.type(METAL)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(85))
 			.build()
 		);
 		register(MoveBuilder.newMove(SECOND_WIND)
@@ -2211,6 +2506,7 @@ public class MoveRegistry {
 			.type(DARK)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(100))
 			.build()
 		);
 		register(MoveBuilder.newMove(SHADOW_PULSE)
@@ -2218,6 +2514,7 @@ public class MoveRegistry {
 			.type(DARK)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(80))
 			.build()
 		);
 		register(MoveBuilder.newMove(SHADOW_SPRINT)
@@ -2226,6 +2523,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(0))
 			.priority(new Constant(1))
+			.basePower(new Constant(40))
 			.build()
 		);
 		register(MoveBuilder.newMove(SHADOWBOX)
@@ -2247,6 +2545,7 @@ public class MoveRegistry {
 			.type(SPIRIT)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(70))
 			.build()
 		);
 		register(MoveBuilder.newMove(SHELL_BASH)
@@ -2254,6 +2553,7 @@ public class MoveRegistry {
 			.type(WATER)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(110))
 			.build()
 		);
 		register(MoveBuilder.newMove(SHELL_SHRAPNEL)
@@ -2261,6 +2561,7 @@ public class MoveRegistry {
 			.type(WATER)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(110))
 			.build()
 		);
 		register(MoveBuilder.newMove(SHINE)
@@ -2268,6 +2569,7 @@ public class MoveRegistry {
 			.type(LIGHT)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(40))
 			.build()
 		);
 		register(MoveBuilder.newMove(SHREWD_BLAST)
@@ -2275,6 +2577,7 @@ public class MoveRegistry {
 			.type(ANCIENT)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(70))
 			.build()
 		);
 		register(MoveBuilder.newMove(SHRIEK)
@@ -2289,6 +2592,7 @@ public class MoveRegistry {
 			.type(FIRE)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(40))
 			.build()
 		);
 		register(MoveBuilder.newMove(SLAP_DOWN)
@@ -2297,6 +2601,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(0))
 			.priority(new Constant(1))
+			.basePower(new Constant(65))
 			.build()
 		);
 		register(MoveBuilder.newMove(SLASH)
@@ -2304,6 +2609,7 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(75))
 			.build()
 		);
 		register(MoveBuilder.newMove(SLEET_SHOT)
@@ -2311,6 +2617,7 @@ public class MoveRegistry {
 			.type(ICE)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(55))
 			.build()
 		);
 		register(MoveBuilder.newMove(SLIME)
@@ -2318,6 +2625,7 @@ public class MoveRegistry {
 			.type(TOXIC)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(65))
 			.build()
 		);
 		register(MoveBuilder.newMove(SLUMBER)
@@ -2334,11 +2642,13 @@ public class MoveRegistry {
 			.energyCost(new Constant(0))
 			.build()
 		);
+		// snot shot
 		register(MoveBuilder.newMove(SNOWDOZER)
 			.name("Snowdozer")
 			.type(ICE)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(30))
 			.build()
 		);
 		register(MoveBuilder.newMove(SOFT_WATER)
@@ -2353,6 +2663,7 @@ public class MoveRegistry {
 			.type(LIGHT)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(100))
 			.build()
 		);
 		register(MoveBuilder.newMove(SOUL_DRAIN)
@@ -2360,6 +2671,7 @@ public class MoveRegistry {
 			.type(DARK)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(80))
 			.build()
 		);
 		register(MoveBuilder.newMove(SOUL_HARVEST)
@@ -2367,6 +2679,7 @@ public class MoveRegistry {
 			.type(SPIRIT)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(60))
 			.build()
 		);
 		register(MoveBuilder.newMove(SOUL_STORM)
@@ -2374,6 +2687,7 @@ public class MoveRegistry {
 			.type(SPIRIT)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(80))
 			.build()
 		);
 		register(MoveBuilder.newMove(SPARE)
@@ -2381,6 +2695,7 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(40))
 			.build()
 		);
 		register(MoveBuilder.newMove(SPECTRAL_BURST)
@@ -2388,6 +2703,7 @@ public class MoveRegistry {
 			.type(SPIRIT)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(80))
 			.build()
 		);
 		register(MoveBuilder.newMove(SPIKE_RUSH)
@@ -2396,6 +2712,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(0))
 			.priority(new Constant(1))
+			.basePower(new Constant(40))
 			.build()
 		);
 		register(MoveBuilder.newMove(SPIT)
@@ -2403,6 +2720,7 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(50))
 			.build()
 		);
 		register(MoveBuilder.newMove(SPIT_OUT)
@@ -2410,6 +2728,7 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(90))
 			.build()
 		);
 		register(MoveBuilder.newMove(SPITE)
@@ -2425,6 +2744,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(0))
 			.priority(new Constant(1))
+			.basePower(new Constant(70))
 			.build()
 		);
 		register(MoveBuilder.newMove(SPRAY)
@@ -2432,6 +2752,7 @@ public class MoveRegistry {
 			.type(WATER)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(40))
 			.build()
 		);
 		register(MoveBuilder.newMove(SQUARE_ONE)
@@ -2453,6 +2774,7 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(30))
 			.build()
 		);
 		register(MoveBuilder.newMove(STARE)
@@ -2467,6 +2789,7 @@ public class MoveRegistry {
 			.type(SPIRIT)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(30))
 			.build()
 		);
 		register(MoveBuilder.newMove(STATIC_SHOCK)
@@ -2474,6 +2797,7 @@ public class MoveRegistry {
 			.type(ELECTRIC)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(40))
 			.build()
 		);
 		register(MoveBuilder.newMove(STATIC_SPORES)
@@ -2488,13 +2812,15 @@ public class MoveRegistry {
 			.type(METAL)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(90))
 			.build()
 		);
 		register(MoveBuilder.newMove(STEEL_TRAP)
 			.name("steel_trap")
 			.type(METAL)
-			.category(STATUS)
+			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(60))
 			.build()
 		);
 		register(MoveBuilder.newMove(STING)
@@ -2502,6 +2828,7 @@ public class MoveRegistry {
 			.type(TOXIC)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(15))
 			.build()
 		);
 		register(MoveBuilder.newMove(STORM_SUMMON)
@@ -2509,6 +2836,7 @@ public class MoveRegistry {
 			.type(ELECTRIC)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(50))
 			.build()
 		);
 		register(MoveBuilder.newMove(STRATAGEM)
@@ -2516,6 +2844,7 @@ public class MoveRegistry {
 			.type(MIND)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(80))
 			.build()
 		);
 		register(MoveBuilder.newMove(STRETCH)
@@ -2530,6 +2859,7 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(40))
 			.build()
 		);
 		register(MoveBuilder.newMove(STUN)
@@ -2544,6 +2874,7 @@ public class MoveRegistry {
 			.type(SPIRIT)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(30))
 			.build()
 		);
 		register(MoveBuilder.newMove(SUBMERGE)
@@ -2551,6 +2882,7 @@ public class MoveRegistry {
 			.type(WATER)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(75))
 			.build()
 		);
 		register(MoveBuilder.newMove(SUMMON)
@@ -2565,6 +2897,7 @@ public class MoveRegistry {
 			.type(BRAWLER)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(45))
 			.build()
 		);
 		register(MoveBuilder.newMove(SWIFTEN)
@@ -2579,6 +2912,7 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(60))
 			.build()
 		);
 		register(MoveBuilder.newMove(TAIL_SLAP)
@@ -2586,6 +2920,7 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(40))
 			.build()
 		);
 		register(MoveBuilder.newMove(TAKE_ROOT)
@@ -2614,6 +2949,7 @@ public class MoveRegistry {
 			.type(ELECTRIC)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(20))
 			.build()
 		);
 		register(MoveBuilder.newMove(TEAMWORK)
@@ -2642,6 +2978,7 @@ public class MoveRegistry {
 			.type(MIND)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(90))
 			.build()
 		);
 		register(MoveBuilder.newMove(TEMPEST)
@@ -2656,6 +2993,7 @@ public class MoveRegistry {
 			.type(PLANT)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(70))
 			.build()
 		);
 		register(MoveBuilder.newMove(THORN_SLAM)
@@ -2663,6 +3001,7 @@ public class MoveRegistry {
 			.type(PLANT)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(110))
 			.build()
 		);
 		register(MoveBuilder.newMove(THUNDER_BLAST)
@@ -2670,6 +3009,7 @@ public class MoveRegistry {
 			.type(ELECTRIC)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(110))
 			.build()
 		);
 		register(MoveBuilder.newMove(THUNDER_CHOMP)
@@ -2677,7 +3017,8 @@ public class MoveRegistry {
 			.type(ELECTRIC)
 			.category(MELEE)
 			.energyCost(new Constant(0))
-			.addTag(BITING_MOVE)
+			.basePower(new Constant(70))
+			.addTag(BITING)
 			.build()
 		);
 		register(MoveBuilder.newMove(THUNDER_CLAP)
@@ -2685,6 +3026,7 @@ public class MoveRegistry {
 			.type(ELECTRIC)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(80))
 			.build()
 		);
 		register(MoveBuilder.newMove(THUNDER_CRASH)
@@ -2692,6 +3034,7 @@ public class MoveRegistry {
 			.type(ELECTRIC)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(95))
 			.build()
 		);
 		register(MoveBuilder.newMove(THUNDER_SLAM)
@@ -2699,6 +3042,7 @@ public class MoveRegistry {
 			.type(ELECTRIC)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(65))
 			.build()
 		);
 		register(MoveBuilder.newMove(THUNDERSTORM)
@@ -2713,6 +3057,7 @@ public class MoveRegistry {
 			.type(ELECTRIC)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(90))
 			.build()
 		);
 		register(MoveBuilder.newMove(TIMBER_THRASH)
@@ -2720,6 +3065,7 @@ public class MoveRegistry {
 			.type(PLANT)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(120))
 			.build()
 		);
 		register(MoveBuilder.newMove(TONE_BARRIER)
@@ -2735,6 +3081,7 @@ public class MoveRegistry {
 			.type(WATER)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(95))
 			.build()
 		);
 		register(MoveBuilder.newMove(TOXIBLAST)
@@ -2742,6 +3089,7 @@ public class MoveRegistry {
 			.type(TOXIC)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(75))
 			.build()
 		);
 		register(MoveBuilder.newMove(TOXIC_SPORES)
@@ -2756,6 +3104,7 @@ public class MoveRegistry {
 			.type(TOXIC)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(50))
 			.build()
 		);
 		register(MoveBuilder.newMove(TRIBUTE)
@@ -2770,6 +3119,7 @@ public class MoveRegistry {
 			.type(SPIRIT)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(70))
 			.build()
 		);
 		register(MoveBuilder.newMove(TRICKY_TACTICS)
@@ -2777,6 +3127,7 @@ public class MoveRegistry {
 			.type(DARK)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(95))
 			.build()
 		);
 		register(MoveBuilder.newMove(TRIP_ROOT)
@@ -2791,6 +3142,7 @@ public class MoveRegistry {
 			.type(WATER)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(90))
 			.build()
 		);
 		register(MoveBuilder.newMove(TUNE_UP)
@@ -2805,6 +3157,7 @@ public class MoveRegistry {
 			.type(BUG)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(75))
 			.build()
 		);
 		register(MoveBuilder.newMove(TYPHOON)
@@ -2812,6 +3165,7 @@ public class MoveRegistry {
 			.type(AIR)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(110))
 			.build()
 		);
 		register(MoveBuilder.newMove(UNDERMINE)
@@ -2819,6 +3173,7 @@ public class MoveRegistry {
 			.type(EARTH)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(70))
 			.build()
 		);
 		register(MoveBuilder.newMove(VENOM_CHOMP)
@@ -2826,7 +3181,8 @@ public class MoveRegistry {
 			.type(TOXIC)
 			.category(MELEE)
 			.energyCost(new Constant(0))
-			.addTag(BITING_MOVE)
+			.basePower(new Constant(70))
+			.addTag(BITING)
 			.build()
 		);
 		register(MoveBuilder.newMove(VENOM_SLASH)
@@ -2834,6 +3190,7 @@ public class MoveRegistry {
 			.type(TOXIC)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(70))
 			.build()
 		);
 		register(MoveBuilder.newMove(VICE_JAWS)
@@ -2841,6 +3198,7 @@ public class MoveRegistry {
 			.type(METAL)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(80))
 			.build()
 		);
 		register(MoveBuilder.newMove(VICIOUS_SNAP)
@@ -2848,6 +3206,7 @@ public class MoveRegistry {
 			.type(WATER)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(75))
 			.build()
 		);
 		register(MoveBuilder.newMove(VINE_LASH)
@@ -2855,6 +3214,7 @@ public class MoveRegistry {
 			.type(PLANT)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(90))
 			.build()
 		);
 		register(MoveBuilder.newMove(VITAL_JAB)
@@ -2862,6 +3222,7 @@ public class MoveRegistry {
 			.type(BRAWLER)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(80))
 			.build()
 		);
 		register(MoveBuilder.newMove(VITAL_SURGE)
@@ -2869,6 +3230,7 @@ public class MoveRegistry {
 			.type(BRAWLER)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(110))
 			.build()
 		);
 		register(MoveBuilder.newMove(WATER_BOMB)
@@ -2876,6 +3238,7 @@ public class MoveRegistry {
 			.type(WATER)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(60))
 			.build()
 		);
 		register(MoveBuilder.newMove(WAVE_WRECKER)
@@ -2883,6 +3246,7 @@ public class MoveRegistry {
 			.type(WATER)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(90))
 			.build()
 		);
 		register(MoveBuilder.newMove(WEB_SHOT)
@@ -2897,6 +3261,7 @@ public class MoveRegistry {
 			.type(AIR)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(60))
 			.build()
 		);
 		register(MoveBuilder.newMove(WINTERS_FURY)
@@ -2904,6 +3269,7 @@ public class MoveRegistry {
 			.type(ICE)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(30))
 			.build()
 		);
 		register(MoveBuilder.newMove(WONDER_HERB)
@@ -2918,6 +3284,7 @@ public class MoveRegistry {
 			.type(EARTH)
 			.category(MELEE)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(120))
 			.build()
 		);
 		register(MoveBuilder.newMove(ZIP_ZAP)
@@ -2925,6 +3292,7 @@ public class MoveRegistry {
 			.type(ELECTRIC)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(70))
 			.build()
 		);
     }

@@ -13,6 +13,9 @@ public class Tags implements DeepCopyable<Tags> {
 
     public Tags() {
         tags = new HashMap<>();
+        for (TagId id : TagId.values()) {
+            tags.put(id, false);
+        }
     }
     public Tags(Tags copy) {
         this.tags = new HashMap<>(copy.tags);
@@ -28,7 +31,7 @@ public class Tags implements DeepCopyable<Tags> {
     public Boolean get(TagId id) {
         return tags.get(id);
     }
-    public void add(TagId id) {
-        tags.put(id, true);
+    public void set(TagId id, Boolean value) {
+        tags.put(id, value);
     }
 }

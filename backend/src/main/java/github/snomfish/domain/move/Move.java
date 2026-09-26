@@ -32,6 +32,7 @@ public class Move implements DeepCopyable<Move> {
     private IMove afterHit;
     private IMove onMiss;
 
+    private INumber basePower;
     private Tags tags;
     private Modifiers modifiers;
     private TypeChart typeChart;
@@ -56,6 +57,7 @@ public class Move implements DeepCopyable<Move> {
         IMove afterHit,
         IMove onMiss,
 
+        INumber basePower,
         Tags tags
     ) {
         this.id = id;
@@ -71,6 +73,7 @@ public class Move implements DeepCopyable<Move> {
         this.afterHit = afterHit;
         this.onMiss = onMiss;
 
+        this.basePower = basePower;
         this.tags = tags;
         this.modifiers = new Modifiers();
         this.typeChart = TypeChart.get();
@@ -95,6 +98,7 @@ public class Move implements DeepCopyable<Move> {
         this.afterHit = move.afterHit.deepCopy();
         this.onMiss = move.onMiss.deepCopy();
 
+        this.basePower = move.basePower.deepCopy();
         this.tags = move.tags.deepCopy();
         this.modifiers = move.modifiers.deepCopy();
         this.typeChart = move.typeChart.deepCopy();
@@ -124,6 +128,7 @@ public class Move implements DeepCopyable<Move> {
     public IMove afterHit() {return afterHit;}
     public IMove onMiss() {return onMiss;}
 
+    public INumber basePower() {return basePower;}
     public Tags tags() {return tags;}
     public Modifiers modifiers() {return modifiers;}
     public TypeChart typeChart() {return typeChart;}
@@ -148,6 +153,7 @@ public class Move implements DeepCopyable<Move> {
     public void setAfterHit(IMove afterHit) {this.afterHit = afterHit;}
     public void setOnMiss(IMove onMiss) {this.onMiss = onMiss;}
 
+    public void setBasePower(INumber basePower) {this.basePower = basePower;}
     public void setTags(Tags tags) {this.tags = tags;}
     public void setModifiers(Modifiers modifiers) {this.modifiers = modifiers;}
     public void setTypeChart(TypeChart typeChart) {this.typeChart = typeChart;}
