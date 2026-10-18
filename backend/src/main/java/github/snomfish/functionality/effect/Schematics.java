@@ -21,16 +21,17 @@ public class Schematics {
 
     // this is bad code, but I dont know how to do suppression in this engine
     // 2026 09 26: I think this is actually a great idea 
-    public static IEffect secondaryEffects(IEffect effects) {
+    public static IEffect secondaryEffects(List<IEffect> effects) {
         return new ConditionalEffect(
             new And(List.of(
                 new Not(new Equals(Value.USER_ABILITY_ID, AbilityId.BRUTE_FORCE))
             )),
-            effects
+            new EffectSequence(effects)
         );
     }
 
 
+    // applying status
     public static IEffect applyStatusToTarget(
         INumber number,
         StatusId statusId
@@ -40,10 +41,7 @@ public class Schematics {
             ApplyStatus.toTarget(statusId)
         );  
     }
-    public static IEffect applyStatusToTarget(
-        Double chance,
-        StatusId statusId
-    ) {
-        return applyStatusToTarget(new Constant(chance), statusId);
+    public static IEffect applyStatusToTarget(double chance, StatusId statusId) {
+        return applyStatusToTarget(new Constant(chance), statusId); // just turns the double into a Constant and calls the same function again
     }
 }

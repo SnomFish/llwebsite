@@ -3,7 +3,6 @@ package github.snomfish.functionality.effect.effects;
 import java.util.List;
 
 import github.snomfish.domain.ActiveLoomian;
-import github.snomfish.domain.mechanics.MechanicId;
 import github.snomfish.domain.status.StatusId;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.branch.Branch;

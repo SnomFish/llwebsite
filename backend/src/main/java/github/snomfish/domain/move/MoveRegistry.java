@@ -4,9 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.scheduling.annotation.SchedulingConfiguration;
+
 import github.snomfish.domain.move.structures.MoveEffect;
 import github.snomfish.domain.stats.StatId;
+import github.snomfish.domain.status.StatusId;
 import github.snomfish.functionality.effect.EffectSequence;
+import github.snomfish.functionality.effect.Schematics;
 import github.snomfish.functionality.effect.effects.DealFormulaDamage;
 import github.snomfish.functionality.number.Constant;
 
@@ -103,7 +107,10 @@ public class MoveRegistry {
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.2, StatusId.BURN)
+					))
 				))
 			))
 			.build()
@@ -116,7 +123,10 @@ public class MoveRegistry {
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.2, StatusId.FROSTBITE)
+					))
 				))
 			))
 			.build()
@@ -155,7 +165,10 @@ public class MoveRegistry {
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.2, StatusId.BAD_POISON)
+					))
 				))
 			))
 			.build()
@@ -344,12 +357,15 @@ public class MoveRegistry {
 			.basePower(new Constant(85))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.1, StatusId.POISON)
+					))
 				))
 			))
 			.build()
 		);
-		register(MoveBuilder.newMove(BARB_TRAP)
+		register(MoveBuilder.newMove(BARB_TRAP) // MAN I HAVE NO IDEA, MAYBE HAVE THIS APPLY A ONE TURN MECHANIC ON THE USER????
 			.name("barb_trap")
 			.type(TOXIC)
 			.category(STATUS)
@@ -431,6 +447,9 @@ public class MoveRegistry {
 			.type(ICE)
 			.category(STATUS)
 			.energyCost(new Constant(0))
+			.onHit(new MoveEffect(
+				Schematics.applyStatusToTarget(1, StatusId.FROSTBITE)
+			))
 			.build()
 		);
 		register(MoveBuilder.newMove(BLAZE_CHOMP)
@@ -441,7 +460,10 @@ public class MoveRegistry {
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.1, StatusId.BURN)
+					))
 				))
 			))
 			.addTag(BITING)
@@ -455,7 +477,10 @@ public class MoveRegistry {
 			.basePower(new Constant(120))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.1, StatusId.BURN)
+					))
 				))
 			))
 			.build()
@@ -468,7 +493,10 @@ public class MoveRegistry {
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.1, StatusId.BURN)
+					))
 				))
 			))
 			.build()
@@ -780,7 +808,10 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.1, StatusId.BURN)
+					))
 				))
 			))
 			.build()
@@ -806,7 +837,10 @@ public class MoveRegistry {
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.1, StatusId.FROSTBITE)
+					))
 				))
 			))
 			.addTag(BITING)
@@ -919,7 +953,10 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.1, StatusId.BURN)
+					))
 				))
 			))
 			.build()
@@ -1170,7 +1207,7 @@ public class MoveRegistry {
 			))
 			.build()
 		);
-		register(MoveBuilder.newMove(DOUBLE_STING)
+		register(MoveBuilder.newMove(DOUBLE_STING) // NEEDS TO BE MADE INTO A BARRAGE
 			.name("double_sting")
 			.type(BUG)
 			.category(MELEE)
@@ -1178,7 +1215,10 @@ public class MoveRegistry {
 			.basePower(new Constant(25))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.2, StatusId.POISON)
+					))
 				))
 			))
 			.build()
@@ -1343,7 +1383,10 @@ public class MoveRegistry {
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.1, StatusId.PARALYSIS)
+					))
 				))
 			))
 			.addTag(PUNCHING)
@@ -1357,7 +1400,11 @@ public class MoveRegistry {
 			.basePower(new Constant(100))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.1, StatusId.PARALYSIS),
+						Schematics.applyStatusToTarget(0.1 / 0.9, StatusId.BURN)
+					))
 				))
 			))
 			.build()
@@ -1370,7 +1417,12 @@ public class MoveRegistry {
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.1, StatusId.PARALYSIS),
+						Schematics.applyStatusToTarget(0.1 / 0.9, StatusId.BURN),
+						Schematics.applyStatusToTarget(0.1 / 0.8, StatusId.FROSTBITE)
+					))
 				))
 			))
 			.build()
@@ -1511,7 +1563,10 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.1, StatusId.BURN)
+					))
 				))
 			))
 			.build()
@@ -1524,7 +1579,10 @@ public class MoveRegistry {
 			.basePower(new Constant(65))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.1, StatusId.BURN)
+					))
 				))
 			))
 			.build()
@@ -1550,7 +1608,10 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.1, StatusId.BURN)
+					))
 				))
 			))
 			.build()
@@ -1576,7 +1637,10 @@ public class MoveRegistry {
 			.basePower(new Constant(110))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.2, StatusId.BURN)
+					))
 				))
 			))
 			.build()
@@ -1622,7 +1686,10 @@ public class MoveRegistry {
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.1, StatusId.FROSTBITE)
+					))
 				))
 			))
 			.build()
@@ -1635,7 +1702,14 @@ public class MoveRegistry {
 			.basePower(new Constant(110))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.06, StatusId.POISON),
+						Schematics.applyStatusToTarget(0.06 / 0.9, StatusId.PARALYSIS),
+						Schematics.applyStatusToTarget(0.06 / 0.8, StatusId.BURN),
+						Schematics.applyStatusToTarget(0.06 / 0.7, StatusId.FROSTBITE),
+						Schematics.applyStatusToTarget(0.06 / 0.6, StatusId.SLEEP)
+					))
 				))
 			))
 			.build()
@@ -1648,7 +1722,10 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.1, StatusId.FROSTBITE)
+					))
 				))
 			))
 			.build()
@@ -1661,7 +1738,10 @@ public class MoveRegistry {
 			.basePower(new Constant(110))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.2, StatusId.FROSTBITE)
+					))
 				))
 			))
 			.build()
@@ -1687,7 +1767,10 @@ public class MoveRegistry {
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.1, StatusId.FROSTBITE)
+					))
 				))
 			))
 			.addTag(PUNCHING)
@@ -1748,7 +1831,10 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.3, StatusId.BURN)
+					))
 				))
 			))
 			.build()
@@ -1852,7 +1938,10 @@ public class MoveRegistry {
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.5, StatusId.POISON)
+					))
 				))
 			))
 			.build()
@@ -1862,6 +1951,9 @@ public class MoveRegistry {
 			.type(ANCIENT)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.onHit(new MoveEffect(
+				Schematics.applyStatusToTarget(1, StatusId.POISON)
+			))
 			.build()
 		);
 		register(MoveBuilder.newMove(GRAFFITI)
@@ -1872,7 +1964,10 @@ public class MoveRegistry {
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.2, StatusId.POISON)
+					))
 				))
 			))
 			.build()
@@ -1912,7 +2007,10 @@ public class MoveRegistry {
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.2, StatusId.SLEEP)
+					))
 				))
 			))
 			.build()
@@ -1925,7 +2023,10 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.1, StatusId.POISON)
+					))
 				))
 			))
 			.build()
@@ -2134,6 +2235,9 @@ public class MoveRegistry {
 			.type(MIND)
 			.category(STATUS)
 			.energyCost(new Constant(0))
+			.onHit(new MoveEffect(
+				Schematics.applyStatusToTarget(1, StatusId.SLEEP)
+			))
 			.build()
 		);
 		register(MoveBuilder.newMove(ICE_HAMMER)
@@ -2323,7 +2427,10 @@ public class MoveRegistry {
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.3, StatusId.BURN)
+					))
 				))
 			))
 			.build()
@@ -2437,7 +2544,10 @@ public class MoveRegistry {
 			.basePower(new Constant(85))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.2, StatusId.BURN)
+					))
 				))
 			))
 			.build()
@@ -2637,7 +2747,10 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.1, StatusId.POISON)
+					))
 				))
 			))
 			.build()
@@ -2781,7 +2894,10 @@ public class MoveRegistry {
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.5, StatusId.PARALYSIS)
+					))
 				))
 			))
 			.build()
@@ -2906,7 +3022,11 @@ public class MoveRegistry {
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.1, StatusId.BURN),
+						Schematics.applyStatusToTarget(0.1 / 0.9, StatusId.FROSTBITE)
+					))
 				))
 			))
 			.build()
@@ -3067,6 +3187,9 @@ public class MoveRegistry {
 			.type(TOXIC)
 			.category(STATUS)
 			.energyCost(new Constant(0))
+			.onHit(new MoveEffect(
+				Schematics.applyStatusToTarget(1, StatusId.BAD_POISON)
+			))
 			.build()
 		);
 		register(MoveBuilder.newMove(POISON_BARBS)
@@ -3130,7 +3253,10 @@ public class MoveRegistry {
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.3, StatusId.PARALYSIS)
+					))
 				))
 			))
 			.build()
@@ -3230,7 +3356,10 @@ public class MoveRegistry {
 			.basePower(new Constant(65))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.1, StatusId.BURN)
+					))
 				))
 			))
 			.build()
@@ -3306,6 +3435,9 @@ public class MoveRegistry {
 			.type(FIRE)
 			.category(STATUS)
 			.energyCost(new Constant(0))
+			.onHit(new MoveEffect(
+				Schematics.applyStatusToTarget(1, StatusId.BURN)
+			))
 			.build()
 		);
 		register(MoveBuilder.newMove(RAGING_HOWL)
@@ -3612,7 +3744,10 @@ public class MoveRegistry {
 			.basePower(new Constant(85))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.1, StatusId.BURN)
+					))
 				))
 			))
 			.build()
@@ -3758,7 +3893,10 @@ public class MoveRegistry {
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.1, StatusId.BURN)
+					))
 				))
 			))
 			.build()
@@ -3811,7 +3949,10 @@ public class MoveRegistry {
 			.basePower(new Constant(65))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.3, StatusId.POISON)
+					))
 				))
 			))
 			.build()
@@ -3828,6 +3969,9 @@ public class MoveRegistry {
 			.type(PLANT)
 			.category(STATUS)
 			.energyCost(new Constant(0))
+			.onHit(new MoveEffect(
+				Schematics.applyStatusToTarget(1, StatusId.SLEEP)
+			))
 			.build()
 		);
 		// snot shot
@@ -4058,7 +4202,10 @@ public class MoveRegistry {
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.1, StatusId.PARALYSIS)
+					))
 				))
 			))
 			.build()
@@ -4068,6 +4215,9 @@ public class MoveRegistry {
 			.type(PLANT)
 			.category(STATUS)
 			.energyCost(new Constant(0))
+			.onHit(new MoveEffect(
+				Schematics.applyStatusToTarget(1, StatusId.PARALYSIS)
+			))
 			.build()
 		);
 		register(MoveBuilder.newMove(STEEL_CRUSHER)
@@ -4104,7 +4254,10 @@ public class MoveRegistry {
 			.basePower(new Constant(15))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.3, StatusId.POISON)
+					))
 				))
 			))
 			.build()
@@ -4117,7 +4270,10 @@ public class MoveRegistry {
 			.basePower(new Constant(50))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.5, StatusId.PARALYSIS)
+					))
 				))
 			))
 			.build()
@@ -4161,6 +4317,9 @@ public class MoveRegistry {
 			.type(ELECTRIC)
 			.category(STATUS)
 			.energyCost(new Constant(0))
+			.onHit(new MoveEffect(
+				Schematics.applyStatusToTarget(1, StatusId.PARALYSIS)
+			))
 			.build()
 		);
 		register(MoveBuilder.newMove(STUPEFY)
@@ -4171,7 +4330,10 @@ public class MoveRegistry {
 			.basePower(new Constant(30))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.3, StatusId.PARALYSIS)
+					))
 				))
 			))
 			.build()
@@ -4271,7 +4433,10 @@ public class MoveRegistry {
 			.basePower(new Constant(20))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(1, StatusId.PARALYSIS)
+					))
 				))
 			))
 			.build()
@@ -4356,7 +4521,10 @@ public class MoveRegistry {
 			.basePower(new Constant(110))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.2, StatusId.PARALYSIS)
+					))
 				))
 			))
 			.build()
@@ -4369,7 +4537,10 @@ public class MoveRegistry {
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.1, StatusId.PARALYSIS)
+					))
 				))
 			))
 			.addTag(BITING)
@@ -4409,7 +4580,10 @@ public class MoveRegistry {
 			.basePower(new Constant(65))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.1, StatusId.PARALYSIS)
+					))
 				))
 			))
 			.build()
@@ -4429,7 +4603,10 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.1, StatusId.PARALYSIS)
+					))
 				))
 			))
 			.build()
@@ -4476,7 +4653,10 @@ public class MoveRegistry {
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.2, StatusId.POISON)
+					))
 				))
 			))
 			.build()
@@ -4486,6 +4666,9 @@ public class MoveRegistry {
 			.type(TOXIC)
 			.category(STATUS)
 			.energyCost(new Constant(0))
+			.onHit(new MoveEffect(
+				Schematics.applyStatusToTarget(1, StatusId.POISON)
+			))
 			.build()
 		);
 		register(MoveBuilder.newMove(TOXIC_TAIL)
@@ -4496,7 +4679,10 @@ public class MoveRegistry {
 			.basePower(new Constant(50))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.1, StatusId.POISON)
+					))
 				))
 			))
 			.build()
@@ -4619,7 +4805,10 @@ public class MoveRegistry {
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.1, StatusId.BAD_POISON)
+					))
 				))
 			))
 			.addTag(BITING)
@@ -4633,7 +4822,10 @@ public class MoveRegistry {
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						Schematics.applyStatusToTarget(0.1, StatusId.POISON)
+					))
 				))
 			))
 			.build()
