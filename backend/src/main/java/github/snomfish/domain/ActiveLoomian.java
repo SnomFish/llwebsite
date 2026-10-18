@@ -22,7 +22,8 @@ public class ActiveLoomian extends Loomian {
     private Stats battleStats;
     private StatChanges statChanges;
     private IAction action;
-    private Mechanics mechanics; // extra functionality that is temp added to an onfield loomina such as coursing venom being in effect
+    private Mechanics mechanics; // extra functionality that is temp added to an onfield loomian such as coursing venom being in effect
+    private int statusTurns;
     
 
     public ActiveLoomian(
@@ -34,6 +35,7 @@ public class ActiveLoomian extends Loomian {
         this.statChanges = new StatChanges();
         this.action = null;
         this.mechanics = new Mechanics();
+        this.statusTurns = 0;
     }
     public ActiveLoomian(ActiveLoomian activeLoomian) {
         super(activeLoomian);
@@ -42,6 +44,7 @@ public class ActiveLoomian extends Loomian {
         this.statChanges = activeLoomian.statChanges.deepCopy();
         if (activeLoomian.action != null) this.action = activeLoomian.action.deepCopy();
         this.mechanics = activeLoomian.mechanics.deepCopy();
+        this.statusTurns = activeLoomian.statusTurns;
     }
 
 
@@ -67,6 +70,7 @@ public class ActiveLoomian extends Loomian {
     public StatChanges statChanges() {return statChanges;}
     public IAction action() {return action;}
     public Mechanics mechanics() {return mechanics;}
+    public int statusTurns() {return statusTurns;}
 
 
     // setter
@@ -75,4 +79,5 @@ public class ActiveLoomian extends Loomian {
     public void setStatChanges(StatChanges statChanges) {this.statChanges = statChanges;}
     public void setAction(IAction action) {this.action = action;}
     public void setMechanics(Mechanics mechanics) {this.mechanics = mechanics;} 
+    public void setStatusTurns(int statusTurns) {this.statusTurns = statusTurns;}
 }

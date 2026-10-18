@@ -6,6 +6,7 @@ import java.util.List;
 import github.snomfish.domain.move.modifiers.Modifiers;
 import github.snomfish.domain.move.structures.IMove;
 import github.snomfish.domain.move.tags.Tags;
+import github.snomfish.domain.stats.StatId;
 import github.snomfish.domain.type.TypeChart;
 import github.snomfish.domain.type.TypeId;
 import github.snomfish.functionality.branch.Branch;
@@ -33,6 +34,8 @@ public class Move implements DeepCopyable<Move> {
     private IMove onMiss;
 
     private INumber basePower;
+    private StatId attackingStatId;
+    private StatId defendingStatId;
     private Tags tags;
     private Modifiers modifiers;
     private TypeChart typeChart;
@@ -58,6 +61,8 @@ public class Move implements DeepCopyable<Move> {
         IMove onMiss,
 
         INumber basePower,
+        StatId attackingStatId,
+        StatId defendingStatId,
         Tags tags
     ) {
         this.id = id;
@@ -74,6 +79,8 @@ public class Move implements DeepCopyable<Move> {
         this.onMiss = onMiss;
 
         this.basePower = basePower;
+        this.attackingStatId = attackingStatId;
+        this.defendingStatId = defendingStatId;
         this.tags = tags;
         this.modifiers = new Modifiers();
         this.typeChart = TypeChart.get();
@@ -99,6 +106,8 @@ public class Move implements DeepCopyable<Move> {
         this.onMiss = move.onMiss.deepCopy();
 
         this.basePower = move.basePower.deepCopy();
+        this.attackingStatId = move.attackingStatId;
+        this.defendingStatId = move.defendingStatId;
         this.tags = move.tags.deepCopy();
         this.modifiers = move.modifiers.deepCopy();
         this.typeChart = move.typeChart.deepCopy();
@@ -129,6 +138,8 @@ public class Move implements DeepCopyable<Move> {
     public IMove onMiss() {return onMiss;}
 
     public INumber basePower() {return basePower;}
+    public StatId attackingStatId() {return attackingStatId;}
+    public StatId defendingStatId() {return defendingStatId;}
     public Tags tags() {return tags;}
     public Modifiers modifiers() {return modifiers;}
     public TypeChart typeChart() {return typeChart;}
@@ -154,6 +165,8 @@ public class Move implements DeepCopyable<Move> {
     public void setOnMiss(IMove onMiss) {this.onMiss = onMiss;}
 
     public void setBasePower(INumber basePower) {this.basePower = basePower;}
+    public void setAttackingStatId(StatId attackingStatId) {this.attackingStatId = attackingStatId;}
+    public void setDefendingStatId(StatId defendingStatId) {this.defendingStatId = defendingStatId;}
     public void setTags(Tags tags) {this.tags = tags;}
     public void setModifiers(Modifiers modifiers) {this.modifiers = modifiers;}
     public void setTypeChart(TypeChart typeChart) {this.typeChart = typeChart;}

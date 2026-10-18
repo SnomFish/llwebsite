@@ -23,25 +23,13 @@ import static github.snomfish.functionality.event.EventId.*;
 public class DealFormulaDamage implements IEffect {
     // deals formula damage to the target
     
-    private StatId attackingStatId;
-    private StatId defendingStatId;
-    
  
-    public DealFormulaDamage(
-        StatId attackingStatId,
-        StatId defendingStatId
-    ) {
-        this.attackingStatId = attackingStatId;
-        this.defendingStatId = defendingStatId;
-    }
+    public DealFormulaDamage() {}
 
 
     @Override 
     public DealFormulaDamage deepCopy() {
-        return new DealFormulaDamage(
-            attackingStatId, 
-            defendingStatId
-        );
+        return new DealFormulaDamage();
     } 
 
 
@@ -119,6 +107,8 @@ public class DealFormulaDamage implements IEffect {
         Move move = user.action().move();
 
 
+        StatId attackingStatId = move.attackingStatId();
+        StatId defendingStatId = move.defendingStatId();
         double attackingStatModifier;
         double defendingStatModifier;
         if (move.hasCrit()) {

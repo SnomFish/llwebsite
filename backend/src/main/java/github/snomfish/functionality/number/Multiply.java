@@ -1,0 +1,56 @@
+package github.snomfish.functionality.number;
+
+import java.util.List;
+
+import github.snomfish.functionality.branch.Branch;
+import github.snomfish.functionality.context.BattleContext;
+
+import static github.snomfish.functionality.copy.DeepCopy.*;
+
+public class Multiply implements INumber {
+    
+
+    private List<INumber> numbers;
+
+
+    public Multiply(List<INumber> numbers) {
+        this.numbers = numbers;
+    }
+
+
+    @Override 
+    public Multiply deepCopy() {
+        return new Multiply(
+            deepCopyList(numbers)
+        );
+    }
+
+
+    @Override
+    public List<Branch<Double>> execute(BattleContext context) {
+        List<Branch<Double>> outcomes = List.of(
+            new Branch<>(0.0, 1.0)
+        );
+
+        for (INumber number : numbers) {
+            List<Branch<Double>> numberOutcomes = number.execute(context);
+
+            List<Branch<Double>> newOutcomes = new java.util.ArrayList<>();
+
+            for (Branch<Double> existing : outcomes) {
+                for (Branch<Double> next : numberOutcomes) {
+
+                    double value = existing.value() * next.value();
+                    double probability =
+                        existing.probability() * next.probability();
+
+                    newOutcomes.add(new Branch<>(value, probability));
+                }
+            }
+
+            outcomes = newOutcomes;
+        }
+
+        return outcomes;
+    }
+}

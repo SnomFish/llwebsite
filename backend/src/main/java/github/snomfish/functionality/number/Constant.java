@@ -7,6 +7,7 @@ import github.snomfish.functionality.context.BattleContext;
 
 public class Constant implements INumber {
 
+    
     private Double value;
     
 

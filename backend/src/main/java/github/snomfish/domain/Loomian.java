@@ -26,7 +26,6 @@ public class Loomian implements DeepCopyable<Loomian> {
     private AbilityId abilityId;
     private ItemId itemId;
     private StatusId statusId;
-    private int statusTurns;
     private Stats nature;
 
     private Stats actualStats;
@@ -55,7 +54,6 @@ public class Loomian implements DeepCopyable<Loomian> {
         this.abilityId = abilityId;
         this.itemId = itemId;
         this.statusId = statusId;
-        this.statusTurns = 0;
         this.nature = nature;
 
         this.tps = tps;
@@ -75,7 +73,6 @@ public class Loomian implements DeepCopyable<Loomian> {
         this.abilityId = loomian.abilityId;
         this.itemId = loomian.itemId;
         this.statusId = loomian.statusId;
-        this.statusTurns = loomian.statusTurns;
         this.nature = loomian.nature;
 
         this.actualStats = loomian.actualStats;
@@ -123,7 +120,7 @@ public class Loomian implements DeepCopyable<Loomian> {
     public void setMoves(List<MoveId> moves) {this.moves = moves;}
     public void setAbilityId(AbilityId abilityId) {this.abilityId = abilityId;}
     public void setItemId(ItemId itemId) {this.itemId = itemId;}
-    public void setStatusId(StatusId statusId) {this.statusId = statusId;}
+    public void setStatusId(StatusId statusId) {this.statusId = statusId;} // this does not reset status turns
     public void setNature(Stats nature) {this.nature = nature;}
 
     public void setActualStats(Stats actualStats) {this.actualStats = actualStats;}

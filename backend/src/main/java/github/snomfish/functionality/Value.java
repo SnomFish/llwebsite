@@ -1,7 +1,5 @@
 package github.snomfish.functionality;
 
-import static github.snomfish.domain.stats.StatChangesId.MATTACK;
-
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
@@ -74,12 +72,21 @@ public enum Value {
     ),
 
     USER_STATUS_ID(
-        c -> c.user().activeLoomian().status().id(),
-        null
+        c -> c.user().activeLoomian().statusId(),
+        (c, v) -> c.user().activeLoomian().setStatusId(v)
     ),
     TARGET_STATUS_ID(
-        c -> c.target().activeLoomian().status().id(),
-        null
+        c -> c.target().activeLoomian().statusId(),
+        (c, v) -> c.target().activeLoomian().setStatusId(v)
+    ),
+
+    USER_STATUS_TURNS(
+        c -> c.user().activeLoomian().statusTurns(),
+        (c, v) -> c.user().activeLoomian().setStatusTurns(v)
+    ),
+    TARGET_STATUS_TURNS(
+        c -> c.target().activeLoomian().statusTurns(),
+        (c, v) -> c.target().activeLoomian().setStatusTurns(v)
     ),
 
 

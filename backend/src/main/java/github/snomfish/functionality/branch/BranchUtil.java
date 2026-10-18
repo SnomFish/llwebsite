@@ -1,7 +1,9 @@
 package github.snomfish.functionality.branch;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 
 public class BranchUtil {
@@ -40,5 +42,30 @@ public class BranchUtil {
             branch.multiplyProbability(pBranch.probability());
         }
         return branches;
+    }
+
+
+
+
+    // OPTIMIZATIONS
+    public static List<Branch<Double>> condense(List<Branch<Double>> branches) {
+        Map<Double, Double> map = new HashMap<>();
+        for (Branch<Double> branch : branches) {
+            Double key = branch.value();
+            Double val = map.get(key);
+            val += branch.probability();
+            map.put(key, val);
+        }
+
+        List<Branch<Double>> outcomes = new ArrayList<>();
+        for (Double value : map.keySet()) {
+            Double probability = map.get(value);
+            outcomes.add(new Branch<>(
+                value,
+                probability
+            ));
+        }
+
+        return outcomes;
     }
 }

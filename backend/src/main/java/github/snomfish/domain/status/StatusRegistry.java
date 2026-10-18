@@ -5,9 +5,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import github.snomfish.domain.move.CategoryId;
+import github.snomfish.functionality.Value;
+import github.snomfish.functionality.condition.Equals;
+import github.snomfish.functionality.condition.NoCondition;
+import github.snomfish.functionality.effect.effects.DealDirectSelfDamage;
+import github.snomfish.functionality.effect.effects.MultiplyValueEffect;
+import github.snomfish.functionality.effect.effects.NoEffect;
+import github.snomfish.functionality.event.Event;
+import github.snomfish.functionality.event.EventId;
 import github.snomfish.functionality.event.TriggerRule;
+import github.snomfish.functionality.number.Constant;
+import github.snomfish.functionality.number.Multiply;
+import github.snomfish.functionality.number.ValueConstant;
 
 import static github.snomfish.domain.status.StatusId.*;
+import static github.snomfish.functionality.event.EventSideId.*;
 
 public class StatusRegistry {
     
@@ -27,14 +40,23 @@ public class StatusRegistry {
 
     private static void register(
         StatusId id,
+        String name
+    ) {
+        registry.put(id, new Status(id, name, new ArrayList<TriggerRule>()));
+    }
+    private static void register(
+        StatusId id,
         String name,
         TriggerRule rule
     ) {
-		if (rule == null) {
-			registry.put(id, new Status(id, name, new ArrayList<TriggerRule>()));
-			return;
-		}
         registry.put(id, new Status(id, name, List.of(rule)));
+    }
+    private static void register(
+        StatusId id,
+        String name,
+        List<TriggerRule> rules
+    ) {
+        registry.put(id, new Status(id, name, rules));
     }
 
 
@@ -44,37 +66,68 @@ public class StatusRegistry {
         register(
             NO_STATUS,
             "no status",
-            null
+            new TriggerRule(
+                new Event(), 
+                new NoCondition(),
+                new NoEffect() 
+            )
         );  
         register(
             POISON,
             "posion",
-            null
+            new TriggerRule(
+                new Event(EventId.END_TURN_STATUS_EFFECT_EVENT, USER),
+                new NoCondition(),
+                new DealDirectSelfDamage(new Constant(1/8))
+            )
         );
         register(
             BAD_POISON,
             "poison",
-            null
+            new TriggerRule(
+                new Event(EventId.END_TURN_STATUS_EFFECT_EVENT, USER),
+                new NoCondition(),
+                new DealDirectSelfDamage(new Multiply(List.of(
+                    new Constant(1/16),
+                    new ValueConstant(Value.USER_STATUS_TURNS)
+                )))
+            )
         );
         register(
             PARALYSIS,
-            "paralysis",
-            null
+            "paralysis"
         );
         register(
             BURN,
             "burn",
-            null
+            List.of(new TriggerRule(
+                new Event(EventId.END_TURN_STATUS_EFFECT_EVENT, USER),
+                new NoCondition(),
+                new DealDirectSelfDamage(new Constant(1/16))
+            ),
+            new TriggerRule( // cutting mattack in half
+                new Event(EventId.BEFORE_MOVE_EVENT, USER), 
+                new Equals(Value.MOVE_CATEGORY, CategoryId.MELEE),
+                new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant (0.5)) 
+            ))
         );
         register(
             FROSTBITE,
             "frostbite",
-            null
+            List.of(new TriggerRule(
+                new Event(EventId.END_TURN_STATUS_EFFECT_EVENT, USER),
+                new NoCondition(),
+                new DealDirectSelfDamage(new Constant(1/16))
+            ),
+            new TriggerRule( // cutting mattack in half
+                new Event(EventId.BEFORE_MOVE_EVENT, USER), 
+                new Equals(Value.MOVE_CATEGORY, CategoryId.RANGED),
+                new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant (0.5)) 
+            ))
         );
         register(
             SLEEP,
-            "sleep",
-            null
+            "sleep"
         );
     }
 }

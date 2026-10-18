@@ -4,6 +4,7 @@ import github.snomfish.domain.move.structures.IMove;
 import github.snomfish.domain.move.structures.NoMove;
 import github.snomfish.domain.move.tags.TagId;
 import github.snomfish.domain.move.tags.Tags;
+import github.snomfish.domain.stats.StatId;
 import github.snomfish.domain.type.TypeId;
 import github.snomfish.functionality.condition.ICondition;
 import github.snomfish.functionality.condition.NoCondition;
@@ -35,6 +36,8 @@ public class MoveBuilder {
             new NoMove(),
             new NoMove(),
             new Constant(0),
+            StatId.MATTACK,
+            StatId.MDEFENSE,
             new Tags()
         );
     }
@@ -57,6 +60,13 @@ public class MoveBuilder {
     }
     public MoveBuilder category(CategoryId category) {
         move.setCategory(category);
+        if (category == CategoryId.MELEE) {
+            move.setAttackingStatId(StatId.MATTACK); 
+            move.setAttackingStatId(StatId.MDEFENSE); 
+        } else if (category == CategoryId.RANGED) {
+            move.setAttackingStatId(StatId.RATTACK); 
+            move.setAttackingStatId(StatId.RDEFENSE);
+        }
         return this;
     }
     public MoveBuilder energyCost(INumber energyCost) {
@@ -87,6 +97,14 @@ public class MoveBuilder {
 
     public MoveBuilder basePower(INumber basePower) {
         move.setBasePower(basePower);
+        return this;
+    }
+    public MoveBuilder overrideAttackingStat(StatId attackingStatId) {
+        move.setAttackingStatId(attackingStatId);
+        return this;
+    }
+    public MoveBuilder overrideDefendingStat(StatId defendingStatId) {
+        move.setDefendingStatId(defendingStatId);
         return this;
     }
     public MoveBuilder addTag(TagId tagId) {
