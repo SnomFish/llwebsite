@@ -10,8 +10,6 @@ import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.event.EventId;
 import github.snomfish.functionality.number.INumber;
 
-import static github.snomfish.functionality.condition.ConditionUtil.optimise;
-
 public class AccuracyCheck implements ICondition {
     
 
@@ -47,6 +45,6 @@ public class AccuracyCheck implements ICondition {
             outcomes.add(new Branch<>(false, 1-accuracyValue));
         }
 
-        return optimise(outcomes);
+        return outcomes;
     }
 }

@@ -7,7 +7,7 @@ import github.snomfish.domain.move.tags.Tags;
 import github.snomfish.domain.stats.StatId;
 import github.snomfish.domain.type.TypeId;
 import github.snomfish.functionality.condition.ICondition;
-import github.snomfish.functionality.condition.NoCondition;
+import github.snomfish.functionality.condition.conditions.NoCondition;
 import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.INumber;
 

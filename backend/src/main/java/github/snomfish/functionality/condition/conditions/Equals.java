@@ -1,9 +1,10 @@
-package github.snomfish.functionality.condition;
+package github.snomfish.functionality.condition.conditions;
 
 import java.util.List;
 
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.branch.Branch;
+import github.snomfish.functionality.condition.ICondition;
 import github.snomfish.functionality.context.BattleContext;
 
 public class Equals implements ICondition {

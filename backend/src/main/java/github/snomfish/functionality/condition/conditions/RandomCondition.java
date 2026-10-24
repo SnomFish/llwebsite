@@ -1,13 +1,12 @@
-package github.snomfish.functionality.condition;
+package github.snomfish.functionality.condition.conditions;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import github.snomfish.functionality.branch.Branch;
+import github.snomfish.functionality.condition.ICondition;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.number.INumber;
-
-import static github.snomfish.functionality.condition.ConditionUtil.optimise;
 
 public class RandomCondition implements ICondition {
     
@@ -40,6 +39,6 @@ public class RandomCondition implements ICondition {
             outcomes.add(new Branch<>(false, 1-value));
         }
 
-        return optimise(outcomes);
+        return outcomes;
     }
 }

@@ -7,8 +7,8 @@ import java.util.Map;
 
 import github.snomfish.domain.move.CategoryId;
 import github.snomfish.functionality.Value;
-import github.snomfish.functionality.condition.Equals;
-import github.snomfish.functionality.condition.NoCondition;
+import github.snomfish.functionality.condition.conditions.Equals;
+import github.snomfish.functionality.condition.conditions.NoCondition;
 import github.snomfish.functionality.effect.effects.DealDirectSelfDamage;
 import github.snomfish.functionality.effect.effects.MultiplyValueEffect;
 import github.snomfish.functionality.effect.effects.NoEffect;

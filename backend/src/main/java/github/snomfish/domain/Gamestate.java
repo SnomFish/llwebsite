@@ -2,8 +2,6 @@ package github.snomfish.domain;
 
 import github.snomfish.functionality.copy.DeepCopyable;
 
-import static github.snomfish.domain.SideId.*;
-
 import java.util.ArrayList;
 import java.util.List;
 

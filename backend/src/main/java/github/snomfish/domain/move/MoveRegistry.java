@@ -4,15 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.scheduling.annotation.SchedulingConfiguration;
-
 import github.snomfish.domain.move.structures.MoveEffect;
 import github.snomfish.domain.stats.StatId;
 import github.snomfish.domain.status.StatusId;
 import github.snomfish.functionality.Schematics;
 import github.snomfish.functionality.Value;
-import github.snomfish.functionality.condition.comparisons.Comparator;
-import github.snomfish.functionality.condition.comparisons.GreaterThan;
+import github.snomfish.functionality.condition.conditions.GreaterThan;
 import github.snomfish.functionality.effect.EffectSequence;
 import github.snomfish.functionality.effect.effects.DealFormulaDamage;
 import github.snomfish.functionality.effect.effects.EnergyDrainEffect;
@@ -989,7 +986,7 @@ public class MoveRegistry {
 			.name("complete_demolition")
 			.type(METAL)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(60))
 			.basePower(new Constant(150))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3681,7 +3678,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(0))
 			.basePower(new ConditionalNumber(
-				Comparator.greaterThan(Value.USER_HEIGHT, Value.TARGET_HEIGHT),
+				new GreaterThan(Value.USER_HEIGHT, Value.TARGET_HEIGHT),
 				new Constant(70 * 1.25),
 				new Constant(70)
 			))

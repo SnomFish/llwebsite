@@ -4,10 +4,10 @@ import java.util.List;
 
 import github.snomfish.domain.ability.AbilityId;
 import github.snomfish.domain.status.StatusId;
-import github.snomfish.functionality.condition.And;
-import github.snomfish.functionality.condition.Equals;
-import github.snomfish.functionality.condition.Not;
-import github.snomfish.functionality.condition.RandomCondition;
+import github.snomfish.functionality.condition.conditions.And;
+import github.snomfish.functionality.condition.conditions.Equals;
+import github.snomfish.functionality.condition.conditions.Not;
+import github.snomfish.functionality.condition.conditions.RandomCondition;
 import github.snomfish.functionality.effect.ConditionalEffect;
 import github.snomfish.functionality.effect.EffectSequence;
 import github.snomfish.functionality.effect.IEffect;
@@ -25,9 +25,8 @@ public class Schematics {
     // 2026 09 26: I think this is actually a great idea 
     public static IEffect secondaryEffects(List<IEffect> effects) {
         return new ConditionalEffect(
-            new And(List.of(
-                new Not(new Equals(Value.USER_ABILITY_ID, AbilityId.BRUTE_FORCE))
-            )),
+            new Not(new Equals(Value.USER_ABILITY_ID, AbilityId.BRUTE_FORCE)),
+
             new EffectSequence(effects)
         );
     }

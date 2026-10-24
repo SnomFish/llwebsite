@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import github.snomfish.functionality.branch.Branch;
-import github.snomfish.functionality.condition.And;
 import github.snomfish.functionality.condition.ICondition;
-import github.snomfish.functionality.condition.RandomCondition;
+import github.snomfish.functionality.condition.conditions.And;
+import github.snomfish.functionality.condition.conditions.RandomCondition;
 import github.snomfish.functionality.number.Constant;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TestAnd {
     
 
-    
+    /*
     private void testAnd(
         List<Double> probabilities,
         int optimisedBranchNum,
@@ -42,7 +42,7 @@ public class TestAnd {
         for (int i = 0; i < keys.size(); i ++) {
             assertEquals(branchMap.get(keys.get(i)), values.get(i));
         }
-    } 
+    }
 
     //@Test
     void testAllCertainTrue() {
@@ -173,5 +173,5 @@ public class TestAnd {
             .sum();
 
         assertEquals(1.0, probabilitySum);
-    }
+    }*/
 }

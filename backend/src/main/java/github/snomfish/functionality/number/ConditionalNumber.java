@@ -5,7 +5,6 @@ import java.util.List;
 
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.branch.BranchUtil;
-import github.snomfish.functionality.condition.ConditionUtil;
 import github.snomfish.functionality.condition.ICondition;
 import github.snomfish.functionality.context.BattleContext;
 
@@ -41,7 +40,7 @@ public class ConditionalNumber implements INumber {
     public List<Branch<Double>> execute(BattleContext context) {
         List<Branch<Double>> outcomes = new ArrayList<>();
 
-        List<Branch<Boolean>> conditionBranches = ConditionUtil.optimise(condition.execute(context));
+        List<Branch<Boolean>> conditionBranches = condition.execute(context);
         for (Branch<Boolean> conditionBranch : conditionBranches) {
 
             // if condition is true add the true number's execute to the outcomes

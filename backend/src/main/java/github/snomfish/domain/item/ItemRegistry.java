@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import github.snomfish.functionality.Value;
-import github.snomfish.functionality.condition.Equals;
-import github.snomfish.functionality.condition.NoCondition;
-import github.snomfish.functionality.condition.Or;
+import github.snomfish.functionality.condition.conditions.Equals;
+import github.snomfish.functionality.condition.conditions.NoCondition;
+import github.snomfish.functionality.condition.conditions.Or;
 import github.snomfish.functionality.effect.EffectSequence;
 import github.snomfish.functionality.effect.effects.ClutchEffect;
 import github.snomfish.functionality.effect.effects.ConsumeItem;
@@ -768,15 +768,15 @@ public class ItemRegistry {
 				))
 			)
 		);
-		register( // doy for scorb line
+		register( // drop of youth for scorb line
 			SCRAP_METAL,
 			"scrap metal",
 			new TriggerRule(
 				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
-				new Or(List.of(
-					new Equals(Value.TARGET_SPECIES_ID, SCORB)
-					//new Equals(Value.TARGET_SPECIES_ID, VEYLENS)
-				)),
+				new Or(
+					new Equals(Value.TARGET_SPECIES_ID, SCORB),
+					new Equals(Value.TARGET_SPECIES_ID, VEYLENS)
+				),
 				new EffectSequence(List.of(
 					new MultiplyValueEffect(Value.TARGET_BATTLE_MDEFENSE, new Constant(1.5)),
 					new MultiplyValueEffect(Value.TARGET_BATTLE_RDEFENSE, new Constant(1.5))

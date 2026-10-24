@@ -1,9 +1,10 @@
-package github.snomfish.functionality.condition;
+package github.snomfish.functionality.condition.conditions;
 
 import java.util.List;
 
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.branch.Branch;
+import github.snomfish.functionality.condition.ICondition;
 import github.snomfish.functionality.context.BattleContext;
 
 public class ListContains implements ICondition {
@@ -22,8 +23,7 @@ public class ListContains implements ICondition {
     }
 
 
-    // THERE IS NO DEEP COPYING HAPPENING HERE, BUGS WILL OCCUR LMAOOOOOOOOOO 
-    // I COPIED THIS FROM EQUALS LMAOOOOOOOOOOO
+    // both are type Value, so no deep copying is needed here
     @Override
     public ListContains deepCopy() {
         return new ListContains(

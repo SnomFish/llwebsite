@@ -9,11 +9,11 @@ import github.snomfish.domain.mechanics.MechanicId;
 import github.snomfish.domain.status.StatusId;
 import github.snomfish.domain.type.TypeId;
 import github.snomfish.functionality.Value;
-import github.snomfish.functionality.condition.Equals;
-import github.snomfish.functionality.condition.ListContains;
-import github.snomfish.functionality.condition.NoCondition;
-import github.snomfish.functionality.condition.Or;
-import github.snomfish.functionality.condition.comparisons.GreaterThan;
+import github.snomfish.functionality.condition.conditions.Equals;
+import github.snomfish.functionality.condition.conditions.GreaterThan;
+import github.snomfish.functionality.condition.conditions.ListContains;
+import github.snomfish.functionality.condition.conditions.NoCondition;
+import github.snomfish.functionality.condition.conditions.Or;
 import github.snomfish.functionality.effect.EffectSequence;
 import github.snomfish.functionality.effect.effects.AlterTypeChart;
 import github.snomfish.functionality.effect.effects.ApplyMechanic;
@@ -198,10 +198,10 @@ public class AbilityRegistry {
             "baneful",
 			new TriggerRule(
                 List.of(new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)), 
-                new Or(List.of(
+                new Or(
                     new Equals(Value.USER_STATUS_ID, StatusId.POISON),
                     new Equals(Value.USER_STATUS_ID, StatusId.BAD_POISON)
-                )),
+                ),
                 new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
             )
         );

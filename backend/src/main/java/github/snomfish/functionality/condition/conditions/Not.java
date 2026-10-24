@@ -1,8 +1,9 @@
-package github.snomfish.functionality.condition;
+package github.snomfish.functionality.condition.conditions;
 
 import java.util.List;
 
 import github.snomfish.functionality.branch.Branch;
+import github.snomfish.functionality.condition.ICondition;
 import github.snomfish.functionality.context.BattleContext;
 
 public class Not implements ICondition {
@@ -32,7 +33,7 @@ public class Not implements ICondition {
             branch.setValue(branch.value() == false);
         }
 
-        // does not need the optimise() function, as this function does nt create new branches
+        // does not need the optimise() function, as this function doesn't create new branches
         // this is true so long as all other functions that create branches have the optimise() function
         return outcomes;
     }

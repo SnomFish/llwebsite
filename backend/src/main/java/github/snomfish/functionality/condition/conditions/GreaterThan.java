@@ -1,4 +1,4 @@
-package github.snomfish.functionality.condition.comparisons;
+package github.snomfish.functionality.condition.conditions;
 
 import java.util.List;
 
@@ -6,67 +6,45 @@ import github.snomfish.functionality.Value;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.condition.ICondition;
 import github.snomfish.functionality.context.BattleContext;
-import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.INumber;
 import github.snomfish.functionality.number.ValueConstant;
 
-public class LessThan implements ICondition {
+public class GreaterThan implements ICondition {
     
-
+    
     private INumber leftNumber;
     private INumber rightNumber;
 
 
-    public LessThan(INumber leftNumber, INumber rightNumber) {
+    public GreaterThan(INumber leftNumber, INumber rightNumber) {
         this.leftNumber = leftNumber;
         this.rightNumber = rightNumber;
     }
-    public LessThan(INumber leftNumber, double rightNumber) {
-        this.leftNumber = leftNumber;
-        this.rightNumber = new Constant(rightNumber);
-    }
-    public LessThan(INumber leftNumber, Value rightNumber) {
-        this.leftNumber = leftNumber;
-        this.rightNumber = new ValueConstant(rightNumber);
-    }
-    public LessThan(Double leftNumber, INumber rightNumber) {
-        this.leftNumber = new Constant(leftNumber);
-        this.rightNumber = rightNumber;
-    }
-    public LessThan(Double leftNumber, Double rightNumber) {
-        this.leftNumber = new Constant(leftNumber);
-        this.rightNumber = new Constant(rightNumber);
-    }
-    public LessThan(Double leftNumber, Value rightNumber) {
-        this.leftNumber = new Constant(leftNumber);
-        this.rightNumber = new ValueConstant(rightNumber);
-    }
-    public LessThan(Value leftNumber, INumber rightNumber) {
+    public GreaterThan(Value leftNumber, INumber rightNumber) {
         this.leftNumber = new ValueConstant(leftNumber);
         this.rightNumber = rightNumber;
     }
-    public LessThan(Value leftNumber, Double rightNumber) {
-        this.leftNumber = new ValueConstant(leftNumber);
-        this.rightNumber = new Constant(rightNumber);
+    public GreaterThan(INumber leftNumber, Value rightNumber) {
+        this.leftNumber = leftNumber;
+        this.rightNumber = new ValueConstant(rightNumber);
     }
-    public LessThan(Value leftNumber, Value rightNumber) {
+    public GreaterThan(Value leftNumber, Value rightNumber) {
         this.leftNumber = new ValueConstant(leftNumber);
         this.rightNumber = new ValueConstant(rightNumber);
     }
-    
 
 
-    public LessThan(LessThan copy) {
+    private GreaterThan(GreaterThan copy) {
         this.leftNumber = copy.leftNumber.deepCopy();
         this.rightNumber = copy.rightNumber.deepCopy();
     }
-    @Override
-    public LessThan deepCopy() {
-        return new LessThan(this);
+
+
+    public GreaterThan deepCopy() {
+        return new GreaterThan(this);
     }
 
 
-    @Override 
     public List<Branch<Boolean>> execute(BattleContext context) {
         
         List<Branch<Double>> leftBranches = leftNumber.execute(context);
@@ -83,7 +61,7 @@ public class LessThan implements ICondition {
                 Double rightValue = rightBranch.value();
                 Double rightProbability = rightBranch.probability();
 
-                if (leftValue < rightValue) {
+                if (leftValue > rightValue) {
                     trueProbability += leftProbability * rightProbability;
                 } else {
                     falseProbability += leftProbability * rightProbability;
