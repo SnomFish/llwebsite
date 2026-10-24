@@ -9,9 +9,15 @@ import org.springframework.scheduling.annotation.SchedulingConfiguration;
 import github.snomfish.domain.move.structures.MoveEffect;
 import github.snomfish.domain.stats.StatId;
 import github.snomfish.domain.status.StatusId;
+import github.snomfish.functionality.Schematics;
+import github.snomfish.functionality.Value;
+import github.snomfish.functionality.condition.comparisons.Comparator;
+import github.snomfish.functionality.condition.comparisons.GreaterThan;
 import github.snomfish.functionality.effect.EffectSequence;
-import github.snomfish.functionality.effect.Schematics;
 import github.snomfish.functionality.effect.effects.DealFormulaDamage;
+import github.snomfish.functionality.effect.effects.EnergyDrainEffect;
+import github.snomfish.functionality.effect.effects.HealthDrainEffect;
+import github.snomfish.functionality.number.ConditionalNumber;
 import github.snomfish.functionality.number.Constant;
 
 import static github.snomfish.domain.move.CategoryId.*;
@@ -190,7 +196,16 @@ public class MoveRegistry {
 			.name("aggravate")
 			.type(DARK)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(20))
+			.basePower(new Constant(30))
+			.onHit(new MoveEffect(
+				new EffectSequence(List.of(
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						new HealthDrainEffect(new Constant(1/2))
+					))
+				))
+			))
 			.build()
 		);
 		register(MoveBuilder.newMove(AIM)
@@ -535,7 +550,10 @@ public class MoveRegistry {
 			.basePower(new Constant(20))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						// apply blood drain mechanic
+					))
 				))
 			))
 			.build()
@@ -702,7 +720,10 @@ public class MoveRegistry {
 			.basePower(new Constant(30))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						new HealthDrainEffect(new Constant(1/2))
+					))
 				))
 			))
 			.build()
@@ -775,7 +796,10 @@ public class MoveRegistry {
 			.basePower(new Constant(100))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						new HealthDrainEffect(new Constant(1/2))
+					))
 				))
 			))
 			.build()
@@ -1463,7 +1487,10 @@ public class MoveRegistry {
 			.basePower(new Constant(85))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						new EnergyDrainEffect(new Constant(1/2))
+					))
 				))
 			))
 			.build()
@@ -2456,7 +2483,10 @@ public class MoveRegistry {
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						new HealthDrainEffect(new Constant(1/2))
+					))
 				))
 			))
 			.build()
@@ -2523,7 +2553,10 @@ public class MoveRegistry {
 			.basePower(new Constant(50))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						new HealthDrainEffect(new Constant(1/2))
+					))
 				))
 			))
 			.build()
@@ -2567,7 +2600,10 @@ public class MoveRegistry {
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						new EnergyDrainEffect(new Constant(1/2))
+					))
 				))
 			))
 			.build()
@@ -2710,6 +2746,15 @@ public class MoveRegistry {
 			.type(MIND)
 			.category(RANGED)
 			.energyCost(new Constant(0))
+			.basePower(new Constant(75))
+			.onHit(new MoveEffect(
+				new EffectSequence(List.of(
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						new HealthDrainEffect(new Constant(1/2))
+					))
+				))
+			))
 			.build()
 		);
 		register(MoveBuilder.newMove(MINDS_EYE)
@@ -2949,7 +2994,10 @@ public class MoveRegistry {
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						new HealthDrainEffect(new Constant(1/2))
+					))
 				))
 			))
 			.addTag(BITING)
@@ -3240,7 +3288,10 @@ public class MoveRegistry {
 			.basePower(new Constant(20))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						// apply power siphon mechanic
+					))
 				))
 			))
 			.build()
@@ -3629,7 +3680,11 @@ public class MoveRegistry {
 			.type(BRAWLER)
 			.category(MELEE)
 			.energyCost(new Constant(0))
-			.basePower(new Constant(70))
+			.basePower(new ConditionalNumber(
+				Comparator.greaterThan(Value.USER_HEIGHT, Value.TARGET_HEIGHT),
+				new Constant(70 * 1.25),
+				new Constant(70)
+			))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					new DealFormulaDamage()
@@ -3675,6 +3730,11 @@ public class MoveRegistry {
 			.type(PLANT)
 			.category(STATUS)
 			.energyCost(new Constant(0))
+			.onHit(new MoveEffect(
+				new EffectSequence(List.of(
+					// apply sap plant mechanic
+				))
+			))
 			.build()
 		);
 		register(MoveBuilder.newMove(SAVAGE_GREED)
@@ -4016,7 +4076,10 @@ public class MoveRegistry {
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						new HealthDrainEffect(new Constant(1/2))
+					))
 				))
 			))
 			.build()

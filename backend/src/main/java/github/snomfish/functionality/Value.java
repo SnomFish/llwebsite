@@ -11,21 +11,25 @@ import github.snomfish.functionality.context.BattleContext;
 public enum Value {
 
 
-    USER(
-        c -> c.user().activeLoomian(),
-        null
-    ),
-    TARGET(
-        c -> c.target().activeLoomian(),
-        null
-    ),
+    // IMMUTABLE
+    USER(c -> c.user().activeLoomian(), null),
+    USER_SPECIES(c -> c.user().activeLoomian().species(), null),
+    USER_SPECIES_NAME(c -> c.user().activeLoomian().species().name(), null),
+    USER_HEIGHT(c -> c.user().activeLoomian().species().height(), null),
+    USER_WEIGHT(c -> c.user().activeLoomian().species().weight(), null),
+
+    TARGET(c -> c.target().activeLoomian(), null),
+    TARGET_SPECIES(c -> c.target().activeLoomian().species(), null),
+    TARGET_SPECIES_NAME(c -> c.target().activeLoomian().species().name(), null),
+    TARGET_HEIGHT(c -> c.target().activeLoomian().species().height(), null),
+    TARGET_WEIGHT(c -> c.target().activeLoomian().species().weight(), null),
+
+
+    
+    
     USER_SPECIES_ID(
         c -> c.user().activeLoomian().speciesId(),
         (c, v) -> c.user().activeLoomian().setSpeciesId(v)
-    ),
-    USER_SPECIES(
-        c -> c.user().activeLoomian().species(),
-        null
     ),
     USER_CAN_EVOLVE(
         c -> c.user().activeLoomian().species().canEvolve(),
@@ -34,10 +38,6 @@ public enum Value {
     TARGET_SPECIES_ID(
         c -> c.target().activeLoomian().speciesId(),
         (c, v) -> c.target().activeLoomian().setSpeciesId(v)
-    ),
-    TARGET_SPECIES(
-        c -> c.target().activeLoomian().species(),
-        null
     ),
     TARGET_CAN_EVOLVE(
         c -> c.target().activeLoomian().species().canEvolve(),

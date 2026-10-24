@@ -16,6 +16,7 @@ public class ConditionUtil {
     // for now .......
     // will probably need another interface for comparable
     // moved this to ConditionsUtil so it will always work, and it will only be used for bools
+    // wdym complicated objects, this should still work
     public static List<Branch<Boolean>> optimise(List<Branch<Boolean>> branches) {
         double trueProbability = 0.0;
         double falseProbability = 0.0;
@@ -36,6 +37,7 @@ public class ConditionUtil {
     }
 
 
+    // IDK what this does, and I think for now I wont touch it
     public static List<Branch<Boolean>> applyLogicalOperator(
         List<List<Branch<Boolean>>> branchesList,
         BinaryOperator<Boolean> operator

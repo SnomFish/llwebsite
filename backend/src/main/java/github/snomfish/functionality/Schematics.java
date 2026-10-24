@@ -1,14 +1,16 @@
-package github.snomfish.functionality.effect;
+package github.snomfish.functionality;
 
 import java.util.List;
 
 import github.snomfish.domain.ability.AbilityId;
 import github.snomfish.domain.status.StatusId;
-import github.snomfish.functionality.Value;
 import github.snomfish.functionality.condition.And;
 import github.snomfish.functionality.condition.Equals;
 import github.snomfish.functionality.condition.Not;
 import github.snomfish.functionality.condition.RandomCondition;
+import github.snomfish.functionality.effect.ConditionalEffect;
+import github.snomfish.functionality.effect.EffectSequence;
+import github.snomfish.functionality.effect.IEffect;
 import github.snomfish.functionality.effect.effects.ApplyStatus;
 import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.INumber;
