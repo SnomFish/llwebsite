@@ -25,7 +25,7 @@ public class ConditionalNumber implements INumber {
         this.trueNumber = trueNumber;
         this.falseNumber = falseNumber;
     }
-    public ConditionalNumber(ConditionalNumber copy) {
+    private ConditionalNumber(ConditionalNumber copy) {
         this.condition = copy.condition.deepCopy();
         this.trueNumber = copy.trueNumber.deepCopy();
         this.falseNumber = copy.falseNumber.deepCopy();

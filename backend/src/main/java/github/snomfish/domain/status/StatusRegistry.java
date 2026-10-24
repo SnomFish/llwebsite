@@ -8,7 +8,7 @@ import java.util.Map;
 import github.snomfish.domain.move.CategoryId;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.condition.conditions.Equals;
-import github.snomfish.functionality.condition.conditions.NoCondition;
+import github.snomfish.functionality.effect.ConditionalEffect;
 import github.snomfish.functionality.effect.effects.DealDirectSelfDamage;
 import github.snomfish.functionality.effect.effects.MultiplyValueEffect;
 import github.snomfish.functionality.effect.effects.NoEffect;
@@ -68,7 +68,6 @@ public class StatusRegistry {
             "no status",
             new TriggerRule(
                 new Event(), 
-                new NoCondition(),
                 new NoEffect() 
             )
         );  
@@ -77,7 +76,6 @@ public class StatusRegistry {
             "posion",
             new TriggerRule(
                 new Event(EventId.END_TURN_STATUS_EFFECT_EVENT, USER),
-                new NoCondition(),
                 new DealDirectSelfDamage(new Constant(1/8))
             )
         );
@@ -86,7 +84,6 @@ public class StatusRegistry {
             "poison",
             new TriggerRule(
                 new Event(EventId.END_TURN_STATUS_EFFECT_EVENT, USER),
-                new NoCondition(),
                 new DealDirectSelfDamage(new Multiply(List.of(
                     new Constant(1/16),
                     new ValueConstant(Value.USER_STATUS_TURNS)
@@ -102,13 +99,14 @@ public class StatusRegistry {
             "burn",
             List.of(new TriggerRule(
                 new Event(EventId.END_TURN_STATUS_EFFECT_EVENT, USER),
-                new NoCondition(),
                 new DealDirectSelfDamage(new Constant(1/16))
             ),
             new TriggerRule( // cutting mattack in half
                 new Event(EventId.BEFORE_MOVE_EVENT, USER), 
-                new Equals(Value.MOVE_CATEGORY, CategoryId.MELEE),
-                new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant (0.5)) 
+                new ConditionalEffect(
+                    new Equals(Value.MOVE_CATEGORY, CategoryId.MELEE),
+                    new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant (0.5)) 
+                )
             ))
         );
         register(
@@ -116,13 +114,14 @@ public class StatusRegistry {
             "frostbite",
             List.of(new TriggerRule(
                 new Event(EventId.END_TURN_STATUS_EFFECT_EVENT, USER),
-                new NoCondition(),
                 new DealDirectSelfDamage(new Constant(1/16))
             ),
             new TriggerRule( // cutting mattack in half
                 new Event(EventId.BEFORE_MOVE_EVENT, USER), 
-                new Equals(Value.MOVE_CATEGORY, CategoryId.RANGED),
-                new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant (0.5)) 
+                new ConditionalEffect(
+                    new Equals(Value.MOVE_CATEGORY, CategoryId.RANGED),
+                    new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant (0.5)) 
+                )
             ))
         );
         register(

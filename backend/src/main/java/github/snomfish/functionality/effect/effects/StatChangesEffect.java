@@ -27,7 +27,7 @@ public class StatChangesEffect implements IEffect {
     private Map<StatChangesId, Integer> statChanges;
 
 
-    public StatChangesEffect(
+    private StatChangesEffect(
         EventId preEffectEvent, 
         EventId postEffectEvent,
         Value activeLoomianValue,

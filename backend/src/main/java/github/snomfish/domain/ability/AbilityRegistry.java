@@ -14,6 +14,7 @@ import github.snomfish.functionality.condition.conditions.GreaterThan;
 import github.snomfish.functionality.condition.conditions.ListContains;
 import github.snomfish.functionality.condition.conditions.NoCondition;
 import github.snomfish.functionality.condition.conditions.Or;
+import github.snomfish.functionality.effect.ConditionalEffect;
 import github.snomfish.functionality.effect.EffectSequence;
 import github.snomfish.functionality.effect.effects.AlterTypeChart;
 import github.snomfish.functionality.effect.effects.ApplyMechanic;
@@ -22,6 +23,7 @@ import github.snomfish.functionality.effect.effects.SetValueEffect;
 import github.snomfish.functionality.effect.effects.StatChangesEffect;
 import github.snomfish.functionality.event.Event;
 import github.snomfish.functionality.event.TriggerRule;
+import github.snomfish.functionality.number.ConditionalNumber;
 import github.snomfish.functionality.number.Constant;
 
 import static github.snomfish.domain.ability.AbilityId.*;
@@ -82,8 +84,10 @@ public class AbilityRegistry {
 			"ace",
 			new TriggerRule(
                 List.of(new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)), // right before a moves damage is calculated
-                new ListContains(Value.USER_TYPES, Value.MOVE_TYPE),
-                new SetValueEffect(Value.MOVE_STAB_MODIFIER, new Constant(2.0))
+                new ConditionalEffect(
+					new ListContains(Value.USER_TYPES, Value.MOVE_TYPE), 
+					new SetValueEffect(Value.MOVE_STAB_MODIFIER, new Constant(2.0))
+				)
             )
 		);
 		register(
@@ -92,7 +96,11 @@ public class AbilityRegistry {
 		);
 		register(
 			ADORABLE,
-			"adorable"
+			"adorable",
+			new TriggerRule(
+				new Event(USER_SWITCHED_IN_EVENT, USER),
+				StatChangesEffect.userChangingTarget(0, -1, 0, 0, 0, 0, 0, 0)
+			)
 		);
 		register(
 			AGGRESSIVE,
@@ -108,15 +116,18 @@ public class AbilityRegistry {
 		);
 		register(
 			ANALYZE,
-			"analyze"
+			"analyze",
+			List.of(new TriggerRule(
+				new Event(USER_SWITCHED_IN_EVENT, USER),
+				StatChangesEffect.userChangingTarget(0, 0, 0, 0, 0, 0, 0, 0)
+			))
 		);
 		register( // TODO: contemplate this correct implementation and wonder if I could have done anything differentely to make it better
 			ANOMALY,
 			"anomaly",
 			List.of(
-				new TriggerRule(
+				new TriggerRule( // when the loomian is hte user
 					new Event(USER_SWITCHED_IN_EVENT, USER), 
-					new NoCondition(), 
 					new EffectSequence(List.of(
 						new MultiplyValueEffect(Value.USER_MATTACK_STAGE_MODIFIER, new Constant(-1)),
 						new MultiplyValueEffect(Value.USER_MDEFENSE_STAGE_MODIFIER, new Constant(-1)),
@@ -127,9 +138,8 @@ public class AbilityRegistry {
 						new MultiplyValueEffect(Value.USER_EVASION_STAGE_MODIFIER, new Constant(-1))
 					))
 				),
-				new TriggerRule(
+				new TriggerRule( // when the loomian is the target
 					new Event(TARGET_SWITCHED_IN_EVENT, TARGET), 
-					new NoCondition(), 
 					new EffectSequence(List.of(
 						new MultiplyValueEffect(Value.TARGET_MATTACK_STAGE_MODIFIER, new Constant(-1)),
 						new MultiplyValueEffect(Value.TARGET_MDEFENSE_STAGE_MODIFIER, new Constant(-1)),
@@ -152,12 +162,10 @@ public class AbilityRegistry {
 			List.of(
 				new TriggerRule(
 					new Event(TARGET_LOWERED_USER_STATS_EVENT, USER),
-					new NoCondition(),
 					StatChangesEffect.userChangingUser(0, 0, 2, 0, 0, 0, 0, 0)	
 				),
 				new TriggerRule(
 					new Event(USER_LOWERED_TARGET_STATS_EVENT, TARGET),
-					new NoCondition(),
 					StatChangesEffect.targetChangingTarget(0, 0, 2, 0, 0, 0, 0, 0)	
 				)
 			)
@@ -171,8 +179,10 @@ public class AbilityRegistry {
             "aqua body",
 			new TriggerRule(
                 List.of(new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET)), // before the targets move damage is calculated 
-                new Equals(Value.MOVE_TYPE, TypeId.FIRE), 
-                new MultiplyValueEffect(Value.MOVE_TYPE_MODIFIER, new Constant(0.5))
+                new ConditionalEffect(
+					new Equals(Value.MOVE_TYPE, TypeId.FIRE),
+					new MultiplyValueEffect(Value.MOVE_TYPE_MODIFIER, new Constant(0.5))
+				)
             )
         );
         register(
@@ -180,7 +190,6 @@ public class AbilityRegistry {
             "assertive",
 			new TriggerRule(
                 List.of(new Event(BEFORE_MOVE_EVENT, USER)), // before anything about the move is actually used
-                new NoCondition(), 
                 new AlterTypeChart(BRAWLER, SPIRIT, 1)
             )
         );
@@ -189,7 +198,6 @@ public class AbilityRegistry {
             "awakening",
 			new TriggerRule(
                 List.of(new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)), // right before a moves damage is calculated
-                new ListContains(Value.USER_TYPES, Value.MOVE_TYPE),
                 new SetValueEffect(Value.MOVE_STAB_MODIFIER, new Constant(1.5))
             )
         );
@@ -198,11 +206,13 @@ public class AbilityRegistry {
             "baneful",
 			new TriggerRule(
                 List.of(new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)), 
-                new Or(
-                    new Equals(Value.USER_STATUS_ID, StatusId.POISON),
-                    new Equals(Value.USER_STATUS_ID, StatusId.BAD_POISON)
-                ),
-                new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
+				new ConditionalEffect(
+					new Or(
+						new Equals(Value.USER_STATUS_ID, StatusId.POISON),
+						new Equals(Value.USER_STATUS_ID, StatusId.BAD_POISON)
+					),
+					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
+				)
             )
         );
 		register(
@@ -211,8 +221,10 @@ public class AbilityRegistry {
 			List.of(
 				new TriggerRule(
 					new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER), 
-					new Equals(Value.MOVE_TYPE, TypeId.METAL),
-					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.25))
+					new ConditionalEffect(
+						new Equals(Value.MOVE_TYPE, TypeId.METAL),
+						new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.25))
+					)
 				)
 				// TODO: battle armour protects the user from the secondary effects of moves
 			)
@@ -315,12 +327,10 @@ public class AbilityRegistry {
 			List.of(
 				new TriggerRule(
 					new Event(TARGET_LOWERED_USER_STATS_EVENT, USER),
-					new NoCondition(),
 					StatChangesEffect.userChangingUser(1, 0, 0, 0, 0, 0, 0, 0)	
 				),
 				new TriggerRule(
 					new Event(USER_LOWERED_TARGET_STATS_EVENT, TARGET),
-					new NoCondition(),
 					StatChangesEffect.targetChangingTarget(1, 0, 0, 0, 0, 0, 0, 0)	
 				)
 			)
@@ -330,11 +340,13 @@ public class AbilityRegistry {
 			"combustible",
 			new TriggerRule(
 				new Event(PRE_DAMAGE_EVENT, TARGET),
-				new Equals(Value.MOVE_TYPE, TypeId.FIRE),
-				new EffectSequence(List.of(
-					new MultiplyValueEffect(Value.MOVE_DAMAGE, new Constant(0.0)),
-					ApplyMechanic.toUser(MechanicId.COMBUSTIBLE)
-				))
+				new ConditionalEffect(
+					new Equals(Value.MOVE_TYPE, TypeId.FIRE),
+					new EffectSequence(List.of(
+						new MultiplyValueEffect(Value.MOVE_DAMAGE, new Constant(0.0)),
+						ApplyMechanic.toUser(MechanicId.COMBUSTIBLE)
+					))
+				)
 			)
 		);
 		register(
@@ -362,11 +374,13 @@ public class AbilityRegistry {
 			"coursing venom",
 			new TriggerRule(
 				new Event(PRE_DAMAGE_EVENT, TARGET),
-				new Equals(Value.MOVE_TYPE, TypeId.TOXIC),
-				new EffectSequence(List.of(
-					new MultiplyValueEffect(Value.MOVE_DAMAGE, new Constant(0.0)),
-					ApplyMechanic.toUser(MechanicId.COURSING_VENOM)
-				))
+				new ConditionalEffect(
+					new Equals(Value.MOVE_TYPE, TypeId.TOXIC),
+					new EffectSequence(List.of(
+						new MultiplyValueEffect(Value.MOVE_DAMAGE, new Constant(0.0)),
+						ApplyMechanic.toUser(MechanicId.COURSING_VENOM)
+					))
+				)
 			)
 		);
 		register(
@@ -387,12 +401,10 @@ public class AbilityRegistry {
 			List.of(
 				new TriggerRule(
 					new Event(USER_SWITCHED_IN_EVENT, USER),
-					new NoCondition(),
 					StatChangesEffect.userChangingUser(0, 1, 0, 1, -2, 0, 0, 0)	
 				),
 				new TriggerRule(
 					new Event(TARGET_SWITCHED_IN_EVENT, TARGET),
-					new NoCondition(),
 					StatChangesEffect.targetChangingTarget(0, 1, 2, 1, -2, 0, 0, 0)	
 				)
 			)
@@ -406,8 +418,10 @@ public class AbilityRegistry {
 			"depths_borne",
 			new TriggerRule(
 				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-				new Equals(Value.MOVE_TYPE, TypeId.WATER),
-				new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.25))
+				new ConditionalEffect(
+					new Equals(Value.MOVE_TYPE, TypeId.WATER),
+					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.25))
+				)
 			)
 		);
 		register(
@@ -435,7 +449,6 @@ public class AbilityRegistry {
             "drainage",
 			new TriggerRule(
                 new Event(HEALTH_DRAIN_EVENT, USER), 
-                new NoCondition(),
                 new MultiplyValueEffect(Value.MOVE_HEALTH_DRAIN_MODIFIER, new Constant(1.5)) 
             )
         );
@@ -468,8 +481,10 @@ public class AbilityRegistry {
 			"enchanted coat",
 			new TriggerRule(
 				new Event(PRE_DAMAGE_EVENT, TARGET),
-				new GreaterThan(Value.MOVE_TYPE_MODIFIER, new Constant(1)),
-				new MultiplyValueEffect(Value.MOVE_DAMAGE, new Constant(0.75))
+				new ConditionalEffect(
+					new GreaterThan(Value.MOVE_TYPE_MODIFIER, new Constant(1)),
+					new MultiplyValueEffect(Value.MOVE_DAMAGE, new Constant(0.75))
+				)
 			)
 		);
 		register(
@@ -486,8 +501,10 @@ public class AbilityRegistry {
 			List.of(
 				new TriggerRule(
 					new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
-					new Equals(Value.MOVE_TYPE, TypeId.AIR),
-					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5))
+					new ConditionalEffect(
+						new Equals(Value.MOVE_TYPE, TypeId.AIR),
+						new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5))
+					)
 				)// TODO: add +1 ranged attack when hit
 			)
 		);
@@ -517,8 +534,10 @@ public class AbilityRegistry {
 			List.of(
 				new TriggerRule(
 					new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
-					new Equals(Value.MOVE_TYPE, TypeId.FIRE),
-					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5))
+					new ConditionalEffect(
+						new Equals(Value.MOVE_TYPE, TypeId.FIRE),
+						new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5))
+					)
 				)
 			)
 		);
@@ -559,8 +578,10 @@ public class AbilityRegistry {
 			"gummy",
 			new TriggerRule(
 				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
-				new Equals(Value.MOVE_EXPLOSIVE_TAG, true),
-				new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0))
+				new ConditionalEffect(
+					new Equals(Value.MOVE_EXPLOSIVE_TAG, true),
+					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0))
+				)
 			)
 		);
 		register( // technician from pokemon
@@ -568,8 +589,10 @@ public class AbilityRegistry {
 			"guru",
 			new TriggerRule(
 				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
-				new Equals(Value.MOVE_EXPLOSIVE_TAG, true),
-				new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0))
+				new ConditionalEffect(
+					new Equals(Value.MOVE_EXPLOSIVE_TAG, true),
+					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0))
+				)
 			)
 		);
 		register(
@@ -686,7 +709,6 @@ public class AbilityRegistry {
 			// also needs to increase crit chance
 			new TriggerRule(
 				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-				new NoCondition(),
 				new MultiplyValueEffect(Value.MOVE_CRIT_MODIFIER, new Constant(1.5)) // generic crit modifier = 1.5 and is always applied, so a 1.5 boost brings it to 2.25
 			)
 		);
@@ -707,7 +729,6 @@ public class AbilityRegistry {
 			"marksman",
 			new TriggerRule(
 				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-				new NoCondition(),
 				new MultiplyValueEffect(Value.MOVE_CRIT_MODIFIER, new Constant(1.5)) // generic crit modifier = 1.5 and is always applied, so a 1.5 boost brings it to 2.25
 			)
 		);
@@ -784,11 +805,13 @@ public class AbilityRegistry {
 			"noxious weeds",
 			new TriggerRule(
 				new Event(PRE_DAMAGE_EVENT, TARGET),
-				new Equals(Value.MOVE_TYPE, TypeId.PLANT),
-				new EffectSequence(List.of(
-					new MultiplyValueEffect(Value.MOVE_DAMAGE, new Constant(0.0)),
-					ApplyMechanic.toUser(MechanicId.NOXIOUS_WEEDS)
-				))
+				new ConditionalEffect(
+					new Equals(Value.MOVE_TYPE, TypeId.PLANT),
+					new EffectSequence(List.of(
+						new MultiplyValueEffect(Value.MOVE_DAMAGE, new Constant(0.0)),
+						ApplyMechanic.toUser(MechanicId.NOXIOUS_WEEDS)
+					))
+				)
 			)
 		);
 		register(
@@ -876,11 +899,13 @@ public class AbilityRegistry {
 			"prismatic",
 			new TriggerRule(
 				new Event(PRE_DAMAGE_EVENT, TARGET),
-				new Equals(Value.MOVE_TYPE, TypeId.LIGHT),
-				new EffectSequence(List.of(
-					new MultiplyValueEffect(Value.MOVE_DAMAGE, new Constant(0.0)),
-					ApplyMechanic.toUser(MechanicId.PRISMATIC)
-				))
+				new ConditionalEffect(
+					new Equals(Value.MOVE_TYPE, TypeId.LIGHT),
+					new EffectSequence(List.of(
+						new MultiplyValueEffect(Value.MOVE_DAMAGE, new Constant(0.0)),
+						ApplyMechanic.toUser(MechanicId.PRISMATIC)
+					))
+				)
 			)
 		);
 		register(
@@ -1136,11 +1161,13 @@ public class AbilityRegistry {
 			"toxic filter",
 			new TriggerRule(
 				new Event(PRE_DAMAGE_EVENT, TARGET),
-				new Equals(Value.MOVE_TYPE, TypeId.TOXIC),
-				new EffectSequence(List.of(
-					new MultiplyValueEffect(Value.MOVE_DAMAGE, new Constant(0.0)),
-					ApplyMechanic.toUser(MechanicId.TOXIC_FILTER)
-				))
+				new ConditionalEffect(
+					new Equals(Value.MOVE_TYPE, TypeId.TOXIC),
+					new EffectSequence(List.of(
+						new MultiplyValueEffect(Value.MOVE_DAMAGE, new Constant(0.0)),
+						ApplyMechanic.toUser(MechanicId.TOXIC_FILTER)
+					))
+				)
 			)
 		);
 		register(

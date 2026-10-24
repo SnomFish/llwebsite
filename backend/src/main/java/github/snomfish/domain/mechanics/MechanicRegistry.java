@@ -8,6 +8,7 @@ import java.util.Map;
 import github.snomfish.domain.type.TypeId;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.condition.conditions.Equals;
+import github.snomfish.functionality.effect.ConditionalEffect;
 import github.snomfish.functionality.effect.EffectSequence;
 import github.snomfish.functionality.effect.effects.MultiplyValueEffect;
 import github.snomfish.functionality.effect.effects.RemoveMechanic;
@@ -54,8 +55,10 @@ public class MechanicRegistry {
             "combustible",
             new TriggerRule(
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-                new Equals(Value.MOVE_TYPE, TypeId.FIRE),
-                new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5))
+                new ConditionalEffect(
+                    new Equals(Value.MOVE_TYPE, TypeId.FIRE),
+                    new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5))
+                )
             )
         );
         register(
@@ -63,8 +66,10 @@ public class MechanicRegistry {
             "coursing venom",
             new TriggerRule(
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-                new Equals(Value.MOVE_TYPE, TypeId.TOXIC),
-                new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5))
+                new ConditionalEffect(
+                    new Equals(Value.MOVE_TYPE, TypeId.TOXIC),
+                    new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5))
+                )
             )
         );
         register(
@@ -72,8 +77,10 @@ public class MechanicRegistry {
             "Noxious Weeds",
             new TriggerRule(
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-                new Equals(Value.MOVE_TYPE, TypeId.PLANT),
-                new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5))
+                new ConditionalEffect(
+                    new Equals(Value.MOVE_TYPE, TypeId.PLANT),
+                    new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5))
+                )
             )
         );
         register(
@@ -81,8 +88,10 @@ public class MechanicRegistry {
             "Prismatic",
             new TriggerRule(
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-                new Equals(Value.MOVE_TYPE, TypeId.LIGHT),
-                new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5))
+                new ConditionalEffect(
+                    new Equals(Value.MOVE_TYPE, TypeId.LIGHT),
+                    new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5))
+                )
             )
         );
         register(
@@ -90,11 +99,13 @@ public class MechanicRegistry {
             "Toxic Filter",
             new TriggerRule(
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-                new Equals(Value.MOVE_TYPE, TypeId.AIR),
-                new EffectSequence(List.of(
-                    new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
-                    RemoveMechanic.fromUser(TOXIC_FILTER)
-                ))
+                new ConditionalEffect(    
+                    new Equals(Value.MOVE_TYPE, TypeId.AIR),
+                    new EffectSequence(List.of(
+                        new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+                        RemoveMechanic.fromUser(TOXIC_FILTER)
+                    ))
+                )
             )
         );
     }
