@@ -9,18 +9,20 @@ import github.snomfish.domain.mechanics.MechanicId;
 import github.snomfish.domain.status.StatusId;
 import github.snomfish.domain.type.TypeId;
 import github.snomfish.functionality.Value;
+import github.snomfish.functionality.condition.conditions.And;
 import github.snomfish.functionality.condition.conditions.Equals;
 import github.snomfish.functionality.condition.conditions.GreaterThan;
 import github.snomfish.functionality.condition.conditions.ListContains;
 import github.snomfish.functionality.condition.conditions.NoCondition;
 import github.snomfish.functionality.condition.conditions.Or;
+import github.snomfish.functionality.condition.conditions.RandomCondition;
 import github.snomfish.functionality.effect.ConditionalEffect;
 import github.snomfish.functionality.effect.EffectSequence;
 import github.snomfish.functionality.effect.effects.AlterTypeChart;
 import github.snomfish.functionality.effect.effects.ApplyMechanic;
+import github.snomfish.functionality.effect.effects.ApplyStatChanges;
 import github.snomfish.functionality.effect.effects.MultiplyValueEffect;
 import github.snomfish.functionality.effect.effects.SetValueEffect;
-import github.snomfish.functionality.effect.effects.StatChangesEffect;
 import github.snomfish.functionality.event.Event;
 import github.snomfish.functionality.event.TriggerRule;
 import github.snomfish.functionality.number.ConditionalNumber;
@@ -99,7 +101,8 @@ public class AbilityRegistry {
 			"adorable",
 			new TriggerRule(
 				new Event(USER_SWITCHED_IN_EVENT, USER),
-				StatChangesEffect.userChangingTarget(0, -1, 0, 0, 0, 0, 0, 0)
+				ApplyStatChanges.userChangingTarget()
+					.mdefense(new Constant(-1))
 			)
 		);
 		register(
@@ -119,7 +122,19 @@ public class AbilityRegistry {
 			"analyze",
 			List.of(new TriggerRule(
 				new Event(USER_SWITCHED_IN_EVENT, USER),
-				StatChangesEffect.userChangingTarget(0, 0, 0, 0, 0, 0, 0, 0)
+				new ConditionalEffect(
+					new Or(
+						new GreaterThan(Value.TARGET_BATTLE_MDEFENSE, Value.TARGET_BATTLE_RDEFENSE),
+						new And(
+							new Equals(Value.TARGET_BATTLE_MDEFENSE, Value.TARGET_BATTLE_RDEFENSE),
+							new RandomCondition(new Constant(0.5))
+						)
+					), 
+					ApplyStatChanges.userChangingUser()
+						.rattack(new Constant(1)), 
+					ApplyStatChanges.userChangingUser()
+						.mattack(new Constant(1))
+				)
 			))
 		);
 		register( // TODO: contemplate this correct implementation and wonder if I could have done anything differentely to make it better
@@ -162,11 +177,13 @@ public class AbilityRegistry {
 			List.of(
 				new TriggerRule(
 					new Event(TARGET_LOWERED_USER_STATS_EVENT, USER),
-					StatChangesEffect.userChangingUser(0, 0, 2, 0, 0, 0, 0, 0)	
+					ApplyStatChanges.userChangingUser()
+						.rattack(new Constant(2))	
 				),
 				new TriggerRule(
 					new Event(USER_LOWERED_TARGET_STATS_EVENT, TARGET),
-					StatChangesEffect.targetChangingTarget(0, 0, 2, 0, 0, 0, 0, 0)	
+					ApplyStatChanges.targetChangingTarget()
+						.rattack(new Constant(2))	
 				)
 			)
 		);
@@ -241,9 +258,16 @@ public class AbilityRegistry {
 			BLISTERING_HEAT,
 			"blistering heat"
 		);
-		register(
+		register( // Increases the damage of the user's health draining moves
 			BLOODSUCKER,
-			"bloodsucker"
+			"bloodsucker",
+			new TriggerRule(
+				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
+				new ConditionalEffect(
+					new Equals(Value.MOVE_HEALTH_DRAIN_TAG, true),
+					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.25))
+				)
+			)
 		);
 		register(
 			BOAST,
@@ -327,11 +351,13 @@ public class AbilityRegistry {
 			List.of(
 				new TriggerRule(
 					new Event(TARGET_LOWERED_USER_STATS_EVENT, USER),
-					StatChangesEffect.userChangingUser(1, 0, 0, 0, 0, 0, 0, 0)	
+					ApplyStatChanges.userChangingUser()
+						.mattack(new Constant(2))
 				),
 				new TriggerRule(
 					new Event(USER_LOWERED_TARGET_STATS_EVENT, TARGET),
-					StatChangesEffect.targetChangingTarget(1, 0, 0, 0, 0, 0, 0, 0)	
+					ApplyStatChanges.targetChangingTarget()
+						.mattack(new Constant(2))	
 				)
 			)
 		);
@@ -401,11 +427,17 @@ public class AbilityRegistry {
 			List.of(
 				new TriggerRule(
 					new Event(USER_SWITCHED_IN_EVENT, USER),
-					StatChangesEffect.userChangingUser(0, 1, 0, 1, -2, 0, 0, 0)	
+					ApplyStatChanges.userChangingUser()
+						.mdefense(new Constant(1))
+						.rdefense(new Constant(1))
+						.speed(new Constant(-2))	
 				),
 				new TriggerRule(
 					new Event(TARGET_SWITCHED_IN_EVENT, TARGET),
-					StatChangesEffect.targetChangingTarget(0, 1, 2, 1, -2, 0, 0, 0)	
+					ApplyStatChanges.targetChangingTarget()
+						.mdefense(new Constant(1))
+						.rdefense(new Constant(1))
+						.speed(new Constant(-2))	
 				)
 			)
 		);

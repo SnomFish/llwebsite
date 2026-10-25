@@ -400,6 +400,10 @@ public enum Value {
     MOVE_EXPLOSIVE_TAG(
         c -> c.user().activeLoomian().action().move().tags().get(TagId.EXPLOSIVE),
         (c, v) -> c.user().activeLoomian().action().move().tags().set(TagId.EXPLOSIVE, v)
+    ),
+    MOVE_HEALTH_DRAIN_TAG(
+        c -> c.user().activeLoomian().action().move().tags().get(TagId.HEALTH_DRAIN),
+        (c, v) -> c.user().activeLoomian().action().move().tags().set(TagId.HEALTH_DRAIN, v)
     )
     ;
 

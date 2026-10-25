@@ -7,6 +7,7 @@ import java.util.Map;
 import github.snomfish.domain.move.structures.MoveEffect;
 import github.snomfish.domain.stats.StatId;
 import github.snomfish.domain.status.StatusId;
+import github.snomfish.functionality.Constants;
 import github.snomfish.functionality.Schematics;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.condition.conditions.GreaterThan;
@@ -74,6 +75,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(ADAPTIVE_ASSAULT_BRAWLER)
@@ -87,6 +89,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(ADAPTIVE_ASSAULT_BUG)
@@ -100,6 +103,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(ADAPTIVE_ASSAULT_FIRE)
@@ -132,6 +136,7 @@ public class MoveRegistry {
 					))
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(ADAPTIVE_ASSAULT_SIMPLE)
@@ -145,6 +150,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(ADAPTIVE_ASSAULT_SPIRIT)
@@ -158,6 +164,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(ADAPTIVE_ASSAULT_TOXIC)
@@ -203,6 +210,7 @@ public class MoveRegistry {
 					))
 				))
 			))
+			.addTag(HEALTH_DRAIN)
 			.build()
 		);
 		register(MoveBuilder.newMove(AIM)
@@ -223,6 +231,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(SLASHING)
 			.build()
 		);
 		register(MoveBuilder.newMove(AIR_SHOT)
@@ -251,11 +260,27 @@ public class MoveRegistry {
 			))
 			.build()
 		);
+		register(MoveBuilder.newMove(AIRSTRIKE)
+			.name("Airstrike")
+			.type(METAL)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.basePower(new Constant(125))
+			.onHit(new MoveEffect(
+				new EffectSequence(List.of(
+					new DealFormulaDamage()
+				))
+			))
+			.addTag(SOUL_BURST)
+			.build()
+		);
 		register(MoveBuilder.newMove(ANCIENT_ROAR)
 			.name("ancient_roar")
 			.type(ANCIENT)
 			.category(STATUS)
 			.energyCost(new Constant(0))
+			.addTag(PIVOT)
+			.addTag(SOUND)
 			.build()
 		);
 		register(MoveBuilder.newMove(APPARITION)
@@ -282,6 +307,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(ARMOUR_DOWN)
@@ -303,6 +329,7 @@ public class MoveRegistry {
 			.type(DARK)
 			.category(STATUS)
 			.energyCost(new Constant(0))
+			.addTag(PIVOT)
 			.build()
 		);
 		register(MoveBuilder.newMove(BAG_OF_TRICKS)
@@ -331,6 +358,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(BANANA_SLAM)
@@ -344,6 +372,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(BANANA_SPLIT)
@@ -375,6 +404,7 @@ public class MoveRegistry {
 					))
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(BARB_TRAP) // MAN I HAVE NO IDEA, MAYBE HAVE THIS APPLY A ONE TURN MECHANIC ON THE USER????
@@ -409,6 +439,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(BATTERING_RAM)
@@ -423,6 +454,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(BATTLE_CHIME)
@@ -430,6 +462,7 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(STATUS)
 			.energyCost(new Constant(0))
+			.addTag(SOUND)
 			.build()
 		);
 		register(MoveBuilder.newMove(BATTLE_HORN)
@@ -437,6 +470,7 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(STATUS)
 			.energyCost(new Constant(0))
+			.addTag(SOUND)
 			.build()
 		);
 		register(MoveBuilder.newMove(BEASTS_SLUMBER)
@@ -479,6 +513,7 @@ public class MoveRegistry {
 				))
 			))
 			.addTag(BITING)
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(BLAZE_OF_GLORY)
@@ -495,6 +530,7 @@ public class MoveRegistry {
 					))
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(BLAZE_PUNCH)
@@ -511,6 +547,7 @@ public class MoveRegistry {
 					))
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(BLAZE_RUSH)
@@ -524,6 +561,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(BLINDSPOT_BATTER)
@@ -537,6 +575,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(BLOOD_DRAIN)
@@ -553,6 +592,8 @@ public class MoveRegistry {
 					))
 				))
 			))
+			.addTag(CONTACT)
+			.addTag(HEALTH_DRAIN)
 			.build()
 		);
 		register(MoveBuilder.newMove(BLUDGEON)
@@ -580,6 +621,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(BODY_SLAM)
@@ -593,6 +635,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(BOILING_PRESS)
@@ -606,6 +649,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(BONE_CRUNCH)
@@ -619,6 +663,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(BOOM_BASH)
@@ -632,6 +677,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(KICKING)
 			.build()
 		);
 		register(MoveBuilder.newMove(BOULDER_BLAST)
@@ -723,6 +769,8 @@ public class MoveRegistry {
 					))
 				))
 			))
+			.addTag(CONTACT)
+			.addTag(HEALTH_DRAIN)
 			.build()
 		);
 		register(MoveBuilder.newMove(BULK_UP)
@@ -783,6 +831,8 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
+			.addTag(KICKING)
 			.build()
 		);
 		register(MoveBuilder.newMove(CARNIVOROUS_SNAP)
@@ -799,6 +849,9 @@ public class MoveRegistry {
 					))
 				))
 			))
+			.addTag(CONTACT)
+			.addTag(HEALTH_DRAIN)
+			.addTag(SOUL_BURST)
 			.build()
 		);
 		register(MoveBuilder.newMove(CEREBRAL_SLASH)
@@ -812,6 +865,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(SLASHING)
 			.build()
 		);
 		register(MoveBuilder.newMove(CHARADE)
@@ -835,6 +889,8 @@ public class MoveRegistry {
 					))
 				))
 			))
+			.addTag(CONTACT)
+			.addTag(SLASHING)
 			.build()
 		);
 		register(MoveBuilder.newMove(CHASE_DOWN)
@@ -848,6 +904,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(CHILLY_CHOMP)
@@ -865,6 +922,7 @@ public class MoveRegistry {
 				))
 			))
 			.addTag(BITING)
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(CHOMP)
@@ -879,6 +937,7 @@ public class MoveRegistry {
 				))
 			))
 			.addTag(BITING)
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(CHOP)
@@ -892,6 +951,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(CLAMP)
@@ -905,6 +965,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(CLAMP_CLAW)
@@ -918,6 +979,8 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
+			.addTag(SLASHING)
 			.build()
 		);
 		register(MoveBuilder.newMove(CLAWBER)
@@ -931,6 +994,8 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
+			.addTag(SLASHING)
 			.build()
 		);
 		register(MoveBuilder.newMove(CLAY_SLAP)
@@ -944,6 +1009,9 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
+			.addTag(KICKING)
+			.addTag(SLAPPING)
 			.build()
 		);
 		register(MoveBuilder.newMove(CLEAN_UP)
@@ -980,6 +1048,7 @@ public class MoveRegistry {
 					))
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(COMPLETE_DEMOLITION)
@@ -993,6 +1062,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(CONCLUSION)
@@ -1000,6 +1070,7 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(STATUS)
 			.energyCost(new Constant(0))
+			.addTag(SOUND)
 			.build()
 		);
 		register(MoveBuilder.newMove(CONFOUND)
@@ -1039,6 +1110,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(COUNTER_STANCE)
@@ -1052,6 +1124,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(CYCLONE_SLAM)
@@ -1065,6 +1138,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(DARK_SURGE)
@@ -1118,6 +1192,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(DEEP_FREEZE)
@@ -1151,6 +1226,8 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
+			.addTag(SLASHING)
 			.build()
 		);
 		register(MoveBuilder.newMove(DISCORDANCE)
@@ -1164,6 +1241,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(SOUND)
 			.build()
 		);
 		register(MoveBuilder.newMove(DISPERSE)
@@ -1179,6 +1257,7 @@ public class MoveRegistry {
 			.category(STATUS)
 			.energyCost(new Constant(0))
 			.priority(new Constant(-6))
+			.addTag(PIVOT)
 			.build()
 		);
 		register(MoveBuilder.newMove(DISSONANT_CHORD)
@@ -1192,6 +1271,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(SOUND)
 			.build()
 		);
 		register(MoveBuilder.newMove(DIVE_BOMB)
@@ -1205,6 +1285,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(DODGE)
@@ -1226,6 +1307,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(DOUBLE_STING) // NEEDS TO BE MADE INTO A BARRAGE
@@ -1242,6 +1324,7 @@ public class MoveRegistry {
 					))
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(DOUBLE_WHACK)
@@ -1255,6 +1338,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(DOUSE)
@@ -1302,6 +1386,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(DRUDGE)
@@ -1322,6 +1407,8 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
+			.addTag(SLAPPING)
 			.build()
 		);
 		register(MoveBuilder.newMove(EARTHQUAKE)
@@ -1368,6 +1455,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(SOUL_BURST)
 			.build()
 		);
 		register(MoveBuilder.newMove(EGG_STORM)
@@ -1394,6 +1482,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(SOUL_BURST)
 			.build()
 		);
 		register(MoveBuilder.newMove(ELECTRO_PUNCH)
@@ -1410,6 +1499,7 @@ public class MoveRegistry {
 					))
 				))
 			))
+			.addTag(CONTACT)
 			.addTag(PUNCHING)
 			.build()
 		);
@@ -1516,6 +1606,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(SOUL_BURST)
 			.build()
 		);
 		register(MoveBuilder.newMove(EXAMINE)
@@ -1550,6 +1641,8 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
+			.addTag(PIVOT)
 			.build()
 		);
 		register(MoveBuilder.newMove(FAR_ENCHANTMENT)
@@ -1570,6 +1663,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(FINAL_RUSE)
@@ -1609,6 +1703,7 @@ public class MoveRegistry {
 					))
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(FLABBERGAST)
@@ -1638,6 +1733,8 @@ public class MoveRegistry {
 					))
 				))
 			))
+			.addTag(CONTACT)
+			.addTag(KICKING)
 			.build()
 		);
 		register(MoveBuilder.newMove(FLARE)
@@ -1687,6 +1784,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(PIVOT)
 			.build()
 		);
 		register(MoveBuilder.newMove(FLASH_PULSE)
@@ -1700,6 +1798,20 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.build()
+		);
+		register(MoveBuilder.newMove(FLORA_BLAST)
+			.name("Flora Blast")
+			.type(PLANT)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.basePower(new Constant(100))
+			.onHit(new MoveEffect(
+				new EffectSequence(List.of(
+					new DealFormulaDamage()
+				))
+			))
+			.addTag(SOUL_BURST)
 			.build()
 		);
 		register(MoveBuilder.newMove(FLURRY)
@@ -1736,6 +1848,23 @@ public class MoveRegistry {
 					))
 				))
 			))
+			.build()
+		);
+		register(MoveBuilder.newMove(FRIGHTFUL_SUPRISE)
+			.name("Frightful Suprise")
+			.type(SPIRIT)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.basePower(new Constant(100))
+			.onHit(new MoveEffect(
+				new EffectSequence(List.of(
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						// TODO apply bane of haste at the end of the turn
+					))
+				))
+			))
+			.addTag(SOUL_BURST)
 			.build()
 		);
 		register(MoveBuilder.newMove(FROST_BEAM)
@@ -1797,6 +1926,7 @@ public class MoveRegistry {
 					))
 				))
 			))
+			.addTag(CONTACT)
 			.addTag(PUNCHING)
 			.build()
 		);
@@ -1811,6 +1941,8 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
+			.addTag(SOUL_BURST)
 			.build()
 		);
 		register(MoveBuilder.newMove(FUNGUS_CURSE)
@@ -1874,6 +2006,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(SOUND)
 			.build()
 		);
 		register(MoveBuilder.newMove(GIVE_UP)
@@ -1900,6 +2033,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(GLOOMINOUS_FANGS)
@@ -1913,6 +2047,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(GLOOMINOUS_ROAR)
@@ -1926,6 +2061,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(SOUND)
 			.build()
 		);
 		register(MoveBuilder.newMove(GNARLY_GASH)
@@ -1939,6 +2075,8 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
+			.addTag(SLASHING)
 			.build()
 		);
 		register(MoveBuilder.newMove(GNAW)
@@ -1952,6 +2090,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(GOBBLE_GOOP)
@@ -2037,6 +2176,7 @@ public class MoveRegistry {
 					))
 				))
 			))
+			.addTag(SOUND)
 			.build()
 		);
 		register(MoveBuilder.newMove(HARROW)
@@ -2053,6 +2193,7 @@ public class MoveRegistry {
 					))
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(HARVEST)
@@ -2094,6 +2235,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(HEALTH_GIFT)
@@ -2114,6 +2256,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(HEAT_WAVE)
@@ -2134,6 +2277,39 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
+			.build()
+		);
+		register(MoveBuilder.newMove(HEEDLESS_RUSH) // TODO: give this perfect accuracy and bypass dodge
+			.name("Heedless Rush")
+			.type(WATER)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.basePower(new Constant(100))
+			.onHit(new MoveEffect(
+				new EffectSequence(List.of(
+					new DealFormulaDamage()
+				))
+			))
+			.addTag(CONTACT)
+			.addTag(SOUL_BURST)
+			.build()
+		);
+		register(MoveBuilder.newMove(HELLSTORM)
+			.name("Hellstorm")
+			.type(FIRE)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.basePower(new Constant(100))
+			.onHit(new MoveEffect(
+				new EffectSequence(List.of(
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+
+					))
+				))
+			))
+			.addTag(SOUL_BURST)
 			.build()
 		);
 		register(MoveBuilder.newMove(HERBAL_REMEDY)
@@ -2154,6 +2330,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(SOUND)
 			.build()
 		);
 		register(MoveBuilder.newMove(HOLY_SLASH)
@@ -2167,6 +2344,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(SLASHING)
 			.build()
 		);
 		register(MoveBuilder.newMove(HOODWINK)
@@ -2187,6 +2365,8 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
+			.addTag(KICKING)
 			.build()
 		);
 		register(MoveBuilder.newMove(HORN_DASHI)
@@ -2200,6 +2380,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(HULLABALOO)
@@ -2213,6 +2394,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(SOUND)
 			.build()
 		);
 		register(MoveBuilder.newMove(HYDRO_BLAST)
@@ -2239,6 +2421,8 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
+			.addTag(SLASHING)
 			.build()
 		);
 		register(MoveBuilder.newMove(HYPER_STING)
@@ -2252,6 +2436,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(HYPNOTIZE)
@@ -2288,6 +2473,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(ICICLE_TRAP)
@@ -2321,6 +2507,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(IMPERSONATE)
@@ -2402,6 +2589,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(KINDLED_RAGE)
@@ -2415,6 +2603,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(LANDSLIDE)
@@ -2441,6 +2630,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(SOUL_BURST)
 			.build()
 		);
 		register(MoveBuilder.newMove(LAVA_SLASH)
@@ -2457,6 +2647,8 @@ public class MoveRegistry {
 					))
 				))
 			))
+			.addTag(CONTACT)
+			.addTag(SLASHING)
 			.build()
 		);
 		register(MoveBuilder.newMove(LEAF_BARRAGE)
@@ -2486,6 +2678,7 @@ public class MoveRegistry {
 					))
 				))
 			))
+			.addTag(HEALTH_DRAIN)
 			.build()
 		);
 		register(MoveBuilder.newMove(LIGHT_DASH)
@@ -2500,6 +2693,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(LIGHTSPEED_RAY)
@@ -2527,6 +2721,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(SOUND)
 			.build()
 		);
 		register(MoveBuilder.newMove(LUNGE)
@@ -2540,6 +2735,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(LUSTER_LOOT)
@@ -2556,6 +2752,7 @@ public class MoveRegistry {
 					))
 				))
 			))
+			.addTag(HEALTH_DRAIN)
 			.build()
 		);
 		register(MoveBuilder.newMove(MAGMA_BLOCK)
@@ -2630,6 +2827,7 @@ public class MoveRegistry {
 				))
 			))
 			.addTag(BITING)
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(MEGA_KICK)
@@ -2643,6 +2841,8 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
+			.addTag(KICKING)
 			.build()
 		);
 		register(MoveBuilder.newMove(MEGA_PUNCH)
@@ -2656,6 +2856,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.addTag(PUNCHING)
 			.build()
 		);
@@ -2670,6 +2871,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(SOUL_BURST)
 			.build()
 		);
 		register(MoveBuilder.newMove(MEMORIZE)
@@ -2710,6 +2912,8 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
+			.addTag(SLASHING)
 			.build()
 		);
 		register(MoveBuilder.newMove(METEOR_CRASH)
@@ -2752,6 +2956,7 @@ public class MoveRegistry {
 					))
 				))
 			))
+			.addTag(HEALTH_DRAIN)
 			.build()
 		);
 		register(MoveBuilder.newMove(MINDS_EYE)
@@ -2772,6 +2977,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(SOUL_BURST)
 			.build()
 		);
 		register(MoveBuilder.newMove(MOLT)
@@ -2808,6 +3014,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(MUD_SPATTER)
@@ -2860,6 +3067,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(NATURES_FORCE)
@@ -2886,6 +3094,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(NEAR_ENCHANTMENT)
@@ -2906,6 +3115,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(NOVA_BLAST)
@@ -2968,6 +3178,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(PAINT_SHOWER)
@@ -2998,6 +3209,8 @@ public class MoveRegistry {
 				))
 			))
 			.addTag(BITING)
+			.addTag(CONTACT)
+			.addTag(HEALTH_DRAIN)
 			.build()
 		);
 		register(MoveBuilder.newMove(PEACE_OF_MIND)
@@ -3031,6 +3244,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(PEP_JAB)
@@ -3044,6 +3258,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(PEPPER_BURST)
@@ -3146,6 +3361,8 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
+			.addTag(SLASHING)
 			.build()
 		);
 		register(MoveBuilder.newMove(PHEROBLAST)
@@ -3186,6 +3403,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(PILFER)
@@ -3199,6 +3417,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(PINE_SHOT)
@@ -3225,6 +3444,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(POISON)
@@ -3255,6 +3475,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(POWER_DRAW)
@@ -3291,6 +3512,7 @@ public class MoveRegistry {
 					))
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(POWER_SURGE)
@@ -3333,6 +3555,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(PRIMAL_SLASH)
@@ -3346,6 +3569,8 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
+			.addTag(SLASHING)
 			.build()
 		);
 		register(MoveBuilder.newMove(PROVOKE)
@@ -3381,6 +3606,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(SLAPPING)
 			.build()
 		);
 		register(MoveBuilder.newMove(PSYCHO_BLAST)
@@ -3394,6 +3620,23 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.build()
+		);
+		register(MoveBuilder.newMove(PUNCH)
+			.name("Punch")
+			.type(BRAWLER)
+			.category(MELEE)
+			.energyCost(new Constant(20))
+			.basePower(new Constant(45))
+			.onHit(new MoveEffect(
+				new EffectSequence(List.of(
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+
+					))
+				))
+			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(PYROKINESIS)
@@ -3423,6 +3666,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(QUICK_PUNCH)
@@ -3436,6 +3680,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.addTag(PUNCHING)
 			.build()
 		);
@@ -3476,6 +3721,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(RAGING_FLAME)
@@ -3499,6 +3745,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(SOUND)
 			.build()
 		);
 		register(MoveBuilder.newMove(RAGING_TACKLE)
@@ -3512,6 +3759,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(RAINBOW_BLAST)
@@ -3538,6 +3786,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(SOUND)
 			.build()
 		);
 		register(MoveBuilder.newMove(RAPID_FIRE)
@@ -3564,6 +3813,8 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
+			.addTag(SLASHING)
 			.build()
 		);
 		register(MoveBuilder.newMove(RECYCLE)
@@ -3604,6 +3855,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(SOUND)
 			.build()
 		);
 		register(MoveBuilder.newMove(RESONATE)
@@ -3617,6 +3869,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(SOUND)
 			.build()
 		);
 		register(MoveBuilder.newMove(RETURN_TO_SENDER)
@@ -3644,6 +3897,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(ROCK_SLIDE)
@@ -3670,6 +3924,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(ROUGH_UP)
@@ -3687,6 +3942,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(RUFFLED_FEATHERS)
@@ -3707,6 +3963,8 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
+			.addTag(SOUL_BURST)
 			.build()
 		);
 		register(MoveBuilder.newMove(SAFEGUARD)
@@ -3732,6 +3990,7 @@ public class MoveRegistry {
 					// apply sap plant mechanic
 				))
 			))
+			.addTag(HEALTH_DRAIN)
 			.build()
 		);
 		register(MoveBuilder.newMove(SAVAGE_GREED)
@@ -3745,6 +4004,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(SAVAGE_HORN)
@@ -3758,6 +4018,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(SCAPEGOAT)
@@ -3778,6 +4039,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(SEA_SONG)
@@ -3791,6 +4053,8 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(PIVOT)
+			.addTag(SOUND)
 			.build()
 		);
 		register(MoveBuilder.newMove(SEARING_STEEL)
@@ -3807,6 +4071,7 @@ public class MoveRegistry {
 					))
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(SECOND_WIND)
@@ -3854,6 +4119,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(SHADOWBOX)
@@ -3881,6 +4147,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(SHELL_BASH)
@@ -3940,6 +4207,7 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(STATUS)
 			.energyCost(new Constant(0))
+			.addTag(SOUND)
 			.build()
 		);
 		register(MoveBuilder.newMove(SINGE)
@@ -3958,6 +4226,19 @@ public class MoveRegistry {
 			))
 			.build()
 		);
+		register(MoveBuilder.newMove(SINISTER_SHACKLES)
+			.name("Sinister Shackles")
+			.type(SPIRIT)
+			.category(RANGED)
+			.energyCost(new Constant(0))
+			.basePower(new Constant(100))
+			.onHit(new MoveEffect(
+				new EffectSequence(List.of(
+					new DealFormulaDamage()
+				))
+			))
+			.build()
+		);
 		register(MoveBuilder.newMove(SLAP_DOWN)
 			.name("Slap Down")
 			.type(DARK)
@@ -3970,6 +4251,8 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
+			.addTag(SLAPPING)
 			.build()
 		);
 		register(MoveBuilder.newMove(SLASH)
@@ -3983,6 +4266,8 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
+			.addTag(SLASHING)
 			.build()
 		);
 		register(MoveBuilder.newMove(SLEET_SHOT)
@@ -4029,6 +4314,7 @@ public class MoveRegistry {
 			.onHit(new MoveEffect(
 				Schematics.applyStatusToTarget(1, StatusId.SLEEP)
 			))
+			.addTag(POWDER)
 			.build()
 		);
 		// snot shot
@@ -4043,6 +4329,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(SOFT_WATER)
@@ -4063,6 +4350,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(SOUL_DRAIN)
@@ -4079,6 +4367,7 @@ public class MoveRegistry {
 					))
 				))
 			))
+			.addTag(HEALTH_DRAIN)
 			.build()
 		);
 		register(MoveBuilder.newMove(SOUL_HARVEST)
@@ -4092,6 +4381,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(SOUL_STORM)
@@ -4118,6 +4408,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(SPECTRAL_BURST)
@@ -4145,6 +4436,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(SPIT)
@@ -4232,6 +4524,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(STARE)
@@ -4278,6 +4571,7 @@ public class MoveRegistry {
 			.onHit(new MoveEffect(
 				Schematics.applyStatusToTarget(1, StatusId.PARALYSIS)
 			))
+			.addTag(POWDER)
 			.build()
 		);
 		register(MoveBuilder.newMove(STEEL_CRUSHER)
@@ -4291,6 +4585,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(STEEL_TRAP)
@@ -4304,6 +4599,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(STING)
@@ -4320,6 +4616,7 @@ public class MoveRegistry {
 					))
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(STORM_SUMMON)
@@ -4370,6 +4667,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(STUN)
@@ -4409,6 +4707,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(SUMMON)
@@ -4429,6 +4728,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(SWIFTEN)
@@ -4449,6 +4749,8 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
+			.addTag(SLASHING)
 			.build()
 		);
 		register(MoveBuilder.newMove(TAIL_SLAP)
@@ -4462,6 +4764,8 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
+			.addTag(SLAPPING)
 			.build()
 		);
 		register(MoveBuilder.newMove(TAKE_ROOT)
@@ -4499,6 +4803,7 @@ public class MoveRegistry {
 					))
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(TEAMWORK)
@@ -4533,6 +4838,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(SLAPPING)
 			.build()
 		);
 		register(MoveBuilder.newMove(TEMPEST)
@@ -4558,6 +4864,8 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
+			.addTag(SLASHING)
 			.build()
 		);
 		register(MoveBuilder.newMove(THORN_SLAM)
@@ -4571,6 +4879,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(THUNDER_BLAST)
@@ -4604,6 +4913,7 @@ public class MoveRegistry {
 				))
 			))
 			.addTag(BITING)
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(THUNDER_CLAP)
@@ -4617,6 +4927,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(THUNDER_CRASH)
@@ -4630,6 +4941,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(THUNDER_SLAM)
@@ -4646,6 +4958,7 @@ public class MoveRegistry {
 					))
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(THUNDERSTORM)
@@ -4682,6 +4995,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(TONE_BARRIER)
@@ -4690,6 +5004,7 @@ public class MoveRegistry {
 			.category(STATUS)
 			.energyCost(new Constant(0))
 			.priority(new Constant(4))
+			.addTag(SOUND)
 			.build()
 		);
 		register(MoveBuilder.newMove(TORRENTIAL_SLASH)
@@ -4703,6 +5018,8 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
+			.addTag(SLASHING)
 			.build()
 		);
 		register(MoveBuilder.newMove(TOXIBLAST)
@@ -4729,6 +5046,7 @@ public class MoveRegistry {
 			.onHit(new MoveEffect(
 				Schematics.applyStatusToTarget(1, StatusId.POISON)
 			))
+			.addTag(POWDER)
 			.build()
 		);
 		register(MoveBuilder.newMove(TOXIC_TAIL)
@@ -4745,6 +5063,7 @@ public class MoveRegistry {
 					))
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(TRIBUTE)
@@ -4855,6 +5174,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(VENOM_CHOMP)
@@ -4872,6 +5192,7 @@ public class MoveRegistry {
 				))
 			))
 			.addTag(BITING)
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(VENOM_SLASH)
@@ -4888,6 +5209,8 @@ public class MoveRegistry {
 					))
 				))
 			))
+			.addTag(CONTACT)
+			.addTag(SLASHING)
 			.build()
 		);
 		register(MoveBuilder.newMove(VICE_JAWS)
@@ -4901,6 +5224,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(VICIOUS_SNAP)
@@ -4914,6 +5238,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(VINE_LASH)
@@ -4940,6 +5265,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(VITAL_SURGE)
@@ -4979,6 +5305,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(WEB_SHOT)
@@ -5004,6 +5331,8 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
+			.addTag(SLAPPING)
 			.build()
 		);
 		register(MoveBuilder.newMove(WINTERS_FURY)
@@ -5017,6 +5346,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(WONDER_HERB)
@@ -5042,6 +5372,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(CONTACT)
 			.build()
 		);
 		register(MoveBuilder.newMove(ZIP_ZAP)
@@ -5055,6 +5386,7 @@ public class MoveRegistry {
 					new DealFormulaDamage()
 				))
 			))
+			.addTag(PIVOT)
 			.build()
 		);
     }

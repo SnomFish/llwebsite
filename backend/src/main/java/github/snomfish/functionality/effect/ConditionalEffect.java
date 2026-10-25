@@ -6,6 +6,7 @@ import java.util.List;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.condition.ICondition;
 import github.snomfish.functionality.context.BattleContext;
+import github.snomfish.functionality.effect.effects.NoEffect;
 
 import static github.snomfish.functionality.branch.BranchUtil.applyProbability;
 
@@ -13,15 +14,26 @@ public class ConditionalEffect implements IEffect {
     
 
     private ICondition condition;
-    private IEffect effect;
+    private IEffect trueEffect;
+    private IEffect falseEffect;
 
 
     public ConditionalEffect(
         ICondition condition,
-        IEffect effect
+        IEffect trueEffect
     ) {
         this.condition = condition;
-        this.effect = effect;
+        this.trueEffect = trueEffect;
+        this.falseEffect = new NoEffect();
+    }
+    public ConditionalEffect(
+        ICondition condition,
+        IEffect trueEffect,
+        IEffect falseEffect
+    ) {
+        this.condition = condition;
+        this.trueEffect = trueEffect;
+        this.falseEffect = falseEffect;
     }
 
 
@@ -29,7 +41,8 @@ public class ConditionalEffect implements IEffect {
     public ConditionalEffect deepCopy() {
         return new ConditionalEffect(
             condition.deepCopy(), 
-            effect.deepCopy()
+            trueEffect.deepCopy(),
+            falseEffect.deepCopy()
         );
     }
 
@@ -42,12 +55,9 @@ public class ConditionalEffect implements IEffect {
         
         for (Branch<Boolean> branch : conditionBranches) {
             if (branch.value()) {
-                outcomes.addAll(applyProbability(effect.execute(context), branch));
+                outcomes.addAll(applyProbability(trueEffect.execute(context), branch));
             } else {
-                outcomes.add(new Branch<>(
-                    context,
-                    branch.probability()
-                ));
+                outcomes.addAll(applyProbability(falseEffect.execute(context), branch));
             }
         }
 

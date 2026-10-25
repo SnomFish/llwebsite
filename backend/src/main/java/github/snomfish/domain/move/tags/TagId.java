@@ -1,18 +1,19 @@
 package github.snomfish.domain.move.tags;
 
 public enum TagId {
+    BITING,
     CONTACT,
+    EXPLOSIVE,
+    HEALTH_DRAIN,
+    KICKING,
     MULTI_HIT,
     MULTI_TURN,
-    
-    BITING,
-    EXPLOSIVE,
-    KICKING,
     PIVOT,
     POWDER,
     PUNCHING,
     SLAPPING,
     SLASHING,
+    SOUL_BURST,
     SOUND,
     ;
 }
