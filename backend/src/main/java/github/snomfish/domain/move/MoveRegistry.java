@@ -11,7 +11,10 @@ import github.snomfish.functionality.Constants;
 import github.snomfish.functionality.Schematics;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.condition.conditions.GreaterThan;
+import github.snomfish.functionality.condition.conditions.RandomCondition;
+import github.snomfish.functionality.effect.ConditionalEffect;
 import github.snomfish.functionality.effect.EffectSequence;
+import github.snomfish.functionality.effect.effects.ApplyStatChanges;
 import github.snomfish.functionality.effect.effects.DealFormulaDamage;
 import github.snomfish.functionality.effect.effects.EnergyDrainEffect;
 import github.snomfish.functionality.effect.effects.HealthDrainEffect;
@@ -49,6 +52,10 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(STATUS)
 			.energyCost(new Constant(25))
+			.onHit(new MoveEffect(
+				ApplyStatChanges.userChangingUser()
+					.speed(new Constant(2))
+			))
 			.build()
 		);
 		register(MoveBuilder.newMove(ADAPTIVE_ASSAULT_AIR)
@@ -72,7 +79,14 @@ public class MoveRegistry {
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						new ConditionalEffect(
+							new RandomCondition(new Constant(0.2)),
+							ApplyStatChanges.userChangingUser()
+								.mattack(new Constant(1))
+						)
+					))
 				))
 			))
 			.addTag(CONTACT)
@@ -315,6 +329,10 @@ public class MoveRegistry {
 			.type(METAL)
 			.category(STATUS)
 			.energyCost(new Constant(0))
+			.onHit(new MoveEffect(
+				ApplyStatChanges.userChangingUser()
+					.speed(new Constant(2))	
+			))
 			.build()
 		);
 		register(MoveBuilder.newMove(AUGMENT)
@@ -462,6 +480,13 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(STATUS)
 			.energyCost(new Constant(0))
+			.onHit(new MoveEffect(
+				new EffectSequence(List.of(
+					// remove half of the user's health
+					ApplyStatChanges.userChangingUser()
+						.mattack(new Constant(20))
+				))
+			))
 			.addTag(SOUND)
 			.build()
 		);
@@ -470,6 +495,14 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(STATUS)
 			.energyCost(new Constant(0))
+			.onHit(new MoveEffect(
+				new EffectSequence(List.of(
+					ApplyStatChanges.userChangingUser()
+						.mattack(new Constant(1))
+						.mdefense(new Constant(1))
+					// heal the status effects off the party
+				))
+			))
 			.addTag(SOUND)
 			.build()
 		);
@@ -478,6 +511,11 @@ public class MoveRegistry {
 			.type(ANCIENT)
 			.category(STATUS)
 			.energyCost(new Constant(0))
+			.onHit(new MoveEffect(
+				new EffectSequence(List.of(
+					// applys beast slumber mechanic
+				))
+			))
 			.build()
 		);
 		register(MoveBuilder.newMove(BEQUEATH)
@@ -558,7 +596,11 @@ public class MoveRegistry {
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						ApplyStatChanges.userChangingUser()
+							.speed(new Constant(1))	
+					))
 				))
 			))
 			.addTag(CONTACT)
@@ -698,6 +740,12 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(STATUS)
 			.energyCost(new Constant(0))
+			.onHit(new MoveEffect(
+				new EffectSequence(List.of(
+					ApplyStatChanges.userChangingTarget()
+						.mdefense(new Constant(1))
+				))
+			))
 			.build()
 		);
 		register(MoveBuilder.newMove(BRAIN_EXERCISE)
@@ -705,6 +753,13 @@ public class MoveRegistry {
 			.type(MIND)
 			.category(STATUS)
 			.energyCost(new Constant(0))
+			.onHit(new MoveEffect(
+				new EffectSequence(List.of(
+					ApplyStatChanges.userChangingUser()
+						.rattack(new Constant(1))
+						.mdefense(new Constant(1))
+				))
+			))
 			.build()
 		);
 		register(MoveBuilder.newMove(BRAIN_FREEZE)
@@ -738,6 +793,12 @@ public class MoveRegistry {
 			.type(BRAWLER)
 			.category(STATUS)
 			.energyCost(new Constant(0))
+			.onHit(new MoveEffect(
+				new EffectSequence(List.of(
+					ApplyStatChanges.userChangingUser()
+						.mattack(new Constant(2))
+				))
+			))
 			.build()
 		);
 		register(MoveBuilder.newMove(BRIAR_BLOCK)
@@ -753,6 +814,12 @@ public class MoveRegistry {
 			.type(BRAWLER)
 			.category(STATUS)
 			.energyCost(new Constant(0))
+			.onHit(new MoveEffect(
+				new EffectSequence(List.of(
+					ApplyStatChanges.userChangingUser()
+						.critChance(new Constant(2))		
+				))
+			))
 			.build()
 		);
 		register(MoveBuilder.newMove(BUG_BITE)
@@ -777,7 +844,14 @@ public class MoveRegistry {
 			.name("Bulk Up")
 			.type(BRAWLER)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
+			.onHit(new MoveEffect(
+				new EffectSequence(List.of(
+					ApplyStatChanges.userChangingUser()
+						.mattack(new Constant(1))
+						.mdefense(new Constant(1))
+				))
+			))
 			.build()
 		);
 		register(MoveBuilder.newMove(BURN_UP)
@@ -785,6 +859,13 @@ public class MoveRegistry {
 			.type(FIRE)
 			.category(STATUS)
 			.energyCost(new Constant(0))
+			.onHit(new MoveEffect(
+				new EffectSequence(List.of(
+					ApplyStatChanges.userChangingUser()
+						.rattack(new Constant(1))
+					// clear hazards
+				))
+			))
 			.build()
 		);
 		register(MoveBuilder.newMove(BURROW)
@@ -792,6 +873,12 @@ public class MoveRegistry {
 			.type(EARTH)
 			.category(STATUS)
 			.energyCost(new Constant(0))
+			.onHit(new MoveEffect(
+				new EffectSequence(List.of(
+					ApplyStatChanges.userChangingUser()
+						.mdefense(new Constant(1))
+				))
+			))
 			.build()
 		);
 		register(MoveBuilder.newMove(BUSH_WHACK)
@@ -1249,6 +1336,13 @@ public class MoveRegistry {
 			.type(LIGHT)
 			.category(STATUS)
 			.energyCost(new Constant(0))
+			.onHit(new MoveEffect(
+				new EffectSequence(List.of(
+					ApplyStatChanges.userChangingUser()
+						.rattack(new Constant(1))
+						.accuracy(new Constant(1))
+				))
+			))
 			.build()
 		);
 		register(MoveBuilder.newMove(DISSIPATE)
@@ -1394,6 +1488,13 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(STATUS)
 			.energyCost(new Constant(0))
+			.onHit(new MoveEffect(
+				new EffectSequence(List.of(
+					ApplyStatChanges.userChangingUser()
+						.mattack(new Constant(1))
+						.speed(new Constant(1))
+				))
+			))
 			.build()
 		);
 		register(MoveBuilder.newMove(EAR_SLAP)
@@ -1564,6 +1665,13 @@ public class MoveRegistry {
 			.type(ELECTRIC)
 			.category(STATUS)
 			.energyCost(new Constant(0))
+			.onHit(new MoveEffect(
+				new EffectSequence(List.of(
+					ApplyStatChanges.userChangingUser()
+						.rattack(new Constant(1))
+						.rdefense(new Constant(1))
+				))
+			))
 			.build()
 		);
 		register(MoveBuilder.newMove(ENERGY_BREAK)
@@ -1660,7 +1768,11 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						ApplyStatChanges.userChangingUser()
+							.mdefense(new Constant(1))	
+					))
 				))
 			))
 			.addTag(CONTACT)
@@ -2160,6 +2272,13 @@ public class MoveRegistry {
 			.type(AIR)
 			.category(STATUS)
 			.energyCost(new Constant(0))
+			.onHit(new MoveEffect(
+				new EffectSequence(List.of(
+					// clear hazards
+					ApplyStatChanges.userChangingUser()
+						.mattack(new Constant(1))
+				))
+			))
 			.build()
 		);
 		register(MoveBuilder.newMove(HARMONIOUS_CHORD)
@@ -2208,6 +2327,13 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(STATUS)
 			.energyCost(new Constant(0))
+			.onHit(new MoveEffect(
+				new EffectSequence(List.of(
+					ApplyStatChanges.userChangingUser()
+						.rattack(new Constant(1))
+						.speed(new Constant(1))
+				))
+			))
 			.build()
 		);
 		register(MoveBuilder.newMove(HAZE_SHROUD)
@@ -2576,6 +2702,13 @@ public class MoveRegistry {
 			.type(ELECTRIC)
 			.category(STATUS)
 			.energyCost(new Constant(0))
+			.onHit(new MoveEffect(
+				new EffectSequence(List.of(
+					ApplyStatChanges.userChangingUser()
+						.rattack(new Constant(1))
+					// lose 1/4 hp
+				))
+			))
 			.build()
 		);
 		register(MoveBuilder.newMove(JUNGLEJUTSU)
@@ -2784,6 +2917,12 @@ public class MoveRegistry {
 			.type(LIGHT)
 			.category(STATUS)
 			.energyCost(new Constant(0))
+			.onHit(new MoveEffect(
+				new EffectSequence(List.of(
+					ApplyStatChanges.userChangingUser()
+						.rattack(new Constant(2))
+				))
+			))
 			.build()
 		);
 		register(MoveBuilder.newMove(MAROON)
@@ -2964,6 +3103,12 @@ public class MoveRegistry {
 			.type(MIND)
 			.category(STATUS)
 			.energyCost(new Constant(0))
+			.onHit(new MoveEffect(
+				new EffectSequence(List.of(
+					ApplyStatChanges.userChangingUser()
+						.rattack(new Constant(1))
+				))
+			))
 			.build()
 		);
 		register(MoveBuilder.newMove(MIRACLE_BEAM)
@@ -2985,6 +3130,12 @@ public class MoveRegistry {
 			.type(BUG)
 			.category(STATUS)
 			.energyCost(new Constant(0))
+			.onHit(new MoveEffect(
+				new EffectSequence(List.of(
+					ApplyStatChanges.userChangingUser()
+						.speed(new Constant(2))
+				))
+			))
 			.build()
 		);
 		register(MoveBuilder.newMove(MUCK_BLAST)
@@ -3038,7 +3189,11 @@ public class MoveRegistry {
 			.basePower(new Constant(50))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						ApplyStatChanges.userChangingUser()
+							.accuracy(new Constant(1))
+					))
 				))
 			))
 			.build()
@@ -3051,7 +3206,14 @@ public class MoveRegistry {
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						new ConditionalEffect(
+							new RandomCondition(new Constant(0.2)),
+							ApplyStatChanges.userChangingUser()
+								.speed(new Constant(1))
+						)
+					))
 				))
 			))
 			.build()
@@ -3218,6 +3380,13 @@ public class MoveRegistry {
 			.type(MIND)
 			.category(STATUS)
 			.energyCost(new Constant(0))
+			.onHit(new MoveEffect(
+				new EffectSequence(List.of(
+					ApplyStatChanges.userChangingUser()
+						.rattack(new Constant(1))
+						.rdefense(new Constant(1))
+				))
+			))
 			.build()
 		);
 		register(MoveBuilder.newMove(PEBBLE_TOSS)
@@ -3496,6 +3665,13 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(STATUS)
 			.energyCost(new Constant(0))
+			.onHit(new MoveEffect(
+				new EffectSequence(List.of(
+					ApplyStatChanges.userChangingUser()
+						.mattack(new Constant(1))
+						.rattack(new Constant(1))
+				))
+			))
 			.build()
 		);
 		register(MoveBuilder.newMove(POWER_SIPHON)
@@ -3866,7 +4042,14 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						new ConditionalEffect(
+							new RandomCondition(new Constant(0.1)),
+							ApplyStatChanges.userChangingUser()
+								.rattack(new Constant(1))
+						)
+					))
 				))
 			))
 			.addTag(SOUND)
@@ -4127,6 +4310,13 @@ public class MoveRegistry {
 			.type(BRAWLER)
 			.category(STATUS)
 			.energyCost(new Constant(0))
+			.onHit(new MoveEffect(
+				new EffectSequence(List.of(
+					ApplyStatChanges.userChangingUser()
+						.mattack(new Constant(1))
+						.rdefense(new Constant(1))
+				))
+			))
 			.build()
 		);
 		register(MoveBuilder.newMove(SHARPEN)
@@ -4134,6 +4324,13 @@ public class MoveRegistry {
 			.type(DARK)
 			.category(STATUS)
 			.energyCost(new Constant(0))
+			.onHit(new MoveEffect(
+				new EffectSequence(List.of(
+					ApplyStatChanges.userChangingUser()
+						.mattack(new Constant(1))
+						.accuracy(new Constant(1))
+				))
+			))
 			.build()
 		);
 		register(MoveBuilder.newMove(SHATTER)
@@ -4582,7 +4779,14 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						new ConditionalEffect(
+							new RandomCondition(new Constant(0.1)),
+							ApplyStatChanges.userChangingUser()
+								.mattack(new Constant(1))
+						)
+					))
 				))
 			))
 			.addTag(CONTACT)
@@ -4654,6 +4858,12 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(STATUS)
 			.energyCost(new Constant(0))
+			.onHit(new MoveEffect(
+				new EffectSequence(List.of(
+					ApplyStatChanges.userChangingUser()
+						.speed(new Constant(1))
+				))
+			))
 			.build()
 		);
 		register(MoveBuilder.newMove(STRIKE)
@@ -4787,6 +4997,13 @@ public class MoveRegistry {
 			.type(EARTH)
 			.category(STATUS)
 			.energyCost(new Constant(0))
+			.onHit(new MoveEffect(
+				new EffectSequence(List.of(
+					ApplyStatChanges.userChangingUser()
+						.mdefense(new Constant(1))
+						.rdefense(new Constant(1))
+				))
+			))
 			.build()
 		);
 		register(MoveBuilder.newMove(TASE)
@@ -5132,7 +5349,8 @@ public class MoveRegistry {
 			.energyCost(new Constant(0))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					ApplyStatChanges.userChangingUser()
+						.rdefense(new Constant(1))
 				))
 			))
 			.build()
@@ -5145,7 +5363,14 @@ public class MoveRegistry {
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						new ConditionalEffect(
+							new RandomCondition(new Constant(0.5)),
+							ApplyStatChanges.userChangingUser()
+								.rattack(new Constant(1))
+						)
+					))
 				))
 			))
 			.build()
