@@ -84,10 +84,10 @@ public class StatusRegistry {
             "poison",
             new TriggerRule(
                 new Event(EventId.END_TURN_STATUS_EFFECT_EVENT, USER),
-                new DealDirectSelfDamage(new Multiply(List.of(
+                new DealDirectSelfDamage(new Multiply(
                     new Constant(1/16),
                     new ValueConstant(Value.USER_STATUS_TURNS)
-                )))
+                ))
             )
         );
         register(

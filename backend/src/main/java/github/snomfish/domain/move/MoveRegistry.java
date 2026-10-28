@@ -7,7 +7,6 @@ import java.util.Map;
 import github.snomfish.domain.move.structures.MoveEffect;
 import github.snomfish.domain.stats.StatId;
 import github.snomfish.domain.status.StatusId;
-import github.snomfish.functionality.Constants;
 import github.snomfish.functionality.Schematics;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.condition.conditions.GreaterThan;
@@ -252,7 +251,7 @@ public class MoveRegistry {
 			.name("Air Shot")
 			.type(AIR)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(20))
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -265,7 +264,7 @@ public class MoveRegistry {
 			.name("Air Whip")
 			.type(AIR)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(35))
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -292,7 +291,7 @@ public class MoveRegistry {
 			.name("ancient_roar")
 			.type(ANCIENT)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.addTag(PIVOT)
 			.addTag(SOUND)
 			.build()
@@ -301,7 +300,7 @@ public class MoveRegistry {
 			.name("apparition")
 			.type(SPIRIT)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(55))
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -314,7 +313,7 @@ public class MoveRegistry {
 			.name("Aqua Jaws")
 			.type(WATER)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(38))
 			.basePower(new Constant(65))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -328,7 +327,7 @@ public class MoveRegistry {
 			.name("armour_down")
 			.type(METAL)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.onHit(new MoveEffect(
 				ApplyStatChanges.userChangingUser()
 					.speed(new Constant(2))	
@@ -339,14 +338,14 @@ public class MoveRegistry {
 			.name("Augment")
 			.type(ANCIENT)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.build()
 		);
 		register(MoveBuilder.newMove(BAFFLE)
 			.name("Baffle")
 			.type(DARK)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.addTag(PIVOT)
 			.build()
 		);
@@ -354,14 +353,14 @@ public class MoveRegistry {
 			.name("Bag of Tricks")
 			.type(DARK)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.build()
 		);
 		register(MoveBuilder.newMove(BAIT)
 			.name("Bait")
 			.type(SIMPLE)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(30))
 			.priority(new Constant(2))
 			.build()
 		);
@@ -369,7 +368,7 @@ public class MoveRegistry {
 			.name("Bamboozle")
 			.type(DARK)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(26))
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -383,7 +382,7 @@ public class MoveRegistry {
 			.name("banana_slam")
 			.type(BRAWLER)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(55))
 			.basePower(new Constant(95))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -404,7 +403,7 @@ public class MoveRegistry {
 			.name("Bane of Haste")
 			.type(ANCIENT)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.priority(new Constant(-7))
 			.build()
 		);
@@ -412,7 +411,7 @@ public class MoveRegistry {
 			.name("Baneful Bash")
 			.type(TOXIC)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(45))
 			.basePower(new Constant(85))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -429,28 +428,28 @@ public class MoveRegistry {
 			.name("barb_trap")
 			.type(TOXIC)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(Schematics.tenPercentOfMaxEnergy()) // 10% of max energy
 			.build()
 		);
 		register(MoveBuilder.newMove(BARBS)
 			.name("Barbs")
 			.type(METAL)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(20))
 			.build()
 		);
 		register(MoveBuilder.newMove(BARTER)
 			.name("Barter")
 			.type(SIMPLE)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.build()
 		);
 		register(MoveBuilder.newMove(BASH)
 			.name("Bash")
 			.type(METAL)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(20))
 			.basePower(new Constant(20))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -464,7 +463,7 @@ public class MoveRegistry {
 			.name("Battering Ram")
 			.type(BUG)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
 			.overrideAttackingStat(StatId.MDEFENSE)
 			.onHit(new MoveEffect(
@@ -479,7 +478,7 @@ public class MoveRegistry {
 			.name("Battle Chime")
 			.type(SIMPLE)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					// remove half of the user's health
@@ -494,7 +493,7 @@ public class MoveRegistry {
 			.name("Battle Horn")
 			.type(SIMPLE)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(30))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					ApplyStatChanges.userChangingUser()
@@ -510,7 +509,7 @@ public class MoveRegistry {
 			.name("beasts_slumber")
 			.type(ANCIENT)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(65))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					// applys beast slumber mechanic
@@ -522,7 +521,7 @@ public class MoveRegistry {
 			.name("Bequeath")
 			.type(SIMPLE)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.priority(new Constant(-6))
 			.build()
 		);
@@ -530,7 +529,7 @@ public class MoveRegistry {
 			.name("Bitter Cold")
 			.type(ICE)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(35))
 			.onHit(new MoveEffect(
 				Schematics.applyStatusToTarget(1, StatusId.FROSTBITE)
 			))
@@ -540,7 +539,7 @@ public class MoveRegistry {
 			.name("Blaze Chomp")
 			.type(FIRE)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(35))
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -575,7 +574,7 @@ public class MoveRegistry {
 			.name("blaze_punch")
 			.type(FIRE)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(35))
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -592,7 +591,7 @@ public class MoveRegistry {
 			.name("Blaze Rush")
 			.type(FIRE)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(45))
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -610,7 +609,7 @@ public class MoveRegistry {
 			.name("Blindspot Batter")
 			.type(LIGHT)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(38))
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -624,7 +623,7 @@ public class MoveRegistry {
 			.name("blood_drain")
 			.type(DARK)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(30))
 			.basePower(new Constant(20))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -642,7 +641,7 @@ public class MoveRegistry {
 			.name("Bludgeon")
 			.type(BRAWLER)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(36))
 			.basePower(new Constant(65))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -655,7 +654,7 @@ public class MoveRegistry {
 			.name("Body Crash")
 			.type(BRAWLER)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.basePower(new Constant(80))
 			.overrideAttackingStat(StatId.MDEFENSE)
 			.onHit(new MoveEffect(
@@ -670,7 +669,7 @@ public class MoveRegistry {
 			.name("Body Slam")
 			.type(SIMPLE)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(35))
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -684,7 +683,7 @@ public class MoveRegistry {
 			.name("Boiling Press")
 			.type(FIRE)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -698,7 +697,7 @@ public class MoveRegistry {
 			.name("bone_crunch")
 			.type(TOXIC)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(46))
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -712,7 +711,7 @@ public class MoveRegistry {
 			.name("Boom Bash")
 			.type(BRAWLER)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(45))
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -726,7 +725,7 @@ public class MoveRegistry {
 			.name("Boulder Blast")
 			.type(BRAWLER)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.basePower(new Constant(25))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -739,7 +738,7 @@ public class MoveRegistry {
 			.name("Brace")
 			.type(SIMPLE)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(15))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					ApplyStatChanges.userChangingTarget()
@@ -752,7 +751,7 @@ public class MoveRegistry {
 			.name("Brain Exercise")
 			.type(MIND)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					ApplyStatChanges.userChangingUser()
@@ -766,7 +765,7 @@ public class MoveRegistry {
 			.name("brain_freeze")
 			.type(ICE)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(44))
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -779,7 +778,7 @@ public class MoveRegistry {
 			.name("Brainwash")
 			.type(MIND)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(24))
 			.basePower(new Constant(50))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -792,7 +791,7 @@ public class MoveRegistry {
 			.name("Brawn Boost")
 			.type(BRAWLER)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					ApplyStatChanges.userChangingUser()
@@ -805,7 +804,7 @@ public class MoveRegistry {
 			.name("Briar Block")
 			.type(PLANT)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(Schematics.tenPercentOfMaxEnergy()) // 10%
 			.priority(new Constant(4))
 			.build()
 		);
@@ -813,7 +812,7 @@ public class MoveRegistry {
 			.name("Buck Up")
 			.type(BRAWLER)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(20))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					ApplyStatChanges.userChangingUser()
@@ -826,7 +825,7 @@ public class MoveRegistry {
 			.name("Bug Bite")
 			.type(BUG)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(20))
 			.basePower(new Constant(30))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -858,7 +857,7 @@ public class MoveRegistry {
 			.name("Burn Up")
 			.type(FIRE)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					ApplyStatChanges.userChangingUser()
@@ -872,7 +871,7 @@ public class MoveRegistry {
 			.name("Burrow")
 			.type(EARTH)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(15))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					ApplyStatChanges.userChangingUser()
@@ -885,7 +884,7 @@ public class MoveRegistry {
 			.name("Bush Whack")
 			.type(PLANT)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(35))
 			.basePower(new Constant(65))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -898,7 +897,7 @@ public class MoveRegistry {
 			.name("Canister Burst")
 			.type(TOXIC)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(35))
 			.basePower(new Constant(25))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -911,7 +910,7 @@ public class MoveRegistry {
 			.name("capriole")
 			.type(EARTH)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(52))
 			.basePower(new Constant(105))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -945,7 +944,7 @@ public class MoveRegistry {
 			.name("Cerebral Slash")
 			.type(MIND)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(36))
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -959,14 +958,14 @@ public class MoveRegistry {
 			.name("Charade")
 			.type(DARK)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.build()
 		);
 		register(MoveBuilder.newMove(CHARRED_CLAWS)
 			.name("Charred Claws")
 			.type(FIRE)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -984,7 +983,7 @@ public class MoveRegistry {
 			.name("Chase Down")
 			.type(SIMPLE)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(30))
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -998,7 +997,7 @@ public class MoveRegistry {
 			.name("Chilly Chomp")
 			.type(ICE)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(35))
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1016,7 +1015,7 @@ public class MoveRegistry {
 			.name("Chomp")
 			.type(DARK)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(20))
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1031,7 +1030,7 @@ public class MoveRegistry {
 			.name("Chop")
 			.type(BRAWLER)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(30))
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1045,7 +1044,7 @@ public class MoveRegistry {
 			.name("Clamp")
 			.type(METAL)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(22))
 			.basePower(new Constant(45))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1059,7 +1058,7 @@ public class MoveRegistry {
 			.name("clamp_claw")
 			.type(BUG)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.basePower(new Constant(85))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1074,7 +1073,7 @@ public class MoveRegistry {
 			.name("clawber")
 			.type(BRAWLER)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(55))
 			.basePower(new Constant(100))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1089,7 +1088,7 @@ public class MoveRegistry {
 			.name("Clay Slap")
 			.type(EARTH)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(35))
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1105,14 +1104,14 @@ public class MoveRegistry {
 			.name("clean_up")
 			.type(METAL)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.build()
 		);
 		register(MoveBuilder.newMove(CLIMATE_CANNON)
 			.name("Climate Cannon")
 			.type(SIMPLE)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(45))
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1125,7 +1124,7 @@ public class MoveRegistry {
 			.name("Coconut Bomb")
 			.type(PLANT)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(45))
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1142,7 +1141,7 @@ public class MoveRegistry {
 			.name("complete_demolition")
 			.type(METAL)
 			.category(MELEE)
-			.energyCost(new Constant(60))
+			.energyCost(new Constant(50))
 			.basePower(new Constant(150))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1156,7 +1155,7 @@ public class MoveRegistry {
 			.name("conclusion")
 			.type(SIMPLE)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.addTag(SOUND)
 			.build()
 		);
@@ -1164,7 +1163,7 @@ public class MoveRegistry {
 			.name("Confound")
 			.type(ANCIENT)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(18))
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1177,7 +1176,7 @@ public class MoveRegistry {
 			.name("Corrode")
 			.type(TOXIC)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(24))
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1190,7 +1189,7 @@ public class MoveRegistry {
 			.name("Counter Poise")
 			.type(BUG)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(45))
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1204,7 +1203,7 @@ public class MoveRegistry {
 			.name("counter_stance")
 			.type(BRAWLER)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(45))
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1218,7 +1217,7 @@ public class MoveRegistry {
 			.name("Cyclone Slam")
 			.type(AIR)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(26))
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1232,7 +1231,7 @@ public class MoveRegistry {
 			.name("Dark Surge")
 			.type(DARK)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1245,7 +1244,7 @@ public class MoveRegistry {
 			.name("dart_burst")
 			.type(METAL)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.basePower(new Constant(15))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1258,7 +1257,7 @@ public class MoveRegistry {
 			.name("Dawdle")
 			.type(SIMPLE)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(10))
 			.build()
 		);
 		register(MoveBuilder.newMove(DAYDREAM)
@@ -1272,7 +1271,7 @@ public class MoveRegistry {
 			.name("Dazzling Barrage")
 			.type(LIGHT)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.basePower(new Constant(25))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1286,7 +1285,7 @@ public class MoveRegistry {
 			.name("Deep Freeze")
 			.type(ICE)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1299,14 +1298,14 @@ public class MoveRegistry {
 			.name("Deja Vu")
 			.type(MIND)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(30))
 			.build()
 		);
 		register(MoveBuilder.newMove(DINO_CLAWS)
 			.name("Dino Claws")
 			.type(ANCIENT)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(24))
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1321,7 +1320,7 @@ public class MoveRegistry {
 			.name("Discordance")
 			.type(BUG)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1335,7 +1334,7 @@ public class MoveRegistry {
 			.name("Disperse")
 			.type(LIGHT)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					ApplyStatChanges.userChangingUser()
@@ -1349,7 +1348,7 @@ public class MoveRegistry {
 			.name("Dissipate")
 			.type(MIND)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(45))
 			.priority(new Constant(-6))
 			.addTag(PIVOT)
 			.build()
@@ -1358,7 +1357,7 @@ public class MoveRegistry {
 			.name("Dissonant Chord")
 			.type(SIMPLE)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1372,7 +1371,7 @@ public class MoveRegistry {
 			.name("Dive Bomb")
 			.type(DARK)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(26))
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1386,7 +1385,7 @@ public class MoveRegistry {
 			.name("Dodge")
 			.type(SIMPLE)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(Schematics.tenPercentOfMaxEnergy()) // 10%
 			.priority(new Constant(4))
 			.build()
 		);
@@ -1394,7 +1393,7 @@ public class MoveRegistry {
 			.name("double_beat")
 			.type(AIR)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1408,7 +1407,7 @@ public class MoveRegistry {
 			.name("double_sting")
 			.type(BUG)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(28))
 			.basePower(new Constant(25))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1425,7 +1424,7 @@ public class MoveRegistry {
 			.name("Double Whack")
 			.type(METAL)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(34))
 			.basePower(new Constant(35))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1439,7 +1438,7 @@ public class MoveRegistry {
 			.name("douse")
 			.type(WATER)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1452,14 +1451,14 @@ public class MoveRegistry {
 			.name("Dounpour")
 			.type(WATER)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.build()
 		);
 		register(MoveBuilder.newMove(DRACO_BEAM)
 			.name("Draco Beam")
 			.type(ANCIENT)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(60))
 			.basePower(new Constant(130))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1472,7 +1471,7 @@ public class MoveRegistry {
 			.name("Driving Force")
 			.type(BRAWLER)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.priority(new Constant(-6))
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
@@ -1487,7 +1486,7 @@ public class MoveRegistry {
 			.name("Drudge")
 			.type(SIMPLE)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					ApplyStatChanges.userChangingUser()
@@ -1501,7 +1500,7 @@ public class MoveRegistry {
 			.name("Ear Slap")
 			.type(SIMPLE)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(18))
 			.basePower(new Constant(15))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1516,7 +1515,7 @@ public class MoveRegistry {
 			.name("Earthquake")
 			.type(EARTH)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1529,14 +1528,14 @@ public class MoveRegistry {
 			.name("Eerie Stare")
 			.type(SIMPLE)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.build()
 		);
 		register(MoveBuilder.newMove(EGG_LOB)
 			.name("egg_lob")
 			.type(DARK)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(46))
 			.basePower(new Constant(100))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1563,7 +1562,7 @@ public class MoveRegistry {
 			.name("egg_storm")
 			.type(DARK)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(52))
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1590,7 +1589,7 @@ public class MoveRegistry {
 			.name("Electro Punch")
 			.type(ELECTRIC)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(35))
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1608,7 +1607,7 @@ public class MoveRegistry {
 			.name("electroburst")
 			.type(ELECTRIC)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(54))
 			.basePower(new Constant(100))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1625,7 +1624,7 @@ public class MoveRegistry {
 			.name("elemental_burst")
 			.type(ANCIENT)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1643,28 +1642,28 @@ public class MoveRegistry {
 			.name("Empathize")
 			.type(MIND)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.build()
 		);
 		register(MoveBuilder.newMove(EMULATE)
 			.name("Emulate")
 			.type(SPIRIT)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.build()
 		);
 		register(MoveBuilder.newMove(ENAMOR)
 			.name("Enamour")
 			.type(SIMPLE)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.build()
 		);
 		register(MoveBuilder.newMove(ENERGIZE)
 			.name("Energize")
 			.type(ELECTRIC)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					ApplyStatChanges.userChangingUser()
@@ -1678,7 +1677,7 @@ public class MoveRegistry {
 			.name("Energy Break")
 			.type(ANCIENT)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(54))
 			.basePower(new Constant(85))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1694,7 +1693,7 @@ public class MoveRegistry {
 			.name("Energy Surge")
 			.type(LIGHT)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1721,7 +1720,7 @@ public class MoveRegistry {
 			.name("Examine")
 			.type(SIMPLE)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(15))
 			.build()
 		);
 		//RDUHGURSNCGURYEISNGCFXYERSIXNFGRYSNXFVREUXIFGYURGAFXYURNSGXYFUNERGSYUXFINGREYUSNFXGURYENOAFUEAWGYFBEGWIUAVOFGEBCGFYURESBIC
@@ -1729,7 +1728,7 @@ public class MoveRegistry {
 			.name("expert_onslaught")
 			.type(SIMPLE)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1742,7 +1741,7 @@ public class MoveRegistry {
 			.name("Fade Away")
 			.type(SPIRIT)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1757,14 +1756,14 @@ public class MoveRegistry {
 			.name("Far Enchantment")
 			.type(ANCIENT)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.build()
 		);
 		register(MoveBuilder.newMove(FIERY_FONDANT)
 			.name("fiery_fondant")
 			.type(FIRE)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(55))
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1782,14 +1781,14 @@ public class MoveRegistry {
 			.name("Final Ruse")
 			.type(SPIRIT)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.build()
 		);
 		register(MoveBuilder.newMove(FIRE_BREATH)
 			.name("Fire Breath")
 			.type(FIRE)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1805,7 +1804,7 @@ public class MoveRegistry {
 			.name("Fire Slam")
 			.type(FIRE)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(26))
 			.basePower(new Constant(65))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1822,7 +1821,7 @@ public class MoveRegistry {
 			.name("Flabbergast")
 			.type(MIND)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(36))
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1835,7 +1834,7 @@ public class MoveRegistry {
 			.name("Flaming Kick")
 			.type(FIRE)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1853,7 +1852,7 @@ public class MoveRegistry {
 			.name("flare")
 			.type(LIGHT)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1866,7 +1865,7 @@ public class MoveRegistry {
 			.name("Flare Blast")
 			.type(FIRE)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(60))
 			.basePower(new Constant(110))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1882,14 +1881,14 @@ public class MoveRegistry {
 			.name("Flash")
 			.type(LIGHT)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.build()
 		);
 		register(MoveBuilder.newMove(FLASH_N_FLEE)
 			.name("Flash n Flee")
 			.type(LIGHT)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1903,7 +1902,7 @@ public class MoveRegistry {
 			.name("flash_pulse")
 			.type(LIGHT)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(42))
 			.basePower(new Constant(85))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1930,7 +1929,7 @@ public class MoveRegistry {
 			.name("Flurry")
 			.type(ICE)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(22))
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1946,7 +1945,7 @@ public class MoveRegistry {
 			.name("foul_chant")
 			.type(MIND)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(45))
 			.basePower(new Constant(110))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1983,7 +1982,7 @@ public class MoveRegistry {
 			.name("Frost Beam")
 			.type(ICE)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -1999,7 +1998,7 @@ public class MoveRegistry {
 			.name("frost_blast")
 			.type(ICE)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(60))
 			.basePower(new Constant(110))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2015,7 +2014,7 @@ public class MoveRegistry {
 			.name("Frost Breath")
 			.type(ICE)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(38))
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2028,7 +2027,7 @@ public class MoveRegistry {
 			.name("Frost Punch")
 			.type(ICE)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(35))
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2061,28 +2060,28 @@ public class MoveRegistry {
 			.name("Fungus Curse")
 			.type(PLANT)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.build()
 		);
 		register(MoveBuilder.newMove(GAIN_DRAIN)
 			.name("Gain Drain")
 			.type(DARK)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(30))
 			.build()
 		);
 		register(MoveBuilder.newMove(GALE_FORCE)
 			.name("Gale Force")
 			.type(AIR)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.build()
 		);
 		register(MoveBuilder.newMove(GAMMA_PULSE)
 			.name("Gamma Pulse")
 			.type(LIGHT)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2095,7 +2094,7 @@ public class MoveRegistry {
 			.name("geyser")
 			.type(WATER)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2111,7 +2110,7 @@ public class MoveRegistry {
 			.name("ghostly_howl")
 			.type(SPIRIT)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(38))
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2138,7 +2137,7 @@ public class MoveRegistry {
 			.name("gloom_fangs")
 			.type(DARK)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(36))
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2152,7 +2151,7 @@ public class MoveRegistry {
 			.name("gloominous_fangs")
 			.type(SIMPLE)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(46))
 			.basePower(new Constant(85))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2166,7 +2165,7 @@ public class MoveRegistry {
 			.name("Gloominous Roar")
 			.type(SIMPLE)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(46))
 			.basePower(new Constant(85))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2180,7 +2179,7 @@ public class MoveRegistry {
 			.name("Gnarly Gash")
 			.type(DARK)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2195,7 +2194,7 @@ public class MoveRegistry {
 			.name("Gnaw")
 			.type(SIMPLE)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(15))
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2209,7 +2208,7 @@ public class MoveRegistry {
 			.name("gobble_goop")
 			.type(TOXIC)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2225,7 +2224,7 @@ public class MoveRegistry {
 			.name("goop_spout")
 			.type(ANCIENT)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(35))
 			.onHit(new MoveEffect(
 				Schematics.applyStatusToTarget(1, StatusId.POISON)
 			))
@@ -2235,7 +2234,7 @@ public class MoveRegistry {
 			.name("graffiti")
 			.type(TOXIC)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2251,14 +2250,14 @@ public class MoveRegistry {
 			.name("Growl")
 			.type(SIMPLE)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(10))
 			.build()
 		);
 		register(MoveBuilder.newMove(GULP)
 			.name("gulp")
 			.type(WATER)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(45))
 			.basePower(new Constant(65))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2271,7 +2270,7 @@ public class MoveRegistry {
 			.name("Gust")
 			.type(AIR)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					// clear hazards
@@ -2285,7 +2284,7 @@ public class MoveRegistry {
 			.name("Harmonious Chord")
 			.type(SIMPLE)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(35))
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2302,7 +2301,7 @@ public class MoveRegistry {
 			.name("Harrow")
 			.type(SPIRIT)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2319,14 +2318,14 @@ public class MoveRegistry {
 			.name("Harvest")
 			.type(PLANT)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(72))
 			.build()
 		);
 		register(MoveBuilder.newMove(HASTEN)
 			.name("Hasten")
 			.type(SIMPLE)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					ApplyStatChanges.userChangingUser()
@@ -2336,25 +2335,18 @@ public class MoveRegistry {
 			))
 			.build()
 		);
-		register(MoveBuilder.newMove(HAZE_SHROUD)
-			.name("haze_shroud")
-			.type(SPIRIT)
-			.category(STATUS)
-			.energyCost(new Constant(0))
-			.build()
-		);
 		register(MoveBuilder.newMove(HAZY_SHROUD)
 			.name("Hazy Shroud")
 			.type(SPIRIT)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.build()
 		);
 		register(MoveBuilder.newMove(HEADBUTT)
 			.name("Headbutt")
 			.type(SIMPLE)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2368,14 +2360,14 @@ public class MoveRegistry {
 			.name("Health Gift")
 			.type(MIND)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.build()
 		);
 		register(MoveBuilder.newMove(HEART_BREAK)
 			.name("Heart Break")
 			.type(BRAWLER)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.basePower(new Constant(50))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2389,14 +2381,14 @@ public class MoveRegistry {
 			.name("Heat Wave")
 			.type(FIRE)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.build()
 		);
 		register(MoveBuilder.newMove(HEAVY_BASH)
 			.name("Heavy Bash")
 			.type(METAL)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(36))
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2442,14 +2434,14 @@ public class MoveRegistry {
 			.name("herbal_remedy")
 			.type(PLANT)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(70))
 			.build()
 		);
 		register(MoveBuilder.newMove(HIGH_PITCH_SCREECH)
 			.name("High Pitch Screech")
 			.type(SIMPLE)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2463,7 +2455,7 @@ public class MoveRegistry {
 			.name("holy_slash")
 			.type(METAL)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(35))
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2477,14 +2469,14 @@ public class MoveRegistry {
 			.name("hoodwink")
 			.type(SIMPLE)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(35))
 			.build()
 		);
 		register(MoveBuilder.newMove(HOP_KICK)
 			.name("Hop Kick")
 			.type(BRAWLER)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(30))
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2499,7 +2491,7 @@ public class MoveRegistry {
 			.name("horn_dashi")
 			.type(BRAWLER)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2513,7 +2505,7 @@ public class MoveRegistry {
 			.name("Hullabaloo")
 			.type(SIMPLE)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2527,7 +2519,7 @@ public class MoveRegistry {
 			.name("Hydro Blast")
 			.type(WATER)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(60))
 			.basePower(new Constant(110))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2540,7 +2532,7 @@ public class MoveRegistry {
 			.name("Hydro Slash")
 			.type(WATER)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(36))
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2555,7 +2547,7 @@ public class MoveRegistry {
 			.name("hyper_sting")
 			.type(LIGHT)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2569,7 +2561,7 @@ public class MoveRegistry {
 			.name("Hypnotize")
 			.type(MIND)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.onHit(new MoveEffect(
 				Schematics.applyStatusToTarget(1, StatusId.SLEEP)
 			))
@@ -2579,7 +2571,7 @@ public class MoveRegistry {
 			.name("Ice Hammer")
 			.type(ICE)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.basePower(new Constant(95))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2592,7 +2584,7 @@ public class MoveRegistry {
 			.name("icicle_fangs")
 			.type(ICE)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2606,14 +2598,14 @@ public class MoveRegistry {
 			.name("Icicle Trap")
 			.type(ICE)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(45))
 			.build()
 		);
 		register(MoveBuilder.newMove(ICICLE_TREMOR)
 			.name("icicle_tremor")
 			.type(ICE)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2626,7 +2618,7 @@ public class MoveRegistry {
 			.name("Ill Will")
 			.type(SIMPLE)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2640,7 +2632,7 @@ public class MoveRegistry {
 			.name("Impersonate")
 			.type(SPIRIT)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(45))
 			.priority(new Constant(1))
 			.build()
 		);
@@ -2648,7 +2640,7 @@ public class MoveRegistry {
 			.name("incinerate")
 			.type(FIRE)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(60))
 			.basePower(new Constant(130))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2661,7 +2653,7 @@ public class MoveRegistry {
 			.name("Jet Stream")
 			.type(AIR)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2674,7 +2666,7 @@ public class MoveRegistry {
 			.name("Jolt")
 			.type(ELECTRIC)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.priority(new Constant(1))
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
@@ -2688,7 +2680,7 @@ public class MoveRegistry {
 			.name("Judgement")
 			.type(MIND)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(45))
 			.basePower(new Constant(85))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2701,7 +2693,7 @@ public class MoveRegistry {
 			.name("Jump Start")
 			.type(ELECTRIC)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					ApplyStatChanges.userChangingUser()
@@ -2715,7 +2707,7 @@ public class MoveRegistry {
 			.name("junglejutsu")
 			.type(BRAWLER)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2729,7 +2721,7 @@ public class MoveRegistry {
 			.name("kindled_rage")
 			.type(FIRE)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(45))
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2743,7 +2735,7 @@ public class MoveRegistry {
 			.name("Landslide")
 			.type(EARTH)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2770,7 +2762,7 @@ public class MoveRegistry {
 			.name("lava_slash")
 			.type(FIRE)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(45))
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2788,7 +2780,7 @@ public class MoveRegistry {
 			.name("Leaf Barrage")
 			.type(PLANT)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(30))
 			.basePower(new Constant(65))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2801,7 +2793,7 @@ public class MoveRegistry {
 			.name("Life Drain")
 			.type(PLANT)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(48))
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2818,7 +2810,7 @@ public class MoveRegistry {
 			.name("Light Dash")
 			.type(LIGHT)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.priority(new Constant(1))
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
@@ -2833,7 +2825,7 @@ public class MoveRegistry {
 			.name("Lightspeed Ray")
 			.type(LIGHT)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.priority(new Constant(1))
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
@@ -2847,7 +2839,7 @@ public class MoveRegistry {
 			.name("luminous_roar")
 			.type(LIGHT)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(36))
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2861,7 +2853,7 @@ public class MoveRegistry {
 			.name("Lunge")
 			.type(BUG)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2875,7 +2867,7 @@ public class MoveRegistry {
 			.name("Luster Loot")
 			.type(LIGHT)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(35))
 			.basePower(new Constant(50))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2892,7 +2884,7 @@ public class MoveRegistry {
 			.name("Magma Block")
 			.type(FIRE)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(Schematics.tenPercentOfMaxEnergy()) // 10%
 			.priority(new Constant(4))
 			.build()
 		);
@@ -2900,7 +2892,7 @@ public class MoveRegistry {
 			.name("magma_burst")
 			.type(FIRE)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(45))
 			.basePower(new Constant(85))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2916,7 +2908,7 @@ public class MoveRegistry {
 			.name("Magnify")
 			.type(LIGHT)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					ApplyStatChanges.userChangingUser()
@@ -2929,7 +2921,7 @@ public class MoveRegistry {
 			.name("Maroon")
 			.type(WATER)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(45))
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2945,7 +2937,7 @@ public class MoveRegistry {
 			.name("marsh_wave")
 			.type(WATER)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(45))
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2958,7 +2950,7 @@ public class MoveRegistry {
 			.name("Mega Chomp")
 			.type(DARK)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2973,7 +2965,7 @@ public class MoveRegistry {
 			.name("Mega Kick")
 			.type(BRAWLER)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(45))
 			.basePower(new Constant(100))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2988,7 +2980,7 @@ public class MoveRegistry {
 			.name("Mega Punch")
 			.type(BRAWLER)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3017,14 +3009,14 @@ public class MoveRegistry {
 			.name("Memorize")
 			.type(MIND)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.build()
 		);
 		register(MoveBuilder.newMove(METAL_BLAST)
 			.name("Metal Blast")
 			.type(METAL)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(42))
 			.basePower(new Constant(85))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3037,14 +3029,14 @@ public class MoveRegistry {
 			.name("Metal Shriek")
 			.type(METAL)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.build()
 		);
 		register(MoveBuilder.newMove(METAL_SWIPES)
 			.name("Metal Swipes")
 			.type(METAL)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(20))
 			.basePower(new Constant(20))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3059,7 +3051,7 @@ public class MoveRegistry {
 			.name("meteor_crash")
 			.type(ANCIENT)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3072,7 +3064,7 @@ public class MoveRegistry {
 			.name("meteor_smash")
 			.type(ANCIENT)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3085,7 +3077,7 @@ public class MoveRegistry {
 			.name("Mind Drain")
 			.type(MIND)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(48))
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3102,7 +3094,7 @@ public class MoveRegistry {
 			.name("Minds Eye")
 			.type(MIND)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					ApplyStatChanges.userChangingUser()
@@ -3129,7 +3121,7 @@ public class MoveRegistry {
 			.name("molt")
 			.type(BUG)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					ApplyStatChanges.userChangingUser()
@@ -3142,7 +3134,7 @@ public class MoveRegistry {
 			.name("Muck Blast")
 			.type(TOXIC)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3158,7 +3150,7 @@ public class MoveRegistry {
 			.name("Muck Buck")
 			.type(EARTH)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.basePower(new Constant(95))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3172,7 +3164,7 @@ public class MoveRegistry {
 			.name("Mud Spatter")
 			.type(EARTH)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(30))
 			.basePower(new Constant(55))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3185,7 +3177,7 @@ public class MoveRegistry {
 			.name("Mudslide")
 			.type(EARTH)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(35))
 			.basePower(new Constant(50))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3202,7 +3194,7 @@ public class MoveRegistry {
 			.name("mystic_breeze")
 			.type(BUG)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(30))
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3222,7 +3214,7 @@ public class MoveRegistry {
 			.name("Nab")
 			.type(SIMPLE)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(35))
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3236,7 +3228,7 @@ public class MoveRegistry {
 			.name("Natures Force")
 			.type(PLANT)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3249,7 +3241,7 @@ public class MoveRegistry {
 			.name("natures_rage")
 			.type(PLANT)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(55))
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3263,14 +3255,14 @@ public class MoveRegistry {
 			.name("Near Enchantment")
 			.type(MIND)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.build()
 		);
 		register(MoveBuilder.newMove(NOSEDIVE)
 			.name("Nosedive")
 			.type(AIR)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.basePower(new Constant(95))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3284,7 +3276,7 @@ public class MoveRegistry {
 			.name("Nova Blast")
 			.type(LIGHT)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(52))
 			.basePower(new Constant(95))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3297,14 +3289,14 @@ public class MoveRegistry {
 			.name("Oil Leak")
 			.type(TOXIC)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(10))
 			.build()
 		);
 		register(MoveBuilder.newMove(OPPRESS)
 			.name("oppress")
 			.type(SPIRIT)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(45))
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3320,7 +3312,7 @@ public class MoveRegistry {
 			.name("out_of_order")
 			.type(ICE)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(60))
 			.basePower(new Constant(150))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3333,7 +3325,7 @@ public class MoveRegistry {
 			.name("Outburst")
 			.type(ANCIENT)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(60))
 			.basePower(new Constant(125))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3347,7 +3339,7 @@ public class MoveRegistry {
 			.name("Paint Shower")
 			.type(TOXIC)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.basePower(new Constant(110))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3360,7 +3352,7 @@ public class MoveRegistry {
 			.name("Parasitize")
 			.type(BUG)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3379,7 +3371,7 @@ public class MoveRegistry {
 			.name("Peace of Mind")
 			.type(MIND)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					ApplyStatChanges.userChangingUser()
@@ -3393,7 +3385,7 @@ public class MoveRegistry {
 			.name("Pebble Toss")
 			.type(EARTH)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(15))
 			.basePower(new Constant(30))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3406,7 +3398,7 @@ public class MoveRegistry {
 			.name("Peck")
 			.type(AIR)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(15))
 			.basePower(new Constant(35))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3420,7 +3412,7 @@ public class MoveRegistry {
 			.name("Pep Jab")
 			.type(BRAWLER)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3434,7 +3426,7 @@ public class MoveRegistry {
 			.name("Pepper Burst")
 			.type(FIRE)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.basePower(new Constant(35))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3447,7 +3439,7 @@ public class MoveRegistry {
 			.name("peppermint_breath")
 			.type(ICE)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3464,14 +3456,14 @@ public class MoveRegistry {
 			.name("Perch")
 			.type(AIR)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(72))
 			.build()
 		);
 		register(MoveBuilder.newMove(PESTER)
 			.name("Pester")
 			.type(BUG)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(32))
 			.basePower(new Constant(50))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3484,7 +3476,7 @@ public class MoveRegistry {
 			.name("Pestilence")
 			.type(BUG)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(35))
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3497,7 +3489,7 @@ public class MoveRegistry {
 			.name("Petal Pummel")
 			.type(PLANT)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(20))
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3510,7 +3502,7 @@ public class MoveRegistry {
 			.name("Phantom Blast")
 			.type(SPIRIT)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(60))
 			.basePower(new Constant(110))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3523,7 +3515,7 @@ public class MoveRegistry {
 			.name("Phantom Slash")
 			.type(SPIRIT)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(36))
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3538,7 +3530,7 @@ public class MoveRegistry {
 			.name("Pheroblast")
 			.type(BUG)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3551,21 +3543,21 @@ public class MoveRegistry {
 			.name("phoenix_flame")
 			.type(FIRE)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(0)) // 0 is the display but it takes all of your energy
 			.build()
 		);
 		register(MoveBuilder.newMove(PHOTOSYNTHESIS)
 			.name("Photosynthesis")
 			.type(PLANT)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(72))
 			.build()
 		);
 		register(MoveBuilder.newMove(PIERCING_DRIVE)
 			.name("Piercing Drive")
 			.type(WATER)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.basePower(new Constant(85))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3579,7 +3571,7 @@ public class MoveRegistry {
 			.name("Pilfer")
 			.type(DARK)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(32))
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3593,7 +3585,7 @@ public class MoveRegistry {
 			.name("Pine Shot")
 			.type(PLANT)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.basePower(new Constant(25))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3606,7 +3598,7 @@ public class MoveRegistry {
 			.name("Plunge")
 			.type(WATER)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(35))
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3620,7 +3612,7 @@ public class MoveRegistry {
 			.name("Poison")
 			.type(TOXIC)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.onHit(new MoveEffect(
 				Schematics.applyStatusToTarget(1, StatusId.BAD_POISON)
 			))
@@ -3630,14 +3622,14 @@ public class MoveRegistry {
 			.name("Poison Barbs")
 			.type(TOXIC)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.build()
 		);
 		register(MoveBuilder.newMove(POUNCE)
 			.name("Pounce")
 			.type(SIMPLE)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(15))
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3651,7 +3643,7 @@ public class MoveRegistry {
 			.name("power_draw")
 			.type(ELECTRIC)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3664,7 +3656,7 @@ public class MoveRegistry {
 			.name("Power Focus")
 			.type(SIMPLE)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					ApplyStatChanges.userChangingUser()
@@ -3678,7 +3670,7 @@ public class MoveRegistry {
 			.name("Power Siphon")
 			.type(ELECTRIC)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(32))
 			.basePower(new Constant(20))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3695,7 +3687,7 @@ public class MoveRegistry {
 			.name("power_surge")
 			.type(ELECTRIC)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3711,7 +3703,7 @@ public class MoveRegistry {
 			.name("Precision Bolt")
 			.type(ELECTRIC)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(26))
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3724,7 +3716,7 @@ public class MoveRegistry {
 			.name("Preemptive Strike")
 			.type(BRAWLER)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3738,7 +3730,7 @@ public class MoveRegistry {
 			.name("Primal Slash")
 			.type(ANCIENT)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(45))
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3753,14 +3745,14 @@ public class MoveRegistry {
 			.name("Provoke")
 			.type(DARK)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.build()
 		);
 		register(MoveBuilder.newMove(PSYCHAL_CHOMP)
 			.name("Psychal Chomp")
 			.type(MIND)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3774,7 +3766,7 @@ public class MoveRegistry {
 			.name("psychal_slap")
 			.type(MIND)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(45))
 			.basePower(new Constant(85))
 			.overrideDefendingStat(StatId.RDEFENSE)
 			.onHit(new MoveEffect(
@@ -3789,7 +3781,7 @@ public class MoveRegistry {
 			.name("Psycho Blast")
 			.type(MIND)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3819,7 +3811,7 @@ public class MoveRegistry {
 			.name("Pyrokinesis")
 			.type(FIRE)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(38))
 			.basePower(new Constant(65))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3835,7 +3827,7 @@ public class MoveRegistry {
 			.name("Quick Pounce")
 			.type(SIMPLE)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3849,7 +3841,7 @@ public class MoveRegistry {
 			.name("Quick Punch")
 			.type(BRAWLER)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3864,7 +3856,7 @@ public class MoveRegistry {
 			.name("Quicksand")
 			.type(EARTH)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(35))
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3877,7 +3869,7 @@ public class MoveRegistry {
 			.name("radiant_forecast")
 			.type(LIGHT)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(44))
 			.basePower(new Constant(110))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3890,7 +3882,7 @@ public class MoveRegistry {
 			.name("Radiant Rush")
 			.type(LIGHT)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.basePower(new Constant(100))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3904,7 +3896,7 @@ public class MoveRegistry {
 			.name("Raging Flame")
 			.type(FIRE)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(35))
 			.onHit(new MoveEffect(
 				Schematics.applyStatusToTarget(1, StatusId.BURN)
 			))
@@ -3914,7 +3906,7 @@ public class MoveRegistry {
 			.name("Raging Howl")
 			.type(SIMPLE)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(60))
 			.basePower(new Constant(120))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3928,7 +3920,7 @@ public class MoveRegistry {
 			.name("Raging Tackle")
 			.type(SIMPLE)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(60))
 			.basePower(new Constant(120))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3955,7 +3947,7 @@ public class MoveRegistry {
 			.name("Rant")
 			.type(DARK)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(32))
 			.basePower(new Constant(65))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3969,7 +3961,7 @@ public class MoveRegistry {
 			.name("rapid_fire")
 			.type(FIRE)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(32))
 			.basePower(new Constant(20))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3982,7 +3974,7 @@ public class MoveRegistry {
 			.name("razor_slash")
 			.type(METAL)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3997,14 +3989,14 @@ public class MoveRegistry {
 			.name("Recycle")
 			.type(SIMPLE)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.build()
 		);
 		register(MoveBuilder.newMove(REFLECTION_BURST)
 			.name("Reflection Burst")
 			.type(METAL)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -4017,14 +4009,14 @@ public class MoveRegistry {
 			.name("Rejuvenate")
 			.type(SIMPLE)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(72))
 			.build()
 		);
 		register(MoveBuilder.newMove(REPEATING_TUNE)
 			.name("Repeating Tune")
 			.type(SIMPLE)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.basePower(new Constant(25))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -4038,7 +4030,7 @@ public class MoveRegistry {
 			.name("Resonate")
 			.type(SIMPLE)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -4059,21 +4051,21 @@ public class MoveRegistry {
 			.name("Return to Sender")
 			.type(MIND)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.build()
 		);
 		register(MoveBuilder.newMove(REVIVAL)
 			.name("revival")
 			.type(SPIRIT)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(72))
 			.build()
 		);
 		register(MoveBuilder.newMove(REVOLUTION)
 			.name("revolution")
 			.type(DARK)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(45))
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -4087,7 +4079,7 @@ public class MoveRegistry {
 			.name("Rock Slide")
 			.type(EARTH)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -4100,7 +4092,7 @@ public class MoveRegistry {
 			.name("Rogue Assault")
 			.type(BRAWLER)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(60))
 			.basePower(new Constant(120))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -4114,7 +4106,7 @@ public class MoveRegistry {
 			.name("Rough Up")
 			.type(BRAWLER)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.basePower(new ConditionalNumber(
 				new GreaterThan(Value.USER_HEIGHT, Value.TARGET_HEIGHT),
 				new Constant(70 * 1.25),
@@ -4132,7 +4124,7 @@ public class MoveRegistry {
 			.name("ruffled_feathers")
 			.type(AIR)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(Schematics.tenPercentOfMaxEnergy()) // 10% of max energy
 			.build()
 		);
 		register(MoveBuilder.newMove(RUTHLESS_FEAST)
@@ -4154,7 +4146,7 @@ public class MoveRegistry {
 			.name("Safeguard")
 			.type(SIMPLE)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(35))
 			.priority(new Constant(3))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -4167,7 +4159,7 @@ public class MoveRegistry {
 			.name("Sap Plant")
 			.type(PLANT)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(30))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					// apply sap plant mechanic
@@ -4180,7 +4172,7 @@ public class MoveRegistry {
 			.name("savage_greed")
 			.type(ANCIENT)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(55))
 			.basePower(new Constant(95))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -4194,7 +4186,7 @@ public class MoveRegistry {
 			.name("savage_horn")
 			.type(BUG)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(60))
 			.basePower(new Constant(120))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -4208,14 +4200,14 @@ public class MoveRegistry {
 			.name("Scapegoat")
 			.type(SIMPLE)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(20))
 			.build()
 		);
 		register(MoveBuilder.newMove(SCAVENGE)
 			.name("Scavenge")
 			.type(AIR)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(32))
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -4229,7 +4221,7 @@ public class MoveRegistry {
 			.name("sea_song")
 			.type(WATER)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(60))
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -4244,7 +4236,7 @@ public class MoveRegistry {
 			.name("searing_steel")
 			.type(METAL)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(48))
 			.basePower(new Constant(85))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -4268,7 +4260,7 @@ public class MoveRegistry {
 			.name("shadow_lurk")
 			.type(DARK)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(55))
 			.basePower(new Constant(100))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -4281,7 +4273,7 @@ public class MoveRegistry {
 			.name("shadow_pulse")
 			.type(DARK)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -4294,7 +4286,7 @@ public class MoveRegistry {
 			.name("Shadow Sprint")
 			.type(SPIRIT)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.priority(new Constant(1))
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
@@ -4309,7 +4301,7 @@ public class MoveRegistry {
 			.name("Shadowbox")
 			.type(BRAWLER)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					ApplyStatChanges.userChangingUser()
@@ -4323,7 +4315,7 @@ public class MoveRegistry {
 			.name("Sharpen")
 			.type(DARK)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					ApplyStatChanges.userChangingUser()
@@ -4337,7 +4329,7 @@ public class MoveRegistry {
 			.name("shatter")
 			.type(SPIRIT)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -4351,7 +4343,7 @@ public class MoveRegistry {
 			.name("shell_bash")
 			.type(WATER)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(56))
 			.basePower(new Constant(110))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -4364,7 +4356,7 @@ public class MoveRegistry {
 			.name("shell_shrapnel")
 			.type(WATER)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(56))
 			.basePower(new Constant(110))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -4377,7 +4369,7 @@ public class MoveRegistry {
 			.name("Shine")
 			.type(LIGHT)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(20))
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -4390,7 +4382,7 @@ public class MoveRegistry {
 			.name("SHrewd Blast")
 			.type(ANCIENT)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(42))
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -4403,7 +4395,7 @@ public class MoveRegistry {
 			.name("Shriek")
 			.type(SIMPLE)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(15))
 			.addTag(SOUND)
 			.build()
 		);
@@ -4411,7 +4403,7 @@ public class MoveRegistry {
 			.name("Singe")
 			.type(FIRE)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(20))
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -4440,7 +4432,7 @@ public class MoveRegistry {
 			.name("Slap Down")
 			.type(DARK)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(45))
 			.priority(new Constant(1))
 			.basePower(new Constant(65))
 			.onHit(new MoveEffect(
@@ -4456,7 +4448,7 @@ public class MoveRegistry {
 			.name("Slash")
 			.type(SIMPLE)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(36))
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -4471,7 +4463,7 @@ public class MoveRegistry {
 			.name("Sleet Shot")
 			.type(ICE)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(28))
 			.basePower(new Constant(55))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -4484,7 +4476,7 @@ public class MoveRegistry {
 			.name("Slime")
 			.type(TOXIC)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(28))
 			.basePower(new Constant(65))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -4500,14 +4492,14 @@ public class MoveRegistry {
 			.name("Slumber")
 			.type(SIMPLE)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.build()
 		);
 		register(MoveBuilder.newMove(SNORE_SPORES)
 			.name("Snore Spores")
 			.type(PLANT)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.onHit(new MoveEffect(
 				Schematics.applyStatusToTarget(1, StatusId.SLEEP)
 			))
@@ -4519,7 +4511,7 @@ public class MoveRegistry {
 			.name("Snowdozer")
 			.type(ICE)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(24))
 			.basePower(new Constant(30))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -4533,14 +4525,14 @@ public class MoveRegistry {
 			.name("Soft Water")
 			.type(WATER)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.build()
 		);
 		register(MoveBuilder.newMove(SOLAR_PUNCH)
 			.name("solar_punch")
 			.type(LIGHT)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.basePower(new Constant(100))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -4554,7 +4546,7 @@ public class MoveRegistry {
 			.name("soul_drain")
 			.type(DARK)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -4571,7 +4563,7 @@ public class MoveRegistry {
 			.name("soul_harvest")
 			.type(SPIRIT)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(30))
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -4585,7 +4577,7 @@ public class MoveRegistry {
 			.name("Soul Storm")
 			.type(SPIRIT)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -4598,7 +4590,7 @@ public class MoveRegistry {
 			.name("Spare")
 			.type(SIMPLE)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(15))
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -4612,7 +4604,7 @@ public class MoveRegistry {
 			.name("Spectral Burst")
 			.type(SPIRIT)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -4625,7 +4617,7 @@ public class MoveRegistry {
 			.name("Spike Rush")
 			.type(ICE)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.priority(new Constant(1))
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
@@ -4640,7 +4632,7 @@ public class MoveRegistry {
 			.name("Spit")
 			.type(SIMPLE)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.basePower(new Constant(50))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -4653,7 +4645,7 @@ public class MoveRegistry {
 			.name("spit_out")
 			.type(SIMPLE)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -4666,14 +4658,14 @@ public class MoveRegistry {
 			.name("Spite")
 			.type(SPIRIT)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.build()
 		);
 		register(MoveBuilder.newMove(SPLITTING_HEADACHE)
 			.name("Splitting Headache")
 			.type(MIND)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.priority(new Constant(1))
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
@@ -4687,7 +4679,7 @@ public class MoveRegistry {
 			.name("Spray")
 			.type(WATER)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(20))
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -4700,21 +4692,21 @@ public class MoveRegistry {
 			.name("Square One")
 			.type(DARK)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(30))
 			.build()
 		);
 		register(MoveBuilder.newMove(SQUAWK)
 			.name("Squawk")
 			.type(AIR)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(10))
 			.build()
 		);
 		register(MoveBuilder.newMove(STAMPEDE)
 			.name("Stampede")
 			.type(SIMPLE)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.basePower(new Constant(30))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -4728,14 +4720,14 @@ public class MoveRegistry {
 			.name("Stare")
 			.type(SIMPLE)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(10))
 			.build()
 		);
 		register(MoveBuilder.newMove(STARTLE)
 			.name("Startle")
 			.type(SPIRIT)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(15))
 			.basePower(new Constant(30))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -4748,7 +4740,7 @@ public class MoveRegistry {
 			.name("Static Shock")
 			.type(ELECTRIC)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(20))
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -4764,7 +4756,7 @@ public class MoveRegistry {
 			.name("Static Spores")
 			.type(PLANT)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.onHit(new MoveEffect(
 				Schematics.applyStatusToTarget(1, StatusId.PARALYSIS)
 			))
@@ -4775,7 +4767,7 @@ public class MoveRegistry {
 			.name("Steel Crusher")
 			.type(METAL)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -4796,7 +4788,7 @@ public class MoveRegistry {
 			.name("steel_trap")
 			.type(METAL)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(35))
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -4810,7 +4802,7 @@ public class MoveRegistry {
 			.name("Sting")
 			.type(TOXIC)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(10))
 			.basePower(new Constant(15))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -4827,7 +4819,7 @@ public class MoveRegistry {
 			.name("storm_summon")
 			.type(ELECTRIC)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(46))
 			.basePower(new Constant(50))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -4843,7 +4835,7 @@ public class MoveRegistry {
 			.name("Stratagem")
 			.type(MIND)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.basePower(new Constant(80))
 			.overrideAttackingStat(StatId.RDEFENSE)
 			.onHit(new MoveEffect(
@@ -4857,7 +4849,7 @@ public class MoveRegistry {
 			.name("Stretch")
 			.type(SIMPLE)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(15))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					ApplyStatChanges.userChangingUser()
@@ -4870,7 +4862,7 @@ public class MoveRegistry {
 			.name("Strike")
 			.type(SIMPLE)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(15))
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -4884,7 +4876,7 @@ public class MoveRegistry {
 			.name("Stun")
 			.type(ELECTRIC)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(35))
 			.onHit(new MoveEffect(
 				Schematics.applyStatusToTarget(1, StatusId.PARALYSIS)
 			))
@@ -4894,7 +4886,7 @@ public class MoveRegistry {
 			.name("Stupefy")
 			.type(SPIRIT)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.basePower(new Constant(30))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -4910,7 +4902,7 @@ public class MoveRegistry {
 			.name("submerge")
 			.type(WATER)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(30))
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -4924,14 +4916,14 @@ public class MoveRegistry {
 			.name("Summon")
 			.type(SIMPLE)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.build()
 		);
 		register(MoveBuilder.newMove(SWAT)
 			.name("Swat")
 			.type(BRAWLER)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(32))
 			.basePower(new Constant(45))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -4945,14 +4937,14 @@ public class MoveRegistry {
 			.name("swiften")
 			.type(LIGHT)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.build()
 		);
 		register(MoveBuilder.newMove(SWIPE)
 			.name("Swipe")
 			.type(SIMPLE)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(22))
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -4967,7 +4959,7 @@ public class MoveRegistry {
 			.name("Tail Slap")
 			.type(SIMPLE)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(10))
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -4982,21 +4974,21 @@ public class MoveRegistry {
 			.name("Take Root")
 			.type(PLANT)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.build()
 		);
 		register(MoveBuilder.newMove(TALENT_TRADE)
 			.name("Talent Trade")
 			.type(DARK)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.build()
 		);
 		register(MoveBuilder.newMove(TAMP)
 			.name("Tamp")
 			.type(EARTH)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					ApplyStatChanges.userChangingUser()
@@ -5010,7 +5002,7 @@ public class MoveRegistry {
 			.name("Tase")
 			.type(ELECTRIC)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(35))
 			.basePower(new Constant(20))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -5027,28 +5019,28 @@ public class MoveRegistry {
 			.name("Teamwork")
 			.type(SIMPLE)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(20))
 			.build()
 		);
 		register(MoveBuilder.newMove(TEAR_DOWN)
 			.name("Tear Down")
 			.type(SIMPLE)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(35))
 			.build()
 		);
 		register(MoveBuilder.newMove(TEASE)
 			.name("Tease")
 			.type(DARK)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(20))
 			.build()
 		);
 		register(MoveBuilder.newMove(TELEKINETIC_SWEEP)
 			.name("telekinetic_sweep")
 			.type(MIND)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(45))
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -5062,7 +5054,7 @@ public class MoveRegistry {
 			.name("tempest")
 			.type(AIR)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					new DealFormulaDamage()
@@ -5074,7 +5066,7 @@ public class MoveRegistry {
 			.name("Thistle Slash")
 			.type(PLANT)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(36))
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -5089,7 +5081,7 @@ public class MoveRegistry {
 			.name("thorn_slam")
 			.type(PLANT)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(55))
 			.basePower(new Constant(110))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -5103,7 +5095,7 @@ public class MoveRegistry {
 			.name("Thunder Blast")
 			.type(ELECTRIC)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(60))
 			.basePower(new Constant(110))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -5119,7 +5111,7 @@ public class MoveRegistry {
 			.name("Thunder Chomp")
 			.type(ELECTRIC)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(35))
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -5137,7 +5129,7 @@ public class MoveRegistry {
 			.name("Thunder Clap")
 			.type(ELECTRIC)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(45))
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -5151,7 +5143,7 @@ public class MoveRegistry {
 			.name("Thunder Crash")
 			.type(ELECTRIC)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.basePower(new Constant(95))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -5165,7 +5157,7 @@ public class MoveRegistry {
 			.name("Thunder Slam")
 			.type(ELECTRIC)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(26))
 			.basePower(new Constant(65))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -5182,14 +5174,14 @@ public class MoveRegistry {
 			.name("ThunderStorm")
 			.type(ELECTRIC)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.build()
 		);
 		register(MoveBuilder.newMove(THUNDERSTRIKE)
 			.name("Thunderstrike")
 			.type(ELECTRIC)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -5205,7 +5197,7 @@ public class MoveRegistry {
 			.name("Timber Thrash")
 			.type(PLANT)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(60))
 			.basePower(new Constant(120))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -5219,7 +5211,7 @@ public class MoveRegistry {
 			.name("Tone Barrier")
 			.type(SIMPLE)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(Schematics.tenPercentOfMaxEnergy()) // 10% max energy
 			.priority(new Constant(4))
 			.addTag(SOUND)
 			.build()
@@ -5228,7 +5220,7 @@ public class MoveRegistry {
 			.name("torrential_slash")
 			.type(WATER)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.basePower(new Constant(95))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -5243,7 +5235,7 @@ public class MoveRegistry {
 			.name("toxiblast")
 			.type(TOXIC)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(36))
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -5259,7 +5251,7 @@ public class MoveRegistry {
 			.name("Toxic Spores")
 			.type(TOXIC)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(25))
 			.onHit(new MoveEffect(
 				Schematics.applyStatusToTarget(1, StatusId.POISON)
 			))
@@ -5270,7 +5262,7 @@ public class MoveRegistry {
 			.name("Toxic Tail")
 			.type(TOXIC)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(30))
 			.basePower(new Constant(50))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -5287,14 +5279,14 @@ public class MoveRegistry {
 			.name("Tribute")
 			.type(SIMPLE)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.build()
 		);
 		register(MoveBuilder.newMove(TRICK_SHOT)
 			.name("trick_shot")
 			.type(SPIRIT)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(45))
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -5307,7 +5299,7 @@ public class MoveRegistry {
 			.name("Tricky Tactics")
 			.type(DARK)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(55))
 			.basePower(new Constant(95))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -5320,7 +5312,7 @@ public class MoveRegistry {
 			.name("trip_root")
 			.type(PLANT)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(30))
 			.basePower(new Constant(0)) // TODO
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -5333,7 +5325,7 @@ public class MoveRegistry {
 			.name("Tsunami")
 			.type(WATER)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -5346,7 +5338,7 @@ public class MoveRegistry {
 			.name("Tune Up")
 			.type(METAL)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(15))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					ApplyStatChanges.userChangingUser()
@@ -5359,7 +5351,7 @@ public class MoveRegistry {
 			.name("twirly_whirl")
 			.type(BUG)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -5379,7 +5371,7 @@ public class MoveRegistry {
 			.name("Typhoon")
 			.type(AIR)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(60))
 			.basePower(new Constant(110))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -5392,7 +5384,7 @@ public class MoveRegistry {
 			.name("Undermine")
 			.type(EARTH)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(35))
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -5406,7 +5398,7 @@ public class MoveRegistry {
 			.name("Venom Chomp")
 			.type(TOXIC)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(35))
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -5424,7 +5416,7 @@ public class MoveRegistry {
 			.name("Venom Slash")
 			.type(TOXIC)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(45))
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -5442,7 +5434,7 @@ public class MoveRegistry {
 			.name("Vice Jaws")
 			.type(METAL)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(40))
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -5456,7 +5448,7 @@ public class MoveRegistry {
 			.name("vicious_snap")
 			.type(WATER)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(45))
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -5470,7 +5462,7 @@ public class MoveRegistry {
 			.name("Vine Lash")
 			.type(PLANT)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -5483,7 +5475,7 @@ public class MoveRegistry {
 			.name("Vital Slash")
 			.type(BRAWLER)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -5497,7 +5489,7 @@ public class MoveRegistry {
 			.name("vital_surge")
 			.type(BRAWLER)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(55))
 			.basePower(new Constant(110))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -5510,7 +5502,7 @@ public class MoveRegistry {
 			.name("Water Bomb")
 			.type(WATER)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(26))
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -5523,7 +5515,7 @@ public class MoveRegistry {
 			.name("Wave Wrecker")
 			.type(WATER)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(60))
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -5537,7 +5529,7 @@ public class MoveRegistry {
 			.name("Web Shot")
 			.type(BUG)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(10))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					new DealFormulaDamage()
@@ -5549,7 +5541,7 @@ public class MoveRegistry {
 			.name("Wing Slap")
 			.type(AIR)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(26))
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -5564,7 +5556,7 @@ public class MoveRegistry {
 			.name("winters_fury")
 			.type(ICE)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(55))
 			.basePower(new Constant(30))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -5578,7 +5570,7 @@ public class MoveRegistry {
 			.name("Wonder Herb")
 			.type(PLANT)
 			.category(STATUS)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(35))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					new DealFormulaDamage()
@@ -5590,7 +5582,7 @@ public class MoveRegistry {
 			.name("yetis_wrath")
 			.type(EARTH)
 			.category(MELEE)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(60))
 			.basePower(new Constant(120))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -5604,7 +5596,7 @@ public class MoveRegistry {
 			.name("Zip Zap")
 			.type(ELECTRIC)
 			.category(RANGED)
-			.energyCost(new Constant(0))
+			.energyCost(new Constant(50))
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(

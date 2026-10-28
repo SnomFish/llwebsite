@@ -14,6 +14,8 @@ import github.snomfish.functionality.effect.IEffect;
 import github.snomfish.functionality.effect.effects.ApplyStatus;
 import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.INumber;
+import github.snomfish.functionality.number.Multiply;
+import github.snomfish.functionality.number.ValueConstant;
 
 public class Schematics {
 
@@ -28,6 +30,14 @@ public class Schematics {
             new Not(new Equals(Value.USER_ABILITY_ID, AbilityId.BRUTE_FORCE)),
 
             new EffectSequence(effects)
+        );
+    }
+
+
+    public static INumber tenPercentOfMaxEnergy() {
+        return new Multiply(
+            new ValueConstant(Value.USER_BATTLE_ENERGY),
+            new Constant(0.1)
         );
     }
 

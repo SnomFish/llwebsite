@@ -13,7 +13,6 @@ import github.snomfish.functionality.condition.conditions.And;
 import github.snomfish.functionality.condition.conditions.Equals;
 import github.snomfish.functionality.condition.conditions.GreaterThan;
 import github.snomfish.functionality.condition.conditions.ListContains;
-import github.snomfish.functionality.condition.conditions.NoCondition;
 import github.snomfish.functionality.condition.conditions.Or;
 import github.snomfish.functionality.condition.conditions.RandomCondition;
 import github.snomfish.functionality.effect.ConditionalEffect;
@@ -25,7 +24,6 @@ import github.snomfish.functionality.effect.effects.MultiplyValueEffect;
 import github.snomfish.functionality.effect.effects.SetValueEffect;
 import github.snomfish.functionality.event.Event;
 import github.snomfish.functionality.event.TriggerRule;
-import github.snomfish.functionality.number.ConditionalNumber;
 import github.snomfish.functionality.number.Constant;
 
 import static github.snomfish.domain.ability.AbilityId.*;
@@ -36,7 +34,6 @@ import static github.snomfish.functionality.event.EventSideId.*;
 public class AbilityRegistry {
     
 
-	private static boolean initialised = false;
     private static final Map<AbilityId, Ability> registry = new HashMap<>();
 
 
@@ -44,7 +41,6 @@ public class AbilityRegistry {
 
 
     public static Ability get(AbilityId id) {
-		if (!initialised) throw new IllegalArgumentException("Abilities has not been initialised");
         return registry.get(id);
     }
 
@@ -70,9 +66,7 @@ public class AbilityRegistry {
 	private static void register(AbilityId id, String name) {}
 
 
-    public static void init() {
-		if (initialised) return;
-		initialised = true;
+    static {
 		register(
 			NO_ABILITY,
 			"no ability"

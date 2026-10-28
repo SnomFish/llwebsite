@@ -21,7 +21,6 @@ public class LoomianTest {
 
     public static Loomian embit() {
         SpeciesRegistry.init();
-        AbilityRegistry.init();
         ItemRegistry.init();
         StatusRegistry.init();
         return new Loomian(

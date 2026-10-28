@@ -175,7 +175,6 @@ public enum MoveId {
     HARROW,
     HARVEST,
     HASTEN,
-    HAZE_SHROUD,
     HAZY_SHROUD,
     HEADBUTT,
     HEALTH_GIFT,

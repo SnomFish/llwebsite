@@ -1,9 +1,15 @@
 package github.snomfish.domain;
 
+import github.snomfish.domain.weather.Weather;
+import github.snomfish.domain.weather.WeatherId;
+import github.snomfish.domain.weather.WeatherInstance;
+import github.snomfish.domain.weather.WeatherRegistry;
 import github.snomfish.functionality.copy.DeepCopyable;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static github.snomfish.domain.weather.WeatherId.*;
 
 // the gamestate is mutable.
 // then branching the gamestate is copied and the new changes are applied to each gamestate
@@ -13,6 +19,8 @@ public class Gamestate implements DeepCopyable<Gamestate> {
     
     private Side playerSide;
     private Side enemySide;
+    private WeatherInstance weather;
+
     private List<String> battleLog;
     // this is silly and should probably be an enum map
     //private final Map<FieldEffect, Boolean> fieldEffects = new HashMap<>();
@@ -24,19 +32,26 @@ public class Gamestate implements DeepCopyable<Gamestate> {
     ) {
         this.playerSide = playerSide;
         this.enemySide = enemySide;
+        this.weather = new WeatherInstance(NO_WEATHER, 999);
+
         this.battleLog = new ArrayList<>();
     }
-
     public Gamestate(Gamestate copy) {
         this.playerSide = copy.playerSide.deepCopy();
         this.enemySide = copy.enemySide.deepCopy();
+        this.weather = copy.weather.deepCopy();
+
         this.battleLog = new ArrayList<>(copy.battleLog);
     }
+
+
 
     // deepcopy
     public Gamestate deepCopy() {
         return new Gamestate(this);
     }
+
+
 
     
     // getters
@@ -50,7 +65,12 @@ public class Gamestate implements DeepCopyable<Gamestate> {
                 throw new IllegalArgumentException("Unknown side: " + sideId);
         }
     }
+    public WeatherId weatherId() {return weather.weatherId();}
+    public Weather weather() {return weather.weather();}
+    public int weatherLifespan() {return weather.lifespan();}
     public List<String> battleLog() {return battleLog;}
+
+
 
 
     // setter
@@ -64,9 +84,17 @@ public class Gamestate implements DeepCopyable<Gamestate> {
                 throw new IllegalArgumentException("Unkown side: " + sideId);
         }
     }
+    public void setWeatherId(WeatherId weatherId) {this.weather.setWeatherId(weatherId);}
+    public void setWeatherTurns(int weatherLifespan) {this.weather.setLifespan(weatherLifespan);}
     public void setBattleLog(List<String> battleLog) {this.battleLog = battleLog;}
 
 
+
+    public void clearWeather() {this.weather = new WeatherInstance(NO_WEATHER, 999);}
+    // add a way to decriment the lifespan
+
+
+    // battle log
     public void log(String entry) {battleLog.add(entry);}
     public void printLog() {
         System.out.println("BattleLog:");

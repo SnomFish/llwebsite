@@ -9,7 +9,11 @@ import github.snomfish.functionality.event.TriggerRule;
 // same with item
 public class Ability extends RuleDefinition<AbilityId> {
 
-    public Ability(AbilityId id, String name, List<TriggerRule> rules) {
+    public Ability(
+        AbilityId id,
+        String name,
+        List<TriggerRule> rules
+    ) {
         super(id, name, rules);
     }
 }

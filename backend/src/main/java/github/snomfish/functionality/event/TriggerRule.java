@@ -3,8 +3,6 @@ package github.snomfish.functionality.event;
 import java.util.List;
 
 import github.snomfish.functionality.branch.Branch;
-import github.snomfish.functionality.branch.BranchUtil;
-import github.snomfish.functionality.condition.ICondition;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.effect.IEffect;
 
