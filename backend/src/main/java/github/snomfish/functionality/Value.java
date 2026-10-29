@@ -56,9 +56,25 @@ public enum Value {
         c -> c.user().activeLoomian().types(),
         (c, v) -> c.user().activeLoomian().setTypes(v)
     ),
+    USER_PRIMARY_TYPE(
+        c -> c.user().activeLoomian().primaryType(),
+        (c, v) -> c.user().activeLoomian().setPrimaryType(v)
+    ),
+    USER_SECONDARY_TYPE(
+        c -> c.user().activeLoomian().secondaryType(),
+        (c, v) -> c.user().activeLoomian().setSecondaryType(v)
+    ),
     TARGET_TYPES(
         c -> c.target().activeLoomian().types(),
         (c, v) -> c.target().activeLoomian().setTypes(v)
+    ),
+    TARGET_PRIMARY_TYPE(
+        c -> c.target().activeLoomian().primaryType(),
+        (c, v) -> c.target().activeLoomian().setPrimaryType(v)
+    ),
+    TARGET_SECONDARY_TYPE(
+        c -> c.target().activeLoomian().secondaryType(),
+        (c, v) -> c.target().activeLoomian().setSecondaryType(v)
     ),
     
     USER_ABILITY_ID(

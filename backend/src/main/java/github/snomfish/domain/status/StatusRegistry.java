@@ -1,13 +1,12 @@
 package github.snomfish.domain.status;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import github.snomfish.domain.move.CategoryId;
 import github.snomfish.functionality.Value;
-import github.snomfish.functionality.condition.conditions.Equals;
+import github.snomfish.functionality.condition.Equals;
 import github.snomfish.functionality.effect.ConditionalEffect;
 import github.snomfish.functionality.effect.effects.DealDirectSelfDamage;
 import github.snomfish.functionality.effect.effects.MultiplyValueEffect;
@@ -25,7 +24,6 @@ import static github.snomfish.functionality.event.EventSideId.*;
 public class StatusRegistry {
     
 
-	private static boolean initialised = false;
     private static final Map<StatusId, Status> registry = new HashMap<>();
 
 
@@ -33,17 +31,10 @@ public class StatusRegistry {
 
 
     public static Status get(StatusId id) {
-		if (!initialised) throw new IllegalArgumentException("Statuses has not been initialised");
         return registry.get(id);
     }
 
 
-    private static void register(
-        StatusId id,
-        String name
-    ) {
-        registry.put(id, new Status(id, name, new ArrayList<TriggerRule>()));
-    }
     private static void register(
         StatusId id,
         String name,
@@ -60,9 +51,7 @@ public class StatusRegistry {
     }
 
 
-    public static void init() {
-		if (initialised) return;
-		initialised = true;
+    static {
         register(
             NO_STATUS,
             "no status",
@@ -92,7 +81,8 @@ public class StatusRegistry {
         );
         register(
             PARALYSIS,
-            "paralysis"
+            "paralysis",
+            List.of()
         );
         register(
             BURN,
@@ -126,7 +116,8 @@ public class StatusRegistry {
         );
         register(
             SLEEP,
-            "sleep"
+            "sleep",
+            List.of()
         );
     }
 }

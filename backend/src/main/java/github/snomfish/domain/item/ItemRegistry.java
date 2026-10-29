@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import github.snomfish.functionality.Value;
-import github.snomfish.functionality.condition.conditions.Equals;
-import github.snomfish.functionality.condition.conditions.Or;
+import github.snomfish.functionality.condition.Equals;
+import github.snomfish.functionality.condition.Or;
 import github.snomfish.functionality.effect.ConditionalEffect;
 import github.snomfish.functionality.effect.EffectSequence;
 import github.snomfish.functionality.effect.effects.ClutchEffect;
@@ -28,7 +28,6 @@ import static github.snomfish.functionality.event.EventSideId.*;
 public class ItemRegistry {
 
 
-	private static boolean initialised = false;
     private static final Map<ItemId, Item> registry = new HashMap<>();
 
 
@@ -36,7 +35,6 @@ public class ItemRegistry {
 
 
     public static Item get(ItemId id) {
-		if (!initialised) throw new IllegalArgumentException("Abilities has not been initialised");
         return registry.get(id);
     }
 
@@ -54,9 +52,7 @@ public class ItemRegistry {
     }
 
 
-    public static void init() {
-		if (initialised) return;
-		initialised = true;
+    static {
         register(
 			NO_ITEM,
 			"no item",

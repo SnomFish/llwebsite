@@ -1,11 +1,10 @@
-package github.snomfish.functionality.condition.conditions;
+package github.snomfish.functionality.condition;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.branch.Branch;
-import github.snomfish.functionality.condition.ICondition;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.event.EventId;
 import github.snomfish.functionality.number.INumber;

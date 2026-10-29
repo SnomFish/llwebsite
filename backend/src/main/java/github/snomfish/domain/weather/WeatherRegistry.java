@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import github.snomfish.functionality.Value;
-import github.snomfish.functionality.condition.conditions.Equals;
+import github.snomfish.functionality.condition.Equals;
 import github.snomfish.functionality.effect.ConditionalEffect;
 import github.snomfish.functionality.effect.effects.MultiplyValueEffect;
 import github.snomfish.functionality.event.Event;

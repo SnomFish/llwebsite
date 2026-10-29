@@ -1,47 +1,46 @@
-package github.snomfish.functionality.condition.conditions;
+package github.snomfish.functionality.condition;
 
 import java.util.List;
 
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.branch.Branch;
-import github.snomfish.functionality.condition.ICondition;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.number.INumber;
 import github.snomfish.functionality.number.ValueConstant;
 
-public class GreaterThanEqualTo implements ICondition {
+public class LessThan implements ICondition {
     
     
     private INumber leftNumber;
     private INumber rightNumber;
 
 
-    public GreaterThanEqualTo(INumber leftNumber, INumber rightNumber) {
+    public LessThan(INumber leftNumber, INumber rightNumber) {
         this.leftNumber = leftNumber;
         this.rightNumber = rightNumber;
     }
-    public GreaterThanEqualTo(Value leftNumber, INumber rightNumber) {
+    public LessThan(Value leftNumber, INumber rightNumber) {
         this.leftNumber = new ValueConstant(leftNumber);
         this.rightNumber = rightNumber;
     }
-    public GreaterThanEqualTo(INumber leftNumber, Value rightNumber) {
+    public LessThan(INumber leftNumber, Value rightNumber) {
         this.leftNumber = leftNumber;
         this.rightNumber = new ValueConstant(rightNumber);
     }
-    public GreaterThanEqualTo(Value leftNumber, Value rightNumber) {
+    public LessThan(Value leftNumber, Value rightNumber) {
         this.leftNumber = new ValueConstant(leftNumber);
         this.rightNumber = new ValueConstant(rightNumber);
     }
 
 
-    private GreaterThanEqualTo(GreaterThanEqualTo copy) {
+    private LessThan(LessThan copy) {
         this.leftNumber = copy.leftNumber.deepCopy();
         this.rightNumber = copy.rightNumber.deepCopy();
     }
 
 
-    public GreaterThanEqualTo deepCopy() {
-        return new GreaterThanEqualTo(this);
+    public LessThan deepCopy() {
+        return new LessThan(this);
     }
 
 
@@ -61,7 +60,7 @@ public class GreaterThanEqualTo implements ICondition {
                 Double rightValue = rightBranch.value();
                 Double rightProbability = rightBranch.probability();
 
-                if (leftValue >= rightValue) {
+                if (leftValue < rightValue) {
                     trueProbability += leftProbability * rightProbability;
                 } else {
                     falseProbability += leftProbability * rightProbability;

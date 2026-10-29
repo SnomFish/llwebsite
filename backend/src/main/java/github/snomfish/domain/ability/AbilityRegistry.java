@@ -9,18 +9,20 @@ import github.snomfish.domain.mechanics.MechanicId;
 import github.snomfish.domain.status.StatusId;
 import github.snomfish.domain.type.TypeId;
 import github.snomfish.functionality.Value;
-import github.snomfish.functionality.condition.conditions.And;
-import github.snomfish.functionality.condition.conditions.Equals;
-import github.snomfish.functionality.condition.conditions.GreaterThan;
-import github.snomfish.functionality.condition.conditions.ListContains;
-import github.snomfish.functionality.condition.conditions.Or;
-import github.snomfish.functionality.condition.conditions.RandomCondition;
+import github.snomfish.functionality.condition.And;
+import github.snomfish.functionality.condition.Conditions;
+import github.snomfish.functionality.condition.Equals;
+import github.snomfish.functionality.condition.GreaterThan;
+import github.snomfish.functionality.condition.ListContains;
+import github.snomfish.functionality.condition.Or;
+import github.snomfish.functionality.condition.RandomCondition;
 import github.snomfish.functionality.effect.ConditionalEffect;
 import github.snomfish.functionality.effect.EffectSequence;
 import github.snomfish.functionality.effect.effects.AlterTypeChart;
 import github.snomfish.functionality.effect.effects.ApplyMechanic;
 import github.snomfish.functionality.effect.effects.ApplyStatChanges;
 import github.snomfish.functionality.effect.effects.MultiplyValueEffect;
+import github.snomfish.functionality.effect.effects.SetType;
 import github.snomfish.functionality.effect.effects.SetValueEffect;
 import github.snomfish.functionality.event.Event;
 import github.snomfish.functionality.event.TriggerRule;
@@ -88,7 +90,53 @@ public class AbilityRegistry {
 		);
 		register(
 			ADAPTABLE,
-			"adaptable"
+			"adaptable",
+			List.of(
+				new TriggerRule(
+					new Event(WEATHER_SET_EVENT, USER),
+					new EffectSequence(List.of(	
+						new ConditionalEffect(Conditions.clearWeather(), 		SetType.userPrimary(TypeId.SIMPLE)),
+						new ConditionalEffect(Conditions.underFog(),			SetType.userPrimary(TypeId.SPIRIT)),
+						new ConditionalEffect(Conditions.underHeatwave(), 		SetType.userPrimary(TypeId.FIRE)),
+						new ConditionalEffect(Conditions.underStrongWinds(), 	SetType.userPrimary(TypeId.AIR)),
+						new ConditionalEffect(Conditions.underRain(), 			SetType.userPrimary(TypeId.WATER)),
+						new ConditionalEffect(Conditions.underThunderstorm(),	SetType.userPrimary(TypeId.ELECTRIC))
+					))
+				),
+				new TriggerRule(
+					new Event(WEATHER_SET_EVENT, TARGET),
+					new EffectSequence(List.of(	
+						new ConditionalEffect(Conditions.clearWeather(), 		SetType.targetPrimary(TypeId.SIMPLE)),
+						new ConditionalEffect(Conditions.underFog(),			SetType.targetPrimary(TypeId.SPIRIT)),
+						new ConditionalEffect(Conditions.underHeatwave(), 		SetType.targetPrimary(TypeId.FIRE)),
+						new ConditionalEffect(Conditions.underStrongWinds(), 	SetType.targetPrimary(TypeId.AIR)),
+						new ConditionalEffect(Conditions.underRain(), 			SetType.targetPrimary(TypeId.WATER)),
+						new ConditionalEffect(Conditions.underThunderstorm(),	SetType.targetPrimary(TypeId.ELECTRIC))
+					))
+				),
+				new TriggerRule(
+					new Event(USER_SWITCHED_IN_EVENT, USER),
+					new EffectSequence(List.of(	
+						new ConditionalEffect(Conditions.clearWeather(), 		SetType.userPrimary(TypeId.SIMPLE)),
+						new ConditionalEffect(Conditions.underFog(),			SetType.userPrimary(TypeId.SPIRIT)),
+						new ConditionalEffect(Conditions.underHeatwave(), 		SetType.userPrimary(TypeId.FIRE)),
+						new ConditionalEffect(Conditions.underStrongWinds(), 	SetType.userPrimary(TypeId.AIR)),
+						new ConditionalEffect(Conditions.underRain(), 			SetType.userPrimary(TypeId.WATER)),
+						new ConditionalEffect(Conditions.underThunderstorm(),	SetType.userPrimary(TypeId.ELECTRIC))
+					))
+				),
+				new TriggerRule(
+					new Event(TARGET_SWITCHED_IN_EVENT, TARGET),
+					new EffectSequence(List.of(	
+						new ConditionalEffect(Conditions.clearWeather(), 		SetType.targetPrimary(TypeId.SIMPLE)),
+						new ConditionalEffect(Conditions.underFog(),			SetType.targetPrimary(TypeId.SPIRIT)),
+						new ConditionalEffect(Conditions.underHeatwave(), 		SetType.targetPrimary(TypeId.FIRE)),
+						new ConditionalEffect(Conditions.underStrongWinds(), 	SetType.targetPrimary(TypeId.AIR)),
+						new ConditionalEffect(Conditions.underRain(), 			SetType.targetPrimary(TypeId.WATER)),
+						new ConditionalEffect(Conditions.underThunderstorm(),	SetType.targetPrimary(TypeId.ELECTRIC))
+					))
+				)
+			)
 		);
 		register(
 			ADORABLE,
@@ -124,9 +172,9 @@ public class AbilityRegistry {
 							new RandomCondition(new Constant(0.5))
 						)
 					), 
-					ApplyStatChanges.userChangingUser()
+					ApplyStatChanges.userChangingUser() // true effect
 						.rattack(new Constant(1)), 
-					ApplyStatChanges.userChangingUser()
+					ApplyStatChanges.userChangingUser() // false effect
 						.mattack(new Constant(1))
 				)
 			))

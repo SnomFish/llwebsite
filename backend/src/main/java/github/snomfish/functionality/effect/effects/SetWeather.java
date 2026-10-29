@@ -19,25 +19,21 @@ public class SetWeather implements IEffect {
     private WeatherId weatherId;
     private INumber lifespan;
     private EventId beforeSetEvent;
-    private EventId setEvent;
 
 
     private SetWeather(
         WeatherId weatherId,
         INumber lifespan,
-        EventId beforeSetEvent,
-        EventId setEvent
+        EventId beforeSetEvent
     ) {
         this.weatherId = weatherId;
         this.lifespan = lifespan;
         this.beforeSetEvent = beforeSetEvent;
-        this.setEvent = setEvent;
     }
     private SetWeather(SetWeather copy) {
         this.weatherId = copy.weatherId;
         this.lifespan = copy.lifespan.deepCopy();
         this.beforeSetEvent = copy.beforeSetEvent;
-        this.setEvent = copy.setEvent;
     }
 
 
@@ -49,15 +45,13 @@ public class SetWeather implements IEffect {
     public static SetWeather userSetting(WeatherId id, INumber lifespan) {
         return new SetWeather(
             id, lifespan,
-            USER_BEFORE_WEATHER_SET_EVENT,
-            USER_WEATHER_SET_EVENT
+            PRE_USER_SET_WEATHER_EVENT
         );
     }
     public static SetWeather targetSetting(WeatherId id, INumber lifespan) {
         return new SetWeather(
             id, lifespan,
-            TARGET_BEFORE_WEATHER_SET_EVENT,
-            TARGET_WEATHER_SET_EVENT
+            PRE_TARGET_SET_WEATHER_EVENT
         );
     }
 
@@ -70,7 +64,7 @@ public class SetWeather implements IEffect {
 
         outcomes = flatMap(outcomes, c -> c.dispatchEvent(beforeSetEvent));
         outcomes = flatMap(outcomes, c -> setWeatherModule(context));
-        outcomes = flatMap(outcomes, c -> c.dispatchEvent(setEvent));
+        outcomes = flatMap(outcomes, c -> c.dispatchEvent(WEATHER_SET_EVENT));
         
         return outcomes;
     }

@@ -1,9 +1,8 @@
-package github.snomfish.functionality.condition.conditions;
+package github.snomfish.functionality.condition;
 
 import java.util.List;
 
 import github.snomfish.functionality.branch.Branch;
-import github.snomfish.functionality.condition.ICondition;
 import github.snomfish.functionality.context.BattleContext;
 
 public class NoCondition implements ICondition {
