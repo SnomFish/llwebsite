@@ -22,6 +22,7 @@ import github.snomfish.functionality.effect.effects.AlterTypeChart;
 import github.snomfish.functionality.effect.effects.ApplyMechanic;
 import github.snomfish.functionality.effect.effects.ApplyStatChanges;
 import github.snomfish.functionality.effect.effects.MultiplyValueEffect;
+import github.snomfish.functionality.effect.effects.SetAbility;
 import github.snomfish.functionality.effect.effects.SetType;
 import github.snomfish.functionality.effect.effects.SetValueEffect;
 import github.snomfish.functionality.event.Event;
@@ -96,44 +97,44 @@ public class AbilityRegistry {
 					new Event(WEATHER_SET_EVENT, USER),
 					new EffectSequence(List.of(	
 						new ConditionalEffect(Conditions.clearWeather(), 		SetType.userPrimary(TypeId.SIMPLE)),
-						new ConditionalEffect(Conditions.underFog(),			SetType.userPrimary(TypeId.SPIRIT)),
-						new ConditionalEffect(Conditions.underHeatwave(), 		SetType.userPrimary(TypeId.FIRE)),
-						new ConditionalEffect(Conditions.underStrongWinds(), 	SetType.userPrimary(TypeId.AIR)),
-						new ConditionalEffect(Conditions.underRain(), 			SetType.userPrimary(TypeId.WATER)),
-						new ConditionalEffect(Conditions.underThunderstorm(),	SetType.userPrimary(TypeId.ELECTRIC))
+						new ConditionalEffect(Conditions.fogActive(),			SetType.userPrimary(TypeId.SPIRIT)),
+						new ConditionalEffect(Conditions.heatwaveActive(), 		SetType.userPrimary(TypeId.FIRE)),
+						new ConditionalEffect(Conditions.strongWindsActive(), 	SetType.userPrimary(TypeId.AIR)),
+						new ConditionalEffect(Conditions.rainActive(), 			SetType.userPrimary(TypeId.WATER)),
+						new ConditionalEffect(Conditions.thunderstormActive(),	SetType.userPrimary(TypeId.ELECTRIC))
 					))
 				),
 				new TriggerRule(
 					new Event(WEATHER_SET_EVENT, TARGET),
 					new EffectSequence(List.of(	
 						new ConditionalEffect(Conditions.clearWeather(), 		SetType.targetPrimary(TypeId.SIMPLE)),
-						new ConditionalEffect(Conditions.underFog(),			SetType.targetPrimary(TypeId.SPIRIT)),
-						new ConditionalEffect(Conditions.underHeatwave(), 		SetType.targetPrimary(TypeId.FIRE)),
-						new ConditionalEffect(Conditions.underStrongWinds(), 	SetType.targetPrimary(TypeId.AIR)),
-						new ConditionalEffect(Conditions.underRain(), 			SetType.targetPrimary(TypeId.WATER)),
-						new ConditionalEffect(Conditions.underThunderstorm(),	SetType.targetPrimary(TypeId.ELECTRIC))
+						new ConditionalEffect(Conditions.fogActive(),			SetType.targetPrimary(TypeId.SPIRIT)),
+						new ConditionalEffect(Conditions.heatwaveActive(), 		SetType.targetPrimary(TypeId.FIRE)),
+						new ConditionalEffect(Conditions.strongWindsActive(), 	SetType.targetPrimary(TypeId.AIR)),
+						new ConditionalEffect(Conditions.rainActive(), 			SetType.targetPrimary(TypeId.WATER)),
+						new ConditionalEffect(Conditions.thunderstormActive(),	SetType.targetPrimary(TypeId.ELECTRIC))
 					))
 				),
 				new TriggerRule(
 					new Event(USER_SWITCHED_IN_EVENT, USER),
 					new EffectSequence(List.of(	
 						new ConditionalEffect(Conditions.clearWeather(), 		SetType.userPrimary(TypeId.SIMPLE)),
-						new ConditionalEffect(Conditions.underFog(),			SetType.userPrimary(TypeId.SPIRIT)),
-						new ConditionalEffect(Conditions.underHeatwave(), 		SetType.userPrimary(TypeId.FIRE)),
-						new ConditionalEffect(Conditions.underStrongWinds(), 	SetType.userPrimary(TypeId.AIR)),
-						new ConditionalEffect(Conditions.underRain(), 			SetType.userPrimary(TypeId.WATER)),
-						new ConditionalEffect(Conditions.underThunderstorm(),	SetType.userPrimary(TypeId.ELECTRIC))
+						new ConditionalEffect(Conditions.fogActive(),			SetType.userPrimary(TypeId.SPIRIT)),
+						new ConditionalEffect(Conditions.heatwaveActive(), 		SetType.userPrimary(TypeId.FIRE)),
+						new ConditionalEffect(Conditions.strongWindsActive(), 	SetType.userPrimary(TypeId.AIR)),
+						new ConditionalEffect(Conditions.rainActive(), 			SetType.userPrimary(TypeId.WATER)),
+						new ConditionalEffect(Conditions.thunderstormActive(),	SetType.userPrimary(TypeId.ELECTRIC))
 					))
 				),
 				new TriggerRule(
 					new Event(TARGET_SWITCHED_IN_EVENT, TARGET),
 					new EffectSequence(List.of(	
 						new ConditionalEffect(Conditions.clearWeather(), 		SetType.targetPrimary(TypeId.SIMPLE)),
-						new ConditionalEffect(Conditions.underFog(),			SetType.targetPrimary(TypeId.SPIRIT)),
-						new ConditionalEffect(Conditions.underHeatwave(), 		SetType.targetPrimary(TypeId.FIRE)),
-						new ConditionalEffect(Conditions.underStrongWinds(), 	SetType.targetPrimary(TypeId.AIR)),
-						new ConditionalEffect(Conditions.underRain(), 			SetType.targetPrimary(TypeId.WATER)),
-						new ConditionalEffect(Conditions.underThunderstorm(),	SetType.targetPrimary(TypeId.ELECTRIC))
+						new ConditionalEffect(Conditions.fogActive(),			SetType.targetPrimary(TypeId.SPIRIT)),
+						new ConditionalEffect(Conditions.heatwaveActive(), 		SetType.targetPrimary(TypeId.FIRE)),
+						new ConditionalEffect(Conditions.strongWindsActive(), 	SetType.targetPrimary(TypeId.AIR)),
+						new ConditionalEffect(Conditions.rainActive(), 			SetType.targetPrimary(TypeId.WATER)),
+						new ConditionalEffect(Conditions.thunderstormActive(),	SetType.targetPrimary(TypeId.ELECTRIC))
 					))
 				)
 			)
@@ -796,7 +797,14 @@ public class AbilityRegistry {
 		);
 		register(
 			MALWARE,
-			"malware"
+			"malware",
+			new TriggerRule(
+				new Event(POST_DAMAGE_EVENT, TARGET), // if hit by a move
+				new ConditionalEffect(
+					new Equals(Value.MOVE_CONTACT_TAG, true),
+					SetAbility.target(MALWARE)
+				)
+			)
 		);
 		register(
 			MARKSMAN,
@@ -808,7 +816,15 @@ public class AbilityRegistry {
 		);
 		register(
 			MASK_SWAP,
-			"mask_swap"
+			"mask_swap",
+			new TriggerRule(
+				new Event(BEFORE_MOVE_EVENT, USER),
+				new ConditionalEffect(
+					new Equals(Value.MOVE_TYPE, Value.USER_PRIMARY_TYPE), // if the user's move doesnt match the type of move they are using, gain it as a secondary type
+					SetType.userSecondary(NULL),
+					SetType.userSecondary(Value.MOVE_TYPE)
+				)
+			)
 		);
 		register(
 			MASTER,

@@ -10,6 +10,7 @@ import github.snomfish.domain.status.StatusId;
 import github.snomfish.domain.weather.WeatherId;
 import github.snomfish.functionality.Schematics;
 import github.snomfish.functionality.Value;
+import github.snomfish.functionality.condition.Conditions;
 import github.snomfish.functionality.condition.GreaterThan;
 import github.snomfish.functionality.condition.RandomCondition;
 import github.snomfish.functionality.effect.ConditionalEffect;
@@ -18,6 +19,7 @@ import github.snomfish.functionality.effect.effects.ApplyStatChanges;
 import github.snomfish.functionality.effect.effects.DealFormulaDamage;
 import github.snomfish.functionality.effect.effects.EnergyDrainEffect;
 import github.snomfish.functionality.effect.effects.HealthDrainEffect;
+import github.snomfish.functionality.effect.effects.SetType;
 import github.snomfish.functionality.effect.effects.SetWeather;
 import github.snomfish.functionality.number.ConditionalNumber;
 import github.snomfish.functionality.number.Constant;
@@ -26,6 +28,7 @@ import static github.snomfish.domain.move.CategoryId.*;
 import static github.snomfish.domain.move.MoveId.*;
 import static github.snomfish.domain.move.tags.TagId.*;
 import static github.snomfish.domain.type.TypeId.*;
+import static github.snomfish.domain.weather.WeatherId.RAIN;
 
 public class MoveRegistry {
 
@@ -1109,12 +1112,23 @@ public class MoveRegistry {
 			.energyCost(new Constant(50))
 			.build()
 		);
+		// this may not work as I am attempting to set the move values before selective a move
 		register(MoveBuilder.newMove(CLIMATE_CANNON)
 			.name("Climate Cannon")
 			.type(SIMPLE)
 			.category(RANGED)
 			.energyCost(new Constant(45))
 			.basePower(new Constant(90))
+			.beforeHit(new MoveEffect(
+				new EffectSequence(List.of(
+					new ConditionalEffect(Conditions.clearWeather(), 		SetType.move(SIMPLE)),
+					new ConditionalEffect(Conditions.fogActive(), 			SetType.move(SPIRIT)),
+					new ConditionalEffect(Conditions.heatwaveActive(), 		SetType.move(FIRE)),
+					new ConditionalEffect(Conditions.rainActive(), 			SetType.move(RAIN)),
+					new ConditionalEffect(Conditions.strongWindsActive(), 	SetType.move(AIR)),
+					new ConditionalEffect(Conditions.thunderstormActive(), 	SetType.move(ELECTRIC))
+				))
+			))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					new DealFormulaDamage()
@@ -1731,13 +1745,15 @@ public class MoveRegistry {
 			.energyCost(new Constant(15))
 			.build()
 		);
-		//RDUHGURSNCGURYEISNGCFXYERSIXNFGRYSNXFVREUXIFGYURGAFXYURNSGXYFUNERGSYUXFINGREYUSNFXGURYENOAFUEAWGYFBEGWIUAVOFGEBCGFYURESBIC
 		register(MoveBuilder.newMove(EXPERT_ONSLAUGHT)
 			.name("expert_onslaught")
 			.type(SIMPLE)
 			.category(RANGED)
 			.energyCost(new Constant(40))
 			.basePower(new Constant(75))
+			.beforeHit(new MoveEffect(
+				SetType.move(Value.USER_PRIMARY_TYPE)
+			))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					new DealFormulaDamage()

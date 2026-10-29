@@ -12,44 +12,66 @@ public class SetType implements IEffect {
     
 
     private Value typeToSet;
-    private TypeId type;
+    private Object typeObject;
 
 
     private SetType(
         Value typeToSet,
-        TypeId type
+        Object typeObject
     ) {
         this.typeToSet = typeToSet;
-        this.type = type;
+        this.typeObject = typeObject;
     }
 
 
     private SetType(SetType copy) {
         this.typeToSet = copy.typeToSet;
-        this.type = copy.type;
+        this.typeObject = copy.typeObject;
     }
     public SetType deepCopy() {
         return new SetType(this);
     }
 
 
-    public static IEffect userPrimary(TypeId type) {
-        return new SetType(Value.USER_PRIMARY_TYPE, type);
+    // TypeId
+    public static IEffect userPrimary(TypeId typeId) {
+        return new SetType(Value.USER_PRIMARY_TYPE, typeId);
     }
-    public static IEffect targetPrimary(TypeId type) {
-        return new SetType(Value.TARGET_PRIMARY_TYPE, type);
+    public static IEffect targetPrimary(TypeId typeId) {
+        return new SetType(Value.TARGET_PRIMARY_TYPE, typeId);
     }
-    public static IEffect userSecondary(TypeId type) {
-        return new SetType(Value.USER_SECONDARY_TYPE, type);
+    public static IEffect userSecondary(TypeId typeId) {
+        return new SetType(Value.USER_SECONDARY_TYPE, typeId);
     }
-    public static IEffect targetSecondary(TypeId type) {
-        return new SetType(Value.TARGET_SECONDARY_TYPE, type);
+    public static IEffect targetSecondary(TypeId typeId) {
+        return new SetType(Value.TARGET_SECONDARY_TYPE, typeId);
+    }
+    public static IEffect move(TypeId typeId) {
+        return new SetType(Value.MOVE_TYPE, typeId);
+    }
+    // Value
+    public static IEffect userPrimary(Value typeValue) {
+        return new SetType(Value.USER_PRIMARY_TYPE, typeValue);
+    }
+    public static IEffect targetPrimary(Value typeValue) {
+        return new SetType(Value.TARGET_PRIMARY_TYPE, typeValue);
+    }
+    public static IEffect userSecondary(Value typeValue) {
+        return new SetType(Value.USER_SECONDARY_TYPE, typeValue);
+    }
+    public static IEffect targetSecondary(Value typeValue) {
+        return new SetType(Value.TARGET_SECONDARY_TYPE, typeValue);
+    }
+    public static IEffect move(Value typeValue) {
+        return new SetType(Value.MOVE_TYPE, typeValue);
     }
 
 
     public List<Branch<BattleContext>> execute(BattleContext context) {
         BattleContext outcome = context.deepCopy();
         
+        TypeId type = Value.resolve(typeObject, TypeId.class, outcome);
+        typeToSet.set(outcome, type);
 
         return List.of(new Branch<>(outcome, 1));
     }

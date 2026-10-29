@@ -12,19 +12,19 @@ public class Conditions {
     public static ICondition clearWeather() {
         return new Equals(Value.WEATHER_ID, WeatherId.NO_WEATHER);
     }
-    public static ICondition underFog() {
+    public static ICondition fogActive() {
         return new Equals(Value.WEATHER_ID, WeatherId.FOG);
     }
-    public static ICondition underHeatwave() {
+    public static ICondition heatwaveActive() {
         return new Equals(Value.WEATHER_ID, WeatherId.HEATWAVE);
     }
-    public static ICondition underStrongWinds() {
+    public static ICondition strongWindsActive() {
         return new Equals(Value.WEATHER_ID, WeatherId.STRONG_WINDS);
     }
-    public static ICondition underRain() {
+    public static ICondition rainActive() {
         return new Equals(Value.WEATHER_ID, WeatherId.RAIN);
     }
-    public static ICondition underThunderstorm() {
+    public static ICondition thunderstormActive() {
         return new Equals(Value.WEATHER_ID, WeatherId.THUNDERSTORM);
     }
 }

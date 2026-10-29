@@ -421,6 +421,10 @@ public enum Value {
         c -> c.user().activeLoomian().action().move().modifiers().get(ModifierId.ENERGY_DRAIN),
         (c, v) -> c.user().activeLoomian().action().move().modifiers().set(ModifierId.ENERGY_DRAIN, v)
     ),
+    MOVE_CONTACT_TAG(
+        c -> c.user().activeLoomian().action().move().tags().get(TagId.CONTACT),
+        (c, v) -> c.user().activeLoomian().action().move().tags().set(TagId.CONTACT, v)
+    ),
     MOVE_EXPLOSIVE_TAG(
         c -> c.user().activeLoomian().action().move().tags().get(TagId.EXPLOSIVE),
         (c, v) -> c.user().activeLoomian().action().move().tags().set(TagId.EXPLOSIVE, v)
