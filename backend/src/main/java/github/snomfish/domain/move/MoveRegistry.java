@@ -7,6 +7,7 @@ import java.util.Map;
 import github.snomfish.domain.move.structures.MoveEffect;
 import github.snomfish.domain.stats.StatId;
 import github.snomfish.domain.status.StatusId;
+import github.snomfish.domain.weather.WeatherId;
 import github.snomfish.functionality.Schematics;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.condition.conditions.GreaterThan;
@@ -17,6 +18,7 @@ import github.snomfish.functionality.effect.effects.ApplyStatChanges;
 import github.snomfish.functionality.effect.effects.DealFormulaDamage;
 import github.snomfish.functionality.effect.effects.EnergyDrainEffect;
 import github.snomfish.functionality.effect.effects.HealthDrainEffect;
+import github.snomfish.functionality.effect.effects.SetWeather;
 import github.snomfish.functionality.number.ConditionalNumber;
 import github.snomfish.functionality.number.Constant;
 
@@ -1452,6 +1454,12 @@ public class MoveRegistry {
 			.type(WATER)
 			.category(STATUS)
 			.energyCost(new Constant(25))
+			.onHit(new MoveEffect(
+				new SetWeather(
+					WeatherId.RAIN,
+					new Constant(5)
+				)
+			))
 			.build()
 		);
 		register(MoveBuilder.newMove(DRACO_BEAM)
@@ -2075,6 +2083,12 @@ public class MoveRegistry {
 			.type(AIR)
 			.category(STATUS)
 			.energyCost(new Constant(25))
+			.onHit(new MoveEffect(
+				new SetWeather(
+					WeatherId.STRONG_WINDS,
+					new Constant(5)
+				)
+			))
 			.build()
 		);
 		register(MoveBuilder.newMove(GAMMA_PULSE)
@@ -2340,6 +2354,12 @@ public class MoveRegistry {
 			.type(SPIRIT)
 			.category(STATUS)
 			.energyCost(new Constant(25))
+			.onHit(new MoveEffect(
+				new SetWeather(
+					WeatherId.FOG,
+					new Constant(5)
+				)
+			))
 			.build()
 		);
 		register(MoveBuilder.newMove(HEADBUTT)
@@ -2382,6 +2402,12 @@ public class MoveRegistry {
 			.type(FIRE)
 			.category(STATUS)
 			.energyCost(new Constant(25))
+			.onHit(new MoveEffect(
+				new SetWeather(
+					WeatherId.HEATWAVE,
+					new Constant(5)
+				)
+			))
 			.build()
 		);
 		register(MoveBuilder.newMove(HEAVY_BASH)
@@ -5175,6 +5201,12 @@ public class MoveRegistry {
 			.type(ELECTRIC)
 			.category(STATUS)
 			.energyCost(new Constant(25))
+			.onHit(new MoveEffect(
+				new SetWeather(
+					WeatherId.THUNDERSTORM,
+					new Constant(5)
+				)
+			))
 			.build()
 		);
 		register(MoveBuilder.newMove(THUNDERSTRIKE)

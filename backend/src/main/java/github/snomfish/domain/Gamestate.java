@@ -3,7 +3,6 @@ package github.snomfish.domain;
 import github.snomfish.domain.weather.Weather;
 import github.snomfish.domain.weather.WeatherId;
 import github.snomfish.domain.weather.WeatherInstance;
-import github.snomfish.domain.weather.WeatherRegistry;
 import github.snomfish.functionality.copy.DeepCopyable;
 
 import java.util.ArrayList;
@@ -22,8 +21,6 @@ public class Gamestate implements DeepCopyable<Gamestate> {
     private WeatherInstance weather;
 
     private List<String> battleLog;
-    // this is silly and should probably be an enum map
-    //private final Map<FieldEffect, Boolean> fieldEffects = new HashMap<>();
 
 
     public Gamestate(
@@ -85,7 +82,7 @@ public class Gamestate implements DeepCopyable<Gamestate> {
         }
     }
     public void setWeatherId(WeatherId weatherId) {this.weather.setWeatherId(weatherId);}
-    public void setWeatherTurns(int weatherLifespan) {this.weather.setLifespan(weatherLifespan);}
+    public void setWeatherLifespan(int weatherLifespan) {this.weather.setLifespan(weatherLifespan);}
     public void setBattleLog(List<String> battleLog) {this.battleLog = battleLog;}
 
 

@@ -25,6 +25,14 @@ public enum Value {
     TARGET_WEIGHT(c -> c.target().activeLoomian().species().weight(), null),
 
 
+    WEATHER_ID(
+        c -> c.gamestate().weatherId(),
+        (c, v) -> c.gamestate().setWeatherId(v)
+    ),
+    WEATHER_LIFESPAN(
+        c -> c.gamestate().weatherLifespan(),
+        (c, v) -> c.gamestate().setWeatherLifespan(v)
+    ),
     
     
     USER_SPECIES_ID(
