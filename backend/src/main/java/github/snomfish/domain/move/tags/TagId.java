@@ -11,6 +11,7 @@ public enum TagId {
     PIVOT,
     POWDER,
     PUNCHING,
+    RECOIL,
     SLAPPING,
     SLASHING,
     SOUL_BURST,

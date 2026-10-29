@@ -432,6 +432,10 @@ public enum Value {
     MOVE_HEALTH_DRAIN_TAG(
         c -> c.user().activeLoomian().action().move().tags().get(TagId.HEALTH_DRAIN),
         (c, v) -> c.user().activeLoomian().action().move().tags().set(TagId.HEALTH_DRAIN, v)
+    ),
+    MOVE_RECOIL_TAG(
+        c -> c.user().activeLoomian().action().move().tags().get(TagId.RECOIL),
+        (c, v) -> c.user().activeLoomian().action().move().tags().set(TagId.RECOIL, v)
     )
     ;
 

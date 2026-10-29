@@ -19,6 +19,7 @@ import github.snomfish.functionality.effect.effects.ApplyStatChanges;
 import github.snomfish.functionality.effect.effects.DealFormulaDamage;
 import github.snomfish.functionality.effect.effects.EnergyDrainEffect;
 import github.snomfish.functionality.effect.effects.HealthDrainEffect;
+import github.snomfish.functionality.effect.effects.RecoilEffect;
 import github.snomfish.functionality.effect.effects.SetType;
 import github.snomfish.functionality.effect.effects.SetWeather;
 import github.snomfish.functionality.number.ConditionalNumber;
@@ -28,7 +29,6 @@ import static github.snomfish.domain.move.CategoryId.*;
 import static github.snomfish.domain.move.MoveId.*;
 import static github.snomfish.domain.move.tags.TagId.*;
 import static github.snomfish.domain.type.TypeId.*;
-import static github.snomfish.domain.weather.WeatherId.RAIN;
 
 public class MoveRegistry {
 
@@ -568,11 +568,13 @@ public class MoveRegistry {
 				new EffectSequence(List.of(
 					new DealFormulaDamage(),
 					Schematics.secondaryEffects(List.of(
-						Schematics.applyStatusToTarget(0.1, StatusId.BURN)
+						Schematics.applyStatusToTarget(0.1, StatusId.BURN),
+						new RecoilEffect(new Constant(1/3))
 					))
 				))
 			))
 			.addTag(CONTACT)
+			.addTag(RECOIL)
 			.build()
 		);
 		register(MoveBuilder.newMove(BLAZE_PUNCH)
@@ -1082,10 +1084,14 @@ public class MoveRegistry {
 			.basePower(new Constant(100))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						new RecoilEffect(new Constant(1/3))
+					))
 				))
 			))
 			.addTag(CONTACT)
+			.addTag(RECOIL)
 			.addTag(SLASHING)
 			.build()
 		);
@@ -1124,7 +1130,7 @@ public class MoveRegistry {
 					new ConditionalEffect(Conditions.clearWeather(), 		SetType.move(SIMPLE)),
 					new ConditionalEffect(Conditions.fogActive(), 			SetType.move(SPIRIT)),
 					new ConditionalEffect(Conditions.heatwaveActive(), 		SetType.move(FIRE)),
-					new ConditionalEffect(Conditions.rainActive(), 			SetType.move(RAIN)),
+					new ConditionalEffect(Conditions.rainActive(), 			SetType.move(WATER)),
 					new ConditionalEffect(Conditions.strongWindsActive(), 	SetType.move(AIR)),
 					new ConditionalEffect(Conditions.thunderstormActive(), 	SetType.move(ELECTRIC))
 				))
@@ -1146,11 +1152,13 @@ public class MoveRegistry {
 				new EffectSequence(List.of(
 					new DealFormulaDamage(),
 					Schematics.secondaryEffects(List.of(
-						Schematics.applyStatusToTarget(0.1, StatusId.BURN)
+						Schematics.applyStatusToTarget(0.1, StatusId.BURN),
+						new RecoilEffect(new Constant(1/4))
 					))
 				))
 			))
 			.addTag(CONTACT)
+			.addTag(RECOIL)
 			.build()
 		);
 		register(MoveBuilder.newMove(COMPLETE_DEMOLITION)
@@ -1794,11 +1802,13 @@ public class MoveRegistry {
 					new DealFormulaDamage(),
 					Schematics.secondaryEffects(List.of(
 						ApplyStatChanges.userChangingUser()
-							.mdefense(new Constant(1))	
+							.mdefense(new Constant(1)),
+						new RecoilEffect(new Constant(1/4))
 					))
 				))
 			))
 			.addTag(CONTACT)
+			.addTag(RECOIL)
 			.build()
 		);
 		register(MoveBuilder.newMove(FINAL_RUSE)
@@ -3196,10 +3206,14 @@ public class MoveRegistry {
 			.basePower(new Constant(95))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						new RecoilEffect(new Constant(1/4))
+					))
 				))
 			))
 			.addTag(CONTACT)
+			.addTag(RECOIL)
 			.build()
 		);
 		register(MoveBuilder.newMove(MUD_SPATTER)
@@ -3308,10 +3322,14 @@ public class MoveRegistry {
 			.basePower(new Constant(95))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						new RecoilEffect(new Constant(1/4))
+					))
 				))
 			))
 			.addTag(CONTACT)
+			.addTag(RECOIL)
 			.build()
 		);
 		register(MoveBuilder.newMove(NOVA_BLAST)
@@ -3952,9 +3970,13 @@ public class MoveRegistry {
 			.basePower(new Constant(120))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						new RecoilEffect(new Constant(1/3))
+					))
 				))
 			))
+			.addTag(RECOIL)
 			.addTag(SOUND)
 			.build()
 		);
@@ -3966,9 +3988,13 @@ public class MoveRegistry {
 			.basePower(new Constant(120))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						new RecoilEffect(new Constant(1/3))
+					))
 				))
 			))
+			.addTag(RECOIL)
 			.addTag(CONTACT)
 			.build()
 		);
@@ -5189,10 +5215,14 @@ public class MoveRegistry {
 			.basePower(new Constant(95))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						new RecoilEffect(new Constant(1/3))
+					))
 				))
 			))
 			.addTag(CONTACT)
+			.addTag(RECOIL)
 			.build()
 		);
 		register(MoveBuilder.newMove(THUNDER_SLAM)
@@ -5249,10 +5279,14 @@ public class MoveRegistry {
 			.basePower(new Constant(120))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						new RecoilEffect(new Constant(1/4))
+					))
 				))
 			))
 			.addTag(CONTACT)
+			.addTag(RECOIL)
 			.build()
 		);
 		register(MoveBuilder.newMove(TONE_BARRIER)

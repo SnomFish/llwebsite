@@ -793,7 +793,14 @@ public class AbilityRegistry {
 		);
 		register(
 			MADCAP,
-			"madcap"
+			"madcap",
+			new TriggerRule(
+				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
+				new ConditionalEffect(
+					new Equals(Value.MOVE_RECOIL_TAG, true),
+					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
+				)
+			)
 		);
 		register(
 			MALWARE,
