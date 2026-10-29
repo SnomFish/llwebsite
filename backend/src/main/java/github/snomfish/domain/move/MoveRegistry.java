@@ -1455,7 +1455,7 @@ public class MoveRegistry {
 			.category(STATUS)
 			.energyCost(new Constant(25))
 			.onHit(new MoveEffect(
-				new SetWeather(
+				SetWeather.userSetting(
 					WeatherId.RAIN,
 					new Constant(5)
 				)
@@ -2084,7 +2084,7 @@ public class MoveRegistry {
 			.category(STATUS)
 			.energyCost(new Constant(25))
 			.onHit(new MoveEffect(
-				new SetWeather(
+				SetWeather.userSetting(
 					WeatherId.STRONG_WINDS,
 					new Constant(5)
 				)
@@ -2355,7 +2355,7 @@ public class MoveRegistry {
 			.category(STATUS)
 			.energyCost(new Constant(25))
 			.onHit(new MoveEffect(
-				new SetWeather(
+				SetWeather.userSetting(
 					WeatherId.FOG,
 					new Constant(5)
 				)
@@ -2403,7 +2403,7 @@ public class MoveRegistry {
 			.category(STATUS)
 			.energyCost(new Constant(25))
 			.onHit(new MoveEffect(
-				new SetWeather(
+				SetWeather.userSetting(
 					WeatherId.HEATWAVE,
 					new Constant(5)
 				)
@@ -5202,7 +5202,7 @@ public class MoveRegistry {
 			.category(STATUS)
 			.energyCost(new Constant(25))
 			.onHit(new MoveEffect(
-				new SetWeather(
+				SetWeather.userSetting(
 					WeatherId.THUNDERSTORM,
 					new Constant(5)
 				)

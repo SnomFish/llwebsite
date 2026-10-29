@@ -7,7 +7,6 @@ import java.util.Map;
 
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.condition.conditions.Equals;
-import github.snomfish.functionality.condition.conditions.NoCondition;
 import github.snomfish.functionality.condition.conditions.Or;
 import github.snomfish.functionality.effect.ConditionalEffect;
 import github.snomfish.functionality.effect.EffectSequence;
