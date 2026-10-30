@@ -11,6 +11,7 @@ public class Ability {
     private final String name;
     private final List<AbilityRule> rules;
 
+    private final boolean isLocked;
     private final boolean oncePerBattle;
     private final boolean oncePerSwapIn;
 
@@ -19,12 +20,14 @@ public class Ability {
         AbilityId id,
         String name,
         List<AbilityRule> rules,
+        boolean isLocked,
         boolean oncePerBattle,
         boolean oncePerSwapIn
     ) {
         this.id = id;
         this.name = name;
         this.rules = rules;
+        this.isLocked = isLocked;
         this.oncePerBattle = oncePerBattle;
         this.oncePerSwapIn = oncePerSwapIn;
     }
@@ -34,6 +37,7 @@ public class Ability {
     public AbilityId id() {return id;}
     public String name() {return name;}
     public List<AbilityRule> rules() {return rules;}
+    public boolean isLocked() {return isLocked;}
     public boolean oncePerBattle() {return oncePerBattle;}
     public boolean oncePerSwapIn() {return oncePerSwapIn;}
 }

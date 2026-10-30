@@ -10,6 +10,7 @@ public class AbilityBuilder {
     private String name;
     private List<AbilityRule> rules;
 
+    private boolean isLocked;
     private boolean oncePerBattle;
     private boolean oncePerSwapIn;
 
@@ -18,6 +19,7 @@ public class AbilityBuilder {
         this.id = AbilityId.NO_ABILITY;
         this.name = "No Ability";
         this.rules = new ArrayList<>();
+        this.isLocked = false;
         this.oncePerBattle = false;
         this.oncePerSwapIn = false;
     }
@@ -31,6 +33,7 @@ public class AbilityBuilder {
             id,
             name,
             rules,
+            isLocked,
             oncePerBattle,
             oncePerSwapIn
         );
@@ -48,6 +51,10 @@ public class AbilityBuilder {
     public AbilityBuilder rule(AbilityRule rule) {
         this.rules.add(rule);
 		return this;
+    }
+    public AbilityBuilder isLocked() {
+        this.isLocked = true;
+        return this;                                      
     }
     public AbilityBuilder oncePerBattle() {
         this.oncePerBattle = true;

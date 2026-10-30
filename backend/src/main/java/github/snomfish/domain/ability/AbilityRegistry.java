@@ -143,6 +143,7 @@ public class AbilityRegistry {
 				)))
 				.build()
 			)
+			.isLocked()
 			.build()
 		);
 		register(AbilityBuilder.newAbility() // completed
@@ -343,6 +344,28 @@ public class AbilityRegistry {
 		register(AbilityBuilder.newAbility()
 			.id(BOAST)
 			.name("boast")
+			.rule(AbilityRuleBuilder.newRule()
+				.event(new Event(USER_SWITCHED_IN_EVENT, USER))
+				.effect(new ConditionalEffect(
+					new GreaterThan(Value.USER_BATTLE_MATTACK, Value.TARGET_BATTLE_MATTACK),
+					ApplyStatChanges.userChangingUser()
+						.mattack(new Constant(1)),
+					ApplyStatChanges.userChangingUser()
+						.mattack(new Constant(-1))
+				))
+				.build()
+			)
+			.rule(AbilityRuleBuilder.newRule()
+				.event(new Event(TARGET_SWITCHED_IN_EVENT, TARGET))
+				.effect(new ConditionalEffect(
+					new GreaterThan(Value.TARGET_BATTLE_MATTACK, Value.USER_BATTLE_MATTACK),
+					ApplyStatChanges.targetChangingTarget()
+						.mattack(new Constant(1)),
+					ApplyStatChanges.targetChangingTarget()
+						.mattack(new Constant(-1))
+				))
+				.build()
+			)
 			.build()
 		);
 		register(AbilityBuilder.newAbility()
@@ -380,9 +403,16 @@ public class AbilityRegistry {
 			.name("burgler")
 			.build()
 		);
+		// increases the damage of hte users fire type moves by 25%
 		register(AbilityBuilder.newAbility()
 			.id(BURNING_RAGE)
 			.name("burning_rage")
+			.rule(AbilityRuleBuilder.newRule()
+				.event(new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER))
+				.condition(new Equals(Value.MOVE_TYPE, FIRE))
+				.effect(new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.25)))
+				.build()
+			)
 			.build()
 		);
 		register(AbilityBuilder.newAbility()
@@ -390,7 +420,7 @@ public class AbilityRegistry {
 			.name("bursting_seams")
 			.build()
 		);
-		register(AbilityBuilder.newAbility()
+		register(AbilityBuilder.newAbility() // doubles exclusive ability
 			.id(CADDIE)
 			.name("caddie")
 			.build()
@@ -415,14 +445,22 @@ public class AbilityRegistry {
 			.name("chill")
 			.build()
 		);
+		// increases the damage of the user's ice type moves by 25%
 		register(AbilityBuilder.newAbility()
 			.id(CHILLING_PASSION)
 			.name("chilling_passion")
+			.rule(AbilityRuleBuilder.newRule()
+				.event(new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER))
+				.condition(new Equals(Value.MOVE_TYPE, ICE))
+				.effect(new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.25)))
+				.build()
+			)
 			.build()
 		);
 		register(AbilityBuilder.newAbility()
 			.id(CIRCADIAN)
 			.name("circadian")
+			.isLocked()
 			.build()
 		);
 		register(AbilityBuilder.newAbility()
@@ -466,7 +504,7 @@ public class AbilityRegistry {
 			)
 			.build()
 		);
-		register(AbilityBuilder.newAbility()
+		register(AbilityBuilder.newAbility() // doubles exclusive
 			.id(COMMUNICATION)
 			.name("communication")
 			.build()
@@ -481,7 +519,7 @@ public class AbilityRegistry {
 			.name("confidence")
 			.build()
 		);
-		register(AbilityBuilder.newAbility()
+		register(AbilityBuilder.newAbility() // doubles exclusive
 			.id(CONSPIRE)
 			.name("conspire")
 			.build()
@@ -641,6 +679,7 @@ public class AbilityRegistry {
 		register(AbilityBuilder.newAbility()
 			.id(FACADE)
 			.name("facade")
+			.isLocked()
 			.build()
 		);
 		register(AbilityBuilder.newAbility()
@@ -657,6 +696,7 @@ public class AbilityRegistry {
 		register(AbilityBuilder.newAbility()
 			.id(FESTIVE_SPIRIT)
 			.name("festive spirit")
+			.isLocked()
 			.build()
 		);
 		register(AbilityBuilder.newAbility()
@@ -931,6 +971,7 @@ public class AbilityRegistry {
 		register(AbilityBuilder.newAbility()
 			.id(LIFE_FORCE)
 			.name("life force")
+			.isLocked()
 			.build()
 		);
 		register(AbilityBuilder.newAbility()
@@ -1585,6 +1626,7 @@ public class AbilityRegistry {
 		register(AbilityBuilder.newAbility()
 			.id(TWO_FACE)
 			.name("two_face")
+			.isLocked()
 			.build()
 		);
 		register(AbilityBuilder.newAbility() // completed

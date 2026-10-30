@@ -60,7 +60,7 @@ public class SetWeather implements IEffect {
     public List<Branch<BattleContext>> execute(BattleContext context) {
         List<Branch<BattleContext>> outcomes = List.of(new Branch<>(context, 1));
 
-        if (context.gamestate().weatherId() == weatherId) return outcomes;
+        if (context.gamestate().weatherInstance().weatherId() == weatherId) return outcomes;
 
         outcomes = flatMap(outcomes, c -> c.dispatchEvent(beforeSetEvent));
         outcomes = flatMap(outcomes, c -> setWeatherModule(context));
@@ -78,8 +78,8 @@ public class SetWeather implements IEffect {
             double probability = lifespanBranch.probability();
 
             BattleContext outcome = context.deepCopy();
-            outcome.gamestate().setWeatherId(weatherId);
-            outcome.gamestate().setWeatherLifespan(lifespan);
+            outcome.gamestate().weatherInstance().setWeatherId(weatherId);
+            outcome.gamestate().weatherInstance().setLifespan(lifespan);
 
 
             outcomes.add(new Branch<>(

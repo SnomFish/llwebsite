@@ -83,7 +83,7 @@ public class ItemRegistry {
 			DRAIN_ORB,
 			"drain orb",
 			new TriggerRule(
-				new Event(HEALTH_DRAIN_EVENT, USER), 
+				new Event(PRE_HEALTH_DRAIN_EVENT, USER), 
 				new MultiplyValueEffect(Value.MOVE_HEALTH_DRAIN_MODIFIER, new Constant(1.2))
 			)
 		);

@@ -1,11 +1,11 @@
 package github.snomfish.functionality.context;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import github.snomfish.domain.Gamestate;
 import github.snomfish.domain.Side;
 import github.snomfish.domain.SideId;
+import github.snomfish.domain.weather.WeatherInstance;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.copy.DeepCopyable;
 import github.snomfish.functionality.event.Event;
@@ -50,12 +50,14 @@ public class BattleContext implements DeepCopyable<BattleContext> {
     public SideId userState() {return userState;}
     public Side user() {return user;}
     public Side target() {return target;}
+    public WeatherInstance weather() {return gamestate.weatherInstance();}
 
 
     // events
-    public List<Branch<BattleContext>> dispatchEvent(EventId eventId) { // I could crush this down to one line
+    public List<Branch<BattleContext>> dispatchEvent(EventId eventId) {
         List<Branch<BattleContext>> outcomes = List.of(new Branch<>(this, 1.0));
 
+        outcomes = flatMap(outcomes, context -> weather().handleEvent(context, new Event(eventId, null)));
         outcomes = flatMap(outcomes, context -> user().dispatchEvent(context, new Event(eventId, EventSideId.USER)));
         outcomes = flatMap(outcomes, context -> target().dispatchEvent(context, new Event(eventId, EventSideId.TARGET)));
 

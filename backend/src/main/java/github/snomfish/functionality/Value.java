@@ -26,12 +26,12 @@ public enum Value {
 
 
     WEATHER_ID(
-        c -> c.gamestate().weatherId(),
-        (c, v) -> c.gamestate().setWeatherId(v)
+        c -> c.gamestate().weatherInstance().weatherId(),
+        (c, v) -> c.gamestate().weatherInstance().setWeatherId(v)
     ),
     WEATHER_LIFESPAN(
-        c -> c.gamestate().weatherLifespan(),
-        (c, v) -> c.gamestate().setWeatherLifespan(v)
+        c -> c.gamestate().weatherInstance().lifespan(),
+        (c, v) -> c.gamestate().weatherInstance().setLifespan(v)
     ),
     
     

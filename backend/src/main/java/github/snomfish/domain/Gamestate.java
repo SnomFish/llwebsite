@@ -62,9 +62,7 @@ public class Gamestate implements DeepCopyable<Gamestate> {
                 throw new IllegalArgumentException("Unknown side: " + sideId);
         }
     }
-    public WeatherId weatherId() {return weather.weatherId();}
-    public Weather weather() {return weather.weather();}
-    public int weatherLifespan() {return weather.lifespan();}
+    public WeatherInstance weatherInstance() {return weather;}
     public List<String> battleLog() {return battleLog;}
 
 
@@ -81,8 +79,7 @@ public class Gamestate implements DeepCopyable<Gamestate> {
                 throw new IllegalArgumentException("Unkown side: " + sideId);
         }
     }
-    public void setWeatherId(WeatherId weatherId) {this.weather.setWeatherId(weatherId);}
-    public void setWeatherLifespan(int weatherLifespan) {this.weather.setLifespan(weatherLifespan);}
+    public void setWeatherInstance(WeatherInstance weather) {this.weather = weather;}
     public void setBattleLog(List<String> battleLog) {this.battleLog = battleLog;}
 
 
