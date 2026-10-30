@@ -5,13 +5,16 @@ import java.util.List;
 import java.util.Map;
 
 import github.snomfish.domain.mechanics.MechanicId;
+import github.snomfish.domain.move.CategoryId;
 import github.snomfish.domain.status.StatusId;
 import github.snomfish.domain.type.TypeId;
+import github.snomfish.domain.weather.WeatherId;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.condition.And;
 import github.snomfish.functionality.condition.Conditions;
 import github.snomfish.functionality.condition.Equals;
 import github.snomfish.functionality.condition.GreaterThan;
+import github.snomfish.functionality.condition.LessThan;
 import github.snomfish.functionality.condition.ListContains;
 import github.snomfish.functionality.condition.Or;
 import github.snomfish.functionality.condition.RandomCondition;
@@ -26,6 +29,7 @@ import github.snomfish.functionality.effect.effects.SetAbility;
 import github.snomfish.functionality.effect.effects.SetAbilityEffect;
 import github.snomfish.functionality.effect.effects.SetType;
 import github.snomfish.functionality.effect.effects.SetValueEffect;
+import github.snomfish.functionality.effect.effects.SetWeather;
 import github.snomfish.functionality.event.Event;
 import github.snomfish.functionality.number.Constant;
 
@@ -54,12 +58,12 @@ public class AbilityRegistry {
 
 
     static {
-		register(AbilityBuilder.newAbility()
+		register(AbilityBuilder.newAbility() // completed
 			.id(NO_ABILITY)
 			.name("no ability")
 			.build()
 		);
-        register(AbilityBuilder.newAbility()
+        register(AbilityBuilder.newAbility() // completed
 			.id(ABILITY_THIEF)
 			.name("ability thief")
 			.rule(AbilityRuleBuilder.newRule()
@@ -77,7 +81,7 @@ public class AbilityRegistry {
 			.oncePerBattle()
 			.build()
 		);
-		register(AbilityBuilder.newAbility()
+		register(AbilityBuilder.newAbility() // completed
 			.id(ACE)
 			.name("ace")
 			.rule(AbilityRuleBuilder.newRule()
@@ -88,7 +92,7 @@ public class AbilityRegistry {
             )
 			.build()
 		);
-		register(AbilityBuilder.newAbility()
+		register(AbilityBuilder.newAbility() // completed
 			.id(ADAPTABLE)
 			.name("adaptable")
 			.rule(AbilityRuleBuilder.newRule()
@@ -141,7 +145,7 @@ public class AbilityRegistry {
 			)
 			.build()
 		);
-		register(AbilityBuilder.newAbility()
+		register(AbilityBuilder.newAbility() // completed
 			.id(ADORABLE)
 			.name("adorable")
 			.rule(AbilityRuleBuilder.newRule()
@@ -168,7 +172,7 @@ public class AbilityRegistry {
 			.name("ambush")
 			.build()
 		);
-		register(AbilityBuilder.newAbility()
+		register(AbilityBuilder.newAbility() // completed
 			.id(ANALYZE)
 			.name("analyze")
 			.rule(AbilityRuleBuilder.newRule()
@@ -190,7 +194,7 @@ public class AbilityRegistry {
 			)
 			.build()
 		);
-		register(AbilityBuilder.newAbility() // TODO: contemplate this correct implementation and wonder if I could have done anything differentely to make it better
+		register(AbilityBuilder.newAbility() // completed
 			.id(ANOMALY)
 			.name("anomaly")
 			.rule(AbilityRuleBuilder.newRule() // when the loomian is the user
@@ -226,7 +230,7 @@ public class AbilityRegistry {
 			.name("appetite")
 			.build()
 		);
-		register(AbilityBuilder.newAbility()
+		register(AbilityBuilder.newAbility() // completed
 			.id(APPLIED_FRUSTRATION)
 			.name("applied_frustration")
 			.rule(AbilityRuleBuilder.newRule()
@@ -245,12 +249,13 @@ public class AbilityRegistry {
 			)
 			.build()
 		);
-		register(AbilityBuilder.newAbility()
+		register(AbilityBuilder.newAbility() // completed
 			.id(APPREHENSION)
 			.name("apprehension")
 			.build()
 		);
-		register(AbilityBuilder.newAbility() // this has to use type modifier, you cannot alter the typechart for this as if the target has two types, that fire resistance will be applied twice
+		 // this has to use type modifier, you cannot alter the typechart for this as if the target has two types, that fire resistance will be applied twice
+		register(AbilityBuilder.newAbility() // completed
             .id(AQUA_BODY)
             .name("aqua body")
 			.rule(AbilityRuleBuilder.newRule()
@@ -263,7 +268,7 @@ public class AbilityRegistry {
             )
 			.build()
         );
-        register(AbilityBuilder.newAbility()
+        register(AbilityBuilder.newAbility() // completed
             .id(ASSERTIVE)
             .name("assertive")
 			.rule(AbilityRuleBuilder.newRule()
@@ -273,7 +278,7 @@ public class AbilityRegistry {
             )
 			.build()
         );
-        register(AbilityBuilder.newAbility()
+        register(AbilityBuilder.newAbility() // completed
             .id(AWAKENING)
             .name("awakening")
 			.rule(AbilityRuleBuilder.newRule()
@@ -283,7 +288,7 @@ public class AbilityRegistry {
             )
 			.build()
         );
-        register(AbilityBuilder.newAbility()
+        register(AbilityBuilder.newAbility() // completed
             .id(BANEFUL)
             .name("baneful")
 			.rule(AbilityRuleBuilder.newRule()
@@ -581,7 +586,7 @@ public class AbilityRegistry {
             .id(DRAINAGE)
             .name("drainage")
 			.rule(AbilityRuleBuilder.newRule()
-                .event(new Event(HEALTH_DRAIN_EVENT, USER)) 
+                .event(new Event(PRE_HEALTH_DRAIN_EVENT, USER)) 
                 .effect(new MultiplyValueEffect(Value.MOVE_HEALTH_DRAIN_MODIFIER, new Constant(1.5)))
 				.build()
             )
@@ -667,6 +672,11 @@ public class AbilityRegistry {
 		register(AbilityBuilder.newAbility()
 			.id(FOG_SUMMON)
 			.name("fog summon")
+			.rule(AbilityRuleBuilder.newRule()
+				.event(new Event(USER_SWITCHED_IN_EVENT, USER))
+				.effect(SetWeather.userSetting(WeatherId.FOG, new Constant(5)))
+				.build()
+			)
 			.build()
 		);
 		register(AbilityBuilder.newAbility()
@@ -674,13 +684,23 @@ public class AbilityRegistry {
 			.name("foresight")
 			.build()
 		);
-		register(AbilityBuilder.newAbility()
+		register(AbilityBuilder.newAbility() // completed
 			.id(FORGE)
 			.name("forge")
 			.rule(AbilityRuleBuilder.newRule()
 				.event(new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET))
 				.condition(new Equals(Value.MOVE_TYPE, TypeId.FIRE))
-				.effect(new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)))
+				.effect(
+					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5))
+				)
+				.build()
+			)
+			.rule(AbilityRuleBuilder.newRule()
+				.event(new Event(DEALT_DAMAGE_EVENT, TARGET))
+				.condition(new Equals(Value.MOVE_TYPE, TypeId.FIRE))
+				.effect(ApplyStatChanges.userChangingTarget()
+					.mattack(new Constant(1))
+				)
 				.build()
 			)
 			.build()
@@ -690,9 +710,18 @@ public class AbilityRegistry {
 			.name("fortissimo")
 			.build()
 		);
-		register(AbilityBuilder.newAbility()
+		register(AbilityBuilder.newAbility() // completed
 			.id(FRAIL_ARMOUR)
 			.name("frail armour")
+			.rule(AbilityRuleBuilder.newRule()
+				.event(new Event(DEALT_DAMAGE_EVENT, TARGET))
+				.condition(new Equals(Value.MOVE_CATEGORY, CategoryId.MELEE))
+				.effect(ApplyStatChanges.targetChangingTarget()
+					.mdefense(new Constant(-1))
+					.speed(new Constant(2))
+				)
+				.build()
+			)
 			.build()
 		);
 		register(AbilityBuilder.newAbility()
@@ -700,14 +729,36 @@ public class AbilityRegistry {
 			.name("frenzy")
 			.build()
 		);
-		register(AbilityBuilder.newAbility()
+		register(AbilityBuilder.newAbility() // completed
 			.id(GLIDE)
 			.name("glide")
+			.rule(AbilityRuleBuilder.newRule()
+				.event(new Event(DEALT_DAMAGE_EVENT, USER))
+				.condition(new Equals(Value.MOVE_TYPE, AIR))
+				.effect(ApplyStatChanges.userChangingUser()
+					.speed(new Constant(1))
+				)
+				.build()
+			)
+			.rule(AbilityRuleBuilder.newRule()
+				.event(new Event(DEALT_DAMAGE_EVENT, TARGET))
+				.condition(new Equals(Value.MOVE_TYPE, AIR))
+				.effect(ApplyStatChanges.targetChangingTarget()
+					.speed(new Constant(1))
+				)
+				.build()
+			)
 			.build()
 		);
-		register(AbilityBuilder.newAbility()
+		register(AbilityBuilder.newAbility() // completed
 			.id(GLOOMY)
 			.name("gloomy")
+			.rule(AbilityRuleBuilder.newRule()
+				.event(new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER))
+				.condition(Conditions.fogActive())
+				.effect(new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.3)))
+				.build()
+			)
 			.build()
 		);
 		register(AbilityBuilder.newAbility()
@@ -775,6 +826,11 @@ public class AbilityRegistry {
 		register(AbilityBuilder.newAbility()
 			.id(HEAT_SUMMON)
 			.name("heat summon")
+			.rule(AbilityRuleBuilder.newRule()
+				.event(new Event(USER_SWITCHED_IN_EVENT, USER))
+				.effect(SetWeather.userSetting(WeatherId.HEATWAVE, new Constant(5)))
+				.build()
+			)
 			.build()
 		);
 		register(AbilityBuilder.newAbility()
@@ -1205,6 +1261,11 @@ public class AbilityRegistry {
 		register(AbilityBuilder.newAbility()
 			.id(RAIN_SUMMON)
 			.name("rain summon")
+			.rule(AbilityRuleBuilder.newRule()
+				.event(new Event(USER_SWITCHED_IN_EVENT, USER))
+				.effect(SetWeather.userSetting(WeatherId.RAIN, new Constant(5)))
+				.build()
+			)
 			.build()
 		);
 		register(AbilityBuilder.newAbility()
@@ -1450,6 +1511,11 @@ public class AbilityRegistry {
 		register(AbilityBuilder.newAbility()
 			.id(THUNDER_SUMMON)
 			.name("thunder summon")
+			.rule(AbilityRuleBuilder.newRule()
+				.event(new Event(USER_SWITCHED_IN_EVENT, USER))
+				.effect(SetWeather.userSetting(WeatherId.THUNDERSTORM, new Constant(5)))
+				.build()
+			)
 			.build()
 		);
 		register(AbilityBuilder.newAbility()
@@ -1521,9 +1587,14 @@ public class AbilityRegistry {
 			.name("two_face")
 			.build()
 		);
-		register(AbilityBuilder.newAbility()
+		register(AbilityBuilder.newAbility() // completed
 			.id(UNGRACIOUS_HOST)
 			.name("ungracious host")
+			.rule(AbilityRuleBuilder.newRule()
+				.event(new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET))
+				.effect(new MultiplyValueEffect(Value.MOVE_HEALTH_DRAIN_MODIFIER, new Constant(-1)))
+				.build()
+			)
 			.build()
 		);
 		register(AbilityBuilder.newAbility()
@@ -1541,9 +1612,16 @@ public class AbilityRegistry {
 			.name("venomous")
 			.build()
 		);
-		register(AbilityBuilder.newAbility()
+		// increases the users damage when the user is poisoned
+		register(AbilityBuilder.newAbility() // build
 			.id(VICIOUS)
 			.name("vicious")
+			.rule(AbilityRuleBuilder.newRule()
+				.event(new Event(PRE_DAMAGE_EVENT, USER))
+				.condition(new Equals(Value.USER_STATUS_ID, StatusId.BURN))
+				.effect(new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)))
+				.build()
+			)
 			.build()
 		);
 		register(AbilityBuilder.newAbility()
@@ -1551,24 +1629,48 @@ public class AbilityRegistry {
 			.name("vigilant")
 			.build()
 		);
-		register(AbilityBuilder.newAbility()
+		// increases the users melee attack by 50% if they are inflicted by a status ailment and removes the damage drop from burn
+		register(AbilityBuilder.newAbility() // completed
 			.id(VIGOROUS)
 			.name("vigorous")
+			.rule(AbilityRuleBuilder.newRule()
+				.event(new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER))
+				.condition(new And(
+					Conditions.userHasStatusAilment(),
+					new Equals(Value.MOVE_CATEGORY, CategoryId.MELEE)
+				))
+				.effect(new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)))
+				.build()
+			)
+			.rule(AbilityRuleBuilder.newRule()
+				.event(new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER))
+				.condition(new Equals(Value.USER_STATUS_ID, StatusId.BURN))
+				.effect(new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(2)))
+				.build()
+			)
 			.build()
 		);
+		// reduces the energy cost of the user's sound based moves by 25%
 		register(AbilityBuilder.newAbility()
 			.id(VIRTUOSO)
 			.name("virtuoso")
 			.build()
 		);
+		// the user cannot be forced off the field
 		register(AbilityBuilder.newAbility()
 			.id(VISCID)
 			.name("viscid")
 			.build()
 		);
-		register(AbilityBuilder.newAbility()
+		// increases the accuracy of the user's moves by 30%
+		register(AbilityBuilder.newAbility() // completed
 			.id(VIVID_SIGHT)
 			.name("vivid sight")
+			.rule(AbilityRuleBuilder.newRule()
+				.event(new Event(BEFORE_MOVE_EVENT, USER))
+				.effect(new MultiplyValueEffect(Value.MOVE_ACCURACY_MODIFIER, new Constant(1.3)))
+				.build()
+			)
 			.build()
 		);
 		register(AbilityBuilder.newAbility()
@@ -1581,14 +1683,32 @@ public class AbilityRegistry {
 			.name("watcher")
 			.build()
 		);
-		register(AbilityBuilder.newAbility()
+		register(AbilityBuilder.newAbility() // completed
 			.id(WEBBING)
 			.name("webbing")
+			.rule(AbilityRuleBuilder.newRule()
+				.event(new Event(POST_DAMAGE_EVENT, TARGET))
+				.condition(new Equals(Value.MOVE_CONTACT_TAG, true))
+				.effect(ApplyStatChanges.targetChangingUser()
+					.speed(new Constant(1))
+				)
+				.build()
+			)
 			.build()
 		);
-		register(AbilityBuilder.newAbility()
+		// reduces the damage of brawler and mind type moves by 50%
+		register(AbilityBuilder.newAbility() // completed
 			.id(WHOLESOME)
 			.name("wholesome")
+			.rule(AbilityRuleBuilder.newRule()
+				.event(new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET))
+				.condition(new Or(
+					new Equals(Value.MOVE_TYPE, BRAWLER),
+					new Equals(Value.MOVE_TYPE, MIND)
+				))
+				.effect(new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)))
+				.build()
+			)
 			.build()
 		);
 		register(AbilityBuilder.newAbility()
@@ -1596,14 +1716,25 @@ public class AbilityRegistry {
 			.name("wildfire")
 			.build()
 		);
-		register(AbilityBuilder.newAbility()
+		register(AbilityBuilder.newAbility() // completed
 			.id(WIND_SUMMON)
 			.name("wind summon")
+			.rule(AbilityRuleBuilder.newRule()
+				.event(new Event(USER_SWITCHED_IN_EVENT, USER))
+				.effect(SetWeather.userSetting(WeatherId.STRONG_WINDS, new Constant(5)))
+				.build()
+			)
 			.build()
 		);
-		register(AbilityBuilder.newAbility()
+		register(AbilityBuilder.newAbility() // completed
 			.id(WISE)
 			.name("wise")
+			.rule(AbilityRuleBuilder.newRule()
+				.event(new Event(PRE_DAMAGE_EVENT, USER))
+				.condition(new LessThan(Value.MOVE_TYPE_MODIFIER, new Constant(1)))
+				.effect(new MultiplyValueEffect(Value.MOVE_DAMAGE, new Constant(2)))
+				.build()
+			)
 			.build()
 		);
 		register(AbilityBuilder.newAbility()

@@ -39,7 +39,7 @@ public class EnergyDrainEffect implements IEffect {
     public List<Branch<BattleContext>> execute(BattleContext context) {
         List<Branch<BattleContext>> outcomes = new ArrayList<>();
 
-        for(Branch<BattleContext> contextBranch : context.dispatchEvent(ENERGY_DRAIN_EVENT)) {
+        for(Branch<BattleContext> contextBranch : context.dispatchEvent(PRE_ENERGY_DRAIN_EVENT)) {
             for(Branch<Double> drainBranch : drain.execute(context)) {
 
                 BattleContext outcome = contextBranch.value().deepCopy();

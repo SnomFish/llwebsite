@@ -8,10 +8,11 @@ public enum EventId {
     ACCURACY_CHECK_EVENT,
     PRE_DEAL_FORMULA_DAMAGE_EVENT,
     PRE_DAMAGE_EVENT,
-    POST_DAMAGE_EVENT,
+    DEALT_DAMAGE_EVENT, // used if the move dealt damage
+    POST_DAMAGE_EVENT, // used wether the move hit or missed
     CLUTCH_EVENT,
-    HEALTH_DRAIN_EVENT,
-    ENERGY_DRAIN_EVENT,
+    PRE_HEALTH_DRAIN_EVENT,
+    PRE_ENERGY_DRAIN_EVENT,
 
 
     PRE_STAT_CHANGES_EFFECT_EVENT,

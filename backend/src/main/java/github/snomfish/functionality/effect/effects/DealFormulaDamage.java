@@ -45,9 +45,7 @@ public class DealFormulaDamage implements IEffect {
         outcomes = flatMap(outcomes, c -> damageModule(c));
         outcomes = flatMap(outcomes, c -> c.dispatchEvent(PRE_DAMAGE_EVENT));
         outcomes = flatMap(outcomes, c -> damageRollModule(c));
-        //outcomes = flatMap(outcomes, c -> applyDamageModule(c));
         outcomes = flatMap(outcomes, c -> c.dispatchEvent(POST_DAMAGE_EVENT));
-        // separate apply damage from the damage roll?
 
         return outcomes;
     }
@@ -168,10 +166,12 @@ public class DealFormulaDamage implements IEffect {
             move.setDamage((int)Math.clamp((double)damage * damageRollModifier, 1, target.currentHealth()));
             outcome.gamestate().log("move dealt " + damage + " damage");
             target.addToCurrentHealth(-damage);
-            outcomes.add(new Branch<>(
-                outcome,
-                1/16
-            ));
+
+            if (damage > 0) {
+                outcomes.addAll(flatMap(List.of(new Branch<>(outcome, 1/16)), c -> c.dispatchEvent(DEALT_DAMAGE_EVENT)));
+            } else {
+                outcomes.add(new Branch<>(outcome, 1/16));
+            }
         }
 
         return outcomes;
