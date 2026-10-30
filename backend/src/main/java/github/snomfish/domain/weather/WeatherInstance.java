@@ -2,7 +2,7 @@ package github.snomfish.domain.weather;
 
 import github.snomfish.functionality.copy.DeepCopyable;
 
-public class WeatherInstance implements DeepCopyable{
+public class WeatherInstance implements DeepCopyable<WeatherInstance> {
     
 
     private WeatherId id;

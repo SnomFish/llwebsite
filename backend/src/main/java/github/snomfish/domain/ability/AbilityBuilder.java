@@ -49,12 +49,12 @@ public class AbilityBuilder {
         this.rules.add(rule);
 		return this;
     }
-    public AbilityBuilder oncePerBattle(boolean oncePerBattle) {
-        this.oncePerBattle = oncePerBattle;
+    public AbilityBuilder oncePerBattle() {
+        this.oncePerBattle = true;
         return this;
     }
-    public AbilityBuilder oncePerSwapIn(boolean oncePerSwapIn) {
-        this.oncePerSwapIn = oncePerSwapIn;
+    public AbilityBuilder oncePerSwapIn() {
+        this.oncePerSwapIn = true;
         return this;
     }
 }

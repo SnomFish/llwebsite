@@ -13,7 +13,6 @@ import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.condition.ICondition;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.copy.DeepCopyable;
-import github.snomfish.functionality.effect.IEffect;
 import github.snomfish.functionality.number.INumber;
 
 import static github.snomfish.functionality.branch.BranchUtil.*;

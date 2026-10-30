@@ -20,8 +20,10 @@ import github.snomfish.functionality.effect.EffectSequence;
 import github.snomfish.functionality.effect.effects.AlterTypeChart;
 import github.snomfish.functionality.effect.effects.ApplyMechanic;
 import github.snomfish.functionality.effect.effects.ApplyStatChanges;
+import github.snomfish.functionality.effect.effects.DispatchEventEffect;
 import github.snomfish.functionality.effect.effects.MultiplyValueEffect;
 import github.snomfish.functionality.effect.effects.SetAbility;
+import github.snomfish.functionality.effect.effects.SetAbilityEffect;
 import github.snomfish.functionality.effect.effects.SetType;
 import github.snomfish.functionality.effect.effects.SetValueEffect;
 import github.snomfish.functionality.event.Event;
@@ -62,8 +64,17 @@ public class AbilityRegistry {
 			.name("ability thief")
 			.rule(AbilityRuleBuilder.newRule()
 				.event(new Event(POST_DAMAGE_EVENT, USER))
+				.condition(new Equals(Value.MOVE_CONTACT_TAG, true))
+				.effect(new EffectSequence(List.of(
+					SetAbilityEffect.userActual(Value.TARGET_ABILITY_ID),
+					SetAbilityEffect.user(Value.TARGET_ABILITY_ID),
+					SetAbilityEffect.targetActual(AbilityId.NO_ABILITY),
+					SetAbilityEffect.target(AbilityId.NO_ABILITY),
+					new DispatchEventEffect(USER_SWITCHED_IN_EVENT)
+				)))
 				.build()
 			)
+			.oncePerBattle()
 			.build()
 		);
 		register(AbilityBuilder.newAbility()

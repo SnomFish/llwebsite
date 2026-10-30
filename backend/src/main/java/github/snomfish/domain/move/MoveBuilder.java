@@ -8,8 +8,6 @@ import github.snomfish.domain.stats.StatId;
 import github.snomfish.domain.type.TypeId;
 import github.snomfish.functionality.condition.ICondition;
 import github.snomfish.functionality.condition.NoCondition;
-import github.snomfish.functionality.effect.IEffect;
-import github.snomfish.functionality.effect.effects.NoEffect;
 import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.INumber;
 
