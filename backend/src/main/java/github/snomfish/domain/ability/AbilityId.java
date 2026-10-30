@@ -163,7 +163,7 @@ public enum AbilityId {
     PROTECTIVE_SHELL,
     PROWLER,
     PUNCTURE,
-    PYR_PRO,
+    PYRO_PRO,
     PYRO,
     QUICK_RECOVERY,
     RADIANCE,

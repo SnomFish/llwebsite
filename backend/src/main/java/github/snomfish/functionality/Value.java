@@ -78,12 +78,52 @@ public enum Value {
     ),
     
     USER_ABILITY_ID(
-        c -> c.user().activeLoomian().abilityId(),
-        (c, v) -> c.user().activeLoomian().setAbilityId(v)
+        c -> c.user().activeLoomian().abilityInstance().abilityId(),
+        (c, v) -> c.user().activeLoomian().abilityInstance().setAbilityId(v)
+    ),
+    USER_ABILITY_HAS_TRIGGERED_THIS_BATTLE(
+        c -> c.user().activeLoomian().abilityInstance().hasTriggeredThisBattle(),
+        (c, v) -> c.user().activeLoomian().abilityInstance().setTriggeredThisBattle(v)
+    ),
+    USER_ABILITY_HAS_TRIGGERED_THIS_SWAP(
+        c -> c.user().activeLoomian().abilityInstance().hasTriggeredThisSwapIn(),
+        (c, v) -> c.user().activeLoomian().abilityInstance().setTriggeredThisSwapIn(v)
+    ),
+    USER_ACTUAL_ABILITY_ID(
+        c -> c.user().activeLoomian().abilityInstance().abilityId(),
+        (c, v) -> c.user().activeLoomian().abilityInstance().setAbilityId(v)
+    ),
+    USER_ACTUAL_ABILITY_HAS_TRIGGERED_THIS_BATTLE(
+        c -> c.user().activeLoomian().actualAbilityInstance().hasTriggeredThisBattle(),
+        (c, v) -> c.user().activeLoomian().actualAbilityInstance().setTriggeredThisBattle(v)
+    ),
+    USER_ACTUAL_ABILITY_HAS_TRIGGERED_THIS_SWAP(
+        c -> c.user().activeLoomian().actualAbilityInstance().hasTriggeredThisSwapIn(),
+        (c, v) -> c.user().activeLoomian().actualAbilityInstance().setTriggeredThisSwapIn(v)
     ),
     TARGET_ABILITY_ID(
-        c -> c.target().activeLoomian().abilityId(),
-        (c, v) -> c.target().activeLoomian().setAbilityId(v)
+        c -> c.target().activeLoomian().abilityInstance().abilityId(),
+        (c, v) -> c.target().activeLoomian().abilityInstance().setAbilityId(v)
+    ),
+    TARGET_ABILITY_HAS_TRIGGERED_THIS_BATTLE(
+        c -> c.target().activeLoomian().abilityInstance().hasTriggeredThisBattle(),
+        (c, v) -> c.target().activeLoomian().abilityInstance().setTriggeredThisBattle(v)
+    ),
+    TARGET_ABILITY_HAS_TRIGGERED_THIS_SWAP(
+        c -> c.target().activeLoomian().abilityInstance().hasTriggeredThisSwapIn(),
+        (c, v) -> c.target().activeLoomian().abilityInstance().setTriggeredThisSwapIn(v)
+    ),
+    TARGET_ACTUAL_ABILITY_ID(
+        c -> c.user().activeLoomian().abilityInstance().abilityId(),
+        (c, v) -> c.user().activeLoomian().abilityInstance().setAbilityId(v)
+    ),
+    TARGET_ACTUAL_ABILITY_HAS_TRIGGERED_THIS_BATTLE(
+        c -> c.target().activeLoomian().actualAbilityInstance().hasTriggeredThisBattle(),
+        (c, v) -> c.target().activeLoomian().actualAbilityInstance().setTriggeredThisBattle(v)
+    ),
+    TARGET_ACTUAL_ABILITY_HAS_TRIGGERED_THIS_SWAP(
+        c -> c.target().activeLoomian().actualAbilityInstance().hasTriggeredThisSwapIn(),
+        (c, v) -> c.target().activeLoomian().actualAbilityInstance().setTriggeredThisSwapIn(v)
     ),
 
     USER_ITEM_ID(

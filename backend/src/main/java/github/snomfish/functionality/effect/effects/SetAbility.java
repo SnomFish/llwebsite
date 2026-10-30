@@ -40,6 +40,9 @@ public class SetAbility implements IEffect {
     public static SetAbility user(AbilityId abilityId) {
         return new SetAbility(Value.USER_ABILITY_ID, abilityId);
     }
+    public static SetAbility userActual(AbilityId abilityId) {
+        return new SetAbility(Value.USER_ACTUAL_ABILITY_ID, abilityId);
+    }
     public static SetAbility target(AbilityId abilityId) {
         return new SetAbility(Value.TARGET_ABILITY_ID, abilityId);
     }

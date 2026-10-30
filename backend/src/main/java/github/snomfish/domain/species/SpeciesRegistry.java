@@ -925,7 +925,7 @@ public class SpeciesRegistry {
 			ERUPTIDON_MAGMADIRE,
 			"eruptidon_magmadire",
 			List.of(FIRE, EARTH),
-			List.of(PYR_PRO),
+			List.of(PYRO_PRO),
 			81, 90, 104, 90, 127, 94, 80, 
 			666,
 			266.7,

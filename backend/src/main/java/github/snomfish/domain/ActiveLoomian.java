@@ -5,6 +5,8 @@ import static github.snomfish.functionality.branch.BranchUtil.flatMap;
 import java.util.ArrayList;
 import java.util.List;
 
+import github.snomfish.domain.ability.AbilityId;
+import github.snomfish.domain.ability.AbilityInstance;
 import github.snomfish.domain.mechanics.Mechanics;
 import github.snomfish.domain.stats.StatChanges;
 import github.snomfish.domain.stats.Stats;
@@ -19,6 +21,7 @@ public class ActiveLoomian extends Loomian {
 
 
     private List<TypeId> types;
+    private AbilityInstance abilityInstance;
     private Stats battleStats;
     private StatChanges statChanges;
     private IAction action;
@@ -55,7 +58,7 @@ public class ActiveLoomian extends Loomian {
     public List<Branch<BattleContext>> dispatchEvent(BattleContext context, Event event) {
         List<Branch<BattleContext>> outcomes = List.of(new Branch<>(context, 1.0));
 
-        outcomes = flatMap(outcomes, c -> ability().handleEvent(c, event));
+        outcomes = flatMap(outcomes, c -> abilityInstance().handleEvent(c, event));
         outcomes = flatMap(outcomes, c -> item().handleEvent(c, event));
         outcomes = flatMap(outcomes, c -> status().handleEvent(c, event)); // has to be afunction as I only store Ids for ability item and status
         outcomes = flatMap(outcomes, c -> mechanics.handleEvent(c, event)); 
@@ -68,6 +71,8 @@ public class ActiveLoomian extends Loomian {
     public List<TypeId> types() {return types;}
     public TypeId primaryType() {return types.get(0);}
     public TypeId secondaryType() {return types.get(1);}
+    public AbilityInstance abilityInstance() {return abilityInstance;}
+    public AbilityId abilityId() {return abilityInstance.abilityId();}
     public Stats battleStats() {return battleStats;}
     public StatChanges statChanges() {return statChanges;}
     public IAction action() {return action;}
@@ -79,6 +84,8 @@ public class ActiveLoomian extends Loomian {
     public void setTypes(List<TypeId> types) {this.types = types;}
     public void setPrimaryType(TypeId typeId) {this.types.set(0, typeId);}
     public void setSecondaryType(TypeId typeId) {this.types.set(1, typeId);}
+    public void setAbilityInstance(AbilityInstance abilityInstance) {this.abilityInstance = abilityInstance;}
+    public void setAbilityId(AbilityId abilityId) {this.abilityInstance.setAbilityId(abilityId);}
     public void setBattleStats(Stats battleStats) {this.battleStats = battleStats;} 
     public void setStatChanges(StatChanges statChanges) {this.statChanges = statChanges;}
     public void setAction(IAction action) {this.action = action;}

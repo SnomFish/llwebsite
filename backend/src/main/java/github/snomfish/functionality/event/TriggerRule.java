@@ -13,25 +13,18 @@ public class TriggerRule {
     private IEffect effect;
 
 
-    public TriggerRule(
-        List<Event> events,
-        IEffect effect
-    ) {
+    public TriggerRule(List<Event> events, IEffect effect) {
         this.events = events;
         this.effect = effect;
     }
-
-
-    public TriggerRule(
-        Event event,
-        IEffect effect
-    ) {
+    public TriggerRule(Event event, IEffect effect) {
         this.events = List.of(event);
         this.effect = effect;
     }
 
 
     public List<Branch<BattleContext>> execute(BattleContext context, Event event) {
+        
         if (!events.contains(event)) {
             return List.of(new Branch<>(context, 1.0));
         }

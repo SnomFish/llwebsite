@@ -1,0 +1,60 @@
+package github.snomfish.domain.ability;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class AbilityBuilder {
+    
+
+    private AbilityId id;
+    private String name;
+    private List<AbilityRule> rules;
+
+    private boolean oncePerBattle;
+    private boolean oncePerSwapIn;
+
+
+    private AbilityBuilder() {
+        this.id = AbilityId.NO_ABILITY;
+        this.name = "No Ability";
+        this.rules = new ArrayList<>();
+        this.oncePerBattle = false;
+        this.oncePerSwapIn = false;
+    }
+
+
+    public static AbilityBuilder newAbility() {
+        return new AbilityBuilder();
+    }
+    public Ability build() {
+        return new Ability(
+            id,
+            name,
+            rules,
+            oncePerBattle,
+            oncePerSwapIn
+        );
+    }
+
+
+    public AbilityBuilder id(AbilityId id) {
+        this.id = id;
+        return this;
+    }
+    public AbilityBuilder name(String name) {
+        this.name = name;
+        return this;
+    }
+    public AbilityBuilder rule(AbilityRule rule) {
+        this.rules.add(rule);
+		return this;
+    }
+    public AbilityBuilder oncePerBattle(boolean oncePerBattle) {
+        this.oncePerBattle = oncePerBattle;
+        return this;
+    }
+    public AbilityBuilder oncePerSwapIn(boolean oncePerSwapIn) {
+        this.oncePerSwapIn = oncePerSwapIn;
+        return this;
+    }
+}

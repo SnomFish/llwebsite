@@ -33,9 +33,11 @@ public class RuleDefinition<T> {
 
     public List<Branch<BattleContext>> handleEvent(BattleContext context, Event event) {
         List<Branch<BattleContext>> outcomes = List.of(new Branch<>(context, 1.0));
+        
         for (TriggerRule rule : rules) {
             outcomes = BranchUtil.flatMap(outcomes, branchContext -> rule.execute(context, event));
         }
+
         return outcomes;
     }
 }
