@@ -23,6 +23,7 @@ import github.snomfish.functionality.effect.EffectSequence;
 import github.snomfish.functionality.effect.effects.AlterTypeChart;
 import github.snomfish.functionality.effect.effects.ApplyMechanic;
 import github.snomfish.functionality.effect.effects.ApplyStatChanges;
+import github.snomfish.functionality.effect.effects.DealDirectSelfDamage;
 import github.snomfish.functionality.effect.effects.DispatchEventEffect;
 import github.snomfish.functionality.effect.effects.MultiplyValueEffect;
 import github.snomfish.functionality.effect.effects.SetAbility;
@@ -32,6 +33,8 @@ import github.snomfish.functionality.effect.effects.SetValueEffect;
 import github.snomfish.functionality.effect.effects.SetWeather;
 import github.snomfish.functionality.event.Event;
 import github.snomfish.functionality.number.Constant;
+import github.snomfish.functionality.number.Multiply;
+import github.snomfish.functionality.number.ValueConstant;
 
 import static github.snomfish.domain.ability.AbilityId.*;
 import static github.snomfish.domain.type.TypeId.*;
@@ -548,7 +551,7 @@ public class AbilityRegistry {
 			.name("dauntless")
 			.build()
 		);
-		register(AbilityBuilder.newAbility()
+		register(AbilityBuilder.newAbility() // doubles exclusive
 			.id(DAWN)
 			.name("dawn")
 			.build()
@@ -613,6 +616,19 @@ public class AbilityRegistry {
 		register(AbilityBuilder.newAbility()
 			.id(DO_OR_DIE)
 			.name("do or die")
+			.rule(AbilityRuleBuilder.newRule()
+				.event(new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER))
+				.effect(new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.3)))
+				.build()
+			)
+			.rule(AbilityRuleBuilder.newRule()
+				.event(new Event(DEALT_DAMAGE_EVENT, USER))
+				.effect(new DealDirectSelfDamage(new Multiply(
+					new ValueConstant(Value.USER_BATTLE_HEALTH),
+					new Constant(1/16)
+				)))
+				.build()
+			)
 			.build()
 		);
 		register(AbilityBuilder.newAbility()
@@ -722,6 +738,13 @@ public class AbilityRegistry {
 		register(AbilityBuilder.newAbility()
 			.id(FORESIGHT)
 			.name("foresight")
+			.rule(AbilityRuleBuilder.newRule(
+				.event(new Event(BEFORE_TURN_EVENT, USER))
+				.condition(new And(
+					new Equals(Value.USER_CURRENT_HEALTH, Value.USER_BATTLE_HEALTH),
+					new Equals(Value.MOVE_TYPE, TypeId.MIND)
+				))
+			))
 			.build()
 		);
 		register(AbilityBuilder.newAbility() // completed

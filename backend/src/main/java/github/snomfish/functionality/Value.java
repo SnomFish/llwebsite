@@ -154,6 +154,14 @@ public enum Value {
     ),
 
 
+    USER_PRIORITY_MODIFIER(
+        c -> c.user().activeLoomian().priorityModifier
+    ),
+    TARGET_PRIORITY_MODIFIER(
+
+    ),
+
+
     USER_CURRENT_HEALTH(
         c -> c.user().activeLoomian().currentHealth(),
         (c, v) -> c.user().activeLoomian().setCurrentHealth(v)

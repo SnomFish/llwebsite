@@ -1,6 +1,7 @@
 package github.snomfish.domain.move.modifiers;
 
 public enum ModifierId {
+    PRIORITY,
     DAMAGE,
     ACCURACY,
     STAB,
