@@ -8,8 +8,8 @@ import github.snomfish.domain.move.CategoryId;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.condition.Equals;
 import github.snomfish.functionality.effect.ConditionalEffect;
+import github.snomfish.functionality.effect.Effects;
 import github.snomfish.functionality.effect.effects.DealDirectSelfDamage;
-import github.snomfish.functionality.effect.effects.MultiplyValueEffect;
 import github.snomfish.functionality.effect.effects.NoEffect;
 import github.snomfish.functionality.event.Event;
 import github.snomfish.functionality.event.EventId;
@@ -56,7 +56,7 @@ public class StatusRegistry {
             NO_STATUS,
             "no status",
             new TriggerRule(
-                new Event(), 
+                new Event(EventId.END_TURN_STATUS_EFFECT_EVENT, USER), 
                 new NoEffect() 
             )
         );  
@@ -95,7 +95,7 @@ public class StatusRegistry {
                 new Event(EventId.BEFORE_MOVE_EVENT, USER), 
                 new ConditionalEffect(
                     new Equals(Value.MOVE_CATEGORY, CategoryId.MELEE),
-                    new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant (0.5)) 
+                    Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant (0.5)) 
                 )
             ))
         );
@@ -110,7 +110,7 @@ public class StatusRegistry {
                 new Event(EventId.BEFORE_MOVE_EVENT, USER), 
                 new ConditionalEffect(
                     new Equals(Value.MOVE_CATEGORY, CategoryId.RANGED),
-                    new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant (0.5)) 
+                    Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant (0.5)) 
                 )
             ))
         );

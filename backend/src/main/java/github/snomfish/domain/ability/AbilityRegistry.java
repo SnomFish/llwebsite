@@ -24,9 +24,9 @@ import github.snomfish.functionality.effect.Effects;
 import github.snomfish.functionality.effect.effects.AlterTypeChart;
 import github.snomfish.functionality.effect.effects.ApplyMechanic;
 import github.snomfish.functionality.effect.effects.ApplyStatChanges;
+import github.snomfish.functionality.effect.effects.ClutchEffect;
 import github.snomfish.functionality.effect.effects.DealDirectSelfDamage;
 import github.snomfish.functionality.effect.effects.DispatchEventEffect;
-import github.snomfish.functionality.effect.effects.MultiplyValueEffect;
 import github.snomfish.functionality.effect.effects.SetAbility;
 import github.snomfish.functionality.effect.effects.SetAbilityEffect;
 import github.snomfish.functionality.effect.effects.SetType;
@@ -475,6 +475,12 @@ public class AbilityRegistry {
 		register(AbilityBuilder.newAbility()
 			.id(CLUTCH)
 			.name("clutch")
+			.rule(AbilityRuleBuilder.newRule()
+				.event(new Event(CLUTCH_EVENT, TARGET))
+				.condition(Conditions.targetIsAtFullHealth())
+				.effect(new ClutchEffect())
+				.build()
+			)
 			.build()
 		);
 		register(AbilityBuilder.newAbility()
@@ -747,7 +753,7 @@ public class AbilityRegistry {
 				))
 				.effect(Effects.addValue(Value.USER_PRIORITY, new Constant(1)))
 				.build()
-			))
+			)
 			.build()
 		);
 		register(AbilityBuilder.newAbility() // completed

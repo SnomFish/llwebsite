@@ -1,6 +1,6 @@
-package github.snomfish.domain.move.tags;
+package github.snomfish.domain.move;
 
-public enum TagId {
+public enum MoveTagId {
     BITING,
     CONTACT,
     EXPLOSIVE,

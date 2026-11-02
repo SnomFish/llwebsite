@@ -6,8 +6,6 @@ import java.util.List;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 
-import static github.snomfish.functionality.copy.DeepCopy.*;
-
 public class Add implements INumber {
     
 
@@ -22,13 +20,12 @@ public class Add implements INumber {
         this.left = left;
         this.right = right;
     }
+
+    
     public Add(Add copy) {
         this.left = copy.left.deepCopy();
         this.right = copy.right.deepCopy();
     }
-
-
-    @Override 
     public Add deepCopy() {
         return new Add(this);
     }

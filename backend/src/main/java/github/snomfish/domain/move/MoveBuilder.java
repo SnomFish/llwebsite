@@ -2,14 +2,14 @@ package github.snomfish.domain.move;
 
 import github.snomfish.domain.move.structures.IMove;
 import github.snomfish.domain.move.structures.NoMove;
-import github.snomfish.domain.move.tags.TagId;
-import github.snomfish.domain.move.tags.Tags;
 import github.snomfish.domain.stats.StatId;
 import github.snomfish.domain.type.TypeId;
 import github.snomfish.functionality.condition.ICondition;
 import github.snomfish.functionality.condition.NoCondition;
 import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.INumber;
+import github.snomfish.functionality.tags.MoveTagId;
+import github.snomfish.functionality.tags.Tags;
 
 public class MoveBuilder {
     
@@ -38,7 +38,7 @@ public class MoveBuilder {
             new Constant(0),
             StatId.MATTACK,
             StatId.MDEFENSE,
-            new Tags()
+            new Tags<MoveTagId>()
         );
     }
     public Move build() {
@@ -107,7 +107,7 @@ public class MoveBuilder {
         move.setDefendingStatId(defendingStatId);
         return this;
     }
-    public MoveBuilder addTag(TagId tagId) {
+    public MoveBuilder addTag(MoveTagId tagId) {
         move.tags().set(tagId, true);
         return this;
     }

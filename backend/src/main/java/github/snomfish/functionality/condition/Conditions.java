@@ -36,4 +36,12 @@ public class Conditions {
     public static ICondition targetHasStatusAilment() {
         return new Not(new Equals(Value.TARGET_STATUS_ID, StatusId.NO_STATUS));
     }
+
+
+    public static ICondition userIsAtFullHealth() {
+        return new Equals(Value.USER_CURRENT_HEALTH, Value.USER_BATTLE_HEALTH);
+    }
+    public static ICondition targetIsAtFullHealth() {
+        return new Equals(Value.TARGET_CURRENT_HEALTH, Value.TARGET_BATTLE_HEALTH);
+    }
 }

@@ -5,7 +5,6 @@ import java.util.List;
 
 import github.snomfish.domain.move.modifiers.Modifiers;
 import github.snomfish.domain.move.structures.IMove;
-import github.snomfish.domain.move.tags.Tags;
 import github.snomfish.domain.stats.StatId;
 import github.snomfish.domain.type.TypeChart;
 import github.snomfish.domain.type.TypeId;
@@ -14,6 +13,7 @@ import github.snomfish.functionality.condition.ICondition;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.copy.DeepCopyable;
 import github.snomfish.functionality.number.INumber;
+import github.snomfish.functionality.tags.Tags;
 
 import static github.snomfish.functionality.branch.BranchUtil.*;
 
@@ -36,7 +36,7 @@ public class Move implements DeepCopyable<Move> {
     private INumber basePower;
     private StatId attackingStatId;
     private StatId defendingStatId;
-    private Tags tags;
+    private Tags<MoveTagId> tags;
     private Modifiers modifiers;
     private TypeChart typeChart;
 
@@ -63,7 +63,7 @@ public class Move implements DeepCopyable<Move> {
         INumber basePower,
         StatId attackingStatId,
         StatId defendingStatId,
-        Tags tags
+        Tags<MoveTagId> tags
     ) {
         this.id = id;
         this.name = name;
@@ -140,7 +140,7 @@ public class Move implements DeepCopyable<Move> {
     public INumber basePower() {return basePower;}
     public StatId attackingStatId() {return attackingStatId;}
     public StatId defendingStatId() {return defendingStatId;}
-    public Tags tags() {return tags;}
+    public Tags<MoveTagId> tags() {return tags;}
     public Modifiers modifiers() {return modifiers;}
     public TypeChart typeChart() {return typeChart;}
 
@@ -167,7 +167,7 @@ public class Move implements DeepCopyable<Move> {
     public void setBasePower(INumber basePower) {this.basePower = basePower;}
     public void setAttackingStatId(StatId attackingStatId) {this.attackingStatId = attackingStatId;}
     public void setDefendingStatId(StatId defendingStatId) {this.defendingStatId = defendingStatId;}
-    public void setTags(Tags tags) {this.tags = tags;}
+    public void setTags(Tags<MoveTagId> tags) {this.tags = tags;}
     public void setModifiers(Modifiers modifiers) {this.modifiers = modifiers;}
     public void setTypeChart(TypeChart typeChart) {this.typeChart = typeChart;}
 

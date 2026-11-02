@@ -10,9 +10,9 @@ import github.snomfish.functionality.condition.Equals;
 import github.snomfish.functionality.condition.Or;
 import github.snomfish.functionality.effect.ConditionalEffect;
 import github.snomfish.functionality.effect.EffectSequence;
+import github.snomfish.functionality.effect.Effects;
 import github.snomfish.functionality.effect.effects.ClutchEffect;
 import github.snomfish.functionality.effect.effects.ConsumeItem;
-import github.snomfish.functionality.effect.effects.MultiplyValueEffect;
 import github.snomfish.functionality.event.Event;
 import github.snomfish.functionality.event.TriggerRule;
 import github.snomfish.functionality.number.Constant;
@@ -84,7 +84,7 @@ public class ItemRegistry {
 			"drain orb",
 			new TriggerRule(
 				new Event(PRE_HEALTH_DRAIN_EVENT, USER), 
-				new MultiplyValueEffect(Value.MOVE_HEALTH_DRAIN_MODIFIER, new Constant(1.2))
+				Effects.multiplyValue(Value.MOVE_HEALTH_DRAIN_MODIFIER, new Constant(1.2))
 			)
 		);
 		register(
@@ -95,8 +95,8 @@ public class ItemRegistry {
 				new ConditionalEffect(
 					new Equals(Value.TARGET_CAN_EVOLVE, true),
 					new EffectSequence(List.of(
-						new MultiplyValueEffect(Value.TARGET_BATTLE_MDEFENSE, new Constant(1.5)),
-						new MultiplyValueEffect(Value.TARGET_BATTLE_RDEFENSE, new Constant(1.5))
+						Effects.multiplyValue(Value.TARGET_BATTLE_MDEFENSE, new Constant(1.5)),
+						Effects.multiplyValue(Value.TARGET_BATTLE_RDEFENSE, new Constant(1.5))
 					))
 				)
 			)
@@ -213,7 +213,7 @@ public class ItemRegistry {
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, AIR),
-					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
+					Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
 				)
 			)
 		);
@@ -224,7 +224,7 @@ public class ItemRegistry {
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(	
 					new Equals(Value.MOVE_TYPE, ANCIENT),
-					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
+					Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
 				)
             )
 		);
@@ -235,7 +235,7 @@ public class ItemRegistry {
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, BRAWLER),
-					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
+					Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
 				)
             )
 		);
@@ -246,7 +246,7 @@ public class ItemRegistry {
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, BUG),
-					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
+					Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
 				)
             )
 		);
@@ -257,7 +257,7 @@ public class ItemRegistry {
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, DARK),
-					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
+					Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
 				)
             )
 		);
@@ -268,7 +268,7 @@ public class ItemRegistry {
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, EARTH),
-					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
+					Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
 				)
             )
 		);
@@ -279,7 +279,7 @@ public class ItemRegistry {
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, ELECTRIC),
-					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
+					Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
 				)
             )
 		);
@@ -290,7 +290,7 @@ public class ItemRegistry {
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, FIRE),
-					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
+					Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
 				)
             )
 		);
@@ -301,7 +301,7 @@ public class ItemRegistry {
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, ICE),
-					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
+					Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
 				)
             )
 		);
@@ -312,7 +312,7 @@ public class ItemRegistry {
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, LIGHT),
-					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
+					Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
 				)
             )
 		);
@@ -323,7 +323,7 @@ public class ItemRegistry {
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, METAL),
-					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
+					Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
 				)
             )
 		);
@@ -334,7 +334,7 @@ public class ItemRegistry {
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, MIND),
-					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
+					Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
 				)
             )
 		);
@@ -345,7 +345,7 @@ public class ItemRegistry {
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, PLANT),
-					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
+					Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
 				)
             )
 		);
@@ -356,7 +356,7 @@ public class ItemRegistry {
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, SPIRIT),
-					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
+					Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
 				)
             )
 		);
@@ -367,7 +367,7 @@ public class ItemRegistry {
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, SIMPLE),
-					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
+					Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
 				)
             )
 		);
@@ -378,7 +378,7 @@ public class ItemRegistry {
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, TOXIC),
-					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
+					Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
 				)
 			)
 		);
@@ -389,7 +389,7 @@ public class ItemRegistry {
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, WATER),
-					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
+					Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
 				)
             )
 		);
@@ -401,7 +401,7 @@ public class ItemRegistry {
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, ANCIENT),
 					new EffectSequence(List.of(
-						new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
+						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
 						ConsumeItem.target()
 					))
 				)
@@ -415,7 +415,7 @@ public class ItemRegistry {
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, PLANT),
 					new EffectSequence(List.of(
-						new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
+						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
 						ConsumeItem.target()
 					))
 				)
@@ -429,7 +429,7 @@ public class ItemRegistry {
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, AIR),
 					new EffectSequence(List.of(
-						new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
+						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
 						ConsumeItem.target()
 					))
 				)
@@ -443,7 +443,7 @@ public class ItemRegistry {
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, FIRE),
 					new EffectSequence(List.of(
-						new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
+						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
 						ConsumeItem.target()
 					))
 				)
@@ -457,7 +457,7 @@ public class ItemRegistry {
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, ICE),
 					new EffectSequence(List.of(
-						new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
+						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
 						ConsumeItem.target()
 					))
 				)
@@ -471,7 +471,7 @@ public class ItemRegistry {
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, BRAWLER),
 					new EffectSequence(List.of(
-						new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
+						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
 						ConsumeItem.target()
 					))
 				)
@@ -485,7 +485,7 @@ public class ItemRegistry {
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, MIND),
 					new EffectSequence(List.of(
-						new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
+						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
 						ConsumeItem.target()
 					))
 				)
@@ -499,7 +499,7 @@ public class ItemRegistry {
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, METAL),
 					new EffectSequence(List.of(
-						new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
+						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
 						ConsumeItem.target()
 					))
 				)
@@ -513,7 +513,7 @@ public class ItemRegistry {
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, TOXIC),
 					new EffectSequence(List.of(
-						new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
+						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
 						ConsumeItem.target()
 					))
 				)
@@ -527,7 +527,7 @@ public class ItemRegistry {
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, SIMPLE),
 					new EffectSequence(List.of(
-						new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
+						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
 						ConsumeItem.target()
 					))
 				)
@@ -541,7 +541,7 @@ public class ItemRegistry {
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, DARK),
 					new EffectSequence(List.of(
-						new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
+						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
 						ConsumeItem.target()
 					))
 				)
@@ -555,7 +555,7 @@ public class ItemRegistry {
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, LIGHT),
 					new EffectSequence(List.of(
-						new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
+						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
 						ConsumeItem.target()
 					))
 				)
@@ -569,7 +569,7 @@ public class ItemRegistry {
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, SPIRIT),
 					new EffectSequence(List.of(
-						new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
+						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
 						ConsumeItem.target()
 					))
 				)
@@ -583,7 +583,7 @@ public class ItemRegistry {
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, EARTH),
 					new EffectSequence(List.of(
-						new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
+						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
 						ConsumeItem.target()
 					))
 				)
@@ -597,7 +597,7 @@ public class ItemRegistry {
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, ELECTRIC),
 					new EffectSequence(List.of(
-						new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
+						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
 						ConsumeItem.target()
 					))
 				)
@@ -611,7 +611,7 @@ public class ItemRegistry {
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, WATER),
 					new EffectSequence(List.of(
-						new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
+						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
 						ConsumeItem.target()
 					))
 				)
@@ -625,7 +625,7 @@ public class ItemRegistry {
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, BUG),
 					new EffectSequence(List.of(
-						new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
+						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
 						ConsumeItem.target()
 					))
 				)
@@ -639,7 +639,7 @@ public class ItemRegistry {
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, ANCIENT),
 					new EffectSequence(List.of(
-						new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
 						ConsumeItem.user()
 					))
 				)
@@ -653,7 +653,7 @@ public class ItemRegistry {
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, PLANT),
 					new EffectSequence(List.of(
-						new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
 						ConsumeItem.user()
 					))
 				)
@@ -667,7 +667,7 @@ public class ItemRegistry {
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, AIR),
 					new EffectSequence(List.of(
-						new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
 						ConsumeItem.user()
 					))
 				)
@@ -681,7 +681,7 @@ public class ItemRegistry {
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, FIRE),
 					new EffectSequence(List.of(
-						new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
 						ConsumeItem.user()
 					))
 				)
@@ -695,7 +695,7 @@ public class ItemRegistry {
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, ICE),
 					new EffectSequence(List.of(
-						new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
 						ConsumeItem.user()
 					))
 				)
@@ -709,7 +709,7 @@ public class ItemRegistry {
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, BRAWLER),
 					new EffectSequence(List.of(
-						new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
 						ConsumeItem.user()
 					))
 				)
@@ -723,7 +723,7 @@ public class ItemRegistry {
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, MIND),
 					new EffectSequence(List.of(
-						new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
 						ConsumeItem.user()
 					))
 				)
@@ -737,7 +737,7 @@ public class ItemRegistry {
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, METAL),
 					new EffectSequence(List.of(
-						new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
 						ConsumeItem.user()
 					))
 				)
@@ -751,7 +751,7 @@ public class ItemRegistry {
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, TOXIC),
 					new EffectSequence(List.of(
-						new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
 						ConsumeItem.user()
 					))
 				)
@@ -765,7 +765,7 @@ public class ItemRegistry {
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, SIMPLE),
 					new EffectSequence(List.of(
-						new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
 						ConsumeItem.user()
 					))
 				)
@@ -779,7 +779,7 @@ public class ItemRegistry {
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, DARK),
 					new EffectSequence(List.of(
-						new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
 						ConsumeItem.user()
 					))
 				)
@@ -793,7 +793,7 @@ public class ItemRegistry {
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, LIGHT),
 					new EffectSequence(List.of(
-						new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
 						ConsumeItem.user()
 					))
 				)
@@ -807,7 +807,7 @@ public class ItemRegistry {
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, SPIRIT),
 					new EffectSequence(List.of(
-						new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
 						ConsumeItem.user()
 					))
 				)
@@ -821,7 +821,7 @@ public class ItemRegistry {
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, EARTH),
 					new EffectSequence(List.of(
-						new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
 						ConsumeItem.user()
 					))
 				)
@@ -835,7 +835,7 @@ public class ItemRegistry {
 				new ConditionalEffect(
 				new Equals(Value.MOVE_TYPE, ELECTRIC),
 				new EffectSequence(List.of(
-					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+					Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
 					ConsumeItem.user()
 				))
 				)
@@ -849,7 +849,7 @@ public class ItemRegistry {
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, WATER),
 					new EffectSequence(List.of(
-						new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
 						ConsumeItem.user()
 					))
 				)
@@ -863,7 +863,7 @@ public class ItemRegistry {
 				new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, BUG),
 					new EffectSequence(List.of(
-						new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
 						ConsumeItem.user()
 					))
 				)
@@ -880,8 +880,8 @@ public class ItemRegistry {
 						new Equals(Value.TARGET_SPECIES_ID, VEYLENS)
 					),
 					new EffectSequence(List.of(
-						new MultiplyValueEffect(Value.TARGET_BATTLE_MDEFENSE, new Constant(1.5)),
-						new MultiplyValueEffect(Value.TARGET_BATTLE_RDEFENSE, new Constant(1.5))
+						Effects.multiplyValue(Value.TARGET_BATTLE_MDEFENSE, new Constant(1.5)),
+						Effects.multiplyValue(Value.TARGET_BATTLE_RDEFENSE, new Constant(1.5))
 					))
 				)
 			)

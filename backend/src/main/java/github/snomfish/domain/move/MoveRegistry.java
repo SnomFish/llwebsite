@@ -27,8 +27,8 @@ import github.snomfish.functionality.number.Constant;
 
 import static github.snomfish.domain.move.CategoryId.*;
 import static github.snomfish.domain.move.MoveId.*;
-import static github.snomfish.domain.move.tags.TagId.*;
 import static github.snomfish.domain.type.TypeId.*;
+import static github.snomfish.functionality.tags.MoveTagId.*;
 
 public class MoveRegistry {
 

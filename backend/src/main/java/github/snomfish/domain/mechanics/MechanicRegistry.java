@@ -10,7 +10,7 @@ import github.snomfish.functionality.Value;
 import github.snomfish.functionality.condition.Equals;
 import github.snomfish.functionality.effect.ConditionalEffect;
 import github.snomfish.functionality.effect.EffectSequence;
-import github.snomfish.functionality.effect.effects.MultiplyValueEffect;
+import github.snomfish.functionality.effect.Effects;
 import github.snomfish.functionality.effect.effects.RemoveMechanic;
 import github.snomfish.functionality.event.Event;
 import github.snomfish.functionality.event.TriggerRule;
@@ -57,7 +57,7 @@ public class MechanicRegistry {
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
                 new ConditionalEffect(
                     new Equals(Value.MOVE_TYPE, TypeId.FIRE),
-                    new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5))
+                    Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5))
                 )
             )
         );
@@ -68,7 +68,7 @@ public class MechanicRegistry {
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
                 new ConditionalEffect(
                     new Equals(Value.MOVE_TYPE, TypeId.TOXIC),
-                    new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5))
+                    Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5))
                 )
             )
         );
@@ -79,7 +79,7 @@ public class MechanicRegistry {
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
                 new ConditionalEffect(
                     new Equals(Value.MOVE_TYPE, TypeId.PLANT),
-                    new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5))
+                    Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5))
                 )
             )
         );
@@ -90,7 +90,7 @@ public class MechanicRegistry {
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
                 new ConditionalEffect(
                     new Equals(Value.MOVE_TYPE, TypeId.LIGHT),
-                    new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5))
+                    Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5))
                 )
             )
         );
@@ -102,7 +102,7 @@ public class MechanicRegistry {
                 new ConditionalEffect(    
                     new Equals(Value.MOVE_TYPE, TypeId.AIR),
                     new EffectSequence(List.of(
-                        new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+                        Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
                         RemoveMechanic.fromUser(TOXIC_FILTER)
                     ))
                 )

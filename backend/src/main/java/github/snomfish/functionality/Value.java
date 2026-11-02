@@ -4,9 +4,9 @@ import java.util.function.BiConsumer;
 import java.util.function.Function;
 
 import github.snomfish.domain.move.modifiers.ModifierId;
-import github.snomfish.domain.move.tags.TagId;
 import github.snomfish.domain.stats.StatChangesId;
 import github.snomfish.functionality.context.BattleContext;
+import github.snomfish.functionality.tags.MoveTagId;
 
 public enum Value {
 
@@ -472,20 +472,20 @@ public enum Value {
         (c, v) -> c.user().activeLoomian().action().move().modifiers().set(ModifierId.ENERGY_DRAIN, v)
     ),
     MOVE_CONTACT_TAG(
-        c -> c.user().activeLoomian().action().move().tags().get(TagId.CONTACT),
-        (c, v) -> c.user().activeLoomian().action().move().tags().set(TagId.CONTACT, v)
+        c -> c.user().activeLoomian().action().move().tags().get(MoveTagId.CONTACT),
+        (c, v) -> c.user().activeLoomian().action().move().tags().set(MoveTagId.CONTACT, v)
     ),
     MOVE_EXPLOSIVE_TAG(
-        c -> c.user().activeLoomian().action().move().tags().get(TagId.EXPLOSIVE),
-        (c, v) -> c.user().activeLoomian().action().move().tags().set(TagId.EXPLOSIVE, v)
+        c -> c.user().activeLoomian().action().move().tags().get(MoveTagId.EXPLOSIVE),
+        (c, v) -> c.user().activeLoomian().action().move().tags().set(MoveTagId.EXPLOSIVE, v)
     ),
     MOVE_HEALTH_DRAIN_TAG(
-        c -> c.user().activeLoomian().action().move().tags().get(TagId.HEALTH_DRAIN),
-        (c, v) -> c.user().activeLoomian().action().move().tags().set(TagId.HEALTH_DRAIN, v)
+        c -> c.user().activeLoomian().action().move().tags().get(MoveTagId.HEALTH_DRAIN),
+        (c, v) -> c.user().activeLoomian().action().move().tags().set(MoveTagId.HEALTH_DRAIN, v)
     ),
     MOVE_RECOIL_TAG(
-        c -> c.user().activeLoomian().action().move().tags().get(TagId.RECOIL),
-        (c, v) -> c.user().activeLoomian().action().move().tags().set(TagId.RECOIL, v)
+        c -> c.user().activeLoomian().action().move().tags().get(MoveTagId.RECOIL),
+        (c, v) -> c.user().activeLoomian().action().move().tags().set(MoveTagId.RECOIL, v)
     )
     ;
 
