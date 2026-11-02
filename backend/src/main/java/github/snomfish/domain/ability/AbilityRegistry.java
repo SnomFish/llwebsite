@@ -20,6 +20,7 @@ import github.snomfish.functionality.condition.Or;
 import github.snomfish.functionality.condition.RandomCondition;
 import github.snomfish.functionality.effect.ConditionalEffect;
 import github.snomfish.functionality.effect.EffectSequence;
+import github.snomfish.functionality.effect.Effects;
 import github.snomfish.functionality.effect.effects.AlterTypeChart;
 import github.snomfish.functionality.effect.effects.ApplyMechanic;
 import github.snomfish.functionality.effect.effects.ApplyStatChanges;
@@ -204,26 +205,26 @@ public class AbilityRegistry {
 			.rule(AbilityRuleBuilder.newRule() // when the loomian is the user
 				.event(new Event(USER_SWITCHED_IN_EVENT, USER)) 
 				.effect(new EffectSequence(List.of(
-					new MultiplyValueEffect(Value.USER_MATTACK_STAGE_MODIFIER, new Constant(-1)),
-					new MultiplyValueEffect(Value.USER_MDEFENSE_STAGE_MODIFIER, new Constant(-1)),
-					new MultiplyValueEffect(Value.USER_RATTACK_STAGE_MODIFIER, new Constant(-1)),
-					new MultiplyValueEffect(Value.USER_RDEFENSE_STAGE_MODIFIER, new Constant(-1)),
-					new MultiplyValueEffect(Value.USER_SPEED_STAGE_MODIFIER, new Constant(-1)),
-					new MultiplyValueEffect(Value.USER_ACCURACY_STAGE_MODIFIER, new Constant(-1)),
-					new MultiplyValueEffect(Value.USER_EVASION_STAGE_MODIFIER, new Constant(-1))
+					Effects.multiplyValue(Value.USER_MATTACK_STAGE_MODIFIER, new Constant(-1)),
+					Effects.multiplyValue(Value.USER_MDEFENSE_STAGE_MODIFIER, new Constant(-1)),
+					Effects.multiplyValue(Value.USER_RATTACK_STAGE_MODIFIER, new Constant(-1)),
+					Effects.multiplyValue(Value.USER_RDEFENSE_STAGE_MODIFIER, new Constant(-1)),
+					Effects.multiplyValue(Value.USER_SPEED_STAGE_MODIFIER, new Constant(-1)),
+					Effects.multiplyValue(Value.USER_ACCURACY_STAGE_MODIFIER, new Constant(-1)),
+					Effects.multiplyValue(Value.USER_EVASION_STAGE_MODIFIER, new Constant(-1))
 				)))
 				.build()
 			)
 			.rule(AbilityRuleBuilder.newRule() // when the loomian is the target
 				.event(new Event(TARGET_SWITCHED_IN_EVENT, TARGET))
 				.effect(new EffectSequence(List.of(
-					new MultiplyValueEffect(Value.TARGET_MATTACK_STAGE_MODIFIER, new Constant(-1)),
-					new MultiplyValueEffect(Value.TARGET_MDEFENSE_STAGE_MODIFIER, new Constant(-1)),
-					new MultiplyValueEffect(Value.TARGET_RATTACK_STAGE_MODIFIER, new Constant(-1)),
-					new MultiplyValueEffect(Value.TARGET_RDEFENSE_STAGE_MODIFIER, new Constant(-1)),
-					new MultiplyValueEffect(Value.TARGET_SPEED_STAGE_MODIFIER, new Constant(-1)),
-					new MultiplyValueEffect(Value.TARGET_ACCURACY_STAGE_MODIFIER, new Constant(-1)),
-					new MultiplyValueEffect(Value.TARGET_EVASION_STAGE_MODIFIER, new Constant(-1))
+					Effects.multiplyValue(Value.TARGET_MATTACK_STAGE_MODIFIER, new Constant(-1)),
+					Effects.multiplyValue(Value.TARGET_MDEFENSE_STAGE_MODIFIER, new Constant(-1)),
+					Effects.multiplyValue(Value.TARGET_RATTACK_STAGE_MODIFIER, new Constant(-1)),
+					Effects.multiplyValue(Value.TARGET_RDEFENSE_STAGE_MODIFIER, new Constant(-1)),
+					Effects.multiplyValue(Value.TARGET_SPEED_STAGE_MODIFIER, new Constant(-1)),
+					Effects.multiplyValue(Value.TARGET_ACCURACY_STAGE_MODIFIER, new Constant(-1)),
+					Effects.multiplyValue(Value.TARGET_EVASION_STAGE_MODIFIER, new Constant(-1))
 				)))
 				.build()
 			)
@@ -266,7 +267,7 @@ public class AbilityRegistry {
                 .event(new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET)) // before the targets move damage is calculated 
                 .effect(new ConditionalEffect(
 					new Equals(Value.MOVE_TYPE, TypeId.FIRE),
-					new MultiplyValueEffect(Value.MOVE_TYPE_MODIFIER, new Constant(0.5))
+					Effects.multiplyValue(Value.MOVE_TYPE_MODIFIER, new Constant(0.5))
 				))
 				.build()
             )
@@ -301,7 +302,7 @@ public class AbilityRegistry {
 					new Equals(Value.USER_STATUS_ID, StatusId.POISON),
 					new Equals(Value.USER_STATUS_ID, StatusId.BAD_POISON)
 				))
-				.effect(new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2)))
+				.effect(Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2)))
 				.build()
             )
 			.build()
@@ -312,7 +313,7 @@ public class AbilityRegistry {
 			.rule(AbilityRuleBuilder.newRule()
 				.event(new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)) 
 				.condition(new Equals(Value.MOVE_TYPE, TypeId.METAL))
-				.effect(new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.25)))
+				.effect(Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.25)))
 				.build()
 			)
 				// TODO: battle armour protects the user from the secondary effects of moves
@@ -339,7 +340,7 @@ public class AbilityRegistry {
 			.rule(AbilityRuleBuilder.newRule()
 				.event(new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER))
 				.condition(new Equals(Value.MOVE_HEALTH_DRAIN_TAG, true))
-				.effect(new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.25)))
+				.effect(Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.25)))
 				.build()
 			)
 			.build()
@@ -413,7 +414,7 @@ public class AbilityRegistry {
 			.rule(AbilityRuleBuilder.newRule()
 				.event(new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER))
 				.condition(new Equals(Value.MOVE_TYPE, FIRE))
-				.effect(new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.25)))
+				.effect(Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.25)))
 				.build()
 			)
 			.build()
@@ -455,7 +456,7 @@ public class AbilityRegistry {
 			.rule(AbilityRuleBuilder.newRule()
 				.event(new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER))
 				.condition(new Equals(Value.MOVE_TYPE, ICE))
-				.effect(new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.25)))
+				.effect(Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.25)))
 				.build()
 			)
 			.build()
@@ -500,7 +501,7 @@ public class AbilityRegistry {
 				.event(new Event(PRE_DAMAGE_EVENT, TARGET))
 				.condition(new Equals(Value.MOVE_TYPE, TypeId.FIRE))
 				.effect(new EffectSequence(List.of(
-						new MultiplyValueEffect(Value.MOVE_DAMAGE, new Constant(0.0)),
+						Effects.multiplyValue(Value.MOVE_DAMAGE, new Constant(0.0)),
 						ApplyMechanic.toUser(MechanicId.COMBUSTIBLE)
 				)))
 				.build()
@@ -539,7 +540,7 @@ public class AbilityRegistry {
 				.event(new Event(PRE_DAMAGE_EVENT, TARGET))
 				.condition(new Equals(Value.MOVE_TYPE, TypeId.TOXIC))
 				.effect(new EffectSequence(List.of(
-						new MultiplyValueEffect(Value.MOVE_DAMAGE, new Constant(0.0)),
+						Effects.multiplyValue(Value.MOVE_DAMAGE, new Constant(0.0)),
 						ApplyMechanic.toUser(MechanicId.COURSING_VENOM)
 				)))
 				.build()
@@ -593,7 +594,7 @@ public class AbilityRegistry {
 			.rule(AbilityRuleBuilder.newRule()
 				.event(new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER))
 				.condition(new Equals(Value.MOVE_TYPE, TypeId.WATER))
-				.effect(new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.25)))
+				.effect(Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.25)))
 				.build()
 			)
 			.build()
@@ -618,7 +619,7 @@ public class AbilityRegistry {
 			.name("do or die")
 			.rule(AbilityRuleBuilder.newRule()
 				.event(new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER))
-				.effect(new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.3)))
+				.effect(Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.3)))
 				.build()
 			)
 			.rule(AbilityRuleBuilder.newRule()
@@ -641,7 +642,7 @@ public class AbilityRegistry {
             .name("drainage")
 			.rule(AbilityRuleBuilder.newRule()
                 .event(new Event(PRE_HEALTH_DRAIN_EVENT, USER)) 
-                .effect(new MultiplyValueEffect(Value.MOVE_HEALTH_DRAIN_MODIFIER, new Constant(1.5)))
+                .effect(Effects.multiplyValue(Value.MOVE_HEALTH_DRAIN_MODIFIER, new Constant(1.5)))
 				.build()
             )
 			.build()
@@ -682,7 +683,7 @@ public class AbilityRegistry {
 			.rule(AbilityRuleBuilder.newRule()
 				.event(new Event(PRE_DAMAGE_EVENT, TARGET))
 				.condition(new GreaterThan(Value.MOVE_TYPE_MODIFIER, new Constant(1)))
-				.effect(new MultiplyValueEffect(Value.MOVE_DAMAGE, new Constant(0.75)))
+				.effect(Effects.multiplyValue(Value.MOVE_DAMAGE, new Constant(0.75)))
 				.build()
 			)
 			.build()
@@ -704,7 +705,7 @@ public class AbilityRegistry {
 			.rule(AbilityRuleBuilder.newRule()
 				.event(new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET))
 				.condition(new Equals(Value.MOVE_TYPE, AIR))
-				.effect(new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)))
+				.effect(Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)))
 				.build()
 			)// TODO: add +1 ranged attack when hit
 			.build()
@@ -738,12 +739,14 @@ public class AbilityRegistry {
 		register(AbilityBuilder.newAbility()
 			.id(FORESIGHT)
 			.name("foresight")
-			.rule(AbilityRuleBuilder.newRule(
+			.rule(AbilityRuleBuilder.newRule()
 				.event(new Event(BEFORE_TURN_EVENT, USER))
 				.condition(new And(
 					new Equals(Value.USER_CURRENT_HEALTH, Value.USER_BATTLE_HEALTH),
 					new Equals(Value.MOVE_TYPE, TypeId.MIND)
 				))
+				.effect(Effects.addValue(Value.USER_PRIORITY, new Constant(1)))
+				.build()
 			))
 			.build()
 		);
@@ -754,7 +757,7 @@ public class AbilityRegistry {
 				.event(new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET))
 				.condition(new Equals(Value.MOVE_TYPE, TypeId.FIRE))
 				.effect(
-					new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5))
+					Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5))
 				)
 				.build()
 			)
@@ -819,7 +822,7 @@ public class AbilityRegistry {
 			.rule(AbilityRuleBuilder.newRule()
 				.event(new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER))
 				.condition(Conditions.fogActive())
-				.effect(new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.3)))
+				.effect(Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.3)))
 				.build()
 			)
 			.build()
@@ -845,7 +848,7 @@ public class AbilityRegistry {
 			.rule(AbilityRuleBuilder.newRule()
 				.event(new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET))
 				.condition(new Equals(Value.MOVE_EXPLOSIVE_TAG, true))
-				.effect(new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0)))
+				.effect(Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(0)))
 				.build()
 			)
 			.build()
@@ -856,7 +859,7 @@ public class AbilityRegistry {
 			.rule(AbilityRuleBuilder.newRule()
 				.event(new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET))
 				.condition(new Equals(Value.MOVE_EXPLOSIVE_TAG, true))
-				.effect(new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0)))
+				.effect(Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(0)))
 				.build()
 			)
 			.build()
@@ -1007,7 +1010,7 @@ public class AbilityRegistry {
 			.name("luck_of_the_sea")
 			.rule(AbilityRuleBuilder.newRule()
 				.event(new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER))
-				.effect(new MultiplyValueEffect(Value.MOVE_CRIT_MODIFIER, new Constant(1.5))) // generic crit modifier = 1.5 and is always applied, so a 1.5 boost brings it to 2.25
+				.effect(Effects.multiplyValue(Value.MOVE_CRIT_MODIFIER, new Constant(1.5))) // generic crit modifier = 1.5 and is always applied, so a 1.5 boost brings it to 2.25
 				.build()
 			)
 			// increases crit chance
@@ -1024,7 +1027,7 @@ public class AbilityRegistry {
 			.rule(AbilityRuleBuilder.newRule()
 				.event(new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER))
 				.condition(new Equals(Value.MOVE_RECOIL_TAG, true))
-				.effect(new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2)))
+				.effect(Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2)))
 				.build()
 			)
 			.build()
@@ -1045,7 +1048,7 @@ public class AbilityRegistry {
 			.name("marksman")
 			.rule(AbilityRuleBuilder.newRule()
 				.event(new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER))
-				.effect(new MultiplyValueEffect(Value.MOVE_CRIT_MODIFIER, new Constant(1.5))) // generic crit modifier = 1.5 and is always applied, so a 1.5 boost brings it to 2.25
+				.effect(Effects.multiplyValue(Value.MOVE_CRIT_MODIFIER, new Constant(1.5))) // generic crit modifier = 1.5 and is always applied, so a 1.5 boost brings it to 2.25
 				.build()
 			)
 			.build()
@@ -1151,7 +1154,7 @@ public class AbilityRegistry {
 				.event(new Event(PRE_DAMAGE_EVENT, TARGET))
 				.condition(new Equals(Value.MOVE_TYPE, TypeId.PLANT))
 				.effect(new EffectSequence(List.of(
-					new MultiplyValueEffect(Value.MOVE_DAMAGE, new Constant(0.0)),
+					Effects.multiplyValue(Value.MOVE_DAMAGE, new Constant(0.0)),
 					ApplyMechanic.toUser(MechanicId.NOXIOUS_WEEDS)
 				)))
 				.build()
@@ -1265,7 +1268,7 @@ public class AbilityRegistry {
 				.event(new Event(PRE_DAMAGE_EVENT, TARGET))
 				.condition(new Equals(Value.MOVE_TYPE, TypeId.LIGHT))
 				.effect(new EffectSequence(List.of(
-					new MultiplyValueEffect(Value.MOVE_DAMAGE, new Constant(0.0)),
+					Effects.multiplyValue(Value.MOVE_DAMAGE, new Constant(0.0)),
 					ApplyMechanic.toUser(MechanicId.PRISMATIC)
 				)))
 				.build()
@@ -1599,7 +1602,7 @@ public class AbilityRegistry {
 				.event(new Event(PRE_DAMAGE_EVENT, TARGET))
 				.condition(new Equals(Value.MOVE_TYPE, TypeId.TOXIC))
 				.effect(new EffectSequence(List.of(
-					new MultiplyValueEffect(Value.MOVE_DAMAGE, new Constant(0.0)),
+					Effects.multiplyValue(Value.MOVE_DAMAGE, new Constant(0.0)),
 					ApplyMechanic.toUser(MechanicId.TOXIC_FILTER)
 				)))
 				.build()
@@ -1657,7 +1660,7 @@ public class AbilityRegistry {
 			.name("ungracious host")
 			.rule(AbilityRuleBuilder.newRule()
 				.event(new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET))
-				.effect(new MultiplyValueEffect(Value.MOVE_HEALTH_DRAIN_MODIFIER, new Constant(-1)))
+				.effect(Effects.multiplyValue(Value.MOVE_HEALTH_DRAIN_MODIFIER, new Constant(-1)))
 				.build()
 			)
 			.build()
@@ -1684,7 +1687,7 @@ public class AbilityRegistry {
 			.rule(AbilityRuleBuilder.newRule()
 				.event(new Event(PRE_DAMAGE_EVENT, USER))
 				.condition(new Equals(Value.USER_STATUS_ID, StatusId.BURN))
-				.effect(new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)))
+				.effect(Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)))
 				.build()
 			)
 			.build()
@@ -1704,13 +1707,13 @@ public class AbilityRegistry {
 					Conditions.userHasStatusAilment(),
 					new Equals(Value.MOVE_CATEGORY, CategoryId.MELEE)
 				))
-				.effect(new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)))
+				.effect(Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)))
 				.build()
 			)
 			.rule(AbilityRuleBuilder.newRule()
 				.event(new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER))
 				.condition(new Equals(Value.USER_STATUS_ID, StatusId.BURN))
-				.effect(new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(2)))
+				.effect(Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(2)))
 				.build()
 			)
 			.build()
@@ -1733,7 +1736,7 @@ public class AbilityRegistry {
 			.name("vivid sight")
 			.rule(AbilityRuleBuilder.newRule()
 				.event(new Event(BEFORE_MOVE_EVENT, USER))
-				.effect(new MultiplyValueEffect(Value.MOVE_ACCURACY_MODIFIER, new Constant(1.3)))
+				.effect(Effects.multiplyValue(Value.MOVE_ACCURACY_MODIFIER, new Constant(1.3)))
 				.build()
 			)
 			.build()
@@ -1771,7 +1774,7 @@ public class AbilityRegistry {
 					new Equals(Value.MOVE_TYPE, BRAWLER),
 					new Equals(Value.MOVE_TYPE, MIND)
 				))
-				.effect(new MultiplyValueEffect(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)))
+				.effect(Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)))
 				.build()
 			)
 			.build()
@@ -1797,7 +1800,7 @@ public class AbilityRegistry {
 			.rule(AbilityRuleBuilder.newRule()
 				.event(new Event(PRE_DAMAGE_EVENT, USER))
 				.condition(new LessThan(Value.MOVE_TYPE_MODIFIER, new Constant(1)))
-				.effect(new MultiplyValueEffect(Value.MOVE_DAMAGE, new Constant(2)))
+				.effect(Effects.multiplyValue(Value.MOVE_DAMAGE, new Constant(2)))
 				.build()
 			)
 			.build()

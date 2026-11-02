@@ -11,7 +11,7 @@ import github.snomfish.domain.mechanics.Mechanics;
 import github.snomfish.domain.stats.StatChanges;
 import github.snomfish.domain.stats.Stats;
 import github.snomfish.domain.type.TypeId;
-import github.snomfish.functionality.action.IAction;
+import github.snomfish.functionality.action.Action;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.event.Event;
@@ -24,7 +24,7 @@ public class ActiveLoomian extends Loomian {
     private AbilityInstance abilityInstance;
     private Stats battleStats;
     private StatChanges statChanges;
-    private IAction action;
+    private Action action;
     private Mechanics mechanics; // extra functionality that is temp added to an onfield loomian such as coursing venom being in effect
     private int statusTurns;
     
@@ -75,7 +75,7 @@ public class ActiveLoomian extends Loomian {
     public AbilityId abilityId() {return abilityInstance.abilityId();}
     public Stats battleStats() {return battleStats;}
     public StatChanges statChanges() {return statChanges;}
-    public IAction action() {return action;}
+    public Action action() {return action;}
     public Mechanics mechanics() {return mechanics;}
     public int statusTurns() {return statusTurns;}
 
@@ -88,7 +88,7 @@ public class ActiveLoomian extends Loomian {
     public void setAbilityId(AbilityId abilityId) {this.abilityInstance.setAbilityId(abilityId);}
     public void setBattleStats(Stats battleStats) {this.battleStats = battleStats;} 
     public void setStatChanges(StatChanges statChanges) {this.statChanges = statChanges;}
-    public void setAction(IAction action) {this.action = action;}
+    public void setAction(Action action) {this.action = action;}
     public void setMechanics(Mechanics mechanics) {this.mechanics = mechanics;} 
     public void setStatusTurns(int statusTurns) {this.statusTurns = statusTurns;}
 }

@@ -154,11 +154,13 @@ public enum Value {
     ),
 
 
-    USER_PRIORITY_MODIFIER(
-        c -> c.user().activeLoomian().priorityModifier
+    USER_PRIORITY(
+        c -> c.user().activeLoomian().action().priority(),
+        (c, v) -> c.user().activeLoomian().action().setPriority(v)
     ),
-    TARGET_PRIORITY_MODIFIER(
-
+    TARGET_PRIORITY(
+        c -> c.target().activeLoomian().action().priority(),
+        (c, v) -> c.target().activeLoomian().action().setPriority(v)
     ),
 
 

@@ -12,8 +12,8 @@ public class ValueConstant implements INumber {
     private Value value;
     
 
-    public ValueConstant(Value leftNumber) {
-        this.value = leftNumber;
+    public ValueConstant(Value value) {
+        this.value = value;
     }
 
 

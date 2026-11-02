@@ -1,8 +1,9 @@
 package github.snomfish.functionality.action;
 
 import github.snomfish.domain.move.Move;
+import github.snomfish.functionality.copy.DeepCopyable;
 
-public abstract class Action {
+public abstract class Action implements DeepCopyable<Action> {
     
 
     private int priority;

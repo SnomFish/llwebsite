@@ -1,5 +1,6 @@
 package github.snomfish.functionality.number;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import github.snomfish.functionality.branch.Branch;
@@ -10,45 +11,46 @@ import static github.snomfish.functionality.copy.DeepCopy.*;
 public class Add implements INumber {
     
 
-    private List<INumber> numbers;
+    private INumber left;
+    private INumber right;
 
 
-    public Add(List<INumber> numbers) {
-        this.numbers = numbers;
+    public Add(
+        INumber left,
+        INumber right
+    ) {
+        this.left = left;
+        this.right = right;
+    }
+    public Add(Add copy) {
+        this.left = copy.left.deepCopy();
+        this.right = copy.right.deepCopy();
     }
 
 
     @Override 
     public Add deepCopy() {
-        return new Add(
-            deepCopyList(numbers)
-        );
+        return new Add(this);
     }
 
 
     @Override
     public List<Branch<Double>> execute(BattleContext context) {
-        List<Branch<Double>> outcomes = List.of(
-            new Branch<>(0.0, 1.0)
-        );
+        List<Branch<Double>> outcomes = new ArrayList<>();
 
-        for (INumber number : numbers) {
-            List<Branch<Double>> numberOutcomes = number.execute(context);
+        for (Branch<Double> leftBranch : left.execute(context)) {
+            Double leftValue = leftBranch.value();
+            Double leftProbability = leftBranch.probability();
 
-            List<Branch<Double>> newOutcomes = new java.util.ArrayList<>();
+            for (Branch<Double> rightBranch : right.execute(context)) {
+                Double rightValue = rightBranch.value();
+                Double rightProbability = rightBranch.probability();
 
-            for (Branch<Double> existing : outcomes) {
-                for (Branch<Double> next : numberOutcomes) {
-
-                    double value = existing.value() + next.value();
-                    double probability =
-                        existing.probability() * next.probability();
-
-                    newOutcomes.add(new Branch<>(value, probability));
-                }
+                outcomes.add(new Branch<>(
+                    leftValue + rightValue,
+                    leftProbability * rightProbability
+                ));
             }
-
-            outcomes = newOutcomes;
         }
 
         return outcomes;

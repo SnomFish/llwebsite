@@ -2,7 +2,7 @@ package github.snomfish.functionality.action;
 
 import github.snomfish.domain.move.Move;
 
-public class SwitchAction extends Action implements IAction {
+public class SwitchAction extends Action {
     
 
     public SwitchAction(
