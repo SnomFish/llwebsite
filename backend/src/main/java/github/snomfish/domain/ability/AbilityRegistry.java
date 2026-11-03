@@ -19,6 +19,7 @@ import github.snomfish.functionality.condition.ListContains;
 import github.snomfish.functionality.condition.NoCondition;
 import github.snomfish.functionality.condition.Or;
 import github.snomfish.functionality.condition.RandomCondition;
+import github.snomfish.functionality.condition.TrueCondition;
 import github.snomfish.functionality.effect.ConditionalEffect;
 import github.snomfish.functionality.effect.EffectSequence;
 import github.snomfish.functionality.effect.Effects;
@@ -379,6 +380,10 @@ public class AbilityRegistry {
 		register(AbilityBuilder.newAbility()
 			.id(BONEHEADED)
 			.name("boneheaded")
+			.gate(new Gate(
+				new GateEvent(CANNOT_TAKE_RECOIL, USER),
+				new TrueCondition()
+			))
 			.build()
 		);
 		register(AbilityBuilder.newAbility()
@@ -391,7 +396,7 @@ public class AbilityRegistry {
 			.name("brute force")
 			.gate(new Gate(
 				new GateEvent(CANNOT_USE_SECONDARY_EFFECTS, USER),
-				new NoCondition() // always true
+				new TrueCondition()
 			))
 			.build()
 		);

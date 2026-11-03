@@ -8,9 +8,13 @@ import github.snomfish.domain.ability.AbilityId;
 import github.snomfish.domain.move.Move;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.branch.Branch;
+import github.snomfish.functionality.condition.GateCondition;
 import github.snomfish.functionality.context.BattleContext;
+import github.snomfish.functionality.effect.ConditionalEffect;
 import github.snomfish.functionality.effect.IEffect;
 import github.snomfish.functionality.number.INumber;
+
+import static github.snomfish.functionality.gate.GateId.CANNOT_TAKE_RECOIL;
 
 public class RecoilEffect implements IEffect {
     
@@ -18,24 +22,31 @@ public class RecoilEffect implements IEffect {
     private INumber recoilNumber; // fraction of the damage dealt
 
 
-    public RecoilEffect(
-        INumber recoilNumber
-    ) {
+    private RecoilEffect(INumber recoilNumber) {
         this.recoilNumber = recoilNumber;
     }
-    public RecoilEffect(RecoilEffect copy) {
+
+
+    private RecoilEffect(RecoilEffect copy) {
         this.recoilNumber = copy.recoilNumber.deepCopy();
-    }
-
-
-    @Override 
+    } 
     public RecoilEffect deepCopy() {
         return new RecoilEffect(this);
     }
 
 
+    public static IEffect onUser(INumber recoilNumber) {
+        return new ConditionalEffect(
+            new GateCondition(CANNOT_TAKE_RECOIL),
+            new RecoilEffect(recoilNumber)
+        );
+    }
+    // on target does not exist yet as right now I dont think it needs to
+
+
     @Override 
     public List<Branch<BattleContext>> execute(BattleContext context) {
+
 
         if (Value.USER_ABILITY_ID.get(context) == AbilityId.BONEHEADED) List.of(new Branch<>(context, 1));
 

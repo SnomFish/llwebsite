@@ -571,7 +571,7 @@ public class MoveRegistry {
 					new DealFormulaDamage(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.1, StatusId.BURN),
-						new RecoilEffect(new Constant(1/3))
+						RecoilEffect.onUser(new Constant(1/3))
 					))
 				))
 			))
@@ -1088,7 +1088,7 @@ public class MoveRegistry {
 				new EffectSequence(List.of(
 					new DealFormulaDamage(),
 					Schematics.secondaryEffects(List.of(
-						new RecoilEffect(new Constant(1/3))
+						RecoilEffect.onUser(new Constant(1/3))
 					))
 				))
 			))
@@ -1155,7 +1155,7 @@ public class MoveRegistry {
 					new DealFormulaDamage(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.1, StatusId.BURN),
-						new RecoilEffect(new Constant(1/4))
+						RecoilEffect.onUser(new Constant(1/4))
 					))
 				))
 			))
@@ -1811,7 +1811,7 @@ public class MoveRegistry {
 					Schematics.secondaryEffects(List.of(
 						ApplyStatChanges.userChangingUser()
 							.mdefense(new Constant(1)),
-						new RecoilEffect(new Constant(1/4))
+						RecoilEffect.onUser(new Constant(1/4))
 					))
 				))
 			))
@@ -3239,7 +3239,7 @@ public class MoveRegistry {
 				new EffectSequence(List.of(
 					new DealFormulaDamage(),
 					Schematics.secondaryEffects(List.of(
-						new RecoilEffect(new Constant(1/4))
+						RecoilEffect.onUser(new Constant(1/4))
 					))
 				))
 			))
@@ -3355,7 +3355,7 @@ public class MoveRegistry {
 				new EffectSequence(List.of(
 					new DealFormulaDamage(),
 					Schematics.secondaryEffects(List.of(
-						new RecoilEffect(new Constant(1/4))
+						RecoilEffect.onUser(new Constant(1/4))
 					))
 				))
 			))
@@ -4006,7 +4006,7 @@ public class MoveRegistry {
 				new EffectSequence(List.of(
 					new DealFormulaDamage(),
 					Schematics.secondaryEffects(List.of(
-						new RecoilEffect(new Constant(1/3))
+						RecoilEffect.onUser(new Constant(1/3))
 					))
 				))
 			))
@@ -4024,7 +4024,7 @@ public class MoveRegistry {
 				new EffectSequence(List.of(
 					new DealFormulaDamage(),
 					Schematics.secondaryEffects(List.of(
-						new RecoilEffect(new Constant(1/3))
+						RecoilEffect.onUser(new Constant(1/3))
 					))
 				))
 			))
@@ -5252,7 +5252,7 @@ public class MoveRegistry {
 				new EffectSequence(List.of(
 					new DealFormulaDamage(),
 					Schematics.secondaryEffects(List.of(
-						new RecoilEffect(new Constant(1/3))
+						RecoilEffect.onUser(new Constant(1/3))
 					))
 				))
 			))
@@ -5316,7 +5316,7 @@ public class MoveRegistry {
 				new EffectSequence(List.of(
 					new DealFormulaDamage(),
 					Schematics.secondaryEffects(List.of(
-						new RecoilEffect(new Constant(1/4))
+						RecoilEffect.onUser(new Constant(1/4))
 					))
 				))
 			))
