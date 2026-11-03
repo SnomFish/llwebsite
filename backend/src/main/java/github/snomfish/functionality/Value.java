@@ -81,7 +81,7 @@ public enum Value {
         c -> c.user().activeLoomian().abilityInstance().abilityId(),
         (c, v) -> c.user().activeLoomian().abilityInstance().setAbilityId(v)
     ),
-    USER_ABILITY_HAS_TRIGGERED_THIS_BATTLE(
+    USER_ABILITY_HAS_TRIGGERED_THIS(
         c -> c.user().activeLoomian().abilityInstance().hasTriggeredThisBattle(),
         (c, v) -> c.user().activeLoomian().abilityInstance().setTriggeredThisBattle(v)
     ),
@@ -93,7 +93,7 @@ public enum Value {
         c -> c.user().activeLoomian().abilityInstance().abilityId(),
         (c, v) -> c.user().activeLoomian().abilityInstance().setAbilityId(v)
     ),
-    USER_ACTUAL_ABILITY_HAS_TRIGGERED_THIS_BATTLE(
+    USER_ACTUAL_ABILITY_HAS_TRIGGERED_THIS(
         c -> c.user().activeLoomian().actualAbilityInstance().hasTriggeredThisBattle(),
         (c, v) -> c.user().activeLoomian().actualAbilityInstance().setTriggeredThisBattle(v)
     ),
@@ -105,7 +105,7 @@ public enum Value {
         c -> c.target().activeLoomian().abilityInstance().abilityId(),
         (c, v) -> c.target().activeLoomian().abilityInstance().setAbilityId(v)
     ),
-    TARGET_ABILITY_HAS_TRIGGERED_THIS_BATTLE(
+    TARGET_ABILITY_HAS_TRIGGERED_THIS(
         c -> c.target().activeLoomian().abilityInstance().hasTriggeredThisBattle(),
         (c, v) -> c.target().activeLoomian().abilityInstance().setTriggeredThisBattle(v)
     ),
@@ -117,7 +117,7 @@ public enum Value {
         c -> c.user().activeLoomian().abilityInstance().abilityId(),
         (c, v) -> c.user().activeLoomian().abilityInstance().setAbilityId(v)
     ),
-    TARGET_ACTUAL_ABILITY_HAS_TRIGGERED_THIS_BATTLE(
+    TARGET_ACTUAL_ABILITY_HAS_TRIGGERED_THIS(
         c -> c.target().activeLoomian().actualAbilityInstance().hasTriggeredThisBattle(),
         (c, v) -> c.target().activeLoomian().actualAbilityInstance().setTriggeredThisBattle(v)
     ),
@@ -274,33 +274,33 @@ public enum Value {
         (c, v) -> c.user().activeLoomian().actualStats().setSpeed(v)
     ),
     // USER BATTLE STATS
-    USER_BATTLE_HEALTH(
-        c -> c.user().activeLoomian().battleStats().health(),
-        (c, v) -> c.user().activeLoomian().battleStats().setHealth(v)
+    USER_HEALTH(
+        c -> c.user().activeLoomian().stats().health(),
+        (c, v) -> c.user().activeLoomian().stats().setHealth(v)
     ),
-    USER_BATTLE_ENERGY(
-        c -> c.user().activeLoomian().battleStats().energy(),
-        (c, v) -> c.user().activeLoomian().battleStats().setEnergy(v)
+    USER_ENERGY(
+        c -> c.user().activeLoomian().stats().energy(),
+        (c, v) -> c.user().activeLoomian().stats().setEnergy(v)
     ),
-    USER_BATTLE_MATTACK(
-        c -> c.user().activeLoomian().battleStats().mattack(),
-        (c, v) -> c.user().activeLoomian().battleStats().setMattack(v)
+    USER_MATTACK(
+        c -> c.user().activeLoomian().stats().mattack(),
+        (c, v) -> c.user().activeLoomian().stats().setMattack(v)
     ),
-    USER_BATTLE_MDEFENSE(
-        c -> c.user().activeLoomian().battleStats().mdefense(),
-        (c, v) -> c.user().activeLoomian().battleStats().setMdefense(v)
+    USER_MDEFENSE(
+        c -> c.user().activeLoomian().stats().mdefense(),
+        (c, v) -> c.user().activeLoomian().stats().setMdefense(v)
     ),  
-    USER_BATTLE_RATTACK(
-        c -> c.user().activeLoomian().battleStats().rattack(),
-        (c, v) -> c.user().activeLoomian().battleStats().setRattack(v)
+    USER_RATTACK(
+        c -> c.user().activeLoomian().stats().rattack(),
+        (c, v) -> c.user().activeLoomian().stats().setRattack(v)
     ),
-    USER_BATTLE_RDEFENSE(
-        c -> c.user().activeLoomian().battleStats().rdefense(),
-        (c, v) -> c.user().activeLoomian().battleStats().setRdefense(v)
+    USER_RDEFENSE(
+        c -> c.user().activeLoomian().stats().rdefense(),
+        (c, v) -> c.user().activeLoomian().stats().setRdefense(v)
     ),
-    USER_BATTLE_SPEED(
-        c -> c.user().activeLoomian().battleStats().speed(),
-        (c, v) -> c.user().activeLoomian().battleStats().setSpeed(v)
+    USER_SPEED(
+        c -> c.user().activeLoomian().stats().speed(),
+        (c, v) -> c.user().activeLoomian().stats().setSpeed(v)
     ),
 
     TARGET_MATTACK_STAGE_MODIFIER(
@@ -397,33 +397,33 @@ public enum Value {
         (c, v) -> c.target().activeLoomian().actualStats().setSpeed(v)
     ),
     // TARGET BATTLE STATS
-    TARGET_BATTLE_HEALTH(
-        c -> c.target().activeLoomian().battleStats().health(),
-        (c, v) -> c.target().activeLoomian().battleStats().setHealth(v)
+    TARGET_HEALTH(
+        c -> c.target().activeLoomian().stats().health(),
+        (c, v) -> c.target().activeLoomian().stats().setHealth(v)
     ),
-    TARGET_BATTLE_ENERGY(
-        c -> c.target().activeLoomian().battleStats().energy(),
-        (c, v) -> c.target().activeLoomian().battleStats().setEnergy(v)
+    TARGET_ENERGY(
+        c -> c.target().activeLoomian().stats().energy(),
+        (c, v) -> c.target().activeLoomian().stats().setEnergy(v)
     ),
-    TARGET_BATTLE_MATTACK(
-        c -> c.target().activeLoomian().battleStats().mattack(),
-        (c, v) -> c.target().activeLoomian().battleStats().setMattack(v)
+    TARGET_MATTACK(
+        c -> c.target().activeLoomian().stats().mattack(),
+        (c, v) -> c.target().activeLoomian().stats().setMattack(v)
     ),
-    TARGET_BATTLE_MDEFENSE(
-        c -> c.target().activeLoomian().battleStats().mdefense(),
-        (c, v) -> c.target().activeLoomian().battleStats().setMdefense(v)
+    TARGET_MDEFENSE(
+        c -> c.target().activeLoomian().stats().mdefense(),
+        (c, v) -> c.target().activeLoomian().stats().setMdefense(v)
     ),  
-    TARGET_BATTLE_RATTACK(
-        c -> c.target().activeLoomian().battleStats().rattack(),
-        (c, v) -> c.target().activeLoomian().battleStats().setRattack(v)
+    TARGET_RATTACK(
+        c -> c.target().activeLoomian().stats().rattack(),
+        (c, v) -> c.target().activeLoomian().stats().setRattack(v)
     ),
-    TARGET_BATTLE_RDEFENSE(
-        c -> c.target().activeLoomian().battleStats().rdefense(),
-        (c, v) -> c.target().activeLoomian().battleStats().setRdefense(v)
+    TARGET_RDEFENSE(
+        c -> c.target().activeLoomian().stats().rdefense(),
+        (c, v) -> c.target().activeLoomian().stats().setRdefense(v)
     ),
-    TARGET_BATTLE_SPEED(
-        c -> c.target().activeLoomian().battleStats().speed(),
-        (c, v) -> c.target().activeLoomian().battleStats().setSpeed(v)
+    TARGET_SPEED(
+        c -> c.target().activeLoomian().stats().speed(),
+        (c, v) -> c.target().activeLoomian().stats().setSpeed(v)
     ),
 
 
@@ -446,6 +446,14 @@ public enum Value {
     MOVE_DAMAGE(
         c -> c.user().activeLoomian().action().move().damage(),
         (c, v) -> c.user().activeLoomian().action().move().setDamage(v)
+    ),
+    MOVE_ATTACKING_STAT_MODIFIER(
+        c -> c.user().activeLoomian().action().move().modifiers().get(ModifierId.ATTACKING_STAT),
+        (c, v) -> c.user().activeLoomian().action().move().modifiers().set(ModifierId.ATTACKING_STAT, v)
+    ),
+    MOVE_DEFENDING_STAT_MODIFIER(
+        c -> c.user().activeLoomian().action().move().modifiers().get(ModifierId.DEFENDING_STAT),
+        (c, v) -> c.user().activeLoomian().action().move().modifiers().set(ModifierId.DEFENDING_STAT, v)
     ),
     MOVE_DAMAGE_MODIFIER(
         c -> c.user().activeLoomian().action().move().modifiers().get(ModifierId.DAMAGE),

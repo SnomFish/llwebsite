@@ -24,7 +24,7 @@ public class ActiveLoomian extends Loomian {
 
     private List<TypeId> types;
     private AbilityInstance abilityInstance;
-    private Stats battleStats;
+    private Stats stats;
     private StatChanges statChanges;
     private Action action;
     private Mechanics mechanics; // extra functionality that is temp added to an onfield loomian such as coursing venom being in effect
@@ -36,6 +36,7 @@ public class ActiveLoomian extends Loomian {
     ) {
         super(loomian);
         this.types = new ArrayList<>(loomian.species().baseTypes());
+        this.stats = actualStats().deepCopy();
         this.statChanges = new StatChanges();
         this.action = null;
         this.mechanics = new Mechanics();
@@ -44,7 +45,6 @@ public class ActiveLoomian extends Loomian {
     public ActiveLoomian(ActiveLoomian activeLoomian) {
         super(activeLoomian);
         this.types = new ArrayList<>(activeLoomian.types);
-        this.battleStats = activeLoomian.battleStats.deepCopy();
         this.statChanges = activeLoomian.statChanges.deepCopy();
         if (activeLoomian.action != null) this.action = activeLoomian.action.deepCopy();
         this.mechanics = activeLoomian.mechanics.deepCopy();
@@ -81,7 +81,7 @@ public class ActiveLoomian extends Loomian {
     public TypeId secondaryType() {return types.get(1);}
     public AbilityInstance abilityInstance() {return abilityInstance;}
     public AbilityId abilityId() {return abilityInstance.abilityId();}
-    public Stats battleStats() {return battleStats;}
+    public Stats stats() {return stats;}
     public StatChanges statChanges() {return statChanges;}
     public Action action() {return action;}
     public Mechanics mechanics() {return mechanics;}
@@ -94,7 +94,7 @@ public class ActiveLoomian extends Loomian {
     public void setSecondaryType(TypeId typeId) {this.types.set(1, typeId);}
     public void setAbilityInstance(AbilityInstance abilityInstance) {this.abilityInstance = abilityInstance;}
     public void setAbilityId(AbilityId abilityId) {this.abilityInstance.setAbilityId(abilityId);}
-    public void setBattleStats(Stats battleStats) {this.battleStats = battleStats;} 
+    public void setStats(Stats stats) {this.stats = stats;}
     public void setStatChanges(StatChanges statChanges) {this.statChanges = statChanges;}
     public void setAction(Action action) {this.action = action;}
     public void setMechanics(Mechanics mechanics) {this.mechanics = mechanics;} 

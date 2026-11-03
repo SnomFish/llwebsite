@@ -10,9 +10,15 @@ import github.snomfish.domain.move.modifiers.Modifiers;
 import github.snomfish.domain.stats.StatChangesId;
 import github.snomfish.domain.stats.StatId;
 import github.snomfish.functionality.Constants;
+import github.snomfish.functionality.Value;
 import github.snomfish.functionality.branch.Branch;
+import github.snomfish.functionality.condition.GateCondition;
 import github.snomfish.functionality.context.BattleContext;
+import github.snomfish.functionality.effect.ConditionalEffect;
+import github.snomfish.functionality.effect.Effects;
 import github.snomfish.functionality.effect.IEffect;
+import github.snomfish.functionality.gate.GateId;
+import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.INumber;
 
 import static github.snomfish.domain.move.modifiers.ModifierId.*;
@@ -43,6 +49,7 @@ public class DealFormulaDamage implements IEffect {
         outcomes = flatMap(outcomes, c -> basePowerModule(c));
         outcomes = flatMap(outcomes, c -> critChanceModule(c));
         outcomes = flatMap(outcomes, c -> damageModule(c));
+        outcomes = flatMap(outcomes, c -> statModifierModule(c));
         outcomes = flatMap(outcomes, c -> c.dispatchEvent(PRE_DAMAGE_EVENT));
         outcomes = flatMap(outcomes, c -> c.dispatchEvent(CLUTCH_EVENT));
         outcomes = flatMap(outcomes, c -> damageRollModule(c));
@@ -54,7 +61,7 @@ public class DealFormulaDamage implements IEffect {
 
 
 
-
+    // executes on the base power inumber
     private List<Branch<BattleContext>> basePowerModule(BattleContext context) {
         List<Branch<BattleContext>> outcomes = new ArrayList<>();
 
@@ -77,6 +84,7 @@ public class DealFormulaDamage implements IEffect {
     }
 
 
+    // determins if the move is a critical hit and if so, applies the critical hit damage modifier
     private static final double[] CRIT_CHANCES = {1/24, 1/8, 1/2, 1};
 
     private List<Branch<BattleContext>> critChanceModule(BattleContext context) {
@@ -99,26 +107,67 @@ public class DealFormulaDamage implements IEffect {
     }
 
 
+    // sets the attacking and defending stat modifiers
+    private List<Branch<BattleContext>> statModifierModule(BattleContext context) {
+        BattleContext outcome = context.deepCopy();
+        ActiveLoomian user = outcome.user().activeLoomian();
+        ActiveLoomian target = outcome.target().activeLoomian();
+        Move move = user.action().move();
+        
+        StatId attackingStatId = move.attackingStatId();
+        StatId defendingStatId = move.defendingStatId();
+        double attackingStatModifier = move.modifiers().get(ATTACKING_STAT);
+        double defendingStatModifier = move.modifiers().get(DEFENDING_STAT);
+
+        double attackingStatBoosts   = Math.max(1, user.statChanges().multiplier(attackingStatId));
+        double attackingStatDrops    = Math.min(1, user.statChanges().multiplier(attackingStatId));
+        double defendingStatBoosts   = Math.max(1, target.statChanges().multiplier(defendingStatId));
+        double defendingStatDrops    = Math.min(1, target.statChanges().multiplier(defendingStatId));
+
+        List<Branch<BattleContext>> outcomes = List.of(new Branch<>(outcome, 1));
+
+        outcomes = flatMap(outcomes, c -> new ConditionalEffect(
+            new GateCondition(GateId.CAN_ATTACKING_STAT_USE_STAT_BOOSTS),
+            Effects.multiplyValue(Value.MOVE_ATTACKING_STAT_MODIFIER, new Constant(attackingStatBoosts))
+        ).execute(c));
+
+        if (move.hasCrit()) {
+            outcomes = flatMap(outcomes, c -> new ConditionalEffect(
+                new GateCondition(GateId.CAN_ATTACKING_STAT_USE_STAT_DROPS),
+                Effects.multiplyValue(Value.MOVE_ATTACKING_STAT_MODIFIER, new Constant(attackingStatDrops))
+            ).execute(c));
+
+            outcomes = flatMap(outcomes, c -> new ConditionalEffect(
+                new GateCondition(GateId.CAN_DEFENDING_STAT_USE_STAT_BOOSTS),
+                Effects.multiplyValue(Value.MOVE_ATTACKING_STAT_MODIFIER, new Constant(defendingStatBoosts))
+            ).execute(c));
+        }
+
+        outcomes = flatMap(outcomes, c -> new ConditionalEffect(
+            new GateCondition(GateId.CAN_DEFENDING_STAT_USE_STAT_DROPS),
+            Effects.multiplyValue(Value.MOVE_ATTACKING_STAT_MODIFIER, new Constant(defendingStatDrops))
+        ).execute(c));
+
+        move.modifiers().set(ATTACKING_STAT, attackingStatModifier);
+        move.modifiers().set(DEFENDING_STAT, defendingStatModifier);
+
+        return outcomes;
+    }
+
+
+    // calculates the damage of the move
     private List<Branch<BattleContext>> damageModule(BattleContext context) {
         BattleContext outcome = context.deepCopy();
         ActiveLoomian user = outcome.user().activeLoomian();
         ActiveLoomian target = outcome.target().activeLoomian();
         Move move = user.action().move();
 
-
         StatId attackingStatId = move.attackingStatId();
         StatId defendingStatId = move.defendingStatId();
-        double attackingStatModifier;
-        double defendingStatModifier;
-        if (move.hasCrit()) {
-            attackingStatModifier = Math.max(user.statChanges().multiplier(attackingStatId), 1.0); // ensures on a crit lowered stats from attacking stat are ignored
-            defendingStatModifier = Math.min(target.statChanges().multiplier(defendingStatId), 1.0); // same with stat raises on defending stat
-        } else {
-            attackingStatModifier = user.statChanges().multiplier(attackingStatId);
-            defendingStatModifier = target.statChanges().multiplier(defendingStatId);
-        }
-        int attackingStat = (int)(user.battleStats().get(attackingStatId) * attackingStatModifier);
-        int defendingStat = (int)(target.battleStats().get(defendingStatId) * defendingStatModifier);
+        double attackingStatModifier = move.modifiers().get(ATTACKING_STAT);
+        double defendingStatModifier = move.modifiers().get(DEFENDING_STAT);
+        int attackingStat = (int)(user.stats().get(attackingStatId) * attackingStatModifier);
+        int defendingStat = (int)(target.stats().get(defendingStatId) * defendingStatModifier);
 
         double damage = Math.floor(2 * Constants.LEVEL / 5) + 2;
         damage *= move.damage();
