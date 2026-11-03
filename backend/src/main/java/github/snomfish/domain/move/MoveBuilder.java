@@ -8,7 +8,6 @@ import github.snomfish.functionality.condition.ICondition;
 import github.snomfish.functionality.condition.NoCondition;
 import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.INumber;
-import github.snomfish.functionality.tags.MoveTagId;
 import github.snomfish.functionality.tags.Tags;
 
 public class MoveBuilder {
@@ -107,7 +106,7 @@ public class MoveBuilder {
         move.setDefendingStatId(defendingStatId);
         return this;
     }
-    public MoveBuilder addTag(MoveTagId tagId) {
+    public MoveBuilder tag(MoveTagId tagId) {
         move.tags().set(tagId, true);
         return this;
     }

@@ -44,6 +44,7 @@ public class DealFormulaDamage implements IEffect {
         outcomes = flatMap(outcomes, c -> critChanceModule(c));
         outcomes = flatMap(outcomes, c -> damageModule(c));
         outcomes = flatMap(outcomes, c -> c.dispatchEvent(PRE_DAMAGE_EVENT));
+        outcomes = flatMap(outcomes, c -> c.dispatchEvent(CLUTCH_EVENT));
         outcomes = flatMap(outcomes, c -> damageRollModule(c));
         outcomes = flatMap(outcomes, c -> c.dispatchEvent(POST_DAMAGE_EVENT));
 

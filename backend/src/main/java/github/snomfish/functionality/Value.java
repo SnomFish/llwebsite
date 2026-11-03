@@ -3,10 +3,10 @@ package github.snomfish.functionality;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
+import github.snomfish.domain.move.MoveTagId;
 import github.snomfish.domain.move.modifiers.ModifierId;
 import github.snomfish.domain.stats.StatChangesId;
 import github.snomfish.functionality.context.BattleContext;
-import github.snomfish.functionality.tags.MoveTagId;
 
 public enum Value {
 

@@ -154,6 +154,7 @@ public enum MoveId {
     FROST_PUNCH,
     FULGER_FANGS,
     FUNGUS_CURSE,
+    FUSION_BARRAGE,
     GAIN_DRAIN,
     GALE_FORCE,
     GAMMA_PULSE,

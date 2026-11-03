@@ -14,7 +14,7 @@ public enum MoveTagId {
     RECOIL,
     SLAPPING,
     SLASHING,
-    SOUL_BURST,
+    SOUL_MOVE,
     SOUND,
     ;
 }
