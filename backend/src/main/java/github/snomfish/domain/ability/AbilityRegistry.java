@@ -16,6 +16,7 @@ import github.snomfish.functionality.condition.Equals;
 import github.snomfish.functionality.condition.GreaterThan;
 import github.snomfish.functionality.condition.LessThan;
 import github.snomfish.functionality.condition.ListContains;
+import github.snomfish.functionality.condition.NoCondition;
 import github.snomfish.functionality.condition.Or;
 import github.snomfish.functionality.condition.RandomCondition;
 import github.snomfish.functionality.effect.ConditionalEffect;
@@ -33,14 +34,17 @@ import github.snomfish.functionality.effect.effects.SetType;
 import github.snomfish.functionality.effect.effects.SetValueEffect;
 import github.snomfish.functionality.effect.effects.SetWeather;
 import github.snomfish.functionality.event.Event;
+import github.snomfish.functionality.gate.Gate;
+import github.snomfish.functionality.gate.GateEvent;
 import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.Multiply;
 import github.snomfish.functionality.number.ValueConstant;
 
 import static github.snomfish.domain.ability.AbilityId.*;
 import static github.snomfish.domain.type.TypeId.*;
+import static github.snomfish.functionality.context.ContextSideId.*;
 import static github.snomfish.functionality.event.EventId.*;
-import static github.snomfish.functionality.event.EventSideId.*;
+import static github.snomfish.functionality.gate.GateId.*;
 
 public class AbilityRegistry {
     
@@ -385,6 +389,10 @@ public class AbilityRegistry {
 		register(AbilityBuilder.newAbility()
 			.id(BRUTE_FORCE)
 			.name("brute force")
+			.gate(new Gate(
+				new GateEvent(CANNOT_USE_SECONDARY_EFFECTS, USER),
+				new NoCondition() // always true
+			))
 			.build()
 		);
 		register(AbilityBuilder.newAbility()

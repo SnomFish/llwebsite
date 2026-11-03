@@ -19,6 +19,7 @@ import github.snomfish.functionality.effect.effects.ApplyStatChanges;
 import github.snomfish.functionality.effect.effects.DealFormulaDamage;
 import github.snomfish.functionality.effect.effects.EnergyDrainEffect;
 import github.snomfish.functionality.effect.effects.HealthDrainEffect;
+import github.snomfish.functionality.effect.effects.NoEffect;
 import github.snomfish.functionality.effect.effects.RecoilEffect;
 import github.snomfish.functionality.effect.effects.SetType;
 import github.snomfish.functionality.effect.effects.SetWeather;
@@ -161,6 +162,7 @@ public class MoveRegistry {
 			.name("adaptive_assault_simple")
 			.type(SIMPLE)
 			.category(MELEE)
+			.priority(new Constant(1))
 			.energyCost(new Constant(35))
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
@@ -365,8 +367,8 @@ public class MoveRegistry {
 			.name("Bait")
 			.type(SIMPLE)
 			.category(STATUS)
-			.energyCost(new Constant(30))
 			.priority(new Constant(2))
+			.energyCost(new Constant(30))
 			.build()
 		);
 		register(MoveBuilder.newMove(BAMBOOZLE)
@@ -1213,12 +1215,15 @@ public class MoveRegistry {
 			.name("Counter Poise")
 			.type(BUG)
 			.category(MELEE)
+			.priority(new Constant(1))
 			.energyCost(new Constant(45))
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
-				new EffectSequence(List.of(
+				/*new ConditionalEffect(
+					new Equals()
 					new DealFormulaDamage()
-				))
+				)*/
+				new NoEffect()
 			))
 			.tag(CONTACT)
 			.build()
@@ -1227,12 +1232,15 @@ public class MoveRegistry {
 			.name("counter_stance")
 			.type(BRAWLER)
 			.category(MELEE)
+			.priority(new Constant(1))
 			.energyCost(new Constant(45))
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
-				new EffectSequence(List.of(
+				/*new ConditionalEffect(
+					new Equals()
 					new DealFormulaDamage()
-				))
+				)*/
+				new NoEffect()
 			))
 			.tag(CONTACT)
 			.build()
@@ -2564,6 +2572,7 @@ public class MoveRegistry {
 			.name("horn_dashi")
 			.type(BRAWLER)
 			.category(MELEE)
+			.priority(new Constant(-6))
 			.energyCost(new Constant(40))
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
@@ -2705,6 +2714,7 @@ public class MoveRegistry {
 			.name("Impersonate")
 			.type(SPIRIT)
 			.category(STATUS)
+			.priority(new Constant(1))
 			.energyCost(new Constant(45))
 			.priority(new Constant(1))
 			.build()
@@ -2739,8 +2749,8 @@ public class MoveRegistry {
 			.name("Jolt")
 			.type(ELECTRIC)
 			.category(RANGED)
-			.energyCost(new Constant(25))
 			.priority(new Constant(1))
+			.energyCost(new Constant(25))
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2883,8 +2893,8 @@ public class MoveRegistry {
 			.name("Light Dash")
 			.type(LIGHT)
 			.category(MELEE)
-			.energyCost(new Constant(25))
 			.priority(new Constant(1))
+			.energyCost(new Constant(25))
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2898,8 +2908,8 @@ public class MoveRegistry {
 			.name("Lightspeed Ray")
 			.type(LIGHT)
 			.category(RANGED)
-			.energyCost(new Constant(25))
 			.priority(new Constant(1))
+			.energyCost(new Constant(25))
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3797,6 +3807,7 @@ public class MoveRegistry {
 			.name("Preemptive Strike")
 			.type(BRAWLER)
 			.category(MELEE)
+			.priority(new Constant(3))
 			.energyCost(new Constant(25))
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
@@ -3908,6 +3919,7 @@ public class MoveRegistry {
 			.name("Quick Pounce")
 			.type(SIMPLE)
 			.category(MELEE)
+			.priority(new Constant(1))
 			.energyCost(new Constant(25))
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
@@ -3922,6 +3934,7 @@ public class MoveRegistry {
 			.name("Quick Punch")
 			.type(BRAWLER)
 			.category(MELEE)
+			.priority(new Constant(1))
 			.energyCost(new Constant(25))
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
@@ -4140,6 +4153,7 @@ public class MoveRegistry {
 			.name("Return to Sender")
 			.type(MIND)
 			.category(STATUS)
+			.priority(new Constant(-1))
 			.energyCost(new Constant(25))
 			.build()
 		);
@@ -4235,8 +4249,8 @@ public class MoveRegistry {
 			.name("Safeguard")
 			.type(SIMPLE)
 			.category(STATUS)
-			.energyCost(new Constant(35))
 			.priority(new Constant(3))
+			.energyCost(new Constant(35))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					new DealFormulaDamage()
@@ -4375,8 +4389,8 @@ public class MoveRegistry {
 			.name("Shadow Sprint")
 			.type(SPIRIT)
 			.category(MELEE)
-			.energyCost(new Constant(25))
 			.priority(new Constant(1))
+			.energyCost(new Constant(25))
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -4706,8 +4720,8 @@ public class MoveRegistry {
 			.name("Spike Rush")
 			.type(ICE)
 			.category(MELEE)
-			.energyCost(new Constant(25))
 			.priority(new Constant(1))
+			.energyCost(new Constant(25))
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -5389,6 +5403,7 @@ public class MoveRegistry {
 			.name("trick_shot")
 			.type(SPIRIT)
 			.category(RANGED)
+			.priority(new Constant(1))
 			.energyCost(new Constant(45))
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(

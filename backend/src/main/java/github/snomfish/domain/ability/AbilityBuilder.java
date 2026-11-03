@@ -3,12 +3,15 @@ package github.snomfish.domain.ability;
 import java.util.ArrayList;
 import java.util.List;
 
+import github.snomfish.functionality.gate.Gate;
+
 public class AbilityBuilder {
     
 
     private AbilityId id;
     private String name;
     private List<AbilityRule> rules;
+    private List<Gate> gates;
 
     private boolean isLocked;
     private boolean oncePerBattle;
@@ -33,6 +36,7 @@ public class AbilityBuilder {
             id,
             name,
             rules,
+            gates,
             isLocked,
             oncePerBattle,
             oncePerSwapIn
@@ -51,6 +55,10 @@ public class AbilityBuilder {
     public AbilityBuilder rule(AbilityRule rule) {
         this.rules.add(rule);
 		return this;
+    }
+    public AbilityBuilder gate(Gate gate) {
+        this.gates.add(gate);
+        return this;
     }
     public AbilityBuilder isLocked() {
         this.isLocked = true;

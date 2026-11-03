@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
+import github.snomfish.functionality.context.BattleContext;
+
 public class BranchUtil {
 
 
@@ -32,8 +34,26 @@ public class BranchUtil {
         return result;
     }
 
-    
-    
+
+    public static List<Branch<Boolean>> gateFlatMap(
+        BattleContext context,
+        List<Branch<Boolean>> leftBranches, // a list of two branches, onecontains true, the other false
+        Function<BattleContext, List<Branch<Boolean>>> function
+    ) {
+        List<Branch<Boolean>> outcomes = new ArrayList<>();
+        List<Branch<Boolean>> rightBranches = function.apply(context);
+
+        for (Branch<Boolean> leftBranch : leftBranches) {
+            for (Branch<Boolean> rightBranch : rightBranches) {
+                outcomes.add(new Branch<>(
+                    leftBranch.value() || rightBranch.value(),
+                    leftBranch.probability() * rightBranch.probability()
+                ));
+            }
+        }
+
+        return outcomes;
+    }
 
 
     // much better, mutation but it is safe

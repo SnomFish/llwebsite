@@ -17,7 +17,7 @@ import github.snomfish.functionality.event.TriggerRule;
 import github.snomfish.functionality.number.Constant;
 
 import static github.snomfish.domain.mechanics.MechanicId.*;
-import static github.snomfish.functionality.event.EventSideId.*;
+import static github.snomfish.functionality.context.ContextSideId.*;
 import static github.snomfish.functionality.event.EventId.*;
 
 public class MechanicRegistry {

@@ -14,8 +14,8 @@ import github.snomfish.functionality.number.Constant;
 
 import static github.snomfish.domain.type.TypeId.*;
 import static github.snomfish.domain.weather.WeatherId.*;
+import static github.snomfish.functionality.context.ContextSideId.*;
 import static github.snomfish.functionality.event.EventId.*;
-import static github.snomfish.functionality.event.EventSideId.*;
 
 public class WeatherRegistry {
     

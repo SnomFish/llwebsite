@@ -1,6 +1,7 @@
 package github.snomfish.domain;
 
 import static github.snomfish.functionality.branch.BranchUtil.flatMap;
+import static github.snomfish.functionality.branch.BranchUtil.gateFlatMap;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ import github.snomfish.functionality.action.Action;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.event.Event;
+import github.snomfish.functionality.gate.GateEvent;
 
 // ALL LOOMIAN PARAMETERS ARE PRIVATE BY CHOICE
 public class ActiveLoomian extends Loomian {
@@ -62,6 +64,13 @@ public class ActiveLoomian extends Loomian {
         outcomes = flatMap(outcomes, c -> item().handleEvent(c, event));
         outcomes = flatMap(outcomes, c -> status().handleEvent(c, event)); // has to be afunction as I only store Ids for ability item and status
         outcomes = flatMap(outcomes, c -> mechanics.handleEvent(c, event)); 
+
+        return outcomes;
+    }
+    public List<Branch<Boolean>> dispatchGate(BattleContext context, GateEvent event) {
+        List<Branch<Boolean>> outcomes = List.of(new Branch<>(false, 1));
+
+        outcomes = gateFlatMap(context, outcomes, c -> abilityInstance().handleGate(c, event));
 
         return outcomes;
     }

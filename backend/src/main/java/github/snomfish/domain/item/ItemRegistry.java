@@ -20,8 +20,8 @@ import github.snomfish.functionality.number.Constant;
 import static github.snomfish.domain.item.ItemId.*;
 import static github.snomfish.domain.species.SpeciesId.*;
 import static github.snomfish.domain.type.TypeId.*;
+import static github.snomfish.functionality.context.ContextSideId.*;
 import static github.snomfish.functionality.event.EventId.*;
-import static github.snomfish.functionality.event.EventSideId.*;
 
 // oi add a condition in condition schematics for general item use, offensive item use and defensive.
 // simplest solution for whe the loomian cannot use items/ are about to be pile drived by sly cavenish
@@ -77,6 +77,7 @@ public class ItemRegistry {
 					new Equals(Value.TARGET_BATTLE_HEALTH, Value.TARGET_CURRENT_HEALTH),
 					new ClutchEffect()
 				)
+				
 			)
 		);
 		register(

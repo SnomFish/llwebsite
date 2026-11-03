@@ -7,6 +7,7 @@ import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.copy.DeepCopyable;
 import github.snomfish.functionality.event.Event;
+import github.snomfish.functionality.gate.GateEvent;
 
 import static github.snomfish.functionality.copy.DeepCopy.deepCopyList;
 
@@ -50,6 +51,13 @@ public class Side implements DeepCopyable<Side> {
         List<Branch<BattleContext>> outcomes = new ArrayList<>();
 
         outcomes = activeLoomian().dispatchEvent(context, event);
+
+        return outcomes;
+    }
+    public List<Branch<Boolean>> dispatchGate(BattleContext context, GateEvent event) {
+        List<Branch<Boolean>> outcomes = new ArrayList<>();
+
+        outcomes = activeLoomian().dispatchGate(context, event);
 
         return outcomes;
     }

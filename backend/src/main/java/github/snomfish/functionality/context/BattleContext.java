@@ -10,10 +10,12 @@ import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.copy.DeepCopyable;
 import github.snomfish.functionality.event.Event;
 import github.snomfish.functionality.event.EventId;
-import github.snomfish.functionality.event.EventSideId;
+import github.snomfish.functionality.gate.GateEvent;
+import github.snomfish.functionality.gate.GateId;
 
 import static github.snomfish.domain.SideId.*;
 import static github.snomfish.functionality.branch.BranchUtil.flatMap;
+import static github.snomfish.functionality.branch.BranchUtil.gateFlatMap;
 
 // this is the context of a loomian using a move
 // this could be a record // no it cant, I like mutation
@@ -58,8 +60,16 @@ public class BattleContext implements DeepCopyable<BattleContext> {
         List<Branch<BattleContext>> outcomes = List.of(new Branch<>(this, 1.0));
 
         outcomes = flatMap(outcomes, context -> weather().handleEvent(context, new Event(eventId, null)));
-        outcomes = flatMap(outcomes, context -> user().dispatchEvent(context, new Event(eventId, EventSideId.USER)));
-        outcomes = flatMap(outcomes, context -> target().dispatchEvent(context, new Event(eventId, EventSideId.TARGET)));
+        outcomes = flatMap(outcomes, context -> user().dispatchEvent(context, new Event(eventId, ContextSideId.USER)));
+        outcomes = flatMap(outcomes, context -> target().dispatchEvent(context, new Event(eventId, ContextSideId.TARGET)));
+
+        return outcomes;
+    }
+    public List<Branch<Boolean>> dispatchGate(GateId gateId) {
+        List<Branch<Boolean>> outcomes = List.of(new Branch<>(false, 1));
+
+        outcomes = gateFlatMap(this, outcomes, context -> user().dispatchGate(context, new GateEvent(gateId, ContextSideId.USER)));
+        outcomes = gateFlatMap(this, outcomes, context -> target().dispatchGate(context, new GateEvent(gateId, ContextSideId.TARGET)));
 
         return outcomes;
     }

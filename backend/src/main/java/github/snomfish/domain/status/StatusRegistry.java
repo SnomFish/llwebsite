@@ -19,7 +19,7 @@ import github.snomfish.functionality.number.Multiply;
 import github.snomfish.functionality.number.ValueConstant;
 
 import static github.snomfish.domain.status.StatusId.*;
-import static github.snomfish.functionality.event.EventSideId.*;
+import static github.snomfish.functionality.context.ContextSideId.*;
 
 public class StatusRegistry {
     

@@ -6,11 +6,14 @@ import java.util.List;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
+import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.copy.DeepCopyable;
 import github.snomfish.functionality.event.Event;
-import github.snomfish.functionality.event.EventSideId;
+import github.snomfish.functionality.gate.Gate;
+import github.snomfish.functionality.gate.GateEvent;
 
 import static github.snomfish.functionality.branch.BranchUtil.flatMap;
+import static github.snomfish.functionality.branch.BranchUtil.gateFlatMap;
 
 public class AbilityInstance implements DeepCopyable<AbilityInstance> {
     
@@ -83,23 +86,23 @@ public class AbilityInstance implements DeepCopyable<AbilityInstance> {
                 AbilityId targetAbilityId =         (AbilityId) Value.TARGET_ABILITY_ID.get(context);
                 AbilityId targetActualAbilityId = 	(AbilityId) Value.TARGET_ACTUAL_ABILITY_ID.get(context);
                 
-                if (event.sideId() == EventSideId.USER && userAbilityId == userActualAbilityId) {
+                if (event.sideId() == ContextSideId.USER && userAbilityId == userActualAbilityId) {
                     Value.USER_ABILITY_HAS_TRIGGERED_THIS_BATTLE.set(outcome, true);
                     Value.USER_ABILITY_HAS_TRIGGERED_THIS_SWAP.set(outcome, true);
 					Value.USER_ACTUAL_ABILITY_HAS_TRIGGERED_THIS_BATTLE.set(outcome, true);
                     Value.USER_ACTUAL_ABILITY_HAS_TRIGGERED_THIS_SWAP.set(outcome, true);
                 } 
-				else if (event.sideId() == EventSideId.USER && userAbilityId != userActualAbilityId) {
+				else if (event.sideId() == ContextSideId.USER && userAbilityId != userActualAbilityId) {
 					Value.USER_ABILITY_HAS_TRIGGERED_THIS_BATTLE.set(outcome, true);
                     Value.USER_ABILITY_HAS_TRIGGERED_THIS_SWAP.set(outcome, true);
 				}
-				else if (event.sideId() == EventSideId.TARGET && targetAbilityId == targetActualAbilityId) {
+				else if (event.sideId() == ContextSideId.TARGET && targetAbilityId == targetActualAbilityId) {
                     Value.TARGET_ABILITY_HAS_TRIGGERED_THIS_BATTLE.set(outcome, true);
                     Value.TARGET_ABILITY_HAS_TRIGGERED_THIS_SWAP.set(outcome, true);
 					Value.TARGET_ACTUAL_ABILITY_HAS_TRIGGERED_THIS_BATTLE.set(outcome, true);
                     Value.TARGET_ACTUAL_ABILITY_HAS_TRIGGERED_THIS_SWAP.set(outcome, true);
                 } 
-				else if (event.sideId() == EventSideId.TARGET && targetAbilityId != targetActualAbilityId) {
+				else if (event.sideId() == ContextSideId.TARGET && targetAbilityId != targetActualAbilityId) {
 					Value.TARGET_ABILITY_HAS_TRIGGERED_THIS_BATTLE.set(outcome, true);
                     Value.TARGET_ABILITY_HAS_TRIGGERED_THIS_SWAP.set(outcome, true);
 				}
@@ -109,5 +112,17 @@ public class AbilityInstance implements DeepCopyable<AbilityInstance> {
         }
 
 		return outcomes;
+    }
+
+
+    public List<Branch<Boolean>> handleGate(BattleContext context, GateEvent event) {
+        List<Branch<Boolean>> outcomes = List.of(new Branch<>(false, 1));
+        Ability ability = ability();
+
+        for (Gate gate : ability.gates()) {
+            outcomes = gateFlatMap(context, outcomes, c -> gate.condition().execute(c));
+        }
+
+        return outcomes;
     }
 }
