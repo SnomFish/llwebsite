@@ -14,7 +14,7 @@ import github.snomfish.functionality.effect.ConditionalEffect;
 import github.snomfish.functionality.effect.IEffect;
 import github.snomfish.functionality.number.INumber;
 
-import static github.snomfish.functionality.gate.GateId.CANNOT_TAKE_RECOIL;
+import static github.snomfish.functionality.gate.GateId.CAN_TAKE_RECOIL;
 
 public class RecoilEffect implements IEffect {
     
@@ -37,7 +37,7 @@ public class RecoilEffect implements IEffect {
 
     public static IEffect onUser(INumber recoilNumber) {
         return new ConditionalEffect(
-            new GateCondition(CANNOT_TAKE_RECOIL),
+            new GateCondition(CAN_TAKE_RECOIL),
             new RecoilEffect(recoilNumber)
         );
     }

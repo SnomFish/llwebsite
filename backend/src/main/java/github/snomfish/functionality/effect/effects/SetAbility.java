@@ -8,9 +8,6 @@ import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.effect.IEffect;
 
-import static github.snomfish.functionality.branch.BranchUtil.flatMap;
-import static github.snomfish.functionality.event.EventId.USER_SWITCHED_IN_EVENT;
-
 public class SetAbility implements IEffect {
     
 
@@ -37,32 +34,40 @@ public class SetAbility implements IEffect {
 
 
     // AbilityId
-    public static SetAbility user(AbilityId abilityId) {
-        return new SetAbility(Value.USER_ABILITY_ID, abilityId);
+    public static IEffect user(AbilityId ability) {
+        return new SetAbility(Value.USER_ABILITY_ID, ability);
     }
-    public static SetAbility userActual(AbilityId abilityId) {
-        return new SetAbility(Value.USER_ACTUAL_ABILITY_ID, abilityId);
+    public static IEffect userActual(AbilityId ability) {
+        return new SetAbility(Value.USER_ACTUAL_ABILITY_ID, ability);
     }
-    public static SetAbility target(AbilityId abilityId) {
-        return new SetAbility(Value.TARGET_ABILITY_ID, abilityId);
+    public static IEffect target(AbilityId ability) {
+        return new SetAbility(Value.TARGET_ABILITY_ID, ability);
+    }
+    public static IEffect targetActual(AbilityId ability) {
+        return new SetAbility(Value.TARGET_ACTUAL_ABILITY_ID, ability);
     }
     // Value
-    public static SetAbility user(Value abilityValue) {
-        return new SetAbility(Value.USER_ABILITY_ID, abilityValue);
+    public static IEffect user(Value ability) {
+        return new SetAbility(Value.USER_ABILITY_ID, ability);
     }
-    public static SetAbility target(Value abilityValue) {
-        return new SetAbility(Value.TARGET_ABILITY_ID, abilityValue);
+    public static IEffect userActual(Value ability) {
+        return new SetAbility(Value.USER_ACTUAL_ABILITY_ID, ability);
+    }
+    public static IEffect target(Value ability) {
+        return new SetAbility(Value.TARGET_ABILITY_ID, ability);
+    }
+    public static IEffect targetActual(Value ability) {
+        return new SetAbility(Value.TARGET_ACTUAL_ABILITY_ID, ability);
     }
 
 
     public List<Branch<BattleContext>> execute(BattleContext context) {
         BattleContext outcome = context.deepCopy();
         
-        AbilityId type = Value.resolve(abilityObject, AbilityId.class, outcome);
-        abilityToBeSet.set(outcome, type);
+        AbilityId ability = Value.resolve(abilityObject, AbilityId.class, outcome);
+        abilityToBeSet.set(outcome, ability);
 
         List<Branch<BattleContext>> outcomes = List.of(new Branch<>(outcome, 1));
-        outcomes = flatMap(outcomes, c -> c.dispatchEvent(USER_SWITCHED_IN_EVENT)); // calls the switched in event to retrigger abilities
 
         return outcomes;
     }

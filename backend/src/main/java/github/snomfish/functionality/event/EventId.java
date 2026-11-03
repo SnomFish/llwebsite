@@ -12,6 +12,8 @@ public enum EventId {
     PRE_DAMAGE_EVENT,
     CLUTCH_EVENT,
     DEALT_DAMAGE_EVENT, // used if the move dealt damage
+    USER_KNOCKED_OUT_TARGET_EVENT,
+    TARGET_KNOCKED_OUT_USER_EVENT,
     POST_DAMAGE_EVENT, // used wether the move hit or missed
     PRE_HEALTH_DRAIN_EVENT,
     PRE_ENERGY_DRAIN_EVENT,

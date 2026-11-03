@@ -10,6 +10,11 @@ public class Conditions {
     private Conditions() {}
 
 
+    public static ICondition and(ICondition a, ICondition b, ICondition c) {
+        return new And(a, new And(b, c));
+    }
+
+
     public static ICondition clearWeather() {
         return new Equals(Value.WEATHER_ID, WeatherId.NO_WEATHER);
     }

@@ -46,7 +46,7 @@ public class BranchUtil {
         for (Branch<Boolean> leftBranch : leftBranches) {
             for (Branch<Boolean> rightBranch : rightBranches) {
                 outcomes.add(new Branch<>(
-                    leftBranch.value() || rightBranch.value(),
+                    leftBranch.value() && rightBranch.value(),
                     leftBranch.probability() * rightBranch.probability()
                 ));
             }

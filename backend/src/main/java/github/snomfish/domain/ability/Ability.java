@@ -1,5 +1,8 @@
 package github.snomfish.domain.ability;
 
+import static github.snomfish.domain.ability.AbilityId.NO_ABILITY;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import github.snomfish.functionality.gate.Gate;
@@ -9,17 +12,17 @@ import github.snomfish.functionality.gate.Gate;
 public class Ability {
 
 
-    private final AbilityId id;
-    private final String name;
-    private final List<AbilityRule> rules;
-    private final List<Gate> gates;
+    private AbilityId id;
+    private String name;
+    private List<AbilityRule> rules;
+    private List<Gate> gates;
 
-    private final boolean isLocked;
-    private final boolean oncePerBattle;
-    private final boolean oncePerSwapIn;
+    private boolean isLocked;
+    private boolean oncePerBattle;
+    private boolean oncePerSwapIn;
 
 
-    public Ability(
+    private Ability(
         AbilityId id,
         String name,
         List<AbilityRule> rules,
@@ -46,4 +49,46 @@ public class Ability {
     public boolean isLocked() {return isLocked;}
     public boolean oncePerBattle() {return oncePerBattle;}
     public boolean oncePerSwapIn() {return oncePerSwapIn;}
+
+
+    // builder functions
+    public static Ability build() {
+        return new Ability(
+            NO_ABILITY,
+            "no ability",
+            new ArrayList<>(),
+            new ArrayList<>(),
+            false,
+            false,
+            false
+        );
+    }
+    public Ability id(AbilityId id) {
+        this.id = id;
+        return this;
+    }
+    public Ability name(String name) {
+        this.name = name;
+        return this;
+    }
+    public Ability rule(AbilityRule rule) {
+        this.rules.add(rule);
+		return this;
+    }
+    public Ability gate(Gate gate) {
+        this.gates.add(gate);
+        return this;
+    }
+    public Ability setLocked() {
+        this.isLocked = true;
+        return this;                                      
+    }
+    public Ability setOncePerBattle() {
+        this.oncePerBattle = true;
+        return this;
+    }
+    public Ability setOncePerSwapIn() {
+        this.oncePerSwapIn = true;
+        return this;
+    } 
 }

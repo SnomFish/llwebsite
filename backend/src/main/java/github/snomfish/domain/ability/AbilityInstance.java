@@ -120,6 +120,9 @@ public class AbilityInstance implements DeepCopyable<AbilityInstance> {
         Ability ability = ability();
 
         for (Gate gate : ability.gates()) {
+            
+            if (!gate.events().contains(event)) continue; // only fires the gate if the event matches
+
             outcomes = gateFlatMap(context, outcomes, c -> gate.condition().execute(c));
         }
 

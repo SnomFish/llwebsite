@@ -36,7 +36,6 @@ public class ActiveLoomian extends Loomian {
     ) {
         super(loomian);
         this.types = new ArrayList<>(loomian.species().baseTypes());
-        this.battleStats = loomian.actualStats().deepCopy();
         this.statChanges = new StatChanges();
         this.action = null;
         this.mechanics = new Mechanics();

@@ -5,7 +5,7 @@ import java.util.List;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 
-public class FalseCondition {
+public class FalseCondition implements ICondition {
     
 
     public FalseCondition() {}

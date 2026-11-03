@@ -439,6 +439,10 @@ public enum Value {
         c -> c.user().activeLoomian().action().move().typeChart(),
         (c, v) -> c.user().activeLoomian().action().move().setTypeChart(v)
     ),
+    MOVE_CRIT_CHANCE(
+        c -> c.user().activeLoomian().action().move().damage(),
+        (c, v) -> c.user().activeLoomian().action().move().setCritChance(v)
+    ),
     MOVE_DAMAGE(
         c -> c.user().activeLoomian().action().move().damage(),
         (c, v) -> c.user().activeLoomian().action().move().setDamage(v)

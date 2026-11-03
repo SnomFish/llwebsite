@@ -26,7 +26,7 @@ public class Schematics {
     // 2026 09 26: I think this is actually a great idea 
     public static IEffect secondaryEffects(List<IEffect> effects) {
         return new ConditionalEffect(
-            new GateCondition(CANNOT_USE_SECONDARY_EFFECTS),
+            new GateCondition(CAN_USE_SECONDARY_EFFECTS),
             new EffectSequence(effects)
         );
     }
