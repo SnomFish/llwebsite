@@ -74,7 +74,7 @@ public class ItemRegistry {
 			new TriggerRule(
 				new Event(CLUTCH_EVENT, TARGET), 
 				new ConditionalEffect(
-					new Equals(Value.TARGET_BATTLE_HEALTH, Value.TARGET_CURRENT_HEALTH),
+					new Equals(Value.TARGET_HEALTH, Value.TARGET_CURRENT_HEALTH),
 					new ClutchEffect()
 				)
 				
@@ -96,8 +96,8 @@ public class ItemRegistry {
 				new ConditionalEffect(
 					new Equals(Value.TARGET_CAN_EVOLVE, true),
 					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.TARGET_BATTLE_MDEFENSE, new Constant(1.5)),
-						Effects.multiplyValue(Value.TARGET_BATTLE_RDEFENSE, new Constant(1.5))
+						Effects.multiplyValue(Value.TARGET_MDEFENSE, new Constant(1.5)),
+						Effects.multiplyValue(Value.TARGET_RDEFENSE, new Constant(1.5))
 					))
 				)
 			)
@@ -881,8 +881,8 @@ public class ItemRegistry {
 						new Equals(Value.TARGET_SPECIES_ID, VEYLENS)
 					),
 					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.TARGET_BATTLE_MDEFENSE, new Constant(1.5)),
-						Effects.multiplyValue(Value.TARGET_BATTLE_RDEFENSE, new Constant(1.5))
+						Effects.multiplyValue(Value.TARGET_MDEFENSE, new Constant(1.5)),
+						Effects.multiplyValue(Value.TARGET_RDEFENSE, new Constant(1.5))
 					))
 				)
 			)

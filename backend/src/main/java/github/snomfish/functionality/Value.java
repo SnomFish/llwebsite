@@ -81,7 +81,7 @@ public enum Value {
         c -> c.user().activeLoomian().abilityInstance().abilityId(),
         (c, v) -> c.user().activeLoomian().abilityInstance().setAbilityId(v)
     ),
-    USER_ABILITY_HAS_TRIGGERED_THIS(
+    USER_ABILITY_HAS_TRIGGERED_THIS_BATTLE(
         c -> c.user().activeLoomian().abilityInstance().hasTriggeredThisBattle(),
         (c, v) -> c.user().activeLoomian().abilityInstance().setTriggeredThisBattle(v)
     ),
@@ -93,7 +93,7 @@ public enum Value {
         c -> c.user().activeLoomian().abilityInstance().abilityId(),
         (c, v) -> c.user().activeLoomian().abilityInstance().setAbilityId(v)
     ),
-    USER_ACTUAL_ABILITY_HAS_TRIGGERED_THIS(
+    USER_ACTUAL_ABILITY_HAS_TRIGGERED_THIS_BATTLE(
         c -> c.user().activeLoomian().actualAbilityInstance().hasTriggeredThisBattle(),
         (c, v) -> c.user().activeLoomian().actualAbilityInstance().setTriggeredThisBattle(v)
     ),
@@ -105,7 +105,7 @@ public enum Value {
         c -> c.target().activeLoomian().abilityInstance().abilityId(),
         (c, v) -> c.target().activeLoomian().abilityInstance().setAbilityId(v)
     ),
-    TARGET_ABILITY_HAS_TRIGGERED_THIS(
+    TARGET_ABILITY_HAS_TRIGGERED_THIS_BATTLE(
         c -> c.target().activeLoomian().abilityInstance().hasTriggeredThisBattle(),
         (c, v) -> c.target().activeLoomian().abilityInstance().setTriggeredThisBattle(v)
     ),
@@ -117,7 +117,7 @@ public enum Value {
         c -> c.user().activeLoomian().abilityInstance().abilityId(),
         (c, v) -> c.user().activeLoomian().abilityInstance().setAbilityId(v)
     ),
-    TARGET_ACTUAL_ABILITY_HAS_TRIGGERED_THIS(
+    TARGET_ACTUAL_ABILITY_HAS_TRIGGERED_THIS_BATTLE(
         c -> c.target().activeLoomian().actualAbilityInstance().hasTriggeredThisBattle(),
         (c, v) -> c.target().activeLoomian().actualAbilityInstance().setTriggeredThisBattle(v)
     ),
@@ -443,6 +443,10 @@ public enum Value {
         c -> c.user().activeLoomian().action().move().damage(),
         (c, v) -> c.user().activeLoomian().action().move().setCritChance(v)
     ),
+    MOVE_BASE_POWER(
+        c -> c.user().activeLoomian().action().move().basePower(),
+        (c, v) -> c.user().activeLoomian().action().move().setBasePower(v)
+    ),
     MOVE_DAMAGE(
         c -> c.user().activeLoomian().action().move().damage(),
         (c, v) -> c.user().activeLoomian().action().move().setDamage(v)
@@ -495,9 +499,17 @@ public enum Value {
         c -> c.user().activeLoomian().action().move().tags().get(MoveTagId.HEALTH_DRAIN),
         (c, v) -> c.user().activeLoomian().action().move().tags().set(MoveTagId.HEALTH_DRAIN, v)
     ),
+    MOVE_POWDER_TAG(
+        c -> c.user().activeLoomian().action().move().tags().get(MoveTagId.POWDER),
+        (c, v) -> c.user().activeLoomian().action().move().tags().set(MoveTagId.POWDER, v)
+    ),
     MOVE_RECOIL_TAG(
         c -> c.user().activeLoomian().action().move().tags().get(MoveTagId.RECOIL),
         (c, v) -> c.user().activeLoomian().action().move().tags().set(MoveTagId.RECOIL, v)
+    ),
+    MOVE_SOUND_TAG(
+        c -> c.user().activeLoomian().action().move().tags().get(MoveTagId.SOUND),
+        (c, v) -> c.user().activeLoomian().action().move().tags().set(MoveTagId.SOUND, v)
     )
     ;
 

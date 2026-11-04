@@ -88,22 +88,34 @@ public class DealFormulaDamage implements IEffect {
     private static final double[] CRIT_CHANCES = {1/24, 1/8, 1/2, 1};
 
     private List<Branch<BattleContext>> critChanceModule(BattleContext context) {
-        ActiveLoomian user = context.user().activeLoomian();
-        Move move = user.action().move();
+        List<Branch<BattleContext>> outcomes = new ArrayList<>();
         
-        int critChance = user.statChanges().stage(StatChangesId.CRIT_CHANCE) + move.critChance();
-        critChance = Math.clamp(critChance, 0, 3);
+        for (Branch<Boolean> canCritBranch : new GateCondition(GateId.CAN_MOVE_CRIT).execute(context)) {
+            boolean canCrit = canCritBranch.value();
+            double canCritProbability = canCritBranch.probability();
 
-        BattleContext critContext1 = context.deepCopy(); // did crit
-        BattleContext critContext2 = context.deepCopy(); // did not crit
-        critContext1.user().activeLoomian().action().move().setHasCrit(true);
-        critContext1.gamestate().log("critical hit!");
-        // assumes hasCrit is always false so critContext2 is not setting it to false
+            if (canCrit) {
+                ActiveLoomian user = context.user().activeLoomian();
+                Move move = user.action().move();
+                
+                int critChance = user.statChanges().stage(StatChangesId.CRIT_CHANCE) + move.critChance();
+                critChance = Math.clamp(critChance, 0, 3);
 
-        return List.of(
-            new Branch<>(critContext2, CRIT_CHANCES[1-critChance]),
-            new Branch<>(critContext1, CRIT_CHANCES[critChance])
-        );
+                BattleContext outcome1 = context.deepCopy();
+                BattleContext outcome2 = context.deepCopy();
+
+                outcome1.user().activeLoomian().action().move().setHasCrit(true);
+                outcome2.user().activeLoomian().action().move().setHasCrit(false);
+
+                outcomes.add(new Branch<>(outcome1, CRIT_CHANCES[critChance]));
+                outcomes.add(new Branch<>(outcome2, 1-CRIT_CHANCES[critChance]));
+
+            } else {
+                outcomes.add(new Branch<>(context, canCritProbability));
+            }
+        }
+
+        return outcomes;
     }
 
 

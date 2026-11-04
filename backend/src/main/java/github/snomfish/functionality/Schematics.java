@@ -30,6 +30,12 @@ public class Schematics {
             new EffectSequence(effects)
         );
     }
+    public static IEffect affectsTarget(List<IEffect> effects) {
+        return new ConditionalEffect(
+            new GateCondition(CAN_SECONDARY_EFFECTS_AFFECT_TARGET),
+            new EffectSequence(effects)
+        );
+    }
 
 
     public static INumber tenPercentOfMaxEnergy() {

@@ -5,9 +5,11 @@ import java.util.List;
 
 import github.snomfish.functionality.condition.ICondition;
 import github.snomfish.functionality.condition.NoCondition;
+import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.effect.IEffect;
 import github.snomfish.functionality.effect.effects.NoEffect;
 import github.snomfish.functionality.event.Event;
+import github.snomfish.functionality.event.EventId;
 
 public class AbilityRule {
     
@@ -41,8 +43,8 @@ public class AbilityRule {
             new NoEffect()
         );
     }
-    public AbilityRule event(Event event) {
-        this.events.add(event);
+    public AbilityRule event(EventId eventId, ContextSideId sideId) {
+        this.events.add(new Event(eventId, sideId));
         return this;
     }
     public AbilityRule condition(ICondition condition) {
