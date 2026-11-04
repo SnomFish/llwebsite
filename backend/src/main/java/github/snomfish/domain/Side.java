@@ -54,10 +54,9 @@ public class Side implements DeepCopyable<Side> {
 
         return outcomes;
     }
-    public List<Branch<Boolean>> dispatchGate(BattleContext context, GateEvent event) {
-        List<Branch<Boolean>> outcomes = new ArrayList<>();
+    public List<Branch<Boolean>> dispatchGate(BattleContext context, GateEvent event, List<Branch<Boolean>> outcomes) {
 
-        outcomes = activeLoomian().dispatchGate(context, event);
+        outcomes = activeLoomian().dispatchGate(context, event, outcomes);
 
         return outcomes;
     }

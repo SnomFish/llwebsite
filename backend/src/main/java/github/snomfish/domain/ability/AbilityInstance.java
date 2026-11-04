@@ -13,7 +13,6 @@ import github.snomfish.functionality.gate.Gate;
 import github.snomfish.functionality.gate.GateEvent;
 
 import static github.snomfish.functionality.branch.BranchUtil.flatMap;
-import static github.snomfish.functionality.branch.BranchUtil.gateFlatMap;
 
 public class AbilityInstance implements DeepCopyable<AbilityInstance> {
     
@@ -64,14 +63,14 @@ public class AbilityInstance implements DeepCopyable<AbilityInstance> {
         if (ability.oncePerSwapIn() && hasTriggeredThisSwapIn) return outcomes;
 
         for (AbilityRule rule : ability.rules()) {
-            outcomes = flatMap(outcomes, c -> executeRule(c, event, rule));
+            outcomes = flatMap(outcomes, c -> executeEventRule(c, event, rule));
         }
 
         return outcomes;
     }
 
 
-    public List<Branch<BattleContext>> executeRule(BattleContext context, Event event, AbilityRule rule) {
+    public List<Branch<BattleContext>> executeEventRule(BattleContext context, Event event, AbilityRule rule) {
         List<Branch<BattleContext>> outcomes = new ArrayList<>();
 
         if (!rule.events().contains(event)) return List.of(new Branch<>(context, 1));
@@ -123,7 +122,7 @@ public class AbilityInstance implements DeepCopyable<AbilityInstance> {
             
             if (!gate.events().contains(event)) continue; // only fires the gate if the event matches
 
-            outcomes = gateFlatMap(context, outcomes, c -> gate.condition().execute(c));
+            outcomes = flatMap(context, outcomes, c -> gate.condition().execute(c));
         }
 
         return outcomes;

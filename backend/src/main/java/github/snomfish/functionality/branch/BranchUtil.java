@@ -20,43 +20,43 @@ public class BranchUtil {
         List<Branch<A>> branches,
         Function<A, List<Branch<B>>> function
     ) {
-        List<Branch<B>> result = new ArrayList<>();
+        List<Branch<B>> outcomes = new ArrayList<>();
         for (Branch<A> branch : branches) {
 
             List<Branch<B>> newBranches = function.apply(branch.value());   
             for (Branch<B> newBranch : newBranches) {
-                result.add(new Branch<B>(
+                outcomes.add(new Branch<B>(
                     newBranch.value(), 
                     branch.probability() * newBranch.probability()
                 ));
             }
         }
-        return result;
+        return outcomes;
     }
 
 
-    public static List<Branch<Boolean>> gateFlatMap(
+    public static List<Branch<Boolean>> flatMap(
         BattleContext context,
-        List<Branch<Boolean>> leftBranches, // a list of two branches, onecontains true, the other false
+        List<Branch<Boolean>> oldBranches,
         Function<BattleContext, List<Branch<Boolean>>> function
     ) {
         List<Branch<Boolean>> outcomes = new ArrayList<>();
-        List<Branch<Boolean>> rightBranches = function.apply(context);
+        for (Branch<Boolean> oldBranch : oldBranches) {
 
-        for (Branch<Boolean> leftBranch : leftBranches) {
-            for (Branch<Boolean> rightBranch : rightBranches) {
+            List<Branch<Boolean>> newBranches = function.apply(context);
+            for (Branch<Boolean> newBranch : newBranches) {
                 outcomes.add(new Branch<>(
-                    leftBranch.value() && rightBranch.value(),
-                    leftBranch.probability() * rightBranch.probability()
+                    oldBranch.value() && newBranch.value(),
+                    oldBranch.probability() * newBranch.probability()
                 ));
             }
         }
-
         return outcomes;
     }
 
 
     // much better, mutation but it is safe
+    // I wish I used this more, it is worryingly how little I do
     public static <A, B> List<Branch<A>> applyProbability(List<Branch<A>> branches, Branch<B> pBranch) {
         for (Branch<A> branch : branches) {
             branch.multiplyProbability(pBranch.probability());

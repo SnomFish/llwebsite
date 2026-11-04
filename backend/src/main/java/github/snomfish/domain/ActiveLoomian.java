@@ -1,8 +1,5 @@
 package github.snomfish.domain;
 
-import static github.snomfish.functionality.branch.BranchUtil.flatMap;
-import static github.snomfish.functionality.branch.BranchUtil.gateFlatMap;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +14,8 @@ import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.event.Event;
 import github.snomfish.functionality.gate.GateEvent;
+
+import static github.snomfish.functionality.branch.BranchUtil.flatMap;
 
 // ALL LOOMIAN PARAMETERS ARE PRIVATE BY CHOICE
 public class ActiveLoomian extends Loomian {
@@ -66,10 +65,9 @@ public class ActiveLoomian extends Loomian {
 
         return outcomes;
     }
-    public List<Branch<Boolean>> dispatchGate(BattleContext context, GateEvent event) {
-        List<Branch<Boolean>> outcomes = List.of(new Branch<>(false, 1));
+    public List<Branch<Boolean>> dispatchGate(BattleContext context, GateEvent event, List<Branch<Boolean>> outcomes) {
 
-        outcomes = gateFlatMap(context, outcomes, c -> abilityInstance().handleGate(c, event));
+        outcomes = flatMap(context, outcomes, c -> abilityInstance().handleGate(context, event));
 
         return outcomes;
     }

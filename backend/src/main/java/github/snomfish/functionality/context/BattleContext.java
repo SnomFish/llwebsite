@@ -15,10 +15,10 @@ import github.snomfish.functionality.gate.GateId;
 
 import static github.snomfish.domain.SideId.*;
 import static github.snomfish.functionality.branch.BranchUtil.flatMap;
-import static github.snomfish.functionality.branch.BranchUtil.gateFlatMap;
 
 // this is the context of a loomian using a move
-// this could be a record // no it cant, I like mutation
+// this could be a record
+// no it cant, I like mutation
 public class BattleContext implements DeepCopyable<BattleContext> {
     
     private Gamestate gamestate;
@@ -66,10 +66,10 @@ public class BattleContext implements DeepCopyable<BattleContext> {
         return outcomes;
     }
     public List<Branch<Boolean>> dispatchGate(GateId gateId) {
-        List<Branch<Boolean>> outcomes = List.of(new Branch<>(false, 1));
+        List<Branch<Boolean>> outcomes = List.of(new Branch<>(true, 1));
 
-        outcomes = gateFlatMap(this, outcomes, context -> user().dispatchGate(context, new GateEvent(gateId, ContextSideId.USER)));
-        outcomes = gateFlatMap(this, outcomes, context -> target().dispatchGate(context, new GateEvent(gateId, ContextSideId.TARGET)));
+        outcomes = user().dispatchGate(this, new GateEvent(gateId, ContextSideId.USER), outcomes);
+        outcomes = target().dispatchGate(this, new GateEvent(gateId, ContextSideId.TARGET), outcomes);
 
         return outcomes;
     }

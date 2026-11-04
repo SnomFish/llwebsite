@@ -1441,6 +1441,10 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(ROYAL_DECREE)
 			.name("royal_decree")
+			.rule(AbilityRule.build()
+                .event(PRE_MOVE_EVENT, USER) // before anything about the move is actually used
+                .effect(new AlterTypeChart(TypeId.ELECTRIC, TypeId.EARTH, 1))
+            )
 		);
 		register(Ability.build()
 			.id(RUSH_HOUR)
