@@ -2,8 +2,6 @@ package github.snomfish.domain.weather;
 
 import java.util.List;
 
-import github.snomfish.domain.ability.Ability;
-import github.snomfish.domain.ability.AbilityRule;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.copy.DeepCopyable;

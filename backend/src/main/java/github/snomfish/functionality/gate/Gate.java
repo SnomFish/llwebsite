@@ -6,8 +6,6 @@ import java.util.List;
 import github.snomfish.functionality.condition.ICondition;
 import github.snomfish.functionality.condition.NoCondition;
 import github.snomfish.functionality.context.ContextSideId;
-import github.snomfish.functionality.effect.IEffect;
-import github.snomfish.functionality.effect.effects.NoEffect;
 
 public class Gate {
     

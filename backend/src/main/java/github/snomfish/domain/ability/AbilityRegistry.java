@@ -42,12 +42,6 @@ import github.snomfish.functionality.number.Multiply;
 import github.snomfish.functionality.number.ValueConstant;
 
 import static github.snomfish.domain.ability.AbilityId.*;
-import static github.snomfish.domain.type.TypeId.AIR;
-import static github.snomfish.domain.type.TypeId.BRAWLER;
-import static github.snomfish.domain.type.TypeId.FIRE;
-import static github.snomfish.domain.type.TypeId.ICE;
-import static github.snomfish.domain.type.TypeId.MIND;
-import static github.snomfish.domain.type.TypeId.SPIRIT;
 import static github.snomfish.functionality.context.ContextSideId.*;
 import static github.snomfish.functionality.event.EventId.*;
 import static github.snomfish.functionality.gate.GateId.*;
@@ -454,7 +448,7 @@ public class AbilityRegistry {
 			.name("burning_rage")
 			.rule(AbilityRule.build()
 				.event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
-				.condition(new Equals<>(Value.USER().MOVE().TYPE(), FIRE))
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.FIRE))
 				.effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.25)))
 			)
 		);
@@ -488,7 +482,7 @@ public class AbilityRegistry {
 			.name("chilling_passion")
 			.rule(AbilityRule.build()
 				.event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
-				.condition(new Equals<>(Value.USER().MOVE().TYPE(), ICE))
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.ICE))
 				.effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.25)))
 			)
 		);
@@ -729,7 +723,7 @@ public class AbilityRegistry {
 			.rule(AbilityRule.build()
 				.event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET)
 				.condition(new And(
-					new Equals<>(Value.USER().MOVE().TYPE(), AIR),
+					new Equals<>(Value.USER().MOVE().TYPE(), TypeId.AIR),
 					new GateCondition(CAN_USE_DEFENSIVE_ABILITY)
 				))
 				.effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)))
@@ -838,14 +832,14 @@ public class AbilityRegistry {
 			.name("glide")
 			.rule(AbilityRule.build()
 				.event(DEALT_DAMAGE_EVENT, USER)
-				.condition(new Equals<>(Value.USER().MOVE().TYPE(), AIR))
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.AIR))
 				.effect(ApplyStatChanges.userChangingUser()
 					.speed(new Constant(1))
 				)
 			)
 			.rule(AbilityRule.build()
 				.event(DEALT_DAMAGE_EVENT, TARGET)
-				.condition(new Equals<>(Value.USER().MOVE().TYPE(), AIR))
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.AIR))
 				.effect(ApplyStatChanges.targetChangingTarget()
 					.speed(new Constant(1))
 				)
@@ -1029,8 +1023,8 @@ public class AbilityRegistry {
 				.condition(new And(
 					new GateCondition(CAN_USE_DEFENSIVE_ABILITY),
 					new Or(
-						new Equals<>(Value.USER().MOVE().TYPE(), FIRE),
-						new Equals<>(Value.USER().MOVE().TYPE(), ICE)
+						new Equals<>(Value.USER().MOVE().TYPE(), TypeId.FIRE),
+						new Equals<>(Value.USER().MOVE().TYPE(), TypeId.ICE)
 					)
 				))
 				.effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)))
@@ -1762,8 +1756,8 @@ public class AbilityRegistry {
 			.rule(AbilityRule.build()
 				.event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET)
 				.condition(new Or(
-					new Equals<>(Value.USER().MOVE().TYPE(), BRAWLER),
-					new Equals<>(Value.USER().MOVE().TYPE(), MIND)
+					new Equals<>(Value.USER().MOVE().TYPE(), TypeId.BRAWLER),
+					new Equals<>(Value.USER().MOVE().TYPE(), TypeId.MIND)
 				))
 				.effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)))
 			)

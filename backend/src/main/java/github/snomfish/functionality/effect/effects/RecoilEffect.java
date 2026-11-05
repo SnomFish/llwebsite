@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import github.snomfish.domain.ActiveLoomian;
-import github.snomfish.domain.ability.AbilityId;
 import github.snomfish.domain.move.Move;
-import github.snomfish.functionality.Value;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.condition.GateCondition;
 import github.snomfish.functionality.context.BattleContext;

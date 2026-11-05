@@ -3,7 +3,6 @@ package github.snomfish.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import github.snomfish.domain.ability.AbilityId;
 import github.snomfish.domain.ability.AbilityInstance;
 import github.snomfish.domain.mechanics.Mechanics;
 import github.snomfish.domain.stats.StatChanges;
