@@ -56,8 +56,8 @@ public class MechanicRegistry {
             new TriggerRule(
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
                 new ConditionalEffect(
-                    new Equals(Value.MOVE_TYPE, TypeId.FIRE),
-                    Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5))
+                    new Equals<>(Value.USER().MOVE().TYPE(), TypeId.FIRE),
+                    Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5))
                 )
             )
         );
@@ -67,8 +67,8 @@ public class MechanicRegistry {
             new TriggerRule(
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
                 new ConditionalEffect(
-                    new Equals(Value.MOVE_TYPE, TypeId.TOXIC),
-                    Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5))
+                    new Equals<>(Value.USER().MOVE().TYPE(), TypeId.TOXIC),
+                    Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5))
                 )
             )
         );
@@ -78,8 +78,8 @@ public class MechanicRegistry {
             new TriggerRule(
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
                 new ConditionalEffect(
-                    new Equals(Value.MOVE_TYPE, TypeId.PLANT),
-                    Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5))
+                    new Equals<>(Value.USER().MOVE().TYPE(), TypeId.PLANT),
+                    Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5))
                 )
             )
         );
@@ -89,8 +89,8 @@ public class MechanicRegistry {
             new TriggerRule(
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
                 new ConditionalEffect(
-                    new Equals(Value.MOVE_TYPE, TypeId.LIGHT),
-                    Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5))
+                    new Equals<>(Value.USER().MOVE().TYPE(), TypeId.LIGHT),
+                    Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5))
                 )
             )
         );
@@ -100,9 +100,9 @@ public class MechanicRegistry {
             new TriggerRule(
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
                 new ConditionalEffect(    
-                    new Equals(Value.MOVE_TYPE, TypeId.AIR),
+                    new Equals<>(Value.USER().MOVE().TYPE(), TypeId.AIR),
                     new EffectSequence(List.of(
-                        Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+                        Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
                         RemoveMechanic.fromUser(TOXIC_FILTER)
                     ))
                 )

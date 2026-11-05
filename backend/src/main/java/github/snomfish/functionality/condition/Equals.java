@@ -6,7 +6,7 @@ import github.snomfish.functionality.Value;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 
-public class Equals implements ICondition {
+public class Equals<T> implements ICondition {
     
 
     private Object value1;
@@ -24,8 +24,8 @@ public class Equals implements ICondition {
 
     // THERE IS NO DEEP COPYING HAPPENING HERE, BUGS WILL OCCUR LMAOOOOOOOOOO 
     @Override
-    public Equals deepCopy() {
-        return new Equals(
+    public Equals<T> deepCopy() {
+        return new Equals<T>(
             value1,
             value2
         );
@@ -35,25 +35,12 @@ public class Equals implements ICondition {
     @Override 
     public List<Branch<Boolean>> execute(BattleContext context) {
 
-        Object value1Value = resolve(value1, context);
-        Object value2Value = resolve(value2, context);
-
-        if (value1Value != null && value2Value != null && !value1Value.getClass().equals(value2Value.getClass())) { 
-            throw new IllegalStateException( "Cannot compare values of different types: " + value1Value.getClass().getSimpleName() + " and " + value2Value.getClass().getSimpleName() ); 
-        }
+        T value1Value = Value.resolve(value1, context);
+        T value2Value = Value.resolve(value2, context);
 
         return List.of(new Branch<>(
             value1Value == value2Value,
             1.0
         ));
-    }
-
-
-    // this is bad and shoud be using the Value resolve() one, i think
-    private Object resolve(Object value, BattleContext context) {
-        if (value instanceof Value dynamicValue) {
-            return dynamicValue.get(context);
-        }
-        return value;
     }
 }

@@ -16,37 +16,37 @@ public class Conditions {
 
 
     public static ICondition clearWeather() {
-        return new Equals(Value.WEATHER_ID, WeatherId.NO_WEATHER);
+        return new Equals<>(Value.WEATHER_ID(), WeatherId.NO_WEATHER);
     }
     public static ICondition fogActive() {
-        return new Equals(Value.WEATHER_ID, WeatherId.FOG);
+        return new Equals<>(Value.WEATHER_ID(), WeatherId.FOG);
     }
     public static ICondition heatwaveActive() {
-        return new Equals(Value.WEATHER_ID, WeatherId.HEATWAVE);
+        return new Equals<>(Value.WEATHER_ID(), WeatherId.HEATWAVE);
     }
     public static ICondition strongWindsActive() {
-        return new Equals(Value.WEATHER_ID, WeatherId.STRONG_WINDS);
+        return new Equals<>(Value.WEATHER_ID(), WeatherId.STRONG_WINDS);
     }
     public static ICondition rainActive() {
-        return new Equals(Value.WEATHER_ID, WeatherId.RAIN);
+        return new Equals<>(Value.WEATHER_ID(), WeatherId.RAIN);
     }
     public static ICondition thunderstormActive() {
-        return new Equals(Value.WEATHER_ID, WeatherId.THUNDERSTORM);
+        return new Equals<>(Value.WEATHER_ID(), WeatherId.THUNDERSTORM);
     }
 
 
     public static ICondition userHasStatusAilment() {
-        return new Not(new Equals(Value.USER_STATUS_ID, StatusId.NO_STATUS));
+        return new Not(new Equals<>(Value.USER().STATUS_ID(), StatusId.NO_STATUS));
     }
     public static ICondition targetHasStatusAilment() {
-        return new Not(new Equals(Value.TARGET_STATUS_ID, StatusId.NO_STATUS));
+        return new Not(new Equals<>(Value.TARGET().STATUS_ID(), StatusId.NO_STATUS));
     }
 
 
     public static ICondition userIsAtFullHealth() {
-        return new Equals(Value.USER_CURRENT_HEALTH, Value.USER_HEALTH);
+        return new Equals<>(Value.USER().CURRENT_HEALTH(), Value.USER().HEALTH());
     }
     public static ICondition targetIsAtFullHealth() {
-        return new Equals(Value.TARGET_CURRENT_HEALTH, Value.TARGET_HEALTH);
+        return new Equals<>(Value.TARGET().CURRENT_HEALTH(), Value.TARGET().HEALTH());
     }
 }

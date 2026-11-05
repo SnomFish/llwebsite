@@ -6,16 +6,16 @@ import github.snomfish.functionality.Value;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 
-public class ListContains implements ICondition {
+public class ListContains<T> implements ICondition {
       
 
-    private Value list;
-    private Value value;
+    private Value<List<T>> list;
+    private Value<T> value;
 
 
     public ListContains(
-        Value list,
-        Value value
+        Value<List<T>> list,
+        Value<T> value
     ) {
         this.list = list;
         this.value = value;
@@ -24,8 +24,8 @@ public class ListContains implements ICondition {
 
     // both are type Value, so no deep copying is needed here
     @Override
-    public ListContains deepCopy() {
-        return new ListContains(
+    public ListContains<T> deepCopy() {
+        return new ListContains<>(
             list,
             value
         );
@@ -35,15 +35,11 @@ public class ListContains implements ICondition {
     @Override 
     public List<Branch<Boolean>> execute(BattleContext context) {
         
-        Object listValue = list.get(context);
-        Object valueValue = value.get(context);
-
-        if (!(listValue instanceof List<?> actualList)) {
-            throw new IllegalStateException(list + " does not contain a List, got: " + listValue);
-        }
+        List<T> listValue = list.get(context);
+        T valueValue = value.get(context);
         
         return List.of(new Branch<>(
-            actualList.contains(valueValue),
+            listValue.contains(valueValue),
             1.0
         ));
     }

@@ -15,12 +15,12 @@ import static github.snomfish.domain.item.ItemId.NO_ITEM;
 public class ConsumeItem implements IEffect {
         
 
-    private Value activeLoomianValue;
+    private Value<ActiveLoomian> activeLoomianValue;
     private EventId removedItemEventId;
 
 
     private ConsumeItem(
-        Value activeLoomianValue,
+        Value<ActiveLoomian> activeLoomianValue,
         EventId removedItemEventId
     ) {
         this.activeLoomianValue = activeLoomianValue;
@@ -28,13 +28,13 @@ public class ConsumeItem implements IEffect {
     }
     public static ConsumeItem user() {
         return new ConsumeItem(
-            Value.USER, 
+            Value.USER().LOOMIAN(), 
             EventId.USER_ITEM_CONSUMED_EVENT
         );
     }
     public static ConsumeItem target() {
         return new ConsumeItem(
-            Value.TARGET,
+            Value.TARGET().LOOMIAN(),
             EventId.TARGET_ITEM_CONSUMED_EVENT
         );
     }

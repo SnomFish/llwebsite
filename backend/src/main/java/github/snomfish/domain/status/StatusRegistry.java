@@ -75,7 +75,7 @@ public class StatusRegistry {
                 new Event(EventId.END_TURN_STATUS_EFFECT_EVENT, USER),
                 new DealDirectSelfDamage(new Multiply(
                     new Constant(1/16),
-                    new ValueConstant(Value.USER_STATUS_TURNS)
+                    new ValueConstant(Value.USER().CURRENT_HEALTH())
                 ))
             )
         );
@@ -92,10 +92,10 @@ public class StatusRegistry {
                 new DealDirectSelfDamage(new Constant(1/16))
             ),
             new TriggerRule( // cutting mattack in half
-                new Event(EventId.BEFORE_MOVE_EVENT, USER), 
+                new Event(EventId.PRE_MOVE_EVENT, USER), 
                 new ConditionalEffect(
-                    new Equals(Value.MOVE_CATEGORY, CategoryId.MELEE),
-                    Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant (0.5)) 
+                    new Equals<>(Value.USER().MOVE().CATEGORY(), CategoryId.MELEE),
+                    Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant (0.5)) 
                 )
             ))
         );
@@ -107,10 +107,10 @@ public class StatusRegistry {
                 new DealDirectSelfDamage(new Constant(1/16))
             ),
             new TriggerRule( // cutting mattack in half
-                new Event(EventId.BEFORE_MOVE_EVENT, USER), 
+                new Event(EventId.PRE_MOVE_EVENT, USER), 
                 new ConditionalEffect(
-                    new Equals(Value.MOVE_CATEGORY, CategoryId.RANGED),
-                    Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant (0.5)) 
+                    new Equals<>(Value.USER().MOVE().CATEGORY(), CategoryId.RANGED),
+                    Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant (0.5)) 
                 )
             ))
         );

@@ -38,9 +38,9 @@ public class Schematics {
     }
 
 
-    public static INumber tenPercentOfMaxEnergy() {
+    public static INumber tenPercentOfUserMaxEnergy() {
         return new Multiply(
-            new ValueConstant(Value.USER_ENERGY),
+            new ValueConstant(Value.USER().ENERGY()),
             new Constant(0.1)
         );
     }

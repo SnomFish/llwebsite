@@ -12,22 +12,22 @@ import github.snomfish.functionality.effect.IEffect;
 public class ApplyStatus implements IEffect {
     
 
-    private Value activeLoomianValue;
+    private Value<ActiveLoomian> activeLoomianValue;
     private StatusId statusId;
 
 
     private ApplyStatus(
-        Value activeLoomianValue,
+        Value<ActiveLoomian> activeLoomianValue,
         StatusId statusId
     ) {
         this.activeLoomianValue = activeLoomianValue;
         this.statusId = statusId;
     }
     public static ApplyStatus toUser(StatusId statusId) {
-        return new ApplyStatus(Value.USER, statusId);
+        return new ApplyStatus(Value.USER().LOOMIAN(), statusId);
     }
     public static ApplyStatus toTarget(StatusId statusId) {
-        return new ApplyStatus(Value.TARGET, statusId);
+        return new ApplyStatus(Value.TARGET().LOOMIAN(), statusId);
     }
 
 

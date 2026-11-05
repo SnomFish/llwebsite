@@ -22,14 +22,14 @@ public class ApplyStatChanges implements IEffect {
 
     private EventId preEvent; // runs once before the stat changes are applied
     private EventId loweredStatEvent; // runs after each inidividual stat change if a stat is lowered
-    private Value activeLoomianValue; // the loomian who will have their stats changed
+    private Value<ActiveLoomian> activeLoomianValue; // the loomian who will have their stats changed
     private Map<StatChangesId, INumber> statChanges;
 
 
     private ApplyStatChanges(
         EventId preEvent,
         EventId loweredStatEvent,
-        Value activeLoomianValue
+        Value<ActiveLoomian> activeLoomianValue
     ) {
         this.preEvent = preEvent;
         this.loweredStatEvent = loweredStatEvent;
@@ -42,28 +42,28 @@ public class ApplyStatChanges implements IEffect {
         return new ApplyStatChanges(
             EventId.PRE_STAT_CHANGES_EFFECT_EVENT, 
             null,
-            Value.USER
+            Value.USER().LOOMIAN()
         );
     }
     public static ApplyStatChanges userChangingTarget() {
         return new ApplyStatChanges(
             EventId.PRE_STAT_CHANGES_EFFECT_EVENT,  
             EventId.USER_LOWERED_TARGET_STATS_EVENT,
-            Value.TARGET
+            Value.TARGET().LOOMIAN()
         );
     }
     public static ApplyStatChanges targetChangingUser() {
         return new ApplyStatChanges(
             EventId.PRE_STAT_CHANGES_EFFECT_EVENT,  
             EventId.TARGET_LOWERED_USER_STATS_EVENT,
-            Value.USER
+            Value.USER().LOOMIAN()
         );
     }
     public static ApplyStatChanges targetChangingTarget() {
         return new ApplyStatChanges(
             EventId.PRE_STAT_CHANGES_EFFECT_EVENT, 
             null, 
-            Value.TARGET
+            Value.TARGET().LOOMIAN()
         );
     }
 

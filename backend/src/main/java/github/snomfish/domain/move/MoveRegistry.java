@@ -10,8 +10,8 @@ import github.snomfish.domain.status.StatusId;
 import github.snomfish.domain.weather.WeatherId;
 import github.snomfish.functionality.Schematics;
 import github.snomfish.functionality.Value;
+import github.snomfish.functionality.condition.Comparator;
 import github.snomfish.functionality.condition.Conditions;
-import github.snomfish.functionality.condition.GreaterThan;
 import github.snomfish.functionality.condition.RandomCondition;
 import github.snomfish.functionality.effect.ConditionalEffect;
 import github.snomfish.functionality.effect.EffectSequence;
@@ -25,6 +25,7 @@ import github.snomfish.functionality.effect.effects.SetType;
 import github.snomfish.functionality.effect.effects.SetWeather;
 import github.snomfish.functionality.number.ConditionalNumber;
 import github.snomfish.functionality.number.Constant;
+import github.snomfish.functionality.number.ValueConstant;
 
 import static github.snomfish.domain.move.CategoryId.*;
 import static github.snomfish.domain.move.MoveId.*;
@@ -435,7 +436,7 @@ public class MoveRegistry {
 			.name("barb_trap")
 			.type(TOXIC)
 			.category(STATUS)
-			.energyCost(Schematics.tenPercentOfMaxEnergy()) // 10% of max energy
+			.energyCost(Schematics.tenPercentOfUserMaxEnergy()) // 10% of max energy
 			.build()
 		);
 		register(MoveBuilder.newMove(BARBS)
@@ -813,7 +814,7 @@ public class MoveRegistry {
 			.name("Briar Block")
 			.type(PLANT)
 			.category(STATUS)
-			.energyCost(Schematics.tenPercentOfMaxEnergy()) // 10%
+			.energyCost(Schematics.tenPercentOfUserMaxEnergy()) // 10%
 			.priority(new Constant(4))
 			.build()
 		);
@@ -1220,7 +1221,7 @@ public class MoveRegistry {
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				/*new ConditionalEffect(
-					new Equals()
+					new Equals<>()
 					new DealFormulaDamage()
 				)*/
 				new NoEffect()
@@ -1237,7 +1238,7 @@ public class MoveRegistry {
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				/*new ConditionalEffect(
-					new Equals()
+					new Equals<>()
 					new DealFormulaDamage()
 				)*/
 				new NoEffect()
@@ -1417,7 +1418,7 @@ public class MoveRegistry {
 			.name("Dodge")
 			.type(SIMPLE)
 			.category(STATUS)
-			.energyCost(Schematics.tenPercentOfMaxEnergy()) // 10%
+			.energyCost(Schematics.tenPercentOfUserMaxEnergy()) // 10%
 			.priority(new Constant(4))
 			.build()
 		);
@@ -1768,7 +1769,7 @@ public class MoveRegistry {
 			.energyCost(new Constant(40))
 			.basePower(new Constant(75))
 			.beforeHit(new MoveEffect(
-				SetType.move(Value.USER_PRIMARY_TYPE)
+				SetType.move(Value.USER().PRIMARY_TYPE())
 			))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -2967,7 +2968,7 @@ public class MoveRegistry {
 			.name("Magma Block")
 			.type(FIRE)
 			.category(STATUS)
-			.energyCost(Schematics.tenPercentOfMaxEnergy()) // 10%
+			.energyCost(Schematics.tenPercentOfUserMaxEnergy()) // 10%
 			.priority(new Constant(4))
 			.build()
 		);
@@ -4211,7 +4212,9 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(40))
 			.basePower(new ConditionalNumber(
-				new GreaterThan(Value.USER_HEIGHT, Value.TARGET_HEIGHT),
+				Comparator.greaterThan()
+					.left(new ValueConstant(Value.USER().HEIGHT()))
+					.right(new ValueConstant(Value.TARGET().HEIGHT())),
 				new Constant(70 * 1.25),
 				new Constant(70)
 			))
@@ -4227,7 +4230,7 @@ public class MoveRegistry {
 			.name("ruffled_feathers")
 			.type(AIR)
 			.category(STATUS)
-			.energyCost(Schematics.tenPercentOfMaxEnergy()) // 10% of max energy
+			.energyCost(Schematics.tenPercentOfUserMaxEnergy()) // 10% of max energy
 			.build()
 		);
 		register(MoveBuilder.newMove(RUTHLESS_FEAST)
@@ -5328,7 +5331,7 @@ public class MoveRegistry {
 			.name("Tone Barrier")
 			.type(SIMPLE)
 			.category(STATUS)
-			.energyCost(Schematics.tenPercentOfMaxEnergy()) // 10% max energy
+			.energyCost(Schematics.tenPercentOfUserMaxEnergy()) // 10% max energy
 			.priority(new Constant(4))
 			.tag(SOUND)
 			.build()

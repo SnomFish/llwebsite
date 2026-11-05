@@ -80,30 +80,30 @@ public class AbilityInstance implements DeepCopyable<AbilityInstance> {
                 BattleContext outcome = context.deepCopy();
 
 				// idk how else to try and set the triggered booleans to true or false
-                AbilityId userAbilityId =           (AbilityId) Value.USER_ABILITY_ID.get(context);
-                AbilityId userActualAbilityId =     (AbilityId) Value.USER_ACTUAL_ABILITY_ID.get(context);
-                AbilityId targetAbilityId =         (AbilityId) Value.TARGET_ABILITY_ID.get(context);
-                AbilityId targetActualAbilityId = 	(AbilityId) Value.TARGET_ACTUAL_ABILITY_ID.get(context);
+                AbilityId userAbilityId =           (AbilityId) Value.USER().ABILITY_ID().get(context);
+                AbilityId userActualAbilityId =     (AbilityId) Value.USER().ACTUAL_ABILITY_ID().get(context);
+                AbilityId targetAbilityId =         (AbilityId) Value.TARGET().ABILITY_ID().get(context);
+                AbilityId targetActualAbilityId = 	(AbilityId) Value.TARGET().ACTUAL_ABILITY_ID().get(context);
                 
                 if (event.sideId() == ContextSideId.USER && userAbilityId == userActualAbilityId) {
-                    Value.USER_ABILITY_HAS_TRIGGERED_THIS_BATTLE.set(outcome, true);
-                    Value.USER_ABILITY_HAS_TRIGGERED_THIS_SWAP.set(outcome, true);
-					Value.USER_ACTUAL_ABILITY_HAS_TRIGGERED_THIS_BATTLE.set(outcome, true);
-                    Value.USER_ACTUAL_ABILITY_HAS_TRIGGERED_THIS_SWAP.set(outcome, true);
+                    Value.USER().ABILITY_HAS_ACTIVATED_THIS_BATTLE().set(outcome, true);
+                    Value.USER().ABILITY_HAS_ACTIVATED_THIS_SWAP().set(outcome, true);
+					Value.USER().ACTUAL_ABILITY_HAS_ACTIVATED_THIS_BATTLE().set(outcome, true);
+                    Value.USER().ACTUAL_ABILITY_HAS_ACTIVATED_THIS_SWAP().set(outcome, true);
                 } 
 				else if (event.sideId() == ContextSideId.USER && userAbilityId != userActualAbilityId) {
-					Value.USER_ABILITY_HAS_TRIGGERED_THIS_BATTLE.set(outcome, true);
-                    Value.USER_ABILITY_HAS_TRIGGERED_THIS_SWAP.set(outcome, true);
+					Value.USER().ABILITY_HAS_ACTIVATED_THIS_BATTLE().set(outcome, true);
+                    Value.USER().ABILITY_HAS_ACTIVATED_THIS_SWAP().set(outcome, true);
 				}
 				else if (event.sideId() == ContextSideId.TARGET && targetAbilityId == targetActualAbilityId) {
-                    Value.TARGET_ABILITY_HAS_TRIGGERED_THIS_BATTLE.set(outcome, true);
-                    Value.TARGET_ABILITY_HAS_TRIGGERED_THIS_SWAP.set(outcome, true);
-					Value.TARGET_ACTUAL_ABILITY_HAS_TRIGGERED_THIS_BATTLE.set(outcome, true);
-                    Value.TARGET_ACTUAL_ABILITY_HAS_TRIGGERED_THIS_SWAP.set(outcome, true);
+                    Value.TARGET().ABILITY_HAS_ACTIVATED_THIS_BATTLE().set(outcome, true);
+                    Value.TARGET().ABILITY_HAS_ACTIVATED_THIS_SWAP().set(outcome, true);
+					Value.TARGET().ACTUAL_ABILITY_HAS_ACTIVATED_THIS_BATTLE().set(outcome, true);
+                    Value.TARGET().ACTUAL_ABILITY_HAS_ACTIVATED_THIS_SWAP().set(outcome, true);
                 } 
 				else if (event.sideId() == ContextSideId.TARGET && targetAbilityId != targetActualAbilityId) {
-					Value.TARGET_ABILITY_HAS_TRIGGERED_THIS_BATTLE.set(outcome, true);
-                    Value.TARGET_ABILITY_HAS_TRIGGERED_THIS_SWAP.set(outcome, true);
+					Value.TARGET().ABILITY_HAS_ACTIVATED_THIS_BATTLE().set(outcome, true);
+                    Value.TARGET().ABILITY_HAS_ACTIVATED_THIS_SWAP().set(outcome, true);
 				}
 
 				outcomes.addAll(rule.effect().execute(outcome));

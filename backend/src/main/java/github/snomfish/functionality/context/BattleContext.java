@@ -12,9 +12,6 @@ import github.snomfish.functionality.event.Event;
 import github.snomfish.functionality.event.EventId;
 import github.snomfish.functionality.gate.GateEvent;
 import github.snomfish.functionality.gate.GateId;
-import github.snomfish.functionality.value.Location;
-import github.snomfish.functionality.value.SubjectRoot;
-import github.snomfish.functionality.value.subject.ISubject;
 
 import static github.snomfish.domain.SideId.*;
 import static github.snomfish.functionality.branch.BranchUtil.flatMap;
@@ -61,14 +58,14 @@ public class BattleContext implements DeepCopyable<BattleContext> {
             case TARGET -> target;
         };
     }
-    public WeatherInstance weather() {return gamestate.weatherInstance();}
+    public WeatherInstance weatherInstance() {return gamestate.weatherInstance();}
 
 
     // events
     public List<Branch<BattleContext>> dispatchEvent(EventId eventId) {
         List<Branch<BattleContext>> outcomes = List.of(new Branch<>(this, 1.0));
 
-        outcomes = flatMap(outcomes, context -> weather().handleEvent(context, new Event(eventId, null)));
+        outcomes = flatMap(outcomes, context -> weatherInstance().handleEvent(context, new Event(eventId, null)));
         outcomes = flatMap(outcomes, context -> user().dispatchEvent(context, new Event(eventId, ContextSideId.USER)));
         outcomes = flatMap(outcomes, context -> target().dispatchEvent(context, new Event(eventId, ContextSideId.TARGET)));
 
@@ -81,15 +78,6 @@ public class BattleContext implements DeepCopyable<BattleContext> {
         outcomes = target().dispatchGate(this, new GateEvent(gateId, ContextSideId.TARGET), outcomes);
 
         return outcomes;
-    }
-
-
-    @SuppressWarnings("unchecked")
-    public <A, B> A get(Location<B> location) {
-        SubjectRoot main = location.main();
-        ISubject<B> side = location.side();
-
-        return (A) side.get(main.get(this));
     }
 
 

@@ -11,12 +11,12 @@ import github.snomfish.functionality.effect.IEffect;
 public class SetAbility implements IEffect {
     
 
-    private Value abilityToBeSet;
+    private Value<AbilityId> abilityToBeSet;
     private Object abilityObject;
 
 
     private SetAbility(
-        Value abilityToBeSet,
+        Value<AbilityId> abilityToBeSet,
         Object abilityObject
     ) {
         this.abilityToBeSet = abilityToBeSet;
@@ -35,36 +35,36 @@ public class SetAbility implements IEffect {
 
     // AbilityId
     public static IEffect user(AbilityId ability) {
-        return new SetAbility(Value.USER_ABILITY_ID, ability);
+        return new SetAbility(Value.USER().ABILITY_ID(), ability);
     }
     public static IEffect userActual(AbilityId ability) {
-        return new SetAbility(Value.USER_ACTUAL_ABILITY_ID, ability);
+        return new SetAbility(Value.USER().ACTUAL_ABILITY_ID(), ability);
     }
     public static IEffect target(AbilityId ability) {
-        return new SetAbility(Value.TARGET_ABILITY_ID, ability);
+        return new SetAbility(Value.TARGET().ABILITY_ID(), ability);
     }
     public static IEffect targetActual(AbilityId ability) {
-        return new SetAbility(Value.TARGET_ACTUAL_ABILITY_ID, ability);
+        return new SetAbility(Value.TARGET().ACTUAL_ABILITY_ID(), ability);
     }
     // Value
-    public static IEffect user(Value ability) {
-        return new SetAbility(Value.USER_ABILITY_ID, ability);
+    public static IEffect user(Value<AbilityId> ability) {
+        return new SetAbility(Value.USER().ABILITY_ID(), ability);
     }
-    public static IEffect userActual(Value ability) {
-        return new SetAbility(Value.USER_ACTUAL_ABILITY_ID, ability);
+    public static IEffect userActual(Value<AbilityId> ability) {
+        return new SetAbility(Value.USER().ACTUAL_ABILITY_ID(), ability);
     }
-    public static IEffect target(Value ability) {
-        return new SetAbility(Value.TARGET_ABILITY_ID, ability);
+    public static IEffect target(Value<AbilityId> ability) {
+        return new SetAbility(Value.TARGET().ABILITY_ID(), ability);
     }
-    public static IEffect targetActual(Value ability) {
-        return new SetAbility(Value.TARGET_ACTUAL_ABILITY_ID, ability);
+    public static IEffect targetActual(Value<AbilityId> ability) {
+        return new SetAbility(Value.TARGET().ACTUAL_ABILITY_ID(), ability);
     }
 
 
     public List<Branch<BattleContext>> execute(BattleContext context) {
         BattleContext outcome = context.deepCopy();
         
-        AbilityId ability = Value.resolve(abilityObject, AbilityId.class, outcome);
+        AbilityId ability = Value.resolve(abilityObject, outcome);
         abilityToBeSet.set(outcome, ability);
 
         List<Branch<BattleContext>> outcomes = List.of(new Branch<>(outcome, 1));

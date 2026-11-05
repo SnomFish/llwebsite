@@ -61,15 +61,15 @@ public class WeatherRegistry {
                 new TriggerRule( // increases the power of fire moves by 30%
                     new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
                     new ConditionalEffect(
-                        new Equals(Value.MOVE_TYPE, FIRE),
-                        Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.3))
+                        new Equals<>(Value.USER().MOVE().TYPE(), FIRE),
+                        Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.3))
                     )
                 ),
                 new TriggerRule( // decreases the power of water moves by 30%
                     new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
                     new ConditionalEffect(
-                        new Equals(Value.MOVE_TYPE, WATER),
-                        Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.7))
+                        new Equals<>(Value.USER().MOVE().TYPE(), WATER),
+                        Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.7))
                     )
                 )
                 // moves of bug type loomians cost 10% less energy
@@ -82,15 +82,15 @@ public class WeatherRegistry {
                 new TriggerRule( // increases the power of water moves by 30%
                     new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
                     new ConditionalEffect(
-                        new Equals(Value.MOVE_TYPE, WATER),
-                        Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.3))
+                        new Equals<>(Value.USER().MOVE().TYPE(), WATER),
+                        Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.3))
                     )
                 ),
                 new TriggerRule( // decreases the power of fire moves by 30%
                     new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
                     new ConditionalEffect(
-                        new Equals(Value.MOVE_TYPE, FIRE),
-                        Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.7))
+                        new Equals<>(Value.USER().MOVE().TYPE(), FIRE),
+                        Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.7))
                     )
                 )
                 // plant types heal 1/16 max hp after each turn
@@ -103,8 +103,8 @@ public class WeatherRegistry {
                 new TriggerRule( // increases the power of toxic moves by 25%
                     new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
                     new ConditionalEffect(
-                        new Equals(Value.MOVE_TYPE, TOXIC),
-                        Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.25))
+                        new Equals<>(Value.USER().MOVE().TYPE(), TOXIC),
+                        Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.25))
                     )
                 )
                 // increases the speed of air type loomians by 25%
@@ -118,8 +118,8 @@ public class WeatherRegistry {
                 new TriggerRule( // increases the power of toxic moves by 25%
                     new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
                     new ConditionalEffect(
-                        new Equals(Value.MOVE_TYPE, ELECTRIC),
-                        Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.25))
+                        new Equals<>(Value.USER().MOVE().TYPE(), ELECTRIC),
+                        Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.25))
                     )
                 )
                 // electric type moves cost 25% less energy

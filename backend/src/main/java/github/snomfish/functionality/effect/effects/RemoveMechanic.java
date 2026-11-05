@@ -12,22 +12,22 @@ import github.snomfish.functionality.effect.IEffect;
 public class RemoveMechanic implements IEffect {
         
 
-    private Value activeLoomianValue;
+    private Value<ActiveLoomian> activeLoomianValue;
     private MechanicId mechanicId;
 
 
     private RemoveMechanic(
-        Value activeLoomianValue,
+        Value<ActiveLoomian> activeLoomianValue,
         MechanicId mechanicId
     ) {
         this.activeLoomianValue = activeLoomianValue;
         this.mechanicId = mechanicId;
     }
     public static RemoveMechanic fromUser(MechanicId mechanicId) {
-        return new RemoveMechanic(Value.USER, mechanicId);
+        return new RemoveMechanic(Value.USER().LOOMIAN(), mechanicId);
     }
     public static RemoveMechanic fromTarget(MechanicId mechanicId) {
-        return new RemoveMechanic(Value.TARGET, mechanicId);
+        return new RemoveMechanic(Value.TARGET().LOOMIAN(), mechanicId);
     }
 
 

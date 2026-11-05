@@ -46,10 +46,6 @@ public class RecoilEffect implements IEffect {
 
     @Override 
     public List<Branch<BattleContext>> execute(BattleContext context) {
-
-
-        if (Value.USER_ABILITY_ID.get(context) == AbilityId.BONEHEADED) List.of(new Branch<>(context, 1));
-
         List<Branch<BattleContext>> outcomes = new ArrayList<>();
 
         for (Branch<Double> recoilBranch : recoilNumber.execute(context)) {

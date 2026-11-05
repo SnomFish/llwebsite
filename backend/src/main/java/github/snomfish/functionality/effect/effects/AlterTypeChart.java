@@ -42,8 +42,8 @@ public class AlterTypeChart implements IEffect {
     @Override 
     public List<Branch<BattleContext>> execute(BattleContext context) {
         TypeChart typeChart = context.user().activeLoomian().action().move().typeChart();
-        TypeId attackingType = Value.resolve(attackingTypeObject, TypeId.class, context);
-        TypeId defendingType = Value.resolve(defendingTypeObject, TypeId.class, context);
+        TypeId attackingType = Value.resolve(attackingTypeObject, context);
+        TypeId defendingType = Value.resolve(defendingTypeObject, context);
 
         typeChart.set(attackingType, defendingType, multiplier);
 

@@ -9,30 +9,24 @@ import github.snomfish.functionality.context.BattleContext;
 public class ValueConstant implements INumber {
 
     
-    private Value value;
+    private Value<? extends Number> value;
     
 
-    public ValueConstant(Value value) {
+    public ValueConstant(Value<? extends Number> value) {
         this.value = value;
     }
 
 
-    @Override 
+    private ValueConstant(ValueConstant copy) {
+        this.value = copy.value;
+    }
     public ValueConstant deepCopy() {
-        return new ValueConstant(value);
+        return new ValueConstant(this);
     }
 
 
     @Override 
     public List<Branch<Double>> execute(BattleContext context) {
-        Object object = value.get(context);
-        Double val;
-        if (object instanceof Number) {
-            val = (double) object;
-        } else {
-            throw new RuntimeException("Value \"" + value.name() + "\"; returns a non number into ValueConstant");
-        }
-
-        return List.of(new Branch<>(val, 1.0));
+        return List.of(new Branch<>(value.get(context).doubleValue(), 1.0));
     }
 }

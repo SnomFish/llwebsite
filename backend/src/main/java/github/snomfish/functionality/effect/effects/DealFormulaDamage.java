@@ -140,24 +140,24 @@ public class DealFormulaDamage implements IEffect {
 
         outcomes = flatMap(outcomes, c -> new ConditionalEffect(
             new GateCondition(GateId.CAN_ATTACKING_STAT_USE_STAT_BOOSTS),
-            Effects.multiplyValue(Value.MOVE_ATTACKING_STAT_MODIFIER, new Constant(attackingStatBoosts))
+            Effects.multiplyValue(Value.USER().MOVE().ATTACKING_STAT_MODIFIER(), new Constant(attackingStatBoosts))
         ).execute(c));
 
         if (move.hasCrit()) {
             outcomes = flatMap(outcomes, c -> new ConditionalEffect(
                 new GateCondition(GateId.CAN_ATTACKING_STAT_USE_STAT_DROPS),
-                Effects.multiplyValue(Value.MOVE_ATTACKING_STAT_MODIFIER, new Constant(attackingStatDrops))
+                Effects.multiplyValue(Value.USER().MOVE().ATTACKING_STAT_MODIFIER(), new Constant(attackingStatDrops))
             ).execute(c));
 
             outcomes = flatMap(outcomes, c -> new ConditionalEffect(
                 new GateCondition(GateId.CAN_DEFENDING_STAT_USE_STAT_BOOSTS),
-                Effects.multiplyValue(Value.MOVE_ATTACKING_STAT_MODIFIER, new Constant(defendingStatBoosts))
+                Effects.multiplyValue(Value.USER().MOVE().ATTACKING_STAT_MODIFIER(), new Constant(defendingStatBoosts))
             ).execute(c));
         }
 
         outcomes = flatMap(outcomes, c -> new ConditionalEffect(
             new GateCondition(GateId.CAN_DEFENDING_STAT_USE_STAT_DROPS),
-            Effects.multiplyValue(Value.MOVE_ATTACKING_STAT_MODIFIER, new Constant(defendingStatDrops))
+            Effects.multiplyValue(Value.USER().MOVE().ATTACKING_STAT_MODIFIER(), new Constant(defendingStatDrops))
         ).execute(c));
 
         move.modifiers().set(ATTACKING_STAT, attackingStatModifier);

@@ -8,14 +8,15 @@ import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.effect.IEffect;
 import github.snomfish.functionality.number.INumber;
+import github.snomfish.functionality.number.NumberUtil;
 
-public class SetValueEffect implements IEffect {
+public class SetValueEffect<T extends Number> implements IEffect {
 
-    private Value value;
+    private Value<T> value;
     private INumber newValue;
 
     public SetValueEffect(
-        Value value,
+        Value<T> value,
         INumber newValue
     ) {
         this.value = value;
@@ -24,8 +25,8 @@ public class SetValueEffect implements IEffect {
 
 
     @Override
-    public SetValueEffect deepCopy() {
-        return new SetValueEffect(
+    public SetValueEffect<T> deepCopy() {
+        return new SetValueEffect<>(
             value,
             newValue.deepCopy()
         );
@@ -42,7 +43,8 @@ public class SetValueEffect implements IEffect {
         for (Branch<Double> valueBranch : valueBranches) {
             BattleContext copy = context.deepCopy();
 
-            value.set(copy, valueBranch.value());
+            
+            value.set(copy, NumberUtil.convert(valueBranch.value(), value.type()));
 
             outcomes.add(new Branch<>(
                 copy,

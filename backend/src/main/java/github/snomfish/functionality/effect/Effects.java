@@ -13,17 +13,17 @@ public class Effects {
     private Effects() {}
 
 
-    public static IEffect addValue(Value value, INumber addition) {
+    public static IEffect addValue(Value<? extends Number> value, INumber addition) {
         return new SetValueEffect(value, new Add(new ValueConstant(value), addition));
     }
-    public static IEffect addValue(Value value, Value addition) {
+    public static IEffect addValue(Value<? extends Number> value, Value<? extends Number> addition) {
         return new SetValueEffect(value, new Add(new ValueConstant(value), new ValueConstant(addition)));
     }
 
-    public static IEffect multiplyValue(Value value, INumber multiplier) {
+    public static IEffect multiplyValue(Value<? extends Number> value, INumber multiplier) {
         return new SetValueEffect(value, new Multiply(new ValueConstant(value), multiplier));
     }
-    public static IEffect multiplyValue(Value value, Value multiplier) {
+    public static IEffect multiplyValue(Value<? extends Number> value, Value<? extends Number> multiplier) {
         return new SetValueEffect(value, new Multiply(new ValueConstant(value), new ValueConstant(multiplier)));
     }
 }

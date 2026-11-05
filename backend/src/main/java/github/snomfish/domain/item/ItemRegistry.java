@@ -74,7 +74,7 @@ public class ItemRegistry {
 			new TriggerRule(
 				new Event(CLUTCH_EVENT, TARGET), 
 				new ConditionalEffect(
-					new Equals(Value.TARGET_HEALTH, Value.TARGET_CURRENT_HEALTH),
+					new Equals<>(Value.TARGET().HEALTH(), Value.TARGET().CURRENT_HEALTH()),
 					new ClutchEffect()
 				)
 				
@@ -85,7 +85,7 @@ public class ItemRegistry {
 			"drain orb",
 			new TriggerRule(
 				new Event(PRE_HEALTH_DRAIN_EVENT, USER), 
-				Effects.multiplyValue(Value.MOVE_HEALTH_DRAIN_MODIFIER, new Constant(1.2))
+				Effects.multiplyValue(Value.USER().MOVE().HEALTH_DRAIN_MODIFIER(), new Constant(1.2))
 			)
 		);
 		register(
@@ -94,10 +94,10 @@ public class ItemRegistry {
 			new TriggerRule(
 				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET), 
 				new ConditionalEffect(
-					new Equals(Value.TARGET_CAN_EVOLVE, true),
+					new Equals<>(Value.TARGET().CAN_EVOLVE(), true),
 					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.TARGET_MDEFENSE, new Constant(1.5)),
-						Effects.multiplyValue(Value.TARGET_RDEFENSE, new Constant(1.5))
+						Effects.multiplyValue(Value.TARGET().MDEFENSE(), new Constant(1.5)),
+						Effects.multiplyValue(Value.TARGET().RDEFENSE(), new Constant(1.5))
 					))
 				)
 			)
@@ -213,8 +213,8 @@ public class ItemRegistry {
 			new TriggerRule(
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, AIR),
-					Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
+					new Equals<>(Value.USER().MOVE().TYPE(), AIR),
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2))
 				)
 			)
 		);
@@ -224,8 +224,8 @@ public class ItemRegistry {
 			new TriggerRule(
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(	
-					new Equals(Value.MOVE_TYPE, ANCIENT),
-					Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
+					new Equals<>(Value.USER().MOVE().TYPE(), ANCIENT),
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2))
 				)
             )
 		);
@@ -235,8 +235,8 @@ public class ItemRegistry {
 			new TriggerRule(
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, BRAWLER),
-					Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
+					new Equals<>(Value.USER().MOVE().TYPE(), BRAWLER),
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2))
 				)
             )
 		);
@@ -246,8 +246,8 @@ public class ItemRegistry {
 			new TriggerRule(
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, BUG),
-					Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
+					new Equals<>(Value.USER().MOVE().TYPE(), BUG),
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2))
 				)
             )
 		);
@@ -257,8 +257,8 @@ public class ItemRegistry {
 			new TriggerRule(
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, DARK),
-					Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
+					new Equals<>(Value.USER().MOVE().TYPE(), DARK),
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2))
 				)
             )
 		);
@@ -268,8 +268,8 @@ public class ItemRegistry {
 			new TriggerRule(
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, EARTH),
-					Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
+					new Equals<>(Value.USER().MOVE().TYPE(), EARTH),
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2))
 				)
             )
 		);
@@ -279,8 +279,8 @@ public class ItemRegistry {
 			new TriggerRule(
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, ELECTRIC),
-					Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
+					new Equals<>(Value.USER().MOVE().TYPE(), ELECTRIC),
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2))
 				)
             )
 		);
@@ -290,8 +290,8 @@ public class ItemRegistry {
 			new TriggerRule(
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, FIRE),
-					Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
+					new Equals<>(Value.USER().MOVE().TYPE(), FIRE),
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2))
 				)
             )
 		);
@@ -301,8 +301,8 @@ public class ItemRegistry {
 			new TriggerRule(
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, ICE),
-					Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
+					new Equals<>(Value.USER().MOVE().TYPE(), ICE),
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2))
 				)
             )
 		);
@@ -312,8 +312,8 @@ public class ItemRegistry {
 			new TriggerRule(
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, LIGHT),
-					Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
+					new Equals<>(Value.USER().MOVE().TYPE(), LIGHT),
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2))
 				)
             )
 		);
@@ -323,8 +323,8 @@ public class ItemRegistry {
 			new TriggerRule(
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, METAL),
-					Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
+					new Equals<>(Value.USER().MOVE().TYPE(), METAL),
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2))
 				)
             )
 		);
@@ -334,8 +334,8 @@ public class ItemRegistry {
 			new TriggerRule(
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, MIND),
-					Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
+					new Equals<>(Value.USER().MOVE().TYPE(), MIND),
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2))
 				)
             )
 		);
@@ -345,8 +345,8 @@ public class ItemRegistry {
 			new TriggerRule(
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, PLANT),
-					Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
+					new Equals<>(Value.USER().MOVE().TYPE(), PLANT),
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2))
 				)
             )
 		);
@@ -356,8 +356,8 @@ public class ItemRegistry {
 			new TriggerRule(
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, SPIRIT),
-					Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
+					new Equals<>(Value.USER().MOVE().TYPE(), SPIRIT),
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2))
 				)
             )
 		);
@@ -367,8 +367,8 @@ public class ItemRegistry {
 			new TriggerRule(
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, SIMPLE),
-					Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
+					new Equals<>(Value.USER().MOVE().TYPE(), SIMPLE),
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2))
 				)
             )
 		);
@@ -378,8 +378,8 @@ public class ItemRegistry {
 			new TriggerRule(
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, TOXIC),
-					Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
+					new Equals<>(Value.USER().MOVE().TYPE(), TOXIC),
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2))
 				)
 			)
 		);
@@ -389,8 +389,8 @@ public class ItemRegistry {
 			new TriggerRule(
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, WATER),
-					Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.2))
+					new Equals<>(Value.USER().MOVE().TYPE(), WATER),
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2))
 				)
             )
 		);
@@ -400,9 +400,9 @@ public class ItemRegistry {
 			new TriggerRule(
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, ANCIENT),
+					new Equals<>(Value.USER().MOVE().TYPE(), ANCIENT),
 					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
+						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
 						ConsumeItem.target()
 					))
 				)
@@ -414,9 +414,9 @@ public class ItemRegistry {
 			new TriggerRule(
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, PLANT),
+					new Equals<>(Value.USER().MOVE().TYPE(), PLANT),
 					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
+						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
 						ConsumeItem.target()
 					))
 				)
@@ -428,9 +428,9 @@ public class ItemRegistry {
 			new TriggerRule(
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, AIR),
+					new Equals<>(Value.USER().MOVE().TYPE(), AIR),
 					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
+						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
 						ConsumeItem.target()
 					))
 				)
@@ -442,9 +442,9 @@ public class ItemRegistry {
 			new TriggerRule(
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, FIRE),
+					new Equals<>(Value.USER().MOVE().TYPE(), FIRE),
 					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
+						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
 						ConsumeItem.target()
 					))
 				)
@@ -456,9 +456,9 @@ public class ItemRegistry {
 			new TriggerRule(
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, ICE),
+					new Equals<>(Value.USER().MOVE().TYPE(), ICE),
 					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
+						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
 						ConsumeItem.target()
 					))
 				)
@@ -470,9 +470,9 @@ public class ItemRegistry {
 			new TriggerRule(
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, BRAWLER),
+					new Equals<>(Value.USER().MOVE().TYPE(), BRAWLER),
 					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
+						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
 						ConsumeItem.target()
 					))
 				)
@@ -484,9 +484,9 @@ public class ItemRegistry {
 			new TriggerRule(
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, MIND),
+					new Equals<>(Value.USER().MOVE().TYPE(), MIND),
 					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
+						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
 						ConsumeItem.target()
 					))
 				)
@@ -498,9 +498,9 @@ public class ItemRegistry {
 			new TriggerRule(
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, METAL),
+					new Equals<>(Value.USER().MOVE().TYPE(), METAL),
 					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
+						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
 						ConsumeItem.target()
 					))
 				)
@@ -512,9 +512,9 @@ public class ItemRegistry {
 			new TriggerRule(
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, TOXIC),
+					new Equals<>(Value.USER().MOVE().TYPE(), TOXIC),
 					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
+						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
 						ConsumeItem.target()
 					))
 				)
@@ -526,9 +526,9 @@ public class ItemRegistry {
 			new TriggerRule(
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, SIMPLE),
+					new Equals<>(Value.USER().MOVE().TYPE(), SIMPLE),
 					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
+						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
 						ConsumeItem.target()
 					))
 				)
@@ -540,9 +540,9 @@ public class ItemRegistry {
 			new TriggerRule(
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, DARK),
+					new Equals<>(Value.USER().MOVE().TYPE(), DARK),
 					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
+						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
 						ConsumeItem.target()
 					))
 				)
@@ -554,9 +554,9 @@ public class ItemRegistry {
 			new TriggerRule(
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, LIGHT),
+					new Equals<>(Value.USER().MOVE().TYPE(), LIGHT),
 					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
+						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
 						ConsumeItem.target()
 					))
 				)
@@ -568,9 +568,9 @@ public class ItemRegistry {
 			new TriggerRule(
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, SPIRIT),
+					new Equals<>(Value.USER().MOVE().TYPE(), SPIRIT),
 					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
+						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
 						ConsumeItem.target()
 					))
 				)
@@ -582,9 +582,9 @@ public class ItemRegistry {
 			new TriggerRule(
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, EARTH),
+					new Equals<>(Value.USER().MOVE().TYPE(), EARTH),
 					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
+						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
 						ConsumeItem.target()
 					))
 				)
@@ -596,9 +596,9 @@ public class ItemRegistry {
 			new TriggerRule(
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, ELECTRIC),
+					new Equals<>(Value.USER().MOVE().TYPE(), ELECTRIC),
 					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
+						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
 						ConsumeItem.target()
 					))
 				)
@@ -610,9 +610,9 @@ public class ItemRegistry {
 			new TriggerRule(
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, WATER),
+					new Equals<>(Value.USER().MOVE().TYPE(), WATER),
 					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
+						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
 						ConsumeItem.target()
 					))
 				)
@@ -624,9 +624,9 @@ public class ItemRegistry {
 			new TriggerRule(
                 new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, BUG),
+					new Equals<>(Value.USER().MOVE().TYPE(), BUG),
 					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(0.5)),
+						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
 						ConsumeItem.target()
 					))
 				)
@@ -638,9 +638,9 @@ public class ItemRegistry {
 			new TriggerRule(
 				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, ANCIENT),
+					new Equals<>(Value.USER().MOVE().TYPE(), ANCIENT),
 					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
 						ConsumeItem.user()
 					))
 				)
@@ -652,9 +652,9 @@ public class ItemRegistry {
 			new TriggerRule(
 				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, PLANT),
+					new Equals<>(Value.USER().MOVE().TYPE(), PLANT),
 					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
 						ConsumeItem.user()
 					))
 				)
@@ -666,9 +666,9 @@ public class ItemRegistry {
 			new TriggerRule(
 				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, AIR),
+					new Equals<>(Value.USER().MOVE().TYPE(), AIR),
 					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
 						ConsumeItem.user()
 					))
 				)
@@ -680,9 +680,9 @@ public class ItemRegistry {
 			new TriggerRule(
 				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, FIRE),
+					new Equals<>(Value.USER().MOVE().TYPE(), FIRE),
 					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
 						ConsumeItem.user()
 					))
 				)
@@ -694,9 +694,9 @@ public class ItemRegistry {
 			new TriggerRule(
 				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, ICE),
+					new Equals<>(Value.USER().MOVE().TYPE(), ICE),
 					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
 						ConsumeItem.user()
 					))
 				)
@@ -708,9 +708,9 @@ public class ItemRegistry {
 			new TriggerRule(
 				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, BRAWLER),
+					new Equals<>(Value.USER().MOVE().TYPE(), BRAWLER),
 					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
 						ConsumeItem.user()
 					))
 				)
@@ -722,9 +722,9 @@ public class ItemRegistry {
 			new TriggerRule(
 				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, MIND),
+					new Equals<>(Value.USER().MOVE().TYPE(), MIND),
 					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
 						ConsumeItem.user()
 					))
 				)
@@ -736,9 +736,9 @@ public class ItemRegistry {
 			new TriggerRule(
 				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, METAL),
+					new Equals<>(Value.USER().MOVE().TYPE(), METAL),
 					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
 						ConsumeItem.user()
 					))
 				)
@@ -750,9 +750,9 @@ public class ItemRegistry {
 			new TriggerRule(
 				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, TOXIC),
+					new Equals<>(Value.USER().MOVE().TYPE(), TOXIC),
 					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
 						ConsumeItem.user()
 					))
 				)
@@ -764,9 +764,9 @@ public class ItemRegistry {
 			new TriggerRule(
 				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, SIMPLE),
+					new Equals<>(Value.USER().MOVE().TYPE(), SIMPLE),
 					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
 						ConsumeItem.user()
 					))
 				)
@@ -778,9 +778,9 @@ public class ItemRegistry {
 			new TriggerRule(
 				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, DARK),
+					new Equals<>(Value.USER().MOVE().TYPE(), DARK),
 					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
 						ConsumeItem.user()
 					))
 				)
@@ -792,9 +792,9 @@ public class ItemRegistry {
 			new TriggerRule(
 				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, LIGHT),
+					new Equals<>(Value.USER().MOVE().TYPE(), LIGHT),
 					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
 						ConsumeItem.user()
 					))
 				)
@@ -806,9 +806,9 @@ public class ItemRegistry {
 			new TriggerRule(
 				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, SPIRIT),
+					new Equals<>(Value.USER().MOVE().TYPE(), SPIRIT),
 					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
 						ConsumeItem.user()
 					))
 				)
@@ -820,9 +820,9 @@ public class ItemRegistry {
 			new TriggerRule(
 				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, EARTH),
+					new Equals<>(Value.USER().MOVE().TYPE(), EARTH),
 					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
 						ConsumeItem.user()
 					))
 				)
@@ -834,9 +834,9 @@ public class ItemRegistry {
 			new TriggerRule(
 				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
-				new Equals(Value.MOVE_TYPE, ELECTRIC),
+				new Equals<>(Value.USER().MOVE().TYPE(), ELECTRIC),
 				new EffectSequence(List.of(
-					Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
 					ConsumeItem.user()
 				))
 				)
@@ -848,9 +848,9 @@ public class ItemRegistry {
 			new TriggerRule(
 				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, WATER),
+					new Equals<>(Value.USER().MOVE().TYPE(), WATER),
 					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
 						ConsumeItem.user()
 					))
 				)
@@ -862,9 +862,9 @@ public class ItemRegistry {
 			new TriggerRule(
 				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
 				new ConditionalEffect(
-					new Equals(Value.MOVE_TYPE, BUG),
+					new Equals<>(Value.USER().MOVE().TYPE(), BUG),
 					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.MOVE_DAMAGE_MODIFIER, new Constant(1.5)),
+						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
 						ConsumeItem.user()
 					))
 				)
@@ -877,12 +877,12 @@ public class ItemRegistry {
 				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
 				new ConditionalEffect(
 					new Or(
-						new Equals(Value.TARGET_SPECIES_ID, SCORB),
-						new Equals(Value.TARGET_SPECIES_ID, VEYLENS)
+						new Equals<>(Value.TARGET().SPECIES_ID(), SCORB),
+						new Equals<>(Value.TARGET().SPECIES_ID(), VEYLENS)
 					),
 					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.TARGET_MDEFENSE, new Constant(1.5)),
-						Effects.multiplyValue(Value.TARGET_RDEFENSE, new Constant(1.5))
+						Effects.multiplyValue(Value.TARGET().MDEFENSE(), new Constant(1.5)),
+						Effects.multiplyValue(Value.TARGET().RDEFENSE(), new Constant(1.5))
 					))
 				)
 			)

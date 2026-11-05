@@ -15,12 +15,12 @@ import static github.snomfish.domain.item.ItemId.*;
 public class RemoveItem implements IEffect {
     
 
-    private Value activeLoomianValue;
+    private Value<ActiveLoomian> activeLoomianValue;
     private EventId removedItemEventId;
 
 
     private RemoveItem(
-        Value activeLoomianValue,
+        Value<ActiveLoomian> activeLoomianValue,
         EventId removedItemEventId
     ) {
         this.activeLoomianValue = activeLoomianValue;
@@ -28,13 +28,13 @@ public class RemoveItem implements IEffect {
     }
     public static RemoveItem fromUser() {
         return new RemoveItem(
-            Value.USER, 
+            Value.USER().LOOMIAN(), 
             EventId.USER_ITEM_REMOVED_EVENT
         );
     }
     public static RemoveItem fromTarget() {
         return new RemoveItem(
-            Value.TARGET,
+            Value.TARGET().LOOMIAN(),
             EventId.TARGET_ITEM_REMOVED_EVENT
         );
     }

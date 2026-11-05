@@ -35,7 +35,7 @@ public class AccuracyCheck implements ICondition {
 
         context.dispatchEvent(EventId.ACCURACY_CHECK_EVENT);
 
-        double cachedAccuracyModifier = (double) Value.MOVE_ACCURACY_MODIFIER.get(context);
+        double cachedAccuracyModifier = (double) Value.USER().MOVE().ACCURACY_MODIFIER().get(context);
 
         for (Branch<Double> branch : accuracyBranches) {
             double accuracyValue = Math.clamp(branch.value() * cachedAccuracyModifier, 0, 1);

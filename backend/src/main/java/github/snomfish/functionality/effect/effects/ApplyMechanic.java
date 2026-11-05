@@ -12,22 +12,22 @@ import github.snomfish.functionality.effect.IEffect;
 public class ApplyMechanic implements IEffect {
     
 
-    private Value activeLoomianValue;
+    private Value<ActiveLoomian> activeLoomianValue;
     private MechanicId mechanicId;
 
 
     private ApplyMechanic(
-        Value activeLoomianValue,
+        Value<ActiveLoomian> activeLoomianValue,
         MechanicId mechanicId
     ) {
         this.activeLoomianValue = activeLoomianValue;
         this.mechanicId = mechanicId;
     }
     public static ApplyMechanic toUser(MechanicId mechanicId) {
-        return new ApplyMechanic(Value.USER, mechanicId);
+        return new ApplyMechanic(Value.USER().LOOMIAN(), mechanicId);
     }
     public static ApplyMechanic toTarget(MechanicId mechanicId) {
-        return new ApplyMechanic(Value.TARGET, mechanicId);
+        return new ApplyMechanic(Value.TARGET().LOOMIAN(), mechanicId);
     }
 
 
