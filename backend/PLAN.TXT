@@ -1,0 +1,1 @@
+If I can separate the USER_ and TARGET_ part of Value and have them as a separate entity then I'll be able to parse it in with events to create a generic event 
