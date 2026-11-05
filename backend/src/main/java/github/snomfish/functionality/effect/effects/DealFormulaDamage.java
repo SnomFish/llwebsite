@@ -195,8 +195,9 @@ public class DealFormulaDamage implements IEffect {
         Modifiers modifiers = move.modifiers();
         // types
         modifiers.mul(TYPE, move.typeChart().getModifier(move.type(), target.types()));
-        // stab
-        if (user.types().contains(move.type()) && !(user.abilityId() == AbilityId.AWAKENING || user.abilityId() == AbilityId.ACE)) { // stab
+        // stab (should eventually be replaced by an interceptor/gate)
+        AbilityId userAbilityId = user.abilityInstance().abilityId();
+        if (user.types().contains(move.type()) && !(userAbilityId == AbilityId.AWAKENING || userAbilityId == AbilityId.ACE)) { // stab
             modifiers.set(STAB, 1.25);
         }
 

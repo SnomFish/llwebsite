@@ -78,7 +78,6 @@ public class ActiveLoomian extends Loomian {
     public TypeId primaryType() {return types.get(0);}
     public TypeId secondaryType() {return types.get(1);}
     public AbilityInstance abilityInstance() {return abilityInstance;}
-    public AbilityId abilityId() {return abilityInstance.abilityId();}
     public Stats stats() {return stats;}
     public StatChanges statChanges() {return statChanges;}
     public Action action() {return action;}
@@ -91,7 +90,6 @@ public class ActiveLoomian extends Loomian {
     public void setPrimaryType(TypeId typeId) {this.types.set(0, typeId);}
     public void setSecondaryType(TypeId typeId) {this.types.set(1, typeId);}
     public void setAbilityInstance(AbilityInstance abilityInstance) {this.abilityInstance = abilityInstance;}
-    public void setAbilityId(AbilityId abilityId) {this.abilityInstance.setAbilityId(abilityId);}
     public void setStats(Stats stats) {this.stats = stats;}
     public void setStatChanges(StatChanges statChanges) {this.statChanges = statChanges;}
     public void setAction(Action action) {this.action = action;}

@@ -13,12 +13,11 @@ import github.snomfish.functionality.event.EventId;
 import github.snomfish.functionality.gate.GateEvent;
 import github.snomfish.functionality.gate.GateId;
 import github.snomfish.functionality.value.Location;
-import github.snomfish.functionality.value.ValueC;
+import github.snomfish.functionality.value.SubjectRoot;
 import github.snomfish.functionality.value.subject.ISubject;
 
 import static github.snomfish.domain.SideId.*;
 import static github.snomfish.functionality.branch.BranchUtil.flatMap;
-import static github.snomfish.functionality.context.ContextSideId.*;
 
 // this is the context of a loomian using a move
 // this could be a record
@@ -86,10 +85,9 @@ public class BattleContext implements DeepCopyable<BattleContext> {
 
 
     @SuppressWarnings("unchecked")
-    public <A, B> A get(Location location) {
-        ValueC main = location.main();
+    public <A, B> A get(Location<B> location) {
+        SubjectRoot main = location.main();
         ISubject<B> side = location.side();
-
 
         return (A) side.get(main.get(this));
     }
