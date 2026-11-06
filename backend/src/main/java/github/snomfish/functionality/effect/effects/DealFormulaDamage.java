@@ -24,19 +24,28 @@ import github.snomfish.functionality.number.INumber;
 import static github.snomfish.domain.move.modifiers.ModifierId.*;
 import static github.snomfish.functionality.branch.BranchUtil.flatMap;
 import static github.snomfish.functionality.event.EventId.*;
+import static github.snomfish.functionality.interceptor.InterceptorId.MOVE_ABOUT_TO_AFFECT_TARGET;
 
 // the move tricky tactics does not work with this attacking and defending stat implementation, will require probably a new enum or the use of Value
 public class DealFormulaDamage implements IEffect {
     // deals formula damage to the target
     
  
-    public DealFormulaDamage() {}
+    private DealFormulaDamage() {}
 
 
     @Override 
     public DealFormulaDamage deepCopy() {
         return new DealFormulaDamage();
     } 
+
+
+    public static IEffect schema() {
+        return new InterceptorEffect(
+            MOVE_ABOUT_TO_AFFECT_TARGET,
+            new DealFormulaDamage()
+        );
+    }
 
 
     @Override

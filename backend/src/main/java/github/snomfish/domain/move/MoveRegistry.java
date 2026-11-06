@@ -72,7 +72,7 @@ public class MoveRegistry {
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -85,7 +85,7 @@ public class MoveRegistry {
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						new ConditionalEffect(
 							new RandomCondition(new Constant(0.2)),
@@ -106,7 +106,7 @@ public class MoveRegistry {
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -120,7 +120,7 @@ public class MoveRegistry {
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -134,7 +134,7 @@ public class MoveRegistry {
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.2, StatusId.BURN)
 					))
@@ -150,7 +150,7 @@ public class MoveRegistry {
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.2, StatusId.FROSTBITE)
 					))
@@ -168,7 +168,7 @@ public class MoveRegistry {
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -182,7 +182,7 @@ public class MoveRegistry {
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -196,7 +196,7 @@ public class MoveRegistry {
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.2, StatusId.BAD_POISON)
 					))
@@ -212,7 +212,7 @@ public class MoveRegistry {
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -225,7 +225,7 @@ public class MoveRegistry {
 			.basePower(new Constant(30))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						new HealthDrainEffect(new Constant(1/2))
 					))
@@ -249,7 +249,7 @@ public class MoveRegistry {
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(SLASHING)
@@ -263,7 +263,7 @@ public class MoveRegistry {
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -276,7 +276,7 @@ public class MoveRegistry {
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -289,7 +289,7 @@ public class MoveRegistry {
 			.basePower(new Constant(125))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(SOUL_MOVE)
@@ -312,7 +312,7 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -325,7 +325,7 @@ public class MoveRegistry {
 			.basePower(new Constant(65))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -380,7 +380,7 @@ public class MoveRegistry {
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -394,7 +394,7 @@ public class MoveRegistry {
 			.basePower(new Constant(95))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -423,7 +423,7 @@ public class MoveRegistry {
 			.basePower(new Constant(85))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.1, StatusId.POISON)
 					))
@@ -461,7 +461,7 @@ public class MoveRegistry {
 			.basePower(new Constant(20))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -476,7 +476,7 @@ public class MoveRegistry {
 			.overrideAttackingStat(StatId.MDEFENSE)
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -551,7 +551,7 @@ public class MoveRegistry {
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.1, StatusId.BURN)
 					))
@@ -569,7 +569,7 @@ public class MoveRegistry {
 			.basePower(new Constant(120))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.1, StatusId.BURN),
 						RecoilEffect.onUser(new Constant(1/3))
@@ -588,7 +588,7 @@ public class MoveRegistry {
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.1, StatusId.BURN)
 					))
@@ -605,7 +605,7 @@ public class MoveRegistry {
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						ApplyStatChanges.userChangingUser()
 							.speed(new Constant(1))	
@@ -623,7 +623,7 @@ public class MoveRegistry {
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -637,7 +637,7 @@ public class MoveRegistry {
 			.basePower(new Constant(20))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						// apply blood drain mechanic
 					))
@@ -655,7 +655,7 @@ public class MoveRegistry {
 			.basePower(new Constant(65))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -669,7 +669,7 @@ public class MoveRegistry {
 			.overrideAttackingStat(StatId.MDEFENSE)
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -683,7 +683,7 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -697,7 +697,7 @@ public class MoveRegistry {
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -711,7 +711,7 @@ public class MoveRegistry {
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -725,7 +725,7 @@ public class MoveRegistry {
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(KICKING)
@@ -739,7 +739,7 @@ public class MoveRegistry {
 			.basePower(new Constant(25))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -779,7 +779,7 @@ public class MoveRegistry {
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -792,7 +792,7 @@ public class MoveRegistry {
 			.basePower(new Constant(50))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -839,7 +839,7 @@ public class MoveRegistry {
 			.basePower(new Constant(30))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						new HealthDrainEffect(new Constant(1/2))
 					))
@@ -898,7 +898,7 @@ public class MoveRegistry {
 			.basePower(new Constant(65))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -911,7 +911,7 @@ public class MoveRegistry {
 			.basePower(new Constant(25))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -924,7 +924,7 @@ public class MoveRegistry {
 			.basePower(new Constant(105))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -939,7 +939,7 @@ public class MoveRegistry {
 			.basePower(new Constant(100))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						new HealthDrainEffect(new Constant(1/2))
 					))
@@ -958,7 +958,7 @@ public class MoveRegistry {
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(SLASHING)
@@ -979,7 +979,7 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.1, StatusId.BURN)
 					))
@@ -997,7 +997,7 @@ public class MoveRegistry {
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -1011,7 +1011,7 @@ public class MoveRegistry {
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.1, StatusId.FROSTBITE)
 					))
@@ -1029,7 +1029,7 @@ public class MoveRegistry {
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(BITING)
@@ -1044,7 +1044,7 @@ public class MoveRegistry {
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -1058,7 +1058,7 @@ public class MoveRegistry {
 			.basePower(new Constant(45))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -1072,7 +1072,7 @@ public class MoveRegistry {
 			.basePower(new Constant(85))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -1087,7 +1087,7 @@ public class MoveRegistry {
 			.basePower(new Constant(100))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						RecoilEffect.onUser(new Constant(1/3))
 					))
@@ -1106,7 +1106,7 @@ public class MoveRegistry {
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -1140,7 +1140,7 @@ public class MoveRegistry {
 			))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -1153,7 +1153,7 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.1, StatusId.BURN),
 						RecoilEffect.onUser(new Constant(1/4))
@@ -1172,7 +1172,7 @@ public class MoveRegistry {
 			.basePower(new Constant(150))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -1194,7 +1194,7 @@ public class MoveRegistry {
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -1207,7 +1207,7 @@ public class MoveRegistry {
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -1222,7 +1222,7 @@ public class MoveRegistry {
 			.onHit(new MoveEffect(
 				/*new ConditionalEffect(
 					new Equals<>()
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				)*/
 				new NoEffect()
 			))
@@ -1239,7 +1239,7 @@ public class MoveRegistry {
 			.onHit(new MoveEffect(
 				/*new ConditionalEffect(
 					new Equals<>()
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				)*/
 				new NoEffect()
 			))
@@ -1254,7 +1254,7 @@ public class MoveRegistry {
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -1268,7 +1268,7 @@ public class MoveRegistry {
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -1281,7 +1281,7 @@ public class MoveRegistry {
 			.basePower(new Constant(15))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -1308,7 +1308,7 @@ public class MoveRegistry {
 			.basePower(new Constant(25))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -1322,7 +1322,7 @@ public class MoveRegistry {
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -1342,7 +1342,7 @@ public class MoveRegistry {
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -1357,7 +1357,7 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(SOUND)
@@ -1394,7 +1394,7 @@ public class MoveRegistry {
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(SOUND)
@@ -1408,7 +1408,7 @@ public class MoveRegistry {
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -1430,7 +1430,7 @@ public class MoveRegistry {
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -1444,7 +1444,7 @@ public class MoveRegistry {
 			.basePower(new Constant(25))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.2, StatusId.POISON)
 					))
@@ -1461,7 +1461,7 @@ public class MoveRegistry {
 			.basePower(new Constant(35))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -1475,7 +1475,7 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -1501,7 +1501,7 @@ public class MoveRegistry {
 			.basePower(new Constant(130))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -1515,7 +1515,7 @@ public class MoveRegistry {
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -1543,7 +1543,7 @@ public class MoveRegistry {
 			.basePower(new Constant(15))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -1558,7 +1558,7 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -1578,7 +1578,7 @@ public class MoveRegistry {
 			.basePower(new Constant(100))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -1591,7 +1591,7 @@ public class MoveRegistry {
 			.basePower(new Constant(125))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(SOUL_MOVE)
@@ -1605,7 +1605,7 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -1618,7 +1618,7 @@ public class MoveRegistry {
 			.basePower(new Constant(125))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(SOUL_MOVE)
@@ -1632,7 +1632,7 @@ public class MoveRegistry {
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.1, StatusId.PARALYSIS)
 					))
@@ -1650,7 +1650,7 @@ public class MoveRegistry {
 			.basePower(new Constant(100))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.1, StatusId.PARALYSIS),
 						Schematics.applyStatusToTarget(0.1 / 0.9, StatusId.BURN)
@@ -1667,7 +1667,7 @@ public class MoveRegistry {
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.1, StatusId.PARALYSIS),
 						Schematics.applyStatusToTarget(0.1 / 0.9, StatusId.BURN),
@@ -1720,7 +1720,7 @@ public class MoveRegistry {
 			.basePower(new Constant(85))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						new EnergyDrainEffect(new Constant(1/2))
 					))
@@ -1736,7 +1736,7 @@ public class MoveRegistry {
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -1749,7 +1749,7 @@ public class MoveRegistry {
 			.basePower(new Constant(125))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(SOUL_MOVE)
@@ -1773,7 +1773,7 @@ public class MoveRegistry {
 			))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -1786,7 +1786,7 @@ public class MoveRegistry {
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -1808,7 +1808,7 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						ApplyStatChanges.userChangingUser()
 							.mdefense(new Constant(1)),
@@ -1835,7 +1835,7 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.1, StatusId.BURN)
 					))
@@ -1851,7 +1851,7 @@ public class MoveRegistry {
 			.basePower(new Constant(65))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.1, StatusId.BURN)
 					))
@@ -1868,7 +1868,7 @@ public class MoveRegistry {
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -1881,7 +1881,7 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.1, StatusId.BURN)
 					))
@@ -1899,7 +1899,7 @@ public class MoveRegistry {
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -1912,7 +1912,7 @@ public class MoveRegistry {
 			.basePower(new Constant(110))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.2, StatusId.BURN)
 					))
@@ -1935,7 +1935,7 @@ public class MoveRegistry {
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(PIVOT)
@@ -1949,7 +1949,7 @@ public class MoveRegistry {
 			.basePower(new Constant(85))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -1962,7 +1962,7 @@ public class MoveRegistry {
 			.basePower(new Constant(100))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(SOUL_MOVE)
@@ -1976,7 +1976,7 @@ public class MoveRegistry {
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.1, StatusId.FROSTBITE)
 					))
@@ -1992,7 +1992,7 @@ public class MoveRegistry {
 			.basePower(new Constant(110))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.06, StatusId.POISON),
 						Schematics.applyStatusToTarget(0.06 / 0.9, StatusId.PARALYSIS),
@@ -2012,7 +2012,7 @@ public class MoveRegistry {
 			.basePower(new Constant(100))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						// TODO apply bane of haste at the end of the turn
 					))
@@ -2029,7 +2029,7 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.1, StatusId.FROSTBITE)
 					))
@@ -2045,7 +2045,7 @@ public class MoveRegistry {
 			.basePower(new Constant(110))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.2, StatusId.FROSTBITE)
 					))
@@ -2061,7 +2061,7 @@ public class MoveRegistry {
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -2074,7 +2074,7 @@ public class MoveRegistry {
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.1, StatusId.FROSTBITE)
 					))
@@ -2092,7 +2092,7 @@ public class MoveRegistry {
 			.basePower(new Constant(100))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -2113,15 +2113,15 @@ public class MoveRegistry {
 			.energyCost(new Constant(0))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					SetType.move(ELECTRIC),
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					SetType.move(FIRE),
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					SetType.move(WATER),
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					SetType.move(DARK),
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(SOUL_MOVE)
@@ -2155,7 +2155,7 @@ public class MoveRegistry {
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -2168,7 +2168,7 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.3, StatusId.BURN)
 					))
@@ -2184,7 +2184,7 @@ public class MoveRegistry {
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(SOUND)
@@ -2198,7 +2198,7 @@ public class MoveRegistry {
 			.basePower(new Constant(1))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -2211,7 +2211,7 @@ public class MoveRegistry {
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -2225,7 +2225,7 @@ public class MoveRegistry {
 			.basePower(new Constant(85))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -2239,7 +2239,7 @@ public class MoveRegistry {
 			.basePower(new Constant(85))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(SOUND)
@@ -2253,7 +2253,7 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -2268,7 +2268,7 @@ public class MoveRegistry {
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -2282,7 +2282,7 @@ public class MoveRegistry {
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.5, StatusId.POISON)
 					))
@@ -2308,7 +2308,7 @@ public class MoveRegistry {
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.2, StatusId.POISON)
 					))
@@ -2331,7 +2331,7 @@ public class MoveRegistry {
 			.basePower(new Constant(65))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -2358,7 +2358,7 @@ public class MoveRegistry {
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.2, StatusId.SLEEP)
 					))
@@ -2375,7 +2375,7 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.1, StatusId.POISON)
 					))
@@ -2426,7 +2426,7 @@ public class MoveRegistry {
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -2447,7 +2447,7 @@ public class MoveRegistry {
 			.basePower(new Constant(50))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -2474,7 +2474,7 @@ public class MoveRegistry {
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -2488,7 +2488,7 @@ public class MoveRegistry {
 			.basePower(new Constant(100))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -2503,7 +2503,7 @@ public class MoveRegistry {
 			.basePower(new Constant(100))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 
 					))
@@ -2527,7 +2527,7 @@ public class MoveRegistry {
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(SOUND)
@@ -2541,7 +2541,7 @@ public class MoveRegistry {
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(SLASHING)
@@ -2562,7 +2562,7 @@ public class MoveRegistry {
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -2578,7 +2578,7 @@ public class MoveRegistry {
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -2592,7 +2592,7 @@ public class MoveRegistry {
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(SOUND)
@@ -2606,7 +2606,7 @@ public class MoveRegistry {
 			.basePower(new Constant(110))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -2619,7 +2619,7 @@ public class MoveRegistry {
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -2634,7 +2634,7 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -2658,7 +2658,7 @@ public class MoveRegistry {
 			.basePower(new Constant(95))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -2671,7 +2671,7 @@ public class MoveRegistry {
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -2692,7 +2692,7 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -2705,7 +2705,7 @@ public class MoveRegistry {
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -2728,7 +2728,7 @@ public class MoveRegistry {
 			.basePower(new Constant(130))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -2741,7 +2741,7 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -2755,7 +2755,7 @@ public class MoveRegistry {
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -2768,7 +2768,7 @@ public class MoveRegistry {
 			.basePower(new Constant(85))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -2795,7 +2795,7 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -2809,7 +2809,7 @@ public class MoveRegistry {
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -2823,7 +2823,7 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -2836,7 +2836,7 @@ public class MoveRegistry {
 			.basePower(new Constant(100))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(SOUL_MOVE)
@@ -2850,7 +2850,7 @@ public class MoveRegistry {
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.3, StatusId.BURN)
 					))
@@ -2868,7 +2868,7 @@ public class MoveRegistry {
 			.basePower(new Constant(65))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -2881,7 +2881,7 @@ public class MoveRegistry {
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						new HealthDrainEffect(new Constant(1/2))
 					))
@@ -2899,7 +2899,7 @@ public class MoveRegistry {
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -2914,7 +2914,7 @@ public class MoveRegistry {
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -2927,7 +2927,7 @@ public class MoveRegistry {
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(SOUND)
@@ -2941,7 +2941,7 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -2955,7 +2955,7 @@ public class MoveRegistry {
 			.basePower(new Constant(50))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						new HealthDrainEffect(new Constant(1/2))
 					))
@@ -2980,7 +2980,7 @@ public class MoveRegistry {
 			.basePower(new Constant(85))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.2, StatusId.BURN)
 					))
@@ -3009,7 +3009,7 @@ public class MoveRegistry {
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						new EnergyDrainEffect(new Constant(1/2))
 					))
@@ -3025,7 +3025,7 @@ public class MoveRegistry {
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -3038,7 +3038,7 @@ public class MoveRegistry {
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(BITING)
@@ -3053,7 +3053,7 @@ public class MoveRegistry {
 			.basePower(new Constant(100))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -3068,7 +3068,7 @@ public class MoveRegistry {
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -3083,7 +3083,7 @@ public class MoveRegistry {
 			.basePower(new Constant(100))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(SOUL_MOVE)
@@ -3104,7 +3104,7 @@ public class MoveRegistry {
 			.basePower(new Constant(85))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -3124,7 +3124,7 @@ public class MoveRegistry {
 			.basePower(new Constant(20))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -3139,7 +3139,7 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -3152,7 +3152,7 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -3165,7 +3165,7 @@ public class MoveRegistry {
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						new HealthDrainEffect(new Constant(1/2))
 					))
@@ -3195,7 +3195,7 @@ public class MoveRegistry {
 			.basePower(new Constant(100))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(SOUL_MOVE)
@@ -3222,7 +3222,7 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.1, StatusId.POISON)
 					))
@@ -3238,7 +3238,7 @@ public class MoveRegistry {
 			.basePower(new Constant(95))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						RecoilEffect.onUser(new Constant(1/4))
 					))
@@ -3256,7 +3256,7 @@ public class MoveRegistry {
 			.basePower(new Constant(55))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -3269,7 +3269,7 @@ public class MoveRegistry {
 			.basePower(new Constant(50))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						ApplyStatChanges.userChangingUser()
 							.accuracy(new Constant(1))
@@ -3286,7 +3286,7 @@ public class MoveRegistry {
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						new ConditionalEffect(
 							new RandomCondition(new Constant(0.2)),
@@ -3306,7 +3306,7 @@ public class MoveRegistry {
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -3320,7 +3320,7 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -3333,7 +3333,7 @@ public class MoveRegistry {
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -3354,7 +3354,7 @@ public class MoveRegistry {
 			.basePower(new Constant(95))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						RecoilEffect.onUser(new Constant(1/4))
 					))
@@ -3372,7 +3372,7 @@ public class MoveRegistry {
 			.basePower(new Constant(95))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -3392,7 +3392,7 @@ public class MoveRegistry {
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.5, StatusId.PARALYSIS)
 					))
@@ -3408,7 +3408,7 @@ public class MoveRegistry {
 			.basePower(new Constant(150))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -3421,7 +3421,7 @@ public class MoveRegistry {
 			.basePower(new Constant(125))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -3435,7 +3435,7 @@ public class MoveRegistry {
 			.basePower(new Constant(110))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -3448,7 +3448,7 @@ public class MoveRegistry {
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						new HealthDrainEffect(new Constant(1/2))
 					))
@@ -3481,7 +3481,7 @@ public class MoveRegistry {
 			.basePower(new Constant(30))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -3494,7 +3494,7 @@ public class MoveRegistry {
 			.basePower(new Constant(35))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -3508,7 +3508,7 @@ public class MoveRegistry {
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -3522,7 +3522,7 @@ public class MoveRegistry {
 			.basePower(new Constant(35))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -3535,7 +3535,7 @@ public class MoveRegistry {
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.1, StatusId.BURN),
 						Schematics.applyStatusToTarget(0.1 / 0.9, StatusId.FROSTBITE)
@@ -3559,7 +3559,7 @@ public class MoveRegistry {
 			.basePower(new Constant(50))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -3572,7 +3572,7 @@ public class MoveRegistry {
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -3585,7 +3585,7 @@ public class MoveRegistry {
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -3598,7 +3598,7 @@ public class MoveRegistry {
 			.basePower(new Constant(110))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -3611,7 +3611,7 @@ public class MoveRegistry {
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -3626,7 +3626,7 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -3653,7 +3653,7 @@ public class MoveRegistry {
 			.basePower(new Constant(85))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -3667,7 +3667,7 @@ public class MoveRegistry {
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -3681,7 +3681,7 @@ public class MoveRegistry {
 			.basePower(new Constant(25))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -3694,7 +3694,7 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -3725,7 +3725,7 @@ public class MoveRegistry {
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -3739,7 +3739,7 @@ public class MoveRegistry {
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -3766,7 +3766,7 @@ public class MoveRegistry {
 			.basePower(new Constant(20))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						// apply power siphon mechanic
 					))
@@ -3783,7 +3783,7 @@ public class MoveRegistry {
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.3, StatusId.PARALYSIS)
 					))
@@ -3799,7 +3799,7 @@ public class MoveRegistry {
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -3813,7 +3813,7 @@ public class MoveRegistry {
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -3827,7 +3827,7 @@ public class MoveRegistry {
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -3849,7 +3849,7 @@ public class MoveRegistry {
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(BITING)
@@ -3864,7 +3864,7 @@ public class MoveRegistry {
 			.overrideDefendingStat(StatId.RDEFENSE)
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(SLAPPING)
@@ -3878,7 +3878,7 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -3891,7 +3891,7 @@ public class MoveRegistry {
 			.basePower(new Constant(45))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 
 					))
@@ -3908,7 +3908,7 @@ public class MoveRegistry {
 			.basePower(new Constant(65))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.1, StatusId.BURN)
 					))
@@ -3925,7 +3925,7 @@ public class MoveRegistry {
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -3940,7 +3940,7 @@ public class MoveRegistry {
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -3955,7 +3955,7 @@ public class MoveRegistry {
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -3968,7 +3968,7 @@ public class MoveRegistry {
 			.basePower(new Constant(110))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -3981,7 +3981,7 @@ public class MoveRegistry {
 			.basePower(new Constant(100))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -4005,7 +4005,7 @@ public class MoveRegistry {
 			.basePower(new Constant(120))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						RecoilEffect.onUser(new Constant(1/3))
 					))
@@ -4023,7 +4023,7 @@ public class MoveRegistry {
 			.basePower(new Constant(120))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						RecoilEffect.onUser(new Constant(1/3))
 					))
@@ -4041,7 +4041,7 @@ public class MoveRegistry {
 			.basePower(new Constant(100))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -4054,7 +4054,7 @@ public class MoveRegistry {
 			.basePower(new Constant(65))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(SOUND)
@@ -4068,7 +4068,7 @@ public class MoveRegistry {
 			.basePower(new Constant(20))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -4081,7 +4081,7 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -4103,7 +4103,7 @@ public class MoveRegistry {
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -4123,7 +4123,7 @@ public class MoveRegistry {
 			.basePower(new Constant(25))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(SOUND)
@@ -4137,7 +4137,7 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						new ConditionalEffect(
 							new RandomCondition(new Constant(0.1)),
@@ -4173,7 +4173,7 @@ public class MoveRegistry {
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -4187,7 +4187,7 @@ public class MoveRegistry {
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -4200,7 +4200,7 @@ public class MoveRegistry {
 			.basePower(new Constant(120))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -4220,7 +4220,7 @@ public class MoveRegistry {
 			))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -4241,7 +4241,7 @@ public class MoveRegistry {
 			.basePower(new Constant(35))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -4256,7 +4256,7 @@ public class MoveRegistry {
 			.energyCost(new Constant(35))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -4282,7 +4282,7 @@ public class MoveRegistry {
 			.basePower(new Constant(95))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -4296,7 +4296,7 @@ public class MoveRegistry {
 			.basePower(new Constant(120))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -4317,7 +4317,7 @@ public class MoveRegistry {
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -4331,7 +4331,7 @@ public class MoveRegistry {
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(PIVOT)
@@ -4346,7 +4346,7 @@ public class MoveRegistry {
 			.basePower(new Constant(85))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.1, StatusId.BURN)
 					))
@@ -4370,7 +4370,7 @@ public class MoveRegistry {
 			.basePower(new Constant(100))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -4383,7 +4383,7 @@ public class MoveRegistry {
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -4397,7 +4397,7 @@ public class MoveRegistry {
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -4439,7 +4439,7 @@ public class MoveRegistry {
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -4453,7 +4453,7 @@ public class MoveRegistry {
 			.basePower(new Constant(110))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -4466,7 +4466,7 @@ public class MoveRegistry {
 			.basePower(new Constant(110))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -4479,7 +4479,7 @@ public class MoveRegistry {
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -4492,7 +4492,7 @@ public class MoveRegistry {
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -4513,7 +4513,7 @@ public class MoveRegistry {
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.1, StatusId.BURN)
 					))
@@ -4529,7 +4529,7 @@ public class MoveRegistry {
 			.basePower(new Constant(100))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -4543,7 +4543,7 @@ public class MoveRegistry {
 			.basePower(new Constant(65))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -4558,7 +4558,7 @@ public class MoveRegistry {
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -4573,7 +4573,7 @@ public class MoveRegistry {
 			.basePower(new Constant(55))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -4586,7 +4586,7 @@ public class MoveRegistry {
 			.basePower(new Constant(65))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.3, StatusId.POISON)
 					))
@@ -4621,7 +4621,7 @@ public class MoveRegistry {
 			.basePower(new Constant(30))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -4642,7 +4642,7 @@ public class MoveRegistry {
 			.basePower(new Constant(100))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -4656,7 +4656,7 @@ public class MoveRegistry {
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						new HealthDrainEffect(new Constant(1/2))
 					))
@@ -4673,7 +4673,7 @@ public class MoveRegistry {
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -4687,7 +4687,7 @@ public class MoveRegistry {
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -4700,7 +4700,7 @@ public class MoveRegistry {
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -4714,7 +4714,7 @@ public class MoveRegistry {
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -4728,7 +4728,7 @@ public class MoveRegistry {
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -4742,7 +4742,7 @@ public class MoveRegistry {
 			.basePower(new Constant(50))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -4755,7 +4755,7 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -4776,7 +4776,7 @@ public class MoveRegistry {
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -4789,7 +4789,7 @@ public class MoveRegistry {
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -4816,7 +4816,7 @@ public class MoveRegistry {
 			.basePower(new Constant(30))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -4837,7 +4837,7 @@ public class MoveRegistry {
 			.basePower(new Constant(30))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -4850,7 +4850,7 @@ public class MoveRegistry {
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.1, StatusId.PARALYSIS)
 					))
@@ -4877,7 +4877,7 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						new ConditionalEffect(
 							new RandomCondition(new Constant(0.1)),
@@ -4898,7 +4898,7 @@ public class MoveRegistry {
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -4912,7 +4912,7 @@ public class MoveRegistry {
 			.basePower(new Constant(15))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.3, StatusId.POISON)
 					))
@@ -4929,7 +4929,7 @@ public class MoveRegistry {
 			.basePower(new Constant(50))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.5, StatusId.PARALYSIS)
 					))
@@ -4946,7 +4946,7 @@ public class MoveRegistry {
 			.overrideAttackingStat(StatId.RDEFENSE)
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -4972,7 +4972,7 @@ public class MoveRegistry {
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -4996,7 +4996,7 @@ public class MoveRegistry {
 			.basePower(new Constant(30))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.3, StatusId.PARALYSIS)
 					))
@@ -5012,7 +5012,7 @@ public class MoveRegistry {
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -5033,7 +5033,7 @@ public class MoveRegistry {
 			.basePower(new Constant(45))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -5054,7 +5054,7 @@ public class MoveRegistry {
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -5069,7 +5069,7 @@ public class MoveRegistry {
 			.basePower(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -5112,7 +5112,7 @@ public class MoveRegistry {
 			.basePower(new Constant(20))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(1, StatusId.PARALYSIS)
 					))
@@ -5150,7 +5150,7 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(SLAPPING)
@@ -5163,7 +5163,7 @@ public class MoveRegistry {
 			.energyCost(new Constant(40))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -5176,7 +5176,7 @@ public class MoveRegistry {
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -5191,7 +5191,7 @@ public class MoveRegistry {
 			.basePower(new Constant(110))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -5205,7 +5205,7 @@ public class MoveRegistry {
 			.basePower(new Constant(110))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.2, StatusId.PARALYSIS)
 					))
@@ -5221,7 +5221,7 @@ public class MoveRegistry {
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.1, StatusId.PARALYSIS)
 					))
@@ -5239,7 +5239,7 @@ public class MoveRegistry {
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -5253,7 +5253,7 @@ public class MoveRegistry {
 			.basePower(new Constant(95))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						RecoilEffect.onUser(new Constant(1/3))
 					))
@@ -5271,7 +5271,7 @@ public class MoveRegistry {
 			.basePower(new Constant(65))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.1, StatusId.PARALYSIS)
 					))
@@ -5301,7 +5301,7 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.1, StatusId.PARALYSIS)
 					))
@@ -5317,7 +5317,7 @@ public class MoveRegistry {
 			.basePower(new Constant(120))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						RecoilEffect.onUser(new Constant(1/4))
 					))
@@ -5344,7 +5344,7 @@ public class MoveRegistry {
 			.basePower(new Constant(95))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -5359,7 +5359,7 @@ public class MoveRegistry {
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.2, StatusId.POISON)
 					))
@@ -5386,7 +5386,7 @@ public class MoveRegistry {
 			.basePower(new Constant(50))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.1, StatusId.POISON)
 					))
@@ -5411,7 +5411,7 @@ public class MoveRegistry {
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -5424,7 +5424,7 @@ public class MoveRegistry {
 			.basePower(new Constant(95))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -5437,7 +5437,7 @@ public class MoveRegistry {
 			.basePower(new Constant(0)) // TODO
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -5450,7 +5450,7 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -5476,7 +5476,7 @@ public class MoveRegistry {
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						new ConditionalEffect(
 							new RandomCondition(new Constant(0.5)),
@@ -5496,7 +5496,7 @@ public class MoveRegistry {
 			.basePower(new Constant(110))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -5509,7 +5509,7 @@ public class MoveRegistry {
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -5523,7 +5523,7 @@ public class MoveRegistry {
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.1, StatusId.BAD_POISON)
 					))
@@ -5541,7 +5541,7 @@ public class MoveRegistry {
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage(),
+					DealFormulaDamage.schema(),
 					Schematics.secondaryEffects(List.of(
 						Schematics.applyStatusToTarget(0.1, StatusId.POISON)
 					))
@@ -5559,7 +5559,7 @@ public class MoveRegistry {
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -5573,7 +5573,7 @@ public class MoveRegistry {
 			.basePower(new Constant(75))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -5587,7 +5587,7 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -5600,7 +5600,7 @@ public class MoveRegistry {
 			.basePower(new Constant(80))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -5614,7 +5614,7 @@ public class MoveRegistry {
 			.basePower(new Constant(110))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -5627,7 +5627,7 @@ public class MoveRegistry {
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -5640,7 +5640,7 @@ public class MoveRegistry {
 			.basePower(new Constant(90))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -5653,7 +5653,7 @@ public class MoveRegistry {
 			.energyCost(new Constant(10))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -5666,7 +5666,7 @@ public class MoveRegistry {
 			.basePower(new Constant(60))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -5681,7 +5681,7 @@ public class MoveRegistry {
 			.basePower(new Constant(30))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -5694,7 +5694,7 @@ public class MoveRegistry {
 			.energyCost(new Constant(35))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.build()
@@ -5707,7 +5707,7 @@ public class MoveRegistry {
 			.basePower(new Constant(120))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(CONTACT)
@@ -5721,7 +5721,7 @@ public class MoveRegistry {
 			.basePower(new Constant(70))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					DealFormulaDamage.schema()
 				))
 			))
 			.tag(PIVOT)

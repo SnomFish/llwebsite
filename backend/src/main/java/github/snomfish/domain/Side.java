@@ -8,6 +8,8 @@ import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.copy.DeepCopyable;
 import github.snomfish.functionality.event.Event;
 import github.snomfish.functionality.gate.GateEvent;
+import github.snomfish.functionality.interceptor.InterceptorEvent;
+import github.snomfish.functionality.interceptor.InterceptorReport;
 
 import static github.snomfish.functionality.copy.DeepCopy.deepCopyList;
 
@@ -59,6 +61,12 @@ public class Side implements DeepCopyable<Side> {
         outcomes = activeLoomian().dispatchGate(context, event, outcomes);
 
         return outcomes;
+    }
+    public InterceptorReport dispatchInterceptor(InterceptorReport report, InterceptorEvent event) {
+        
+        report = activeLoomian().dispatchInterceptor(report, event);
+
+        return report;
     }
 
 

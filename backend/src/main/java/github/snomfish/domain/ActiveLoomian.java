@@ -13,6 +13,8 @@ import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.event.Event;
 import github.snomfish.functionality.gate.GateEvent;
+import github.snomfish.functionality.interceptor.InterceptorEvent;
+import github.snomfish.functionality.interceptor.InterceptorReport;
 
 import static github.snomfish.functionality.branch.BranchUtil.flatMap;
 
@@ -69,6 +71,12 @@ public class ActiveLoomian extends Loomian {
         outcomes = flatMap(context, outcomes, c -> abilityInstance().handleGate(context, event));
 
         return outcomes;
+    }
+    public InterceptorReport dispatchInterceptor(InterceptorReport report, InterceptorEvent event) {
+        
+        report.record(abilityInstance().ability().interceptors(), event);
+
+        return report;
     }
 
 

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import github.snomfish.functionality.gate.Gate;
+import github.snomfish.functionality.interceptor.Interceptor;
 
 // ability is only ever called from the registry, therefore it should remain constant
 // same with item
@@ -16,6 +17,7 @@ public class Ability {
     private String name;
     private List<AbilityRule> rules;
     private List<Gate> gates;
+    private List<Interceptor> interceptors;
 
     private boolean isLocked;
     private boolean oncePerBattle;
@@ -27,6 +29,7 @@ public class Ability {
         String name,
         List<AbilityRule> rules,
         List<Gate> gates,
+        List<Interceptor> interceptors,
         boolean isLocked,
         boolean oncePerBattle,
         boolean oncePerSwapIn
@@ -35,6 +38,7 @@ public class Ability {
         this.name = name;
         this.rules = rules;
         this.gates = gates;
+        this.interceptors = interceptors;
         this.isLocked = isLocked;
         this.oncePerBattle = oncePerBattle;
         this.oncePerSwapIn = oncePerSwapIn;
@@ -46,6 +50,7 @@ public class Ability {
     public String name() {return name;}
     public List<AbilityRule> rules() {return rules;}
     public List<Gate> gates() {return gates;}
+    public List<Interceptor> interceptors() {return interceptors;}
     public boolean isLocked() {return isLocked;}
     public boolean oncePerBattle() {return oncePerBattle;}
     public boolean oncePerSwapIn() {return oncePerSwapIn;}
@@ -56,6 +61,7 @@ public class Ability {
         return new Ability(
             NO_ABILITY,
             "no ability",
+            new ArrayList<>(),
             new ArrayList<>(),
             new ArrayList<>(),
             false,
@@ -77,6 +83,10 @@ public class Ability {
     }
     public Ability gate(Gate gate) {
         this.gates.add(gate);
+        return this;
+    }
+    public Ability interceptor(Interceptor interceptor) {
+        this.interceptors.add(interceptor);
         return this;
     }
     public Ability setLocked() {

@@ -31,11 +31,13 @@ import github.snomfish.functionality.effect.effects.ApplyStatChanges;
 import github.snomfish.functionality.effect.effects.ClutchEffect;
 import github.snomfish.functionality.effect.effects.DealDirectSelfDamage;
 import github.snomfish.functionality.effect.effects.DispatchEventEffect;
+import github.snomfish.functionality.effect.effects.NoEffect;
 import github.snomfish.functionality.effect.effects.SetAbility;
 import github.snomfish.functionality.effect.effects.SetType;
 import github.snomfish.functionality.effect.effects.SetValueEffect;
 import github.snomfish.functionality.effect.effects.SetWeather;
 import github.snomfish.functionality.gate.Gate;
+import github.snomfish.functionality.interceptor.Interceptor;
 import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.INumberValueConstant;
 import github.snomfish.functionality.number.Multiply;
@@ -45,6 +47,7 @@ import static github.snomfish.domain.ability.AbilityId.*;
 import static github.snomfish.functionality.context.ContextSideId.*;
 import static github.snomfish.functionality.event.EventId.*;
 import static github.snomfish.functionality.gate.GateId.*;
+import static github.snomfish.functionality.interceptor.InterceptorId.*;
 
 public class AbilityRegistry {
     
@@ -751,12 +754,13 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(FLUTTER)
 			.name("flutter")
-			.gate(Gate.build()
-				.event(CAN_MOVE_AFFECT_TARGET, TARGET)
+			.interceptor(Interceptor.build()
+				.event(MOVE_ABOUT_TO_AFFECT_TARGET, TARGET)
 				.condition(new Or(
 					new Equals<>(Value.USER().MOVE().POWDER_TAG(), true),
 					new GateCondition(CAN_USE_DEFENSIVE_ABILITY)
 				))
+				.effect(new NoEffect())
 			)
 		);
 		register(Ability.build()
@@ -803,12 +807,13 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(FORTISSIMO)
 			.name("fortissimo")
-			.gate(Gate.build()
-				.event(CAN_MOVE_AFFECT_TARGET, TARGET)
+			.interceptor(Interceptor.build()
+				.event(MOVE_ABOUT_TO_AFFECT_TARGET, TARGET)
 				.condition(new Or(
 					new Equals<>(Value.USER().MOVE().SOUND_TAG(), true),
 					new GateCondition(CAN_USE_DEFENSIVE_ABILITY)
 				))
+				.effect(new NoEffect())
 			)
 		);
 		register(Ability.build() // completed
@@ -869,12 +874,13 @@ public class AbilityRegistry {
 		register(Ability.build() // immunity to bomb moves
 			.id(GUMMY)
 			.name("gummy")
-			.gate(Gate.build()
-				.event(CAN_MOVE_AFFECT_TARGET, TARGET)
+			.interceptor(Interceptor.build()
+				.event(MOVE_ABOUT_TO_AFFECT_TARGET, TARGET)
 				.condition(new Or(
 					new Equals<>(Value.USER().MOVE().EXPLOSIVE_TAG(), true),
 					new GateCondition(CAN_USE_DEFENSIVE_ABILITY)
 				))
+				.effect(new NoEffect())
 			)
 		);
 		register(Ability.build() // technician from pokemon
@@ -935,8 +941,8 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(HOVER)
 			.name("hover")
-			.gate(Gate.build()
-				.event(CAN_MOVE_AFFECT_TARGET, TARGET)
+			.interceptor(Interceptor.build()
+				.event(MOVE_ABOUT_TO_AFFECT_TARGET, TARGET)
 				.condition(new Or(
 					new Equals<>(Value.USER().MOVE().TYPE(), TypeId.EARTH),
 					new GateCondition(CAN_USE_DEFENSIVE_ABILITY)
@@ -946,35 +952,27 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(HYDRATE)
 			.name("hydrate")
-			.gate(Gate.build()
-				.event(CAN_MOVE_AFFECT_TARGET, TARGET)
+			.interceptor(Interceptor.build()
+				.event(MOVE_ABOUT_TO_AFFECT_TARGET, TARGET)
 				.condition(new Or(
 					new Equals<>(Value.USER().MOVE().TYPE(), TypeId.WATER),
 					new GateCondition(CAN_USE_DEFENSIVE_ABILITY)
 				))
-			)
-			.rule(AbilityRule.build()
-				.event(MOVE_FAILED_EVENT, TARGET)
-				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.WATER))
-				//.effect(increases targets energy by 25% of max)
+				.effect(new NoEffect())
 			)
 		);
 		register(Ability.build()
 			.id(HYDRO_VORTEX)
 			.name("hydro vortex")
-			.gate(Gate.build()
-				.event(CAN_MOVE_AFFECT_TARGET, TARGET)
+			.interceptor(Interceptor.build()
+				.event(MOVE_ABOUT_TO_AFFECT_TARGET, TARGET)
 				.condition(new Or(
 					new Equals<>(Value.USER().MOVE().TYPE(), TypeId.WATER),
 					new GateCondition(CAN_USE_DEFENSIVE_ABILITY)
 				))
-			)
-			.rule(AbilityRule.build()
-				.event(MOVE_FAILED_EVENT, TARGET)
-				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.WATER))
 				.effect(ApplyStatChanges.userChangingUser()
-					.mattack(new Constant(1))
-				)
+					.mattack(new Constant(1)
+				))
 			)
 		);
 		register(Ability.build()
@@ -1057,19 +1055,15 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(LIGHTNING_ROD)
 			.name("lightning rod")
-			.gate(Gate.build()
-				.event(CAN_MOVE_AFFECT_TARGET, TARGET)
+			.interceptor(Interceptor.build()
+				.event(MOVE_ABOUT_TO_AFFECT_TARGET, TARGET)
 				.condition(new Or(
 					new Equals<>(Value.USER().MOVE().TYPE(), TypeId.ELECTRIC),
 					new GateCondition(CAN_USE_DEFENSIVE_ABILITY)
 				))
-			)
-			.rule(AbilityRule.build()
-				.event(MOVE_FAILED_EVENT, TARGET)
-				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.ELECTRIC))
 				.effect(ApplyStatChanges.userChangingUser()
-					.rattack(new Constant(1))
-				)
+					.rattack(new Constant(1)
+				))
 			)
 		);
 		register(Ability.build()
@@ -1190,16 +1184,13 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(NOXIOUS_WEEDS)
 			.name("noxious weeds")
-			.gate(Gate.build()
-				.event(CAN_MOVE_AFFECT_TARGET, TARGET)
-				.condition(new And(
-					new Not(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.PLANT)),
+			
+			.interceptor(Interceptor.build()
+				.event(MOVE_ABOUT_TO_AFFECT_TARGET, TARGET)
+				.condition(new Or(
+					new Equals<>(Value.USER().MOVE().TYPE(), TypeId.PLANT),
 					new GateCondition(CAN_USE_DEFENSIVE_ABILITY)
 				))
-			)
-			.rule(AbilityRule.build()
-				.event(MOVE_FAILED_EVENT, TARGET)
-				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.PLANT))
 				.effect(ApplyMechanic.toUser(MechanicId.NOXIOUS_WEEDS))
 			)
 		);
@@ -1340,17 +1331,13 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(RAGING_FIRE)
 			.name("raging fire")
-			.gate(Gate.build()
-				.event(CAN_MOVE_AFFECT_TARGET, TARGET)
+			.interceptor(Interceptor.build()
+				.event(MOVE_ABOUT_TO_AFFECT_TARGET, TARGET)
 				.condition(new Or(
 					new Equals<>(Value.USER().MOVE().TYPE(), TypeId.FIRE),
 					new GateCondition(CAN_USE_DEFENSIVE_ABILITY)
 				))
-			)
-			.rule(AbilityRule.build()
-				.event(MOVE_FAILED_EVENT, TARGET)
-				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.FIRE))
-				//.effect(increases targets energy by 25% of max)
+				.effect(new NoEffect())
 			)
 		);
 		register(Ability.build()
@@ -1384,19 +1371,15 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(RECHARGEABLE)
 			.name("rechargeable")
-			.gate(Gate.build()
-				.event(CAN_MOVE_AFFECT_TARGET, TARGET)
+			.interceptor(Interceptor.build()
+				.event(MOVE_ABOUT_TO_AFFECT_TARGET, TARGET)
 				.condition(new Or(
 					new Equals<>(Value.USER().MOVE().TYPE(), TypeId.ELECTRIC),
 					new GateCondition(CAN_USE_DEFENSIVE_ABILITY)
 				))
-			)
-			.rule(AbilityRule.build()
-				.event(MOVE_FAILED_EVENT, TARGET)
-				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.ELECTRIC))
 				.effect(ApplyStatChanges.userChangingUser()
-					.speed(new Constant(1))
-				)
+					.speed(new Constant(1)
+				))
 			)
 		);
 		register(Ability.build()
