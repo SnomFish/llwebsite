@@ -1,7 +1,5 @@
 package github.snomfish.domain;
 
-import github.snomfish.domain.weather.Weather;
-import github.snomfish.domain.weather.WeatherId;
 import github.snomfish.domain.weather.WeatherInstance;
 import github.snomfish.functionality.copy.DeepCopyable;
 

@@ -43,7 +43,7 @@ public class ApplyStatus implements IEffect {
 
     @Override
     public List<Branch<BattleContext>> execute(BattleContext context) {
-        ActiveLoomian loomian = (ActiveLoomian) activeLoomianValue.get(context);
+        //ActiveLoomian loomian = (ActiveLoomian) activeLoomianValue.get(context);
         // TODO: implement
         
         return List.of(new Branch<>(context, 1.0)); 

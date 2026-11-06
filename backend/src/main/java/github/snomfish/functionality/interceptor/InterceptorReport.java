@@ -8,8 +8,6 @@ import github.snomfish.functionality.branch.BranchUtil;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.effect.IEffect;
 
-import static github.snomfish.functionality.branch.BranchUtil.flatMap;
-
 public class InterceptorReport {
     
 

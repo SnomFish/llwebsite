@@ -14,16 +14,16 @@ public class Effects {
 
 
     public static IEffect addValue(Value<? extends Number> value, INumber addition) {
-        return new SetValueEffect(value, new Add(new ValueConstant(value), addition));
+        return new SetValueEffect<>(value, new Add(new ValueConstant(value), addition));
     }
     public static IEffect addValue(Value<? extends Number> value, Value<? extends Number> addition) {
-        return new SetValueEffect(value, new Add(new ValueConstant(value), new ValueConstant(addition)));
+        return new SetValueEffect<>(value, new Add(new ValueConstant(value), new ValueConstant(addition)));
     }
 
     public static IEffect multiplyValue(Value<? extends Number> value, INumber multiplier) {
-        return new SetValueEffect(value, new Multiply(new ValueConstant(value), multiplier));
+        return new SetValueEffect<>(value, new Multiply(new ValueConstant(value), multiplier));
     }
     public static IEffect multiplyValue(Value<? extends Number> value, Value<? extends Number> multiplier) {
-        return new SetValueEffect(value, new Multiply(new ValueConstant(value), new ValueConstant(multiplier)));
+        return new SetValueEffect<>(value, new Multiply(new ValueConstant(value), new ValueConstant(multiplier)));
     }
 }
