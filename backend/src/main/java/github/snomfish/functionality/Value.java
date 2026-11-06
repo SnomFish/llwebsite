@@ -102,11 +102,6 @@ public class Value<T> {
 		c -> c.gamestate().weatherInstance().lifespan(),
 		(c, v) -> c.gamestate().weatherInstance().setLifespan(v)
 	);}
-	public static Value<Integer> WEATHER_LIFESPAN_MODIFIER() {return new Value<>(
-		Integer.class,
-		c -> c.gamestate().weatherInstance().lifespanModifier(),
-		(c, v) -> c.gamestate().weatherInstance().setLifespanModifier(v)
-	);}
 
 
 	public static Value<Integer> TURN_NUMBER() {return new Value<>(

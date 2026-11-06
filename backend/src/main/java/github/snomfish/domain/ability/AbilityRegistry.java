@@ -105,7 +105,8 @@ public class AbilityRegistry {
 			.id(ADAPTABLE)
 			.name("adaptable")
 			.rule(AbilityRule.build()
-				.event(WEATHER_SET_EVENT, USER)
+				.event(POST_USER_SET_WEATHER_EVENT, USER)
+				.event(POST_TARGET_SET_WEATHER_EVENT, USER)
 				.effect(new EffectSequence(List.of(	
 					new ConditionalEffect(Conditions.clearWeather(), 		SetType.userPrimary(TypeId.SIMPLE)),
 					new ConditionalEffect(Conditions.fogActive(),			SetType.userPrimary(TypeId.SPIRIT)),
@@ -116,7 +117,8 @@ public class AbilityRegistry {
 				)))
 			)
 			.rule(AbilityRule.build()
-				.event(WEATHER_SET_EVENT, TARGET)
+				.event(POST_USER_SET_WEATHER_EVENT, TARGET)
+				.event(POST_TARGET_SET_WEATHER_EVENT, TARGET)
 				.effect(new EffectSequence(List.of(	
 					new ConditionalEffect(Conditions.clearWeather(), 		SetType.targetPrimary(TypeId.SIMPLE)),
 					new ConditionalEffect(Conditions.fogActive(),			SetType.targetPrimary(TypeId.SPIRIT)),
