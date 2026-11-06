@@ -1,0 +1,65 @@
+package github.snomfish.functionality.event;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import github.snomfish.functionality.branch.Branch;
+import github.snomfish.functionality.condition.ICondition;
+import github.snomfish.functionality.condition.NoCondition;
+import github.snomfish.functionality.context.BattleContext;
+import github.snomfish.functionality.context.ContextSideId;
+import github.snomfish.functionality.effect.IEffect;
+import github.snomfish.functionality.effect.effects.NoEffect;
+
+import static github.snomfish.functionality.branch.BranchUtil.applyProbability;
+
+public class Rule {
+     
+
+    private List<Event<RuleId>> events;
+    private ICondition condition;
+    private IEffect effect;
+
+
+    private Rule() {
+        this.events = new ArrayList<>();
+        this.condition = new NoCondition();
+        this.effect = new NoEffect();
+    }
+
+
+    public List<Branch<BattleContext>> execute(BattleContext context, Event<RuleId> event) {
+        
+        if (!events.contains(event)) {
+            return List.of(new Branch<>(context, 1.0));
+        }
+
+        List<Branch<BattleContext>> outcomes = new ArrayList<>();
+
+        for (Branch<Boolean> conditionBranch : condition.execute(context)) {
+            if (conditionBranch.value()) {
+                outcomes.addAll(applyProbability(effect.execute(context), conditionBranch));
+            }
+        }
+        
+        return effect.execute(context);
+    }
+
+
+    // builder functions
+    public static Rule build() {
+        return new Rule();
+    }
+    public Rule event(RuleId ruleId, ContextSideId sideId) {
+        this.events.add(new Event<>(ruleId, sideId));
+        return this;
+    }
+    public Rule condition(ICondition condition) {
+        this.condition = condition;
+        return this;
+    }
+    public Rule effect(IEffect effect) {
+        this.effect = effect;
+        return this;
+    }
+}

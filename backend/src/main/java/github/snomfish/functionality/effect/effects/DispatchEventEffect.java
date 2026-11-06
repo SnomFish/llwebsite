@@ -5,17 +5,17 @@ import java.util.List;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.effect.IEffect;
-import github.snomfish.functionality.event.EventId;
+import github.snomfish.functionality.event.RuleId;
 
 import static github.snomfish.functionality.branch.BranchUtil.flatMap;
 
 public class DispatchEventEffect implements IEffect {
     
 
-    private EventId eventId;
+    private RuleId eventId;
 
 
-    public DispatchEventEffect(EventId eventId) {
+    public DispatchEventEffect(RuleId eventId) {
         this.eventId = eventId;
     }
     

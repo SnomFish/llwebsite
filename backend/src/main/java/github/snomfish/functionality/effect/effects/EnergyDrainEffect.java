@@ -11,7 +11,7 @@ import github.snomfish.functionality.effect.IEffect;
 import github.snomfish.functionality.number.INumber;
 
 import static github.snomfish.domain.move.modifiers.ModifierId.ENERGY_DRAIN;
-import static github.snomfish.functionality.event.EventId.*;
+import static github.snomfish.functionality.event.RuleId.*;
 
 public class EnergyDrainEffect implements IEffect {
     

@@ -1,19 +1,15 @@
 package github.snomfish.domain.status;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import github.snomfish.domain.move.CategoryId;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.condition.Equals;
-import github.snomfish.functionality.effect.ConditionalEffect;
 import github.snomfish.functionality.effect.Effects;
 import github.snomfish.functionality.effect.effects.DealDirectSelfDamage;
-import github.snomfish.functionality.effect.effects.NoEffect;
-import github.snomfish.functionality.event.Event;
-import github.snomfish.functionality.event.EventId;
-import github.snomfish.functionality.event.TriggerRule;
+import github.snomfish.functionality.event.RuleId;
+import github.snomfish.functionality.event.Rule;
 import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.Multiply;
 import github.snomfish.functionality.number.ValueConstant;
@@ -35,89 +31,61 @@ public class StatusRegistry {
     }
 
 
-    private static void register(
-        StatusId id,
-        String name,
-        TriggerRule rule
-    ) {
-        registry.put(id, new Status(id, name, List.of(rule)));
-    }
-    private static void register(
-        StatusId id,
-        String name,
-        List<TriggerRule> rules
-    ) {
-        registry.put(id, new Status(id, name, rules));
+    private static void register(Status status) {
+        registry.put(status.id(), status);
     }
 
 
     static {
-        register(
-            NO_STATUS,
-            "no status",
-            new TriggerRule(
-                new Event(EventId.END_TURN_STATUS_EFFECT_EVENT, USER), 
-                new NoEffect() 
-            )
+        register(Status.build(NO_STATUS)
+            .name("no status")
         );  
-        register(
-            POISON,
-            "posion",
-            new TriggerRule(
-                new Event(EventId.END_TURN_STATUS_EFFECT_EVENT, USER),
-                new DealDirectSelfDamage(new Constant(1/8))
+        register(Status.build(POISON)
+            .name("posion")
+            .rule(Rule.build()
+                .event(RuleId.END_TURN_STATUS_EFFECT_EVENT, USER)
+                .effect(new DealDirectSelfDamage(new Constant(1/8)))
             )
         );
-        register(
-            BAD_POISON,
-            "poison",
-            new TriggerRule(
-                new Event(EventId.END_TURN_STATUS_EFFECT_EVENT, USER),
-                new DealDirectSelfDamage(new Multiply(
+        register(Status.build(BAD_POISON)
+            .name("poison")
+            .rule(Rule.build()
+                .event(RuleId.END_TURN_STATUS_EFFECT_EVENT, USER)
+                .effect(new DealDirectSelfDamage(new Multiply(
                     new Constant(1/16),
-                    new ValueConstant(Value.USER().CURRENT_HEALTH())
-                ))
+                    new ValueConstant(Value.USER().STATUS_TURNS())
+                )))
             )
         );
-        register(
-            PARALYSIS,
-            "paralysis",
-            List.of()
+        register(Status.build(PARALYSIS)
+            .name("paralysis")
         );
-        register(
-            BURN,
-            "burn",
-            List.of(new TriggerRule(
-                new Event(EventId.END_TURN_STATUS_EFFECT_EVENT, USER),
-                new DealDirectSelfDamage(new Constant(1/16))
-            ),
-            new TriggerRule( // cutting mattack in half
-                new Event(EventId.PRE_MOVE_EVENT, USER), 
-                new ConditionalEffect(
-                    new Equals<>(Value.USER().MOVE().CATEGORY(), CategoryId.MELEE),
-                    Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant (0.5)) 
-                )
-            ))
+        register(Status.build(BURN)
+            .name("burn")
+            .rule(Rule.build()
+                .event(RuleId.END_TURN_STATUS_EFFECT_EVENT, USER)
+                .effect(new DealDirectSelfDamage(new Constant(1/16)))
+            )
+            .rule(Rule.build() // cutting mattack in half
+                .event(RuleId.PRE_MOVE_EVENT, USER)
+                .condition(new Equals<>(Value.USER().MOVE().CATEGORY(), CategoryId.MELEE))
+                .effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant (0.5)))
+            )
         );
-        register(
-            FROSTBITE,
-            "frostbite",
-            List.of(new TriggerRule(
-                new Event(EventId.END_TURN_STATUS_EFFECT_EVENT, USER),
-                new DealDirectSelfDamage(new Constant(1/16))
-            ),
-            new TriggerRule( // cutting mattack in half
-                new Event(EventId.PRE_MOVE_EVENT, USER), 
-                new ConditionalEffect(
-                    new Equals<>(Value.USER().MOVE().CATEGORY(), CategoryId.RANGED),
-                    Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant (0.5)) 
-                )
-            ))
+        register(Status.build(FROSTBITE)
+            .name("frostbite")
+            .rule(Rule.build()
+                .event(RuleId.END_TURN_STATUS_EFFECT_EVENT, USER)
+                .effect(new DealDirectSelfDamage(new Constant(1/16)))
+            )
+            .rule(Rule.build() // cutting mattack in half
+                .event(RuleId.PRE_MOVE_EVENT, USER)
+                .condition(new Equals<>(Value.USER().MOVE().CATEGORY(), CategoryId.RANGED))
+                .effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant (0.5)))
+            )
         );
-        register(
-            SLEEP,
-            "sleep",
-            List.of()
+        register(Status.build(SLEEP)
+            .name("sleep")
         );
     }
 }

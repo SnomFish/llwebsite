@@ -1,18 +1,36 @@
 package github.snomfish.domain.mechanics;
 
-import java.util.List;
+import github.snomfish.functionality.event.Definition;
+import github.snomfish.functionality.event.Gate;
+import github.snomfish.functionality.event.Interceptor;
+import github.snomfish.functionality.event.Rule;
 
-import github.snomfish.functionality.event.RuleDefinition;
-import github.snomfish.functionality.event.TriggerRule;
-
-public class Mechanic extends RuleDefinition<MechanicId>{
+public class Mechanic extends Definition<MechanicId>{
     
 
-    public Mechanic(
-        MechanicId id,
-        String name,
-        List<TriggerRule> rules
-    ) {
-        super(id, name, rules);
+    public Mechanic(MechanicId id) {
+        super(id);
+    }
+
+
+    // builder functions
+    public static Mechanic build(MechanicId id) {
+        return new Mechanic(id);
+    }
+    public Mechanic name(String name) {
+        this.name = name;
+        return this;
+    }
+    public Mechanic rule(Rule rule) {
+        this.rules.add(rule);
+        return this;
+    }
+    public Mechanic gate(Gate gate) {
+        this.gates.add(gate);
+        return this;
+    }
+    public Mechanic interceptor(Interceptor interceptor) {
+        this.interceptors.add(interceptor);
+        return this;
     }
 }

@@ -1,13 +1,35 @@
 package github.snomfish.domain.weather;
 
-import java.util.List;
+import github.snomfish.functionality.event.Definition;
+import github.snomfish.functionality.event.Gate;
+import github.snomfish.functionality.event.Interceptor;
+import github.snomfish.functionality.event.Rule;
 
-import github.snomfish.functionality.event.RuleDefinition;
-import github.snomfish.functionality.event.TriggerRule;
+public class Weather extends Definition<WeatherId> {
 
-public class Weather extends RuleDefinition<WeatherId> {
-    
-    public Weather(WeatherId id, String name, List<TriggerRule> rules) {
-        super(id, name, rules);
+    public Weather(WeatherId id) {
+        super(id);
+    }
+
+
+    // builder functions
+    public static Weather build(WeatherId id) {
+        return new Weather(id);
+    }
+    public Weather name(String name) {
+        this.name = name;
+        return this;
+    }
+    public Weather rule(Rule rule) {
+        this.rules.add(rule);
+        return this;
+    }
+    public Weather gate(Gate gate) {
+        this.gates.add(gate);
+        return this;
+    }
+    public Weather interceptor(Interceptor interceptor) {
+        this.interceptors.add(interceptor);
+        return this;
     }
 }

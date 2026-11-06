@@ -5,7 +5,7 @@ import java.util.List;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.effect.IEffect;
-import github.snomfish.functionality.interceptor.InterceptorId;
+import github.snomfish.functionality.event.InterceptorId;
 
 public class InterceptorEffect implements IEffect {
     

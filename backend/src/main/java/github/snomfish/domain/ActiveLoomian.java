@@ -12,9 +12,10 @@ import github.snomfish.functionality.action.Action;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.event.Event;
-import github.snomfish.functionality.gate.GateEvent;
-import github.snomfish.functionality.interceptor.InterceptorEvent;
-import github.snomfish.functionality.interceptor.InterceptorReport;
+import github.snomfish.functionality.event.GateId;
+import github.snomfish.functionality.event.InterceptorId;
+import github.snomfish.functionality.event.InterceptorReport;
+import github.snomfish.functionality.event.RuleId;
 
 import static github.snomfish.functionality.branch.BranchUtil.flatMap;
 
@@ -56,23 +57,23 @@ public class ActiveLoomian extends Loomian {
         return new ActiveLoomian(this);
     }
 
-    public List<Branch<BattleContext>> dispatchEvent(BattleContext context, Event event) {
+    public List<Branch<BattleContext>> dispatchEvent(BattleContext context, Event<RuleId> event) {
         List<Branch<BattleContext>> outcomes = List.of(new Branch<>(context, 1.0));
 
-        outcomes = flatMap(outcomes, c -> abilityInstance().handleEvent(c, event));
-        outcomes = flatMap(outcomes, c -> item().handleEvent(c, event));
-        outcomes = flatMap(outcomes, c -> status().handleEvent(c, event)); // has to be afunction as I only store Ids for ability item and status
-        outcomes = flatMap(outcomes, c -> mechanics.handleEvent(c, event)); 
+        outcomes = flatMap(outcomes, c -> abilityInstance().handleRule(c, event));
+        outcomes = flatMap(outcomes, c -> item().handleRule(c, event));
+        outcomes = flatMap(outcomes, c -> status().handleRule(c, event)); // has to be afunction as I only store Ids for ability item and status
+        outcomes = flatMap(outcomes, c -> mechanics.handleRule(c, event)); 
 
         return outcomes;
     }
-    public List<Branch<Boolean>> dispatchGate(BattleContext context, GateEvent event, List<Branch<Boolean>> outcomes) {
+    public List<Branch<Boolean>> dispatchGate(BattleContext context, Event<GateId> event, List<Branch<Boolean>> outcomes) {
 
         outcomes = flatMap(context, outcomes, c -> abilityInstance().handleGate(context, event));
 
         return outcomes;
     }
-    public InterceptorReport dispatchInterceptor(InterceptorReport report, InterceptorEvent event) {
+    public InterceptorReport dispatchInterceptor(InterceptorReport report, Event<InterceptorId> event) {
         
         report.record(abilityInstance().ability().interceptors(), event);
 

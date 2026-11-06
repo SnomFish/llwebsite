@@ -11,7 +11,7 @@ import github.snomfish.functionality.Value;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.effect.IEffect;
-import github.snomfish.functionality.event.EventId;
+import github.snomfish.functionality.event.RuleId;
 import github.snomfish.functionality.number.INumber;
 
 import static github.snomfish.domain.stats.StatChangesId.*;
@@ -20,15 +20,15 @@ import static github.snomfish.functionality.branch.BranchUtil.flatMap;
 public class ApplyStatChanges implements IEffect {
     
 
-    private EventId preEvent; // runs once before the stat changes are applied
-    private EventId loweredStatEvent; // runs after each inidividual stat change if a stat is lowered
+    private RuleId preEvent; // runs once before the stat changes are applied
+    private RuleId loweredStatEvent; // runs after each inidividual stat change if a stat is lowered
     private Value<ActiveLoomian> activeLoomianValue; // the loomian who will have their stats changed
     private Map<StatChangesId, INumber> statChanges;
 
 
     private ApplyStatChanges(
-        EventId preEvent,
-        EventId loweredStatEvent,
+        RuleId preEvent,
+        RuleId loweredStatEvent,
         Value<ActiveLoomian> activeLoomianValue
     ) {
         this.preEvent = preEvent;
@@ -40,28 +40,28 @@ public class ApplyStatChanges implements IEffect {
 
     public static ApplyStatChanges userChangingUser() {
         return new ApplyStatChanges(
-            EventId.PRE_STAT_CHANGES_EFFECT_EVENT, 
+            RuleId.PRE_STAT_CHANGES_EFFECT_EVENT, 
             null,
             Value.USER().LOOMIAN()
         );
     }
     public static ApplyStatChanges userChangingTarget() {
         return new ApplyStatChanges(
-            EventId.PRE_STAT_CHANGES_EFFECT_EVENT,  
-            EventId.USER_LOWERED_TARGET_STATS_EVENT,
+            RuleId.PRE_STAT_CHANGES_EFFECT_EVENT,  
+            RuleId.USER_LOWERED_TARGET_STATS_EVENT,
             Value.TARGET().LOOMIAN()
         );
     }
     public static ApplyStatChanges targetChangingUser() {
         return new ApplyStatChanges(
-            EventId.PRE_STAT_CHANGES_EFFECT_EVENT,  
-            EventId.TARGET_LOWERED_USER_STATS_EVENT,
+            RuleId.PRE_STAT_CHANGES_EFFECT_EVENT,  
+            RuleId.TARGET_LOWERED_USER_STATS_EVENT,
             Value.USER().LOOMIAN()
         );
     }
     public static ApplyStatChanges targetChangingTarget() {
         return new ApplyStatChanges(
-            EventId.PRE_STAT_CHANGES_EFFECT_EVENT, 
+            RuleId.PRE_STAT_CHANGES_EFFECT_EVENT, 
             null, 
             Value.TARGET().LOOMIAN()
         );

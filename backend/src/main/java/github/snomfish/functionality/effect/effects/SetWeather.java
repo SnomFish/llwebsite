@@ -7,24 +7,24 @@ import github.snomfish.domain.weather.WeatherId;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.effect.IEffect;
-import github.snomfish.functionality.event.EventId;
+import github.snomfish.functionality.event.RuleId;
 import github.snomfish.functionality.number.INumber;
 
 import static github.snomfish.functionality.branch.BranchUtil.flatMap;
-import static github.snomfish.functionality.event.EventId.*;
+import static github.snomfish.functionality.event.RuleId.*;
 
 public class SetWeather implements IEffect {
     
 
     private WeatherId weatherId;
     private INumber lifespan;
-    private EventId beforeSetEvent;
+    private RuleId beforeSetEvent;
 
 
     private SetWeather(
         WeatherId weatherId,
         INumber lifespan,
-        EventId beforeSetEvent
+        RuleId beforeSetEvent
     ) {
         this.weatherId = weatherId;
         this.lifespan = lifespan;

@@ -5,17 +5,14 @@ import java.util.List;
 import github.snomfish.domain.Gamestate;
 import github.snomfish.domain.Side;
 import github.snomfish.domain.SideId;
-import github.snomfish.domain.weather.WeatherInstance;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.copy.DeepCopyable;
 import github.snomfish.functionality.effect.IEffect;
 import github.snomfish.functionality.event.Event;
-import github.snomfish.functionality.event.EventId;
-import github.snomfish.functionality.gate.GateEvent;
-import github.snomfish.functionality.gate.GateId;
-import github.snomfish.functionality.interceptor.InterceptorEvent;
-import github.snomfish.functionality.interceptor.InterceptorId;
-import github.snomfish.functionality.interceptor.InterceptorReport;
+import github.snomfish.functionality.event.GateId;
+import github.snomfish.functionality.event.InterceptorId;
+import github.snomfish.functionality.event.InterceptorReport;
+import github.snomfish.functionality.event.RuleId;
 
 import static github.snomfish.domain.SideId.*;
 import static github.snomfish.functionality.branch.BranchUtil.flatMap;
@@ -62,32 +59,31 @@ public class BattleContext implements DeepCopyable<BattleContext> {
             case TARGET -> target;
         };
     }
-    public WeatherInstance weatherInstance() {return gamestate.weatherInstance();}
 
 
     // events
-    public List<Branch<BattleContext>> dispatchEvent(EventId eventId) {
+    public List<Branch<BattleContext>> dispatchEvent(RuleId eventId) {
         List<Branch<BattleContext>> outcomes = List.of(new Branch<>(this, 1.0));
 
-        outcomes = flatMap(outcomes, context -> weatherInstance().handleEvent(context, new Event(eventId, null)));
-        outcomes = flatMap(outcomes, context -> user().dispatchEvent(context, new Event(eventId, ContextSideId.USER)));
-        outcomes = flatMap(outcomes, context -> target().dispatchEvent(context, new Event(eventId, ContextSideId.TARGET)));
+        outcomes = flatMap(outcomes, context -> gamestate().weatherInstance().handleEvent(context, new Event<>(eventId, null)));
+        outcomes = flatMap(outcomes, context -> user().dispatchEvent(context, new Event<>(eventId, ContextSideId.USER)));
+        outcomes = flatMap(outcomes, context -> target().dispatchEvent(context, new Event<>(eventId, ContextSideId.TARGET)));
 
         return outcomes;
     }
     public List<Branch<Boolean>> dispatchGate(GateId gateId) {
         List<Branch<Boolean>> outcomes = List.of(new Branch<>(true, 1));
 
-        outcomes = user().dispatchGate(this, new GateEvent(gateId, ContextSideId.USER), outcomes);
-        outcomes = target().dispatchGate(this, new GateEvent(gateId, ContextSideId.TARGET), outcomes);
+        outcomes = user().dispatchGate(this, new Event<>(gateId, ContextSideId.USER), outcomes);
+        outcomes = target().dispatchGate(this, new Event<>(gateId, ContextSideId.TARGET), outcomes);
 
         return outcomes;
     }
     public List<Branch<BattleContext>> dispatchInterceptor(InterceptorId interceptorId, IEffect trueEffect) {
         InterceptorReport report = new InterceptorReport(this, trueEffect);
 
-        report = user().dispatchInterceptor(report, new InterceptorEvent(interceptorId, ContextSideId.USER));
-        report = user().dispatchInterceptor(report, new InterceptorEvent(interceptorId, ContextSideId.TARGET));
+        report = user().dispatchInterceptor(report, new Event<>(interceptorId, ContextSideId.USER));
+        report = user().dispatchInterceptor(report, new Event<>(interceptorId, ContextSideId.TARGET));
 
         return report.execute();
     }

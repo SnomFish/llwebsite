@@ -6,6 +6,7 @@ import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.copy.DeepCopyable;
 import github.snomfish.functionality.event.Event;
+import github.snomfish.functionality.event.RuleId;
 
 public class WeatherInstance implements DeepCopyable<WeatherInstance> {
     
@@ -43,7 +44,7 @@ public class WeatherInstance implements DeepCopyable<WeatherInstance> {
     public void setLifespan(int lifespan) {this.lifespan = lifespan;}
 
 
-    public List<Branch<BattleContext>> handleEvent(BattleContext context, Event event) {
-        return weather().handleEvent(context, event);
+    public List<Branch<BattleContext>> handleEvent(BattleContext context, Event<RuleId> event) {
+        return weather().handleRule(context, event);
     }
 }

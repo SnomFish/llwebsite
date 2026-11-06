@@ -10,6 +10,7 @@ import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.copy.DeepCopyable;
 import github.snomfish.functionality.event.Event;
+import github.snomfish.functionality.event.RuleId;
 
 public class Mechanics implements DeepCopyable<Mechanics> {
     
@@ -49,13 +50,13 @@ public class Mechanics implements DeepCopyable<Mechanics> {
     }
 
 
-    public List<Branch<BattleContext>> handleEvent(BattleContext context, Event event) {
+    public List<Branch<BattleContext>> handleRule(BattleContext context, Event<RuleId> event) {
         List<Branch<BattleContext>> outcomes = List.of(new Branch<>(context, 1.0));
 
         for (MechanicId id : mechanics.keySet()) {
             if (mechanics.get(id) == false) continue;
             Mechanic mechanic = MechanicRegistry.get(id);
-            outcomes = flatMap(outcomes, c -> mechanic.handleEvent(c, event));
+            outcomes = flatMap(outcomes, c -> mechanic.handleRule(c, event));
         }
 
         return outcomes;

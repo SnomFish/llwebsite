@@ -8,7 +8,7 @@ import github.snomfish.functionality.Value;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.effect.IEffect;
-import github.snomfish.functionality.event.EventId;
+import github.snomfish.functionality.event.RuleId;
 
 import static github.snomfish.domain.item.ItemId.NO_ITEM;
 
@@ -16,12 +16,12 @@ public class ConsumeItem implements IEffect {
         
 
     private Value<ActiveLoomian> activeLoomianValue;
-    private EventId removedItemEventId;
+    private RuleId removedItemEventId;
 
 
     private ConsumeItem(
         Value<ActiveLoomian> activeLoomianValue,
-        EventId removedItemEventId
+        RuleId removedItemEventId
     ) {
         this.activeLoomianValue = activeLoomianValue;
         this.removedItemEventId = removedItemEventId;
@@ -29,13 +29,13 @@ public class ConsumeItem implements IEffect {
     public static ConsumeItem user() {
         return new ConsumeItem(
             Value.USER().LOOMIAN(), 
-            EventId.USER_ITEM_CONSUMED_EVENT
+            RuleId.USER_ITEM_CONSUMED_EVENT
         );
     }
     public static ConsumeItem target() {
         return new ConsumeItem(
             Value.TARGET().LOOMIAN(),
-            EventId.TARGET_ITEM_CONSUMED_EVENT
+            RuleId.TARGET_ITEM_CONSUMED_EVENT
         );
     }
 

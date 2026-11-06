@@ -1,4 +1,4 @@
-package github.snomfish.functionality.interceptor;
+package github.snomfish.functionality.event;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,7 @@ public class InterceptorReport {
     }
 
 
-    public void record(List<Interceptor> interceptors, InterceptorEvent event) {
+    public void record(List<Interceptor> interceptors, Event<InterceptorId> event) {
         for (Interceptor interceptor : interceptors) {
             if (interceptor.events().contains(event)) {
                 

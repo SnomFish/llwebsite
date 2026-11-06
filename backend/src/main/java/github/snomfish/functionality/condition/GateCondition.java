@@ -4,7 +4,7 @@ import java.util.List;
 
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
-import github.snomfish.functionality.gate.GateId;
+import github.snomfish.functionality.event.GateId;
 
 public class GateCondition implements ICondition {
     

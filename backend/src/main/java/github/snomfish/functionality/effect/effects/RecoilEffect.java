@@ -1,5 +1,7 @@
 package github.snomfish.functionality.effect.effects;
 
+import static github.snomfish.functionality.event.GateId.CAN_TAKE_RECOIL;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,8 +13,6 @@ import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.effect.ConditionalEffect;
 import github.snomfish.functionality.effect.IEffect;
 import github.snomfish.functionality.number.INumber;
-
-import static github.snomfish.functionality.gate.GateId.CAN_TAKE_RECOIL;
 
 public class RecoilEffect implements IEffect {
     

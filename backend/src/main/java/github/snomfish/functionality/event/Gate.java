@@ -1,4 +1,4 @@
-package github.snomfish.functionality.gate;
+package github.snomfish.functionality.event;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,12 +10,12 @@ import github.snomfish.functionality.context.ContextSideId;
 public class Gate {
     
 
-    private List<GateEvent> events;
+    private List<Event<GateId>> events;
     private ICondition condition;
 
 
     private Gate(
-        List<GateEvent> events,
+        List<Event<GateId>> events,
         ICondition condition
     ) {
         this.events = events;
@@ -33,7 +33,7 @@ public class Gate {
 
 
     // getters
-    public List<GateEvent> events() {return events;}
+    public List<Event<GateId>> events() {return events;}
     public ICondition condition() {return condition;}
 
 
@@ -45,7 +45,7 @@ public class Gate {
         );
     }
     public Gate event(GateId eventId, ContextSideId sideId) {
-        this.events.add(new GateEvent(eventId, sideId));
+        this.events.add(new Event<>(eventId, sideId));
         return this;
     }
     public Gate condition(ICondition condition) {

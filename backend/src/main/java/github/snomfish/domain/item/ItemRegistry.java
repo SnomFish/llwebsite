@@ -1,27 +1,24 @@
 package github.snomfish.domain.item;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import github.snomfish.domain.type.TypeId;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.condition.Equals;
 import github.snomfish.functionality.condition.Or;
-import github.snomfish.functionality.effect.ConditionalEffect;
 import github.snomfish.functionality.effect.EffectSequence;
 import github.snomfish.functionality.effect.Effects;
 import github.snomfish.functionality.effect.effects.ClutchEffect;
 import github.snomfish.functionality.effect.effects.ConsumeItem;
-import github.snomfish.functionality.event.Event;
-import github.snomfish.functionality.event.TriggerRule;
+import github.snomfish.functionality.event.Rule;
 import github.snomfish.functionality.number.Constant;
 
 import static github.snomfish.domain.item.ItemId.*;
 import static github.snomfish.domain.species.SpeciesId.*;
-import static github.snomfish.domain.type.TypeId.*;
 import static github.snomfish.functionality.context.ContextSideId.*;
-import static github.snomfish.functionality.event.EventId.*;
+import static github.snomfish.functionality.event.RuleId.*;
 
 // oi add a condition in condition schematics for general item use, offensive item use and defensive.
 // simplest solution for whe the loomian cannot use items/ are about to be pile drived by sly cavenish
@@ -39,888 +36,655 @@ public class ItemRegistry {
     }
 
 
-    private static void register(
-        ItemId id,
-        String name,
-        TriggerRule rule
-    ) {
-		if (rule == null) {
-			registry.put(id, new Item(id, name, new ArrayList<TriggerRule>()));
-			return;
-		}
-        registry.put(id, new Item(id, name, List.of(rule)));
+    private static void register(Item item) {
+        registry.put(item.id(), item);
     }
 
 
     static {
-        register(
-			NO_ITEM,
-			"no item",
-			null
+        register(Item.build(NO_ITEM)
+			.name("no item")
 		);
-		register(
-			USELESS_ITEM,
-			"useless item",
-			null
+		register(Item.build(USELESS_ITEM)
+			.name("useless item")
 		);
-		register(
-			CHOCOLATE_BAR,
-			"chocolate bar",
-			null
+		register(Item.build(CHOCOLATE_BAR)
+			.name("chocolate bar")
 		);
-		register(
-			CLUTCH_PLUSHIE,
-			"clutch plushie",
-			new TriggerRule(
-				new Event(CLUTCH_EVENT, TARGET), 
-				new ConditionalEffect(
-					new Equals<>(Value.TARGET().HEALTH(), Value.TARGET().CURRENT_HEALTH()),
-					new ClutchEffect()
-				)
+		register(Item.build(CLUTCH_PLUSHIE)
+			.name("clutch plushie")
+			.rule(Rule.build()
+				.event(CLUTCH_EVENT, TARGET)
+				.condition(new Equals<>(Value.TARGET().HEALTH(), Value.TARGET().CURRENT_HEALTH()))
+				.effect(new ClutchEffect())
 				
 			)
 		);
-		register(
-			DRAIN_ORB,
-			"drain orb",
-			new TriggerRule(
-				new Event(PRE_HEALTH_DRAIN_EVENT, USER), 
-				Effects.multiplyValue(Value.USER().MOVE().HEALTH_DRAIN_MODIFIER(), new Constant(1.2))
+		register(Item.build(DRAIN_ORB)
+			.name("drain orb")
+			.rule(Rule.build()
+				.event(PRE_HEALTH_DRAIN_EVENT, USER)
+				.effect(Effects.multiplyValue(Value.USER().MOVE().HEALTH_DRAIN_MODIFIER(), new Constant(1.2)))
 			)
 		);
-		register(
-			DROP_OF_YOUTH,
-			"drop of youth",
-			new TriggerRule(
-				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET), 
-				new ConditionalEffect(
-					new Equals<>(Value.TARGET().CAN_EVOLVE(), true),
-					new EffectSequence(List.of(
+		register(Item.build(DROP_OF_YOUTH)
+			.name("drop of youth")
+			.rule(Rule.build()
+				.event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET)
+				.condition(new Equals<>(Value.TARGET().CAN_EVOLVE(), true))
+				.effect(new EffectSequence(List.of(
 						Effects.multiplyValue(Value.TARGET().MDEFENSE(), new Constant(1.5)),
 						Effects.multiplyValue(Value.TARGET().RDEFENSE(), new Constant(1.5))
-					))
-				)
+				)))
 			)
 		);
-		register(
-			DRY_ICE,
-			"dry ice",
-			null
+		register(Item.build(DRY_ICE)
+			.name("dry ice")
 		);
-		register(
-			ENERGY_ORB,
-			"energy orb",
-			null
+		register(Item.build(ENERGY_ORB)
+			.name("energy orb")
 		);
-		register(
-			HEALTH_AMULET,
-			"health amulet",
-			null
+		register(Item.build(HEALTH_AMULET)
+			.name("health amulet")
 		);
-		register(
-			HEAVY_ARMOUR,
-			"heavy armour",
-			null
+		register(Item.build(HEAVY_ARMOUR)
+			.name("heavy armour")
 		);
-		register(
-			HEAVY_SHACKLES,
-			"heavy shackles",
-			null
+		register(Item.build(HEAVY_SHACKLES)
+			.name("heavy shackles")
 		);
-		register(
-			HEAVY_SHIELD,
-			"heavy shield",
-			null
+		register(Item.build(HEAVY_SHIELD)
+			.name("heavy shield")
 		);
-		register(
-			KABUNGA_COFFEE,
-			"kabunga coffee",
-			null
+		register(Item.build(KABUNGA_COFFEE)
+			.name("kabunga coffee")
 		);
-		register(
-			MILKSHAKE,
-			"milkshake",
-			null
+		register(Item.build(MILKSHAKE)
+			.name("milkshake")
 		);
-		register(
-			MYSTERIOUS_DUST,
-			"mysterious dust",
-			null
+		register(Item.build(MYSTERIOUS_DUST)
+			.name("mysterious dust")
 		);
-		register(
-			MYSTIC_WAND,
-			"mystic wand",
-			null
+		register(Item.build(MYSTIC_WAND)
+			.name("mystic wand")
 		);
-		register(
-			POWER_CUFFS,
-			"power cuffs",
-			null
+		register(Item.build(POWER_CUFFS)
+			.name("power cuffs")
 		);
-		register(
-			RAGEFUL_PLUSHIE,
-			"rageful plushie",
-			null
+		register(Item.build(RAGEFUL_PLUSHIE)
+			.name("rageful plushie")
 		);
-		register(
-			RESTRICTIVE_ARMOUR,
-			"restrictive armour",
-			null
+		register(Item.build(RESTRICTIVE_ARMOUR)
+			.name("restrictive armour")
 		);
-		register(
-			RESTRICTIVE_SHIELD,
-			"restrictive shield",
-			null
+		register(Item.build(RESTRICTIVE_SHIELD)
+			.name("restrictive shield")
 		);
-		register(
-			SPECIALY_BOOTS,
-			"specialty boots",
-			null
+		register(Item.build(SPECIALY_BOOTS)
+			.name("specialty boots")
 		);
-		register(
-			SPECIALY_GLOVES,
-			"specialty gloves",
-			null
+		register(Item.build(SPECIALY_GLOVES)
+			.name("specialty gloves")
 		);
-		register(
-			SPECIALY_GOGGLES,
-			"specialty goggles",
-			null
+		register(Item.build(SPECIALY_GOGGLES)
+			.name("specialty goggles")
 		);
-		register(
-			STRONG_MAGNET,
-			"strong magnet",
-			null
+		register(Item.build(STRONG_MAGNET)
+			.name("strong magnet")
 		);
-		register(
-			THUNDER_ORB,
-			"thunder orb",
-			null
+		register(Item.build(THUNDER_ORB)
+			.name("thunder orb")
 		);
-		register(
-			VIRULENT_FANG,
-			"virulent fang",
-			null
+		register(Item.build(VIRULENT_FANG)
+			.name("virulent fang")
 		);
-		register(
-			VOLCANIC_ASH,
-			"volcanic ash",
-			null
+		register(Item.build(VOLCANIC_ASH)
+			.name("volcanic ash")
 		);
-		register(
-			AIR_ESSENCE,
-			"air essence",
-			new TriggerRule(
-                new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), AIR),
-					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2))
-				)
+		register(Item.build(AIR_ESSENCE)
+			.name("air essence")
+			.rule(Rule.build()
+                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.AIR))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2)))
 			)
 		);
-		register(
-			ANCIENT_ESSENCE,
-			"ancient essence",
-			new TriggerRule(
-                new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-				new ConditionalEffect(	
-					new Equals<>(Value.USER().MOVE().TYPE(), ANCIENT),
-					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2))
-				)
+		register(Item.build(ANCIENT_ESSENCE)
+			.name("ancient essence")
+			.rule(Rule.build()
+                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.ANCIENT))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2)))
             )
 		);
-		register(
-			BRAWLER_ESSENCE,
-			"brawler essence",
-			new TriggerRule(
-                new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), BRAWLER),
-					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2))
-				)
+		register(Item.build(BRAWLER_ESSENCE)
+			.name("brawler essence")
+			.rule(Rule.build()
+                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.BRAWLER))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2)))
             )
 		);
-		register(
-			BUG_ESSENCE,
-			"bug essence",
-			new TriggerRule(
-                new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), BUG),
-					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2))
-				)
+		register(Item.build(BUG_ESSENCE)
+			.name("bug essence")
+			.rule(Rule.build()
+                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.BUG))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2)))
             )
 		);
-		register(
-			DARK_ESSENCE,
-			"dark essence",
-			new TriggerRule(
-                new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), DARK),
-					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2))
-				)
+		register(Item.build(DARK_ESSENCE)
+			.name("dark essence")
+			.rule(Rule.build()
+                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.DARK))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2)))
             )
 		);
-		register(
-			EARTH_ESSENCE,
-			"earth essence",
-			new TriggerRule(
-                new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), EARTH),
-					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2))
-				)
+		register(Item.build(EARTH_ESSENCE)
+			.name("earth essence")
+			.rule(Rule.build()
+                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.EARTH))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2)))
             )
 		);
-		register(
-			ELECTRIC_ESSENCE,
-			"electric essence",
-			new TriggerRule(
-                new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), ELECTRIC),
-					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2))
-				)
+		register(Item.build(ELECTRIC_ESSENCE)
+			.name("electric essence")
+			.rule(Rule.build()
+                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.ELECTRIC))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2)))
             )
 		);
-		register(
-			FIRE_ESSENCE,
-			"fire essence",
-			new TriggerRule(
-                new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), FIRE),
-					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2))
-				)
+		register(Item.build(FIRE_ESSENCE)
+			.name("fire essence")
+			.rule(Rule.build()
+                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.FIRE))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2)))
             )
 		);
-		register(
-			ICE_ESSENCE,
-			"ice essence",
-			new TriggerRule(
-                new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), ICE),
-					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2))
-				)
+		register(Item.build(ICE_ESSENCE)
+			.name("ice essence")
+			.rule(Rule.build()
+                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.ICE))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2)))
             )
 		);
-		register(
-			LIGHT_ESSENCE,
-			"light essence",
-			new TriggerRule(
-                new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), LIGHT),
-					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2))
-				)
+		register(Item.build(LIGHT_ESSENCE)
+			.name("light essence")
+			.rule(Rule.build()
+                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.LIGHT))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2)))
             )
 		);
-		register(
-			METAL_ESSENCE,
-			"metal essence",
-			new TriggerRule(
-                new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), METAL),
-					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2))
-				)
+		register(Item.build(METAL_ESSENCE)
+			.name("metal essence")
+			.rule(Rule.build()
+                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.METAL))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2)))
             )
 		);
-		register(
-			MIND_ESSENCE,
-			"mind essence",
-			new TriggerRule(
-                new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), MIND),
-					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2))
-				)
+		register(Item.build(MIND_ESSENCE)
+			.name("mind essence")
+			.rule(Rule.build()
+                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.MIND))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2)))
             )
 		);
-		register(
-			PLANT_ESSENCE,
-			"plant essence",
-			new TriggerRule(
-                new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), PLANT),
-					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2))
-				)
+		register(Item.build(PLANT_ESSENCE)
+			.name("plant essence")
+			.rule(Rule.build()
+                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.PLANT))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2)))
             )
 		);
-		register(
-			SPIRIT_ESSENCE,
-			"spirit essence",
-			new TriggerRule(
-                new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), SPIRIT),
-					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2))
-				)
+		register(Item.build(SPIRIT_ESSENCE)
+			.name("spirit essence")
+			.rule(Rule.build()
+                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.SPIRIT))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2)))
             )
 		);
-		register(
-			SIMPLE_ESSENCE,
-			"simple essence",
-			new TriggerRule(
-                new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), SIMPLE),
-					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2))
-				)
+		register(Item.build(SIMPLE_ESSENCE)
+			.name("simple essence")
+			.rule(Rule.build()
+                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.SIMPLE))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2)))
             )
 		);
-		register(
-			TOXIC_ESSENCE,
-			"toxic essence",
-			new TriggerRule(
-                new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), TOXIC),
-					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2))
-				)
+		register(Item.build(TOXIC_ESSENCE)
+			.name("toxic essence")
+			.rule(Rule.build()
+                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.TOXIC))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2)))
 			)
 		);
-		register(
-			WATER_ESSENCE,
-			"water essence",
-			new TriggerRule(
-                new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), WATER),
-					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2))
-				)
+		register(Item.build(WATER_ESSENCE)
+			.name("water essence")
+			.rule(Rule.build()
+                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.WATER))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2)))
             )
 		);
-		register(
-			ARCHAIC_PEARL,
-			"archaic pearl",
-			new TriggerRule(
-                new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), ANCIENT),
-					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
-						ConsumeItem.target()
-					))
-				)
+		register(Item.build(ARCHAIC_PEARL)
+			.name("archaic pearl")
+			.rule(Rule.build()
+                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.ANCIENT))
+				.effect(new EffectSequence(List.of(
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
+					ConsumeItem.target()
+				)))
 			)
 		);
-		register(
-			BLOSSOM_PEARL,
-			"blossom pearl",
-			new TriggerRule(
-                new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), PLANT),
-					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
-						ConsumeItem.target()
-					))
-				)
+		register(Item.build(BLOSSOM_PEARL)
+			.name("blossom pearl")
+			.rule(Rule.build()
+                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.PLANT))
+				.effect(new EffectSequence(List.of(
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
+					ConsumeItem.target()
+				)))
             )
 		);
-		register(
-			DRAFT_PEARL,
-			"draft pearl",
-			new TriggerRule(
-                new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), AIR),
-					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
-						ConsumeItem.target()
-					))
-				)
+		register(Item.build(DRAFT_PEARL)
+			.name("draft pearl")
+			.rule(Rule.build()
+                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.AIR))
+				.effect(new EffectSequence(List.of(
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
+					ConsumeItem.target()
+				)))
             )
 		);
-		register(
-			FLAME_PEARL,
-			"flame pearl",
-			new TriggerRule(
-                new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), FIRE),
-					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
-						ConsumeItem.target()
-					))
-				)
+		register(Item.build(FLAME_PEARL)
+			.name("flame pearl")
+			.rule(Rule.build()
+                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.FIRE))
+				.effect(new EffectSequence(List.of(
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
+					ConsumeItem.target()
+				)))
             )
 		);
-		register(
-			FROST_PEARL,
-			"frost pearl",
-			new TriggerRule(
-                new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), ICE),
-					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
-						ConsumeItem.target()
-					))
-				)
+		register(Item.build(FROST_PEARL)
+			.name("frost pearl")
+			.rule(Rule.build()
+                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.ICE))
+				.effect(new EffectSequence(List.of(
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
+					ConsumeItem.target()
+				)))
             )
 		);
-		register(
-			MARTIAL_PEARL,
-			"martial pearl",
-			new TriggerRule(
-                new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), BRAWLER),
-					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
-						ConsumeItem.target()
-					))
-				)
+		register(Item.build(MARTIAL_PEARL)
+			.name("martial pearl")
+			.rule(Rule.build()
+                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.BRAWLER))
+				.effect(new EffectSequence(List.of(
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
+					ConsumeItem.target()
+				)))
             )
 		);
-		register(
-			MENTAL_PEARL,
-			"mental pearl",
-			new TriggerRule(
-                new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), MIND),
-					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
-						ConsumeItem.target()
-					))
-				)
+		register(Item.build(MENTAL_PEARL)
+			.name("mental pearl")
+			.rule(Rule.build()
+                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.MIND))
+				.effect(new EffectSequence(List.of(
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
+					ConsumeItem.target()
+				)))
             )
 		);
-		register(
-			METALLIC_PEARL,
-			"metallic pearl",
-			new TriggerRule(
-                new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), METAL),
-					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
-						ConsumeItem.target()
-					))
-				)
+		register(Item.build(METALLIC_PEARL)
+			.name("metallic pearl")
+			.rule(Rule.build()
+                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.METAL))
+				.effect(new EffectSequence(List.of(
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
+					ConsumeItem.target()
+				)))
             )
 		);
-		register(
-			NOXIOUS_PEARL,
-			"noxious pearl",
-			new TriggerRule(
-                new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), TOXIC),
-					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
-						ConsumeItem.target()
-					))
-				)
+		register(Item.build(NOXIOUS_PEARL)
+			.name("noxious pearl")
+			.rule(Rule.build()
+                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.TOXIC))
+				.effect(new EffectSequence(List.of(
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
+					ConsumeItem.target()
+				)))
             )
 		);
-		register(
-			PLAIN_PEARL,
-			"plain pearl",
-			new TriggerRule(
-                new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), SIMPLE),
-					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
-						ConsumeItem.target()
-					))
-				)
+		register(Item.build(PLAIN_PEARL)
+			.name("plain pearl")
+			.rule(Rule.build()
+                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.SIMPLE))
+				.effect(new EffectSequence(List.of(
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
+					ConsumeItem.target()
+				)))
             )
 		);
-		register(
-			SHADE_PEARL,
-			"shade pearl",
-			new TriggerRule(
-                new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), DARK),
-					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
-						ConsumeItem.target()
-					))
-				)
+		register(Item.build(SHADE_PEARL)
+			.name("shade pearl")
+			.rule(Rule.build()
+                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.DARK))
+				.effect(new EffectSequence(List.of(
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
+					ConsumeItem.target()
+				)))
             )
 		);
-		register(
-			SHINE_PEARL,
-			"shine pearl",
-			new TriggerRule(
-                new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), LIGHT),
-					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
-						ConsumeItem.target()
-					))
-				)
+		register(Item.build(SHINE_PEARL)
+			.name("shine pearl")
+			.rule(Rule.build()
+                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.LIGHT))
+				.effect(new EffectSequence(List.of(
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
+					ConsumeItem.target()
+				)))
             )
 		);
-		register(
-			SPECTRAL_PEARL,
-			"spectral pearl",
-			new TriggerRule(
-                new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), SPIRIT),
-					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
-						ConsumeItem.target()
-					))
-				)
+		register(Item.build(SPECTRAL_PEARL)
+			.name("spectral pearl")
+			.rule(Rule.build()
+                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.SPIRIT))
+				.effect(new EffectSequence(List.of(
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
+					ConsumeItem.target()
+				)))
             )
 		);
-		register(
-			TERRA_PEARL,
-			"terra pearl",
-			new TriggerRule(
-                new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), EARTH),
-					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
-						ConsumeItem.target()
-					))
-				)
+		register(Item.build(TERRA_PEARL)
+			.name("terra pearl")
+			.rule(Rule.build()
+                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.EARTH))
+				.effect(new EffectSequence(List.of(
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
+					ConsumeItem.target()
+				)))
             )
 		);
-		register(
-			VOLT_PEARL,
-			"volt pearl",
-			new TriggerRule(
-                new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), ELECTRIC),
-					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
-						ConsumeItem.target()
-					))
-				)
+		register(Item.build(VOLT_PEARL)
+			.name("volt pearl")
+			.rule(Rule.build()
+                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.ELECTRIC))
+				.effect(new EffectSequence(List.of(
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
+					ConsumeItem.target()
+				)))
             )
 		);
-		register(
-			WAVE_PEARL,
-			"wave pearl",
-			new TriggerRule(
-                new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), WATER),
-					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
-						ConsumeItem.target()
-					))
-				)
+		register(Item.build(WAVE_PEARL)
+			.name("wave pearl")
+			.rule(Rule.build()
+                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.WATER))
+				.effect(new EffectSequence(List.of(
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
+					ConsumeItem.target()
+				)))
             )
 		);
-		register(
-			WEB_PEARL,
-			"web pearl",
-			new TriggerRule(
-                new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), BUG),
-					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
-						ConsumeItem.target()
-					))
-				)
+		register(Item.build(WEB_PEARL)
+			.name("web pearl")
+			.rule(Rule.build()
+                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.BUG))
+				.effect(new EffectSequence(List.of(
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)),
+					ConsumeItem.target()
+				)))
             )
 		);
-		register(
-			ARCHAIC_SHELL,
-			"archaic shell",
-			new TriggerRule(
-				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), ANCIENT),
-					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
-						ConsumeItem.user()
-					))
-				)
-			)
-		);
-		register(
-			BLOSSOM_SHELL,
-			"blossom shell",
-			new TriggerRule(
-				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), PLANT),
-					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
-						ConsumeItem.user()
-					))
-				)
-			)
-		);
-		register(
-			DRAFT_SHELL,
-			"draft shell",
-			new TriggerRule(
-				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), AIR),
-					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
-						ConsumeItem.user()
-					))
-				)
-			)
-		);
-		register(
-			FLAME_SHELL,
-			"flame shell",
-			new TriggerRule(
-				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), FIRE),
-					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
-						ConsumeItem.user()
-					))
-				)
-			)
-		);
-		register(
-			FROST_SHELL,
-			"frost shell",
-			new TriggerRule(
-				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), ICE),
-					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
-						ConsumeItem.user()
-					))
-				)
-			)
-		);
-		register(
-			MARTIAL_SHELL,
-			"martial shell",
-			new TriggerRule(
-				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), BRAWLER),
-					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
-						ConsumeItem.user()
-					))
-				)
-			)
-		);
-		register(
-			MENTAL_SHELL,
-			"mental shell",
-			new TriggerRule(
-				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), MIND),
-					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
-						ConsumeItem.user()
-					))
-				)
-			)
-		);
-		register(
-			METALLIC_SHELL,
-			"metallic shell",
-			new TriggerRule(
-				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), METAL),
-					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
-						ConsumeItem.user()
-					))
-				)
-			)
-		);
-		register(
-			NOXIOUS_SHELL,
-			"noxious shell",
-			new TriggerRule(
-				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), TOXIC),
-					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
-						ConsumeItem.user()
-					))
-				)
-			)
-		);
-		register(
-			PLAIN_SHELL,
-			"plain shell",
-			new TriggerRule(
-				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), SIMPLE),
-					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
-						ConsumeItem.user()
-					))
-				)
-			)
-		);
-		register(
-			SHADE_SHELL,
-			"shade shell",
-			new TriggerRule(
-				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), DARK),
-					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
-						ConsumeItem.user()
-					))
-				)
-			)
-		);
-		register(
-			SHINE_SHELL,
-			"shine shell",
-			new TriggerRule(
-				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), LIGHT),
-					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
-						ConsumeItem.user()
-					))
-				)
-			)
-		);
-		register(
-			SPECTRAL_SHELL,
-			"spectral shell",
-			new TriggerRule(
-				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), SPIRIT),
-					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
-						ConsumeItem.user()
-					))
-				)
-			)
-		);
-		register(
-			TERRA_SHELL,
-			"terra shell",
-			new TriggerRule(
-				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), EARTH),
-					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
-						ConsumeItem.user()
-					))
-				)
-			)
-		);
-		register(
-			VOLT_SHELL,
-			"volt shell",
-			new TriggerRule(
-				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-				new ConditionalEffect(
-				new Equals<>(Value.USER().MOVE().TYPE(), ELECTRIC),
-				new EffectSequence(List.of(
+		register(Item.build(ARCHAIC_SHELL)
+			.name("archaic shell")
+			.rule(Rule.build()
+				.event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.ANCIENT))
+				.effect(new EffectSequence(List.of(
 					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
 					ConsumeItem.user()
+				)))
+			)
+		);
+		register(Item.build(BLOSSOM_SHELL)
+			.name("blossom shell")
+			.rule(Rule.build()
+				.event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.PLANT))
+				.effect(new EffectSequence(List.of(
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
+					ConsumeItem.user()
+				)))
+			)
+		);
+		register(Item.build(DRAFT_SHELL)
+			.name("draft shell")
+			.rule(Rule.build()
+				.event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.AIR))
+				.effect(new EffectSequence(List.of(
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
+					ConsumeItem.user()
+				)))
+			)
+		);
+		register(Item.build(FLAME_SHELL)
+			.name("flame shell")
+			.rule(Rule.build()
+				.event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.FIRE))
+				.effect(new EffectSequence(List.of(
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
+					ConsumeItem.user()
+				)))
+			)
+		);
+		register(Item.build(FROST_SHELL)
+			.name("frost shell")
+			.rule(Rule.build()
+				.event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.ICE))
+				.effect(new EffectSequence(List.of(
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
+					ConsumeItem.user()
+				)))
+			)
+		);
+		register(Item.build(MARTIAL_SHELL)
+			.name("martial shell")
+			.rule(Rule.build()
+				.event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.BRAWLER))
+				.effect(new EffectSequence(List.of(
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
+					ConsumeItem.user()
+				)))
+			)
+		);
+		register(Item.build(MENTAL_SHELL)
+			.name("mental shell")
+			.rule(Rule.build()
+				.event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.MIND))
+				.effect(new EffectSequence(List.of(
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
+					ConsumeItem.user()
+				)))
+			)
+		);
+		register(Item.build(METALLIC_SHELL)
+			.name("metallic shell")
+			.rule(Rule.build()
+				.event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.METAL))
+				.effect(new EffectSequence(List.of(
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
+					ConsumeItem.user()
+				)))
+			)
+		);
+		register(Item.build(NOXIOUS_SHELL)
+			.name("noxious shell")
+			.rule(Rule.build()
+				.event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.TOXIC))
+				.effect(new EffectSequence(List.of(
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
+					ConsumeItem.user()
+				)))
+			)
+		);
+		register(Item.build(PLAIN_SHELL)
+			.name("plain shell")
+			.rule(Rule.build()
+				.event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.SIMPLE))
+				.effect(new EffectSequence(List.of(
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
+					ConsumeItem.user()
+				)))
+			)
+		);
+		register(Item.build(SHADE_SHELL)
+			.name("shade shell")
+			.rule(Rule.build()
+				.event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.DARK))
+				.effect(new EffectSequence(List.of(
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
+					ConsumeItem.user()
+				)))
+			)
+		);
+		register(Item.build(SHINE_SHELL)
+			.name("shine shell")
+			.rule(Rule.build()
+				.event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.LIGHT))
+				.effect(new EffectSequence(List.of(
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
+					ConsumeItem.user()
+				)))
+			)
+		);
+		register(Item.build(SPECTRAL_SHELL)
+			.name("spectral shell")
+			.rule(Rule.build()
+				.event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.SPIRIT))
+				.effect(new EffectSequence(List.of(
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
+					ConsumeItem.user()
+				)))
+			)
+		);
+		register(Item.build(TERRA_SHELL)
+			.name("terra shell")
+			.rule(Rule.build()
+				.event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.EARTH))
+				.effect(new EffectSequence(List.of(
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
+					ConsumeItem.user()
+				)))
+			)
+		);
+		register(Item.build(VOLT_SHELL)
+			.name("volt shell")
+			.rule(Rule.build()
+				.event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.ELECTRIC))
+				.effect(new EffectSequence(List.of(
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
+					ConsumeItem.user()
+				)))
+			)
+		);
+		register(Item.build(WAVE_SHELL)
+			.name("wave shell")
+			.rule(Rule.build()
+				.event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.WATER))
+				.effect(new EffectSequence(List.of(
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
+					ConsumeItem.user()
+				)))
+			)
+		);
+		register(Item.build(WEB_SHELL)
+			.name("web shell")
+			.rule(Rule.build()
+				.event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.BUG))
+				.effect(new EffectSequence(List.of(
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
+					ConsumeItem.user()
+				)))
+			)
+		);
+		register(Item.build(SCRAP_METAL) // drop of youth for scorb line
+			.name("scrap metal")
+			.rule(Rule.build()
+				.event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET)
+				.condition(new Or(
+					new Equals<>(Value.TARGET().SPECIES_ID(), SCORB),
+					new Equals<>(Value.TARGET().SPECIES_ID(), VEYLENS)
 				))
-				)
+				.effect(new EffectSequence(List.of(
+					Effects.multiplyValue(Value.TARGET().MDEFENSE(), new Constant(1.5)),
+					Effects.multiplyValue(Value.TARGET().RDEFENSE(), new Constant(1.5))
+				)))
 			)
 		);
-		register(
-			WAVE_SHELL,
-			"wave shell",
-			new TriggerRule(
-				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), WATER),
-					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
-						ConsumeItem.user()
-					))
-				)
-			)
+		register(Item.build(SPARE_CABLE) // milkshake for scorb line
+			.name("spare cable")
 		);
-		register(
-			WEB_SHELL,
-			"web shell",
-			new TriggerRule(
-				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-				new ConditionalEffect(
-					new Equals<>(Value.USER().MOVE().TYPE(), BUG),
-					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
-						ConsumeItem.user()
-					))
-				)
-			)
+		register(Item.build(CLEAR_LENS) // makes moves from scorb line undodgeable
+			.name("clear lens")
 		);
-		register( // drop of youth for scorb line
-			SCRAP_METAL,
-			"scrap metal",
-			new TriggerRule(
-				new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
-				new ConditionalEffect(
-					new Or(
-						new Equals<>(Value.TARGET().SPECIES_ID(), SCORB),
-						new Equals<>(Value.TARGET().SPECIES_ID(), VEYLENS)
-					),
-					new EffectSequence(List.of(
-						Effects.multiplyValue(Value.TARGET().MDEFENSE(), new Constant(1.5)),
-						Effects.multiplyValue(Value.TARGET().RDEFENSE(), new Constant(1.5))
-					))
-				)
-			)
+		register(Item.build(FLAME_CORE)
+			.name("flame core")
 		);
-		register( // milkshake for scorb line
-			SPARE_CABLE,
-			"spare cable",
-			null
+		register(Item.build(FREEZER_CORE)
+			.name("freezer core")
 		);
-		register( // makes moves from scorb line undodgeable
-			CLEAR_LENS,
-			"clear lens",
-			null
+		register(Item.build(VOLTAIC_CORE)
+			.name("voltaic core")
 		);
-		register(
-			FLAME_CORE,
-			"flame core",
-			null
+		register(Item.build(POWER_CORE) // power cuffs for scorb line
+			.name("power core")
 		);
-		register(
-			FREEZER_CORE,
-			"freezer core",
-			null
-		);
-		register(
-			VOLTAIC_CORE,
-			"voltaic core",
-			null
-		);
-		register( // power cuffs for scorb line
-			POWER_CORE,
-			"power core",
-			null
-		);
-		register( // energy orb for scorb line
-			QUANTUM_CORE,
-			"quantum core",
-			null
+		register(Item.build(QUANTUM_CORE) // energy orb for scorb line
+			.name("quantum core")
 		);
     }
 }

@@ -1,5 +1,7 @@
 package github.snomfish.functionality;
 
+import static github.snomfish.functionality.event.GateId.*;
+
 import java.util.List;
 
 import github.snomfish.domain.status.StatusId;
@@ -13,8 +15,6 @@ import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.INumber;
 import github.snomfish.functionality.number.Multiply;
 import github.snomfish.functionality.number.ValueConstant;
-
-import static github.snomfish.functionality.gate.GateId.*;
 
 public class Schematics {
 

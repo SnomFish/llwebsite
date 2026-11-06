@@ -9,7 +9,7 @@ import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.effect.IEffect;
 import github.snomfish.functionality.effect.effects.NoEffect;
 import github.snomfish.functionality.event.Event;
-import github.snomfish.functionality.event.EventId;
+import github.snomfish.functionality.event.RuleId;
 
 public class AbilityRule {
     
@@ -43,7 +43,7 @@ public class AbilityRule {
             new NoEffect()
         );
     }
-    public AbilityRule event(EventId eventId, ContextSideId sideId) {
+    public AbilityRule event(RuleId eventId, ContextSideId sideId) {
         this.events.add(new Event(eventId, sideId));
         return this;
     }

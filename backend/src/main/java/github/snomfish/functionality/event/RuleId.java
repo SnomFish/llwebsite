@@ -1,6 +1,6 @@
 package github.snomfish.functionality.event;
 
-public enum EventId {
+public enum RuleId {
     USER_SWITCHED_IN_EVENT,
     TARGET_SWITCHED_IN_EVENT,
 

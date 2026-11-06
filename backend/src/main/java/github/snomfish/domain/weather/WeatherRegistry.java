@@ -1,21 +1,18 @@
 package github.snomfish.domain.weather;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
+import github.snomfish.domain.type.TypeId;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.condition.Equals;
-import github.snomfish.functionality.effect.ConditionalEffect;
 import github.snomfish.functionality.effect.Effects;
-import github.snomfish.functionality.event.Event;
-import github.snomfish.functionality.event.TriggerRule;
+import github.snomfish.functionality.event.Rule;
 import github.snomfish.functionality.number.Constant;
 
-import static github.snomfish.domain.type.TypeId.*;
 import static github.snomfish.domain.weather.WeatherId.*;
 import static github.snomfish.functionality.context.ContextSideId.*;
-import static github.snomfish.functionality.event.EventId.*;
+import static github.snomfish.functionality.event.RuleId.*;
 
 public class WeatherRegistry {
     
@@ -31,101 +28,68 @@ public class WeatherRegistry {
     }
 
 
-    private static void register(
-        WeatherId id,
-        String name,
-        List<TriggerRule> rules
-    ) {
-        registry.put(id, new Weather(id, name, rules));
+    private static void register(Weather weather) {
+        registry.put(weather.id(), weather);
     }
 
 
     static {
-        register(
-            NO_WEATHER,
-            "No Weather",
-            List.of()
+        register(Weather.build(NO_WEATHER)
+            .name("No Weather")
         );
-        register(
-            FOG,
-            "Fog",
-            List.of(
-                // spirit types get mold breaker on non light types
-                // 2 turn moves become one turn
-            )
+        register(Weather.build(FOG)
+            .name("Fog")
+            // spirit types get mold breaker on non light types
+            // 2 turn moves become one turn
         );
-        register(
-            HEATWAVE,
-            "Heatwave",
-            List.of(
-                new TriggerRule( // increases the power of fire moves by 30%
-                    new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
-                    new ConditionalEffect(
-                        new Equals<>(Value.USER().MOVE().TYPE(), FIRE),
-                        Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.3))
-                    )
-                ),
-                new TriggerRule( // decreases the power of water moves by 30%
-                    new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-                    new ConditionalEffect(
-                        new Equals<>(Value.USER().MOVE().TYPE(), WATER),
-                        Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.7))
-                    )
-                )
-                // moves of bug type loomians cost 10% less energy
+        register(Weather.build(HEATWAVE)
+            .name("Heatwave")
+            .rule(Rule.build() // increases the power of fire moves by 30%
+                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET)
+                .condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.FIRE))
+                .effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.3)))
             )
+            .rule(Rule.build() // decreases the power of water moves by 30%
+                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+                .condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.WATER))
+                .effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.7)))
+            )
+            // moves of bug type loomians cost 10% less energy
         );
-        register(
-            RAIN,
-            "Rain",
-            List.of(
-                new TriggerRule( // increases the power of water moves by 30%
-                    new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-                    new ConditionalEffect(
-                        new Equals<>(Value.USER().MOVE().TYPE(), WATER),
-                        Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.3))
-                    )
-                ),
-                new TriggerRule( // decreases the power of fire moves by 30%
-                    new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET),
-                    new ConditionalEffect(
-                        new Equals<>(Value.USER().MOVE().TYPE(), FIRE),
-                        Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.7))
-                    )
-                )
-                // plant types heal 1/16 max hp after each turn
+        register(Weather.build(RAIN)
+            .name("Rain")
+            .rule(Rule.build() // increases the power of water moves by 30%
+                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+                .condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.WATER))
+                .effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.3)))
             )
+            .rule(Rule.build() // decreases the power of fire moves by 30%
+                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET)
+                .condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.FIRE))
+                .effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.7)))
+            )
+            // plant types heal 1/16 max hp after each turn
         );
-        register(
-            STRONG_WINDS,
-            "Strong Winds",
-            List.of(
-                new TriggerRule( // increases the power of toxic moves by 25%
-                    new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-                    new ConditionalEffect(
-                        new Equals<>(Value.USER().MOVE().TYPE(), TOXIC),
-                        Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.25))
-                    )
-                )
-                // increases the speed of air type loomians by 25%
-                // nullifies trapping moves
+        register(Weather.build(STRONG_WINDS)
+            .name("Strong Winds")
+            .rule(Rule.build() // increases the power of toxic moves by 25%
+                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+                .condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.TOXIC))
+                .effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.25)))
             )
+            // increases the speed of air type loomians by 25%
+            // nullifies trapping moves
         );
-        register(
-            THUNDERSTORM,
-            "Thunderstorm",
-            List.of(
-                new TriggerRule( // increases the power of toxic moves by 25%
-                    new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-                    new ConditionalEffect(
-                        new Equals<>(Value.USER().MOVE().TYPE(), ELECTRIC),
-                        Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.25))
-                    )
-                )
-                // electric type moves cost 25% less energy
-                // air types become grounded and can be hit neutrally by eart types
-                // loomians cannot fall asleep, if they are asleep already then immediately wake them up
+        register(Weather.build(THUNDERSTORM)
+            .name("Thunderstorm")
+            .rule(Rule.build() // increases the power of toxic moves by 25%
+                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+                .condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.ELECTRIC))
+                .effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.25)))
             )
+            // electric type moves cost 25% less energy
+            // air types become grounded and can be hit neutrally by eart types
+            // loomians cannot fall asleep, if they are asleep already then immediately wake them up
         );
     }
 }

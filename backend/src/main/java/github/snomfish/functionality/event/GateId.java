@@ -1,4 +1,4 @@
-package github.snomfish.functionality.gate;
+package github.snomfish.functionality.event;
 
 public enum GateId {
     CAN_ATTACKING_STAT_USE_STAT_BOOSTS,

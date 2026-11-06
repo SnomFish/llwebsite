@@ -13,12 +13,12 @@ import github.snomfish.functionality.effect.EffectSequence;
 import github.snomfish.functionality.effect.Effects;
 import github.snomfish.functionality.effect.effects.RemoveMechanic;
 import github.snomfish.functionality.event.Event;
-import github.snomfish.functionality.event.TriggerRule;
+import github.snomfish.functionality.event.Rule;
 import github.snomfish.functionality.number.Constant;
 
 import static github.snomfish.domain.mechanics.MechanicId.*;
 import static github.snomfish.functionality.context.ContextSideId.*;
-import static github.snomfish.functionality.event.EventId.*;
+import static github.snomfish.functionality.event.RuleId.*;
 
 public class MechanicRegistry {
 
@@ -36,76 +36,53 @@ public class MechanicRegistry {
     }
 
 
-    private static void register(
-        MechanicId id,
-        String name,
-        TriggerRule rule
-    ) {
-		if (rule == null) {
-			registry.put(id, new Mechanic(id, name, new ArrayList<TriggerRule>()));
-			return;
-		}
-        registry.put(id, new Mechanic(id, name, List.of(rule)));
+    private static void register(Mechanic mechanic) {
+        registry.put(mechanic.id(), mechanic);
     }
 
 
     static {
-        register(
-            COMBUSTIBLE,
-            "combustible",
-            new TriggerRule(
-                new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-                new ConditionalEffect(
-                    new Equals<>(Value.USER().MOVE().TYPE(), TypeId.FIRE),
-                    Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5))
-                )
+        register(Mechanic.build(COMBUSTIBLE)
+            .name("combustible")
+            .rule(Rule.build()
+                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+                .condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.FIRE))
+                .effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)))
             )
         );
-        register(
-            COURSING_VENOM,
-            "coursing venom",
-            new TriggerRule(
-                new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-                new ConditionalEffect(
-                    new Equals<>(Value.USER().MOVE().TYPE(), TypeId.TOXIC),
-                    Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5))
-                )
+        register(Mechanic.build(COURSING_VENOM)
+            .name("coursing venom")
+            .rule(Rule.build()
+                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+                .condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.TOXIC))
+                .effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)))
             )
         );
-        register(
-            NOXIOUS_WEEDS, 
-            "Noxious Weeds",
-            new TriggerRule(
-                new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-                new ConditionalEffect(
-                    new Equals<>(Value.USER().MOVE().TYPE(), TypeId.PLANT),
-                    Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5))
-                )
+        register(Mechanic.build(NOXIOUS_WEEDS)
+            .name("Noxious Weeds")
+            .rule(Rule.build()
+                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+                .condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.PLANT))
+                .effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)))
             )
         );
-        register(
-            PRISMATIC,
-            "Prismatic",
-            new TriggerRule(
-                new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-                new ConditionalEffect(
-                    new Equals<>(Value.USER().MOVE().TYPE(), TypeId.LIGHT),
-                    Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5))
-                )
+        register(Mechanic.build(PRISMATIC)
+            .name("Prismatic")
+            .rule(Rule.build()
+                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+                .condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.LIGHT))
+                .effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)))
             )
         );
-        register(
-            TOXIC_FILTER,
-            "Toxic Filter",
-            new TriggerRule(
-                new Event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER),
-                new ConditionalEffect(    
-                    new Equals<>(Value.USER().MOVE().TYPE(), TypeId.AIR),
-                    new EffectSequence(List.of(
-                        Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
-                        RemoveMechanic.fromUser(TOXIC_FILTER)
-                    ))
-                )
+        register(Mechanic.build(TOXIC_FILTER)
+            .name("Toxic Filter")
+            .rule(Rule.build()
+                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+                .condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.AIR))
+                .effect(new EffectSequence(List.of(
+                    Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
+                    RemoveMechanic.fromUser(TOXIC_FILTER)
+                )))
             )
         );
     }

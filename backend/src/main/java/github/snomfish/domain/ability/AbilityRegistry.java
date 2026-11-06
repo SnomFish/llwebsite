@@ -36,19 +36,18 @@ import github.snomfish.functionality.effect.effects.SetAbility;
 import github.snomfish.functionality.effect.effects.SetType;
 import github.snomfish.functionality.effect.effects.SetValueEffect;
 import github.snomfish.functionality.effect.effects.SetWeather;
-import github.snomfish.functionality.gate.Gate;
-import github.snomfish.functionality.interceptor.Interceptor;
+import github.snomfish.functionality.event.Gate;
+import github.snomfish.functionality.event.Interceptor;
 import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.INumberValueConstant;
-import github.snomfish.functionality.number.Modulus;
 import github.snomfish.functionality.number.Multiply;
 import github.snomfish.functionality.number.ValueConstant;
 
 import static github.snomfish.domain.ability.AbilityId.*;
 import static github.snomfish.functionality.context.ContextSideId.*;
-import static github.snomfish.functionality.event.EventId.*;
-import static github.snomfish.functionality.gate.GateId.*;
-import static github.snomfish.functionality.interceptor.InterceptorId.*;
+import static github.snomfish.functionality.event.GateId.*;
+import static github.snomfish.functionality.event.InterceptorId.*;
+import static github.snomfish.functionality.event.RuleId.*;
 
 public class AbilityRegistry {
     

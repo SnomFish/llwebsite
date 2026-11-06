@@ -1,4 +1,4 @@
-package github.snomfish.functionality.interceptor;
+package github.snomfish.functionality.event;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,7 @@ import github.snomfish.functionality.effect.effects.NoEffect;
 public class Interceptor {
     
 
-    private List<InterceptorEvent> events;
+    private List<Event<InterceptorId>> events;
     private ICondition condition;
     private IEffect effect;
 
@@ -35,7 +35,7 @@ public class Interceptor {
 
 
     // getter
-    public List<InterceptorEvent> events() {return events;}
+    public List<Event<InterceptorId>> events() {return events;}
     public ICondition condition() {return condition;}
     public IEffect effect() {return effect;}
 
@@ -45,7 +45,7 @@ public class Interceptor {
         return new Interceptor();
     }
     public Interceptor event(InterceptorId id, ContextSideId sideId) {
-        this.events.add(new InterceptorEvent(id, sideId));
+        this.events.add(new Event<>(id, sideId));
         return this;
     }
     public Interceptor condition(ICondition condition) {

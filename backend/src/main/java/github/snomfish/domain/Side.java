@@ -7,9 +7,10 @@ import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.copy.DeepCopyable;
 import github.snomfish.functionality.event.Event;
-import github.snomfish.functionality.gate.GateEvent;
-import github.snomfish.functionality.interceptor.InterceptorEvent;
-import github.snomfish.functionality.interceptor.InterceptorReport;
+import github.snomfish.functionality.event.GateId;
+import github.snomfish.functionality.event.InterceptorId;
+import github.snomfish.functionality.event.InterceptorReport;
+import github.snomfish.functionality.event.RuleId;
 
 import static github.snomfish.functionality.copy.DeepCopy.deepCopyList;
 
@@ -49,20 +50,20 @@ public class Side implements DeepCopyable<Side> {
     }
 
 
-    public List<Branch<BattleContext>> dispatchEvent(BattleContext context, Event event) {
+    public List<Branch<BattleContext>> dispatchEvent(BattleContext context, Event<RuleId> event) {
         List<Branch<BattleContext>> outcomes = new ArrayList<>();
 
         outcomes = activeLoomian().dispatchEvent(context, event);
 
         return outcomes;
     }
-    public List<Branch<Boolean>> dispatchGate(BattleContext context, GateEvent event, List<Branch<Boolean>> outcomes) {
+    public List<Branch<Boolean>> dispatchGate(BattleContext context, Event<GateId> event, List<Branch<Boolean>> outcomes) {
 
         outcomes = activeLoomian().dispatchGate(context, event, outcomes);
 
         return outcomes;
     }
-    public InterceptorReport dispatchInterceptor(InterceptorReport report, InterceptorEvent event) {
+    public InterceptorReport dispatchInterceptor(InterceptorReport report, Event<InterceptorId> event) {
         
         report = activeLoomian().dispatchInterceptor(report, event);
 
