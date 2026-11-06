@@ -18,22 +18,22 @@ public class SetWeather implements IEffect {
 
     private WeatherId weatherId;
     private INumber lifespan;
-    private RuleId beforeSetEvent;
+    private RuleId postSetEvent;
 
 
     private SetWeather(
         WeatherId weatherId,
         INumber lifespan,
-        RuleId beforeSetEvent
+        RuleId postSetEvent
     ) {
         this.weatherId = weatherId;
         this.lifespan = lifespan;
-        this.beforeSetEvent = beforeSetEvent;
+        this.postSetEvent = postSetEvent;
     }
     private SetWeather(SetWeather copy) {
         this.weatherId = copy.weatherId;
         this.lifespan = copy.lifespan.deepCopy();
-        this.beforeSetEvent = copy.beforeSetEvent;
+        this.postSetEvent = copy.postSetEvent;
     }
 
 
@@ -45,13 +45,13 @@ public class SetWeather implements IEffect {
     public static SetWeather userSetting(WeatherId id, INumber lifespan) {
         return new SetWeather(
             id, lifespan,
-            PRE_USER_SET_WEATHER_EVENT
+            POST_USER_SET_WEATHER_EVENT
         );
     }
     public static SetWeather targetSetting(WeatherId id, INumber lifespan) {
         return new SetWeather(
             id, lifespan,
-            PRE_TARGET_SET_WEATHER_EVENT
+            POST_TARGET_SET_WEATHER_EVENT
         );
     }
 
@@ -62,9 +62,8 @@ public class SetWeather implements IEffect {
 
         if (context.gamestate().weatherInstance().weatherId() == weatherId) return outcomes;
 
-        outcomes = flatMap(outcomes, c -> c.dispatchEvent(beforeSetEvent));
         outcomes = flatMap(outcomes, c -> setWeatherModule(context));
-        outcomes = flatMap(outcomes, c -> c.dispatchEvent(WEATHER_SET_EVENT));
+        outcomes = flatMap(outcomes, c -> c.dispatchEvent(postSetEvent));
         
         return outcomes;
     }

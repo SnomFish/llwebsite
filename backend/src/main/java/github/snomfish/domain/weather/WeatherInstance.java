@@ -13,18 +13,22 @@ public class WeatherInstance implements DeepCopyable<WeatherInstance> {
 
     private WeatherId id;
     private int lifespan;
+    private int lifespanModifier;
 
 
     public WeatherInstance(
         WeatherId id,
-        int lifespan
+        int lifespan,
+        int lifespanModifier
     ) {
         this.id = id;
         this.lifespan = lifespan;
+        this.lifespanModifier = lifespanModifier;
     }
     public WeatherInstance(WeatherInstance copy) {
         this.id = copy.id;
         this.lifespan = copy.lifespan;
+        this.lifespanModifier = copy.lifespanModifier;
     }
 
 
@@ -37,11 +41,13 @@ public class WeatherInstance implements DeepCopyable<WeatherInstance> {
     public WeatherId weatherId() {return id;}
     public Weather weather() {return WeatherRegistry.get(id);}
     public int lifespan() {return lifespan;}
+    public int lifespanModifier() {return lifespanModifier;}
 
 
     // setter
     public void setWeatherId(WeatherId id) {this.id = id;}
     public void setLifespan(int lifespan) {this.lifespan = lifespan;}
+    public void setLifespanModifier(int lifespanModifier) {this.lifespanModifier = lifespanModifier;}
 
 
     public List<Branch<BattleContext>> handleEvent(BattleContext context, Event<RuleId> event) {

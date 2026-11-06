@@ -8,13 +8,14 @@ import github.snomfish.domain.move.CategoryId;
 import github.snomfish.domain.species.SpeciesId;
 import github.snomfish.domain.status.StatusId;
 import github.snomfish.domain.type.TypeId;
-import github.snomfish.functionality.Constants;
+import github.snomfish.domain.weather.WeatherId;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.condition.And;
 import github.snomfish.functionality.condition.Comparator;
 import github.snomfish.functionality.condition.Conditions;
 import github.snomfish.functionality.condition.Equals;
 import github.snomfish.functionality.condition.FalseCondition;
+import github.snomfish.functionality.condition.Not;
 import github.snomfish.functionality.condition.Or;
 import github.snomfish.functionality.condition.RandomCondition;
 import github.snomfish.functionality.effect.EffectSequence;
@@ -24,16 +25,16 @@ import github.snomfish.functionality.effect.effects.ApplyStatus;
 import github.snomfish.functionality.effect.effects.ClutchEffect;
 import github.snomfish.functionality.effect.effects.ConsumeItem;
 import github.snomfish.functionality.effect.effects.SetType;
+import github.snomfish.functionality.effect.effects.SetWeather;
 import github.snomfish.functionality.event.Gate;
 import github.snomfish.functionality.event.Rule;
-import github.snomfish.functionality.event.RuleId;
 import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.ValueConstant;
 
 import static github.snomfish.domain.item.ItemId.*;
 import static github.snomfish.domain.species.SpeciesId.*;
 import static github.snomfish.functionality.context.ContextSideId.*;
-import static github.snomfish.functionality.event.GateId.CAN_USE_SUPPORT_MOVES;
+import static github.snomfish.functionality.event.GateId.*;
 import static github.snomfish.functionality.event.RuleId.*;
 
 // oi add a condition in condition schematics for general item use, offensive item use and defensive.
@@ -267,6 +268,142 @@ public class ItemRegistry {
 				.effect(ApplyStatus.toUser(StatusId.BURN))
 			)
 		);
+
+
+		register(Item.build(FOG_GLOBE)
+			.name("Fog Globe")
+			.rule(Rule.build()
+				.event(USER_SWITCHED_IN_EVENT, USER)
+				.condition(new Not(new Equals<>(Value.WEATHER_ID(), WeatherId.FOG)))
+				.effect(SetWeather.userSetting(WeatherId.FOG, new Constant(3)))
+			)
+			.rule(Rule.build()
+				.event(TARGET_SWITCHED_IN_EVENT, TARGET)
+				.condition(new Not(new Equals<>(Value.WEATHER_ID(), WeatherId.FOG)))
+				.effect(SetWeather.targetSetting(WeatherId.FOG, new Constant(3)))
+			)
+		);
+		register(Item.build(HEAT_GLOBE)
+			.name("Heat Globe")
+			.rule(Rule.build()
+				.event(USER_SWITCHED_IN_EVENT, USER)
+				.condition(new Not(new Equals<>(Value.WEATHER_ID(), WeatherId.HEATWAVE)))
+				.effect(SetWeather.userSetting(WeatherId.HEATWAVE, new Constant(3)))
+			)
+			.rule(Rule.build()
+				.event(TARGET_SWITCHED_IN_EVENT, TARGET)
+				.condition(new Not(new Equals<>(Value.WEATHER_ID(), WeatherId.HEATWAVE)))
+				.effect(SetWeather.targetSetting(WeatherId.HEATWAVE, new Constant(3)))
+			)
+		);
+		register(Item.build(RAIN_GLOBE)
+			.name("Rain Globe")
+			.rule(Rule.build()
+				.event(USER_SWITCHED_IN_EVENT, USER)
+				.condition(new Not(new Equals<>(Value.WEATHER_ID(), WeatherId.RAIN)))
+				.effect(SetWeather.userSetting(WeatherId.RAIN, new Constant(3)))
+			)
+			.rule(Rule.build()
+				.event(TARGET_SWITCHED_IN_EVENT, TARGET)
+				.condition(new Not(new Equals<>(Value.WEATHER_ID(), WeatherId.RAIN)))
+				.effect(SetWeather.targetSetting(WeatherId.RAIN, new Constant(3)))
+			)
+		);
+		register(Item.build(STORM_GLOBE)
+			.name("Storm Globe")
+			.rule(Rule.build()
+				.event(USER_SWITCHED_IN_EVENT, USER)
+				.condition(new Not(new Equals<>(Value.WEATHER_ID(), WeatherId.THUNDERSTORM)))
+				.effect(SetWeather.userSetting(WeatherId.THUNDERSTORM, new Constant(3)))
+			)
+			.rule(Rule.build()
+				.event(TARGET_SWITCHED_IN_EVENT, TARGET)
+				.condition(new Not(new Equals<>(Value.WEATHER_ID(), WeatherId.THUNDERSTORM)))
+				.effect(SetWeather.targetSetting(WeatherId.THUNDERSTORM, new Constant(3)))
+			)
+		);
+		register(Item.build(WIND_GLOBE)
+			.name("Wind Globe")
+			.rule(Rule.build()
+				.event(USER_SWITCHED_IN_EVENT, USER)
+				.condition(new Not(new Equals<>(Value.WEATHER_ID(), WeatherId.STRONG_WINDS)))
+				.effect(SetWeather.userSetting(WeatherId.STRONG_WINDS, new Constant(3)))
+			)
+			.rule(Rule.build()
+				.event(TARGET_SWITCHED_IN_EVENT, TARGET)
+				.condition(new Not(new Equals<>(Value.WEATHER_ID(), WeatherId.STRONG_WINDS)))
+				.effect(SetWeather.targetSetting(WeatherId.STRONG_WINDS, new Constant(3)))
+			)
+		);
+
+
+		register(Item.build(FOG_SCALE)
+			.name("Fog Scale")
+			.rule(Rule.build()
+				.event(POST_USER_SET_WEATHER_EVENT, USER)
+				.condition(new Equals<>(Value.WEATHER_ID(), WeatherId.FOG))
+				.effect(Effects.addValue(Value.WEATHER_LIFESPAN_MODIFIER(), new Constant(3)))
+			)
+			.rule(Rule.build()
+				.event(POST_TARGET_SET_WEATHER_EVENT, TARGET)
+				.condition(new Equals<>(Value.WEATHER_ID(), WeatherId.FOG))
+				.effect(Effects.addValue(Value.WEATHER_LIFESPAN_MODIFIER(), new Constant(3)))
+			)
+		);
+		register(Item.build(HEAT_SCALE)
+			.name("Heat Scale")
+			.rule(Rule.build()
+				.event(POST_USER_SET_WEATHER_EVENT, USER)
+				.condition(new Equals<>(Value.WEATHER_ID(), WeatherId.HEATWAVE))
+				.effect(Effects.addValue(Value.WEATHER_LIFESPAN_MODIFIER(), new Constant(3)))
+			)
+			.rule(Rule.build()
+				.event(POST_TARGET_SET_WEATHER_EVENT, TARGET)
+				.condition(new Equals<>(Value.WEATHER_ID(), WeatherId.HEATWAVE))
+				.effect(Effects.addValue(Value.WEATHER_LIFESPAN_MODIFIER(), new Constant(3)))
+			)
+		);
+		register(Item.build(RAIN_SCALE)
+			.name("Rain Scale")
+			.rule(Rule.build()
+				.event(POST_USER_SET_WEATHER_EVENT, USER)
+				.condition(new Equals<>(Value.WEATHER_ID(), WeatherId.RAIN))
+				.effect(Effects.addValue(Value.WEATHER_LIFESPAN_MODIFIER(), new Constant(3)))
+			)
+			.rule(Rule.build()
+				.event(POST_TARGET_SET_WEATHER_EVENT, TARGET)
+				.condition(new Equals<>(Value.WEATHER_ID(), WeatherId.RAIN))
+				.effect(Effects.addValue(Value.WEATHER_LIFESPAN_MODIFIER(), new Constant(3)))
+			)
+		);
+		register(Item.build(STORM_SCALE)
+			.name("Storm Scale")
+			.rule(Rule.build()
+				.event(POST_USER_SET_WEATHER_EVENT, USER)
+				.condition(new Equals<>(Value.WEATHER_ID(), WeatherId.THUNDERSTORM))
+				.effect(Effects.addValue(Value.WEATHER_LIFESPAN_MODIFIER(), new Constant(3)))
+			)
+			.rule(Rule.build()
+				.event(POST_TARGET_SET_WEATHER_EVENT, TARGET)
+				.condition(new Equals<>(Value.WEATHER_ID(), WeatherId.THUNDERSTORM))
+				.effect(Effects.addValue(Value.WEATHER_LIFESPAN_MODIFIER(), new Constant(3)))
+			)
+		);
+		register(Item.build(WIND_SCALE)
+			.name("Wind Scale")
+			.rule(Rule.build()
+				.event(POST_USER_SET_WEATHER_EVENT, USER)
+				.condition(new Equals<>(Value.WEATHER_ID(), WeatherId.STRONG_WINDS))
+				.effect(Effects.addValue(Value.WEATHER_LIFESPAN_MODIFIER(), new Constant(3)))
+			)
+			.rule(Rule.build()
+				.event(POST_TARGET_SET_WEATHER_EVENT, TARGET)
+				.condition(new Equals<>(Value.WEATHER_ID(), WeatherId.STRONG_WINDS))
+				.effect(Effects.addValue(Value.WEATHER_LIFESPAN_MODIFIER(), new Constant(3)))
+			)
+		);
+
+		
 		register(Item.build(AIR_ESSENCE)
 			.name("air essence")
 			.rule(Rule.build()

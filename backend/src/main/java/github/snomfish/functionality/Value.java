@@ -90,11 +90,25 @@ public class Value<T> {
 		c -> c.gamestate().weatherInstance(),
 		null
 	);}
+
+	
 	public static Value<WeatherId> WEATHER_ID() {return new Value<>(
 		WeatherId.class,
 		c -> c.gamestate().weatherInstance().weatherId(),
 		(c, v) -> c.gamestate().weatherInstance().setWeatherId(v) 
 	);}
+	public static Value<Integer> WEATHER_LIFESPAN() {return new Value<>(
+		Integer.class,
+		c -> c.gamestate().weatherInstance().lifespan(),
+		(c, v) -> c.gamestate().weatherInstance().setLifespan(v)
+	);}
+	public static Value<Integer> WEATHER_LIFESPAN_MODIFIER() {return new Value<>(
+		Integer.class,
+		c -> c.gamestate().weatherInstance().lifespanModifier(),
+		(c, v) -> c.gamestate().weatherInstance().setLifespanModifier(v)
+	);}
+
+
 	public static Value<Integer> TURN_NUMBER() {return new Value<>(
 		Integer.class,
 		c -> c.gamestate().turnNumber(),
