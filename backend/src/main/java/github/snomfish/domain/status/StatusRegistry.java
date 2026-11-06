@@ -67,9 +67,9 @@ public class StatusRegistry {
                 .effect(new DealDirectSelfDamage(new Constant(1/16)))
             )
             .rule(Rule.build() // cutting mattack in half
-                .event(RuleId.PRE_MOVE_EVENT, USER)
+                .event(RuleId.PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
                 .condition(new Equals<>(Value.USER().MOVE().CATEGORY(), CategoryId.MELEE))
-                .effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant (0.5)))
+                .effect(Effects.multiplyValue(Value.USER().MOVE().ATTACKING_STAT_MODIFIER(), new Constant (0.5)))
             )
         );
         register(Status.build(FROSTBITE)
@@ -79,9 +79,9 @@ public class StatusRegistry {
                 .effect(new DealDirectSelfDamage(new Constant(1/16)))
             )
             .rule(Rule.build() // cutting mattack in half
-                .event(RuleId.PRE_MOVE_EVENT, USER)
+                .event(RuleId.PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
                 .condition(new Equals<>(Value.USER().MOVE().CATEGORY(), CategoryId.RANGED))
-                .effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant (0.5)))
+                .effect(Effects.multiplyValue(Value.USER().MOVE().ATTACKING_STAT_MODIFIER(), new Constant (0.5)))
             )
         );
         register(Status.build(SLEEP)

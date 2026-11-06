@@ -9,7 +9,8 @@ public enum RuleId {
 
     START_OF_TURN_EVENT,
 
-    PRE_MOVE_EVENT,
+    PRE_MOVE_EVENT, // used when a move is about to be used
+
     ACCURACY_CHECK_EVENT,
     PRE_DEAL_FORMULA_DAMAGE_EVENT,
     PRE_DAMAGE_EVENT,
@@ -20,7 +21,6 @@ public enum RuleId {
     POST_DAMAGE_EVENT, // used wether the move hit or missed
     PRE_HEALTH_DRAIN_EVENT,
     PRE_ENERGY_DRAIN_EVENT,
-
 
     PRE_STAT_CHANGES_EFFECT_EVENT,
     USER_LOWERED_TARGET_STATS_EVENT,
@@ -37,6 +37,6 @@ public enum RuleId {
     TARGET_ITEM_REMOVED_EVENT,
 
     END_TURN_STATUS_EFFECT_EVENT,
-    END_OR_TURN_EVENT,
+    END_OF_TURN_EVENT,
     ;
 }

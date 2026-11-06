@@ -4,20 +4,36 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import github.snomfish.domain.move.CategoryId;
+import github.snomfish.domain.species.SpeciesId;
+import github.snomfish.domain.status.StatusId;
 import github.snomfish.domain.type.TypeId;
+import github.snomfish.functionality.Constants;
 import github.snomfish.functionality.Value;
+import github.snomfish.functionality.condition.And;
+import github.snomfish.functionality.condition.Comparator;
+import github.snomfish.functionality.condition.Conditions;
 import github.snomfish.functionality.condition.Equals;
+import github.snomfish.functionality.condition.FalseCondition;
 import github.snomfish.functionality.condition.Or;
+import github.snomfish.functionality.condition.RandomCondition;
 import github.snomfish.functionality.effect.EffectSequence;
 import github.snomfish.functionality.effect.Effects;
+import github.snomfish.functionality.effect.effects.ApplyStatChanges;
+import github.snomfish.functionality.effect.effects.ApplyStatus;
 import github.snomfish.functionality.effect.effects.ClutchEffect;
 import github.snomfish.functionality.effect.effects.ConsumeItem;
+import github.snomfish.functionality.effect.effects.SetType;
+import github.snomfish.functionality.event.Gate;
 import github.snomfish.functionality.event.Rule;
+import github.snomfish.functionality.event.RuleId;
 import github.snomfish.functionality.number.Constant;
+import github.snomfish.functionality.number.ValueConstant;
 
 import static github.snomfish.domain.item.ItemId.*;
 import static github.snomfish.domain.species.SpeciesId.*;
 import static github.snomfish.functionality.context.ContextSideId.*;
+import static github.snomfish.functionality.event.GateId.CAN_USE_SUPPORT_MOVES;
 import static github.snomfish.functionality.event.RuleId.*;
 
 // oi add a condition in condition schematics for general item use, offensive item use and defensive.
@@ -50,6 +66,11 @@ public class ItemRegistry {
 		);
 		register(Item.build(CHOCOLATE_BAR)
 			.name("chocolate bar")
+			.rule(Rule.build()
+				.event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+				.effect(ConsumeItem.user())
+			)
+			// reduce the cost of all moves to 0 then consume when a move is used
 		);
 		register(Item.build(CLUTCH_PLUSHIE)
 			.name("clutch plushie")
@@ -80,24 +101,55 @@ public class ItemRegistry {
 		);
 		register(Item.build(DRY_ICE)
 			.name("dry ice")
+			.rule(Rule.build()
+				.event(END_OF_TURN_EVENT, USER)
+				.effect(ApplyStatus.toUser(StatusId.FROSTBITE))
+			)
 		);
 		register(Item.build(ENERGY_ORB)
 			.name("energy orb")
+			// TODO decrease the cost of moves by 25%
 		);
 		register(Item.build(HEALTH_AMULET)
 			.name("health amulet")
+			.rule(Rule.build()
+				.event(END_OF_TURN_EVENT, USER)
+				// TODO restore 1/16 of max hp	
+			)
 		);
 		register(Item.build(HEAVY_ARMOUR)
 			.name("heavy armour")
+			.rule(Rule.build()
+				.event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET)
+				.condition(new Equals<>(Value.USER().MOVE().CATEGORY(), CategoryId.MELEE))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().DEFENDING_STAT_MODIFIER(), new Constant(1.2)))
+			)
+			// TODO increase costs of moves by 15%
 		);
 		register(Item.build(HEAVY_SHACKLES)
 			.name("heavy shackles")
 		);
 		register(Item.build(HEAVY_SHIELD)
 			.name("heavy shield")
+			.rule(Rule.build()
+				.event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET)
+				.condition(new Equals<>(Value.USER().MOVE().CATEGORY(), CategoryId.RANGED))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().DEFENDING_STAT_MODIFIER(), new Constant(1.2)))
+			)
+			// TODO increase costs of moves by 15%
 		);
 		register(Item.build(KABUNGA_COFFEE)
 			.name("kabunga coffee")
+			.rule(Rule.build()
+				.event(END_OF_TURN_EVENT, USER)
+				.condition(new RandomCondition(new Constant(0.1)))
+				// TODO restore 1/8 of the user's max energy
+			)
+			.rule(Rule.build()
+				.event(END_OF_TURN_EVENT, TARGET)
+				.condition(new RandomCondition(new Constant(0.1)))
+				// TODO restore 1/8 of the target's max energy
+			)
 		);
 		register(Item.build(MILKSHAKE)
 			.name("milkshake")
@@ -107,39 +159,113 @@ public class ItemRegistry {
 		);
 		register(Item.build(MYSTIC_WAND)
 			.name("mystic wand")
+			.rule(Rule.build()
+				.event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+				.condition(new And(
+					new Equals<>(Value.USER().SPECIES_ID(), SpeciesId.SHAWCHI),
+					new Equals<>(Value.USER().MOVE().CATEGORY(), CategoryId.RANGED)
+				))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().ATTACKING_STAT_MODIFIER(), new Constant(1.5)))
+			)
+			.rule(Rule.build()
+				.event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET)
+				.condition(new And(
+					new Equals<>(Value.USER().SPECIES_ID(), SpeciesId.SHAWCHI),
+					new Equals<>(Value.USER().MOVE().CATEGORY(), CategoryId.RANGED)
+				))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().DEFENDING_STAT_MODIFIER(), new Constant(1.5)))
+			)
 		);
 		register(Item.build(POWER_CUFFS)
 			.name("power cuffs")
+			.rule(Rule.build()
+				.event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+				.effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2)))
+			)
+			// TODO increase energy cost of moves by 25%
 		);
 		register(Item.build(RAGEFUL_PLUSHIE)
 			.name("rageful plushie")
+			.rule(Rule.build()
+				.event(DEALT_DAMAGE_EVENT, TARGET)
+				.condition(Comparator.greaterThan()
+					.left(new ValueConstant(Value.USER().MOVE().TYPE_MODIFIER()))
+					.right(new Constant(1))
+				)
+				.effect(ApplyStatChanges.targetChangingTarget()
+					.mattack(new Constant(2))
+					.rattack(new Constant(2))
+				)
+			)
 		);
 		register(Item.build(RESTRICTIVE_ARMOUR)
 			.name("restrictive armour")
+			.rule(Rule.build()
+				.event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET)
+				.condition(new Equals<>(Value.USER().MOVE().CATEGORY(), CategoryId.MELEE))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(2/3)))
+			)
+			.gate(Gate.build()
+				.event(CAN_USE_SUPPORT_MOVES, USER)
+				.condition(new FalseCondition())
+			)
 		);
 		register(Item.build(RESTRICTIVE_SHIELD)
 			.name("restrictive shield")
+			.rule(Rule.build()
+				.event(PRE_DEAL_FORMULA_DAMAGE_EVENT, TARGET)
+				.condition(new Equals<>(Value.USER().MOVE().CATEGORY(), CategoryId.RANGED))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(2/3)))
+			)
+			.gate(Gate.build()
+				.event(CAN_USE_SUPPORT_MOVES, USER)
+				.condition(new FalseCondition())
+			)
 		);
 		register(Item.build(SPECIALY_BOOTS)
 			.name("specialty boots")
 		);
 		register(Item.build(SPECIALY_GLOVES)
 			.name("specialty gloves")
+			.rule(Rule.build()
+				.event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+				.condition(new Equals<>(Value.USER().MOVE().CATEGORY(), CategoryId.MELEE))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)))
+			)
+			// TODO locks the user into a move
 		);
 		register(Item.build(SPECIALY_GOGGLES)
 			.name("specialty goggles")
+			.rule(Rule.build()
+				.event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+				.condition(new Equals<>(Value.USER().MOVE().CATEGORY(), CategoryId.RANGED))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)))
+			)
+			// TODO locks the user into a move
 		);
-		register(Item.build(STRONG_MAGNET)
+		register(Item.build(STRONG_MAGNET) // doubles exclusive
 			.name("strong magnet")
 		);
 		register(Item.build(THUNDER_ORB)
 			.name("thunder orb")
+			.rule(Rule.build()
+				.event(END_OF_TURN_EVENT, USER)
+				.effect(ApplyStatus.toUser(StatusId.PARALYSIS))
+			)
 		);
 		register(Item.build(VIRULENT_FANG)
 			.name("virulent fang")
+			.rule(Rule.build()
+				.event(END_OF_TURN_EVENT, USER)
+				.effect(ApplyStatus.toUser(StatusId.POISON))
+			)
 		);
 		register(Item.build(VOLCANIC_ASH)
 			.name("volcanic ash")
+			.rule(Rule.build()
+				.event(END_OF_TURN_EVENT, USER)
+				.effect(ApplyStatus.toUser(StatusId.BURN))
+			)
 		);
 		register(Item.build(AIR_ESSENCE)
 			.name("air essence")
@@ -660,8 +786,8 @@ public class ItemRegistry {
 					new Equals<>(Value.TARGET().SPECIES_ID(), VEYLENS)
 				))
 				.effect(new EffectSequence(List.of(
-					Effects.multiplyValue(Value.TARGET().MDEFENSE(), new Constant(1.5)),
-					Effects.multiplyValue(Value.TARGET().RDEFENSE(), new Constant(1.5))
+					Effects.multiplyValue(Value.TARGET().MDEFENSE(), new Constant(1.4)),
+					Effects.multiplyValue(Value.TARGET().RDEFENSE(), new Constant(1.4))
 				)))
 			)
 		);
@@ -673,15 +799,115 @@ public class ItemRegistry {
 		);
 		register(Item.build(FLAME_CORE)
 			.name("flame core")
+			.rule(Rule.build()
+				.event(USER_SWITCHED_IN_EVENT, USER)
+				.condition(Conditions.or(
+					new Equals<>(Value.USER().SPECIES_ID(), SCORB),
+					new Equals<>(Value.USER().SPECIES_ID(), VEYLENS),
+					new Equals<>(Value.USER().SPECIES_ID(), GARDRONE)
+				))
+				.effect(SetType.userSecondary(TypeId.FIRE))
+			)
+			.rule(Rule.build()
+				.event(TARGET_SWITCHED_IN_EVENT, TARGET)
+				.condition(Conditions.or(
+					new Equals<>(Value.TARGET().SPECIES_ID(), SCORB),
+					new Equals<>(Value.TARGET().SPECIES_ID(), VEYLENS),
+					new Equals<>(Value.TARGET().SPECIES_ID(), GARDRONE)
+				))
+				.effect(SetType.targetSecondary(TypeId.FIRE))
+			)
+			.rule(Rule.build()
+				.event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+				.condition(new And(
+					Conditions.or(
+						new Equals<>(Value.USER().SPECIES_ID(), SCORB),
+						new Equals<>(Value.USER().SPECIES_ID(), VEYLENS),
+						new Equals<>(Value.USER().SPECIES_ID(), GARDRONE)
+					),
+					new Equals<>(Value.USER().MOVE().TYPE(), TypeId.FIRE)
+				))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2)))
+			)
 		);
 		register(Item.build(FREEZER_CORE)
 			.name("freezer core")
+			.rule(Rule.build()
+				.event(USER_SWITCHED_IN_EVENT, USER)
+				.condition(Conditions.or(
+					new Equals<>(Value.USER().SPECIES_ID(), SCORB),
+					new Equals<>(Value.USER().SPECIES_ID(), VEYLENS),
+					new Equals<>(Value.USER().SPECIES_ID(), GARDRONE)
+				))
+				.effect(SetType.userSecondary(TypeId.ICE))
+			)
+			.rule(Rule.build()
+				.event(TARGET_SWITCHED_IN_EVENT, TARGET)
+				.condition(Conditions.or(
+					new Equals<>(Value.TARGET().SPECIES_ID(), SCORB),
+					new Equals<>(Value.TARGET().SPECIES_ID(), VEYLENS),
+					new Equals<>(Value.TARGET().SPECIES_ID(), GARDRONE)
+				))
+				.effect(SetType.targetSecondary(TypeId.ICE))
+			)
+			.rule(Rule.build()
+				.event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+				.condition(new And(
+					Conditions.or(
+						new Equals<>(Value.USER().SPECIES_ID(), SCORB),
+						new Equals<>(Value.USER().SPECIES_ID(), VEYLENS),
+						new Equals<>(Value.USER().SPECIES_ID(), GARDRONE)
+					),
+					new Equals<>(Value.USER().MOVE().TYPE(), TypeId.ICE)
+				))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2)))
+			)
 		);
 		register(Item.build(VOLTAIC_CORE)
 			.name("voltaic core")
+			.rule(Rule.build()
+				.event(USER_SWITCHED_IN_EVENT, USER)
+				.condition(Conditions.or(
+					new Equals<>(Value.USER().SPECIES_ID(), SCORB),
+					new Equals<>(Value.USER().SPECIES_ID(), VEYLENS),
+					new Equals<>(Value.USER().SPECIES_ID(), GARDRONE)
+				))
+				.effect(SetType.userSecondary(TypeId.ELECTRIC))
+			)
+			.rule(Rule.build()
+				.event(TARGET_SWITCHED_IN_EVENT, TARGET)
+				.condition(Conditions.or(
+					new Equals<>(Value.TARGET().SPECIES_ID(), SCORB),
+					new Equals<>(Value.TARGET().SPECIES_ID(), VEYLENS),
+					new Equals<>(Value.TARGET().SPECIES_ID(), GARDRONE)
+				))
+				.effect(SetType.targetSecondary(TypeId.ELECTRIC))
+			)
+			.rule(Rule.build()
+				.event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+				.condition(new And(
+					Conditions.or(
+						new Equals<>(Value.USER().SPECIES_ID(), SCORB),
+						new Equals<>(Value.USER().SPECIES_ID(), VEYLENS),
+						new Equals<>(Value.USER().SPECIES_ID(), GARDRONE)
+					),
+					new Equals<>(Value.USER().MOVE().TYPE(), TypeId.ELECTRIC)
+				))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2)))
+			)
 		);
 		register(Item.build(POWER_CORE) // power cuffs for scorb line
 			.name("power core")
+			.rule(Rule.build()
+				.event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
+				.condition(Conditions.or(
+					new Equals<>(Value.TARGET().SPECIES_ID(), SCORB),
+					new Equals<>(Value.TARGET().SPECIES_ID(), VEYLENS),
+					new Equals<>(Value.TARGET().SPECIES_ID(), GARDRONE)
+				))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2)))
+			)
+			// TODO increase energy cost of moves by 25%
 		);
 		register(Item.build(QUANTUM_CORE) // energy orb for scorb line
 			.name("quantum core")

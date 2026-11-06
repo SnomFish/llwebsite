@@ -16,6 +16,9 @@ public class Conditions {
     public static ICondition and(ICondition a, ICondition b, ICondition c) {
         return new And(a, new And(b, c));
     }
+    public static ICondition or(ICondition a, ICondition b, ICondition c) {
+        return new Or(a, new Or(b, c));
+    }
 
 
     public static ICondition isEven(INumber number) {

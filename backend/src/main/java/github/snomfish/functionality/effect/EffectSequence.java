@@ -18,6 +18,15 @@ public class EffectSequence implements IEffect {
     public EffectSequence(List<IEffect> effects) {
         this.effects = effects;
     }
+    public EffectSequence(IEffect a, IEffect b) {
+        this.effects = List.of(a, b);
+    }
+    public EffectSequence(IEffect a, IEffect b, IEffect c) {
+        this.effects = List.of(a, b, c);
+    }
+    public EffectSequence(IEffect a, IEffect b, IEffect c, IEffect d) {
+        this.effects = List.of(a, b, c, d);
+    }
 
 
     @Override 
