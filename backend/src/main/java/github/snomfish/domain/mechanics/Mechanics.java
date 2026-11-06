@@ -1,7 +1,5 @@
 package github.snomfish.domain.mechanics;
 
-import static github.snomfish.functionality.branch.BranchUtil.flatMap;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +9,8 @@ import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.copy.DeepCopyable;
 import github.snomfish.functionality.event.Event;
 import github.snomfish.functionality.event.RuleId;
+
+import static github.snomfish.functionality.branch.BranchUtil.flatMap;
 
 public class Mechanics implements DeepCopyable<Mechanics> {
     

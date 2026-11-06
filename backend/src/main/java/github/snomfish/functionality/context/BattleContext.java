@@ -23,7 +23,8 @@ import static github.snomfish.functionality.branch.BranchUtil.flatMap;
 public class BattleContext implements DeepCopyable<BattleContext> {
     
     private Gamestate gamestate;
-    private SideId userState; 
+    private SideId userState;
+    private SideId targetState;
     private Side user;
     private Side target;
 
@@ -34,6 +35,7 @@ public class BattleContext implements DeepCopyable<BattleContext> {
     ) {
         this.gamestate = gamestate;
         this.userState = userState;
+        this.targetState = userState == PLAYER ? PLAYER : ENEMY;
         this.user = userState == PLAYER ? gamestate.playerSide() : gamestate.enemySide();
         this.target = userState == PLAYER ? gamestate.enemySide() : gamestate.playerSide();
     }
@@ -51,6 +53,7 @@ public class BattleContext implements DeepCopyable<BattleContext> {
     // getters
     public Gamestate gamestate() {return gamestate;}
     public SideId userState() {return userState;}
+    public SideId targetState() {return targetState;}
     public Side user() {return user;}
     public Side target() {return target;}
     public Side side(ContextSideId sideId) {
@@ -62,15 +65,35 @@ public class BattleContext implements DeepCopyable<BattleContext> {
 
 
     // events
-    public List<Branch<BattleContext>> dispatchEvent(RuleId eventId) {
+    public List<Branch<BattleContext>> dispatchEvent(RuleId ruleId) {
         List<Branch<BattleContext>> outcomes = List.of(new Branch<>(this, 1.0));
 
-        outcomes = flatMap(outcomes, context -> gamestate().weatherInstance().handleEvent(context, new Event<>(eventId, null)));
-        outcomes = flatMap(outcomes, context -> user().dispatchEvent(context, new Event<>(eventId, ContextSideId.USER)));
-        outcomes = flatMap(outcomes, context -> target().dispatchEvent(context, new Event<>(eventId, ContextSideId.TARGET)));
+        outcomes = flatMap(outcomes, context -> gamestate().weatherInstance().handleEvent(context, new Event<>(ruleId, null)));
+        outcomes = flatMap(outcomes, context -> user().dispatchRule(context, new Event<>(ruleId, ContextSideId.USER)));
+        outcomes = flatMap(outcomes, context -> target().dispatchRule(context, new Event<>(ruleId, ContextSideId.TARGET)));
 
         return outcomes;
     }
+    public List<Branch<BattleContext>> dispatchGenericEvent(RuleId ruleId) {
+        List<Branch<BattleContext>> outcomes = List.of(new Branch<>(this, 1.0));
+
+        outcomes = flatMap(outcomes, context -> gamestate().weatherInstance().handleEvent(context, new Event<>(ruleId, null)));
+        outcomes = flatMap(outcomes, context -> user().dispatchRule(context, new Event<>(ruleId, null)));
+        outcomes = ContextUtil.switchFocus(outcomes, targetState);
+        outcomes = flatMap(outcomes, context -> target().dispatchRule(context, new Event<>(ruleId, null)));
+        
+        outcomes = ContextUtil.switchFocus(outcomes, userState);
+        return outcomes;
+    }
+    /*
+    FOR A TRUELY GENERIC EVENT A NEW SYSTEM NEEDS TO BE USED
+    EACH EVENT MUST HAVE A COUNTER PART, E.G: "SWAPPED_IN" AND "THE_OTHER_GUY_SWAPPED_IN"
+
+    THE INITIAL FUNCTION CALL NEEDS TO SPECIFY WETHER THE USER OR THE TARGET GETS THE FIRST EVENT ("SWAPPED IN")
+    AND THE OTHER SIDE GETS THE OTHER FUNCTION
+    
+    AFTER THAT THE EXTRA SIDE_CONTEXT_ID IS NOT NEEDED
+    */
     public List<Branch<Boolean>> dispatchGate(GateId gateId) {
         List<Branch<Boolean>> outcomes = List.of(new Branch<>(true, 1));
 

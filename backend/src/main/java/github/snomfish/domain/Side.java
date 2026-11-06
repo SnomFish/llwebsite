@@ -50,10 +50,10 @@ public class Side implements DeepCopyable<Side> {
     }
 
 
-    public List<Branch<BattleContext>> dispatchEvent(BattleContext context, Event<RuleId> event) {
+    public List<Branch<BattleContext>> dispatchRule(BattleContext context, Event<RuleId> event) {
         List<Branch<BattleContext>> outcomes = new ArrayList<>();
 
-        outcomes = activeLoomian().dispatchEvent(context, event);
+        outcomes = activeLoomian().dispatchRule(context, event);
 
         return outcomes;
     }

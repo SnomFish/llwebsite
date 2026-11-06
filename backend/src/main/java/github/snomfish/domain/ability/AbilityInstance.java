@@ -64,14 +64,14 @@ public class AbilityInstance implements DeepCopyable<AbilityInstance> {
         if (ability.oncePerSwapIn() && hasTriggeredThisSwapIn) return outcomes;
 
         for (AbilityRule rule : ability.rules()) {
-            outcomes = flatMap(outcomes, c -> executeEventRule(c, event, rule));
+            outcomes = flatMap(outcomes, c -> executeRule(c, event, rule));
         }
 
         return outcomes;
     }
 
 
-    public List<Branch<BattleContext>> executeEventRule(BattleContext context, Event<RuleId> event, AbilityRule rule) {
+    public List<Branch<BattleContext>> executeRule(BattleContext context, Event<RuleId> event, AbilityRule rule) {
         List<Branch<BattleContext>> outcomes = new ArrayList<>();
 
         if (!rule.events().contains(event)) return List.of(new Branch<>(context, 1));

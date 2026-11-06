@@ -57,7 +57,7 @@ public class ActiveLoomian extends Loomian {
         return new ActiveLoomian(this);
     }
 
-    public List<Branch<BattleContext>> dispatchEvent(BattleContext context, Event<RuleId> event) {
+    public List<Branch<BattleContext>> dispatchRule(BattleContext context, Event<RuleId> event) {
         List<Branch<BattleContext>> outcomes = List.of(new Branch<>(context, 1.0));
 
         outcomes = flatMap(outcomes, c -> abilityInstance().handleRule(c, event));
