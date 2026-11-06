@@ -3,6 +3,9 @@ package github.snomfish.functionality.condition;
 import github.snomfish.domain.status.StatusId;
 import github.snomfish.domain.weather.WeatherId;
 import github.snomfish.functionality.Value;
+import github.snomfish.functionality.number.Constant;
+import github.snomfish.functionality.number.INumber;
+import github.snomfish.functionality.number.Modulus;
 
 public class Conditions {
     
@@ -13,6 +16,14 @@ public class Conditions {
     public static ICondition and(ICondition a, ICondition b, ICondition c) {
         return new And(a, new And(b, c));
     }
+
+
+    public static ICondition isEven(INumber number) {
+        return new Equals<>(new Modulus(number, 2), new Constant(1));
+    }
+    public static ICondition isOdd(INumber number) {
+        return new Equals<>(new Modulus(number, 2), new Constant(1));
+    } 
 
 
     public static ICondition clearWeather() {

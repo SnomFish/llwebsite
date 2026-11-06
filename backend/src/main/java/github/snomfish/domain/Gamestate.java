@@ -17,6 +17,7 @@ public class Gamestate implements DeepCopyable<Gamestate> {
     private Side playerSide;
     private Side enemySide;
     private WeatherInstance weather;
+    private int turnNumber;
 
     private List<String> battleLog;
 
@@ -28,6 +29,7 @@ public class Gamestate implements DeepCopyable<Gamestate> {
         this.playerSide = playerSide;
         this.enemySide = enemySide;
         this.weather = new WeatherInstance(NO_WEATHER, 999);
+        this.turnNumber = 0;
 
         this.battleLog = new ArrayList<>();
     }
@@ -35,6 +37,7 @@ public class Gamestate implements DeepCopyable<Gamestate> {
         this.playerSide = copy.playerSide.deepCopy();
         this.enemySide = copy.enemySide.deepCopy();
         this.weather = copy.weather.deepCopy();
+        this.turnNumber = copy.turnNumber;
 
         this.battleLog = new ArrayList<>(copy.battleLog);
     }
@@ -61,6 +64,7 @@ public class Gamestate implements DeepCopyable<Gamestate> {
         }
     }
     public WeatherInstance weatherInstance() {return weather;}
+    public int turnNumber() {return turnNumber;}
     public List<String> battleLog() {return battleLog;}
 
 
@@ -78,10 +82,11 @@ public class Gamestate implements DeepCopyable<Gamestate> {
         }
     }
     public void setWeatherInstance(WeatherInstance weather) {this.weather = weather;}
+    public void setTurnNumber(int turnNumber) {this.turnNumber = turnNumber;}
     public void setBattleLog(List<String> battleLog) {this.battleLog = battleLog;}
 
 
-
+    public void incrementTurnNumber() {this.turnNumber += 1;}
     public void clearWeather() {this.weather = new WeatherInstance(NO_WEATHER, 999);}
     // add a way to decriment the lifespan
 

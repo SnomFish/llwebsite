@@ -40,6 +40,7 @@ import github.snomfish.functionality.gate.Gate;
 import github.snomfish.functionality.interceptor.Interceptor;
 import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.INumberValueConstant;
+import github.snomfish.functionality.number.Modulus;
 import github.snomfish.functionality.number.Multiply;
 import github.snomfish.functionality.number.ValueConstant;
 
@@ -478,6 +479,14 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(CHILL)
 			.name("chill")
+			.rule(AbilityRule.build()
+				.event(PRE_MOVE_EVENT, USER)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.SIMPLE))
+				.effect(new EffectSequence(List.of(
+					SetType.move(TypeId.ICE),
+					Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.2))
+				)))
+			)
 		);
 		// increases the damage of the user's ice type moves by 25%
 		register(Ability.build()
@@ -492,6 +501,36 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(CIRCADIAN)
 			.name("circadian")
+			.rule(AbilityRule.build()
+				.event(USER_SWITCHED_IN_EVENT, USER)
+				.event(START_OF_TURN_EVENT, USER)
+				.effect(new ConditionalEffect(
+					Conditions.isOdd(new ValueConstant(Value.TURN_NUMBER())),
+					new EffectSequence(List.of(
+						SetType.userPrimary(TypeId.LIGHT),
+						SetType.userSecondary(TypeId.NULL)
+					)),
+					new EffectSequence(List.of(
+						SetType.userPrimary(TypeId.DARK),
+						SetType.userSecondary(TypeId.NULL)
+					))
+				))
+			)
+			.rule(AbilityRule.build()
+				.event(TARGET_SWITCHED_IN_EVENT, TARGET)
+				.event(START_OF_TURN_EVENT, TARGET)
+				.effect(new ConditionalEffect(
+					Conditions.isOdd(new ValueConstant(Value.TURN_NUMBER())),
+					new EffectSequence(List.of(
+						SetType.targetPrimary(TypeId.LIGHT),
+						SetType.targetSecondary(TypeId.NULL)
+					)),
+					new EffectSequence(List.of(
+						SetType.targetPrimary(TypeId.DARK),
+						SetType.targetSecondary(TypeId.NULL)
+					))
+				))
+			)
 			.gate(Gate.build() // prevents the ability being removed
 				.event(CAN_REMOVE_USER_ABILITY, USER)
 				.event(CAN_REMOVE_TARGET_ABILITY, TARGET)
@@ -501,6 +540,10 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(CLINGY)
 			.name("clingy")
+			.gate(Gate.build()
+				.event(CAN_REMOVE_USER_ITEM, USER)
+				.condition(new FalseCondition())
+			)
 		);
 		register(Ability.build()
 			.id(CLUTCH)

@@ -87,13 +87,18 @@ public class Value<T> {
 	);}
     public static Value<WeatherInstance> WEATHER() {return new Value<>(
 		WeatherInstance.class,
-		c -> c.weatherInstance(),
+		c -> c.gamestate().weatherInstance(),
 		null
 	);}
 	public static Value<WeatherId> WEATHER_ID() {return new Value<>(
 		WeatherId.class,
-		c -> c.weatherInstance().weatherId(),
-		(c, v) -> c.weatherInstance().setWeatherId(v) 
+		c -> c.gamestate().weatherInstance().weatherId(),
+		(c, v) -> c.gamestate().weatherInstance().setWeatherId(v) 
+	);}
+	public static Value<Integer> TURN_NUMBER() {return new Value<>(
+		Integer.class,
+		c -> c.gamestate().turnNumber(),
+		(c, v) -> c.gamestate().setTurnNumber(v)
 	);}
 
 
