@@ -14,13 +14,13 @@ import github.snomfish.functionality.event.RuleId;
 public class AbilityRule {
     
 
-    private List<Event> events;
+    private List<Event<RuleId>> events;
     private ICondition condition;
     private IEffect effect;
 
 
     public AbilityRule(
-        List<Event> events, 
+        List<Event<RuleId>> events, 
         ICondition condition,
         IEffect effect
     ) {
@@ -30,7 +30,7 @@ public class AbilityRule {
     }
 
 
-    public List<Event> events() {return events;}
+    public List<Event<RuleId>> events() {return events;}
     public ICondition condition() {return condition;}
     public IEffect effect() {return effect;}
 
@@ -44,7 +44,7 @@ public class AbilityRule {
         );
     }
     public AbilityRule event(RuleId eventId, ContextSideId sideId) {
-        this.events.add(new Event(eventId, sideId));
+        this.events.add(new Event<>(eventId, sideId));
         return this;
     }
     public AbilityRule condition(ICondition condition) {

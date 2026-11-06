@@ -7,7 +7,7 @@ import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.branch.BranchUtil;
 import github.snomfish.functionality.context.BattleContext;
 
-public class Definition<T extends Enum<T>> {
+public class Definition<T extends Enum<T>, D extends Definition<T, D>> {
   
     
     protected final T id;
@@ -32,6 +32,32 @@ public class Definition<T extends Enum<T>> {
     public List<Rule> rules() {return rules;}
     public List<Gate> gates() {return gates;}
     public List<Interceptor> interceptors() {return interceptors;}
+
+
+    // builder functions
+    public static <T extends Enum<T>, D extends Definition<T, D>> Definition<T, D> build(T id) {
+        return new Definition<>(id);
+    }
+    @SuppressWarnings("unchecked")
+    public D name(String name) {
+        this.name = name;
+        return (D) this;
+    }
+    @SuppressWarnings("unchecked")
+    public D rule(Rule rule) {
+        this.rules.add(rule);
+        return (D) this;
+    }
+    @SuppressWarnings("unchecked")
+    public D gate(Gate gate) {
+        this.gates.add(gate);
+        return (D) this;
+    }
+    @SuppressWarnings("unchecked")
+    public D interceptor(Interceptor interceptor) {
+        this.interceptors.add(interceptor);
+        return (D) this;
+    }
 
 
     public List<Branch<BattleContext>> handleRule(BattleContext context, Event<RuleId> event) {

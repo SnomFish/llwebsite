@@ -1,6 +1,5 @@
 package github.snomfish.domain.mechanics;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,11 +7,9 @@ import java.util.Map;
 import github.snomfish.domain.type.TypeId;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.condition.Equals;
-import github.snomfish.functionality.effect.ConditionalEffect;
 import github.snomfish.functionality.effect.EffectSequence;
 import github.snomfish.functionality.effect.Effects;
 import github.snomfish.functionality.effect.effects.RemoveMechanic;
-import github.snomfish.functionality.event.Event;
 import github.snomfish.functionality.event.Rule;
 import github.snomfish.functionality.number.Constant;
 
