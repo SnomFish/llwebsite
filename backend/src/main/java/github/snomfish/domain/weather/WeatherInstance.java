@@ -6,7 +6,6 @@ import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.copy.DeepCopyable;
 import github.snomfish.functionality.event.Event;
-import github.snomfish.functionality.event.ids.RuleId;
 
 public class WeatherInstance implements DeepCopyable<WeatherInstance> {
     

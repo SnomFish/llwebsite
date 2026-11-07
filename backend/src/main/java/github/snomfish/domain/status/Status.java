@@ -1,9 +1,6 @@
 package github.snomfish.domain.status;
 
 import github.snomfish.functionality.event.Definition;
-import github.snomfish.functionality.event.Gate;
-import github.snomfish.functionality.event.Interceptor;
-import github.snomfish.functionality.event.Rule;
 
 public class Status extends Definition<StatusId, Status> {
     

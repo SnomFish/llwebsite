@@ -8,10 +8,6 @@ import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.copy.DeepCopyable;
 import github.snomfish.functionality.event.Event;
 import github.snomfish.functionality.event.InterceptorReport;
-import github.snomfish.functionality.event.ids.GateId;
-import github.snomfish.functionality.event.ids.IEventId;
-import github.snomfish.functionality.event.ids.InterceptorId;
-import github.snomfish.functionality.event.ids.RuleId;
 
 import static github.snomfish.functionality.copy.DeepCopy.deepCopyList;
 

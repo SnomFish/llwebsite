@@ -7,7 +7,6 @@ import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.branch.BranchUtil;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.effect.IEffect;
-import github.snomfish.functionality.event.ids.InterceptorId;
 
 public class InterceptorReport {
     
