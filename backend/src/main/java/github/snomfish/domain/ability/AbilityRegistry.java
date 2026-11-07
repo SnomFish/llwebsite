@@ -152,8 +152,12 @@ public class AbilityRegistry {
 			)
 		);
 		register(Ability.build()
+			.id(AIR_GUARD)
+			.name("air guard")
+		);
+		register(Ability.build()
 			.id(ALL_SEEING)
-			.name("all_seeing")
+			.name("all seeing")
 		);
 		register(Ability.build()
 			.id(AMBUSH)
@@ -227,6 +231,10 @@ public class AbilityRegistry {
 					Effects.multiplyValue(Value.OPP().MOVE().TYPE_MODIFIER(), new Constant(0.5))
 				))
             )
+        );
+        register(Ability.build() // completed
+            .id(ARCTIC)
+            .name("arctic")
         );
         register(Ability.build() // completed
             .id(ASSERTIVE)
@@ -657,6 +665,10 @@ public class AbilityRegistry {
 			.name("driven")
 		);
 		register(Ability.build()
+			.id(DUST_DEVIL)
+			.name("dust devil")
+		);
+		register(Ability.build()
 			.id(DUSK)
 			.name("dusk")
 		);
@@ -879,8 +891,8 @@ public class AbilityRegistry {
 			.name("gorge")
 		);
 		register(Ability.build()
-			.id(GREEDY)
-			.name("Greedy")
+			.id(GREED)
+			.name("greed")
 		);
 		register(Ability.build() // doubles exclusive ability
 			.id(GUARDIAN)
@@ -1162,6 +1174,10 @@ public class AbilityRegistry {
 			.name("medic")
 		);
 		register(Ability.build()
+			.id(MERGE)
+			.name("merge")
+		);
+		register(Ability.build()
 			.id(MESMERIZING)
 			.name("mesmerizing")
 		);
@@ -1421,6 +1437,10 @@ public class AbilityRegistry {
 					.speed(new Constant(1)
 				))
 			)
+		);
+		register(Ability.build()
+			.id(RECRUIT)
+			.name("recruit")
 		);
 		register(Ability.build()
 			.id(RECURRENT)

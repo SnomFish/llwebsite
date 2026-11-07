@@ -17,7 +17,6 @@ import static github.snomfish.domain.type.TypeId.*;
 public class SpeciesRegistry {
     
 
-	private static boolean initialised = false;
     private static final Map<SpeciesId, Species> registry = new HashMap<>();
 
 
@@ -25,7 +24,6 @@ public class SpeciesRegistry {
 
 
 	public static Species get(SpeciesId id) {
-		if (!initialised) throw new IllegalArgumentException("species has not been initialised");
 		return registry.get(id);
     } 
 
@@ -72,15 +70,11 @@ public class SpeciesRegistry {
     }
 
 
-    public static void init() {
-		if (initialised) return;
-		initialised = true;
-		initSpecies1();
-		initSpecies2();
-		initSpecies3();
-		initSpecies4();
+    static {
+		init1();
+		init2();
 	}
-	private static void initSpecies1() {
+	private static void init1() {
 		register(
 			EMBIT,
 			"embit",
@@ -1269,8 +1263,6 @@ public class SpeciesRegistry {
 			List.of(BODY_SLAM, BURROW, CHOMP, CLAMP, CLAY_SLAP, COMPLETE_DEMOLITION, DODGE, EARTHQUAKE, GNAW, HEADBUTT, HEAVY_BASH, METAL_SHRIEK, MUD_SPATTER, POWER_FOCUS, QUICKSAND, SHARPEN, SLUMBER, SPARE, STEEL_CRUSHER, TEAR_DOWN, THUNDER_CHOMP, VICE_JAWS),
 			true
 		);
-	}
-	private static void initSpecies2() {
 		register(
 			CHOMPACTOR,
 			"chompactor",
@@ -2471,8 +2463,6 @@ public class SpeciesRegistry {
 			List.of(BARBS, BODY_CRASH, BULK_UP, BUSH_WHACK, COCONUT_BOMB, DODGE, ENERGY_BREAK, GROWL, HYDRO_SLASH, ILL_WILL, LIFE_DRAIN, MAROON, MUDSLIDE, MUD_SPATTER, NATURES_FORCE, PEACE_OF_MIND, PETAL_PUMMEL, PINE_SHOT, PRIMAL_SLASH, PROVOKE, SHREWD_BLAST, SLASH, SPARE, SPLITTING_HEADACHE, STRETCH, TAIL_SLAP, THISTLE_SLASH, TSUNAMI, VINE_LASH, WATER_BOMB, WAVE_WRECKER, WONDER_HERB),
 			true
 		);
-	}
-	private static void initSpecies3() {
 		register(
 			FRUTRESS,
 			"frutress",
@@ -2557,6 +2547,8 @@ public class SpeciesRegistry {
 			List.of(BAG_OF_TRICKS, BAMBOOZLE, BARBS, BARTER, BOOM_BASH, BRAWN_BOOST, CHARADE, CHASE_DOWN, DARK_SURGE, DEJA_VU, DODGE, GNARLY_GASH, HEADBUTT, HEALTH_GIFT, ILL_WILL, LUNGE, MEMORIZE, MINDS_EYE, PEACE_OF_MIND, PILFER, POWER_FOCUS, PRIMAL_SLASH, PROVOKE, RANT, SAVAGE_HORN, SCAPEGOAT, SHARPEN, SHREWD_BLAST, SLAP_DOWN, SPARE, SPLITTING_HEADACHE, STARTLE, STRETCH, TALENT_TRADE, TEASE, TRIBUTE, TRICKY_TACTICS, VITAL_SURGE),
 			true
 		);
+	}
+	public static void init2() {
 		register(
 			IMPERIOR_ARCHFIEND,
 			"imperior_archfiend",
@@ -3539,7 +3531,1039 @@ public class SpeciesRegistry {
 			203.2,
 			349.0,
 			List.of(BLAZE_OF_GLORY, BLAZE_RUSH, BODY_CRASH, BODY_SLAM, BRACE, CAPRIOLE, CLAY_SLAP, DODGE, EARTHQUAKE, FIRE_BREATH, FIRE_SLAM, FLAMING_KICK, HEADBUTT, HEAT_WAVE, HEAVY_BASH, ILL_WILL, MAGMA_BLOCK, MEGA_KICK, MUDSLIDE, MUD_SPATTER, PEBBLE_TOSS, PREEMPTIVE_STRIKE, PROVOKE, QUICK_POUNCE, RAGING_FLAME, RAGING_TACKLE, SCAPEGOAT, SINGE, SPARE, STRETCH, TAMP, TEAMWORK, TRIBUTE),
+			false
+		);
+		register(
+			MININK,
+			"minink",
+			List.of(SIMPLE),
+			List.of(AGGRESSIVE, AMBUSH, RUSH_HOUR),
+			59, 59, 53, 61, 41, 52, 68,
+			398,
+			6.4,
+			53.5,
+			List.of(),
 			true
+		);
+		register(
+			ERSPRING,
+			"erspring",
+			List.of(SIMPLE),
+			List.of(AGGRESSIVE, AMBUSH, RUSH_HOUR),
+			85, 89, 96, 86, 54, 72, 94,
+			576,
+			26.3,
+			170.2,
+			List.of(),
+			false
+		);
+		register(
+			WOLKIN_METAL,
+			"wolkin",
+			List.of(SIMPLE, METAL),
+			List.of(DUST_DEVIL, FINESSE, COMBATIVE),
+			33, 61, 60, 64, 36, 41, 69,
+			364,
+			9.53,
+			63.5,
+			List.of(),
+			true
+		);
+		register(
+			WOLKIN_ICE,
+			"wolkin",
+			List.of(SIMPLE, ICE),
+			List.of(ARCTIC, FINESSE, COMBATIVE),
+			33, 61, 60, 64, 36, 41, 69,
+			364,
+			9.53,
+			63.5,
+			List.of(),
+			true
+		);
+		register(
+			FENREIGN_METAL,
+			"fenreign",
+			List.of(METAL, SIMPLE),
+			List.of(DUST_DEVIL, FINESSE, COMBATIVE),
+			67, 78, 120, 94, 54, 64, 102,
+			579,
+			24.49,
+			129.54,
+			List.of(),
+			false
+		);
+		register(
+			FENREIGN_ICE,
+			"fenreign",
+			List.of(ICE, SIMPLE),
+			List.of(ARCTIC, FINESSE, COMBATIVE),
+			67, 78, 120, 94, 54, 64, 102,
+			579,
+			24.49,
+			129.54,
+			List.of(),
+			false
+		);
+		register(
+			VERMADOR,
+			"vermador",
+			List.of(BRAWLER, EARTH),
+			List.of(POWER_CLAW, CLINGY, DEVIOUS),
+			60, 73, 108, 98, 34, 81, 71,
+			525,
+			43.5,
+			127,
+			List.of(),
+			false
+		);
+		register(
+			PUPPEAR,
+			"puppear",
+			List.of(PLANT, EARTH),
+			List.of(ADORABLE, DIRT_DASH, REPUGNANT),
+			56, 49, 43, 46, 36, 40, 42,
+			312,
+			4.5,
+			35.6,
+			List.of(),
+			true
+		);
+		register(
+			PUBBLE,
+			"pubble",
+			List.of(PLANT, EARTH),
+			List.of(SHARP_CLAWS, DIRT_DASH, REPUGNANT),
+			93, 68, 91, 76, 48, 61, 51,
+			488,
+			34,
+			134.6,
+			List.of(),
+			true
+		);
+		register(
+			POMPAMOL,
+			"pompamol",
+			List.of(PLANT, EARTH),
+			List.of(SHARP_CLAWS, DIRT_DASH, REPUGNANT),
+			124, 82, 101, 98, 62, 76, 60,
+			603,
+			54.9,
+			160,
+			List.of(),
+			false
+		);
+		register(
+			CUBSCOOT,
+			"cubscoot",
+			List.of(SIMPLE),
+			List.of(VIGOROUS, CONFIDENCE, FINESSE),
+			52, 68, 67, 47, 30, 47, 44,
+			355,
+			10.4,
+			66,
+			List.of(),
+			true
+		);
+		register(
+			GRIZZOL,
+			"grizzol",
+			List.of(SIMPLE),
+			List.of(VIGOROUS, CONFIDENCE, FINESSE),
+			93, 76, 92, 81, 38, 53, 57,
+			490,
+			44.5,
+			106.7,
+			List.of(),
+			true
+		);
+		register(
+			GRIZURUS,
+			"grizurus",
+			List.of(SIMPLE, BRAWLER),
+			List.of(VIGOROUS, CONFIDENCE, FINESSE),
+			126, 86, 135, 103, 43, 67, 65,
+			625,
+			180.5,
+			185.4,
+			List.of(),
+			false
+		);
+		register(
+			LARVOLL,
+			"larvoll",
+			List.of(BUG),
+			List.of(SOB, ODD_HUSK, PREMONITION),
+			10, 55, 5, 10, 5, 10, 5,
+			100,
+			3.6,
+			35.6,
+			List.of(),
+			true
+		);
+		register(
+			HELMANT,
+			"helmant",
+			List.of(BUG, METAL),
+			List.of(PUNCTURE, BATTLE_ARMOUR, COMBATIVE),
+			73, 76, 116, 114, 39, 81, 91,
+			590,
+			34,
+			106.7,
+			List.of(),
+			false
+		);
+		register(
+			REGALIANT,
+			"regaliant",
+			List.of(BUG, METAL),
+			List.of(MESMERIZING, BATTLE_ARMOUR, WISE),
+			73, 76, 116, 144, 44, 111, 51,
+			615,
+			29.9,
+			129.5,
+			List.of(),
+			false
+		);
+		register(
+			SPINETTE,
+			"spinette",
+			List.of(BUG),
+			List.of(ADORABLE, STICKY, DEMANDING),
+			44, 76, 40, 56, 33, 40, 57,
+			346,
+			4.1,
+			38.1,
+			List.of(),
+			true
+		);
+		register(
+			SPINDER,
+			"spinder",
+			List.of(BUG),
+			List.of(ADORABLE, STICKY, DEMANDING),
+			66, 81, 79, 91, 54, 53, 68,
+			492,
+			16.8,
+			119.4,
+			List.of(),
+			true
+		);
+		register(
+			SILEGANT,
+			"silegant",
+			List.of(BUG, DARK),
+			List.of(ADORABLE, STICKY, DEMANDING),
+			88, 86, 101, 111, 66, 78, 79,
+			609,
+			21.8,
+			129.5,
+			List.of(),
+			false
+		);
+		register(
+			TRILOBIT,
+			"trilobit",
+			List.of(BUG),
+			List.of(COMBATIVE, STOKED, PROTECTIVE_SHELL),
+			53, 56, 70, 93, 26, 46, 57,
+			401,
+			8.2,
+			66,
+			List.of(),
+			true
+		);
+		register(
+			SKIRMAPOD,
+			"skirmapod",
+			List.of(BUG, BRAWLER),
+			List.of(COMBATIVE, STOKED, PROTECTIVE_SHELL),
+			87, 70, 118, 114, 53, 72, 87,
+			601,
+			37.6,
+			147.3,
+			List.of(),
+			false
+		);
+		register(
+			CURCCUL,
+			"curccul",
+			List.of(BUG),
+			List.of(GLIDE, VIVID_SIGHT, HIGH_STRUNG),
+			48, 99, 48, 51, 26, 43, 57,
+			372,
+			2.7,
+			38.1,
+			List.of(),
+			true
+		);
+		register(
+			CULSTRUM,
+			"culstrum",
+			List.of(BUG),
+			List.of(EXTENDED_REACH, VIVID_SIGHT, HIGH_STRUNG),
+			77, 88, 91, 88, 41, 61, 73,
+			519,
+			8.2,
+			104.1,
+			List.of(),
+			true
+		);
+		register(
+			CULIOSAUR,
+			"culiosaur",
+			List.of(BUG, ANCIENT),
+			List.of(EXTENDED_REACH, VIVID_SIGHT, HIGH_STRUNG),
+			110, 77, 114, 109, 54, 82, 73,
+			619,
+			221.8,
+			408.9,
+			List.of(),
+			false
+		);
+		register(
+			ESPERAE,
+			"esperae",
+			List.of(MIND),
+			List.of(QUICK_RECOVERY, EXPERTISE, SENDOFF),
+			100, 83, 20, 20, 41, 82, 47,
+			393,
+			9.5,
+			68.6,
+			List.of(),
+			true
+		);
+		register(
+			INFAELLA,
+			"infaella",
+			List.of(MIND, LIGHT),
+			List.of(QUICK_RECOVERY, EXPERTISE, SENDOFF),
+			145, 110, 35, 35, 79, 118, 57,
+			579,
+			19.5,
+			124.5,
+			List.of(),
+			false
+		);
+		register(
+			PONITE,
+			"ponite",
+			List.of(LIGHT),
+			List.of(RADIANCE, SURROGATE, SEIZE),
+			48, 66, 67, 54, 44, 42, 71,
+			392,
+			25.4,
+			83.8,
+			List.of(),
+			true
+		);
+		register(
+			KRYSTALLION,
+			"krystallion",
+			List.of(LIGHT, METAL),
+			List.of(DAUNTLESS, SURROGATE, SEIZE),
+			73, 81, 101, 98, 62, 66, 99,
+			580,
+			135.2,
+			223.5,
+			List.of(),
+			false
+		);
+		register(
+			SYLPHAIRI,
+			"sylphairi",
+			List.of(AIR),
+			List.of(AIR_GUARD, LOCKED_IN),
+			33, 50, 35, 33, 37, 63, 52,
+			303,
+			2.7,
+			76.2,
+			List.of(),
+			true
+		);
+		register(
+			SYLPHAE,
+			"sylphae",
+			List.of(AIR),
+			List.of(AIR_GUARD, LOCKED_IN),
+			51, 62, 70, 45, 72, 79, 81,
+			460,
+			6.8,
+			94,
+			List.of(),
+			true
+		);
+		register(
+			SYLPHYR,
+			"sylphyr",
+			List.of(AIR, BRAWLER),
+			List.of(AIR_GUARD, LOCKED_IN),
+			72, 83, 96, 54, 99, 100, 105,
+			609,
+			18.6,
+			188,
+			List.of(),
+			false
+		);
+		register(
+			HUMBY,
+			"humby",
+			List.of(AIR),
+			List.of(COMBATIVE, FINESSE, CONFIDENCE),
+			61, 66, 60, 52, 26, 59, 70,
+			394,
+			1.4,
+			999,
+			List.of(),
+			true
+		);
+		register(
+			KOLIPEEP,
+			"kolipeep",
+			List.of(AIR),
+			List.of(COMBATIVE, FINESSE, CONFIDENCE),
+			90, 93, 95, 72, 52, 88, 100,
+			590,
+			7.3,
+			73.7,
+			List.of(),
+			false
+		);
+		register(
+			CUBALI,
+			"cubali",
+			List.of(MIND, EARTH),
+			List.of(CONFIDENCE, BRAVE_CUB, WISE),
+			59, 73, 62, 53, 62, 53, 52,
+			414,
+			16.3,
+			71.1,
+			List.of(),
+			true
+		);
+		register(
+			PSYGRIS,
+			"psygris",
+			List.of(MIND, EARTH),
+			List.of(CONFIDENCE, ELDER_MANE, WISE),
+			91, 73, 109, 84, 109, 84, 65,
+			615,
+			115.2,
+			226.1,
+			List.of(),
+			false
+		);
+		register(
+			AKETTA,
+			"aketta",
+			List.of(WATER, BRAWLER),
+			List.of(UPPER_HAND, GUARDIAN),
+			43, 56, 48, 37, 82, 61, 65,
+			392,
+			3.2,
+			33,
+			List.of(),
+			true
+		);
+		register(
+			BRAWFIN,
+			"brawfin",
+			List.of(WATER, BRAWLER),
+			List.of(UPPER_HAND, GUARDIAN),
+			56, 69, 62, 50, 101, 78, 85,
+			501,
+			25.9,
+			129.5,
+			List.of(),
+			false
+		);
+		register(
+			GAJAHRA,
+			"gajahra",
+			List.of(LIGHT, BRAWLER),
+			List.of(UPPER_HAND, GUARDIAN),
+			67, 82, 77, 64, 126, 91, 97,
+			604,
+			61.2,
+			248.9,
+			List.of(),
+			false
+		);
+		register(
+			GLINTERRA_FIRE,
+			"glinterra",
+			List.of(EARTH, FIRE),
+			List.of(CLUTCH, TANK, COMBATIVE),
+			50, 75, 111, 96, 60, 93, 40,
+			525,
+			999,
+			999,
+			List.of(),
+			false
+		);
+		register(
+			GLINTERRA_WATER,
+			"glinterra",
+			List.of(EARTH, WATER),
+			List.of(CLUTCH, CAVERNOUS, SPONGE),
+			111, 75, 50, 60, 93, 96, 40,
+			525,
+			999,
+			999,
+			List.of(),
+			false
+		);
+		register(
+			GLINTERRA_ELECTRIC,
+			"glinterra",
+			List.of(EARTH, ELECTRIC),
+			List.of(CLUTCH, ELECTRIFY, ANALYZE),
+			60, 75, 96, 93, 111, 50, 40,
+			525,
+			999,
+			999,
+			List.of(),
+			false
+		);
+		register(
+			GLINTERRA_LIGHT,
+			"glinterra",
+			List.of(EARTH, LIGHT),
+			List.of(CLUTCH, MYSTERIOUS_CLOAK, SEIZE),
+			93, 75, 60, 50, 96, 111, 40,
+			525,
+			999,
+			999,
+			List.of(),
+			false
+		);
+		register(
+			GLINTERRA_DARK,
+			"glinterra",
+			List.of(EARTH, DARK),
+			List.of(CLUTCH, BITTER_TOUCH, IGNORANT),
+			96, 75, 93, 111, 50, 60, 40,
+			525,
+			999,
+			999,
+			List.of(),
+			false
+		);
+		register(
+			GEOKNIGHT_GLINTERRA_FIRE,
+			"geoknight glinterra",
+			List.of(EARTH, FIRE),
+			List.of(),
+			111, 0, 111, 111, 111, 111, 70,
+			625,
+			999,
+			999,
+			List.of(),
+			false
+		);
+		register(
+			GEOKNIGHT_GLINTERRA_WATER,
+			"geoknight glinterra",
+			List.of(EARTH, WATER),
+			List.of(),
+			111, 0, 111, 111, 111, 111, 70,
+			625,
+			999,
+			999,
+			List.of(),
+			false
+		);
+		register(
+			GEOKNIGHT_GLINTERRA_ELECTRIC,
+			"geoknight glinterra",
+			List.of(EARTH, ELECTRIC),
+			List.of(),
+			111, 0, 111, 111, 111, 111, 70,
+			625,
+			999,
+			999,
+			List.of(),
+			false
+		);
+		register(
+			GEOKNIGHT_GLINTERRA_LIGHT,
+			"geoknight glinterra",
+			List.of(EARTH, LIGHT),
+			List.of(),
+			111, 0, 111, 111, 111, 111, 70,
+			625,
+			999,
+			999,
+			List.of(),
+			false
+		);
+		register(
+			GEOKNIGHT_GLINTERRA_DARK,
+			"geoknight glinterra",
+			List.of(EARTH, DARK),
+			List.of(MERGE),
+			111, 0, 111, 111, 111, 111, 70,
+			625,
+			999,
+			999,
+			List.of(),
+			false
+		);
+		register(
+			NOCTULITE,
+			"noctulite",
+			List.of(METAL, ANCIENT),
+			List.of(REFLECTIVE, SHARP_FOCUS, FINESSE),
+			43, 68, 81, 37, 69, 34, 91,
+			423,
+			25.4,
+			53.3,
+			List.of(),
+			true
+		);
+		register(
+			BISMYOTIS,
+			"bismyotis",
+			List.of(METAL, ANCIENT),
+			List.of(REFLECTIVE, SHARP_FOCUS, FINESSE),
+			73, 86, 114, 57, 101, 49, 112,
+			592,
+			69.9,
+			142.2,
+			List.of(),
+			false
+		);
+		register(
+			PIKBUG,
+			"pikbug",
+			List.of(BUG, METAL),
+			List.of(ILLUMINATE, EARTHMOVER, OVERCLOCK),
+			30, 63, 37, 68, 21, 38, 31,
+			288,
+			6.4,
+			45.7,
+			List.of(),
+			true
+		);
+		register(
+			CRAWLLEY,
+			"crawlley",
+			List.of(BUG, METAL),
+			List.of(ILLUMINATE, EARTHMOVER, OVERCLOCK),
+			53, 83, 51, 99, 30, 53, 56,
+			425,
+			85.7,
+			96.5,
+			List.of(),
+			true
+		);
+		register(
+			CARAPEDE,
+			"carapede",
+			List.of(BUG, METAL),
+			List.of(ILLUMINATE, EARTHMOVER, OVERCLOCK),
+			74, 96, 83, 140, 49, 76, 91,
+			609,
+			307.5,
+			406.4,
+			List.of(),
+			false
+		);
+		register(
+			KUMIRO,
+			"kumiro",
+			List.of(ICE, SPIRIT),
+			List.of(DEAD_OF_WINTER, SOB),
+			53, 66, 37, 51, 65, 59, 67,
+			398,
+			11.3,
+			71.1,
+			List.of(),
+			true
+		);
+		register(
+			VIXUMI,
+			"vixumi",
+			List.of(ICE, SPIRIT),
+			List.of(DEAD_OF_WINTER, SOUL_HOARDER),
+			88, 83, 54, 82, 96, 103, 106,
+			612,
+			80.7,
+			190.5,
+			List.of(),
+			false
+		);
+		register(
+			VOLLOPS,
+			"vollops",
+			List.of(SPIRIT, ELECTRIC),
+			List.of(RUSH_HOUR, SHIFTY, HOVER),
+			69, 75, 20, 59, 96, 86, 120,
+			525,
+			3.6,
+			71.1,
+			List.of(),
+			false
+		);
+		register(
+			SNIFFLIN,
+			"snifflin",
+			List.of(ICE, SIMPLE),
+			List.of(CLINGY, GREED, LAZY),
+			90, 96, 48, 43, 36, 38, 52,
+			403,
+			999,
+			999,
+			List.of(),
+			true
+		);
+		register(
+			NOSTROLL,
+			"nostroll",
+			List.of(ICE, SIMPLE),
+			List.of(CLINGY, GREED, LAZY),
+			132, 96, 81, 76, 53, 70, 72,
+			580,
+			999,
+			999,
+			List.of(),
+			false
+		);
+		register(
+			SVELPUP,
+			"svelpup",
+			List.of(WATER, ICE),
+			List.of(SOB, INSULATED, RAIN_RUSH),
+			55, 49, 34, 25, 34, 26, 36,
+			259,
+			8.2,
+			53.3,
+			List.of(),
+			true
+		);
+		register(
+			SIGLEO,
+			"sigleo",
+			List.of(WATER, ICE),
+			List.of(SOB, INSULATED, RAIN_RUSH),
+			999, 999, 999, 999, 999, 999, 999,
+			999,
+			999,
+			999,
+			List.of(),
+			true
+		);
+		register(
+			BERSERUS,
+			"bersurus",
+			List.of(WATER, ICE),
+			List.of(HASTY, INSULATED, SPOILS_OF_WAR),
+			101, 78, 98, 108, 59, 113, 42,
+			599,
+			186.9,
+			233.7,
+			List.of(),
+			false
+		);
+		register(
+			TADPLODE,
+			"tadplode",
+			List.of(ICE),
+			List.of(COMBUSTIBLE, DETONATE, HIGH_EXPLOSIVE),
+			50, 60, 37, 42, 88, 45, 34,
+			356,
+			5.9,
+			999,
+			List.of(),
+			true
+		);
+		register(
+			NITROAD,
+			"nitroad",
+			List.of(ICE, FIRE),
+			List.of(COMBUSTIBLE, DETONATE, HIGH_EXPLOSIVE),
+			100, 86, 86, 81, 119, 87, 41,
+			600,
+			105.2,
+			157.5,
+			List.of(),
+			false
+		);
+		register(
+			SNUGGUIN,
+			"snugguin",
+			List.of(ICE),
+			List.of(SNOWBALL, SNOW_GLIDER),
+			32, 26, 40, 19, 21, 18, 42,
+			198,
+			5.4,
+			33,
+			List.of(),
+			true
+		);
+		register(
+			PENGUARD,
+			"penguard",
+			List.of(ICE),
+			List.of(RECRUIT, SNOW_GLIDER),
+			63, 63, 70, 91, 48, 66, 59,
+			460,
+			39.5,
+			114.3,
+			List.of(),
+			true
+		);
+		register(
+			FRIGICREST,
+			"frigicrest",
+			List.of(ICE),
+			List.of(VETERAN, SNOW_GLIDER),
+			88, 81, 101, 110, 62, 87, 69,
+			598,
+			115.2,
+			185.4,
+			List.of(),
+			false
+		);
+		register(
+			PLASMITE,
+			"plasmite",
+			List.of(BUG, FIRE),
+			List.of(ENERGY_FEEDING, GAIN_FEEDING, SELF_DESTRUCT),
+			84, 75, 53, 56, 48, 56, 57,
+			429,
+			999,
+			999,
+			List.of(),
+			true
+		);
+		register(
+			COAGULEX,
+			"coagulex",
+			List.of(BUG, FIRE),
+			List.of(ENERGY_FEEDING, GAIN_FEEDING, SELF_DESTRUCT),
+			84, 75, 96, 56, 82, 56, 130,
+			579,
+			999,
+			999,
+			List.of(),
+			false
+		);
+		register(
+			EMBRYX,
+			"embryx",
+			List.of(DARK),
+			List.of(CONDITIONED),
+			33, 75, 53, 53, 89, 57, 91,
+			451,
+			15.9,
+			73.7,
+			List.of(),
+			true
+		);
+		register(
+			COCOONYX,
+			"cocoonyx",
+			List.of(DARK),
+			List.of(CONDITIONED),
+			49, 75, 53, 93, 89, 97, 53,
+			509,
+			18.1,
+			76.2,
+			List.of(),
+			true
+		);
+		register(
+			ARCHANOX,
+			"archanox",
+			List.of(DARK, ANCIENT),
+			List.of(BLACK_HEART),
+			78, 75, 67, 83, 129, 87, 106,
+			625,
+			120.2,
+			342.9,
+			List.of(),
+			false
+		);
+		register(
+			KOZ_MOH,
+			"koz-moh",
+			List.of(METAL, SIMPLE),
+			List.of(APPREHENSION, HOVER, CADDIE),
+			73, 61, 46, 54, 27, 27, 58,
+			346,
+			15.9,
+			73.7,
+			List.of(),
+			true
+		);
+		register(
+			OHNI_ON,
+			"ohni-on",
+			List.of(METAL, SIMPLE),
+			List.of(EXTENDED_REACH, HOVER, CADDIE),
+			98, 78, 62, 68, 38, 38, 67,
+			449,
+			54.9,
+			132.1,
+			List.of(),
+			true
+		);
+		register(
+			KOZ_MECH,
+			"koz-mech",
+			List.of(METAL, SIMPLE),
+			List.of(EXTENDED_REACH, HOVER, CADDIE),
+			130, 99, 90, 83, 49, 49, 83,
+			583,
+			80.7,
+			144.8,
+			List.of(),
+			false
+		);
+		register(
+			NAVILITE,
+			"navilite",
+			List.of(METAL),
+			List.of(COMMUNICATION, SOLAR_POWERED, EXTRATERRESTRIAL),
+			60, 60, 60, 60, 60, 60, 60,
+			420,
+			106.1,
+			139.7,
+			List.of(),
+			true
+		);
+		register(
+			XENARK,
+			"xenark",
+			List.of(METAL, DARK),
+			List.of(REMORSELESS, SOLAR_POWERED, EXTRATERRESTRIAL),
+			60, 90, 120, 75, 90, 90, 90,
+			615,
+			85.7,
+			233.7,
+			List.of(),
+			false
+		);
+		register(
+			RADIARC,
+			"radiarc",
+			List.of(METAL, LIGHT),
+			List.of(COMMUNICATION, SOLAR_POWERED, EXTRATERRESTRIAL),
+			90, 90, 60, 90, 90, 120, 75,
+			615,
+			85.7,
+			233.7,
+			List.of(),
+			false
+		);
+		register(
+			EAGRIM,
+			"eagrim",
+			List.of(ELECTRIC, AIR),
+			List.of(GLIDE, TURBULENT, WIND_SUMMON),
+			60, 55, 85, 55, 50, 40, 55,
+			400,
+			15.9,
+			68.6,
+			List.of(),
+			true
+		);
+		register(
+			FOWLGUR,
+			"fowlgur",
+			List.of(ELECTRIC, AIR),
+			List.of(GLIDE, TURBULENT, WIND_SUMMON),
+			999, 999, 999, 999, 999, 999, 999,
+			999,
+			999,
+			999,
+			List.of(),
+			true
+		);
+		register(
+			FULGURATH,
+			"fulgurath",
+			List.of(ELECTRIC, AIR),
+			List.of(GLIDE, TURBULENT, WIND_SUMMON),
+			999, 999, 999, 999, 999, 999, 999,
+			999,
+			999,
+			999,
+			List.of(),
+			false
+		);
+		register(
+			SPRIGNA,
+			"sprigna",
+			List.of(ICE, PLANT),
+			List.of(RAIN_RUSH, HIGH_PRESSURE, SLICK_SCALES),
+			999, 999, 999, 999, 999, 999, 999,
+			999,
+			999,
+			999,
+			List.of(),
+			true
+		);
+		register(
+			KELPOS,
+			"kelpos",
+			List.of(ICE, PLANT),
+			List.of(RAIN_RUSH, HIGH_PRESSURE, SLICK_SCALES),
+			999, 999, 999, 999, 999, 999, 999,
+			999,
+			999,
+			999,
+			List.of(),
+			true
+		);
+		register(
+			SLUGOONA,
+			"slugoona",
+			List.of(ICE, PLANT),
+			List.of(RAIN_RUSH, HIGH_PRESSURE, SLICK_SCALES),
+			999, 999, 999, 999, 999, 999, 999,
+			999,
+			999,
+			999,
+			List.of(),
+			false
+		);
+		register(
+			IGNIGRUB,
+			"ignigrub",
+			List.of(BUG, FIRE),
+			List.of(PREMONITION, SCORCHING_SKIN, UPPER_HAND),
+			38, 52, 62, 61, 38, 44, 48,
+			343,
+			5,
+			33,
+			List.of(),
+			true
+		);
+		register(
+			CARANADE,
+			"caranade",
+			List.of(BUG, FIRE),
+			List.of(REV_UP, SCORCHING_SKIN, UPPER_HAND),
+			52, 68, 77, 80, 48, 61, 67,
+			453,
+			16.8,
+			94,
+			List.of(),
+			true
+		);
+		register(
+			STAGNITE,
+			"stagnite",
+			List.of(BUG, FIRE),
+			List.of(REV_UP, PUGILIST, UPPER_HAND),
+			75, 81, 115, 101, 58, 82, 113,
+			625,
+			75.7,
+			198.1,
+			List.of(),
+			false
 		);
 		register(
 			DUSKIT,
@@ -3551,7 +4575,7 @@ public class SpeciesRegistry {
 			93.98,
 			37.0,
 			List.of(BITTER_COLD, BRAINWASH, CEREBRAL_SLASH, CHASE_DOWN, DARK_SURGE, DEJA_VU, DODGE, FADE_AWAY, FINAL_RUSE, FLABBERGAST, HARROW, HASTEN, HYPNOTIZE, OPPRESS, OUTBURST, PEACE_OF_MIND, PHANTOM_BLAST, PHANTOM_SLASH, PYROKINESIS, RAGING_FLAME, RETURN_TO_SENDER, SHADOW_SPRINT, SPARE, SPECTRAL_BURST, STARTLE, STUN, STUPEFY, TRIBUTE),
-			true
+			false
 		);
 		register(
 			IKAZUNE,
@@ -3563,7 +4587,7 @@ public class SpeciesRegistry {
 			175.26,
 			84.0,
 			List.of(BLAZE_CHOMP, BLAZE_OF_GLORY, BLAZE_RUSH, BURN_UP, CHARRED_CLAWS, DODGE, ELECTROBURST, ENERGIZE, ENERGY_SURGE, FIRE_BREATH, JOLT, MAGNIFY, POWER_FOCUS, RAGING_FLAME, SINGE, SPARE, STATIC_SHOCK, STUN, THUNDERSTRIKE, THUNDER_CHOMP, THUNDER_CRASH, ZIP_ZAP),
-			true
+			false
 		);
 		register(
 			PROTOGON,
@@ -3575,7 +4599,7 @@ public class SpeciesRegistry {
 			261.62,
 			297.0,
 			List.of(AUGMENT, BARBS, BASH, DART_BURST, DEJA_VU, DODGE, ELECTRO_PUNCH, ENERGY_SURGE, METAL_BLAST, METAL_SWIPES, POWER_SIPHON, SPARE, STEEL_CRUSHER, TAIL_SLAP, THUNDERSTRIKE, TUNE_UP, ZIP_ZAP),
-			true
+			false
 		);
 		register(
 			DAKUDA,
@@ -3587,7 +4611,7 @@ public class SpeciesRegistry {
 			218.44,
 			298.0,
 			List.of(BULK_UP, DODGE, ENERGIZE, GAMMA_PULSE, GROWL, ILL_WILL, MAROON, PLUNGE, POWER_FOCUS, PROVOKE, SLAP_DOWN, SPARE, SPRAY, STATIC_SHOCK, STUN, SWIPE, THUNDERSTRIKE, THUNDER_BLAST, THUNDER_CRASH, THUNDER_SLAM, TORRENTIAL_SLASH, TSUNAMI, WATER_BOMB),
-			true
+			false
 		);
 		register(
 			DAKUDA_OVERCHARGED,
@@ -3599,7 +4623,19 @@ public class SpeciesRegistry {
 			218.44,
 			298.0,
 			List.of(BULK_UP, DODGE, ENERGIZE, GAMMA_PULSE, GROWL, ILL_WILL, MAROON, PLUNGE, POWER_FOCUS, PROVOKE, SLAP_DOWN, SPARE, SPRAY, STATIC_SHOCK, STUN, SWIPE, THUNDERSTRIKE, THUNDER_BLAST, THUNDER_CRASH, THUNDER_SLAM, TORRENTIAL_SLASH, TSUNAMI, WATER_BOMB),
-			true
+			false
+		);
+		register(
+			YAMASHKIGAL,
+			"yamashkigal",
+			List.of(METAL, TOXIC),
+			List.of(NOXIOUS_RAZORBACK, VIRULENT_HYPNOSIS),
+			115, 90, 140, 100, 55, 85, 115, 
+			700,
+			422.7,
+			856.0,
+			List.of(BULK_UP, DODGE, ENERGIZE, GAMMA_PULSE, GROWL, ILL_WILL, MAROON, PLUNGE, POWER_FOCUS, PROVOKE, SLAP_DOWN, SPARE, SPRAY, STATIC_SHOCK, STUN, SWIPE, THUNDERSTRIKE, THUNDER_BLAST, THUNDER_CRASH, THUNDER_SLAM, TORRENTIAL_SLASH, TSUNAMI, WATER_BOMB),
+			false
 		);
 		register(
 			COSMELEON,
@@ -3611,7 +4647,7 @@ public class SpeciesRegistry {
 			167.64,
 			18.0,
 			List.of(AIR_BLADE, AIR_SHOT, BLAZE_CHOMP, BULK_UP, CLIMATE_CANNON, CYCLONE_SLAM, DODGE, DOWNPOUR, FAR_ENCHANTMENT, FLARE_BLAST, GALE_FORCE, GUST, HARMONIOUS_CHORD, HAZY_SHROUD, HEAT_WAVE, HIGH_PITCH_SCREECH, HYDRO_BLAST, HYDRO_SLASH, IMPERSONATE, MAROON, PEACE_OF_MIND, PEPPER_BURST, PHANTOM_BLAST, PHANTOM_SLASH, POWER_FOCUS, PRECISION_BOLT, RAGING_FLAME, SHRIEK, SINGE, SLASH, SOFT_WATER, SPARE, SPECTRAL_BURST, SPRAY, STATIC_SHOCK, STRIKE, STUPEFY, SWIPE, THUNDERSTORM, THUNDER_BLAST, THUNDER_SLAM, TRIBUTE, TYPHOON),
-			true
+			false
 		);
 		register(
 			MUTAGON,
@@ -3623,7 +4659,7 @@ public class SpeciesRegistry {
 			233.68,
 			276.0,
 			List.of(BARTER, BODY_CRASH, BOOM_BASH, BRAINWASH, BRAWN_BOOST, BULK_UP, CEREBRAL_SLASH, CHOP, DODGE, FROST_PUNCH, ILL_WILL, MEGA_PUNCH, PEACE_OF_MIND, PROVOKE, PSYCHO_BLAST, PUNCH, SPARE, STARE, SWIPE, TELEKINETIC_SWEEP),
-			true
+			false
 		);
 		register(
 			CEPHALOPS,
@@ -3635,7 +4671,7 @@ public class SpeciesRegistry {
 			251.46,
 			310.0,
 			List.of(BUG_BITE, DARK_SURGE, DODGE, EERIE_STARE, HYPNOTIZE, ICICLE_TRAP, PARASITIZE, PLUNGE, RANT, SOUL_DRAIN, SPARE, SPRAY, SQUARE_ONE, TEASE, TSUNAMI, WATER_BOMB, WAVE_WRECKER),
-			true
+			false
 		);
 		register(
 			ELEPHAGE,
@@ -3659,7 +4695,7 @@ public class SpeciesRegistry {
 			271.78,
 			252.0,
 			List.of(BODY_SLAM, DEJA_VU, DISSONANT_CHORD, DODGE, ENERGIZE, EXAMINE, FINAL_RUSE, FLASH_N_FLEE, HARMONIOUS_CHORD, HIGH_PITCH_SCREECH, HULLABALOO, ILL_WILL, JOLT, JUMP_START, MAGNIFY, MEMORIZE, POWER_DRAW, POWER_SIPHON, PRECISION_BOLT, PROVOKE, QUICK_POUNCE, RANT, REJUVENATE, REPEATING_TUNE, SPARE, STATIC_SHOCK, STUN, TEAR_DOWN, THUNDERSTORM, THUNDERSTRIKE, THUNDER_BLAST, THUNDER_CLAP, THUNDER_CRASH, THUNDER_SLAM, ZIP_ZAP),
-			true
+			false
 		);
 		register(
 			GLACADIA,
@@ -3671,10 +4707,8 @@ public class SpeciesRegistry {
 			309.88,
 			521.0,
 			List.of(BITTER_COLD, CHILLY_CHOMP, CONFOUND, DISPERSE, DODGE, DRACO_BEAM, ENERGY_BREAK, FAR_ENCHANTMENT, FLURRY, FROST_BEAM, FROST_BLAST, FROST_BREATH, GNAW, HIGH_PITCH_SCREECH, ICE_HAMMER, ICICLE_TRAP, ILL_WILL, OUTBURST, PEACE_OF_MIND, PRIMAL_SLASH, RAGING_HOWL, RAGING_TACKLE, SHREWD_BLAST, SLASH, SLUMBER, SPARE),
-			true
+			false
 		);
-	}
-	private static void initSpecies4() {
 		register(
 			ARCEROS,
 			"arceros",
@@ -3685,7 +4719,7 @@ public class SpeciesRegistry {
 			294.64,
 			436.0,
 			List.of(BLAZE_CHOMP, BLAZE_OF_GLORY, BLAZE_RUSH, BULK_UP, BURN_UP, CHARRED_CLAWS, DINO_CLAWS, DODGE, DRACO_BEAM, ENERGY_BREAK, FIRE_BREATH, FLAMING_KICK, GNAW, HIGH_PITCH_SCREECH, ILL_WILL, NEAR_ENCHANTMENT, OUTBURST, PRIMAL_SLASH, PYROKINESIS, RAGING_FLAME, RAGING_HOWL, RAGING_TACKLE, SHARPEN, SHREWD_BLAST, SINGE, SLASH, SLUMBER, SPARE),
-			true
+			false
 		);
 		register(
 			NOVADEUS,
@@ -3697,7 +4731,7 @@ public class SpeciesRegistry {
 			368.3,
 			946.0,
 			List.of(BITTER_COLD, BLAZE_CHOMP, BLAZE_OF_GLORY, BLAZE_RUSH, BULK_UP, BURN_UP, CHARRED_CLAWS, CHILLY_CHOMP, CONFOUND, DINO_CLAWS, DISPERSE, DODGE, DRACO_BEAM, ENERGY_BREAK, FAR_ENCHANTMENT, FIRE_BREATH, FLAMING_KICK, FLURRY, FROST_BEAM, FROST_BLAST, FROST_BREATH, GNAW, HIGH_PITCH_SCREECH, ICE_HAMMER, ICICLE_TRAP, ILL_WILL, NEAR_ENCHANTMENT, OUTBURST, PEACE_OF_MIND, PRIMAL_SLASH, PYROKINESIS, RAGING_FLAME, RAGING_HOWL, RAGING_TACKLE, SHARPEN, SHREWD_BLAST, SINGE, SLASH, SLUMBER, SPARE),
-			true
+			false
 		);
 		register(
 			MORPHEZU,
@@ -3709,7 +4743,7 @@ public class SpeciesRegistry {
 			999.0,
 			999.0,
 			List.of(AIR_BLADE, AIR_SHOT, AIR_WHIP, CYCLONE_SLAM, DODGE, EERIE_STARE, EXPERT_ONSLAUGHT, HEADBUTT, HIGH_PITCH_SCREECH, HYPNOTIZE, JET_STREAM, METAL_BLAST, NOSEDIVE, PEACE_OF_MIND, POWER_FOCUS, PRIMAL_SLASH, PSYCHO_BLAST, SHREWD_BLAST, SLUMBER, SPARE, STARE, TYPHOON),
-			true
+			false
 		);
 		register(
 			BEHEMOROTH,
@@ -3721,7 +4755,7 @@ public class SpeciesRegistry {
 			999.0,
 			999.0,
 			List.of(BULK_UP, BURROW, CLAY_SLAP, DODGE, DRIVING_FORCE, EARTHQUAKE, EERIE_STARE, EXPERT_ONSLAUGHT, HEADBUTT, HIGH_PITCH_SCREECH, HYPNOTIZE, LANDSLIDE, MUDSLIDE, MUD_SPATTER, POWER_FOCUS, PRIMAL_SLASH, QUICKSAND, ROGUE_ASSAULT, SHREWD_BLAST, SLUMBER, SPARE, STARE, TIMBER_THRASH),
-			true
+			false
 		);
 		register(
 			LEVIATROSS,
@@ -3733,7 +4767,7 @@ public class SpeciesRegistry {
 			999.0,
 			999.0,
 			List.of(AQUA_JAWS, BULK_UP, DARK_SURGE, DODGE, EERIE_STARE, EXPERT_ONSLAUGHT, HARROW, HEADBUTT, HIGH_PITCH_SCREECH, HYDRO_BLAST, HYPNOTIZE, ICICLE_TRAP, LUNGE, MAROON, MEGA_CHOMP, PEACE_OF_MIND, PHANTOM_SLASH, PLUNGE, POWER_FOCUS, PRIMAL_SLASH, PROVOKE, SHREWD_BLAST, SLUMBER, SOFT_WATER, SPARE, SPECTRAL_BURST, STARE, TSUNAMI, WATER_BOMB, WAVE_WRECKER),
-			true
+			false
 		);
 		register(
 			COSMIORE_U,
@@ -3745,7 +4779,7 @@ public class SpeciesRegistry {
 			93.98,
 			272.0,
 			List.of(BANE_OF_HASTE, BRACE, BRAINWASH, BULK_UP, CEREBRAL_SLASH, CONFOUND, DISSIPATE, DODGE, FIRE_SLAM, FROST_BREATH, HEADBUTT, HYPNOTIZE, ICICLE_TRAP, ILL_WILL, JUDGEMENT, METEOR_CRASH, METEOR_SMASH, PEACE_OF_MIND, POWER_FOCUS, PSYCHO_BLAST, SLAP_DOWN, SLUMBER, SPARE, WONDER_HERB),
-			true
+			false
 		);
 		register(
 			COSMIORE_C,
@@ -3757,7 +4791,7 @@ public class SpeciesRegistry {
 			93.98,
 			272.0,
 			List.of(BANE_OF_HASTE, BRACE, BRAINWASH, BULK_UP, CEREBRAL_SLASH, CONFOUND, DISSIPATE, DODGE, FIRE_SLAM, FROST_BREATH, HEADBUTT, HYPNOTIZE, ICICLE_TRAP, ILL_WILL, JUDGEMENT, METEOR_CRASH, METEOR_SMASH, PEACE_OF_MIND, POWER_FOCUS, PSYCHO_BLAST, SLAP_DOWN, SLUMBER, SPARE, WONDER_HERB),
-			true
+			false
 		);
 		register(
 			COSMIORE_E,
@@ -3769,7 +4803,7 @@ public class SpeciesRegistry {
 			93.98,
 			272.0,
 			List.of(BANE_OF_HASTE, BRACE, BRAINWASH, BULK_UP, CEREBRAL_SLASH, CONFOUND, DISSIPATE, DODGE, FIRE_SLAM, FROST_BREATH, HEADBUTT, HYPNOTIZE, ICICLE_TRAP, ILL_WILL, JUDGEMENT, METEOR_CRASH, METEOR_SMASH, PEACE_OF_MIND, POWER_FOCUS, PSYCHO_BLAST, SLAP_DOWN, SLUMBER, SPARE, WONDER_HERB),
-			true
+			false
 		);
 		register(
 			SOLNECTA,
@@ -3781,7 +4815,7 @@ public class SpeciesRegistry {
 			101.6,
 			29.0,
 			List.of(AIR_BLADE, AIR_SHOT, AIR_WHIP, BARTER, BLAZE_RUSH, BLINDSPOT_BATTER, BUG_BITE, BULK_UP, CEREBRAL_SLASH, COUNTER_POISE, DISPERSE, DODGE, DOUBLE_BEAT, DOUBLE_STING, ENERGY_SURGE, FIRE_BREATH, FLABBERGAST, FLASH, GAMMA_PULSE, HEALTH_GIFT, HYPER_STING, JUDGEMENT, LIGHTSPEED_RAY, LIGHT_DASH, LUNGE, LUSTER_LOOT, MAGNIFY, MINDS_EYE, PARASITIZE, PEACE_OF_MIND, PEPPER_BURST, PESTER, PHEROBLAST, PSYCHO_BLAST, RADIANT_RUSH, REJUVENATE, SHINE, SINGE, SPARE, STING, TEAR_DOWN, WONDER_HERB),
-			true
+			false
 		);
 		register(
 			NYMAURAE,
@@ -3793,7 +4827,7 @@ public class SpeciesRegistry {
 			68.58,
 			21.0,
 			List.of(AIR_BLADE, AIR_SHOT, AIR_WHIP, BARTER, DEJA_VU, DISPERSE, DISSONANT_CHORD, DODGE, FLASH_N_FLEE, GAMMA_PULSE, GUST, HARMONIOUS_CHORD, HYPNOTIZE, JET_STREAM, LUSTER_LOOT, PEACE_OF_MIND, PERCH, SHINE, SPARE, TAIL_SLAP, TEAR_DOWN, WONDER_HERB),
-			true
+			false
 		);
 		register(
 			NYMESIS,
@@ -3805,7 +4839,7 @@ public class SpeciesRegistry {
 			93.98,
 			25.0,
 			List.of(AGGRAVATE, AIR_BLADE, AIR_SHOT, AIR_WHIP, BAMBOOZLE, BARTER, CHARADE, DARK_SURGE, DEJA_VU, DODGE, HIGH_PITCH_SCREECH, HYPNOTIZE, JET_STREAM, PEACE_OF_MIND, PEPPER_BURST, PERCH, PROVOKE, RANT, SHADOW_PULSE, SHREWD_BLAST, SLAP_DOWN, SPARE, SQUARE_ONE, SWIPE, TAIL_SLAP, TEAR_DOWN, TEASE),
-			true
+			false,
 		);
 		register(
 			METRONETTE,
@@ -3817,7 +4851,7 @@ public class SpeciesRegistry {
 			96.52,
 			67.0,
 			List.of(BAG_OF_TRICKS, BARBS, BARTER, BRAINWASH, BULK_UP, CEREBRAL_SLASH, CHARADE, CHOMP, DARK_SURGE, DEJA_VU, DODGE, EERIE_STARE, FLABBERGAST, GNARLY_GASH, HARROW, HYPNOTIZE, ILL_WILL, JUDGEMENT, MEGA_PUNCH, MINDS_EYE, MIND_DRAIN, MUD_SPATTER, PEACE_OF_MIND, PHANTOM_SLASH, POWER_FOCUS, PROVOKE, PSYCHO_BLAST, PYROKINESIS, ROGUE_ASSAULT, SOUL_STORM, SPARE, STUPEFY),
-			true
+			false
 		);
 		register(
 			METRONETTE_WILLBOUND,
@@ -3829,7 +4863,7 @@ public class SpeciesRegistry {
 			96.52,
 			67.0,
 			List.of(BAG_OF_TRICKS, BARBS, BARTER, BRAINWASH, BULK_UP, CEREBRAL_SLASH, CHARADE, CHOMP, DARK_SURGE, DEJA_VU, DODGE, EERIE_STARE, FLABBERGAST, GNARLY_GASH, HARROW, HYPNOTIZE, ILL_WILL, JUDGEMENT, MEGA_PUNCH, MINDS_EYE, MIND_DRAIN, MUD_SPATTER, PEACE_OF_MIND, PHANTOM_SLASH, POWER_FOCUS, PROVOKE, PSYCHO_BLAST, PYROKINESIS, ROGUE_ASSAULT, SOUL_STORM, SPARE, STUPEFY),
-			true
+			false
 		);
 		register(
 			NEVERMARE,
@@ -3841,7 +4875,7 @@ public class SpeciesRegistry {
 			248.92,
 			487.0,
 			List.of(BARBS, BULK_UP, BUSH_WHACK, DARK_SURGE, DODGE, HARROW, HEADBUTT, ILL_WILL, MUD_SPATTER, PARASITIZE, PETAL_PUMMEL, PHANTOM_SLASH, PRIMAL_SLASH, PROVOKE, RANT, SHARPEN, SPARE, SPECTRAL_BURST, STARE, STRETCH, STUPEFY, THISTLE_SLASH, VINE_LASH, WONDER_HERB),
-			true
+			false
 		);
 		register(
 			GARGOLEM_B,
@@ -3853,7 +4887,7 @@ public class SpeciesRegistry {
 			185.42,
 			342.0,
 			List.of(ACCELERATE, AIR_BLADE, AIR_SHOT, BANE_OF_HASTE, BARBS, BODY_SLAM, BOOM_BASH, CEREBRAL_SLASH, CHASE_DOWN, CLAY_SLAP, DARK_SURGE, DINO_CLAWS, DODGE, DRIVING_FORCE, EARTHQUAKE, GNARLY_GASH, ICICLE_TRAP, JET_STREAM, LANDSLIDE, MUDSLIDE, MUD_SPATTER, NAB, NOSEDIVE, PRIMAL_SLASH, PROVOKE, RETURN_TO_SENDER, ROGUE_ASSAULT, SCAPEGOAT, SLAP_DOWN, SLASH, SPARE, SWAT, TAMP, TEAR_DOWN, TRIBUTE, WING_SLAP),
-			true
+			false
 		);
 		register(
 			GARGOLEM_A,
@@ -3865,7 +4899,7 @@ public class SpeciesRegistry {
 			185.42,
 			342.0,
 			List.of(ACCELERATE, AIR_BLADE, AIR_SHOT, BANE_OF_HASTE, BARBS, BODY_SLAM, BOOM_BASH, CEREBRAL_SLASH, CHASE_DOWN, CLAY_SLAP, DARK_SURGE, DINO_CLAWS, DODGE, DRIVING_FORCE, EARTHQUAKE, GNARLY_GASH, ICICLE_TRAP, JET_STREAM, LANDSLIDE, MUDSLIDE, MUD_SPATTER, NAB, NOSEDIVE, PRIMAL_SLASH, PROVOKE, RETURN_TO_SENDER, ROGUE_ASSAULT, SCAPEGOAT, SLAP_DOWN, SLASH, SPARE, SWAT, TAMP, TEAR_DOWN, TRIBUTE, WING_SLAP),
-			true
+			false
 		);
 		register(
 			GARGOLEM_D,
@@ -3877,7 +4911,7 @@ public class SpeciesRegistry {
 			185.42,
 			342.0,
 			List.of(ACCELERATE, AIR_BLADE, AIR_SHOT, BANE_OF_HASTE, BARBS, BODY_SLAM, BOOM_BASH, CEREBRAL_SLASH, CHASE_DOWN, CLAY_SLAP, DARK_SURGE, DINO_CLAWS, DODGE, DRIVING_FORCE, EARTHQUAKE, GNARLY_GASH, ICICLE_TRAP, JET_STREAM, LANDSLIDE, MUDSLIDE, MUD_SPATTER, NAB, NOSEDIVE, PRIMAL_SLASH, PROVOKE, RETURN_TO_SENDER, ROGUE_ASSAULT, SCAPEGOAT, SLAP_DOWN, SLASH, SPARE, SWAT, TAMP, TEAR_DOWN, TRIBUTE, WING_SLAP),
-			true
+			false
 		);
 		register(
 			GARGOLEM_S,
@@ -3889,7 +4923,7 @@ public class SpeciesRegistry {
 			185.42,
 			342.0,
 			List.of(ACCELERATE, AIR_BLADE, AIR_SHOT, BANE_OF_HASTE, BARBS, BODY_SLAM, BOOM_BASH, CEREBRAL_SLASH, CHASE_DOWN, CLAY_SLAP, DARK_SURGE, DINO_CLAWS, DODGE, DRIVING_FORCE, EARTHQUAKE, GNARLY_GASH, ICICLE_TRAP, JET_STREAM, LANDSLIDE, MUDSLIDE, MUD_SPATTER, NAB, NOSEDIVE, PRIMAL_SLASH, PROVOKE, RETURN_TO_SENDER, ROGUE_ASSAULT, SCAPEGOAT, SLAP_DOWN, SLASH, SPARE, SWAT, TAMP, TEAR_DOWN, TRIBUTE, WING_SLAP),
-			true
+			false
 		);
 		register(
 			ODOYAGA,
@@ -3901,7 +4935,7 @@ public class SpeciesRegistry {
 			187.96,
 			422.0,
 			List.of(AIR_BLADE, BANE_OF_HASTE, BLAZE_PUNCH, BRAINWASH, BULK_UP, CEREBRAL_SLASH, CYCLONE_SLAM, DARK_SURGE, DODGE, ELECTRO_PUNCH, FIRE_BREATH, FLABBERGAST, FROST_BEAM, FROST_PUNCH, GNARLY_GASH, GUST, HIGH_PITCH_SCREECH, ICICLE_TRAP, ILL_WILL, JET_STREAM, MINDS_EYE, NOSEDIVE, OUTBURST, PEACE_OF_MIND, PHANTOM_SLASH, PRIMAL_SLASH, PROVOKE, PSYCHO_BLAST, SCAPEGOAT, SHREWD_BLAST, SPARE, SPECTRAL_BURST, SPLITTING_HEADACHE, SUMMON, TEAR_DOWN, THUNDERSTRIKE, TYPHOON),
-			true
+			false
 		);
 		register(
 			WABALISC,
@@ -3913,7 +4947,7 @@ public class SpeciesRegistry {
 			218.44,
 			131.0,
 			List.of(BARBS, BITTER_COLD, BODY_SLAM, CHILLY_CHOMP, CLAY_SLAP, DEEP_FREEZE, DODGE, DRIVING_FORCE, EARTHQUAKE, EERIE_STARE, ELECTRO_PUNCH, FLURRY, FROST_BEAM, FROST_PUNCH, GROWL, HEADBUTT, ICE_HAMMER, ICICLE_TRAP, ILL_WILL, LUSTER_LOOT, MUD_SPATTER, POWER_FOCUS, RANT, ROGUE_ASSAULT, SCAPEGOAT, SHARPEN, SLAP_DOWN, SLEET_SHOT, SPARE, TALENT_TRADE, VITAL_JAB),
-			true
+			false
 		);
 		register(
 			AKHALOS,
@@ -3925,7 +4959,7 @@ public class SpeciesRegistry {
 			177.8,
 			245.0,
 			List.of(AQUA_JAWS, BODY_SLAM, BRAWN_BOOST, CHILLY_CHOMP, DEEP_FREEZE, DODGE, DRIVING_FORCE, DRUDGE, FLURRY, FROST_BEAM, GNARLY_GASH, GROWL, HYDRO_SLASH, ICE_HAMMER, ICICLE_TRAP, MAROON, PLUNGE, ROGUE_ASSAULT, SLASH, SOFT_WATER, SPARE, SPRAY, TSUNAMI, WATER_BOMB, WAVE_WRECKER),
-			true
+			false
 		);
 		register(
 			CELESTING,
@@ -3937,7 +4971,7 @@ public class SpeciesRegistry {
 			83.82,
 			47.0,
 			List.of(BARBS, BARTER, BASH, DEJA_VU, DISPERSE, DISSONANT_CHORD, DODGE, ENERGY_BREAK, FLASH, FLASH_N_FLEE, GAMMA_PULSE, HARMONIOUS_CHORD, HEALTH_GIFT, HEAVY_BASH, HULLABALOO, ICICLE_TRAP, LIGHTSPEED_RAY, LUSTER_LOOT, METAL_BLAST, MINDS_EYE, NOVA_BLAST, PEACE_OF_MIND, REFLECTION_BURST, REPEATING_TUNE, RESONATE, SHINE, SPARE, SUMMON, TEAR_DOWN, TONE_BARRIER),
-			true
+			false
 		);
 		register(
 			CELESTING_STELLARCHIME,
@@ -3949,7 +4983,7 @@ public class SpeciesRegistry {
 			83.82,
 			47.0,
 			List.of(BARBS, BARTER, BASH, DEJA_VU, DISPERSE, DISSONANT_CHORD, DODGE, ENERGY_BREAK, FLASH, FLASH_N_FLEE, GAMMA_PULSE, HARMONIOUS_CHORD, HEALTH_GIFT, HEAVY_BASH, HULLABALOO, ICICLE_TRAP, LIGHTSPEED_RAY, LUSTER_LOOT, METAL_BLAST, MINDS_EYE, NOVA_BLAST, PEACE_OF_MIND, REFLECTION_BURST, REPEATING_TUNE, RESONATE, SHINE, SPARE, SUMMON, TEAR_DOWN, TONE_BARRIER),
-			true
+			false
 		);
 		register(
 			MIMASK,
@@ -3961,7 +4995,7 @@ public class SpeciesRegistry {
 			144.78,
 			76.0,
 			List.of(BAG_OF_TRICKS, BAMBOOZLE, BANEFUL_BASH, BARBS, BARTER, BODY_SLAM, BULK_UP, CHASE_DOWN, CHOMP, CLIMATE_CANNON, DARK_SURGE, DODGE, EMULATE, FADE_AWAY, GNARLY_GASH, HARROW, ILL_WILL, MUCK_BLAST, MUD_SPATTER, PEACE_OF_MIND, PHANTOM_SLASH, PILFER, POISON_BARBS, POWER_FOCUS, PRIMAL_SLASH, PROVOKE, QUICK_POUNCE, SHADOW_SPRINT, SHARPEN, SHREWD_BLAST, SLAP_DOWN, SLASH, SOUL_STORM, SPARE, SPECTRAL_BURST, TEAR_DOWN, TRICKY_TACTICS),
-			true
+			false
 		);
 		register(
 			GRIMYULINE,
@@ -3973,7 +5007,7 @@ public class SpeciesRegistry {
 			248.92,
 			234.0,
 			List.of(BARBS, BODY_CRASH, BOOM_BASH, BRIAR_BLOCK, BULK_UP, CHASE_DOWN, CHOMP, DARK_SURGE, DODGE, GAIN_DRAIN, GNARLY_GASH, HIGH_PITCH_SCREECH, ILL_WILL, LUSTER_LOOT, MEGA_CHOMP, NAB, PEACE_OF_MIND, PEP_JAB, PILFER, POISON_BARBS, PREEMPTIVE_STRIKE, PROVOKE, QUICK_POUNCE, QUICK_PUNCH, RAGING_HOWL, RAGING_TACKLE, ROGUE_ASSAULT, SHARPEN, SLAP_DOWN, SLUMBER, SPARE, SWAT, SWIPE, THISTLE_SLASH, VITAL_JAB),
-			true
+			false
 		);
     }
 }
