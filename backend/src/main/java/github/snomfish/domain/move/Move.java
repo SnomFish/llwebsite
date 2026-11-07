@@ -63,7 +63,8 @@ public class Move implements DeepCopyable<Move> {
         INumber basePower,
         StatId attackingStatId,
         StatId defendingStatId,
-        Tags<MoveTagId> tags
+        Tags<MoveTagId> tags,
+        int critChance
     ) {
         this.id = id;
         this.name = name;
@@ -85,7 +86,7 @@ public class Move implements DeepCopyable<Move> {
         this.modifiers = new Modifiers();
         this.typeChart = TypeChart.get();
 
-        this.critChance = 0;
+        this.critChance = critChance;
         this.damage = 0;
 
         this.hasCrit = false;

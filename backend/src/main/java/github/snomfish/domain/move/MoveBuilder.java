@@ -37,7 +37,8 @@ public class MoveBuilder {
             new Constant(0),
             StatId.MATTACK,
             StatId.MDEFENSE,
-            new Tags<MoveTagId>()
+            new Tags<MoveTagId>(),
+            0
         );
     }
     public Move build() {
@@ -108,6 +109,10 @@ public class MoveBuilder {
     }
     public MoveBuilder tag(MoveTagId tagId) {
         move.tags().set(tagId, true);
+        return this;
+    }
+    public MoveBuilder critChance(int critChance) {
+        move.setCritChance(critChance);
         return this;
     }
 }

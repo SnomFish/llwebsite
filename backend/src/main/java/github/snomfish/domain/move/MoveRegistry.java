@@ -10,6 +10,7 @@ import github.snomfish.domain.status.StatusId;
 import github.snomfish.domain.weather.WeatherId;
 import github.snomfish.functionality.Schematics;
 import github.snomfish.functionality.Value;
+import github.snomfish.functionality.condition.AccuracyCheck;
 import github.snomfish.functionality.condition.Comparator;
 import github.snomfish.functionality.condition.Conditions;
 import github.snomfish.functionality.condition.RandomCondition;
@@ -70,9 +71,11 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(35))
 			.basePower(new Constant(75))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
+					// TODO add 20% chance to flinch
 				))
 			))
 			.build()
@@ -83,6 +86,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(35))
 			.basePower(new Constant(75))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -104,6 +108,8 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(35))
 			.basePower(new Constant(75))
+			.critChance(1)
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -118,9 +124,11 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(35))
 			.basePower(new Constant(75))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
+					// TODO apply stinger mechanic
 				))
 			))
 			.tag(CONTACT)
@@ -132,6 +140,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(35))
 			.basePower(new Constant(75))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -148,6 +157,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(35))
 			.basePower(new Constant(75))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -166,6 +176,7 @@ public class MoveRegistry {
 			.priority(new Constant(1))
 			.energyCost(new Constant(35))
 			.basePower(new Constant(75))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -180,9 +191,11 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(35))
 			.basePower(new Constant(75))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
+					// TODO add 20% daze chance
 				))
 			))
 			.tag(CONTACT)
@@ -194,6 +207,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(35))
 			.basePower(new Constant(75))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -210,9 +224,11 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(35))
 			.basePower(new Constant(75))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
+					// TODO add clears all status ailments from users party effect
 				))
 			))
 			.build()
@@ -223,6 +239,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(20))
 			.basePower(new Constant(30))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -239,6 +256,7 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(STATUS)
 			.energyCost(new Constant(10))
+			// TODO: apply aim mechanic that makes a move skip accuracy check then removes itself
 			.build()
 		);
 		register(MoveBuilder.newMove(AIR_BLADE)
@@ -247,6 +265,8 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(40))
 			.basePower(new Constant(70))
+			.critChance(1)
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -261,6 +281,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(20))
 			.basePower(new Constant(40))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -274,9 +295,11 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(35))
 			.basePower(new Constant(60))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
+					// TODO: add 30% flinch chance
 				))
 			))
 			.build()
@@ -295,15 +318,37 @@ public class MoveRegistry {
 			.tag(SOUL_MOVE)
 			.build()
 		);
+		register(MoveBuilder.newMove(ALL_OR_NOTHING)
+			.name("All or Nothing")
+			.type(BRAWLER)
+			.category(MELEE)
+			.priority(new Constant(-3))
+			.energyCost(new Constant(60))
+			.basePower(new Constant(150))
+			.condition(new AccuracyCheck(new Constant(100)))
+			.onHit(new MoveEffect(
+				new NoEffect() // TODO: apply a focusing mechanic and require it for when dealing formula damage
+			))
+			.tag(CONTACT)
+			.build()
+		);
 		register(MoveBuilder.newMove(ANCIENT_ROAR)
 			.name("ancient_roar")
 			.type(ANCIENT)
 			.category(STATUS)
 			.energyCost(new Constant(50))
+			.condition(new AccuracyCheck(new Constant(100)))
+			.onHit(new MoveEffect(
+				ApplyStatChanges.userChangingTarget()
+					.mattack(new Constant(-1))
+					.rattack(new Constant(-1))
+			))
+			// TODO add pivoting effect and make it reliant on the stat drops being successful
 			.tag(PIVOT)
 			.tag(SOUND)
 			.build()
 		);
+		// TODO add aura burst
 		register(MoveBuilder.newMove(APPARITION)
 			.name("apparition")
 			.type(SPIRIT)
@@ -313,6 +358,7 @@ public class MoveRegistry {
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
+					// TODO make it two turn
 				))
 			))
 			.build()
@@ -323,6 +369,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(38))
 			.basePower(new Constant(65))
+			.condition(new AccuracyCheck(new Constant(90)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -354,6 +401,7 @@ public class MoveRegistry {
 			.type(DARK)
 			.category(STATUS)
 			.energyCost(new Constant(50))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.tag(PIVOT)
 			.build()
 		);
@@ -362,6 +410,7 @@ public class MoveRegistry {
 			.type(DARK)
 			.category(STATUS)
 			.energyCost(new Constant(25))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.build()
 		);
 		register(MoveBuilder.newMove(BAIT)
@@ -421,6 +470,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(45))
 			.basePower(new Constant(85))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -432,6 +482,7 @@ public class MoveRegistry {
 			.tag(CONTACT)
 			.build()
 		);
+		// TODO add baneful gnash
 		register(MoveBuilder.newMove(BARB_TRAP) // MAN I HAVE NO IDEA, MAYBE HAVE THIS APPLY A ONE TURN MECHANIC ON THE USER????
 			.name("barb_trap")
 			.type(TOXIC)
@@ -458,7 +509,8 @@ public class MoveRegistry {
 			.type(METAL)
 			.category(MELEE)
 			.energyCost(new Constant(20))
-			.basePower(new Constant(20))
+			.basePower(new Constant(50))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -473,6 +525,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.overrideAttackingStat(StatId.MDEFENSE)
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -538,6 +591,7 @@ public class MoveRegistry {
 			.type(ICE)
 			.category(STATUS)
 			.energyCost(new Constant(35))
+			.condition(new AccuracyCheck(new Constant(90)))
 			.onHit(new MoveEffect(
 				Schematics.applyStatusToTarget(1, StatusId.FROSTBITE)
 			))
@@ -549,6 +603,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(35))
 			.basePower(new Constant(70))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -567,6 +622,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(60))
 			.basePower(new Constant(120))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -586,6 +642,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(35))
 			.basePower(new Constant(70))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -603,6 +660,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(45))
 			.basePower(new Constant(60))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -621,6 +679,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(38))
 			.basePower(new Constant(75))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -629,12 +688,14 @@ public class MoveRegistry {
 			.tag(CONTACT)
 			.build()
 		);
+		// TODO add bloodmeal
 		register(MoveBuilder.newMove(BLOOD_DRAIN)
 			.name("blood_drain")
 			.type(DARK)
 			.category(MELEE)
 			.energyCost(new Constant(30))
 			.basePower(new Constant(20))
+			.condition(new AccuracyCheck(new Constant(90)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -653,6 +714,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(36))
 			.basePower(new Constant(65))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -667,6 +729,7 @@ public class MoveRegistry {
 			.energyCost(new Constant(40))
 			.basePower(new Constant(80))
 			.overrideAttackingStat(StatId.MDEFENSE)
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -681,6 +744,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(35))
 			.basePower(new Constant(90))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -695,6 +759,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(40))
 			.basePower(new Constant(75))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -709,6 +774,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(46))
 			.basePower(new Constant(80))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -723,6 +789,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(45))
 			.basePower(new Constant(80))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -737,6 +804,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(25))
 			.basePower(new Constant(25))
+			.condition(new AccuracyCheck(new Constant(90)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -777,6 +845,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(44))
 			.basePower(new Constant(80))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -790,6 +859,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(24))
 			.basePower(new Constant(50))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -837,6 +907,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(20))
 			.basePower(new Constant(30))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -863,6 +934,7 @@ public class MoveRegistry {
 			))
 			.build()
 		);
+		// TODO add burn true
 		register(MoveBuilder.newMove(BURN_UP)
 			.name("Burn Up")
 			.type(FIRE)
@@ -896,6 +968,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(35))
 			.basePower(new Constant(65))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -909,6 +982,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(35))
 			.basePower(new Constant(25))
+			.condition(new AccuracyCheck(new Constant(95)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -916,12 +990,14 @@ public class MoveRegistry {
 			))
 			.build()
 		);
+		// TODO add calamitous crash
 		register(MoveBuilder.newMove(CAPRIOLE)
 			.name("capriole")
 			.type(EARTH)
 			.category(MELEE)
 			.energyCost(new Constant(52))
 			.basePower(new Constant(105))
+			.condition(new AccuracyCheck(new Constant(85)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -956,6 +1032,8 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(36))
 			.basePower(new Constant(70))
+			.critChance(1)
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -969,6 +1047,7 @@ public class MoveRegistry {
 			.type(DARK)
 			.category(STATUS)
 			.energyCost(new Constant(25))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.build()
 		);
 		register(MoveBuilder.newMove(CHARRED_CLAWS)
@@ -977,6 +1056,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -1009,6 +1089,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(35))
 			.basePower(new Constant(70))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -1027,6 +1108,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(20))
 			.basePower(new Constant(40))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -1042,6 +1124,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(30))
 			.basePower(new Constant(60))
+			.condition(new AccuracyCheck(new Constant(90)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -1056,6 +1139,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(22))
 			.basePower(new Constant(45))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -1070,6 +1154,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(85))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -1085,6 +1170,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(55))
 			.basePower(new Constant(100))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -1104,6 +1190,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(35))
 			.basePower(new Constant(60))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -1128,6 +1215,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(45))
 			.basePower(new Constant(90))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.beforeHit(new MoveEffect(
 				new EffectSequence(List.of(
 					new ConditionalEffect(Conditions.clearWeather(), 		SetType.move(SIMPLE)),
@@ -1151,6 +1239,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(45))
 			.basePower(new Constant(90))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -1170,6 +1259,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(150))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -1192,6 +1282,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(18))
 			.basePower(new Constant(40))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -1205,6 +1296,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(24))
 			.basePower(new Constant(40))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -1212,6 +1304,8 @@ public class MoveRegistry {
 			))
 			.build()
 		);
+		// TODO add cosmic chime
+		// TODO add counter assault
 		register(MoveBuilder.newMove(COUNTER_POISE)
 			.name("Counter Poise")
 			.type(BUG)
@@ -1219,6 +1313,7 @@ public class MoveRegistry {
 			.priority(new Constant(1))
 			.energyCost(new Constant(45))
 			.basePower(new Constant(70))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				/*new ConditionalEffect(
 					new Equals<>()
@@ -1236,6 +1331,7 @@ public class MoveRegistry {
 			.priority(new Constant(1))
 			.energyCost(new Constant(45))
 			.basePower(new Constant(70))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				/*new ConditionalEffect(
 					new Equals<>()
@@ -1266,6 +1362,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(40))
 			.basePower(new Constant(80))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -1279,6 +1376,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(40))
 			.basePower(new Constant(15))
+			.condition(new AccuracyCheck(new Constant(85)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -1291,6 +1389,7 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(STATUS)
 			.energyCost(new Constant(10))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.build()
 		);
 		register(MoveBuilder.newMove(DAYDREAM)
@@ -1306,6 +1405,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(25))
 			.basePower(new Constant(25))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -1320,6 +1420,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(40))
 			.basePower(new Constant(75))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -1340,6 +1441,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(24))
 			.basePower(new Constant(40))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -1355,6 +1457,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -1392,6 +1495,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(40))
 			.basePower(new Constant(80))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -1406,6 +1510,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(26))
 			.basePower(new Constant(60))
+			.condition(new AccuracyCheck(new Constant(90)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -1428,6 +1533,8 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(40))
 			.basePower(new Constant(40))
+			.condition(new AccuracyCheck(new Constant(90)))
+			.critChance(1)
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -1442,6 +1549,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(28))
 			.basePower(new Constant(25))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -1453,12 +1561,25 @@ public class MoveRegistry {
 			.tag(CONTACT)
 			.build()
 		);
+		register(MoveBuilder.newMove(DOUBLE_SWIPE)
+			.name("Double Swipe")
+			.type(BRAWLER)
+			.category(MELEE)
+			.energyCost(new Constant(45))
+			.basePower(new Constant(50))
+			.condition(new AccuracyCheck(new Constant(90)))
+			.critChance(1)
+			.tag(CONTACT)
+			.build()
+		);
 		register(MoveBuilder.newMove(DOUBLE_WHACK)
 			.name("Double Whack")
 			.type(METAL)
 			.category(MELEE)
 			.energyCost(new Constant(34))
 			.basePower(new Constant(35))
+			.condition(new AccuracyCheck(new Constant(90)))
+			.critChance(1)
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -1473,6 +1594,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -1499,6 +1621,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(60))
 			.basePower(new Constant(130))
+			.condition(new AccuracyCheck(new Constant(90)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -1506,13 +1629,30 @@ public class MoveRegistry {
 			))
 			.build()
 		);
+		register(MoveBuilder.newMove(DRAGON_HORN)
+			.name("Dragon Horn")
+			.type(ANCIENT)
+			.category(MELEE)
+			.energyCost(new Constant(50))
+			.basePower(new Constant(100))
+			.condition(new AccuracyCheck(new Constant(80)))
+			.critChance(1)
+			.onHit(new MoveEffect(
+				new EffectSequence(List.of(
+					DealFormulaDamage.schema()
+				))
+			))
+			.tag(CONTACT)
+			.build()
+		);
 		register(MoveBuilder.newMove(DRIVING_FORCE)
 			.name("Driving Force")
 			.type(BRAWLER)
 			.category(MELEE)
-			.energyCost(new Constant(40))
 			.priority(new Constant(-6))
+			.energyCost(new Constant(40))
 			.basePower(new Constant(60))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -1535,12 +1675,14 @@ public class MoveRegistry {
 			))
 			.build()
 		);
+		// TODO add dualfrostblade
 		register(MoveBuilder.newMove(EAR_SLAP)
 			.name("Ear Slap")
 			.type(SIMPLE)
 			.category(MELEE)
 			.energyCost(new Constant(18))
 			.basePower(new Constant(15))
+			.condition(new AccuracyCheck(new Constant(85)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -1556,6 +1698,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -1568,6 +1711,7 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(STATUS)
 			.energyCost(new Constant(25))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.build()
 		);
 		register(MoveBuilder.newMove(EGG_LOB)
@@ -1576,6 +1720,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(46))
 			.basePower(new Constant(100))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -1603,6 +1748,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(52))
 			.basePower(new Constant(90))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -1630,6 +1776,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(35))
 			.basePower(new Constant(70))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -1648,6 +1795,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(54))
 			.basePower(new Constant(100))
+			.condition(new AccuracyCheck(new Constant(90)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -1665,6 +1813,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(80))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -1718,6 +1867,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(54))
 			.basePower(new Constant(85))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -1734,6 +1884,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(40))
 			.basePower(new Constant(70))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -1768,6 +1919,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(40))
 			.basePower(new Constant(75))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.beforeHit(new MoveEffect(
 				SetType.move(Value.USER().PRIMARY_TYPE())
 			))
@@ -1778,6 +1930,7 @@ public class MoveRegistry {
 			))
 			.build()
 		);
+		// TODO add explosion
 		register(MoveBuilder.newMove(FADE_AWAY)
 			.name("Fade Away")
 			.type(SPIRIT)
@@ -1806,6 +1959,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(55))
 			.basePower(new Constant(90))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -1833,6 +1987,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -1849,6 +2004,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(26))
 			.basePower(new Constant(65))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -1866,6 +2022,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(36))
 			.basePower(new Constant(70))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -1879,6 +2036,8 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(40))
 			.basePower(new Constant(90))
+			.condition(new AccuracyCheck(new Constant(90)))
+			.critChance(1)
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -1897,6 +2056,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(70))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -1910,6 +2070,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(60))
 			.basePower(new Constant(110))
+			.condition(new AccuracyCheck(new Constant(80)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -1925,6 +2086,7 @@ public class MoveRegistry {
 			.type(LIGHT)
 			.category(RANGED)
 			.energyCost(new Constant(25))
+			.condition(new AccuracyCheck(new Constant(90)))
 			.build()
 		);
 		register(MoveBuilder.newMove(FLASH_N_FLEE)
@@ -1933,6 +2095,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(70))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -1942,11 +2105,12 @@ public class MoveRegistry {
 			.build()
 		);
 		register(MoveBuilder.newMove(FLASH_PULSE)
-			.name("flash_pulse")
+			.name("Flash Pulse")
 			.type(LIGHT)
 			.category(RANGED)
 			.energyCost(new Constant(42))
 			.basePower(new Constant(85))
+			.condition(new AccuracyCheck(new Constant(90)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -1974,6 +2138,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(22))
 			.basePower(new Constant(40))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -1984,12 +2149,15 @@ public class MoveRegistry {
 			))
 			.build()
 		);
+		// TODO add focus beam
+		// TODO add forged claws
 		register(MoveBuilder.newMove(FOUL_CHANT)
 			.name("foul_chant")
 			.type(MIND)
 			.category(RANGED)
 			.energyCost(new Constant(45))
 			.basePower(new Constant(110))
+			.condition(new AccuracyCheck(new Constant(70)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -2027,6 +2195,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -2038,11 +2207,12 @@ public class MoveRegistry {
 			.build()
 		);
 		register(MoveBuilder.newMove(FROST_BLAST)
-			.name("frost_blast")
+			.name("Frost Blast")
 			.type(ICE)
 			.category(RANGED)
 			.energyCost(new Constant(60))
 			.basePower(new Constant(110))
+			.condition(new AccuracyCheck(new Constant(80)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -2059,6 +2229,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(38))
 			.basePower(new Constant(60))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -2072,6 +2243,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(35))
 			.basePower(new Constant(70))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -2153,6 +2325,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(40))
 			.basePower(new Constant(80))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -2166,6 +2339,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(40))
 			.basePower(new Constant(90))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -2196,6 +2370,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(0))
 			.basePower(new Constant(1))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -2209,6 +2384,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(36))
 			.basePower(new Constant(75))
+			.condition(new AccuracyCheck(new Constant(90)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -2223,6 +2399,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(46))
 			.basePower(new Constant(85))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -2237,6 +2414,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(46))
 			.basePower(new Constant(85))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -2251,6 +2429,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -2266,6 +2445,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(15))
 			.basePower(new Constant(40))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -2280,6 +2460,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(40))
 			.basePower(new Constant(60))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -2295,6 +2476,7 @@ public class MoveRegistry {
 			.type(ANCIENT)
 			.category(RANGED)
 			.energyCost(new Constant(35))
+			.condition(new AccuracyCheck(new Constant(90)))
 			.onHit(new MoveEffect(
 				Schematics.applyStatusToTarget(1, StatusId.POISON)
 			))
@@ -2306,6 +2488,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(70))
+			.condition(new AccuracyCheck(new Constant(90)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -2316,11 +2499,13 @@ public class MoveRegistry {
 			))
 			.build()
 		);
+		// TODO add grapple grip
 		register(MoveBuilder.newMove(GROWL)
 			.name("Growl")
 			.type(SIMPLE)
 			.category(STATUS)
 			.energyCost(new Constant(10))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.build()
 		);
 		register(MoveBuilder.newMove(GULP)
@@ -2329,6 +2514,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(45))
 			.basePower(new Constant(65))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -2341,6 +2527,7 @@ public class MoveRegistry {
 			.type(AIR)
 			.category(STATUS)
 			.energyCost(new Constant(40))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					// clear hazards
@@ -2356,6 +2543,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(35))
 			.basePower(new Constant(60))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -2373,6 +2561,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -2424,6 +2613,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(25))
 			.basePower(new Constant(60))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -2445,6 +2635,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(25))
 			.basePower(new Constant(50))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -2472,6 +2663,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(36))
 			.basePower(new Constant(70))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -2525,6 +2717,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(40))
 			.basePower(new Constant(80))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -2539,6 +2732,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(35))
 			.basePower(new Constant(75))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -2552,14 +2746,18 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(STATUS)
 			.energyCost(new Constant(35))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.build()
 		);
+		// TODO add hook wave
 		register(MoveBuilder.newMove(HOP_KICK)
 			.name("Hop Kick")
 			.type(BRAWLER)
 			.category(MELEE)
 			.energyCost(new Constant(30))
 			.basePower(new Constant(60))
+			.condition(new AccuracyCheck(new Constant(90)))
+			.critChance(1)
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -2576,6 +2774,7 @@ public class MoveRegistry {
 			.priority(new Constant(-6))
 			.energyCost(new Constant(40))
 			.basePower(new Constant(70))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -2590,6 +2789,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(40))
 			.basePower(new Constant(75))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -2604,6 +2804,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(60))
 			.basePower(new Constant(110))
+			.condition(new AccuracyCheck(new Constant(80)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -2617,6 +2818,8 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(36))
 			.basePower(new Constant(70))
+			.condition(new AccuracyCheck(new Constant(100)))
+			.critChance(1)
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -2632,6 +2835,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -2645,9 +2849,7 @@ public class MoveRegistry {
 			.type(MIND)
 			.category(STATUS)
 			.energyCost(new Constant(40))
-			.onHit(new MoveEffect(
-				Schematics.applyStatusToTarget(1, StatusId.SLEEP)
-			))
+			.condition(new AccuracyCheck(new Constant(90)))
 			.build()
 		);
 		register(MoveBuilder.newMove(ICE_HAMMER)
@@ -2656,6 +2858,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(95))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -2669,6 +2872,8 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(40))
 			.basePower(new Constant(80))
+			.condition(new AccuracyCheck(new Constant(100)))
+			.critChance(1)
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -2690,6 +2895,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -2703,6 +2909,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(40))
 			.basePower(new Constant(70))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -2726,6 +2933,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(60))
 			.basePower(new Constant(130))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -2739,6 +2947,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -2753,6 +2962,7 @@ public class MoveRegistry {
 			.priority(new Constant(1))
 			.energyCost(new Constant(25))
 			.basePower(new Constant(40))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -2766,6 +2976,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(45))
 			.basePower(new Constant(85))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -2793,6 +3004,8 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
+			.condition(new AccuracyCheck(new Constant(100)))
+			.critChance(1)
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -2807,6 +3020,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(45))
 			.basePower(new Constant(70))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -2821,6 +3035,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -2848,6 +3063,8 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(45))
 			.basePower(new Constant(70))
+			.condition(new AccuracyCheck(new Constant(100)))
+			.critChance(1)
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -2866,6 +3083,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(30))
 			.basePower(new Constant(65))
+			.condition(new AccuracyCheck(new Constant(90)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -2879,6 +3097,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(48))
 			.basePower(new Constant(75))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -2897,6 +3116,7 @@ public class MoveRegistry {
 			.priority(new Constant(1))
 			.energyCost(new Constant(25))
 			.basePower(new Constant(40))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -2912,6 +3132,7 @@ public class MoveRegistry {
 			.priority(new Constant(1))
 			.energyCost(new Constant(25))
 			.basePower(new Constant(40))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -2925,6 +3146,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(36))
 			.basePower(new Constant(75))
+			.condition(new AccuracyCheck(new Constant(90)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -2939,6 +3161,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -2953,6 +3176,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(35))
 			.basePower(new Constant(50))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -2978,6 +3202,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(45))
 			.basePower(new Constant(85))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -3001,12 +3226,14 @@ public class MoveRegistry {
 			))
 			.build()
 		);
+		// TODO add mandible crusher
 		register(MoveBuilder.newMove(MAROON)
 			.name("Maroon")
 			.type(WATER)
 			.category(RANGED)
 			.energyCost(new Constant(45))
 			.basePower(new Constant(70))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -3023,6 +3250,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(45))
 			.basePower(new Constant(75))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -3036,6 +3264,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(40))
 			.basePower(new Constant(80))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -3051,6 +3280,8 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(45))
 			.basePower(new Constant(100))
+			.condition(new AccuracyCheck(new Constant(90)))
+			.critChance(1)
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -3066,6 +3297,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(40))
 			.basePower(new Constant(80))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -3102,6 +3334,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(42))
 			.basePower(new Constant(85))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -3122,6 +3355,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(20))
 			.basePower(new Constant(20))
+			.condition(new AccuracyCheck(new Constant(95)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -3137,6 +3371,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -3150,6 +3385,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -3163,6 +3399,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(48))
 			.basePower(new Constant(75))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -3220,6 +3457,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -3236,6 +3474,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(40))
 			.basePower(new Constant(95))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -3254,6 +3493,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(30))
 			.basePower(new Constant(55))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -3267,6 +3507,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(35))
 			.basePower(new Constant(50))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -3284,6 +3525,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(30))
 			.basePower(new Constant(60))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -3304,6 +3546,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(35))
 			.basePower(new Constant(75))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -3318,6 +3561,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -3331,6 +3575,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(55))
 			.basePower(new Constant(70))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -3352,6 +3597,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(40))
 			.basePower(new Constant(95))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -3370,6 +3616,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(52))
 			.basePower(new Constant(95))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -3390,6 +3637,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(45))
 			.basePower(new Constant(60))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -3406,6 +3654,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(60))
 			.basePower(new Constant(150))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -3419,6 +3668,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(60))
 			.basePower(new Constant(125))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -3433,6 +3683,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(110))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -3446,6 +3697,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(80))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -3492,6 +3744,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(15))
 			.basePower(new Constant(35))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -3506,6 +3759,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(80))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -3520,6 +3774,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(40))
 			.basePower(new Constant(35))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -3533,6 +3788,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(40))
 			.basePower(new Constant(75))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -3557,6 +3813,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(32))
 			.basePower(new Constant(50))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -3570,6 +3827,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(35))
 			.basePower(new Constant(60))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -3583,6 +3841,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(20))
 			.basePower(new Constant(40))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -3596,6 +3855,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(60))
 			.basePower(new Constant(110))
+			.condition(new AccuracyCheck(new Constant(80)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -3609,6 +3869,8 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(36))
 			.basePower(new Constant(70))
+			.condition(new AccuracyCheck(new Constant(100)))
+			.critChance(1)
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -3624,6 +3886,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -3651,6 +3914,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(40))
 			.basePower(new Constant(85))
+			.condition(new AccuracyCheck(new Constant(90)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -3665,6 +3929,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(32))
 			.basePower(new Constant(60))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -3679,6 +3944,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(25))
 			.basePower(new Constant(25))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -3692,6 +3958,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(35))
 			.basePower(new Constant(90))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -3705,6 +3972,7 @@ public class MoveRegistry {
 			.type(TOXIC)
 			.category(STATUS)
 			.energyCost(new Constant(25))
+			.condition(new AccuracyCheck(new Constant(90)))
 			.onHit(new MoveEffect(
 				Schematics.applyStatusToTarget(1, StatusId.BAD_POISON)
 			))
@@ -3723,6 +3991,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(15))
 			.basePower(new Constant(40))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -3737,6 +4006,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(80))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -3764,6 +4034,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(32))
 			.basePower(new Constant(20))
+			.condition(new AccuracyCheck(new Constant(90)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -3781,6 +4052,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(80))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -3811,6 +4083,7 @@ public class MoveRegistry {
 			.priority(new Constant(3))
 			.energyCost(new Constant(25))
 			.basePower(new Constant(40))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -3825,6 +4098,8 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(45))
 			.basePower(new Constant(80))
+			.condition(new AccuracyCheck(new Constant(100)))
+			.critChance(1)
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -3839,6 +4114,7 @@ public class MoveRegistry {
 			.type(DARK)
 			.category(STATUS)
 			.energyCost(new Constant(25))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.build()
 		);
 		register(MoveBuilder.newMove(PSYCHAL_CHOMP)
@@ -3847,6 +4123,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(40))
 			.basePower(new Constant(80))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -3861,6 +4138,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(45))
 			.basePower(new Constant(85))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.overrideDefendingStat(StatId.RDEFENSE)
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -3876,6 +4154,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -3889,6 +4168,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(20))
 			.basePower(new Constant(45))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -3906,6 +4186,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(38))
 			.basePower(new Constant(65))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -3923,6 +4204,7 @@ public class MoveRegistry {
 			.priority(new Constant(1))
 			.energyCost(new Constant(25))
 			.basePower(new Constant(40))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -3938,6 +4220,7 @@ public class MoveRegistry {
 			.priority(new Constant(1))
 			.energyCost(new Constant(25))
 			.basePower(new Constant(40))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -3953,6 +4236,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(35))
 			.basePower(new Constant(60))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -3966,6 +4250,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(44))
 			.basePower(new Constant(110))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -3979,6 +4264,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(100))
+			.condition(new AccuracyCheck(new Constant(90)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -3992,6 +4278,7 @@ public class MoveRegistry {
 			.type(FIRE)
 			.category(STATUS)
 			.energyCost(new Constant(35))
+			.condition(new AccuracyCheck(new Constant(90)))
 			.onHit(new MoveEffect(
 				Schematics.applyStatusToTarget(1, StatusId.BURN)
 			))
@@ -4003,6 +4290,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(60))
 			.basePower(new Constant(120))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -4021,6 +4309,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(60))
 			.basePower(new Constant(120))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -4039,6 +4328,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(100))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -4052,6 +4342,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(32))
 			.basePower(new Constant(65))
+			.condition(new AccuracyCheck(new Constant(90)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -4066,6 +4357,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(32))
 			.basePower(new Constant(20))
+			.condition(new AccuracyCheck(new Constant(95)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -4079,6 +4371,8 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
+			.condition(new AccuracyCheck(new Constant(100)))
+			.critChance(1)
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -4101,6 +4395,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(40))
 			.basePower(new Constant(70))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -4121,6 +4416,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(25))
 			.basePower(new Constant(25))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -4135,6 +4431,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -4171,6 +4468,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(45))
 			.basePower(new Constant(70))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -4185,6 +4483,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(40))
 			.basePower(new Constant(60))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -4192,12 +4491,14 @@ public class MoveRegistry {
 			))
 			.build()
 		);
+		// TODO rocket jab
 		register(MoveBuilder.newMove(ROGUE_ASSAULT)
 			.name("Rogue Assault")
 			.type(BRAWLER)
 			.category(MELEE)
 			.energyCost(new Constant(60))
 			.basePower(new Constant(120))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -4218,6 +4519,7 @@ public class MoveRegistry {
 				new Constant(70 * 1.25),
 				new Constant(70)
 			))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -4266,6 +4568,7 @@ public class MoveRegistry {
 			.type(PLANT)
 			.category(STATUS)
 			.energyCost(new Constant(30))
+			.condition(new AccuracyCheck(new Constant(90)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					// apply sap plant mechanic
@@ -4280,6 +4583,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(55))
 			.basePower(new Constant(95))
+			.condition(new AccuracyCheck(new Constant(90)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -4294,6 +4598,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(60))
 			.basePower(new Constant(120))
+			.condition(new AccuracyCheck(new Constant(85)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -4315,6 +4620,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(32))
 			.basePower(new Constant(60))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -4329,6 +4635,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(60))
 			.basePower(new Constant(60))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -4344,6 +4651,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(48))
 			.basePower(new Constant(85))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -4381,6 +4689,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(40))
 			.basePower(new Constant(80))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -4395,6 +4704,7 @@ public class MoveRegistry {
 			.priority(new Constant(1))
 			.energyCost(new Constant(25))
 			.basePower(new Constant(40))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -4417,6 +4727,7 @@ public class MoveRegistry {
 			))
 			.build()
 		);
+		// TODO add shard storm
 		register(MoveBuilder.newMove(SHARPEN)
 			.name("Sharpen")
 			.type(DARK)
@@ -4437,6 +4748,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(70))
+			.condition(new AccuracyCheck(new Constant(90)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -4451,6 +4763,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(56))
 			.basePower(new Constant(110))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -4464,6 +4777,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(56))
 			.basePower(new Constant(110))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -4477,6 +4791,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(20))
 			.basePower(new Constant(40))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -4490,6 +4805,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(42))
 			.basePower(new Constant(70))
+			.critChance(1)
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -4502,6 +4818,7 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(STATUS)
 			.energyCost(new Constant(15))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.tag(SOUND)
 			.build()
 		);
@@ -4511,6 +4828,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(20))
 			.basePower(new Constant(40))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -4534,13 +4852,16 @@ public class MoveRegistry {
 			))
 			.build()
 		);
+		// TODO add skilled swipe
+		// TODO add skulk
 		register(MoveBuilder.newMove(SLAP_DOWN)
 			.name("Slap Down")
 			.type(DARK)
 			.category(MELEE)
-			.energyCost(new Constant(45))
 			.priority(new Constant(1))
+			.energyCost(new Constant(45))
 			.basePower(new Constant(65))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -4556,6 +4877,8 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(36))
 			.basePower(new Constant(75))
+			.condition(new AccuracyCheck(new Constant(100)))
+			.critChance(1)
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -4571,6 +4894,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(28))
 			.basePower(new Constant(55))
+			.condition(new AccuracyCheck(new Constant(95)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -4584,6 +4908,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(28))
 			.basePower(new Constant(65))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -4606,9 +4931,7 @@ public class MoveRegistry {
 			.type(PLANT)
 			.category(STATUS)
 			.energyCost(new Constant(40))
-			.onHit(new MoveEffect(
-				Schematics.applyStatusToTarget(1, StatusId.SLEEP)
-			))
+			.condition(new AccuracyCheck(new Constant(90)))
 			.tag(POWDER)
 			.build()
 		);
@@ -4619,6 +4942,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(24))
 			.basePower(new Constant(30))
+			.condition(new AccuracyCheck(new Constant(90)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -4640,6 +4964,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(100))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -4654,6 +4979,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(80))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -4671,6 +4997,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(30))
 			.basePower(new Constant(60))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -4685,6 +5012,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(40))
 			.basePower(new Constant(80))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -4698,6 +5026,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(15))
 			.basePower(new Constant(40))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -4712,6 +5041,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(40))
 			.basePower(new Constant(80))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -4726,6 +5056,7 @@ public class MoveRegistry {
 			.priority(new Constant(1))
 			.energyCost(new Constant(25))
 			.basePower(new Constant(40))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -4740,6 +5071,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(25))
 			.basePower(new Constant(50))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -4753,6 +5085,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -4765,15 +5098,17 @@ public class MoveRegistry {
 			.type(SPIRIT)
 			.category(RANGED)
 			.energyCost(new Constant(40))
+			.condition(new AccuracyCheck(new Constant(90)))
 			.build()
 		);
 		register(MoveBuilder.newMove(SPLITTING_HEADACHE)
 			.name("Splitting Headache")
 			.type(MIND)
 			.category(RANGED)
-			.energyCost(new Constant(40))
 			.priority(new Constant(1))
+			.energyCost(new Constant(40))
 			.basePower(new Constant(70))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -4787,6 +5122,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(20))
 			.basePower(new Constant(40))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -4806,6 +5142,11 @@ public class MoveRegistry {
 			.type(AIR)
 			.category(STATUS)
 			.energyCost(new Constant(10))
+			.condition(new AccuracyCheck(new Constant(100)))
+			.onHit(new MoveEffect(
+				ApplyStatChanges.userChangingTarget()
+					.mdefense(new Constant(-1))	
+			))
 			.build()
 		);
 		register(MoveBuilder.newMove(STAMPEDE)
@@ -4814,6 +5155,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(40))
 			.basePower(new Constant(30))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -4827,6 +5169,7 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(STATUS)
 			.energyCost(new Constant(10))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.build()
 		);
 		register(MoveBuilder.newMove(STARTLE)
@@ -4835,6 +5178,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(15))
 			.basePower(new Constant(30))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -4848,6 +5192,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(20))
 			.basePower(new Constant(40))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -4863,18 +5208,21 @@ public class MoveRegistry {
 			.type(PLANT)
 			.category(STATUS)
 			.energyCost(new Constant(25))
+			.condition(new AccuracyCheck(new Constant(90)))
 			.onHit(new MoveEffect(
 				Schematics.applyStatusToTarget(1, StatusId.PARALYSIS)
 			))
 			.tag(POWDER)
 			.build()
 		);
+		// TODO add stealth assault
 		register(MoveBuilder.newMove(STEEL_CRUSHER)
 			.name("Steel Crusher")
 			.type(METAL)
 			.category(MELEE)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
+			.condition(new AccuracyCheck(new Constant(90)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -4890,12 +5238,14 @@ public class MoveRegistry {
 			.tag(CONTACT)
 			.build()
 		);
+		// TODO add steel grit
 		register(MoveBuilder.newMove(STEEL_TRAP)
 			.name("steel_trap")
 			.type(METAL)
 			.category(MELEE)
 			.energyCost(new Constant(35))
 			.basePower(new Constant(60))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -4910,6 +5260,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(10))
 			.basePower(new Constant(15))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -4927,6 +5278,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(46))
 			.basePower(new Constant(50))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -4943,6 +5295,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(40))
 			.basePower(new Constant(80))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.overrideAttackingStat(StatId.RDEFENSE)
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
@@ -4951,6 +5304,7 @@ public class MoveRegistry {
 			))
 			.build()
 		);
+		// TODO add strategic surge
 		register(MoveBuilder.newMove(STRETCH)
 			.name("Stretch")
 			.type(SIMPLE)
@@ -4970,6 +5324,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(15))
 			.basePower(new Constant(40))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -4983,6 +5338,7 @@ public class MoveRegistry {
 			.type(ELECTRIC)
 			.category(STATUS)
 			.energyCost(new Constant(35))
+			.condition(new AccuracyCheck(new Constant(90)))
 			.onHit(new MoveEffect(
 				Schematics.applyStatusToTarget(1, StatusId.PARALYSIS)
 			))
@@ -4994,6 +5350,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(25))
 			.basePower(new Constant(30))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -5010,6 +5367,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(30))
 			.basePower(new Constant(75))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -5031,6 +5389,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(32))
 			.basePower(new Constant(45))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -5052,6 +5411,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(22))
 			.basePower(new Constant(60))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -5067,6 +5427,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(10))
 			.basePower(new Constant(40))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -5110,6 +5471,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(35))
 			.basePower(new Constant(20))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -5140,6 +5502,7 @@ public class MoveRegistry {
 			.type(DARK)
 			.category(STATUS)
 			.energyCost(new Constant(20))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.build()
 		);
 		register(MoveBuilder.newMove(TELEKINETIC_SWEEP)
@@ -5148,6 +5511,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(45))
 			.basePower(new Constant(90))
+			.condition(new AccuracyCheck(new Constant(90)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -5161,6 +5525,7 @@ public class MoveRegistry {
 			.type(AIR)
 			.category(RANGED)
 			.energyCost(new Constant(40))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -5174,6 +5539,8 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(36))
 			.basePower(new Constant(70))
+			.condition(new AccuracyCheck(new Constant(100)))
+			.critChance(1)
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -5189,6 +5556,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(55))
 			.basePower(new Constant(110))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -5203,6 +5571,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(60))
 			.basePower(new Constant(110))
+			.condition(new AccuracyCheck(new Constant(80)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -5219,6 +5588,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(35))
 			.basePower(new Constant(70))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -5237,6 +5607,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(45))
 			.basePower(new Constant(80))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -5251,6 +5622,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(40))
 			.basePower(new Constant(95))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -5269,6 +5641,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(26))
 			.basePower(new Constant(65))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -5299,6 +5672,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -5309,12 +5683,14 @@ public class MoveRegistry {
 			))
 			.build()
 		);
+		// TODO add timber sweep
 		register(MoveBuilder.newMove(TIMBER_THRASH)
 			.name("Timber Thrash")
 			.type(PLANT)
 			.category(MELEE)
 			.energyCost(new Constant(60))
 			.basePower(new Constant(120))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -5342,6 +5718,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(95))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -5357,6 +5734,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(36))
 			.basePower(new Constant(75))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -5372,6 +5750,7 @@ public class MoveRegistry {
 			.type(TOXIC)
 			.category(STATUS)
 			.energyCost(new Constant(25))
+			.condition(new AccuracyCheck(new Constant(90)))
 			.onHit(new MoveEffect(
 				Schematics.applyStatusToTarget(1, StatusId.POISON)
 			))
@@ -5384,6 +5763,8 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(30))
 			.basePower(new Constant(50))
+			.condition(new AccuracyCheck(new Constant(100)))
+			.critChance(1)
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -5409,6 +5790,7 @@ public class MoveRegistry {
 			.priority(new Constant(1))
 			.energyCost(new Constant(45))
 			.basePower(new Constant(70))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -5422,6 +5804,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(55))
 			.basePower(new Constant(95))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -5435,6 +5818,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(30))
 			.basePower(new Constant(0)) // TODO
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -5448,6 +5832,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -5474,6 +5859,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(40))
 			.basePower(new Constant(75))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -5494,6 +5880,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(60))
 			.basePower(new Constant(110))
+			.condition(new AccuracyCheck(new Constant(80)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -5507,6 +5894,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(35))
 			.basePower(new Constant(70))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -5521,6 +5909,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(35))
 			.basePower(new Constant(70))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -5539,6 +5928,8 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(45))
 			.basePower(new Constant(70))
+			.condition(new AccuracyCheck(new Constant(100)))
+			.critChance(1)
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema(),
@@ -5557,6 +5948,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(40))
 			.basePower(new Constant(80))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -5571,6 +5963,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(45))
 			.basePower(new Constant(75))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -5585,6 +5978,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -5598,6 +5992,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(80))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -5612,6 +6007,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(55))
 			.basePower(new Constant(110))
+			.condition(new AccuracyCheck(new Constant(80)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -5625,6 +6021,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(26))
 			.basePower(new Constant(60))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -5638,6 +6035,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(60))
 			.basePower(new Constant(90))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -5651,6 +6049,7 @@ public class MoveRegistry {
 			.type(BUG)
 			.category(STATUS)
 			.energyCost(new Constant(10))
+			.condition(new AccuracyCheck(new Constant(90)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -5664,6 +6063,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(26))
 			.basePower(new Constant(60))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -5679,6 +6079,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(55))
 			.basePower(new Constant(30))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -5705,6 +6106,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(60))
 			.basePower(new Constant(120))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
@@ -5719,6 +6121,7 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(70))
+			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					DealFormulaDamage.schema()
