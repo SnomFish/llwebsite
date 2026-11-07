@@ -80,7 +80,17 @@ public class Value<T> {
 		c -> c.user(),
 		null
 	);}
+	public static Value<Side> SELF() {return new Value<>( // same as USER()
+		Side.class,
+		c -> c.user(),
+		null
+	);}
     public static Value<Side> TARGET() {return new Value<>(
+		Side.class,
+		c -> c.target(),
+		null
+	);}
+	public static Value<Side> OPP() {return new Value<>( // same as OPP()
 		Side.class,
 		c -> c.target(),
 		null

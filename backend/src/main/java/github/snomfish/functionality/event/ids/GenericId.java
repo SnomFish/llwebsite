@@ -2,11 +2,14 @@ package github.snomfish.functionality.event.ids;
 
 import static github.snomfish.functionality.event.ids.GenericAntiId.*;
 
-public enum GenericId implements IEventId {
-    SELF_SWAPPED_IN(OPP_WATCHES_SELF_SWAP_IN),
+public enum GenericId implements IGenericId {
+    SELF_SWAPPED_IN(WATCHES_OPP_SWAP_IN),
 
-    SELF_STATS_LOWERED_BY_OPP(OPP_LOWERED_SELF_STATS),
-    SELF_STATS_LOWERED_BY_SELF(OPP_WATCHES_SELF_LOWER_SELF_STATS),
+    SELF_PRE_DEAL_FORMULA_DAMAGE(WATCHES_OPP_PRE_DEAL_FORMULA_DAMAGE),
+    SELF_MOVE_HIT(HIT_BY_MOVE),
+
+    SELF_STATS_LOWERED_BY_OPP(LOWERED_OPP_STATS),
+    SELF_STATS_LOWERED_BY_SELF(WATCHES_OPP_LOWER_OPP_STATS),
     ;
 
 

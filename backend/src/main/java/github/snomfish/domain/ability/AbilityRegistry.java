@@ -29,6 +29,7 @@ import github.snomfish.functionality.effect.effects.AlterTypeChart;
 import github.snomfish.functionality.effect.effects.ApplyMechanic;
 import github.snomfish.functionality.effect.effects.ApplyStatChanges;
 import github.snomfish.functionality.effect.effects.ClutchEffect;
+import github.snomfish.functionality.effect.effects.DealDirectDamage;
 import github.snomfish.functionality.effect.effects.DealDirectSelfDamage;
 import github.snomfish.functionality.effect.effects.DispatchEventEffect;
 import github.snomfish.functionality.effect.effects.NoEffect;
@@ -38,6 +39,7 @@ import github.snomfish.functionality.effect.effects.SetValueEffect;
 import github.snomfish.functionality.effect.effects.SetWeather;
 import github.snomfish.functionality.event.Gate;
 import github.snomfish.functionality.event.Interceptor;
+import github.snomfish.functionality.event.ids.GenericAntiId;
 import github.snomfish.functionality.event.ids.GenericId;
 import github.snomfish.functionality.event.ids.IsolatedId;
 import github.snomfish.functionality.number.Constant;
@@ -571,13 +573,13 @@ public class AbilityRegistry {
 			.id(DEMANDING)
 			.name("demanding")
 		);
-		register(Ability.build()
+		register(Ability.build() // increases the power of the users water type moves by 1.25x
 			.id(DEPTHS_BORNE)
 			.name("depths_borne")
 			.rule(AbilityRule.build()
-				.event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
-				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.WATER))
-				.effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.25)))
+				.event(GenericId.SELF_PRE_DEAL_FORMULA_DAMAGE)
+				.condition(new Equals<>(Value.SELF().MOVE().TYPE(), TypeId.WATER))
+				.effect(Effects.multiplyValue(Value.SELF().MOVE().DAMAGE_MODIFIER(), new Constant(1.25)))
 			)
 		);
 		register(Ability.build()
@@ -967,7 +969,7 @@ public class AbilityRegistry {
 			.id(INFERNO)
 			.name("inferno")
 		);
-		register(Ability.build()
+		register(Ability.build() // decreases the damage done by ice and fire attacks to the user by 50%
 			.id(INSULATED)
 			.name("insulated")
 			.rule(AbilityRule.build()
@@ -990,9 +992,14 @@ public class AbilityRegistry {
 			.id(INTERN)
 			.name("intern")
 		);
-		register(Ability.build()
+		register(Ability.build() // increase the damage of the users earth type moves by 25%
 			.id(LAND_BORNE)
 			.name("land_borne")
+			.rule(AbilityRule.build()
+				.event(GenericId.SELF_PRE_DEAL_FORMULA_DAMAGE)
+				.condition(new Equals<>(Value.SELF().MOVE().TYPE(), TypeId.EARTH))
+				.effect(Effects.multiplyValue(Value.SELF().MOVE().DAMAGE_MODIFIER(), new Constant(1.25)))
+			)
 		);
 		register(Ability.build()
 			.id(LAZY)
@@ -1424,17 +1431,27 @@ public class AbilityRegistry {
 			.id(SHARP_CLAWS)
 			.name("sharp claws")
 		);
-		register(Ability.build()
+		register(Ability.build() // when hit by a contact move, the attacker loses 1/16 of their max hp
 			.id(SHARP_EDGES)
 			.name("sharp edges")
+			.rule(AbilityRule.build()
+				.event(GenericAntiId.HIT_BY_MOVE)
+				.condition(new Equals<>(Value.OPP().MOVE().CONTACT_TAG(), true))
+				.effect(new DealDirectSelfDamage(new Multiply(new Constant(1/16), new ValueConstant(Value.OPP().HEALTH()))))
+			)
 		);
 		register(Ability.build()
 			.id(SHARP_FOCUS)
 			.name("sharp_focus")
 		);
-		register(Ability.build()
+		register(Ability.build() // boosts the power of air type moves by 1.25x
 			.id(SKY_BORNE)
 			.name("sky_borne")
+			.rule(AbilityRule.build()
+				.event(GenericId.SELF_PRE_DEAL_FORMULA_DAMAGE)
+				.condition(new Equals<>(Value.SELF().MOVE().TYPE(), TypeId.AIR))
+				.effect(Effects.multiplyValue(Value.SELF().MOVE().DAMAGE_MODIFIER(), new Constant(1.25)))
+			)
 		);
 		register(Ability.build()
 			.id(SLICK_SHELL)

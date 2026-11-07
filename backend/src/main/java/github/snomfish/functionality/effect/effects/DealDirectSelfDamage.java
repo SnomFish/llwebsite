@@ -12,7 +12,7 @@ import github.snomfish.functionality.number.INumber;
 public class DealDirectSelfDamage implements IEffect {
     
 
-    private INumber idamage;
+    private INumber idamage; // raw number, not a percentage of max health
 
 
     public DealDirectSelfDamage(INumber idamage) {

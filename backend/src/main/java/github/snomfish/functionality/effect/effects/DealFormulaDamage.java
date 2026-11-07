@@ -9,7 +9,7 @@ import github.snomfish.domain.move.Move;
 import github.snomfish.domain.move.modifiers.Modifiers;
 import github.snomfish.domain.stats.StatChangesId;
 import github.snomfish.domain.stats.StatId;
-import github.snomfish.functionality.Constants;
+import github.snomfish.functionality.Calculator;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.condition.GateCondition;
@@ -190,7 +190,7 @@ public class DealFormulaDamage implements IEffect {
         int attackingStat = (int)(user.stats().get(attackingStatId) * attackingStatModifier);
         int defendingStat = (int)(target.stats().get(defendingStatId) * defendingStatModifier);
 
-        double damage = Math.floor(2 * Constants.LEVEL / 5) + 2;
+        double damage = Math.floor(2 * Calculator.LEVEL / 5) + 2;
         damage *= move.damage();
         damage *= attackingStat;
         damage /= defendingStat;

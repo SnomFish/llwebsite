@@ -44,7 +44,7 @@ public class StatusRegistry {
             .name("posion")
             .rule(Rule.build()
                 .event(RuleId.END_TURN_STATUS_EFFECT_EVENT, USER)
-                .effect(new DealDirectSelfDamage(new Constant(1/8)))
+                .effect(new DealDirectSelfDamage(new Multiply(new Constant(1/8), new ValueConstant(Value.OPP().HEALTH()))))
             )
         );
         register(Status.build(BAD_POISON)
