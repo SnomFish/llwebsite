@@ -6,16 +6,17 @@ import java.util.List;
 import github.snomfish.functionality.condition.ICondition;
 import github.snomfish.functionality.condition.NoCondition;
 import github.snomfish.functionality.context.ContextSideId;
+import github.snomfish.functionality.event.ids.GateId;
 
 public class Gate {
     
 
-    private List<Event<GateId>> events;
+    private List<Event> events;
     private ICondition condition;
 
 
     private Gate(
-        List<Event<GateId>> events,
+        List<Event> events,
         ICondition condition
     ) {
         this.events = events;
@@ -33,7 +34,7 @@ public class Gate {
 
 
     // getters
-    public List<Event<GateId>> events() {return events;}
+    public List<Event> events() {return events;}
     public ICondition condition() {return condition;}
 
 
@@ -45,7 +46,7 @@ public class Gate {
         );
     }
     public Gate event(GateId eventId, ContextSideId sideId) {
-        this.events.add(new Event<>(eventId, sideId));
+        this.events.add(new Event(eventId, sideId));
         return this;
     }
     public Gate condition(ICondition condition) {

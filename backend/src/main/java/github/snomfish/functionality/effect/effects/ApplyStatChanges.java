@@ -10,8 +10,10 @@ import github.snomfish.domain.stats.StatChangesId;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
+import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.effect.IEffect;
-import github.snomfish.functionality.event.RuleId;
+import github.snomfish.functionality.event.ids.GenericId;
+import github.snomfish.functionality.event.ids.RuleId;
 import github.snomfish.functionality.number.INumber;
 
 import static github.snomfish.domain.stats.StatChangesId.*;
@@ -21,18 +23,21 @@ public class ApplyStatChanges implements IEffect {
     
 
     private RuleId preEvent; // runs once before the stat changes are applied
-    private RuleId loweredStatEvent; // runs after each inidividual stat change if a stat is lowered
+    private GenericId statLoweredEvent;
+    private ContextSideId sideBeingLowered; // runs after each inidividual stat change if a stat is lowered
     private Value<ActiveLoomian> activeLoomianValue; // the loomian who will have their stats changed
     private Map<StatChangesId, INumber> statChanges;
 
 
     private ApplyStatChanges(
         RuleId preEvent,
-        RuleId loweredStatEvent,
+        GenericId statLoweredEvent,
+        ContextSideId sideBeingLowered,
         Value<ActiveLoomian> activeLoomianValue
     ) {
         this.preEvent = preEvent;
-        this.loweredStatEvent = loweredStatEvent;
+        this.statLoweredEvent = statLoweredEvent;
+        this.sideBeingLowered = sideBeingLowered;
         this.activeLoomianValue = activeLoomianValue;
         this.statChanges = new HashMap<>();
     }
@@ -41,28 +46,28 @@ public class ApplyStatChanges implements IEffect {
     public static ApplyStatChanges userChangingUser() {
         return new ApplyStatChanges(
             RuleId.PRE_STAT_CHANGES_EFFECT_EVENT, 
-            null,
+            GenericId.SELF_STATS_LOWERED_BY_OPP, ContextSideId.USER,
             Value.USER().LOOMIAN()
         );
     }
     public static ApplyStatChanges userChangingTarget() {
         return new ApplyStatChanges(
-            RuleId.PRE_STAT_CHANGES_EFFECT_EVENT,  
-            RuleId.USER_LOWERED_TARGET_STATS_EVENT,
+            RuleId.PRE_STAT_CHANGES_EFFECT_EVENT,
+            GenericId.SELF_STATS_LOWERED_BY_OPP, ContextSideId.TARGET,
             Value.TARGET().LOOMIAN()
         );
     }
     public static ApplyStatChanges targetChangingUser() {
         return new ApplyStatChanges(
             RuleId.PRE_STAT_CHANGES_EFFECT_EVENT,  
-            RuleId.TARGET_LOWERED_USER_STATS_EVENT,
+            GenericId.SELF_STATS_LOWERED_BY_OPP, ContextSideId.USER,
             Value.USER().LOOMIAN()
         );
     }
     public static ApplyStatChanges targetChangingTarget() {
         return new ApplyStatChanges(
             RuleId.PRE_STAT_CHANGES_EFFECT_EVENT, 
-            null, 
+            GenericId.SELF_STATS_LOWERED_BY_OPP, ContextSideId.TARGET, 
             Value.TARGET().LOOMIAN()
         );
     }
@@ -104,7 +109,7 @@ public class ApplyStatChanges implements IEffect {
 
     private ApplyStatChanges(ApplyStatChanges copy) { // these are enums
         this.preEvent = copy.preEvent;
-        this.loweredStatEvent = copy.loweredStatEvent;
+        // TODO
         this.activeLoomianValue = copy.activeLoomianValue;
     }
     public ApplyStatChanges deepCopy() {
@@ -159,8 +164,8 @@ public class ApplyStatChanges implements IEffect {
         List<Branch<BattleContext>> outcomes = List.of(new Branch<>(outcome, deltaStageBranch.probability()));
 
         // if a stat was lowered then trigger this
-        if (deltaStage < 0 && loweredStatEvent != null) {
-            outcomes = flatMap(outcomes, c -> c.dispatchEvent(loweredStatEvent));
+        if (deltaStage < 0) {
+            outcomes = flatMap(outcomes, c -> c.dispatchEvent(statLoweredEvent, sideBeingLowered));
         }
 
         return outcomes;

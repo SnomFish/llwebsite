@@ -1,13 +1,9 @@
-package github.snomfish.functionality.event;
+package github.snomfish.functionality.event.ids;
 
-public enum RuleId {
-    USER_SWITCHED_IN_EVENT,
-    TARGET_SWITCHED_IN_EVENT,
+public enum RuleId implements IEventId {
 
     // ACTIVATED DURING THE TURN
     PRE_TURN_EVENT,
-
-    START_OF_TURN_EVENT,
 
     PRE_MOVE_EVENT, // used when a move is about to be used
 
@@ -22,9 +18,8 @@ public enum RuleId {
     PRE_HEALTH_DRAIN_EVENT,
     PRE_ENERGY_DRAIN_EVENT,
 
+    // stat
     PRE_STAT_CHANGES_EFFECT_EVENT,
-    USER_LOWERED_TARGET_STATS_EVENT,
-    TARGET_LOWERED_USER_STATS_EVENT,
 
     POST_USER_SET_WEATHER_EVENT,
     POST_TARGET_SET_WEATHER_EVENT,

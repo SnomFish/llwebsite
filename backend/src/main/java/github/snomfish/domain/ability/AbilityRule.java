@@ -9,18 +9,21 @@ import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.effect.IEffect;
 import github.snomfish.functionality.effect.effects.NoEffect;
 import github.snomfish.functionality.event.Event;
-import github.snomfish.functionality.event.RuleId;
+import github.snomfish.functionality.event.ids.GenericAntiId;
+import github.snomfish.functionality.event.ids.GenericId;
+import github.snomfish.functionality.event.ids.IsolatedId;
+import github.snomfish.functionality.event.ids.RuleId;
 
 public class AbilityRule {
     
 
-    private List<Event<RuleId>> events;
+    private List<Event> events;
     private ICondition condition;
     private IEffect effect;
 
 
     public AbilityRule(
-        List<Event<RuleId>> events, 
+        List<Event> events, 
         ICondition condition,
         IEffect effect
     ) {
@@ -30,7 +33,7 @@ public class AbilityRule {
     }
 
 
-    public List<Event<RuleId>> events() {return events;}
+    public List<Event> events() {return events;}
     public ICondition condition() {return condition;}
     public IEffect effect() {return effect;}
 
@@ -43,10 +46,23 @@ public class AbilityRule {
             new NoEffect()
         );
     }
-    public AbilityRule event(RuleId eventId, ContextSideId sideId) {
-        this.events.add(new Event<>(eventId, sideId));
+    public AbilityRule event(RuleId ruleId, ContextSideId sideId) {
+        this.events.add(new Event(ruleId, sideId));
         return this;
     }
+    public AbilityRule event(IsolatedId isolatedId) {
+        this.events.add(new Event(isolatedId, null));
+        return null;
+    }
+    public AbilityRule event(GenericId genericId) {
+        this.events.add(new Event(genericId, null));
+        return this;
+    }
+    public AbilityRule event(GenericAntiId genericId) {
+        this.events.add(new Event(genericId, null));
+        return this;
+    }
+
     public AbilityRule condition(ICondition condition) {
         this.condition = condition;
         return this;

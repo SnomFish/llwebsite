@@ -1,6 +1,6 @@
 package github.snomfish.functionality;
 
-import static github.snomfish.functionality.event.GateId.*;
+import static github.snomfish.functionality.event.ids.GateId.*;
 
 import java.util.List;
 

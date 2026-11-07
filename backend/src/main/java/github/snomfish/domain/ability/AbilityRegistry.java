@@ -38,6 +38,10 @@ import github.snomfish.functionality.effect.effects.SetValueEffect;
 import github.snomfish.functionality.effect.effects.SetWeather;
 import github.snomfish.functionality.event.Gate;
 import github.snomfish.functionality.event.Interceptor;
+import github.snomfish.functionality.event.Rule;
+import github.snomfish.functionality.event.ids.GenericId;
+import github.snomfish.functionality.event.ids.IsolatedId;
+import github.snomfish.functionality.event.ids.RuleId;
 import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.INumberValueConstant;
 import github.snomfish.functionality.number.Multiply;
@@ -45,9 +49,9 @@ import github.snomfish.functionality.number.ValueConstant;
 
 import static github.snomfish.domain.ability.AbilityId.*;
 import static github.snomfish.functionality.context.ContextSideId.*;
-import static github.snomfish.functionality.event.GateId.*;
-import static github.snomfish.functionality.event.InterceptorId.*;
-import static github.snomfish.functionality.event.RuleId.*;
+import static github.snomfish.functionality.event.ids.GateId.*;
+import static github.snomfish.functionality.event.ids.InterceptorId.*;
+import static github.snomfish.functionality.event.ids.RuleId.*;
 
 public class AbilityRegistry {
     
@@ -87,7 +91,7 @@ public class AbilityRegistry {
 					SetAbility.user(Value.TARGET().ABILITY_ID()),
 					SetAbility.targetActual(AbilityId.NO_ABILITY),
 					SetAbility.target(AbilityId.NO_ABILITY),
-					new DispatchEventEffect(USER_SWITCHED_IN_EVENT)
+					new DispatchEventEffect(GenericId.SELF_SWAPPED_IN, USER)
 				)))
 			)
 			.setOncePerBattle()
@@ -105,8 +109,8 @@ public class AbilityRegistry {
 			.id(ADAPTABLE)
 			.name("adaptable")
 			.rule(AbilityRule.build()
-				.event(POST_USER_SET_WEATHER_EVENT, USER)
-				.event(POST_TARGET_SET_WEATHER_EVENT, USER)
+				.event(IsolatedId.WEATHER_SET_EVENT)
+				.event(GenericId.SELF_SWAPPED_IN)
 				.effect(new EffectSequence(List.of(	
 					new ConditionalEffect(Conditions.clearWeather(), 		SetType.userPrimary(TypeId.SIMPLE)),
 					new ConditionalEffect(Conditions.fogActive(),			SetType.userPrimary(TypeId.SPIRIT)),
@@ -114,40 +118,6 @@ public class AbilityRegistry {
 					new ConditionalEffect(Conditions.strongWindsActive(), 	SetType.userPrimary(TypeId.AIR)),
 					new ConditionalEffect(Conditions.rainActive(), 			SetType.userPrimary(TypeId.WATER)),
 					new ConditionalEffect(Conditions.thunderstormActive(),	SetType.userPrimary(TypeId.ELECTRIC))
-				)))
-			)
-			.rule(AbilityRule.build()
-				.event(POST_USER_SET_WEATHER_EVENT, TARGET)
-				.event(POST_TARGET_SET_WEATHER_EVENT, TARGET)
-				.effect(new EffectSequence(List.of(	
-					new ConditionalEffect(Conditions.clearWeather(), 		SetType.targetPrimary(TypeId.SIMPLE)),
-					new ConditionalEffect(Conditions.fogActive(),			SetType.targetPrimary(TypeId.SPIRIT)),
-					new ConditionalEffect(Conditions.heatwaveActive(), 		SetType.targetPrimary(TypeId.FIRE)),
-					new ConditionalEffect(Conditions.strongWindsActive(), 	SetType.targetPrimary(TypeId.AIR)),
-					new ConditionalEffect(Conditions.rainActive(), 			SetType.targetPrimary(TypeId.WATER)),
-					new ConditionalEffect(Conditions.thunderstormActive(),	SetType.targetPrimary(TypeId.ELECTRIC))
-				)))
-			)
-			.rule(AbilityRule.build()
-				.event(USER_SWITCHED_IN_EVENT, USER)
-				.effect(new EffectSequence(List.of(	
-					new ConditionalEffect(Conditions.clearWeather(), 		SetType.userPrimary(TypeId.SIMPLE)),
-					new ConditionalEffect(Conditions.fogActive(),			SetType.userPrimary(TypeId.SPIRIT)),
-					new ConditionalEffect(Conditions.heatwaveActive(), 		SetType.userPrimary(TypeId.FIRE)),
-					new ConditionalEffect(Conditions.strongWindsActive(), 	SetType.userPrimary(TypeId.AIR)),
-					new ConditionalEffect(Conditions.rainActive(), 			SetType.userPrimary(TypeId.WATER)),
-					new ConditionalEffect(Conditions.thunderstormActive(),	SetType.userPrimary(TypeId.ELECTRIC))
-				)))
-			)
-			.rule(AbilityRule.build()
-				.event(TARGET_SWITCHED_IN_EVENT, TARGET)
-				.effect(new EffectSequence(List.of(	
-					new ConditionalEffect(Conditions.clearWeather(), 		SetType.targetPrimary(TypeId.SIMPLE)),
-					new ConditionalEffect(Conditions.fogActive(),			SetType.targetPrimary(TypeId.SPIRIT)),
-					new ConditionalEffect(Conditions.heatwaveActive(), 		SetType.targetPrimary(TypeId.FIRE)),
-					new ConditionalEffect(Conditions.strongWindsActive(), 	SetType.targetPrimary(TypeId.AIR)),
-					new ConditionalEffect(Conditions.rainActive(), 			SetType.targetPrimary(TypeId.WATER)),
-					new ConditionalEffect(Conditions.thunderstormActive(),	SetType.targetPrimary(TypeId.ELECTRIC))
 				)))
 			)
 			.gate(Gate.build() // prevents the ability being removed
@@ -160,7 +130,7 @@ public class AbilityRegistry {
 			.id(ADORABLE)
 			.name("adorable")
 			.rule(AbilityRule.build()
-				.event(USER_SWITCHED_IN_EVENT, USER)
+				.event(GenericId.SELF_SWAPPED_IN)
 				.effect(ApplyStatChanges.userChangingTarget()
 					.mdefense(new Constant(-1))
 				)
@@ -194,7 +164,7 @@ public class AbilityRegistry {
 			.id(ANALYZE)
 			.name("analyze")
 			.rule(AbilityRule.build()
-				.event(USER_SWITCHED_IN_EVENT, USER)
+				.event(GenericId.SELF_SWAPPED_IN)
 				.effect(new ConditionalEffect(
 					new Or(
 						Comparator.greaterThan()
@@ -213,11 +183,10 @@ public class AbilityRegistry {
 			)
 		);
 		register(Ability.build()
-			// TODO: find out how this interacts with devious
 			.id(ANOMALY)
 			.name("anomaly")
 			.rule(AbilityRule.build() // when the loomian is the user
-				.event(USER_SWITCHED_IN_EVENT, USER) 
+				.event(GenericId.SELF_SWAPPED_IN) 
 				.effect(new EffectSequence(List.of(
 					Effects.multiplyValue(Value.USER().MATTACK_STAGE_MODIFIER(), new Constant(-1)),
 					Effects.multiplyValue(Value.USER().MDEFENSE_STAGE_MODIFIER(), new Constant(-1)),
@@ -226,18 +195,6 @@ public class AbilityRegistry {
 					Effects.multiplyValue(Value.USER().SPEED_STAGE_MODIFIER(), new Constant(-1)),
 					Effects.multiplyValue(Value.USER().ACCURACY_STAGE_MODIFIER(), new Constant(-1)),
 					Effects.multiplyValue(Value.USER().EVASION_STAGE_MODIFIER(), new Constant(-1))
-				)))
-			)
-			.rule(AbilityRule.build() // when the loomian is the target
-				.event(TARGET_SWITCHED_IN_EVENT, TARGET)
-				.effect(new EffectSequence(List.of(
-					Effects.multiplyValue(Value.TARGET().MATTACK_STAGE_MODIFIER(), new Constant(-1)),
-					Effects.multiplyValue(Value.TARGET().MDEFENSE_STAGE_MODIFIER(), new Constant(-1)),
-					Effects.multiplyValue(Value.TARGET().RATTACK_STAGE_MODIFIER(), new Constant(-1)),
-					Effects.multiplyValue(Value.TARGET().RDEFENSE_STAGE_MODIFIER(), new Constant(-1)),
-					Effects.multiplyValue(Value.TARGET().SPEED_STAGE_MODIFIER(), new Constant(-1)),
-					Effects.multiplyValue(Value.TARGET().ACCURACY_STAGE_MODIFIER(), new Constant(-1)),
-					Effects.multiplyValue(Value.TARGET().EVASION_STAGE_MODIFIER(), new Constant(-1))
 				)))
 			)
 		);
@@ -249,14 +206,8 @@ public class AbilityRegistry {
 			.id(APPLIED_FRUSTRATION)
 			.name("applied_frustration")
 			.rule(AbilityRule.build()
-				.event(TARGET_LOWERED_USER_STATS_EVENT, USER)
+				.event(GenericId.SELF_STATS_LOWERED_BY_OPP)
 				.effect(ApplyStatChanges.userChangingUser()
-					.rattack(new Constant(2))
-				)
-			)
-			.rule(AbilityRule.build()
-				.event(USER_LOWERED_TARGET_STATS_EVENT, TARGET)
-				.effect(ApplyStatChanges.targetChangingTarget()
 					.rattack(new Constant(2))
 				)
 			)
@@ -341,7 +292,7 @@ public class AbilityRegistry {
 			.id(BOAST)
 			.name("boast")
 			.rule(AbilityRule.build()
-				.event(USER_SWITCHED_IN_EVENT, USER)
+				.event(GenericId.SELF_SWAPPED_IN)
 				.effect(new ConditionalEffect(
 					Comparator.greaterThan()
 						.left(new ValueConstant(Value.USER().MATTACK()))
@@ -349,18 +300,6 @@ public class AbilityRegistry {
 					ApplyStatChanges.userChangingUser()
 						.mattack(new Constant(1)),
 					ApplyStatChanges.userChangingUser()
-						.mattack(new Constant(-1))
-				))
-			)
-			.rule(AbilityRule.build()
-				.event(TARGET_SWITCHED_IN_EVENT, TARGET)
-				.effect(new ConditionalEffect(
-					Comparator.greaterThan()
-						.left(new ValueConstant(Value.TARGET().MATTACK()))
-						.right(new ValueConstant(Value.USER().MATTACK())),
-					ApplyStatChanges.targetChangingTarget()
-						.mattack(new Constant(1)),
-					ApplyStatChanges.targetChangingTarget()
 						.mattack(new Constant(-1))
 				))
 			)
@@ -503,8 +442,8 @@ public class AbilityRegistry {
 			.id(CIRCADIAN)
 			.name("circadian")
 			.rule(AbilityRule.build()
-				.event(USER_SWITCHED_IN_EVENT, USER)
-				.event(START_OF_TURN_EVENT, USER)
+				.event(GenericId.SELF_SWAPPED_IN)
+				.event(IsolatedId.START_OF_TURN_EVENT)
 				.effect(new ConditionalEffect(
 					Conditions.isOdd(new ValueConstant(Value.TURN_NUMBER())),
 					new EffectSequence(List.of(
@@ -514,21 +453,6 @@ public class AbilityRegistry {
 					new EffectSequence(List.of(
 						SetType.userPrimary(TypeId.DARK),
 						SetType.userSecondary(TypeId.NULL)
-					))
-				))
-			)
-			.rule(AbilityRule.build()
-				.event(TARGET_SWITCHED_IN_EVENT, TARGET)
-				.event(START_OF_TURN_EVENT, TARGET)
-				.effect(new ConditionalEffect(
-					Conditions.isOdd(new ValueConstant(Value.TURN_NUMBER())),
-					new EffectSequence(List.of(
-						SetType.targetPrimary(TypeId.LIGHT),
-						SetType.targetSecondary(TypeId.NULL)
-					)),
-					new EffectSequence(List.of(
-						SetType.targetPrimary(TypeId.DARK),
-						SetType.targetSecondary(TypeId.NULL)
 					))
 				))
 			)
@@ -562,13 +486,8 @@ public class AbilityRegistry {
 			.id(COMBATIVE)
 			.name("combative")
 			.rule(AbilityRule.build()
-				.event(TARGET_LOWERED_USER_STATS_EVENT, USER)
+				.event(GenericId.SELF_STATS_LOWERED_BY_OPP)
 				.effect(ApplyStatChanges.userChangingUser()
-					.mattack(new Constant(2)))
-			)
-			.rule(AbilityRule.build()
-				.event(USER_LOWERED_TARGET_STATS_EVENT, TARGET)
-				.effect(ApplyStatChanges.targetChangingTarget()
 					.mattack(new Constant(2)))
 			)
 		);
@@ -642,19 +561,12 @@ public class AbilityRegistry {
 			.id(DEFENSIVE_PRIORITY)
 			.name("defensive priority")
 			.rule(AbilityRule.build()
-				.event(USER_SWITCHED_IN_EVENT, USER)
+				.event(GenericId.SELF_SWAPPED_IN)
 				.effect(ApplyStatChanges.userChangingUser()
 					.mdefense(new Constant(1))
 					.rdefense(new Constant(1))
 					.speed(new Constant(-2)))
 					
-			)
-			.rule(AbilityRule.build()
-				.event(TARGET_SWITCHED_IN_EVENT, TARGET)
-				.effect(ApplyStatChanges.targetChangingTarget()
-					.mdefense(new Constant(1))
-					.rdefense(new Constant(1))
-					.speed(new Constant(-2)))
 			)
 		);
 		register(Ability.build()
@@ -811,7 +723,7 @@ public class AbilityRegistry {
 			.id(FOG_SUMMON)
 			.name("fog summon")
 			.rule(AbilityRule.build()
-				.event(USER_SWITCHED_IN_EVENT, USER)
+				.event(GenericId.SELF_SWAPPED_IN)
 				.effect(SetWeather.userSetting(WeatherId.FOG, new Constant(5)))
 			)
 		);
@@ -962,7 +874,7 @@ public class AbilityRegistry {
 			.id(HEAT_SUMMON)
 			.name("heat summon")
 			.rule(AbilityRule.build()
-				.event(USER_SWITCHED_IN_EVENT, USER)
+				.event(GenericId.SELF_SWAPPED_IN)
 				.effect(SetWeather.userSetting(WeatherId.HEATWAVE, new Constant(5)))
 			)
 		);
@@ -1396,7 +1308,7 @@ public class AbilityRegistry {
 			.id(RAIN_SUMMON)
 			.name("rain summon")
 			.rule(AbilityRule.build()
-				.event(USER_SWITCHED_IN_EVENT, USER)
+				.event(GenericId.SELF_SWAPPED_IN)
 				.effect(SetWeather.userSetting(WeatherId.RAIN, new Constant(5)))
 			)
 		);
@@ -1622,7 +1534,7 @@ public class AbilityRegistry {
 			.id(THUNDER_SUMMON)
 			.name("thunder summon")
 			.rule(AbilityRule.build()
-				.event(USER_SWITCHED_IN_EVENT, USER)
+				.event(GenericId.SELF_SWAPPED_IN)
 				.effect(SetWeather.userSetting(WeatherId.THUNDERSTORM, new Constant(5)))
 			)
 		);
@@ -1797,7 +1709,7 @@ public class AbilityRegistry {
 			.id(WIND_SUMMON)
 			.name("wind summon")
 			.rule(AbilityRule.build()
-				.event(USER_SWITCHED_IN_EVENT, USER)
+				.event(GenericId.SELF_SWAPPED_IN)
 				.effect(SetWeather.userSetting(WeatherId.STRONG_WINDS, new Constant(5)))
 			)
 		);

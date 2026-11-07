@@ -12,7 +12,7 @@ import github.snomfish.functionality.number.Constant;
 
 import static github.snomfish.domain.weather.WeatherId.*;
 import static github.snomfish.functionality.context.ContextSideId.*;
-import static github.snomfish.functionality.event.RuleId.*;
+import static github.snomfish.functionality.event.ids.RuleId.*;
 
 public class WeatherRegistry {
     

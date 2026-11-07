@@ -60,7 +60,7 @@ public class Definition<T extends Enum<T>, D extends Definition<T, D>> {
     }
 
 
-    public List<Branch<BattleContext>> handleRule(BattleContext context, Event<RuleId> event) {
+    public List<Branch<BattleContext>> handleRule(BattleContext context, Event event) {
         List<Branch<BattleContext>> outcomes = List.of(new Branch<>(context, 1.0));
         
         for (Rule rule : rules) {
@@ -69,10 +69,10 @@ public class Definition<T extends Enum<T>, D extends Definition<T, D>> {
 
         return outcomes;
     }
-    public List<Branch<Boolean>> handleGate(BattleContext context, Event<GateId> event) {
+    public List<Branch<Boolean>> handleGate(BattleContext context, Event event) {
         return null;
     }
-    public List<Branch<BattleContext>> handleInterceptor(InterceptorReport report, Event<InterceptorId> event) {
+    public List<Branch<BattleContext>> handleInterceptor(InterceptorReport report, Event event) {
         return null;
     }
 }

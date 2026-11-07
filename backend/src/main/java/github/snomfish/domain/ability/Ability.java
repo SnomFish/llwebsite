@@ -1,12 +1,12 @@
 package github.snomfish.domain.ability;
 
-import static github.snomfish.domain.ability.AbilityId.NO_ABILITY;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import github.snomfish.functionality.event.Gate;
 import github.snomfish.functionality.event.Interceptor;
+
+import static github.snomfish.domain.ability.AbilityId.NO_ABILITY;
 
 // ability is only ever called from the registry, therefore it should remain constant
 // same with item

@@ -1,6 +1,6 @@
 package github.snomfish.functionality.effect.effects;
 
-import static github.snomfish.functionality.event.GateId.CAN_TAKE_RECOIL;
+import static github.snomfish.functionality.event.ids.GateId.CAN_TAKE_RECOIL;
 
 import java.util.ArrayList;
 import java.util.List;

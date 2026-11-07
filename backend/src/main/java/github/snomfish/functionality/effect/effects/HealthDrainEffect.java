@@ -11,7 +11,7 @@ import github.snomfish.functionality.effect.IEffect;
 import github.snomfish.functionality.number.INumber;
 
 import static github.snomfish.domain.move.modifiers.ModifierId.HEALTH_DRAIN;
-import static github.snomfish.functionality.event.RuleId.*;
+import static github.snomfish.functionality.event.ids.RuleId.*;
 
 public class HealthDrainEffect implements IEffect {
     

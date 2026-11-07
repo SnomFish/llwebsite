@@ -12,10 +12,7 @@ import github.snomfish.functionality.action.Action;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.event.Event;
-import github.snomfish.functionality.event.GateId;
-import github.snomfish.functionality.event.InterceptorId;
 import github.snomfish.functionality.event.InterceptorReport;
-import github.snomfish.functionality.event.RuleId;
 
 import static github.snomfish.functionality.branch.BranchUtil.flatMap;
 
@@ -57,7 +54,7 @@ public class ActiveLoomian extends Loomian {
         return new ActiveLoomian(this);
     }
 
-    public List<Branch<BattleContext>> dispatchRule(BattleContext context, Event<RuleId> event) {
+    public List<Branch<BattleContext>> dispatchRule(BattleContext context, Event event) {
         List<Branch<BattleContext>> outcomes = List.of(new Branch<>(context, 1.0));
 
         outcomes = flatMap(outcomes, c -> abilityInstance().handleRule(c, event));
@@ -67,13 +64,13 @@ public class ActiveLoomian extends Loomian {
 
         return outcomes;
     }
-    public List<Branch<Boolean>> dispatchGate(BattleContext context, Event<GateId> event, List<Branch<Boolean>> outcomes) {
+    public List<Branch<Boolean>> dispatchGate(BattleContext context, Event event, List<Branch<Boolean>> outcomes) {
 
         outcomes = flatMap(context, outcomes, c -> abilityInstance().handleGate(context, event));
 
         return outcomes;
     }
-    public InterceptorReport dispatchInterceptor(InterceptorReport report, Event<InterceptorId> event) {
+    public InterceptorReport dispatchInterceptor(InterceptorReport report, Event event) {
         
         report.record(abilityInstance().ability().interceptors(), event);
 

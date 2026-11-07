@@ -8,7 +8,6 @@ import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.copy.DeepCopyable;
 import github.snomfish.functionality.event.Event;
-import github.snomfish.functionality.event.RuleId;
 
 import static github.snomfish.functionality.branch.BranchUtil.flatMap;
 
@@ -50,7 +49,7 @@ public class Mechanics implements DeepCopyable<Mechanics> {
     }
 
 
-    public List<Branch<BattleContext>> handleRule(BattleContext context, Event<RuleId> event) {
+    public List<Branch<BattleContext>> handleRule(BattleContext context, Event event) {
         List<Branch<BattleContext>> outcomes = List.of(new Branch<>(context, 1.0));
 
         for (MechanicId id : mechanics.keySet()) {

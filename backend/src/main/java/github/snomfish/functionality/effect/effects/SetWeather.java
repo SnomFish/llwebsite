@@ -7,11 +7,12 @@ import github.snomfish.domain.weather.WeatherId;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.effect.IEffect;
-import github.snomfish.functionality.event.RuleId;
+import github.snomfish.functionality.event.ids.IsolatedId;
+import github.snomfish.functionality.event.ids.RuleId;
 import github.snomfish.functionality.number.INumber;
 
 import static github.snomfish.functionality.branch.BranchUtil.flatMap;
-import static github.snomfish.functionality.event.RuleId.*;
+import static github.snomfish.functionality.event.ids.RuleId.*;
 
 public class SetWeather implements IEffect {
     
@@ -64,6 +65,7 @@ public class SetWeather implements IEffect {
 
         outcomes = flatMap(outcomes, c -> setWeatherModule(context));
         outcomes = flatMap(outcomes, c -> c.dispatchEvent(postSetEvent));
+        outcomes = flatMap(outcomes, c -> c.dispatchEvent(IsolatedId.WEATHER_SET_EVENT));
         
         return outcomes;
     }

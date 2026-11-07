@@ -9,10 +9,12 @@ import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.copy.DeepCopyable;
 import github.snomfish.functionality.effect.IEffect;
 import github.snomfish.functionality.event.Event;
-import github.snomfish.functionality.event.GateId;
-import github.snomfish.functionality.event.InterceptorId;
 import github.snomfish.functionality.event.InterceptorReport;
-import github.snomfish.functionality.event.RuleId;
+import github.snomfish.functionality.event.ids.GateId;
+import github.snomfish.functionality.event.ids.GenericId;
+import github.snomfish.functionality.event.ids.InterceptorId;
+import github.snomfish.functionality.event.ids.IsolatedId;
+import github.snomfish.functionality.event.ids.RuleId;
 
 import static github.snomfish.domain.SideId.*;
 import static github.snomfish.functionality.branch.BranchUtil.flatMap;
@@ -22,6 +24,7 @@ import static github.snomfish.functionality.branch.BranchUtil.flatMap;
 // no it cant, I like mutation
 public class BattleContext implements DeepCopyable<BattleContext> {
     
+
     private Gamestate gamestate;
     private SideId userState;
     private SideId targetState;
@@ -65,27 +68,10 @@ public class BattleContext implements DeepCopyable<BattleContext> {
 
 
     // events
-    public List<Branch<BattleContext>> dispatchEvent(RuleId ruleId) {
-        List<Branch<BattleContext>> outcomes = List.of(new Branch<>(this, 1.0));
+    /* 
+    THESE EVENTS WORK FOR EVENTS LIKE "WEATHER_STARTED" WHERE THE EVENT NEEDS TO APPLY TO BOTH PARTIES
+    AND THE EVENT AFFECTS BOTH PARTIES EVENLY
 
-        outcomes = flatMap(outcomes, context -> gamestate().weatherInstance().handleEvent(context, new Event<>(ruleId, null)));
-        outcomes = flatMap(outcomes, context -> user().dispatchRule(context, new Event<>(ruleId, ContextSideId.USER)));
-        outcomes = flatMap(outcomes, context -> target().dispatchRule(context, new Event<>(ruleId, ContextSideId.TARGET)));
-
-        return outcomes;
-    }
-    public List<Branch<BattleContext>> dispatchGenericEvent(RuleId ruleId) {
-        List<Branch<BattleContext>> outcomes = List.of(new Branch<>(this, 1.0));
-
-        outcomes = flatMap(outcomes, context -> gamestate().weatherInstance().handleEvent(context, new Event<>(ruleId, null)));
-        outcomes = flatMap(outcomes, context -> user().dispatchRule(context, new Event<>(ruleId, null)));
-        outcomes = ContextUtil.switchFocus(outcomes, targetState);
-        outcomes = flatMap(outcomes, context -> target().dispatchRule(context, new Event<>(ruleId, null)));
-        
-        outcomes = ContextUtil.switchFocus(outcomes, userState);
-        return outcomes;
-    }
-    /*
     FOR A TRUELY GENERIC EVENT A NEW SYSTEM NEEDS TO BE USED
     EACH EVENT MUST HAVE A COUNTER PART, E.G: "SWAPPED_IN" AND "THE_OTHER_GUY_SWAPPED_IN"
 
@@ -94,19 +80,54 @@ public class BattleContext implements DeepCopyable<BattleContext> {
     
     AFTER THAT THE EXTRA SIDE_CONTEXT_ID IS NOT NEEDED
     */
+    public List<Branch<BattleContext>> dispatchEvent(RuleId ruleId) {
+        List<Branch<BattleContext>> outcomes = List.of(new Branch<>(this, 1.0));
+
+        outcomes = flatMap(outcomes, context -> gamestate().weatherInstance().handleEvent(context, new Event(ruleId, null)));
+        outcomes = flatMap(outcomes, context -> user().dispatchRule(context, new Event(ruleId, ContextSideId.USER)));
+        outcomes = flatMap(outcomes, context -> target().dispatchRule(context, new Event(ruleId, ContextSideId.TARGET)));
+
+        return outcomes;
+    }
+    public List<Branch<BattleContext>> dispatchEvent(IsolatedId ruleId) {
+        List<Branch<BattleContext>> outcomes = List.of(new Branch<>(this, 1.0));
+
+        outcomes = flatMap(outcomes, context -> gamestate().weatherInstance().handleEvent(context, new Event(ruleId, null)));
+        outcomes = flatMap(outcomes, context -> user().dispatchRule(context, new Event(ruleId, null)));
+        outcomes = ContextUtil.switchFocus(outcomes, targetState);
+        outcomes = flatMap(outcomes, context -> target().dispatchRule(context, new Event(ruleId, null)));
+        
+        outcomes = ContextUtil.switchFocus(outcomes, userState);
+        return outcomes;
+    }
+    public List<Branch<BattleContext>> dispatchEvent(GenericId ruleId, ContextSideId sideIds) {
+        List<Branch<BattleContext>> outcomes = List.of(new Branch<>(this, 1.0));
+
+        outcomes = ContextUtil.switchFocus(outcomes, sideIds.self(this));
+        outcomes = flatMap(outcomes, context -> user().dispatchRule(context, new Event(ruleId, null)));
+        outcomes = ContextUtil.switchFocus(outcomes, targetState); // target state always inverts the focus
+        outcomes = flatMap(outcomes, context -> target().dispatchRule(context, new Event(ruleId.oppId(), null)));
+
+        outcomes = ContextUtil.switchFocus(outcomes, userState); // resets the focus to the correct state
+        return outcomes;
+    }
+
+
+
+
     public List<Branch<Boolean>> dispatchGate(GateId gateId) {
         List<Branch<Boolean>> outcomes = List.of(new Branch<>(true, 1));
 
-        outcomes = user().dispatchGate(this, new Event<>(gateId, ContextSideId.USER), outcomes);
-        outcomes = target().dispatchGate(this, new Event<>(gateId, ContextSideId.TARGET), outcomes);
+        outcomes = user().dispatchGate(this, new Event(gateId, ContextSideId.USER), outcomes);
+        outcomes = target().dispatchGate(this, new Event(gateId, ContextSideId.TARGET), outcomes);
 
         return outcomes;
     }
     public List<Branch<BattleContext>> dispatchInterceptor(InterceptorId interceptorId, IEffect trueEffect) {
         InterceptorReport report = new InterceptorReport(this, trueEffect);
 
-        report = user().dispatchInterceptor(report, new Event<>(interceptorId, ContextSideId.USER));
-        report = user().dispatchInterceptor(report, new Event<>(interceptorId, ContextSideId.TARGET));
+        report = user().dispatchInterceptor(report, new Event(interceptorId, ContextSideId.USER));
+        report = user().dispatchInterceptor(report, new Event(interceptorId, ContextSideId.TARGET));
 
         return report.execute();
     }

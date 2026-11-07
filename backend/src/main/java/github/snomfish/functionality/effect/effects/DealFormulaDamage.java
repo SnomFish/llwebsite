@@ -17,14 +17,14 @@ import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.effect.ConditionalEffect;
 import github.snomfish.functionality.effect.Effects;
 import github.snomfish.functionality.effect.IEffect;
-import github.snomfish.functionality.event.GateId;
+import github.snomfish.functionality.event.ids.GateId;
 import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.INumber;
 
 import static github.snomfish.domain.move.modifiers.ModifierId.*;
 import static github.snomfish.functionality.branch.BranchUtil.flatMap;
-import static github.snomfish.functionality.event.InterceptorId.MOVE_ABOUT_TO_AFFECT_TARGET;
-import static github.snomfish.functionality.event.RuleId.*;
+import static github.snomfish.functionality.event.ids.InterceptorId.MOVE_ABOUT_TO_AFFECT_TARGET;
+import static github.snomfish.functionality.event.ids.RuleId.*;
 
 // the move tricky tactics does not work with this attacking and defending stat implementation, will require probably a new enum or the use of Value
 public class DealFormulaDamage implements IEffect {

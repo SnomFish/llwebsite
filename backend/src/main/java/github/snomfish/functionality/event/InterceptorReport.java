@@ -7,6 +7,7 @@ import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.branch.BranchUtil;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.effect.IEffect;
+import github.snomfish.functionality.event.ids.InterceptorId;
 
 public class InterceptorReport {
     
@@ -25,7 +26,7 @@ public class InterceptorReport {
     }
 
 
-    public void record(List<Interceptor> interceptors, Event<InterceptorId> event) {
+    public void record(List<Interceptor> interceptors, Event event) {
         for (Interceptor interceptor : interceptors) {
             if (interceptor.events().contains(event)) {
                 

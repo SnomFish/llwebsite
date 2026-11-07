@@ -6,7 +6,7 @@ import java.util.List;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
-import github.snomfish.functionality.event.RuleId;
+import github.snomfish.functionality.event.ids.RuleId;
 import github.snomfish.functionality.number.INumber;
 
 public class AccuracyCheck implements ICondition {

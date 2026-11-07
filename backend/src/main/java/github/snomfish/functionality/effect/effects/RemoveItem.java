@@ -8,7 +8,7 @@ import github.snomfish.functionality.Value;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.effect.IEffect;
-import github.snomfish.functionality.event.RuleId;
+import github.snomfish.functionality.event.ids.RuleId;
 
 import static github.snomfish.domain.item.ItemId.*;
 

@@ -28,14 +28,15 @@ import github.snomfish.functionality.effect.effects.SetType;
 import github.snomfish.functionality.effect.effects.SetWeather;
 import github.snomfish.functionality.event.Gate;
 import github.snomfish.functionality.event.Rule;
+import github.snomfish.functionality.event.ids.GenericId;
 import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.ValueConstant;
 
 import static github.snomfish.domain.item.ItemId.*;
 import static github.snomfish.domain.species.SpeciesId.*;
 import static github.snomfish.functionality.context.ContextSideId.*;
-import static github.snomfish.functionality.event.GateId.*;
-import static github.snomfish.functionality.event.RuleId.*;
+import static github.snomfish.functionality.event.ids.GateId.*;
+import static github.snomfish.functionality.event.ids.RuleId.*;
 
 // oi add a condition in condition schematics for general item use, offensive item use and defensive.
 // simplest solution for whe the loomian cannot use items/ are about to be pile drived by sly cavenish
@@ -273,66 +274,41 @@ public class ItemRegistry {
 		register(Item.build(FOG_GLOBE)
 			.name("Fog Globe")
 			.rule(Rule.build()
-				.event(USER_SWITCHED_IN_EVENT, USER)
+				.event(GenericId.SELF_SWAPPED_IN)
 				.condition(new Not(new Equals<>(Value.WEATHER_ID(), WeatherId.FOG)))
 				.effect(SetWeather.userSetting(WeatherId.FOG, new Constant(3)))
-			)
-			.rule(Rule.build()
-				.event(TARGET_SWITCHED_IN_EVENT, TARGET)
-				.condition(new Not(new Equals<>(Value.WEATHER_ID(), WeatherId.FOG)))
-				.effect(SetWeather.targetSetting(WeatherId.FOG, new Constant(3)))
 			)
 		);
 		register(Item.build(HEAT_GLOBE)
 			.name("Heat Globe")
 			.rule(Rule.build()
-				.event(USER_SWITCHED_IN_EVENT, USER)
+				.event(GenericId.SELF_SWAPPED_IN)
 				.condition(new Not(new Equals<>(Value.WEATHER_ID(), WeatherId.HEATWAVE)))
 				.effect(SetWeather.userSetting(WeatherId.HEATWAVE, new Constant(3)))
-			)
-			.rule(Rule.build()
-				.event(TARGET_SWITCHED_IN_EVENT, TARGET)
-				.condition(new Not(new Equals<>(Value.WEATHER_ID(), WeatherId.HEATWAVE)))
-				.effect(SetWeather.targetSetting(WeatherId.HEATWAVE, new Constant(3)))
 			)
 		);
 		register(Item.build(RAIN_GLOBE)
 			.name("Rain Globe")
 			.rule(Rule.build()
-				.event(USER_SWITCHED_IN_EVENT, USER)
+				.event(GenericId.SELF_SWAPPED_IN)
 				.condition(new Not(new Equals<>(Value.WEATHER_ID(), WeatherId.RAIN)))
 				.effect(SetWeather.userSetting(WeatherId.RAIN, new Constant(3)))
-			)
-			.rule(Rule.build()
-				.event(TARGET_SWITCHED_IN_EVENT, TARGET)
-				.condition(new Not(new Equals<>(Value.WEATHER_ID(), WeatherId.RAIN)))
-				.effect(SetWeather.targetSetting(WeatherId.RAIN, new Constant(3)))
 			)
 		);
 		register(Item.build(STORM_GLOBE)
 			.name("Storm Globe")
 			.rule(Rule.build()
-				.event(USER_SWITCHED_IN_EVENT, USER)
+				.event(GenericId.SELF_SWAPPED_IN)
 				.condition(new Not(new Equals<>(Value.WEATHER_ID(), WeatherId.THUNDERSTORM)))
 				.effect(SetWeather.userSetting(WeatherId.THUNDERSTORM, new Constant(3)))
-			)
-			.rule(Rule.build()
-				.event(TARGET_SWITCHED_IN_EVENT, TARGET)
-				.condition(new Not(new Equals<>(Value.WEATHER_ID(), WeatherId.THUNDERSTORM)))
-				.effect(SetWeather.targetSetting(WeatherId.THUNDERSTORM, new Constant(3)))
 			)
 		);
 		register(Item.build(WIND_GLOBE)
 			.name("Wind Globe")
 			.rule(Rule.build()
-				.event(USER_SWITCHED_IN_EVENT, USER)
+				.event(GenericId.SELF_SWAPPED_IN)
 				.condition(new Not(new Equals<>(Value.WEATHER_ID(), WeatherId.STRONG_WINDS)))
 				.effect(SetWeather.userSetting(WeatherId.STRONG_WINDS, new Constant(3)))
-			)
-			.rule(Rule.build()
-				.event(TARGET_SWITCHED_IN_EVENT, TARGET)
-				.condition(new Not(new Equals<>(Value.WEATHER_ID(), WeatherId.STRONG_WINDS)))
-				.effect(SetWeather.targetSetting(WeatherId.STRONG_WINDS, new Constant(3)))
 			)
 		);
 
@@ -937,22 +913,13 @@ public class ItemRegistry {
 		register(Item.build(FLAME_CORE)
 			.name("flame core")
 			.rule(Rule.build()
-				.event(USER_SWITCHED_IN_EVENT, USER)
+				.event(GenericId.SELF_SWAPPED_IN)
 				.condition(Conditions.or(
 					new Equals<>(Value.USER().SPECIES_ID(), SCORB),
 					new Equals<>(Value.USER().SPECIES_ID(), VEYLENS),
 					new Equals<>(Value.USER().SPECIES_ID(), GARDRONE)
 				))
 				.effect(SetType.userSecondary(TypeId.FIRE))
-			)
-			.rule(Rule.build()
-				.event(TARGET_SWITCHED_IN_EVENT, TARGET)
-				.condition(Conditions.or(
-					new Equals<>(Value.TARGET().SPECIES_ID(), SCORB),
-					new Equals<>(Value.TARGET().SPECIES_ID(), VEYLENS),
-					new Equals<>(Value.TARGET().SPECIES_ID(), GARDRONE)
-				))
-				.effect(SetType.targetSecondary(TypeId.FIRE))
 			)
 			.rule(Rule.build()
 				.event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
@@ -970,22 +937,13 @@ public class ItemRegistry {
 		register(Item.build(FREEZER_CORE)
 			.name("freezer core")
 			.rule(Rule.build()
-				.event(USER_SWITCHED_IN_EVENT, USER)
+				.event(GenericId.SELF_SWAPPED_IN)
 				.condition(Conditions.or(
 					new Equals<>(Value.USER().SPECIES_ID(), SCORB),
 					new Equals<>(Value.USER().SPECIES_ID(), VEYLENS),
 					new Equals<>(Value.USER().SPECIES_ID(), GARDRONE)
 				))
 				.effect(SetType.userSecondary(TypeId.ICE))
-			)
-			.rule(Rule.build()
-				.event(TARGET_SWITCHED_IN_EVENT, TARGET)
-				.condition(Conditions.or(
-					new Equals<>(Value.TARGET().SPECIES_ID(), SCORB),
-					new Equals<>(Value.TARGET().SPECIES_ID(), VEYLENS),
-					new Equals<>(Value.TARGET().SPECIES_ID(), GARDRONE)
-				))
-				.effect(SetType.targetSecondary(TypeId.ICE))
 			)
 			.rule(Rule.build()
 				.event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
@@ -1003,22 +961,13 @@ public class ItemRegistry {
 		register(Item.build(VOLTAIC_CORE)
 			.name("voltaic core")
 			.rule(Rule.build()
-				.event(USER_SWITCHED_IN_EVENT, USER)
+				.event(GenericId.SELF_SWAPPED_IN)
 				.condition(Conditions.or(
 					new Equals<>(Value.USER().SPECIES_ID(), SCORB),
 					new Equals<>(Value.USER().SPECIES_ID(), VEYLENS),
 					new Equals<>(Value.USER().SPECIES_ID(), GARDRONE)
 				))
 				.effect(SetType.userSecondary(TypeId.ELECTRIC))
-			)
-			.rule(Rule.build()
-				.event(TARGET_SWITCHED_IN_EVENT, TARGET)
-				.condition(Conditions.or(
-					new Equals<>(Value.TARGET().SPECIES_ID(), SCORB),
-					new Equals<>(Value.TARGET().SPECIES_ID(), VEYLENS),
-					new Equals<>(Value.TARGET().SPECIES_ID(), GARDRONE)
-				))
-				.effect(SetType.targetSecondary(TypeId.ELECTRIC))
 			)
 			.rule(Rule.build()
 				.event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)

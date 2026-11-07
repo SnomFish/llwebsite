@@ -1,6 +1,6 @@
-package github.snomfish.functionality.event;
+package github.snomfish.functionality.event.ids;
 
-public enum GateId {
+public enum GateId implements IEventId {
     CAN_ATTACKING_STAT_USE_STAT_BOOSTS,
     CAN_ATTACKING_STAT_USE_STAT_DROPS,
     CAN_DEFENDING_STAT_USE_STAT_BOOSTS,

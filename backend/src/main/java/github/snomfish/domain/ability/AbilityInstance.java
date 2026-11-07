@@ -10,8 +10,6 @@ import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.copy.DeepCopyable;
 import github.snomfish.functionality.event.Event;
 import github.snomfish.functionality.event.Gate;
-import github.snomfish.functionality.event.GateId;
-import github.snomfish.functionality.event.RuleId;
 
 import static github.snomfish.functionality.branch.BranchUtil.flatMap;
 
@@ -55,7 +53,7 @@ public class AbilityInstance implements DeepCopyable<AbilityInstance> {
     public void setTriggeredThisSwapIn(boolean triggered) {hasTriggeredThisSwapIn = triggered;}
 
 
-    public List<Branch<BattleContext>> handleRule(BattleContext context, Event<RuleId> event) {
+    public List<Branch<BattleContext>> handleRule(BattleContext context, Event event) {
         List<Branch<BattleContext>> outcomes = List.of(new Branch<>(context, 1));
         Ability ability = ability();
 
@@ -71,7 +69,7 @@ public class AbilityInstance implements DeepCopyable<AbilityInstance> {
     }
 
 
-    public List<Branch<BattleContext>> executeRule(BattleContext context, Event<RuleId> event, AbilityRule rule) {
+    public List<Branch<BattleContext>> executeRule(BattleContext context, Event event, AbilityRule rule) {
         List<Branch<BattleContext>> outcomes = new ArrayList<>();
 
         if (!rule.events().contains(event)) return List.of(new Branch<>(context, 1));
@@ -115,7 +113,7 @@ public class AbilityInstance implements DeepCopyable<AbilityInstance> {
     }
 
 
-    public List<Branch<Boolean>> handleGate(BattleContext context, Event<GateId> event) {
+    public List<Branch<Boolean>> handleGate(BattleContext context, Event event) {
         List<Branch<Boolean>> outcomes = List.of(new Branch<>(false, 1));
         Ability ability = ability();
 
