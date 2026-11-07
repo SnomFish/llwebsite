@@ -86,7 +86,11 @@ public class Gamestate implements DeepCopyable<Gamestate> {
     public void setBattleLog(List<String> battleLog) {this.battleLog = battleLog;}
 
 
-    public void incrementTurnNumber() {this.turnNumber += 1;}
+    public void incrementTurnNumber() {
+        this.turnNumber += 1;
+        playerSide.incrementTurnNumber();
+        enemySide.incrementTurnNumber();
+    }
     public void clearWeather() {this.weather = new WeatherInstance(NO_WEATHER, 999);}
     // add a way to decriment the lifespan
 

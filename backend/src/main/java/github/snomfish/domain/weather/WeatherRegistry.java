@@ -36,6 +36,9 @@ public class WeatherRegistry {
         register(Weather.build(NO_WEATHER)
             .name("No Weather")
         );
+        register(Weather.build(DUST_STORM)
+            .name("Dust Storm")
+        );
         register(Weather.build(FOG)
             .name("Fog")
             // spirit types get mold breaker on non light types
@@ -68,6 +71,9 @@ public class WeatherRegistry {
                 .effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(0.7)))
             )
             // plant types heal 1/16 max hp after each turn
+        );
+        register(Weather.build(SNOWSTORM)
+            .name("Snow Storm")
         );
         register(Weather.build(STRONG_WINDS)
             .name("Strong Winds")

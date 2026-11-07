@@ -67,6 +67,11 @@ public class BattleContext implements DeepCopyable<BattleContext> {
     }
 
 
+    public void incrementTurnNumber() {
+        this.gamestate.incrementTurnNumber();
+    }
+
+
     // events
     /* 
     THESE EVENTS WORK FOR EVENTS LIKE "WEATHER_STARTED" WHERE THE EVENT NEEDS TO APPLY TO BOTH PARTIES

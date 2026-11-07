@@ -3,7 +3,6 @@ package github.snomfish.functionality.event.ids;
 public enum RuleId implements IEventId {
 
     // ACTIVATED DURING THE TURN
-    PRE_TURN_EVENT,
 
     PRE_MOVE_EVENT, // used when a move is about to be used
 

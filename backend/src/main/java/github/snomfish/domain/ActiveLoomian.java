@@ -54,6 +54,12 @@ public class ActiveLoomian extends Loomian {
         return new ActiveLoomian(this);
     }
 
+
+    public void incrementTurnNumber() {
+        statusTurns += 1;
+    }
+
+
     public List<Branch<BattleContext>> dispatchRule(BattleContext context, Event event) {
         List<Branch<BattleContext>> outcomes = List.of(new Branch<>(context, 1.0));
 

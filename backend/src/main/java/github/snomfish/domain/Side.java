@@ -47,6 +47,14 @@ public class Side implements DeepCopyable<Side> {
     }
 
 
+    public void incrementTurnNumber() {
+        for (Loomian loomian : party) {
+            loomian.incrementTurnNumber();
+        }
+        activeLoomian.incrementTurnNumber();
+    }
+
+
     public List<Branch<BattleContext>> dispatchRule(BattleContext context, Event event) {
         List<Branch<BattleContext>> outcomes = new ArrayList<>();
 

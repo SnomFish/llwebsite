@@ -89,6 +89,11 @@ public class Loomian implements DeepCopyable<Loomian> {
     }
 
 
+    public void incrementTurnNumber() {
+        
+    }
+
+
     // getters
     public SpeciesId speciesId() {return speciesId;}
     public Species species() {return SpeciesRegistry.get(speciesId);} 

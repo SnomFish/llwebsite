@@ -1,6 +1,11 @@
 package github.snomfish.functionality.event.ids;
 
 public enum IsolatedId implements IEventId {
+
+    PRE_TURN,
+
+    START_OF_TURN,
+
     LOOMIAN_SWAPS_IN,
     PRE_DEAL_FORMULA_DAMAGE,
     //LOOMIAN_MOVE_HIT,

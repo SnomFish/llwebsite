@@ -29,7 +29,6 @@ import github.snomfish.functionality.effect.effects.AlterTypeChart;
 import github.snomfish.functionality.effect.effects.ApplyMechanic;
 import github.snomfish.functionality.effect.effects.ApplyStatChanges;
 import github.snomfish.functionality.effect.effects.ClutchEffect;
-import github.snomfish.functionality.effect.effects.DealDirectDamage;
 import github.snomfish.functionality.effect.effects.DealDirectSelfDamage;
 import github.snomfish.functionality.effect.effects.DispatchEventEffect;
 import github.snomfish.functionality.effect.effects.NoEffect;
@@ -276,6 +275,10 @@ public class AbilityRegistry {
 			.name("bitter touch")
 		);
 		register(Ability.build()
+			.id(BLACK_HEART)
+			.name("Black Heart")
+		);
+		register(Ability.build()
 			.id(BLISTERING_HEAT)
 			.name("blistering heat")
 		);
@@ -311,6 +314,10 @@ public class AbilityRegistry {
 				.event(CAN_TAKE_RECOIL, USER)
 				.condition(new FalseCondition())
 			)
+		);
+		register(Ability.build()
+			.id(BRAVE_CUB)
+			.name("Brave Cub")
 		);
 		register(Ability.build()
 			.id(BRUTAL_WRATH)
@@ -411,6 +418,10 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(CAROL)
 			.name("carol")
+		);
+		register(Ability.build()
+			.id(CAVERNOUS)
+			.name("Cavernous")
 		);
 		register(Ability.build()
 			.id(CHARGED_ARC)
@@ -515,6 +526,10 @@ public class AbilityRegistry {
 			.name("compliant")
 		);
 		register(Ability.build()
+			.id(CONDITIONED)
+			.name("Conditioned")
+		);
+		register(Ability.build()
 			.id(CONFIDENCE)
 			.name("confidence")
 			.gate(Gate.build()
@@ -553,6 +568,10 @@ public class AbilityRegistry {
 			.id(DAWN)
 			.name("dawn")
 		);
+		register(Ability.build() // doubles exclusive
+			.id(DEAD_OF_WINTER)
+			.name("Dead of Winter")
+		);
 		register(Ability.build()
 			.id(DEEP_FROSTBITE)
 			.name("deep_frostbite")
@@ -587,12 +606,20 @@ public class AbilityRegistry {
 			.name("designated chompers")
 		);
 		register(Ability.build()
+			.id(DETONATE)
+			.name("Detonate")
+		);
+		register(Ability.build()
 			.id(DEVIOUS)
 			.name("devious")
 			.gate(Gate.build()
 				.event(CAN_USE_DEFENSIVE_ABILITY, USER)
 				.condition(new NoCondition())
 			)
+		);
+		register(Ability.build()
+			.id(DIRT_DASH)
+			.name("Dirt Dash")
 		);
 		register(Ability.build()
 			.id(DISENCHANT)
@@ -638,8 +665,20 @@ public class AbilityRegistry {
 			.name("eager")
 		);
 		register(Ability.build()
+			.id(EARTHMOVER)
+			.name("Earthmover")
+		);
+		register(Ability.build()
 			.id(EFFULGENT)
 			.name("effulgent")
+		);
+		register(Ability.build()
+			.id(ELDER_MANE)
+			.name("Elder Mane")
+		);
+		register(Ability.build()
+			.id(ELECTRIFY)
+			.name("Electrify")
 		);
 		register(Ability.build()
 			.id(ELUSIVE)
@@ -664,8 +703,20 @@ public class AbilityRegistry {
 			)
 		);
 		register(Ability.build()
+			.id(ENERGY_FEEDING)
+			.name("Energy Feeding")
+		);
+		register(Ability.build()
 			.id(EXPERTISE)
 			.name("expertise")
+		);
+		register(Ability.build()
+			.id(EXTENDED_REACH)
+			.name("Extended Reach")
+		);
+		register(Ability.build()
+			.id(EXTRATERRESTRIAL)
+			.name("Extraterrestrial")
 		);
 		register(Ability.build()
 			.id(FACADE)
@@ -731,7 +782,7 @@ public class AbilityRegistry {
 			.id(FORESIGHT)
 			.name("foresight")
 			.rule(AbilityRule.build()
-				.event(PRE_TURN_EVENT, USER)
+				.event(IsolatedId.PRE_TURN)
 				.condition(new And(
 					new Equals<>(Value.USER().CURRENT_HEALTH(), Value.USER().HEALTH()),
 					new Equals<>(Value.USER().MOVE().TYPE(), TypeId.MIND)
@@ -788,6 +839,10 @@ public class AbilityRegistry {
 			.id(FRENZY)
 			.name("frenzy")
 		);
+		register(Ability.build()
+			.id(GAIN_FEEDING)
+			.name("Gain Feeding")
+		);
 		register(Ability.build() // completed
 			.id(GLIDE)
 			.name("glide")
@@ -822,6 +877,10 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(GORGE)
 			.name("gorge")
+		);
+		register(Ability.build()
+			.id(GREEDY)
+			.name("Greedy")
 		);
 		register(Ability.build() // doubles exclusive ability
 			.id(GUARDIAN)
@@ -889,6 +948,14 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(HIGH_EXPLOSIVE)
 			.name("high_explosive")
+		);
+		register(Ability.build()
+			.id(HIGH_PRESSURE)
+			.name("high pressure")
+		);
+		register(Ability.build()
+			.id(HIGH_STRUNG)
+			.name("High Strung")
 		);
 		register(Ability.build()
 			.id(HOTFOOT)
@@ -1028,6 +1095,10 @@ public class AbilityRegistry {
 			)
 		);
 		register(Ability.build()
+			.id(LOCKED_IN)
+			.name("Locked In")
+		);
+		register(Ability.build()
 			.id(LUCK_OF_THE_SEA)
 			.name("luck_of_the_sea")
 			.rule(AbilityRule.build()
@@ -1141,6 +1212,10 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(NIGHTMARISH)
 			.name("nightmarish")
+		);
+		register(Ability.build()
+			.id(NOXIOUS_RAZORBACK)
+			.name("Noxious Razorback")
 		);
 		register(Ability.build()
 			.id(NOXIOUS_WEEDS)
@@ -1268,6 +1343,10 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(PROWLER)
 			.name("prowler")
+		);
+		register(Ability.build()
+			.id(PUGILIST)
+			.name("pugilist")
 		);
 		register(Ability.build()
 			.id(PUNCTURE)
@@ -1424,6 +1503,10 @@ public class AbilityRegistry {
 			.name("sendoff")
 		);
 		register(Ability.build()
+			.id(SELF_DESTRUCT)
+			.name("Self Destruct")
+		);
+		register(Ability.build()
 			.id(SHAKEDOWN)
 			.name("shakedown")
 		);
@@ -1442,7 +1525,11 @@ public class AbilityRegistry {
 		);
 		register(Ability.build()
 			.id(SHARP_FOCUS)
-			.name("sharp_focus")
+			.name("Sharp Focus")
+		);
+		register(Ability.build()
+			.id(SHIFTY)
+			.name("Shifty")
 		);
 		register(Ability.build() // boosts the power of air type moves by 1.25x
 			.id(SKY_BORNE)
@@ -1454,8 +1541,12 @@ public class AbilityRegistry {
 			)
 		);
 		register(Ability.build()
+			.id(SLICK_SCALES)
+			.name("Slick Scales")
+		);
+		register(Ability.build()
 			.id(SLICK_SHELL)
-			.name("slick_shell")
+			.name("slick shell")
 		);
 		register(Ability.build()
 			.id(SLIMY)
@@ -1466,8 +1557,24 @@ public class AbilityRegistry {
 			.name("sly")
 		);
 		register(Ability.build()
+			.id(SNOWBALL)
+			.name("Snowball")
+		);
+		register(Ability.build()
+			.id(SNOW_GLIDER)
+			.name("Snow Glider")
+		);
+		register(Ability.build()
 			.id(SOB)
 			.name("sob")
+		);
+		register(Ability.build()
+			.id(SOLAR_POWERED)
+			.name("Solar Powered")
+		);
+		register(Ability.build()
+			.id(SOUL_HOARDER)
+			.name("Soul Hoarder")
 		);
 		register(Ability.build()
 			.id(SOUL_SIPHON)
@@ -1494,12 +1601,24 @@ public class AbilityRegistry {
 			.name("spine break")
 		);
 		register(Ability.build()
+			.id(SPOILS_OF_WAR)
+			.name("Spoils of War")
+		);
+		register(Ability.build()
 			.id(SPONGE)
 			.name("sponge")
 		);
 		register(Ability.build()
 			.id(STAUNCH)
 			.name("staunch")
+		);
+		register(Ability.build()
+			.id(STICKY)
+			.name("Sticky")
+		);
+		register(Ability.build()
+			.id(STOKED)
+			.name("Stoked")
 		);
 		register(Ability.build()
 			.id(SUGAR_RUSH)
@@ -1633,6 +1752,10 @@ public class AbilityRegistry {
 			.id(VENOMOUS)
 			.name("venomous")
 		);
+		register(Ability.build()
+			.id(VETERAN)
+			.name("Veteran")
+		);
 		// increases the users damage when the user is poisoned
 		register(Ability.build() // build
 			.id(VICIOUS)
@@ -1670,7 +1793,11 @@ public class AbilityRegistry {
 			.id(VIRTUOSO)
 			.name("virtuoso")
 		);
-		// the user CAN be forced off the field
+		register(Ability.build()
+			.id(VIRULENT_HYPNOSIS)
+			.name("virulent hypnosis")
+		);
+		// the user cannot be forced off the field
 		register(Ability.build()
 			.id(VISCID)
 			.name("viscid")
@@ -1719,6 +1846,14 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(WILDFIRE)
 			.name("wildfire")
+			.rule(AbilityRule.build()
+				.event(IsolatedId.PRE_TURN)
+				.condition(new And(
+					new Equals<>(Value.USER().CURRENT_HEALTH(), Value.USER().HEALTH()),
+					new Equals<>(Value.USER().MOVE().TYPE(), TypeId.MIND)
+				))
+				.effect(Effects.addValue(Value.SELF().PRIORITY(), new Constant(1)))
+			)
 		);
 		register(Ability.build() // completed
 			.id(WIND_SUMMON)
@@ -1743,6 +1878,16 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(WOODSMAN)
 			.name("woodman")
+			.interceptor(Interceptor.build()
+				.event(MOVE_ABOUT_TO_AFFECT_TARGET, TARGET)
+				.condition(new Or(
+					new Equals<>(Value.USER().MOVE().TYPE(), TypeId.PLANT),
+					new GateCondition(CAN_USE_DEFENSIVE_ABILITY, USER)
+				))
+				.effect(ApplyStatChanges.userChangingUser()
+					.mattack(new Constant(1)
+				))
+			)
 		);
     }
 }

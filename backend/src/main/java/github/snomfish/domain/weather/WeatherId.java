@@ -4,8 +4,10 @@ public enum WeatherId {
     NO_WEATHER,
 
     FOG,
+    DUST_STORM,
     HEATWAVE,
     RAIN,
+    SNOWSTORM,
     STRONG_WINDS,
     THUNDERSTORM;
 }
