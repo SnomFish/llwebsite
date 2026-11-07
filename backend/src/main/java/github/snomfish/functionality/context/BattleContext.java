@@ -103,6 +103,9 @@ public class BattleContext implements DeepCopyable<BattleContext> {
     public List<Branch<BattleContext>> dispatchEvent(GenericId ruleId, ContextSideId sideIds) {
         List<Branch<BattleContext>> outcomes = List.of(new Branch<>(this, 1.0));
 
+        // weather uses the current battlecontext user target setup
+        outcomes = flatMap(outcomes, context -> gamestate().weatherInstance().handleEvent(context, new Event(ruleId.isoId(), null)));
+
         outcomes = ContextUtil.switchFocus(outcomes, sideIds.self(this));
         outcomes = flatMap(outcomes, context -> user().dispatchRule(context, new Event(ruleId, null)));
         outcomes = ContextUtil.switchFocus(outcomes, targetState); // target state always inverts the focus
@@ -115,11 +118,12 @@ public class BattleContext implements DeepCopyable<BattleContext> {
 
 
 
-    public List<Branch<Boolean>> dispatchGate(GateId gateId) {
+    public List<Branch<Boolean>> dispatchGate(GateId gateId, ContextSideId sideIds) {
         List<Branch<Boolean>> outcomes = List.of(new Branch<>(true, 1));
 
-        outcomes = user().dispatchGate(this, new Event(gateId, ContextSideId.USER), outcomes);
-        outcomes = target().dispatchGate(this, new Event(gateId, ContextSideId.TARGET), outcomes);
+        BattleContext context = ContextUtil.switchFocus(this, sideIds);
+        outcomes = user().dispatchGate(context, new Event(gateId, ContextSideId.USER), outcomes);
+        outcomes = target().dispatchGate(context, new Event(gateId, ContextSideId.TARGET), outcomes);
 
         return outcomes;
     }

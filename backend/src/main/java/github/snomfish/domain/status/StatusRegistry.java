@@ -9,6 +9,7 @@ import github.snomfish.functionality.condition.Equals;
 import github.snomfish.functionality.effect.Effects;
 import github.snomfish.functionality.effect.effects.DealDirectSelfDamage;
 import github.snomfish.functionality.event.Rule;
+import github.snomfish.functionality.event.ids.GenericId;
 import github.snomfish.functionality.event.ids.RuleId;
 import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.Multiply;
@@ -67,9 +68,9 @@ public class StatusRegistry {
                 .effect(new DealDirectSelfDamage(new Constant(1/16)))
             )
             .rule(Rule.build() // cutting mattack in half
-                .event(RuleId.PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
-                .condition(new Equals<>(Value.USER().MOVE().CATEGORY(), CategoryId.MELEE))
-                .effect(Effects.multiplyValue(Value.USER().MOVE().ATTACKING_STAT_MODIFIER(), new Constant (0.5)))
+                .event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+                .condition(new Equals<>(Value.SELF().MOVE().CATEGORY(), CategoryId.MELEE))
+                .effect(Effects.multiplyValue(Value.SELF().MOVE().ATTACKING_STAT_MODIFIER(), new Constant (0.5)))
             )
         );
         register(Status.build(FROSTBITE)
@@ -79,9 +80,9 @@ public class StatusRegistry {
                 .effect(new DealDirectSelfDamage(new Constant(1/16)))
             )
             .rule(Rule.build() // cutting mattack in half
-                .event(RuleId.PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
-                .condition(new Equals<>(Value.USER().MOVE().CATEGORY(), CategoryId.RANGED))
-                .effect(Effects.multiplyValue(Value.USER().MOVE().ATTACKING_STAT_MODIFIER(), new Constant (0.5)))
+                .event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+                .condition(new Equals<>(Value.SELF().MOVE().CATEGORY(), CategoryId.RANGED))
+                .effect(Effects.multiplyValue(Value.SELF().MOVE().ATTACKING_STAT_MODIFIER(), new Constant (0.5)))
             )
         );
         register(Status.build(SLEEP)

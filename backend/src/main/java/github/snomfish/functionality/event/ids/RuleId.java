@@ -8,7 +8,6 @@ public enum RuleId implements IEventId {
     PRE_MOVE_EVENT, // used when a move is about to be used
 
     ACCURACY_CHECK_EVENT,
-    PRE_DEAL_FORMULA_DAMAGE_EVENT,
     PRE_DAMAGE_EVENT,
     CLUTCH_EVENT,
     DEALT_DAMAGE_EVENT, // used if the move dealt damage

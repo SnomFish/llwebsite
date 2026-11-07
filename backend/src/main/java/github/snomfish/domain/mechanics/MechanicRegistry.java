@@ -1,7 +1,6 @@
 package github.snomfish.domain.mechanics;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import github.snomfish.domain.type.TypeId;
@@ -11,11 +10,10 @@ import github.snomfish.functionality.effect.EffectSequence;
 import github.snomfish.functionality.effect.Effects;
 import github.snomfish.functionality.effect.effects.RemoveMechanic;
 import github.snomfish.functionality.event.Rule;
+import github.snomfish.functionality.event.ids.GenericId;
 import github.snomfish.functionality.number.Constant;
 
 import static github.snomfish.domain.mechanics.MechanicId.*;
-import static github.snomfish.functionality.context.ContextSideId.*;
-import static github.snomfish.functionality.event.ids.RuleId.*;
 
 public class MechanicRegistry {
 
@@ -42,44 +40,44 @@ public class MechanicRegistry {
         register(Mechanic.build(COMBUSTIBLE)
             .name("combustible")
             .rule(Rule.build()
-                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
-                .condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.FIRE))
-                .effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)))
+                .event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+                .condition(new Equals<>(Value.SELF().MOVE().TYPE(), TypeId.FIRE))
+                .effect(Effects.multiplyValue(Value.SELF().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)))
             )
         );
         register(Mechanic.build(COURSING_VENOM)
             .name("coursing venom")
             .rule(Rule.build()
-                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
-                .condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.TOXIC))
-                .effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)))
+                .event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+                .condition(new Equals<>(Value.SELF().MOVE().TYPE(), TypeId.TOXIC))
+                .effect(Effects.multiplyValue(Value.SELF().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)))
             )
         );
         register(Mechanic.build(NOXIOUS_WEEDS)
             .name("Noxious Weeds")
             .rule(Rule.build()
-                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
-                .condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.PLANT))
-                .effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)))
+                .event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+                .condition(new Equals<>(Value.SELF().MOVE().TYPE(), TypeId.PLANT))
+                .effect(Effects.multiplyValue(Value.SELF().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)))
             )
         );
         register(Mechanic.build(PRISMATIC)
             .name("Prismatic")
             .rule(Rule.build()
-                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
-                .condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.LIGHT))
-                .effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)))
+                .event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+                .condition(new Equals<>(Value.SELF().MOVE().TYPE(), TypeId.LIGHT))
+                .effect(Effects.multiplyValue(Value.SELF().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)))
             )
         );
         register(Mechanic.build(TOXIC_FILTER)
             .name("Toxic Filter")
             .rule(Rule.build()
-                .event(PRE_DEAL_FORMULA_DAMAGE_EVENT, USER)
-                .condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.AIR))
-                .effect(new EffectSequence(List.of(
-                    Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
+                .event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+                .condition(new Equals<>(Value.SELF().MOVE().TYPE(), TypeId.AIR))
+                .effect(new EffectSequence(
+                    Effects.multiplyValue(Value.SELF().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
                     RemoveMechanic.fromUser(TOXIC_FILTER)
-                )))
+                ))
             )
         );
     }

@@ -1,25 +1,33 @@
 package github.snomfish.functionality.event.ids;
 
 import static github.snomfish.functionality.event.ids.GenericAntiId.*;
+import static github.snomfish.functionality.event.ids.IsolatedId.*;
 
 public enum GenericId implements IGenericId {
-    SELF_SWAPPED_IN(WATCHES_OPP_SWAP_IN),
+    SELF_SWAPPED_IN(WATCHES_OPP_SWAP_IN, LOOMIAN_SWAPS_IN),
 
-    SELF_PRE_DEAL_FORMULA_DAMAGE(WATCHES_OPP_PRE_DEAL_FORMULA_DAMAGE),
-    SELF_MOVE_HIT(HIT_BY_MOVE),
+    PRE_SELF_DEAL_FORMULA_DAMAGE(PRE_OPP_DEAL_FORMULA_DAMAGE, PRE_DEAL_FORMULA_DAMAGE),
+    SELF_MOVE_HIT(HIT_BY_MOVE, null),
+    SELF_MOVE_DEALT_DAMAGE(RECEIVED_DAMAGE_FROM_MOVE, null),
 
-    SELF_STATS_LOWERED_BY_OPP(LOWERED_OPP_STATS),
-    SELF_STATS_LOWERED_BY_SELF(WATCHES_OPP_LOWER_OPP_STATS),
+    SELF_STATS_LOWERED_BY_OPP(LOWERED_OPP_STATS, null),
+    SELF_STATS_LOWERED_BY_SELF(WATCHES_OPP_LOWER_OPP_STATS, null),
     ;
 
 
-    private GenericAntiId oppId; 
+    private GenericAntiId oppId;
+    private IsolatedId isoId; 
 
 
-    private GenericId(GenericAntiId oppId) {
+    private GenericId(
+        GenericAntiId oppId,
+        IsolatedId isoId
+    ) {
         this.oppId = oppId;
+        this.isoId = isoId;
     }
 
 
     public GenericAntiId oppId() {return oppId;}
+    public IsolatedId isoId() {return isoId;}
 }

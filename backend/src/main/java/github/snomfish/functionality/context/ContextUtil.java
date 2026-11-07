@@ -31,4 +31,9 @@ public class ContextUtil {
 
         return outcomes;
     }
+
+
+    public static BattleContext switchFocus(BattleContext context, ContextSideId theSideThatWillBecomeUser) {
+        return new BattleContext(context.gamestate(), theSideThatWillBecomeUser.self(context));
+    }
 }

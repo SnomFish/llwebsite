@@ -7,6 +7,7 @@ import java.util.List;
 import github.snomfish.domain.status.StatusId;
 import github.snomfish.functionality.condition.GateCondition;
 import github.snomfish.functionality.condition.RandomCondition;
+import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.effect.ConditionalEffect;
 import github.snomfish.functionality.effect.EffectSequence;
 import github.snomfish.functionality.effect.IEffect;
@@ -26,13 +27,13 @@ public class Schematics {
     // 2026 09 26: I think this is actually a great idea 
     public static IEffect secondaryEffects(List<IEffect> effects) {
         return new ConditionalEffect(
-            new GateCondition(CAN_USE_SECONDARY_EFFECTS),
+            new GateCondition(CAN_USE_SECONDARY_EFFECTS, ContextSideId.USER),
             new EffectSequence(effects)
         );
     }
     public static IEffect affectsTarget(List<IEffect> effects) {
         return new ConditionalEffect(
-            new GateCondition(CAN_SECONDARY_EFFECTS_AFFECT_TARGET),
+            new GateCondition(CAN_SECONDARY_EFFECTS_AFFECT_TARGET, ContextSideId.USER),
             new EffectSequence(effects)
         );
     }

@@ -14,17 +14,19 @@ import github.snomfish.functionality.Value;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.condition.GateCondition;
 import github.snomfish.functionality.context.BattleContext;
+import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.effect.ConditionalEffect;
 import github.snomfish.functionality.effect.Effects;
 import github.snomfish.functionality.effect.IEffect;
 import github.snomfish.functionality.event.ids.GateId;
+import github.snomfish.functionality.event.ids.GenericId;
+import github.snomfish.functionality.event.ids.InterceptorId;
+import github.snomfish.functionality.event.ids.RuleId;
 import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.INumber;
 
 import static github.snomfish.domain.move.modifiers.ModifierId.*;
 import static github.snomfish.functionality.branch.BranchUtil.flatMap;
-import static github.snomfish.functionality.event.ids.InterceptorId.MOVE_ABOUT_TO_AFFECT_TARGET;
-import static github.snomfish.functionality.event.ids.RuleId.*;
 
 // the move tricky tactics does not work with this attacking and defending stat implementation, will require probably a new enum or the use of Value
 public class DealFormulaDamage implements IEffect {
@@ -42,7 +44,7 @@ public class DealFormulaDamage implements IEffect {
 
     public static IEffect schema() {
         return new InterceptorEffect(
-            MOVE_ABOUT_TO_AFFECT_TARGET,
+            InterceptorId.MOVE_ABOUT_TO_AFFECT_TARGET,
             new DealFormulaDamage()
         );
     }
@@ -54,15 +56,15 @@ public class DealFormulaDamage implements IEffect {
 
         context.log("executing damage effect");
         
-        outcomes = flatMap(outcomes, c -> c.dispatchEvent(PRE_DEAL_FORMULA_DAMAGE_EVENT));
+        outcomes = flatMap(outcomes, c -> c.dispatchEvent(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE, ContextSideId.USER));
         outcomes = flatMap(outcomes, c -> basePowerModule(c));
         outcomes = flatMap(outcomes, c -> critChanceModule(c));
         outcomes = flatMap(outcomes, c -> damageModule(c));
         outcomes = flatMap(outcomes, c -> statModifierModule(c));
-        outcomes = flatMap(outcomes, c -> c.dispatchEvent(PRE_DAMAGE_EVENT));
-        outcomes = flatMap(outcomes, c -> c.dispatchEvent(CLUTCH_EVENT));
+        outcomes = flatMap(outcomes, c -> c.dispatchEvent(RuleId.PRE_DAMAGE_EVENT));
+        outcomes = flatMap(outcomes, c -> c.dispatchEvent(RuleId.CLUTCH_EVENT));
         outcomes = flatMap(outcomes, c -> damageRollModule(c));
-        outcomes = flatMap(outcomes, c -> c.dispatchEvent(POST_DAMAGE_EVENT));
+        outcomes = flatMap(outcomes, c -> c.dispatchEvent(RuleId.POST_DAMAGE_EVENT));
 
         return outcomes;
     }
@@ -99,7 +101,7 @@ public class DealFormulaDamage implements IEffect {
     private List<Branch<BattleContext>> critChanceModule(BattleContext context) {
         List<Branch<BattleContext>> outcomes = new ArrayList<>();
         
-        for (Branch<Boolean> canCritBranch : new GateCondition(GateId.CAN_MOVE_CRIT).execute(context)) {
+        for (Branch<Boolean> canCritBranch : new GateCondition(GateId.CAN_MOVE_CRIT, ContextSideId.USER).execute(context)) {
             boolean canCrit = canCritBranch.value();
             double canCritProbability = canCritBranch.probability();
 
@@ -148,24 +150,24 @@ public class DealFormulaDamage implements IEffect {
         List<Branch<BattleContext>> outcomes = List.of(new Branch<>(outcome, 1));
 
         outcomes = flatMap(outcomes, c -> new ConditionalEffect(
-            new GateCondition(GateId.CAN_ATTACKING_STAT_USE_STAT_BOOSTS),
+            new GateCondition(GateId.CAN_ATTACKING_STAT_USE_STAT_BOOSTS, ContextSideId.USER),
             Effects.multiplyValue(Value.USER().MOVE().ATTACKING_STAT_MODIFIER(), new Constant(attackingStatBoosts))
         ).execute(c));
 
         if (move.hasCrit()) {
             outcomes = flatMap(outcomes, c -> new ConditionalEffect(
-                new GateCondition(GateId.CAN_ATTACKING_STAT_USE_STAT_DROPS),
+                new GateCondition(GateId.CAN_ATTACKING_STAT_USE_STAT_DROPS, ContextSideId.USER),
                 Effects.multiplyValue(Value.USER().MOVE().ATTACKING_STAT_MODIFIER(), new Constant(attackingStatDrops))
             ).execute(c));
 
             outcomes = flatMap(outcomes, c -> new ConditionalEffect(
-                new GateCondition(GateId.CAN_DEFENDING_STAT_USE_STAT_BOOSTS),
+                new GateCondition(GateId.CAN_DEFENDING_STAT_USE_STAT_BOOSTS, ContextSideId.USER),
                 Effects.multiplyValue(Value.USER().MOVE().ATTACKING_STAT_MODIFIER(), new Constant(defendingStatBoosts))
             ).execute(c));
         }
 
         outcomes = flatMap(outcomes, c -> new ConditionalEffect(
-            new GateCondition(GateId.CAN_DEFENDING_STAT_USE_STAT_DROPS),
+            new GateCondition(GateId.CAN_DEFENDING_STAT_USE_STAT_DROPS, ContextSideId.USER),
             Effects.multiplyValue(Value.USER().MOVE().ATTACKING_STAT_MODIFIER(), new Constant(defendingStatDrops))
         ).execute(c));
 
@@ -240,7 +242,7 @@ public class DealFormulaDamage implements IEffect {
             target.addToCurrentHealth(-damage);
 
             if (damage > 0) {
-                outcomes.addAll(flatMap(List.of(new Branch<>(outcome, 1/16)), c -> c.dispatchEvent(DEALT_DAMAGE_EVENT)));
+                outcomes.addAll(flatMap(List.of(new Branch<>(outcome, 1/16)), c -> c.dispatchEvent(GenericId.SELF_MOVE_DEALT_DAMAGE, ContextSideId.USER)));
             } else {
                 outcomes.add(new Branch<>(outcome, 1/16));
             }

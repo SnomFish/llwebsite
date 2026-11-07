@@ -11,6 +11,8 @@ import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.effect.IEffect;
 import github.snomfish.functionality.effect.effects.NoEffect;
 import github.snomfish.functionality.event.ids.GenericId;
+import github.snomfish.functionality.event.ids.IGenericId;
+import github.snomfish.functionality.event.ids.IsolatedId;
 import github.snomfish.functionality.event.ids.RuleId;
 
 import static github.snomfish.functionality.branch.BranchUtil.applyProbability;
@@ -56,7 +58,11 @@ public class Rule {
         this.events.add(new Event(ruleId, sideId));
         return this;
     }
-    public Rule event(GenericId genericId) {
+    public Rule event(IsolatedId ruleId) {
+        this.events.add(new Event(ruleId, null));
+        return this;
+    }
+    public Rule event(IGenericId genericId) {
         this.events.add(new Event(genericId, null));
         return this;
     }
