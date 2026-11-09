@@ -95,7 +95,6 @@ public class MechanicRegistry {
                 .event(GenericAntiId.RECEIVED_DAMAGE_FROM_MOVE)
                 .effect(RemoveMechanic.fromUser(ALL_OR_NOTHING_FOCUSING))
             )
-            .rule()
         );
     }
 }
