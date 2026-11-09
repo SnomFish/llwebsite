@@ -39,6 +39,11 @@ public class Mechanics implements DeepCopyable<Mechanics> {
     }
 
 
+    public void set(MechanicId id, boolean v) {
+        mechanics.put(id, v);
+    }
+
+
     public void add(MechanicId id) {
         mechanics.put(id, true);
     }

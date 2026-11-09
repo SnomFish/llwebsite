@@ -11,12 +11,15 @@ import github.snomfish.domain.weather.WeatherId;
 import github.snomfish.functionality.Schematics;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.condition.AccuracyCheck;
+import github.snomfish.functionality.condition.And;
 import github.snomfish.functionality.condition.Comparator;
 import github.snomfish.functionality.condition.Conditions;
+import github.snomfish.functionality.condition.Equals;
 import github.snomfish.functionality.condition.RandomCondition;
 import github.snomfish.functionality.effect.ConditionalEffect;
 import github.snomfish.functionality.effect.EffectSequence;
 import github.snomfish.functionality.effect.Effects;
+import github.snomfish.functionality.effect.effects.ApplyMechanic;
 import github.snomfish.functionality.effect.effects.ApplyStatChanges;
 import github.snomfish.functionality.effect.effects.DealFormulaDamage;
 import github.snomfish.functionality.effect.effects.EnergyDrainEffect;
@@ -29,6 +32,7 @@ import github.snomfish.functionality.number.ConditionalNumber;
 import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.ValueConstant;
 
+import static github.snomfish.domain.mechanics.MechanicId.ALL_OR_NOTHING_FOCUSING;
 import static github.snomfish.domain.move.CategoryId.*;
 import static github.snomfish.domain.move.MoveId.*;
 import static github.snomfish.domain.move.MoveTagId.*;
@@ -331,9 +335,15 @@ public class MoveRegistry {
 			.priority(new Constant(-3))
 			.energyCost(new Constant(60))
 			.basePower(new Constant(150))
-			.condition(new AccuracyCheck(new Constant(100)))
+			.onTurnStart(new MoveEffect(
+				ApplyMechanic.toUser(ALL_OR_NOTHING_FOCUSING)
+			))
+			.condition(new And(
+				new AccuracyCheck(new Constant(100)),
+				new Equals<>(Value.USER().ALL_OR_NOTHING_FOCUSING_MECHANIC(), true)
+			))
 			.onHit(new MoveEffect(
-				new NoEffect() // TODO: apply a focusing mechanic and require it for when dealing formula damage
+				DealFormulaDamage.schema()
 			))
 			.tag(CONTACT)
 		);
@@ -1275,18 +1285,14 @@ public class MoveRegistry {
 			.energyCost(new Constant(45))
 			.basePower(new Constant(90))
 			.condition(new AccuracyCheck(new Constant(100)))
-			.beforeHit(new MoveEffect(
+			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					new ConditionalEffect(Conditions.clearWeather(), 		SetType.move(SIMPLE)),
 					new ConditionalEffect(Conditions.fogActive(), 			SetType.move(SPIRIT)),
 					new ConditionalEffect(Conditions.heatwaveActive(), 		SetType.move(FIRE)),
 					new ConditionalEffect(Conditions.rainActive(), 			SetType.move(WATER)),
 					new ConditionalEffect(Conditions.strongWindsActive(), 	SetType.move(AIR)),
-					new ConditionalEffect(Conditions.thunderstormActive(), 	SetType.move(ELECTRIC))
-				))
-			))
-			.onHit(new MoveEffect(
-				new EffectSequence(List.of(
+					new ConditionalEffect(Conditions.thunderstormActive(), 	SetType.move(ELECTRIC)),
 					DealFormulaDamage.schema()
 				))
 			))
@@ -2005,11 +2011,9 @@ public class MoveRegistry {
 			.energyCost(new Constant(40))
 			.basePower(new Constant(75))
 			.condition(new AccuracyCheck(new Constant(100)))
-			.beforeHit(new MoveEffect(
-				SetType.move(Value.USER().PRIMARY_TYPE())
-			))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
+				SetType.move(Value.USER().PRIMARY_TYPE()),
 					DealFormulaDamage.schema()
 				))
 			))

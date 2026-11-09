@@ -31,9 +31,10 @@ public class Move implements DeepCopyable<Move> {
     private INumber energyCost;
     private INumber priority;
 
-    private IMove beforeHit;
+    private IMove onTurnStart;
+    private IMove beforeMove;
     private IMove onHit;
-    private IMove afterHit;
+    private IMove afterMove;
     private IMove onMiss;
 
     private INumber basePower;
@@ -58,9 +59,10 @@ public class Move implements DeepCopyable<Move> {
         this.energyCost = 	new Constant(0);
         this.priority = 	new Constant(0);
 
-        this.beforeHit =    new NoMove();
+        this.onTurnStart =  new NoMove();
+        this.beforeMove = 	new NoMove();
         this.onHit =        new NoMove();
-        this.afterHit =     new NoMove();
+        this.afterMove =    new NoMove();
         this.onMiss = 		new NoMove();
 
         this.basePower = 	new Constant(0);
@@ -85,9 +87,10 @@ public class Move implements DeepCopyable<Move> {
         this.energyCost = move.energyCost.deepCopy();
         this.priority = move.priority.deepCopy();
 
-        this.beforeHit = move.beforeHit.deepCopy();
+        this.onTurnStart = move.onTurnStart.deepCopy();
+        this.beforeMove = move.beforeMove.deepCopy();
         this.onHit = move.onHit.deepCopy();
-        this.afterHit = move.afterHit.deepCopy();
+        this.afterMove = move.afterMove.deepCopy();
         this.onMiss = move.onMiss.deepCopy();
 
         this.basePower = move.basePower.deepCopy();
@@ -117,9 +120,10 @@ public class Move implements DeepCopyable<Move> {
     public INumber energyCost() {return energyCost;}
     public INumber priority() {return priority;}
 
-    public IMove beforeHit() {return beforeHit;}
+    public IMove onTurnStart() {return onTurnStart;}
+    public IMove beforeMove() {return beforeMove;}
     public IMove onHit() {return onHit;}
-    public IMove afterHit() {return afterHit;}
+    public IMove afterMove() {return afterMove;}
     public IMove onMiss() {return onMiss;}
 
     public INumber basePower() {return basePower;}
@@ -171,16 +175,20 @@ public class Move implements DeepCopyable<Move> {
 		this.priority = priority;
 		return this;
 	}
-    public Move beforeHit(IMove beforeHit) {
-		this.beforeHit = beforeHit;
+	public Move onTurnStart(IMove onTurnStart) {
+		this.onTurnStart = onTurnStart;
+		return this;
+	}
+    public Move beforeMove(IMove beforeMove) {
+		this.beforeMove = beforeMove;
 		return this;
 	}
     public Move onHit(IMove onHit) {
 		this.onHit = onHit;
 		return this;
 	}
-    public Move afterHit(IMove afterHit) {
-		this.afterHit = afterHit;
+    public Move afterMove(IMove afterMove) {
+		this.afterMove = afterMove;
 		return this;
 	}
     public Move onMiss(IMove onMiss) {
@@ -229,23 +237,23 @@ public class Move implements DeepCopyable<Move> {
 
     // this bich does not think about energy cost
     public List<Branch<BattleContext>> execute(BattleContext context) {
-        List<Branch<BattleContext>> beforeHitOutcomes = beforeHit.execute(context);
+        List<Branch<BattleContext>> beforeMoveOutcomes = beforeMove.execute(context);
         List<Branch<BattleContext>> moveOutcomes = new ArrayList<>();
 
         for (Branch<Boolean> conditionBranch : condition.execute(context)) {
             if (conditionBranch.value()) {
                 moveOutcomes = applyProbability(
-                    flatMap(beforeHitOutcomes, c -> onHit.execute(c)), 
+                    flatMap(beforeMoveOutcomes, c -> onHit.execute(c)), 
                     conditionBranch
                 );
             } else {
                 moveOutcomes = applyProbability(
-                    flatMap(beforeHitOutcomes, c -> onMiss.execute(c)), 
+                    flatMap(beforeMoveOutcomes, c -> onMiss.execute(c)), 
                     conditionBranch
                 );
             }
         }
 
-        return flatMap(moveOutcomes, c -> afterHit.execute(c));
+        return flatMap(moveOutcomes, c -> afterMove.execute(c));
     }
 }

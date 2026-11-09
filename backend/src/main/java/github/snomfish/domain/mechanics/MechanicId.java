@@ -8,6 +8,8 @@ public enum MechanicId {
     COURSING_VENOM,
     NOXIOUS_WEEDS,
     PRISMATIC,
-    TOXIC_FILTER
+    TOXIC_FILTER,
+    
+    ALL_OR_NOTHING_FOCUSING,
     ;
 }

@@ -10,6 +10,7 @@ import github.snomfish.functionality.effect.EffectSequence;
 import github.snomfish.functionality.effect.Effects;
 import github.snomfish.functionality.effect.effects.RemoveMechanic;
 import github.snomfish.functionality.event.Rule;
+import github.snomfish.functionality.event.ids.GenericAntiId;
 import github.snomfish.functionality.event.ids.GenericId;
 import github.snomfish.functionality.number.Constant;
 
@@ -41,7 +42,8 @@ public class MechanicRegistry {
         register(Mechanic.build(FLINCH)
             .name("Flinch")
         );
-        
+
+        // mechanics caused by abilities
         register(Mechanic.build(COMBUSTIBLE)
             .name("combustible")
             .rule(Rule.build()
@@ -84,6 +86,16 @@ public class MechanicRegistry {
                     RemoveMechanic.fromUser(TOXIC_FILTER)
                 ))
             )
+        );
+
+        // mechanics caused by moves
+        register(Mechanic.build(ALL_OR_NOTHING_FOCUSING)
+            .name("Focusing for All or Nothing")
+            .rule(Rule.build()
+                .event(GenericAntiId.RECEIVED_DAMAGE_FROM_MOVE)
+                .effect(RemoveMechanic.fromUser(ALL_OR_NOTHING_FOCUSING))
+            )
+            .rule()
         );
     }
 }
