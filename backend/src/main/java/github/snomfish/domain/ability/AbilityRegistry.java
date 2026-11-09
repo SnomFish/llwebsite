@@ -61,9 +61,8 @@ public class AbilityRegistry {
     private AbilityRegistry() {}
 
 
-    public static Ability get(AbilityId id) {
-        return registry.get(id);
-    }
+	public static Map<AbilityId, Ability> registry() {return registry;}
+    public static Ability get(AbilityId id) {return registry.get(id);}
 
 
     private static void register(Ability ability) {

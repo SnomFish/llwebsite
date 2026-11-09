@@ -18,17 +18,14 @@ import static github.snomfish.domain.mechanics.MechanicId.*;
 public class MechanicRegistry {
 
 
-    private static boolean initialised = false;
     private static final Map<MechanicId, Mechanic> registry = new HashMap<>();
 
 
     private MechanicRegistry() {}
 
 
-    public static Mechanic get(MechanicId id) {
-		if (!initialised) throw new IllegalArgumentException("Abilities has not been initialised");
-        return registry.get(id);
-    }
+    public static Map<MechanicId, Mechanic> registry() {return registry;}
+    public static Mechanic get(MechanicId id) {return registry.get(id);}
 
 
     private static void register(Mechanic mechanic) {

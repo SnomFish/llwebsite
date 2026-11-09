@@ -22,9 +22,8 @@ public class WeatherRegistry {
     private WeatherRegistry() {}
 
 
-    public static Weather get(WeatherId id) {
-        return registry.get(id);
-    }
+    public static Map<WeatherId, Weather> registry() {return registry;}
+    public static Weather get(WeatherId id) {return registry.get(id);}
 
 
     private static void register(Weather weather) {

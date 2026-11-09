@@ -42,9 +42,8 @@ public class MoveRegistry {
     private MoveRegistry() {}
 
 
-    public static Move get(MoveId id) {
-		return registry.get(id);
-    }
+	public static Map<MoveId, Move> registry() {return registry;}
+    public static Move get(MoveId id) {return registry.get(id);}
 
 
 	private static void register(Move move) {
@@ -379,7 +378,7 @@ public class MoveRegistry {
 			.build()
 		);
 		register(MoveBuilder.newMove(ARMOUR_DOWN)
-			.name("armour_down")
+			.name("Armour Down")
 			.type(METAL)
 			.category(STATUS)
 			.energyCost(new Constant(25))
@@ -394,6 +393,12 @@ public class MoveRegistry {
 			.type(ANCIENT)
 			.category(STATUS)
 			.energyCost(new Constant(25))
+			.build()
+		);
+		register(MoveBuilder.newMove(AURA_BURST)
+			.name("Aura Burst")
+			.type(BRAWLER)
+			.category(RANGED)
 			.build()
 		);
 		register(MoveBuilder.newMove(BAFFLE)
@@ -462,6 +467,12 @@ public class MoveRegistry {
 			.category(STATUS)
 			.energyCost(new Constant(50))
 			.priority(new Constant(-7))
+			.build()
+		);
+		register(MoveBuilder.newMove(BANE_OF_WEILDING)
+			.name("Bane of Weilding")
+			.type(ANCIENT)
+			.category(STATUS)
 			.build()
 		);
 		register(MoveBuilder.newMove(BANEFUL_BASH)
@@ -586,6 +597,10 @@ public class MoveRegistry {
 			.priority(new Constant(-6))
 			.build()
 		);
+		register(MoveBuilder.newMove(BINDING_OATH)
+			.name("binding oath")
+			.build()
+		);
 		register(MoveBuilder.newMove(BITTER_COLD)
 			.name("Bitter Cold")
 			.type(ICE)
@@ -708,6 +723,10 @@ public class MoveRegistry {
 			.tag(HEALTH_DRAIN)
 			.build()
 		);
+		register(MoveBuilder.newMove(BLOODMEAL)
+			.name("bloodmeal")
+			.build()
+		);
 		register(MoveBuilder.newMove(BLUDGEON)
 			.name("Bludgeon")
 			.type(BRAWLER)
@@ -720,6 +739,10 @@ public class MoveRegistry {
 					DealFormulaDamage.schema()
 				))
 			))
+			.build()
+		);
+		register(MoveBuilder.newMove(BLUSTER_BURST)
+			.name("bluster burst")
 			.build()
 		);
 		register(MoveBuilder.newMove(BODY_CRASH)
@@ -949,6 +972,10 @@ public class MoveRegistry {
 			))
 			.build()
 		);
+		register(MoveBuilder.newMove(BURN_TRUE)
+			.name("burn true")
+			.build()
+		);
 		register(MoveBuilder.newMove(BURROW)
 			.name("Burrow")
 			.type(EARTH)
@@ -974,6 +1001,10 @@ public class MoveRegistry {
 					DealFormulaDamage.schema()
 				))
 			))
+			.build()
+		);
+		register(MoveBuilder.newMove(CALAMITOUS_CRASH)
+			.name("calamitous crash")
 			.build()
 		);
 		register(MoveBuilder.newMove(CANISTER_BURST)
@@ -1304,8 +1335,10 @@ public class MoveRegistry {
 			))
 			.build()
 		);
-		// TODO add cosmic chime
-		// TODO add counter assault
+		register(MoveBuilder.newMove(COUNTER_ASSAULT)
+			.name("counter assault")
+			.build()
+		);
 		register(MoveBuilder.newMove(COUNTER_POISE)
 			.name("Counter Poise")
 			.type(BUG)
@@ -1354,6 +1387,10 @@ public class MoveRegistry {
 				))
 			))
 			.tag(CONTACT)
+			.build()
+		);
+		register(MoveBuilder.newMove(CYCLONE_VORTEX)
+			.name("cyclone vortex")
 			.build()
 		);
 		register(MoveBuilder.newMove(DARK_SURGE)
@@ -1449,6 +1486,10 @@ public class MoveRegistry {
 			))
 			.tag(CONTACT)
 			.tag(SLASHING)
+			.build()
+		);
+		register(MoveBuilder.newMove(DISCIPLINE)
+			.name("discipline")
 			.build()
 		);
 		register(MoveBuilder.newMove(DISCORDANCE)
@@ -1675,7 +1716,10 @@ public class MoveRegistry {
 			))
 			.build()
 		);
-		// TODO add dualfrostblade
+		register(MoveBuilder.newMove(DUAL_FROSTBLADE)
+			.name("dual frostblade")
+			.build()
+		);
 		register(MoveBuilder.newMove(EAR_SLAP)
 			.name("Ear Slap")
 			.type(SIMPLE)
@@ -1930,7 +1974,10 @@ public class MoveRegistry {
 			))
 			.build()
 		);
-		// TODO add explosion
+		register(MoveBuilder.newMove(EXPLOSION)
+			.name("explosion")
+			.build()
+		);
 		register(MoveBuilder.newMove(FADE_AWAY)
 			.name("Fade Away")
 			.type(SPIRIT)
@@ -2149,8 +2196,14 @@ public class MoveRegistry {
 			))
 			.build()
 		);
-		// TODO add focus beam
-		// TODO add forged claws
+		register(MoveBuilder.newMove(FOCUS_BEAM)
+			.name("Focus Beam")
+			.build()
+		);
+		register(MoveBuilder.newMove(FORGED_CLAWS)
+			.name("Forged Claws")
+			.build()
+		);
 		register(MoveBuilder.newMove(FOUL_CHANT)
 			.name("foul_chant")
 			.type(MIND)
@@ -2172,6 +2225,10 @@ public class MoveRegistry {
 			))
 			.build()
 		);
+		register(MoveBuilder.newMove(FOUNTAIN_BEAM)
+			.name("Fountain Beam")
+			.build()
+		);
 		register(MoveBuilder.newMove(FRIGHTFUL_SUPRISE)
 			.name("Frightful Suprise")
 			.type(SPIRIT)
@@ -2187,6 +2244,10 @@ public class MoveRegistry {
 				))
 			))
 			.tag(SOUL_MOVE)
+			.build()
+		);
+		register(MoveBuilder.newMove(FRIGID_FRENZY)
+			.name("Frigid Frenzy")
 			.build()
 		);
 		register(MoveBuilder.newMove(FROST_BEAM)
@@ -2423,6 +2484,10 @@ public class MoveRegistry {
 			.tag(SOUND)
 			.build()
 		);
+		register(MoveBuilder.newMove(GLOW_BEAM)
+			.name("Glow Beam")
+			.build()
+		);
 		register(MoveBuilder.newMove(GNARLY_GASH)
 			.name("Gnarly Gash")
 			.type(DARK)
@@ -2499,7 +2564,10 @@ public class MoveRegistry {
 			))
 			.build()
 		);
-		// TODO add grapple grip
+		register(MoveBuilder.newMove(GRAPPLE_GRIP)
+			.name("Grapple Grip")
+			.build()
+		);
 		register(MoveBuilder.newMove(GROWL)
 			.name("Growl")
 			.type(SIMPLE)
@@ -2749,7 +2817,10 @@ public class MoveRegistry {
 			.condition(new AccuracyCheck(new Constant(100)))
 			.build()
 		);
-		// TODO add hook wave
+		register(MoveBuilder.newMove(HOOK_WAVE)
+			.name("Hook Wave")
+			.build()
+		);
 		register(MoveBuilder.newMove(HOP_KICK)
 			.name("Hop Kick")
 			.type(BRAWLER)
@@ -3043,6 +3114,10 @@ public class MoveRegistry {
 			))
 			.build()
 		);
+		register(MoveBuilder.newMove(LASH_OUT)
+			.name("Lash Out")
+			.build()
+		);
 		register(MoveBuilder.newMove(LAST_LAUGH)
 			.name("Last Laugh")
 			.type(DARK)
@@ -3226,7 +3301,10 @@ public class MoveRegistry {
 			))
 			.build()
 		);
-		// TODO add mandible crusher
+		register(MoveBuilder.newMove(MANDIBLE_CRUSHER)
+			.name("Mandible Crusher")
+			.build()
+		);
 		register(MoveBuilder.newMove(MAROON)
 			.name("Maroon")
 			.type(WATER)
@@ -3256,6 +3334,10 @@ public class MoveRegistry {
 					DealFormulaDamage.schema()
 				))
 			))
+			.build()
+		);
+		register(MoveBuilder.newMove(MASS_IMPACT)
+			.name("Mass Impact")
 			.build()
 		);
 		register(MoveBuilder.newMove(MEGA_CHOMP)
@@ -3711,6 +3793,10 @@ public class MoveRegistry {
 			.tag(HEALTH_DRAIN)
 			.build()
 		);
+		register(MoveBuilder.newMove(PARASOMNIA)
+			.name("Parasomnia")
+			.build()
+		);
 		register(MoveBuilder.newMove(PEACE_OF_MIND)
 			.name("Peace of Mind")
 			.type(MIND)
@@ -3921,6 +4007,10 @@ public class MoveRegistry {
 				))
 			))
 			.tag(CONTACT)
+			.build()
+		);
+		register(MoveBuilder.newMove(PILE_BUNKER)
+			.name("Pile Bunker")
 			.build()
 		);
 		register(MoveBuilder.newMove(PILFER)
@@ -4336,6 +4426,10 @@ public class MoveRegistry {
 			))
 			.build()
 		);
+		register(MoveBuilder.newMove(RANCOROUS_ROLLOUT)
+			.name("Rancorous Rollout")
+			.build()
+		);
 		register(MoveBuilder.newMove(RANT)
 			.name("Rant")
 			.type(DARK)
@@ -4380,6 +4474,10 @@ public class MoveRegistry {
 			))
 			.tag(CONTACT)
 			.tag(SLASHING)
+			.build()
+		);
+		register(MoveBuilder.newMove(RECHARGE)
+			.name("Recharge")
 			.build()
 		);
 		register(MoveBuilder.newMove(RECYCLE)
@@ -4491,7 +4589,10 @@ public class MoveRegistry {
 			))
 			.build()
 		);
-		// TODO rocket jab
+		register(MoveBuilder.newMove(ROCKET_JAB)
+			.name("Rocket Jab")
+			.build()
+		);
 		register(MoveBuilder.newMove(ROGUE_ASSAULT)
 			.name("Rogue Assault")
 			.type(BRAWLER)
@@ -4670,6 +4771,10 @@ public class MoveRegistry {
 			.energyCost(new Constant(0))
 			.build()
 		);
+		register(MoveBuilder.newMove(SERENE_GIFT)
+			.name("Serene Gift")
+			.build()
+		);
 		register(MoveBuilder.newMove(SHADOW_LURK)
 			.name("shadow_lurk")
 			.type(DARK)
@@ -4727,7 +4832,10 @@ public class MoveRegistry {
 			))
 			.build()
 		);
-		// TODO add shard storm
+		register(MoveBuilder.newMove(SHARD_STORM)
+			.name("Shard Storm")
+			.build()
+		);
 		register(MoveBuilder.newMove(SHARPEN)
 			.name("Sharpen")
 			.type(DARK)
@@ -4852,8 +4960,14 @@ public class MoveRegistry {
 			))
 			.build()
 		);
-		// TODO add skilled swipe
-		// TODO add skulk
+		register(MoveBuilder.newMove(SKILLED_SWIPE)
+			.name("Skilled Swipe")
+			.build()
+		);
+		register(MoveBuilder.newMove(SKULK)
+			.name("Skulk")
+			.build()
+		);
 		register(MoveBuilder.newMove(SLAP_DOWN)
 			.name("Slap Down")
 			.type(DARK)
@@ -4935,7 +5049,10 @@ public class MoveRegistry {
 			.tag(POWDER)
 			.build()
 		);
-		// snot shot
+		register(MoveBuilder.newMove(SNOT_SHOT)
+			.name("Snot Shot")
+			.build()
+		);
 		register(MoveBuilder.newMove(SNOWDOZER)
 			.name("Snowdozer")
 			.type(ICE)
@@ -5149,6 +5266,10 @@ public class MoveRegistry {
 			))
 			.build()
 		);
+		register(MoveBuilder.newMove(STALK)
+			.name("Stalk")
+			.build()
+		);
 		register(MoveBuilder.newMove(STAMPEDE)
 			.name("Stampede")
 			.type(SIMPLE)
@@ -5215,7 +5336,10 @@ public class MoveRegistry {
 			.tag(POWDER)
 			.build()
 		);
-		// TODO add stealth assault
+		register(MoveBuilder.newMove(STEALTH_ASSAULT)
+			.name("Stealth Assault")
+			.build()
+		);
 		register(MoveBuilder.newMove(STEEL_CRUSHER)
 			.name("Steel Crusher")
 			.type(METAL)
@@ -5238,7 +5362,10 @@ public class MoveRegistry {
 			.tag(CONTACT)
 			.build()
 		);
-		// TODO add steel grit
+		register(MoveBuilder.newMove(STEEL_GRIT)
+			.name("Steel Grit")
+			.build()
+		);
 		register(MoveBuilder.newMove(STEEL_TRAP)
 			.name("steel_trap")
 			.type(METAL)
@@ -5304,7 +5431,10 @@ public class MoveRegistry {
 			))
 			.build()
 		);
-		// TODO add strategic surge
+		register(MoveBuilder.newMove(STRATEGIC_SURGE)
+			.name("Strategic Surge")
+			.build()
+		);
 		register(MoveBuilder.newMove(STRETCH)
 			.name("Stretch")
 			.type(SIMPLE)
@@ -5683,7 +5813,10 @@ public class MoveRegistry {
 			))
 			.build()
 		);
-		// TODO add timber sweep
+		register(MoveBuilder.newMove(TIMBER_SWEEP)
+			.name("Timber Sweep")
+			.build()
+		);
 		register(MoveBuilder.newMove(TIMBER_THRASH)
 			.name("Timber Thrash")
 			.type(PLANT)

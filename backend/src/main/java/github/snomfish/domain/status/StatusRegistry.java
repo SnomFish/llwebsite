@@ -27,9 +27,8 @@ public class StatusRegistry {
     private StatusRegistry() {}
 
 
-    public static Status get(StatusId id) {
-        return registry.get(id);
-    }
+    public static Map<StatusId, Status> registry() {return registry;}
+    public static Status get(StatusId id) {return registry.get(id);}
 
 
     private static void register(Status status) {

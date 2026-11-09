@@ -50,9 +50,8 @@ public class ItemRegistry {
     private ItemRegistry() {}
 
 
-    public static Item get(ItemId id) {
-        return registry.get(id);
-    }
+	public static Map<ItemId, Item> registry() {return registry;}
+    public static Item get(ItemId id) {return registry.get(id);}
 
 
     private static void register(Item item) {

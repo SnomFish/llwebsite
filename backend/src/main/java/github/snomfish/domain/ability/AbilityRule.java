@@ -51,7 +51,7 @@ public class AbilityRule {
     }
     public AbilityRule event(IsolatedId isolatedId) {
         this.events.add(new Event(isolatedId, null));
-        return null;
+        return this;
     }
     public AbilityRule event(IGenericId genericId) {
         this.events.add(new Event(genericId, null));
