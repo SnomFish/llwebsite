@@ -10,7 +10,6 @@ import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.effect.IEffect;
 import github.snomfish.functionality.effect.effects.NoEffect;
-import github.snomfish.functionality.event.ids.GenericId;
 import github.snomfish.functionality.event.ids.IGenericId;
 import github.snomfish.functionality.event.ids.IsolatedId;
 import github.snomfish.functionality.event.ids.RuleId;

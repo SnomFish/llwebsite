@@ -4,11 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import github.snomfish.domain.ability.AbilityId;
-import github.snomfish.domain.move.MoveId;
-import github.snomfish.domain.stats.Stats;
-import github.snomfish.domain.type.TypeId;
-
 import static github.snomfish.domain.ability.AbilityId.*;
 import static github.snomfish.domain.move.MoveId.*;
 import static github.snomfish.domain.species.SpeciesId.*;
