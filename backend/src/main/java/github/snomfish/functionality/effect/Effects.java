@@ -1,7 +1,14 @@
 package github.snomfish.functionality.effect;
 
+import github.snomfish.domain.mechanics.MechanicId;
 import github.snomfish.functionality.Value;
+import github.snomfish.functionality.condition.And;
+import github.snomfish.functionality.condition.GateCondition;
+import github.snomfish.functionality.condition.RandomCondition;
+import github.snomfish.functionality.context.ContextSideId;
+import github.snomfish.functionality.effect.effects.ApplyMechanic;
 import github.snomfish.functionality.effect.effects.SetValueEffect;
+import github.snomfish.functionality.event.ids.GateId;
 import github.snomfish.functionality.number.Add;
 import github.snomfish.functionality.number.INumber;
 import github.snomfish.functionality.number.Multiply;
@@ -11,6 +18,34 @@ public class Effects {
     
 
     private Effects() {}
+
+
+    public static IEffect flinch() {
+        return new ConditionalEffect(
+            new GateCondition(GateId.CAN_MOVE_FLINCH, ContextSideId.USER),
+            ApplyMechanic.toTarget(MechanicId.FLINCH)
+        );
+    }
+    public static IEffect flinchChance(INumber flinchChanceNumber) {
+        return new ConditionalEffect(
+            new RandomCondition(flinchChanceNumber),
+            flinch()
+        );
+    }
+
+
+    public static IEffect daze() {
+        return new ConditionalEffect(
+            new GateCondition(GateId.CAN_MOVE_DAZE, ContextSideId.USER),
+            ApplyMechanic.toTarget(MechanicId.DAZE)
+        );
+    }
+    public static IEffect dazeChance(INumber dazeChanceNumber) {
+        return new ConditionalEffect(
+            new RandomCondition(dazeChanceNumber),
+            daze()
+        );
+    }
 
 
     public static IEffect addValue(Value<? extends Number> value, INumber addition) {

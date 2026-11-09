@@ -537,7 +537,7 @@ public class AbilityRegistry {
 			.id(CONFIDENCE)
 			.name("confidence")
 			.gate(Gate.build()
-				.event(CAN_FLINCH, USER)
+				.event(CAN_MOVE_FLINCH, USER)
 				.condition(new FalseCondition())
 			)
 		);

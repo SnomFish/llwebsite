@@ -34,6 +34,9 @@ public class SpeciesRegistry {
 	}
 	private static void init1() {
 		register(Species.build()
+			.id(NO_SPECIES)
+		);
+		register(Species.build()
 			.id(EMBIT)
 			.name("embit")
 			.baseTypes(List.of(FIRE))
