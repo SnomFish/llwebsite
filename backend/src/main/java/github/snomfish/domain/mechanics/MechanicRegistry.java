@@ -35,6 +35,13 @@ public class MechanicRegistry {
 
 
     static {
+        register(Mechanic.build(DAZE)
+            .name("Daze")
+        );
+        register(Mechanic.build(FLINCH)
+            .name("Flinch")
+        );
+        
         register(Mechanic.build(COMBUSTIBLE)
             .name("combustible")
             .rule(Rule.build()

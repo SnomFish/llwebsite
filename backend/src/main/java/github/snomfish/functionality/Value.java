@@ -399,32 +399,32 @@ public class Value<T> {
 	public Value<TypeId> TYPE() {return update(
 		TypeId.class,
         c -> 		((Move) c).type(),
-        (c, v) -> 	((Move) c).setType(v)
+        (c, v) -> 	((Move) c).type(v)
     );}
     public Value<CategoryId> CATEGORY() {return update(
 		CategoryId.class,
         c -> 		((Move) c).category(),
-        (c, v) -> 	((Move) c).setCategory(v)
+        (c, v) -> 	((Move) c).category(v)
     );}
     public Value<TypeChart> TYPECHART() {return update(
 		TypeChart.class,
         c -> 		((Move) c).typeChart(),
-        (c, v) -> 	((Move) c).setTypeChart(v)
+        (c, v) -> 	((Move) c).typeChart(v)
     );}
     public Value<Integer> CRIT_CHANCE() {return update(
 		Integer.class,
         c -> 		((Move) c).damage(),
-        (c, v) -> 	((Move) c).setCritChance(v)
+        (c, v) -> 	((Move) c).critChance(v)
     );}
     public Value<INumber> BASE_POWER() {return update(
 		INumber.class,
         c -> 		((Move) c).basePower(),
-        (c, v) -> 	((Move) c).setBasePower(v)
+        (c, v) -> 	((Move) c).basePower(v)
     );}
     public Value<Integer> DAMAGE() {return update(
 		Integer.class,
         c -> 		((Move) c).damage(),
-        (c, v) -> 	((Move) c).setDamage(v)
+        (c, v) -> 	((Move) c).damage(v)
     );}
     public Value<Double> ATTACKING_STAT_MODIFIER() {return update(
 		Double.class,

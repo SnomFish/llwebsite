@@ -1,6 +1,8 @@
 package github.snomfish.domain.move;
 
 public enum MoveId {
+    NO_MOVE,
+
     ACCELERATE,
     ADAPTIVE_ASSAULT_AIR,
     ADAPTIVE_ASSAULT_ANCIENT,

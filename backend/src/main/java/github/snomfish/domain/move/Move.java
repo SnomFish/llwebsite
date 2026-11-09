@@ -5,13 +5,16 @@ import java.util.List;
 
 import github.snomfish.domain.move.modifiers.Modifiers;
 import github.snomfish.domain.move.structures.IMove;
+import github.snomfish.domain.move.structures.NoMove;
 import github.snomfish.domain.stats.StatId;
 import github.snomfish.domain.type.TypeChart;
 import github.snomfish.domain.type.TypeId;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.condition.ICondition;
+import github.snomfish.functionality.condition.NoCondition;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.copy.DeepCopyable;
+import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.INumber;
 import github.snomfish.functionality.tags.Tags;
 
@@ -46,47 +49,28 @@ public class Move implements DeepCopyable<Move> {
     private boolean hasCrit; // could be added to tags
 
 
-    public Move(
-        MoveId id,
-        String name,
-        ICondition condition,
-        TypeId type,
-        CategoryId category,
-        INumber energyCost,
-        INumber priority,
+    public Move() {
+        this.id = 			MoveId.NO_MOVE;
+        this.name = 		"No Move";
+        this.condition = 	new NoCondition();
+        this.type = 		TypeId.NULL;
+        this.category = 	CategoryId.MELEE;
+        this.energyCost = 	new Constant(0);
+        this.priority = 	new Constant(0);
 
-        IMove beforeHit,
-        IMove onHit,
-        IMove afterHit,
-        IMove onMiss,
+        this.beforeHit =    new NoMove();
+        this.onHit =        new NoMove();
+        this.afterHit =     new NoMove();
+        this.onMiss = 		new NoMove();
 
-        INumber basePower,
-        StatId attackingStatId,
-        StatId defendingStatId,
-        Tags<MoveTagId> tags,
-        int critChance
-    ) {
-        this.id = id;
-        this.name = name;
-        this.condition = condition;
-        this.type = type;
-        this.category = category;
-        this.energyCost = energyCost;
-        this.priority = priority;
+        this.basePower = 	new Constant(0);
+        this.attackingStatId = StatId.MATTACK;
+        this.defendingStatId = StatId.MDEFENSE;
+        this.tags = 		new Tags<MoveTagId>();
+        this.modifiers = 	new Modifiers();
+        this.typeChart = 	TypeChart.get();
 
-        this.beforeHit = beforeHit;
-        this.onHit = onHit;
-        this.afterHit = afterHit;
-        this.onMiss = onMiss;
-
-        this.basePower = basePower;
-        this.attackingStatId = attackingStatId;
-        this.defendingStatId = defendingStatId;
-        this.tags = tags;
-        this.modifiers = new Modifiers();
-        this.typeChart = TypeChart.get();
-
-        this.critChance = critChance;
+        this.critChance = 0;
         this.damage = 0;
 
         this.hasCrit = false;
@@ -152,30 +136,95 @@ public class Move implements DeepCopyable<Move> {
 
 
     // setter
-    public void setMoveId(MoveId moveId) {this.id = moveId;}
-    public void setName(String name) {this.name = name;}
-    public void setCondition(ICondition condition) {this.condition = condition;}
-    public void setType(TypeId type) {this.type = type;}
-    public void setCategory(CategoryId category) {this.category = category;}
-    public void setEnergyCost(INumber energyCost) {this.energyCost = energyCost;}
-    public void setPriority(INumber priority) {this.priority = priority;}
+	public static Move build() {
+		return new Move();
+	}
+	public Move id(MoveId id) {
+		this.id = id;
+		return this;
+	}
+    public Move moveId(MoveId moveId) {
+		this.id = moveId;
+		return this;
+	}
+    public Move name(String name) {
+		this.name = name;
+		return this;
+	}
+    public Move condition(ICondition condition) {
+		this.condition = condition;
+		return this;
+	}
+    public Move type(TypeId type) {
+		this.type = type;
+		return this;
+	}
+    public Move category(CategoryId category) {
+		this.category = category;
+		return this;
+	}
+    public Move energyCost(INumber energyCost) {
+		this.energyCost = energyCost;
+		return this;
+	}
+    public Move priority(INumber priority) {
+		this.priority = priority;
+		return this;
+	}
+    public Move beforeHit(IMove beforeHit) {
+		this.beforeHit = beforeHit;
+		return this;
+	}
+    public Move onHit(IMove onHit) {
+		this.onHit = onHit;
+		return this;
+	}
+    public Move afterHit(IMove afterHit) {
+		this.afterHit = afterHit;
+		return this;
+	}
+    public Move onMiss(IMove onMiss) {
+		this.onMiss = onMiss;
+		return this;
+	}
+    public Move basePower(INumber basePower) {
+		this.basePower = basePower;
+		return this;
+	}
+    public Move attackingStat(StatId attackingStatId) {
+		this.attackingStatId = attackingStatId;
+		return this;
+	}
+    public Move defendingStat(StatId defendingStatId) {
+		this.defendingStatId = defendingStatId;
+		return this;
+	}
+    public Move tag(MoveTagId tag) {
+		this.tags.set(tag, true);
+		return this;
+	}
+    public Move modifiers(Modifiers modifiers) {
+		this.modifiers = modifiers;
+		return this;
+	}
+    public Move typeChart(TypeChart typeChart) {
+		this.typeChart = typeChart;
+		return this;
+	}
+    public Move critChance(int critChance) {
+		this.critChance = critChance;
+		return this;
+	}
+    public Move damage(int damage) {
+		this.damage = damage;
+		return this;
+	}
+    public Move hasCrit(boolean hasCrit) {
+		this.hasCrit = hasCrit;
+		return this;
+	}
 
-    public void setBeforeHit(IMove beforeHit) {this.beforeHit = beforeHit;}
-    public void setOnHit(IMove onHit) {this.onHit = onHit;}
-    public void setAfterHit(IMove afterHit) {this.afterHit = afterHit;}
-    public void setOnMiss(IMove onMiss) {this.onMiss = onMiss;}
 
-    public void setBasePower(INumber basePower) {this.basePower = basePower;}
-    public void setAttackingStatId(StatId attackingStatId) {this.attackingStatId = attackingStatId;}
-    public void setDefendingStatId(StatId defendingStatId) {this.defendingStatId = defendingStatId;}
-    public void setTags(Tags<MoveTagId> tags) {this.tags = tags;}
-    public void setModifiers(Modifiers modifiers) {this.modifiers = modifiers;}
-    public void setTypeChart(TypeChart typeChart) {this.typeChart = typeChart;}
-
-    public void setCritChance(int critChance) {this.critChance = critChance;}
-    public void setDamage(int damage) {this.damage = damage;}
-
-    public void setHasCrit(boolean hasCrit) {this.hasCrit = hasCrit;}
 
 
     // this bich does not think about energy cost

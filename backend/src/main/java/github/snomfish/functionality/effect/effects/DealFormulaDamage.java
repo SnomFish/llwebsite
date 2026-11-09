@@ -84,7 +84,7 @@ public class DealFormulaDamage implements IEffect {
 
             ActiveLoomian user = outcome.user().activeLoomian();
             Move move = user.action().move();
-            move.setDamage(basePower);
+            move.damage(basePower);
             outcomes.add(new Branch<>(
                 outcome,
                 basePowerBranch.probability()
@@ -115,8 +115,8 @@ public class DealFormulaDamage implements IEffect {
                 BattleContext outcome1 = context.deepCopy();
                 BattleContext outcome2 = context.deepCopy();
 
-                outcome1.user().activeLoomian().action().move().setHasCrit(true);
-                outcome2.user().activeLoomian().action().move().setHasCrit(false);
+                outcome1.user().activeLoomian().action().move().hasCrit(true);
+                outcome2.user().activeLoomian().action().move().hasCrit(false);
 
                 outcomes.add(new Branch<>(outcome1, CRIT_CHANCES[critChance]));
                 outcomes.add(new Branch<>(outcome2, 1-CRIT_CHANCES[critChance]));
@@ -220,7 +220,7 @@ public class DealFormulaDamage implements IEffect {
         damage = Math.floor(damage * modifiers.get(TYPE)); 
         damage = Math.floor(damage * modifiers.get(DAMAGE)); 
 
-        move.setDamage((int)damage);
+        move.damage((int)damage);
         
         return List.of(new Branch<>(outcome, 1.0));
     }
@@ -237,7 +237,7 @@ public class DealFormulaDamage implements IEffect {
             Move move = user.action().move();
             int damage = move.damage();
 
-            move.setDamage((int)Math.clamp((double)damage * damageRollModifier, 1, target.currentHealth()));
+            move.damage((int)Math.clamp((double)damage * damageRollModifier, 1, target.currentHealth()));
             outcome.gamestate().log("move dealt " + damage + " damage");
             target.addToCurrentHealth(-damage);
 
