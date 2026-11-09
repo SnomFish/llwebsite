@@ -29,6 +29,7 @@ public class MechanicRegistry {
 
 
     private static void register(Mechanic mechanic) {
+		if (registry.containsKey(mechanic.id())) throw new RuntimeException("MechanicRegistry attempted to register duplicate entry \"" + mechanic.id().name() + "\"");
         registry.put(mechanic.id(), mechanic);
     }
 

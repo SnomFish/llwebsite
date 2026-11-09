@@ -55,6 +55,7 @@ public class ItemRegistry {
 
 
     private static void register(Item item) {
+		if (registry.containsKey(item.id())) throw new RuntimeException("ItemRegistry attempted to register duplicate entry \"" + item.id().name() + "\"");
         registry.put(item.id(), item);
     }
 

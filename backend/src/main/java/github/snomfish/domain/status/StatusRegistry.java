@@ -32,6 +32,7 @@ public class StatusRegistry {
 
 
     private static void register(Status status) {
+		if (registry.containsKey(status.id())) throw new RuntimeException("StatusRegistry attempted to register duplicate entry \"" + status.id().name() + "\"");
         registry.put(status.id(), status);
     }
 

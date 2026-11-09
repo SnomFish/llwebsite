@@ -27,6 +27,7 @@ public class WeatherRegistry {
 
 
     private static void register(Weather weather) {
+		if (registry.containsKey(weather.id())) throw new RuntimeException("WeatherRegistry attempted to register duplicate entry \"" + weather.id().name() + "\"");
         registry.put(weather.id(), weather);
     }
 

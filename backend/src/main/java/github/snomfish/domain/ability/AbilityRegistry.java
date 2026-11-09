@@ -66,6 +66,7 @@ public class AbilityRegistry {
 
 
     private static void register(Ability ability) {
+		if (registry.containsKey(ability.id())) throw new RuntimeException("AbilityRegistry attempted to register duplicate entry \"" + ability.id().name() + "\"");
 		registry.put(ability.id(), ability);
 	}
 
@@ -396,11 +397,7 @@ public class AbilityRegistry {
 				))
 			)
 		);
-		register(Ability.build()
-			.id(BURGLAR)
-			.name("burgler")
-		);
-		// increases the damage of hte users fire type moves by 25%
+		// increases the damage of the users fire type moves by 25%
 		register(Ability.build()
 			.id(BURNING_RAGE)
 			.name("burning_rage")

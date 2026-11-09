@@ -1,6 +1,8 @@
 package github.snomfish.domain.species;
 
 public enum SpeciesId {
+    NO_SPECIES, 
+    
     EMBIT,
     RABBURN,
     SEARKNIGHT,

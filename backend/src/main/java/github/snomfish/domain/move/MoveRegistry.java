@@ -47,6 +47,7 @@ public class MoveRegistry {
 
 
 	private static void register(Move move) {
+		if (registry.containsKey(move.id())) throw new RuntimeException("MoveRegistry attempted to register duplicate entry \"" + move.id().name() + "\"");
 		registry.put(move.id(), move);
 	}
 
