@@ -10,13 +10,12 @@ import github.snomfish.functionality.effect.Effects;
 import github.snomfish.functionality.effect.effects.DealDirectSelfDamage;
 import github.snomfish.functionality.event.Rule;
 import github.snomfish.functionality.event.ids.GenericId;
-import github.snomfish.functionality.event.ids.RuleId;
+import github.snomfish.functionality.event.ids.IsolatedId;
 import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.Multiply;
 import github.snomfish.functionality.number.ValueConstant;
 
 import static github.snomfish.domain.status.StatusId.*;
-import static github.snomfish.functionality.context.ContextSideId.*;
 
 public class StatusRegistry {
     
@@ -44,14 +43,14 @@ public class StatusRegistry {
         register(Status.build(POISON)
             .name("posion")
             .rule(Rule.build()
-                .event(RuleId.END_TURN_STATUS_EFFECT_EVENT, USER)
+                .event(IsolatedId.END_OF_TURN_STATUS_EFFECTS)
                 .effect(new DealDirectSelfDamage(new Multiply(new Constant(1/8), new ValueConstant(Value.OPP().HEALTH()))))
             )
         );
         register(Status.build(BAD_POISON)
             .name("poison")
             .rule(Rule.build()
-                .event(RuleId.END_TURN_STATUS_EFFECT_EVENT, USER)
+                .event(IsolatedId.END_OF_TURN_STATUS_EFFECTS)
                 .effect(new DealDirectSelfDamage(new Multiply(
                     new Constant(1/16),
                     new ValueConstant(Value.USER().STATUS_TURNS())
@@ -64,25 +63,25 @@ public class StatusRegistry {
         register(Status.build(BURN)
             .name("burn")
             .rule(Rule.build()
-                .event(RuleId.END_TURN_STATUS_EFFECT_EVENT, USER)
+                .event(IsolatedId.END_OF_TURN_STATUS_EFFECTS)
                 .effect(new DealDirectSelfDamage(new Constant(1/16)))
             )
-            .rule(Rule.build() // cutting mattack in half
+            .rule(Rule.build() // reduces mattack by 33%
                 .event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
                 .condition(new Equals<>(Value.SELF().MOVE().CATEGORY(), CategoryId.MELEE))
-                .effect(Effects.multiplyValue(Value.SELF().MOVE().ATTACKING_STAT_MODIFIER(), new Constant (0.5)))
+                .effect(Effects.multiplyValue(Value.SELF().MOVE().ATTACKING_STAT_MODIFIER(), new Constant (2/3)))
             )
         );
         register(Status.build(FROSTBITE)
             .name("frostbite")
             .rule(Rule.build()
-                .event(RuleId.END_TURN_STATUS_EFFECT_EVENT, USER)
+                .event(IsolatedId.END_OF_TURN_STATUS_EFFECTS)
                 .effect(new DealDirectSelfDamage(new Constant(1/16)))
             )
-            .rule(Rule.build() // cutting mattack in half
+            .rule(Rule.build() // reduces rattack by 33%
                 .event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
                 .condition(new Equals<>(Value.SELF().MOVE().CATEGORY(), CategoryId.RANGED))
-                .effect(Effects.multiplyValue(Value.SELF().MOVE().ATTACKING_STAT_MODIFIER(), new Constant (0.5)))
+                .effect(Effects.multiplyValue(Value.SELF().MOVE().ATTACKING_STAT_MODIFIER(), new Constant (2/3)))
             )
         );
         register(Status.build(SLEEP)

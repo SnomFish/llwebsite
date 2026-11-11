@@ -38,11 +38,13 @@ public class Rule {
         }
 
         List<Branch<BattleContext>> outcomes = new ArrayList<>();
+        double probability = condition.execute(context);
 
-        for (Branch<Boolean> conditionBranch : condition.execute(context)) {
-            if (conditionBranch.value()) {
-                outcomes.addAll(applyProbability(effect.execute(context), conditionBranch));
-            }
+        if (probability > 0) {
+            outcomes.addAll(applyProbability(effect.execute(context), probability));
+        }
+        if (probability < 1) {
+            outcomes.addAll(applyProbability(effect.execute(context), 1-probability));
         }
         
         return effect.execute(context);

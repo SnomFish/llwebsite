@@ -9,16 +9,16 @@ import github.snomfish.functionality.context.BattleContext;
 public class Equals<T> implements ICondition {
     
 
-    private Object value1;
-    private Object value2;
+    private Object object1;
+    private Object object2;
 
 
     public Equals(
-        Object value1,
-        Object value2
+        Object object1,
+        Object object2
     ) {
-        this.value1 = value1;
-        this.value2 = value2;
+        this.object1 = object1;
+        this.object2 = object2;
     }
 
 
@@ -26,21 +26,18 @@ public class Equals<T> implements ICondition {
     @Override
     public Equals<T> deepCopy() {
         return new Equals<T>(
-            value1,
-            value2
+            object1,
+            object2
         );
     }
 
 
     @Override 
-    public List<Branch<Boolean>> execute(BattleContext context) {
+    public double execute(BattleContext context) {
 
-        T value1Value = Value.resolve(value1, context);
-        T value2Value = Value.resolve(value2, context);
+        T value1 = Value.resolve(object1, context);
+        T value2 = Value.resolve(object2, context);
 
-        return List.of(new Branch<>(
-            value1Value == value2Value,
-            1.0
-        ));
+        return value1 == value2 ? 1 : 0;
     }
 }

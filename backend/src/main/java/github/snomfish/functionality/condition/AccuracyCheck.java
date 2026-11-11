@@ -12,38 +12,37 @@ import github.snomfish.functionality.number.INumber;
 public class AccuracyCheck implements ICondition {
     
 
-    private INumber accuracy;
+    private INumber accuracyNumber;
 
 
-    public AccuracyCheck(INumber accuracy) {
-        this.accuracy = accuracy;
+    public AccuracyCheck(INumber accuracyNumber) {
+        this.accuracyNumber = accuracyNumber;
     }
 
 
     @Override 
     public AccuracyCheck deepCopy() {
         return new AccuracyCheck(
-            accuracy.deepCopy()
+            accuracyNumber.deepCopy()
         );
     }
 
 
     @Override 
-    public List<Branch<Boolean>> execute(BattleContext context) {
-        List<Branch<Double>> accuracyBranches = accuracy.execute(context);
-        List<Branch<Boolean>> outcomes = new ArrayList<>();
+    public double execute(BattleContext context) {
+        List<Branch<Double>> accuracyBranches = accuracyNumber.execute(context);
+        double probability = 0;
 
         context.dispatchEvent(RuleId.ACCURACY_CHECK_EVENT);
 
         double cachedAccuracyModifier = (double) Value.USER().MOVE().ACCURACY_MODIFIER().get(context);
 
-        for (Branch<Double> branch : accuracyBranches) {
-            double accuracyValue = Math.clamp(branch.value() * cachedAccuracyModifier, 0, 1);
+        for (Branch<Double> accuracyBranch : accuracyBranches) {
+            double accuracyValue = Math.clamp(accuracyBranch.value() * cachedAccuracyModifier, 0, 1);
 
-            outcomes.add(new Branch<>(true, accuracyValue));
-            outcomes.add(new Branch<>(false, 1-accuracyValue));
+            probability *= accuracyValue * accuracyBranch.probability();
         }
 
-        return outcomes;
+        return probability;
     }
 }

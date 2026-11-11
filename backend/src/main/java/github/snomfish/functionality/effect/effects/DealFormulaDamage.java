@@ -20,7 +20,6 @@ import github.snomfish.functionality.effect.Effects;
 import github.snomfish.functionality.effect.IEffect;
 import github.snomfish.functionality.event.ids.GateId;
 import github.snomfish.functionality.event.ids.GenericId;
-import github.snomfish.functionality.event.ids.InterceptorId;
 import github.snomfish.functionality.event.ids.RuleId;
 import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.INumber;
@@ -33,27 +32,18 @@ public class DealFormulaDamage implements IEffect {
     // deals formula damage to the target
     
  
-    private DealFormulaDamage() {}
+    public DealFormulaDamage() {}
 
 
     @Override 
     public DealFormulaDamage deepCopy() {
         return new DealFormulaDamage();
-    } 
-
-
-    public static IEffect schema() {
-        return new InterceptorEffect(
-            InterceptorId.MOVE_ABOUT_TO_AFFECT_TARGET,
-            new DealFormulaDamage()
-        );
     }
 
 
     @Override
     public List<Branch<BattleContext>> execute(BattleContext context) {
         List<Branch<BattleContext>> outcomes = List.of(new Branch<>(context, 1.0));
-
         context.log("executing damage effect");
         
         outcomes = flatMap(outcomes, c -> c.dispatchEvent(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE, ContextSideId.USER));
@@ -61,7 +51,13 @@ public class DealFormulaDamage implements IEffect {
         outcomes = flatMap(outcomes, c -> critChanceModule(c));
         outcomes = flatMap(outcomes, c -> damageModule(c));
         outcomes = flatMap(outcomes, c -> statModifierModule(c));
-        outcomes = flatMap(outcomes, c -> c.dispatchEvent(RuleId.PRE_DAMAGE_EVENT));
+        outcomes = flatMap(outcomes, c -> c.dispatchInterceptor(GenericId.SELF_PRE_DAMAGING, ContextSideId.USER, execute1(context)));
+
+        return outcomes;
+    }
+    private List<Branch<BattleContext>> execute1(BattleContext context) {
+        List<Branch<BattleContext>> outcomes = List.of(new Branch<>(context, 1.0));
+
         outcomes = flatMap(outcomes, c -> c.dispatchEvent(RuleId.CLUTCH_EVENT));
         outcomes = flatMap(outcomes, c -> damageRollModule(c));
         outcomes = flatMap(outcomes, c -> c.dispatchEvent(RuleId.POST_DAMAGE_EVENT));
@@ -101,29 +97,27 @@ public class DealFormulaDamage implements IEffect {
     private List<Branch<BattleContext>> critChanceModule(BattleContext context) {
         List<Branch<BattleContext>> outcomes = new ArrayList<>();
         
-        for (Branch<Boolean> canCritBranch : new GateCondition(GateId.CAN_MOVE_CRIT, ContextSideId.USER).execute(context)) {
-            boolean canCrit = canCritBranch.value();
-            double canCritProbability = canCritBranch.probability();
+        double canCritProbability = context.dispatchGate(GateId.CAN_MOVE_CRIT, ContextSideId.USER);
 
-            if (canCrit) {
-                ActiveLoomian user = context.user().activeLoomian();
-                Move move = user.action().move();
-                
-                int critChance = user.statChanges().stage(StatChangesId.CRIT_CHANCE) + move.critChance();
-                critChance = Math.clamp(critChance, 0, 3);
+        if (canCritProbability > 0) { // can crit
+            ActiveLoomian user = context.user().activeLoomian();
+            Move move = user.action().move();
+            
+            int critChance = user.statChanges().stage(StatChangesId.CRIT_CHANCE) + move.critChance();
+            critChance = Math.clamp(critChance, 0, 3);
 
-                BattleContext outcome1 = context.deepCopy();
-                BattleContext outcome2 = context.deepCopy();
+            BattleContext outcome1 = context.deepCopy();
+            BattleContext outcome2 = context.deepCopy();
 
-                outcome1.user().activeLoomian().action().move().hasCrit(true);
-                outcome2.user().activeLoomian().action().move().hasCrit(false);
+            outcome1.user().activeLoomian().action().move().hasCrit(true);
+            outcome2.user().activeLoomian().action().move().hasCrit(false);
 
-                outcomes.add(new Branch<>(outcome1, CRIT_CHANCES[critChance]));
-                outcomes.add(new Branch<>(outcome2, 1-CRIT_CHANCES[critChance]));
+            outcomes.add(new Branch<>(outcome1, CRIT_CHANCES[critChance]));
+            outcomes.add(new Branch<>(outcome2, 1-CRIT_CHANCES[critChance]));
 
-            } else {
-                outcomes.add(new Branch<>(context, canCritProbability));
-            }
+        } 
+        if (canCritProbability < 1) { // cannot crit
+            outcomes.add(new Branch<>(context, canCritProbability));
         }
 
         return outcomes;

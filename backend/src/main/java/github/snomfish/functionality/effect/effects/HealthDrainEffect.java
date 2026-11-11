@@ -5,13 +5,13 @@ import java.util.List;
 
 import github.snomfish.domain.ActiveLoomian;
 import github.snomfish.domain.move.Move;
+import github.snomfish.domain.move.modifiers.ModifierId;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
+import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.effect.IEffect;
+import github.snomfish.functionality.event.ids.GenericId;
 import github.snomfish.functionality.number.INumber;
-
-import static github.snomfish.domain.move.modifiers.ModifierId.HEALTH_DRAIN;
-import static github.snomfish.functionality.event.ids.RuleId.*;
 
 public class HealthDrainEffect implements IEffect {
     
@@ -39,13 +39,13 @@ public class HealthDrainEffect implements IEffect {
     public List<Branch<BattleContext>> execute(BattleContext context) {
         List<Branch<BattleContext>> outcomes = new ArrayList<>();
 
-        for(Branch<BattleContext> contextBranch : context.dispatchEvent(PRE_HEALTH_DRAIN_EVENT)) {
+        for(Branch<BattleContext> contextBranch : context.dispatchEvent(GenericId.SELF_PRE_DRAINING_HEALTH, ContextSideId.USER)) {
             for(Branch<Double> drainBranch : drain.execute(context)) {
 
                 BattleContext outcome = contextBranch.value().deepCopy();
                 ActiveLoomian user	 = outcome.user().activeLoomian();
                 Move move			 = user.action().move();
-                int healthDrain		 = (int) (move.damage() * move.modifiers().get(HEALTH_DRAIN) * drainBranch.value());
+                int healthDrain		 = (int) (move.damage() * move.modifiers().get(ModifierId.HEALTH_DRAIN) * drainBranch.value());
     
 				healthDrain = Math.min(healthDrain, user.maxHealth() - user.currentHealth()); // prevents the drain from over healing
 				user.addToCurrentHealth(healthDrain);

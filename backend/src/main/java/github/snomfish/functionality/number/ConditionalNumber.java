@@ -1,5 +1,7 @@
 package github.snomfish.functionality.number;
 
+import static github.snomfish.functionality.branch.BranchUtil.applyProbability;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,15 +42,14 @@ public class ConditionalNumber implements INumber {
     public List<Branch<Double>> execute(BattleContext context) {
         List<Branch<Double>> outcomes = new ArrayList<>();
 
-        List<Branch<Boolean>> conditionBranches = condition.execute(context);
-        for (Branch<Boolean> conditionBranch : conditionBranches) {
+        double probability = condition.execute(context);
 
-            // if condition is true add the true number's execute to the outcomes
-            if (conditionBranch.value()) {
-                outcomes.addAll(BranchUtil.applyProbability(trueNumber.execute(context), conditionBranch));
-            } else {
-                outcomes.addAll(BranchUtil.applyProbability(falseNumber.execute(context), conditionBranch));
-            }
+        // if condition is true add the true number's execute to the outcomes
+        if (probability > 0) {
+            outcomes.addAll(applyProbability(trueNumber.execute(context), probability));
+        } 
+        if (probability < 1) {
+            outcomes.addAll(applyProbability(falseNumber.execute(context), probability));
         }
 
         return outcomes;

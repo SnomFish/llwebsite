@@ -7,8 +7,9 @@ import github.snomfish.domain.ActiveLoomian;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
+import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.effect.IEffect;
-import github.snomfish.functionality.event.ids.RuleId;
+import github.snomfish.functionality.event.ids.GenericId;
 
 import static github.snomfish.domain.item.ItemId.NO_ITEM;
 
@@ -16,26 +17,26 @@ public class ConsumeItem implements IEffect {
         
 
     private Value<ActiveLoomian> activeLoomianValue;
-    private RuleId removedItemEventId;
+    private ContextSideId sideId;
 
 
     private ConsumeItem(
         Value<ActiveLoomian> activeLoomianValue,
-        RuleId removedItemEventId
+        ContextSideId sideId
     ) {
         this.activeLoomianValue = activeLoomianValue;
-        this.removedItemEventId = removedItemEventId;
+        this.sideId = sideId;
     }
     public static ConsumeItem user() {
         return new ConsumeItem(
             Value.USER().LOOMIAN(), 
-            RuleId.USER_ITEM_CONSUMED_EVENT
+            ContextSideId.USER
         );
     }
     public static ConsumeItem target() {
         return new ConsumeItem(
             Value.TARGET().LOOMIAN(),
-            RuleId.TARGET_ITEM_CONSUMED_EVENT
+            ContextSideId.TARGET
         );
     }
 
@@ -54,10 +55,9 @@ public class ConsumeItem implements IEffect {
         List<Branch<BattleContext>> outcomes = new ArrayList<>();
         ActiveLoomian activeLoomian = (ActiveLoomian) activeLoomianValue.get(context);
 
-        if (activeLoomian.canHaveItemRemoved()) {
-            activeLoomian.setItemId(NO_ITEM);
-            outcomes = context.dispatchEvent(removedItemEventId);
-        }
+        // currently does not check if the item can be consumed
+        activeLoomian.setItemId(NO_ITEM);
+        outcomes = context.dispatchEvent(GenericId.SELF_CONSUMED_ITEM, sideId);
 
         return outcomes;
     }

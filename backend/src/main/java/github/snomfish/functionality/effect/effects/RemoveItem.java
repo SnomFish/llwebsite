@@ -7,8 +7,9 @@ import github.snomfish.domain.ActiveLoomian;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
+import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.effect.IEffect;
-import github.snomfish.functionality.event.ids.RuleId;
+import github.snomfish.functionality.event.ids.GenericId;
 
 import static github.snomfish.domain.item.ItemId.*;
 
@@ -16,32 +17,33 @@ public class RemoveItem implements IEffect {
     
 
     private Value<ActiveLoomian> activeLoomianValue;
-    private RuleId removedItemEventId;
+    private ContextSideId sideId;
 
 
     private RemoveItem(
         Value<ActiveLoomian> activeLoomianValue,
-        RuleId removedItemEventId
+        ContextSideId sideId
     ) {
         this.activeLoomianValue = activeLoomianValue;
-        this.removedItemEventId = removedItemEventId;
+        this.sideId = sideId;
     }
     public static RemoveItem fromUser() {
         return new RemoveItem(
             Value.USER().LOOMIAN(), 
-            RuleId.USER_ITEM_REMOVED_EVENT
+            ContextSideId.USER
         );
     }
     public static RemoveItem fromTarget() {
         return new RemoveItem(
             Value.TARGET().LOOMIAN(),
-            RuleId.TARGET_ITEM_REMOVED_EVENT
+            ContextSideId.TARGET
         );
     }
 
 
     private RemoveItem(RemoveItem copy) {
         this.activeLoomianValue = copy.activeLoomianValue;
+        this.sideId = copy.sideId;
     }
     @Override 
     public RemoveItem deepCopy() {
@@ -54,10 +56,9 @@ public class RemoveItem implements IEffect {
         List<Branch<BattleContext>> outcomes = new ArrayList<>();
         ActiveLoomian activeLoomian = (ActiveLoomian) activeLoomianValue.get(context);
 
-        if (activeLoomian.canHaveItemRemoved()) {
-            activeLoomian.setItemId(NO_ITEM);
-            outcomes = context.dispatchEvent(removedItemEventId);
-        }
+        // does not check if the loomian can have it's item removed
+        activeLoomian.setItemId(NO_ITEM);
+        outcomes = context.dispatchEvent(GenericId.SELF_LOSES_ITEM, sideId);
 
         return outcomes;
     }

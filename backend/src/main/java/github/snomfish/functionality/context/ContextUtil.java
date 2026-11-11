@@ -15,7 +15,7 @@ public class ContextUtil {
 
     // takes a set of outcomes and sets the user and target states to new values (so user -> target and vice versa)
     // this is used for generic events
-    public static List<Branch<BattleContext>> switchFocus(List<Branch<BattleContext>> contextBranches, SideId userState) {
+    public static List<Branch<BattleContext>> setFocus(List<Branch<BattleContext>> contextBranches, SideId userState) {
         List<Branch<BattleContext>> outcomes = new ArrayList<>();
 
         for (Branch<BattleContext> contextBranch : contextBranches) {
@@ -33,7 +33,36 @@ public class ContextUtil {
     }
 
 
-    public static BattleContext switchFocus(BattleContext context, ContextSideId theSideThatWillBecomeUser) {
+    public static BattleContext setFocus(BattleContext context, SideId sideId) {
+        return new BattleContext(context.gamestate(), sideId);
+    }
+
+
+    public static BattleContext setFocus(BattleContext context, ContextSideId theSideThatWillBecomeUser) {
         return new BattleContext(context.gamestate(), theSideThatWillBecomeUser.self(context));
+    }
+
+
+    public static List<Branch<BattleContext>> reverseFocus(List<Branch<BattleContext>> contextBranches) {
+        List<Branch<BattleContext>> outcomes = new ArrayList<>();
+
+        for (Branch<BattleContext> contextBranch : contextBranches) {
+            BattleContext context = contextBranch.value();
+            Double probability =    contextBranch.probability();
+
+            Gamestate gamestate = context.gamestate();
+
+            outcomes.add(new Branch<>(
+                new BattleContext(gamestate, context.targetState()),
+                probability
+            ));
+        }
+
+        return outcomes;
+    }
+
+
+    public static BattleContext reverseFocus(BattleContext context) {
+        return new BattleContext(context.gamestate(), context.targetState());
     }
 }

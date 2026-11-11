@@ -8,7 +8,7 @@ import github.snomfish.functionality.condition.NoCondition;
 import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.effect.IEffect;
 import github.snomfish.functionality.effect.effects.NoEffect;
-import github.snomfish.functionality.event.ids.InterceptorId;
+import github.snomfish.functionality.event.ids.IGenericId;
 
 public class Interceptor {
     
@@ -45,8 +45,8 @@ public class Interceptor {
     public static Interceptor build() {
         return new Interceptor();
     }
-    public Interceptor event(InterceptorId id, ContextSideId sideId) {
-        this.events.add(new Event(id, sideId));
+    public Interceptor event(IGenericId id) {
+        this.events.add(new Event(id, null));
         return this;
     }
     public Interceptor condition(ICondition condition) {

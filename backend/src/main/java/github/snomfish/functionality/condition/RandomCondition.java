@@ -27,17 +27,14 @@ public class RandomCondition implements ICondition {
 
 
     @Override
-    public List<Branch<Boolean>> execute(BattleContext context) {
-        List<Branch<Double>> branches = number.execute(context);
-        List<Branch<Boolean>> outcomes = new ArrayList<>();
-
-        for (Branch<Double> branch : branches) {    
-            Double value = Math.clamp(branch.value(), 0, 1);
-
-            outcomes.add(new Branch<>(true, value));
-            outcomes.add(new Branch<>(false, 1-value));
+    public double execute(BattleContext context) {
+        double probability = 0;
+        
+        // ASSUMES THE PROBABILITIES SUM TO 1
+        for (Branch<Double> branch : number.execute(context)) {
+            probability += Math.clamp(branch.value(), 0, 1) * branch.probability();    
         }
 
-        return outcomes;
+        return probability;
     }
 }

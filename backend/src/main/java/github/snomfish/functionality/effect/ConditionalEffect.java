@@ -50,15 +50,13 @@ public class ConditionalEffect implements IEffect {
     @Override 
     public List<Branch<BattleContext>> execute(BattleContext context) {
 
-        List<Branch<Boolean>> conditionBranches = condition.execute(context);
+        double probability = condition.execute(context);
         List<Branch<BattleContext>> outcomes = new ArrayList<>();
         
-        for (Branch<Boolean> branch : conditionBranches) {
-            if (branch.value()) {
-                outcomes.addAll(applyProbability(trueEffect.execute(context), branch));
-            } else {
-                outcomes.addAll(applyProbability(falseEffect.execute(context), branch));
-            }
+        if (probability != 0) {
+            outcomes.addAll(applyProbability(trueEffect.execute(context), probability));
+        } else {
+            outcomes.addAll(applyProbability(falseEffect.execute(context), probability));
         }
 
         return outcomes;

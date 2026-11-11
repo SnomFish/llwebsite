@@ -63,6 +63,12 @@ public class BranchUtil {
         }
         return branches;
     }
+    public static <A> List<Branch<A>> applyProbability(List<Branch<A>> branches, double probability) {
+        for (Branch<A> branch : branches) {
+            branch.multiplyProbability(probability);
+        }
+        return branches;
+    }
 
 
 

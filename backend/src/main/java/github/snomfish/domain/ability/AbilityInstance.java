@@ -11,6 +11,7 @@ import github.snomfish.functionality.copy.DeepCopyable;
 import github.snomfish.functionality.event.Event;
 import github.snomfish.functionality.event.Gate;
 
+import static github.snomfish.functionality.branch.BranchUtil.applyProbability;
 import static github.snomfish.functionality.branch.BranchUtil.flatMap;
 
 public class AbilityInstance implements DeepCopyable<AbilityInstance> {
@@ -74,56 +75,60 @@ public class AbilityInstance implements DeepCopyable<AbilityInstance> {
 
         if (!rule.events().contains(event)) return List.of(new Branch<>(context, 1));
 
-        for (Branch<Boolean> conditionBranch : rule.condition().execute(context)) {
-            if (conditionBranch.value()) { // if the condition is true
-                BattleContext outcome = context.deepCopy();
+        double probability = rule.condition().execute(context);
 
-				// idk how else to try and set the triggered booleans to true or false
-                AbilityId userAbilityId =           (AbilityId) Value.USER().ABILITY_ID().get(context);
-                AbilityId userActualAbilityId =     (AbilityId) Value.USER().ACTUAL_ABILITY_ID().get(context);
-                AbilityId targetAbilityId =         (AbilityId) Value.TARGET().ABILITY_ID().get(context);
-                AbilityId targetActualAbilityId = 	(AbilityId) Value.TARGET().ACTUAL_ABILITY_ID().get(context);
-                
-                if (event.sideId() == ContextSideId.USER && userAbilityId == userActualAbilityId) {
-                    Value.USER().ABILITY_HAS_ACTIVATED_THIS_BATTLE().set(outcome, true);
-                    Value.USER().ABILITY_HAS_ACTIVATED_THIS_SWAP().set(outcome, true);
-					Value.USER().ACTUAL_ABILITY_HAS_ACTIVATED_THIS_BATTLE().set(outcome, true);
-                    Value.USER().ACTUAL_ABILITY_HAS_ACTIVATED_THIS_SWAP().set(outcome, true);
-                } 
-				else if (event.sideId() == ContextSideId.USER && userAbilityId != userActualAbilityId) {
-					Value.USER().ABILITY_HAS_ACTIVATED_THIS_BATTLE().set(outcome, true);
-                    Value.USER().ABILITY_HAS_ACTIVATED_THIS_SWAP().set(outcome, true);
-				}
-				else if (event.sideId() == ContextSideId.TARGET && targetAbilityId == targetActualAbilityId) {
-                    Value.TARGET().ABILITY_HAS_ACTIVATED_THIS_BATTLE().set(outcome, true);
-                    Value.TARGET().ABILITY_HAS_ACTIVATED_THIS_SWAP().set(outcome, true);
-					Value.TARGET().ACTUAL_ABILITY_HAS_ACTIVATED_THIS_BATTLE().set(outcome, true);
-                    Value.TARGET().ACTUAL_ABILITY_HAS_ACTIVATED_THIS_SWAP().set(outcome, true);
-                } 
-				else if (event.sideId() == ContextSideId.TARGET && targetAbilityId != targetActualAbilityId) {
-					Value.TARGET().ABILITY_HAS_ACTIVATED_THIS_BATTLE().set(outcome, true);
-                    Value.TARGET().ABILITY_HAS_ACTIVATED_THIS_SWAP().set(outcome, true);
-				}
+        if (probability > 0) { // if the condition is true
+            BattleContext outcome = context.deepCopy();
 
-				outcomes.addAll(rule.effect().execute(outcome));
+            // idk how else to try and set the triggered booleans to true or false
+            AbilityId userAbilityId =           (AbilityId) Value.USER().ABILITY_ID().get(context);
+            AbilityId userActualAbilityId =     (AbilityId) Value.USER().ACTUAL_ABILITY_ID().get(context);
+            AbilityId targetAbilityId =         (AbilityId) Value.TARGET().ABILITY_ID().get(context);
+            AbilityId targetActualAbilityId = 	(AbilityId) Value.TARGET().ACTUAL_ABILITY_ID().get(context);
+            
+            if (event.sideId() == ContextSideId.USER && userAbilityId == userActualAbilityId) {
+                Value.USER().ABILITY_HAS_ACTIVATED_THIS_BATTLE().set(outcome, true);
+                Value.USER().ABILITY_HAS_ACTIVATED_THIS_SWAP().set(outcome, true);
+                Value.USER().ACTUAL_ABILITY_HAS_ACTIVATED_THIS_BATTLE().set(outcome, true);
+                Value.USER().ACTUAL_ABILITY_HAS_ACTIVATED_THIS_SWAP().set(outcome, true);
+            } 
+            else if (event.sideId() == ContextSideId.USER && userAbilityId != userActualAbilityId) {
+                Value.USER().ABILITY_HAS_ACTIVATED_THIS_BATTLE().set(outcome, true);
+                Value.USER().ABILITY_HAS_ACTIVATED_THIS_SWAP().set(outcome, true);
             }
+            else if (event.sideId() == ContextSideId.TARGET && targetAbilityId == targetActualAbilityId) {
+                Value.TARGET().ABILITY_HAS_ACTIVATED_THIS_BATTLE().set(outcome, true);
+                Value.TARGET().ABILITY_HAS_ACTIVATED_THIS_SWAP().set(outcome, true);
+                Value.TARGET().ACTUAL_ABILITY_HAS_ACTIVATED_THIS_BATTLE().set(outcome, true);
+                Value.TARGET().ACTUAL_ABILITY_HAS_ACTIVATED_THIS_SWAP().set(outcome, true);
+            } 
+            else if (event.sideId() == ContextSideId.TARGET && targetAbilityId != targetActualAbilityId) {
+                Value.TARGET().ABILITY_HAS_ACTIVATED_THIS_BATTLE().set(outcome, true);
+                Value.TARGET().ABILITY_HAS_ACTIVATED_THIS_SWAP().set(outcome, true);
+            }
+
+            outcomes.addAll(applyProbability(rule.effect().execute(outcome), probability));
+        }
+        if (probability < 1) {
+            BattleContext outcome = context.deepCopy();
+            outcomes.add(new Branch<>(outcome, 1-probability));
         }
 
 		return outcomes;
     }
 
 
-    public List<Branch<Boolean>> handleGate(BattleContext context, Event event) {
-        List<Branch<Boolean>> outcomes = List.of(new Branch<>(false, 1));
+    public double handleGate(BattleContext context, Event event) {
+        double probability = 1;
         Ability ability = ability();
 
         for (Gate gate : ability.gates()) {
             
             if (!gate.events().contains(event)) continue; // only fires the gate if the event matches
 
-            outcomes = flatMap(context, outcomes, c -> gate.condition().execute(c));
+            probability *= gate.condition().execute(context);
         }
 
-        return outcomes;
+        return probability;
     }
 }

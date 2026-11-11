@@ -15,7 +15,7 @@ import github.snomfish.functionality.condition.And;
 import github.snomfish.functionality.condition.Comparator;
 import github.snomfish.functionality.condition.Conditions;
 import github.snomfish.functionality.condition.Equals;
-import github.snomfish.functionality.condition.FalseCondition;
+import github.snomfish.functionality.condition.False;
 import github.snomfish.functionality.condition.GateCondition;
 import github.snomfish.functionality.condition.ListContains;
 import github.snomfish.functionality.condition.NoCondition;
@@ -49,7 +49,6 @@ import github.snomfish.functionality.number.ValueConstant;
 import static github.snomfish.domain.ability.AbilityId.*;
 import static github.snomfish.functionality.context.ContextSideId.*;
 import static github.snomfish.functionality.event.ids.GateId.*;
-import static github.snomfish.functionality.event.ids.InterceptorId.*;
 import static github.snomfish.functionality.event.ids.RuleId.*;
 
 public class AbilityRegistry {
@@ -108,7 +107,7 @@ public class AbilityRegistry {
 			.id(ADAPTABLE)
 			.name("adaptable")
 			.rule(AbilityRule.build()
-				.event(IsolatedId.WEATHER_SET_EVENT)
+				.event(IsolatedId.LOOMIAN_SET_WEATHER)
 				.event(GenericId.SELF_SWAPPED_IN)
 				.effect(new EffectSequence(List.of(	
 					new ConditionalEffect(Conditions.clearWeather(), 		SetType.userPrimary(TypeId.SIMPLE)),
@@ -122,7 +121,7 @@ public class AbilityRegistry {
 			.gate(Gate.build() // prevents the ability being removed
 				.event(CAN_REMOVE_USER_ABILITY, USER)
 				.event(CAN_REMOVE_TARGET_ABILITY, TARGET)
-				.condition(new FalseCondition())
+				.condition(new False())
 			)
 		);
 		register(Ability.build() // completed
@@ -189,7 +188,7 @@ public class AbilityRegistry {
 			.id(ANOMALY)
 			.name("anomaly")
 			.rule(AbilityRule.build() // when the loomian is the user
-				.event(GenericId.SELF_SWAPPED_IN) 
+				.event(GenericId.SELF_PRE_STATS_CHANGED) 
 				.effect(new EffectSequence(List.of(
 					Effects.multiplyValue(Value.USER().MATTACK_STAGE_MODIFIER(), new Constant(-1)),
 					Effects.multiplyValue(Value.USER().MDEFENSE_STAGE_MODIFIER(), new Constant(-1)),
@@ -320,7 +319,7 @@ public class AbilityRegistry {
 			.name("boneheaded")
 			.gate(Gate.build()
 				.event(CAN_TAKE_RECOIL, USER)
-				.condition(new FalseCondition())
+				.condition(new False())
 			)
 		);
 		register(Ability.build()
@@ -344,7 +343,7 @@ public class AbilityRegistry {
 			.name("brute force")
 			.gate(Gate.build()
 				.event(CAN_USE_SECONDARY_EFFECTS, USER)
-				.condition(new FalseCondition())
+				.condition(new False())
 			)
 		);
 		register(Ability.build()
@@ -458,7 +457,7 @@ public class AbilityRegistry {
 			.name("circadian")
 			.rule(AbilityRule.build()
 				.event(GenericId.SELF_SWAPPED_IN)
-				.event(IsolatedId.START_OF_TURN_EVENT)
+				.event(IsolatedId.START_OF_TURN)
 				.effect(new ConditionalEffect(
 					Conditions.isOdd(new ValueConstant(Value.TURN_NUMBER())),
 					new EffectSequence(List.of(
@@ -474,7 +473,7 @@ public class AbilityRegistry {
 			.gate(Gate.build() // prevents the ability being removed
 				.event(CAN_REMOVE_USER_ABILITY, USER)
 				.event(CAN_REMOVE_TARGET_ABILITY, TARGET)
-				.condition(new FalseCondition())
+				.condition(new False())
 			)
 		);
 		register(Ability.build()
@@ -482,7 +481,7 @@ public class AbilityRegistry {
 			.name("clingy")
 			.gate(Gate.build()
 				.event(CAN_REMOVE_USER_ITEM, USER)
-				.condition(new FalseCondition())
+				.condition(new False())
 			)
 		);
 		register(Ability.build()
@@ -509,14 +508,13 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(COMBUSTIBLE)
 			.name("combustible")
-			.rule(AbilityRule.build()
-				.event(PRE_DAMAGE_EVENT, TARGET)
+			.interceptor(Interceptor.build()
+				.event(GenericAntiId.SELF_PRE_DAMAGED)
 				.condition(new And(
 					new GateCondition(CAN_USE_DEFENSIVE_ABILITY, USER),
-					new Equals<>(Value.USER().MOVE().TYPE(), TypeId.FIRE)
+					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.FIRE)
 				))
 				.effect(new EffectSequence(List.of(
-						Effects.multiplyValue(Value.USER().MOVE().DAMAGE(), new Constant(0.0)),
 						ApplyMechanic.toUser(MechanicId.COMBUSTIBLE)
 				)))
 			)
@@ -538,7 +536,7 @@ public class AbilityRegistry {
 			.name("confidence")
 			.gate(Gate.build()
 				.event(CAN_MOVE_FLINCH, USER)
-				.condition(new FalseCondition())
+				.condition(new False())
 			)
 		);
 		register(Ability.build() // doubles exclusive
@@ -652,8 +650,8 @@ public class AbilityRegistry {
             .id(DRAINAGE)
             .name("drainage")
 			.rule(AbilityRule.build()
-                .event(PRE_HEALTH_DRAIN_EVENT, USER) 
-                .effect(Effects.multiplyValue(Value.USER().MOVE().HEALTH_DRAIN_MODIFIER(), new Constant(1.5)))
+                .event(GenericId.SELF_PRE_DRAINING_HEALTH) 
+                .effect(Effects.multiplyValue(Value.SELF().MOVE().HEALTH_DRAIN_MODIFIER(), new Constant(1.5)))
             )
         );
 		register(Ability.build()
@@ -732,7 +730,7 @@ public class AbilityRegistry {
 			.gate(Gate.build() // prevents the ability being removed
 				.event(CAN_REMOVE_USER_ABILITY, USER)
 				.event(CAN_REMOVE_TARGET_ABILITY, TARGET)
-				.condition(new FalseCondition())
+				.condition(new False())
 			)
 		);
 		register(Ability.build() // reduces the damage taken from air type attacks and boosts it's rattack one stage when hit by one
@@ -759,7 +757,7 @@ public class AbilityRegistry {
 			.name("festive spirit").gate(Gate.build() // prevents the ability being removed
 				.event(CAN_REMOVE_USER_ABILITY, USER)
 				.event(CAN_REMOVE_TARGET_ABILITY, TARGET)
-				.condition(new FalseCondition())
+				.condition(new False())
 			)
 		);
 		register(Ability.build()
@@ -770,12 +768,11 @@ public class AbilityRegistry {
 			.id(FLUTTER)
 			.name("flutter")
 			.interceptor(Interceptor.build()
-				.event(MOVE_ABOUT_TO_AFFECT_TARGET, TARGET)
+				.event(GenericAntiId.SELF_PRE_DAMAGED)
 				.condition(new Or(
-					new Equals<>(Value.USER().MOVE().POWDER_TAG(), true),
+					new Equals<>(Value.OPP().MOVE().POWDER_TAG(), true),
 					new GateCondition(CAN_USE_DEFENSIVE_ABILITY, USER)
 				))
-				.effect(new NoEffect())
 			)
 		);
 		register(Ability.build()
@@ -823,12 +820,11 @@ public class AbilityRegistry {
 			.id(FORTISSIMO)
 			.name("fortissimo")
 			.interceptor(Interceptor.build()
-				.event(MOVE_ABOUT_TO_AFFECT_TARGET, TARGET)
+				.event(GenericAntiId.SELF_PRE_DAMAGED)
 				.condition(new Or(
-					new Equals<>(Value.USER().MOVE().SOUND_TAG(), true),
+					new Equals<>(Value.OPP().MOVE().SOUND_TAG(), true),
 					new GateCondition(CAN_USE_DEFENSIVE_ABILITY, USER)
 				))
-				.effect(new NoEffect())
 			)
 		);
 		register(Ability.build() // completed
@@ -898,12 +894,11 @@ public class AbilityRegistry {
 			.id(GUMMY)
 			.name("gummy")
 			.interceptor(Interceptor.build()
-				.event(MOVE_ABOUT_TO_AFFECT_TARGET, TARGET)
+				.event(GenericAntiId.SELF_PRE_DAMAGED)
 				.condition(new Or(
-					new Equals<>(Value.USER().MOVE().EXPLOSIVE_TAG(), true),
+					new Equals<>(Value.OPP().MOVE().EXPLOSIVE_TAG(), true),
 					new GateCondition(CAN_USE_DEFENSIVE_ABILITY, USER)
 				))
-				.effect(new NoEffect())
 			)
 		);
 		register(Ability.build() // technician from pokemon
@@ -973,9 +968,9 @@ public class AbilityRegistry {
 			.id(HOVER)
 			.name("hover")
 			.interceptor(Interceptor.build()
-				.event(MOVE_ABOUT_TO_AFFECT_TARGET, TARGET)
+				.event(GenericAntiId.SELF_PRE_DAMAGED)
 				.condition(new Or(
-					new Equals<>(Value.USER().MOVE().TYPE(), TypeId.EARTH),
+					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.EARTH),
 					new GateCondition(CAN_USE_DEFENSIVE_ABILITY, USER)
 				))
 			)
@@ -984,9 +979,9 @@ public class AbilityRegistry {
 			.id(HYDRATE)
 			.name("hydrate")
 			.interceptor(Interceptor.build()
-				.event(MOVE_ABOUT_TO_AFFECT_TARGET, TARGET)
+				.event(GenericAntiId.SELF_PRE_DAMAGED)
 				.condition(new Or(
-					new Equals<>(Value.USER().MOVE().TYPE(), TypeId.WATER),
+					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.WATER),
 					new GateCondition(CAN_USE_DEFENSIVE_ABILITY, USER)
 				))
 				.effect(new NoEffect())
@@ -996,9 +991,9 @@ public class AbilityRegistry {
 			.id(HYDRO_VORTEX)
 			.name("hydro vortex")
 			.interceptor(Interceptor.build()
-				.event(MOVE_ABOUT_TO_AFFECT_TARGET, TARGET)
+				.event(GenericAntiId.SELF_PRE_DAMAGED)
 				.condition(new Or(
-					new Equals<>(Value.USER().MOVE().TYPE(), TypeId.WATER),
+					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.WATER),
 					new GateCondition(CAN_USE_DEFENSIVE_ABILITY, USER)
 				))
 				.effect(ApplyStatChanges.userChangingUser()
@@ -1085,16 +1080,16 @@ public class AbilityRegistry {
 			.name("life force").gate(Gate.build() // prevents the ability being removed
 				.event(CAN_REMOVE_USER_ABILITY, USER)
 				.event(CAN_REMOVE_TARGET_ABILITY, TARGET)
-				.condition(new FalseCondition())
+				.condition(new False())
 			)
 		);
 		register(Ability.build()
 			.id(LIGHTNING_ROD)
 			.name("lightning rod")
 			.interceptor(Interceptor.build()
-				.event(MOVE_ABOUT_TO_AFFECT_TARGET, TARGET)
+				.event(GenericAntiId.SELF_PRE_DAMAGED)
 				.condition(new Or(
-					new Equals<>(Value.USER().MOVE().TYPE(), TypeId.ELECTRIC),
+					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.ELECTRIC),
 					new GateCondition(CAN_USE_DEFENSIVE_ABILITY, USER)
 				))
 				.effect(ApplyStatChanges.userChangingUser()
@@ -1234,9 +1229,9 @@ public class AbilityRegistry {
 			.name("noxious weeds")
 			
 			.interceptor(Interceptor.build()
-				.event(MOVE_ABOUT_TO_AFFECT_TARGET, TARGET)
+				.event(GenericAntiId.SELF_PRE_DAMAGED)
 				.condition(new Or(
-					new Equals<>(Value.USER().MOVE().TYPE(), TypeId.PLANT),
+					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.PLANT),
 					new GateCondition(CAN_USE_DEFENSIVE_ABILITY, USER)
 				))
 				.effect(ApplyMechanic.toUser(MechanicId.NOXIOUS_WEEDS))
@@ -1384,12 +1379,11 @@ public class AbilityRegistry {
 			.id(RAGING_FIRE)
 			.name("raging fire")
 			.interceptor(Interceptor.build()
-				.event(MOVE_ABOUT_TO_AFFECT_TARGET, TARGET)
+				.event(GenericAntiId.SELF_PRE_DAMAGED)
 				.condition(new Or(
-					new Equals<>(Value.USER().MOVE().TYPE(), TypeId.FIRE),
+					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.FIRE),
 					new GateCondition(CAN_USE_DEFENSIVE_ABILITY, USER)
 				))
-				.effect(new NoEffect())
 			)
 		);
 		register(Ability.build()
@@ -1424,9 +1418,9 @@ public class AbilityRegistry {
 			.id(RECHARGEABLE)
 			.name("rechargeable")
 			.interceptor(Interceptor.build()
-				.event(MOVE_ABOUT_TO_AFFECT_TARGET, TARGET)
+				.event(GenericAntiId.SELF_PRE_DAMAGED)
 				.condition(new Or(
-					new Equals<>(Value.USER().MOVE().TYPE(), TypeId.ELECTRIC),
+					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.ELECTRIC),
 					new GateCondition(CAN_USE_DEFENSIVE_ABILITY, USER)
 				))
 				.effect(ApplyStatChanges.userChangingUser()
@@ -1745,7 +1739,7 @@ public class AbilityRegistry {
 			.name("two_face").gate(Gate.build() // prevents the ability being removed
 				.event(CAN_REMOVE_USER_ABILITY, USER)
 				.event(CAN_REMOVE_TARGET_ABILITY, TARGET)
-				.condition(new FalseCondition())
+				.condition(new False())
 			)
 		);
 		register(Ability.build() // completed
@@ -1895,9 +1889,9 @@ public class AbilityRegistry {
 			.id(WOODSMAN)
 			.name("woodman")
 			.interceptor(Interceptor.build()
-				.event(MOVE_ABOUT_TO_AFFECT_TARGET, TARGET)
+				.event(GenericAntiId.SELF_PRE_DAMAGED)
 				.condition(new Or(
-					new Equals<>(Value.USER().MOVE().TYPE(), TypeId.PLANT),
+					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.PLANT),
 					new GateCondition(CAN_USE_DEFENSIVE_ABILITY, USER)
 				))
 				.effect(ApplyStatChanges.userChangingUser()

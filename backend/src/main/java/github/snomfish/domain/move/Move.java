@@ -240,18 +240,19 @@ public class Move implements DeepCopyable<Move> {
         List<Branch<BattleContext>> beforeMoveOutcomes = beforeMove.execute(context);
         List<Branch<BattleContext>> moveOutcomes = new ArrayList<>();
 
-        for (Branch<Boolean> conditionBranch : condition.execute(context)) {
-            if (conditionBranch.value()) {
-                moveOutcomes = applyProbability(
-                    flatMap(beforeMoveOutcomes, c -> onHit.execute(c)), 
-                    conditionBranch
-                );
-            } else {
-                moveOutcomes = applyProbability(
-                    flatMap(beforeMoveOutcomes, c -> onMiss.execute(c)), 
-                    conditionBranch
-                );
-            }
+        Double conditionProbability = condition.execute(context);
+
+        if (conditionProbability > 0) {
+            moveOutcomes = applyProbability(
+                flatMap(beforeMoveOutcomes, c -> onHit.execute(c)), 
+                conditionProbability
+            );
+        } 
+        if (conditionProbability < 1) {
+            moveOutcomes = applyProbability(
+                flatMap(beforeMoveOutcomes, c -> onMiss.execute(c)), 
+                1-conditionProbability
+            );
         }
 
         return flatMap(moveOutcomes, c -> afterMove.execute(c));

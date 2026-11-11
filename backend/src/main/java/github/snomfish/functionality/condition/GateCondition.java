@@ -32,7 +32,7 @@ public class GateCondition implements ICondition {
     }
 
 
-    public List<Branch<Boolean>> execute(BattleContext context) {
+    public double execute(BattleContext context) {
         return context.dispatchGate(gateId, sideId);
 
     }

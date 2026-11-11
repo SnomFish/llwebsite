@@ -2,7 +2,6 @@ package github.snomfish.functionality.effect;
 
 import github.snomfish.domain.mechanics.MechanicId;
 import github.snomfish.functionality.Value;
-import github.snomfish.functionality.condition.And;
 import github.snomfish.functionality.condition.GateCondition;
 import github.snomfish.functionality.condition.RandomCondition;
 import github.snomfish.functionality.context.ContextSideId;

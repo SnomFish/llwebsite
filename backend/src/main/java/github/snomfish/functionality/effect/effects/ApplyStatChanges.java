@@ -30,12 +30,10 @@ public class ApplyStatChanges implements IEffect {
 
 
     private ApplyStatChanges(
-        RuleId preEvent,
         GenericId statLoweredEvent,
         ContextSideId sideBeingLowered,
         Value<ActiveLoomian> activeLoomianValue
     ) {
-        this.preEvent = preEvent;
         this.statLoweredEvent = statLoweredEvent;
         this.sideBeingLowered = sideBeingLowered;
         this.activeLoomianValue = activeLoomianValue;
@@ -45,28 +43,24 @@ public class ApplyStatChanges implements IEffect {
 
     public static ApplyStatChanges userChangingUser() {
         return new ApplyStatChanges(
-            RuleId.PRE_STAT_CHANGES_EFFECT_EVENT, 
             GenericId.SELF_STATS_LOWERED_BY_OPP, ContextSideId.USER,
             Value.USER().LOOMIAN()
         );
     }
     public static ApplyStatChanges userChangingTarget() {
         return new ApplyStatChanges(
-            RuleId.PRE_STAT_CHANGES_EFFECT_EVENT,
             GenericId.SELF_STATS_LOWERED_BY_OPP, ContextSideId.TARGET,
             Value.TARGET().LOOMIAN()
         );
     }
     public static ApplyStatChanges targetChangingUser() {
-        return new ApplyStatChanges(
-            RuleId.PRE_STAT_CHANGES_EFFECT_EVENT,  
+        return new ApplyStatChanges( 
             GenericId.SELF_STATS_LOWERED_BY_OPP, ContextSideId.USER,
             Value.USER().LOOMIAN()
         );
     }
     public static ApplyStatChanges targetChangingTarget() {
         return new ApplyStatChanges(
-            RuleId.PRE_STAT_CHANGES_EFFECT_EVENT, 
             GenericId.SELF_STATS_LOWERED_BY_OPP, ContextSideId.TARGET, 
             Value.TARGET().LOOMIAN()
         );

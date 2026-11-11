@@ -7,12 +7,10 @@ import github.snomfish.domain.Side;
 import github.snomfish.domain.SideId;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.copy.DeepCopyable;
-import github.snomfish.functionality.effect.IEffect;
 import github.snomfish.functionality.event.Event;
-import github.snomfish.functionality.event.InterceptorReport;
+import github.snomfish.functionality.event.Report;
 import github.snomfish.functionality.event.ids.GateId;
 import github.snomfish.functionality.event.ids.GenericId;
-import github.snomfish.functionality.event.ids.InterceptorId;
 import github.snomfish.functionality.event.ids.IsolatedId;
 import github.snomfish.functionality.event.ids.RuleId;
 
@@ -92,6 +90,7 @@ public class BattleContext implements DeepCopyable<BattleContext> {
         outcomes = flatMap(outcomes, context -> user().dispatchRule(context, new Event(ruleId, ContextSideId.USER)));
         outcomes = flatMap(outcomes, context -> target().dispatchRule(context, new Event(ruleId, ContextSideId.TARGET)));
 
+        outcomes = ContextUtil.setFocus(outcomes, userState);
         return outcomes;
     }
     public List<Branch<BattleContext>> dispatchEvent(IsolatedId ruleId) {
@@ -99,10 +98,10 @@ public class BattleContext implements DeepCopyable<BattleContext> {
 
         outcomes = flatMap(outcomes, context -> gamestate().weatherInstance().handleEvent(context, new Event(ruleId, null)));
         outcomes = flatMap(outcomes, context -> user().dispatchRule(context, new Event(ruleId, null)));
-        outcomes = ContextUtil.switchFocus(outcomes, targetState);
+        outcomes = ContextUtil.reverseFocus(outcomes);
         outcomes = flatMap(outcomes, context -> target().dispatchRule(context, new Event(ruleId, null)));
         
-        outcomes = ContextUtil.switchFocus(outcomes, userState);
+        outcomes = ContextUtil.setFocus(outcomes, userState);
         return outcomes;
     }
     public List<Branch<BattleContext>> dispatchEvent(GenericId ruleId, ContextSideId sideIds) {
@@ -111,34 +110,44 @@ public class BattleContext implements DeepCopyable<BattleContext> {
         // weather uses the current battlecontext user target setup
         outcomes = flatMap(outcomes, context -> gamestate().weatherInstance().handleEvent(context, new Event(ruleId.isoId(), null)));
 
-        outcomes = ContextUtil.switchFocus(outcomes, sideIds.self(this));
+        outcomes = ContextUtil.setFocus(outcomes, sideIds.self(this));
         outcomes = flatMap(outcomes, context -> user().dispatchRule(context, new Event(ruleId, null)));
-        outcomes = ContextUtil.switchFocus(outcomes, targetState); // target state always inverts the focus
+        outcomes = ContextUtil.reverseFocus(outcomes); // target state always inverts the focus
         outcomes = flatMap(outcomes, context -> target().dispatchRule(context, new Event(ruleId.oppId(), null)));
 
-        outcomes = ContextUtil.switchFocus(outcomes, userState); // resets the focus to the correct state
+        outcomes = ContextUtil.setFocus(outcomes, userState); // resets the focus to the correct state
         return outcomes;
     }
 
 
 
+    public double dispatchGate(GateId gateId, ContextSideId sideIds) {
+        double probability = 1;
 
-    public List<Branch<Boolean>> dispatchGate(GateId gateId, ContextSideId sideIds) {
-        List<Branch<Boolean>> outcomes = List.of(new Branch<>(true, 1));
+        BattleContext context = ContextUtil.setFocus(this, sideIds);
+        probability = user().dispatchGate(context, new Event(gateId, ContextSideId.USER), probability);
+        probability = target().dispatchGate(context, new Event(gateId, ContextSideId.TARGET), probability);
 
-        BattleContext context = ContextUtil.switchFocus(this, sideIds);
-        outcomes = user().dispatchGate(context, new Event(gateId, ContextSideId.USER), outcomes);
-        outcomes = target().dispatchGate(context, new Event(gateId, ContextSideId.TARGET), outcomes);
-
-        return outcomes;
+        // outcomes is a boolean so dont fuck with the focus of the battle context rn
+        return probability;
     }
-    public List<Branch<BattleContext>> dispatchInterceptor(InterceptorId interceptorId, IEffect trueEffect) {
-        InterceptorReport report = new InterceptorReport(this, trueEffect);
 
-        report = user().dispatchInterceptor(report, new Event(interceptorId, ContextSideId.USER));
-        report = user().dispatchInterceptor(report, new Event(interceptorId, ContextSideId.TARGET));
 
-        return report.execute();
+
+    public List<Branch<BattleContext>> dispatchInterceptor(
+        GenericId eventId,
+        ContextSideId sideId,
+        List<Branch<BattleContext>> trueOutcomes
+    ) {
+        Report report = new Report(trueOutcomes);
+        BattleContext context = ContextUtil.setFocus(this, sideId);
+        
+        report = user().dispatchInterceptor(report, context, new Event(eventId, null));
+        context = ContextUtil.reverseFocus(context);
+        report = target().dispatchInterceptor(report, context, new Event(eventId.oppId(), null));
+
+        context = ContextUtil.setFocus(context, userState); // resets the focus to the correct state
+        return report.execute(context);
     }
 
 

@@ -3,7 +3,6 @@ package github.snomfish.functionality.condition;
 import java.util.List;
 
 import github.snomfish.functionality.Value;
-import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 
 public class ListContains<T> implements ICondition {
@@ -33,14 +32,7 @@ public class ListContains<T> implements ICondition {
 
 
     @Override 
-    public List<Branch<Boolean>> execute(BattleContext context) {
-        
-        List<T> listValue = list.get(context);
-        T valueValue = value.get(context);
-        
-        return List.of(new Branch<>(
-            listValue.contains(valueValue),
-            1.0
-        ));
+    public double execute(BattleContext context) {
+        return list.get(context).contains(value.get(context)) ? 1 : 0;
     }
 }

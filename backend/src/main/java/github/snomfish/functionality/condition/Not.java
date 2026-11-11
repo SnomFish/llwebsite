@@ -1,8 +1,5 @@
 package github.snomfish.functionality.condition;
 
-import java.util.List;
-
-import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 
 public class Not implements ICondition {
@@ -16,24 +13,17 @@ public class Not implements ICondition {
     }
 
 
+    private Not(Not copy) {
+        this.condition = copy.condition.deepCopy();
+    }
     @Override 
     public Not deepCopy() {
-        return new Not(
-            condition.deepCopy()
-        );
+        return new Not(this);
     }
 
 
     @Override 
-    public List<Branch<Boolean>> execute(BattleContext context) {
-        List<Branch<Boolean>> outcomes = condition.execute(context);
-
-        for (Branch<Boolean> branch : outcomes) { // inverts the boolean value
-            branch.setValue(branch.value() == false);
-        }
-
-        // does not need the optimise() function, as this function doesn't create new branches
-        // this is true so long as all other functions that create branches have the optimise() function
-        return outcomes;
+    public double execute(BattleContext context) {
+        return 1 - condition.execute(context);
     }
 }

@@ -18,7 +18,7 @@ public class NoCondition implements ICondition {
 
 
     @Override 
-    public List<Branch<Boolean>> execute(BattleContext context) {
-        return List.of(new Branch<>(true, 1.0));
+    public double execute(BattleContext context) {
+        return 0;
     }
 }

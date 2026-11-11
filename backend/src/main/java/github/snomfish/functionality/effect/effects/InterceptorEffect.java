@@ -4,27 +4,32 @@ import java.util.List;
 
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
+import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.effect.IEffect;
-import github.snomfish.functionality.event.ids.InterceptorId;
+import github.snomfish.functionality.event.ids.GenericId;
 
 public class InterceptorEffect implements IEffect {
     
 
-    private InterceptorId id;
+    private GenericId id;
+    private ContextSideId sideId;
     private IEffect trueEffect;
 
 
     public InterceptorEffect(
-        InterceptorId id,
+        GenericId id,
+        ContextSideId sideId,
         IEffect trueEffect
     ) {
         this.id = id;
+        this.sideId = sideId;
         this.trueEffect = trueEffect;
     }
 
 
     private InterceptorEffect(InterceptorEffect copy) {
         this.id = copy.id;
+        this.sideId = copy.sideId;
         this.trueEffect = copy.trueEffect.deepCopy();
     }
     public InterceptorEffect deepCopy() {
@@ -33,6 +38,6 @@ public class InterceptorEffect implements IEffect {
 
 
     public List<Branch<BattleContext>> execute(BattleContext context) {
-        return context.dispatchInterceptor(id, trueEffect);
+        return context.dispatchInterceptor(id, sideId, trueEffect.execute(context));
     }
 }

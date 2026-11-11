@@ -14,7 +14,7 @@ import github.snomfish.functionality.condition.And;
 import github.snomfish.functionality.condition.Comparator;
 import github.snomfish.functionality.condition.Conditions;
 import github.snomfish.functionality.condition.Equals;
-import github.snomfish.functionality.condition.FalseCondition;
+import github.snomfish.functionality.condition.False;
 import github.snomfish.functionality.condition.Not;
 import github.snomfish.functionality.condition.Or;
 import github.snomfish.functionality.condition.RandomCondition;
@@ -30,6 +30,7 @@ import github.snomfish.functionality.event.Gate;
 import github.snomfish.functionality.event.Rule;
 import github.snomfish.functionality.event.ids.GenericAntiId;
 import github.snomfish.functionality.event.ids.GenericId;
+import github.snomfish.functionality.event.ids.IsolatedId;
 import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.ValueConstant;
 
@@ -87,7 +88,7 @@ public class ItemRegistry {
 		register(Item.build(DRAIN_ORB)
 			.name("drain orb")
 			.rule(Rule.build()
-				.event(PRE_HEALTH_DRAIN_EVENT, USER)
+				.event(GenericId.SELF_PRE_DRAINING_HEALTH)
 				.effect(Effects.multiplyValue(Value.USER().MOVE().HEALTH_DRAIN_MODIFIER(), new Constant(1.2)))
 			)
 		);
@@ -102,7 +103,7 @@ public class ItemRegistry {
 		register(Item.build(DRY_ICE)
 			.name("dry ice")
 			.rule(Rule.build()
-				.event(END_OF_TURN_EVENT, USER)
+				.event(IsolatedId.END_OF_TURN)
 				.effect(ApplyStatus.toUser(StatusId.FROSTBITE))
 			)
 		);
@@ -113,7 +114,7 @@ public class ItemRegistry {
 		register(Item.build(HEALTH_AMULET)
 			.name("health amulet")
 			.rule(Rule.build()
-				.event(END_OF_TURN_EVENT, USER)
+				.event(IsolatedId.END_OF_TURN)
 				// TODO restore 1/16 of max hp	
 			)
 		);
@@ -141,14 +142,9 @@ public class ItemRegistry {
 		register(Item.build(KABUNGA_COFFEE)
 			.name("kabunga coffee")
 			.rule(Rule.build()
-				.event(END_OF_TURN_EVENT, USER)
+				.event(IsolatedId.END_OF_TURN)
 				.condition(new RandomCondition(new Constant(0.1)))
-				// TODO restore 1/8 of the user's max energy
-			)
-			.rule(Rule.build()
-				.event(END_OF_TURN_EVENT, TARGET)
-				.condition(new RandomCondition(new Constant(0.1)))
-				// TODO restore 1/8 of the target's max energy
+				// TODO restore 1/8 of the SELF's max energy
 			)
 		);
 		register(Item.build(MILKSHAKE)
@@ -207,7 +203,7 @@ public class ItemRegistry {
 			)
 			.gate(Gate.build()
 				.event(CAN_USE_SUPPORT_MOVES, USER)
-				.condition(new FalseCondition())
+				.condition(new False())
 			)
 		);
 		register(Item.build(RESTRICTIVE_SHIELD)
@@ -219,7 +215,7 @@ public class ItemRegistry {
 			)
 			.gate(Gate.build()
 				.event(CAN_USE_SUPPORT_MOVES, USER)
-				.condition(new FalseCondition())
+				.condition(new False())
 			)
 		);
 		register(Item.build(SPECIALY_BOOTS)
@@ -249,21 +245,21 @@ public class ItemRegistry {
 		register(Item.build(THUNDER_ORB)
 			.name("thunder orb")
 			.rule(Rule.build()
-				.event(END_OF_TURN_EVENT, USER)
+				.event(IsolatedId.END_OF_TURN)
 				.effect(ApplyStatus.toUser(StatusId.PARALYSIS))
 			)
 		);
 		register(Item.build(VIRULENT_FANG)
 			.name("virulent fang")
 			.rule(Rule.build()
-				.event(END_OF_TURN_EVENT, USER)
+				.event(IsolatedId.END_OF_TURN)
 				.effect(ApplyStatus.toUser(StatusId.POISON))
 			)
 		);
 		register(Item.build(VOLCANIC_ASH)
 			.name("volcanic ash")
 			.rule(Rule.build()
-				.event(END_OF_TURN_EVENT, USER)
+				.event(IsolatedId.END_OF_TURN)
 				.effect(ApplyStatus.toUser(StatusId.BURN))
 			)
 		);
@@ -314,12 +310,7 @@ public class ItemRegistry {
 		register(Item.build(FOG_SCALE)
 			.name("Fog Scale")
 			.rule(Rule.build()
-				.event(POST_USER_SET_WEATHER_EVENT, USER)
-				.condition(new Equals<>(Value.WEATHER_ID(), WeatherId.FOG))
-				.effect(Effects.addValue(Value.WEATHER_LIFESPAN(), new Constant(3)))
-			)
-			.rule(Rule.build()
-				.event(POST_TARGET_SET_WEATHER_EVENT, TARGET)
+				.event(GenericId.SELF_SET_WEATHER)
 				.condition(new Equals<>(Value.WEATHER_ID(), WeatherId.FOG))
 				.effect(Effects.addValue(Value.WEATHER_LIFESPAN(), new Constant(3)))
 			)
@@ -327,12 +318,7 @@ public class ItemRegistry {
 		register(Item.build(HEAT_SCALE)
 			.name("Heat Scale")
 			.rule(Rule.build()
-				.event(POST_USER_SET_WEATHER_EVENT, USER)
-				.condition(new Equals<>(Value.WEATHER_ID(), WeatherId.HEATWAVE))
-				.effect(Effects.addValue(Value.WEATHER_LIFESPAN(), new Constant(3)))
-			)
-			.rule(Rule.build()
-				.event(POST_TARGET_SET_WEATHER_EVENT, TARGET)
+				.event(GenericId.SELF_SET_WEATHER)
 				.condition(new Equals<>(Value.WEATHER_ID(), WeatherId.HEATWAVE))
 				.effect(Effects.addValue(Value.WEATHER_LIFESPAN(), new Constant(3)))
 			)
@@ -340,12 +326,7 @@ public class ItemRegistry {
 		register(Item.build(RAIN_SCALE)
 			.name("Rain Scale")
 			.rule(Rule.build()
-				.event(POST_USER_SET_WEATHER_EVENT, USER)
-				.condition(new Equals<>(Value.WEATHER_ID(), WeatherId.RAIN))
-				.effect(Effects.addValue(Value.WEATHER_LIFESPAN(), new Constant(3)))
-			)
-			.rule(Rule.build()
-				.event(POST_TARGET_SET_WEATHER_EVENT, TARGET)
+				.event(GenericId.SELF_SET_WEATHER)
 				.condition(new Equals<>(Value.WEATHER_ID(), WeatherId.RAIN))
 				.effect(Effects.addValue(Value.WEATHER_LIFESPAN(), new Constant(3)))
 			)
@@ -353,12 +334,7 @@ public class ItemRegistry {
 		register(Item.build(STORM_SCALE)
 			.name("Storm Scale")
 			.rule(Rule.build()
-				.event(POST_USER_SET_WEATHER_EVENT, USER)
-				.condition(new Equals<>(Value.WEATHER_ID(), WeatherId.THUNDERSTORM))
-				.effect(Effects.addValue(Value.WEATHER_LIFESPAN(), new Constant(3)))
-			)
-			.rule(Rule.build()
-				.event(POST_TARGET_SET_WEATHER_EVENT, TARGET)
+				.event(GenericId.SELF_SET_WEATHER)
 				.condition(new Equals<>(Value.WEATHER_ID(), WeatherId.THUNDERSTORM))
 				.effect(Effects.addValue(Value.WEATHER_LIFESPAN(), new Constant(3)))
 			)
@@ -366,12 +342,7 @@ public class ItemRegistry {
 		register(Item.build(WIND_SCALE)
 			.name("Wind Scale")
 			.rule(Rule.build()
-				.event(POST_USER_SET_WEATHER_EVENT, USER)
-				.condition(new Equals<>(Value.WEATHER_ID(), WeatherId.STRONG_WINDS))
-				.effect(Effects.addValue(Value.WEATHER_LIFESPAN(), new Constant(3)))
-			)
-			.rule(Rule.build()
-				.event(POST_TARGET_SET_WEATHER_EVENT, TARGET)
+				.event(GenericId.SELF_SET_WEATHER)
 				.condition(new Equals<>(Value.WEATHER_ID(), WeatherId.STRONG_WINDS))
 				.effect(Effects.addValue(Value.WEATHER_LIFESPAN(), new Constant(3)))
 			)

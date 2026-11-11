@@ -2,29 +2,27 @@ package github.snomfish.functionality.condition;
 
 import java.util.List;
 
-import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
+
+import static github.snomfish.functionality.copy.DeepCopy.deepCopyList;
 
 public class And implements ICondition {
     
 
-    private final ICondition leftCondition;
-    private final ICondition rightCondition;
+    private List<ICondition> conditions;
 
 
-    public And(
-        ICondition leftCondition,
-        ICondition rightCondition
-    ) {
-        this.leftCondition = leftCondition;
-        this.rightCondition = rightCondition;
+    public And(ICondition a, ICondition b) {
+        this.conditions = List.of(a, b);
     }
+    public And(ICondition a, ICondition b, ICondition c) {
+        this.conditions = List.of(a, b, c);
+    }
+
+
     private And(And copy) {
-        this.leftCondition = copy.leftCondition.deepCopy();
-        this.rightCondition = copy.rightCondition.deepCopy();
+        this.conditions = deepCopyList(conditions);
     }
-
-
     @Override
     public And deepCopy() {
         return new And(this);
@@ -32,33 +30,13 @@ public class And implements ICondition {
 
 
     @Override
-    public List<Branch<Boolean>> execute(BattleContext context) {
+    public double execute(BattleContext context) {
+        double probability = 1;
 
-        List<Branch<Boolean>> leftBranches = leftCondition.execute(context);
-        List<Branch<Boolean>> rightBranches = rightCondition.execute(context);
-
-        Double trueProbability = 0.0;
-        Double falseProbability = 0.0;
-
-        for (Branch<Boolean> leftBranch : leftBranches) {
-            Boolean leftValue = leftBranch.value();
-            Double leftProbability = leftBranch.probability();
-            
-            for (Branch<Boolean> rightBranch : rightBranches) {
-                Boolean rightValue = rightBranch.value();
-                Double rightProbability = rightBranch.probability();
-
-                if (leftValue && rightValue) {
-                    trueProbability += leftProbability * rightProbability;
-                } else {
-                    falseProbability += leftProbability * rightProbability;
-                }
-            }
+        for (ICondition condition : conditions) {
+            probability *= condition.execute(context);
         }
 
-        return List.of(
-            new Branch<>(true, trueProbability),
-            new Branch<>(false, falseProbability)
-        );
+        return probability;
     }
 }

@@ -61,32 +61,23 @@ public class Comparator implements ICondition {
     }
 
 
-    public List<Branch<Boolean>> execute(BattleContext context) {
+    public double execute(BattleContext context) {
+        double numOfTrueComparisons = 0; // this is a double because I need to do division at the end
+        double numOfComparisons = 0;
+
         List<Branch<Double>> leftBranches = leftNumber.execute(context);
         List<Branch<Double>> rightBranches = rightNumber.execute(context);
 
-        Double trueProbability = 0.0;
-        Double falseProbability = 0.0;
-
         for (Branch<Double> leftBranch : leftBranches) {
-            Double leftValue = leftBranch.value();
-            Double leftProbability = leftBranch.probability();
-            
             for (Branch<Double> rightBranch : rightBranches) {
-                Double rightValue = rightBranch.value();
-                Double rightProbability = rightBranch.probability();
-
-                if (comparator.apply(leftValue, rightValue)) {
-                    trueProbability += leftProbability * rightProbability;
-                } else {
-                    falseProbability += leftProbability * rightProbability;
+                
+                numOfComparisons++;
+                if (comparator.apply(leftBranch.value(), rightBranch.value())) {
+                    numOfTrueComparisons++;
                 }
             }
         }
 
-        return List.of(
-            new Branch<>(true, trueProbability),
-            new Branch<>(false, falseProbability)
-        );
+        return numOfTrueComparisons / numOfComparisons;
     }
 }
