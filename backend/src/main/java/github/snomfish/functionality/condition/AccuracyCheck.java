@@ -1,6 +1,5 @@
 package github.snomfish.functionality.condition;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import github.snomfish.functionality.Value;

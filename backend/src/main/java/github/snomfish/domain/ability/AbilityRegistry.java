@@ -31,7 +31,6 @@ import github.snomfish.functionality.effect.effects.ApplyStatChanges;
 import github.snomfish.functionality.effect.effects.ClutchEffect;
 import github.snomfish.functionality.effect.effects.DealDirectSelfDamage;
 import github.snomfish.functionality.effect.effects.DispatchEventEffect;
-import github.snomfish.functionality.effect.effects.NoEffect;
 import github.snomfish.functionality.effect.effects.SetAbility;
 import github.snomfish.functionality.effect.effects.SetType;
 import github.snomfish.functionality.effect.effects.SetValueEffect;
@@ -514,9 +513,9 @@ public class AbilityRegistry {
 					new GateCondition(CAN_USE_DEFENSIVE_ABILITY, USER),
 					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.FIRE)
 				))
-				.effect(new EffectSequence(List.of(
-						ApplyMechanic.toUser(MechanicId.COMBUSTIBLE)
-				)))
+				.effect(
+					ApplyMechanic.toUser(MechanicId.COMBUSTIBLE)
+				)
 			)
 		);
 		register(Ability.build() // doubles exclusive
@@ -984,7 +983,6 @@ public class AbilityRegistry {
 					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.WATER),
 					new GateCondition(CAN_USE_DEFENSIVE_ABILITY, USER)
 				))
-				.effect(new NoEffect())
 			)
 		);
 		register(Ability.build()

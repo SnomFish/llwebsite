@@ -4,7 +4,6 @@ import static github.snomfish.functionality.branch.BranchUtil.applyProbability;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
 
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
