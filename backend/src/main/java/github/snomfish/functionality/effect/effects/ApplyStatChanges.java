@@ -13,7 +13,6 @@ import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.effect.IEffect;
 import github.snomfish.functionality.event.ids.GenericId;
-import github.snomfish.functionality.event.ids.RuleId;
 import github.snomfish.functionality.number.INumber;
 
 import static github.snomfish.domain.stats.StatChangesId.*;
@@ -22,20 +21,22 @@ import static github.snomfish.functionality.branch.BranchUtil.flatMap;
 public class ApplyStatChanges implements IEffect {
     
 
-    private RuleId preEvent; // runs once before the stat changes are applied
-    private GenericId statLoweredEvent;
-    private ContextSideId sideBeingLowered; // runs after each inidividual stat change if a stat is lowered
+    private ContextSideId userSideI;
+    private ContextSideId targetSideI;
+    private GenericId statLoweredEvent; // runs after each inidividual stat change if a stat is lowered
     private Value<ActiveLoomian> activeLoomianValue; // the loomian who will have their stats changed
     private Map<StatChangesId, INumber> statChanges;
 
 
     private ApplyStatChanges(
+        ContextSideId userSideI,
+        ContextSideId targetSideI,
         GenericId statLoweredEvent,
-        ContextSideId sideBeingLowered,
         Value<ActiveLoomian> activeLoomianValue
     ) {
+        this.userSideI = userSideI;
+        this.targetSideI = targetSideI;
         this.statLoweredEvent = statLoweredEvent;
-        this.sideBeingLowered = sideBeingLowered;
         this.activeLoomianValue = activeLoomianValue;
         this.statChanges = new HashMap<>();
     }
@@ -43,25 +44,33 @@ public class ApplyStatChanges implements IEffect {
 
     public static ApplyStatChanges userChangingUser() {
         return new ApplyStatChanges(
-            GenericId.SELF_STATS_LOWERED_BY_OPP, ContextSideId.USER,
+            ContextSideId.USER,
+            ContextSideId.USER,
+            GenericId.SELF_STATS_LOWERED_BY_SELF,
             Value.USER().LOOMIAN()
         );
     }
     public static ApplyStatChanges userChangingTarget() {
         return new ApplyStatChanges(
-            GenericId.SELF_STATS_LOWERED_BY_OPP, ContextSideId.TARGET,
+            ContextSideId.USER,
+            ContextSideId.TARGET,
+            GenericId.SELF_STATS_LOWERED_BY_OPP,
             Value.TARGET().LOOMIAN()
         );
     }
     public static ApplyStatChanges targetChangingUser() {
-        return new ApplyStatChanges( 
-            GenericId.SELF_STATS_LOWERED_BY_OPP, ContextSideId.USER,
+        return new ApplyStatChanges(
+            ContextSideId.TARGET,
+            ContextSideId.USER,
+            GenericId.SELF_STATS_LOWERED_BY_OPP,
             Value.USER().LOOMIAN()
         );
     }
     public static ApplyStatChanges targetChangingTarget() {
         return new ApplyStatChanges(
-            GenericId.SELF_STATS_LOWERED_BY_OPP, ContextSideId.TARGET, 
+            ContextSideId.TARGET,
+            ContextSideId.TARGET,
+            GenericId.SELF_STATS_LOWERED_BY_SELF,
             Value.TARGET().LOOMIAN()
         );
     }
@@ -102,8 +111,6 @@ public class ApplyStatChanges implements IEffect {
 
 
     private ApplyStatChanges(ApplyStatChanges copy) { // these are enums
-        this.preEvent = copy.preEvent;
-        // TODO
         this.activeLoomianValue = copy.activeLoomianValue;
     }
     public ApplyStatChanges deepCopy() {
@@ -115,7 +122,7 @@ public class ApplyStatChanges implements IEffect {
     public List<Branch<BattleContext>> execute(BattleContext context) {
         List<Branch<BattleContext>> outcomes = List.of(new Branch<>(context, 1.0));
 
-        outcomes = flatMap(outcomes, c -> c.dispatchEvent(preEvent));
+        outcomes = flatMap(outcomes, c -> c.dispatchEvent(GenericId.SELF_PRE_STATS_CHANGED, userSideI));
         for (StatChangesId key : StatChangesId.values()) {
             outcomes = flatMap(outcomes, c -> applyStatChangeModule(context, key));
         }
@@ -159,7 +166,7 @@ public class ApplyStatChanges implements IEffect {
 
         // if a stat was lowered then trigger this
         if (deltaStage < 0) {
-            outcomes = flatMap(outcomes, c -> c.dispatchEvent(statLoweredEvent, sideBeingLowered));
+            outcomes = flatMap(outcomes, c -> c.dispatchEvent(statLoweredEvent, targetSideI));
         }
 
         return outcomes;

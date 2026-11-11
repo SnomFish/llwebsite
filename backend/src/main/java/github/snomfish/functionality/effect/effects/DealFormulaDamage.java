@@ -20,7 +20,6 @@ import github.snomfish.functionality.effect.Effects;
 import github.snomfish.functionality.effect.IEffect;
 import github.snomfish.functionality.event.ids.GateId;
 import github.snomfish.functionality.event.ids.GenericId;
-import github.snomfish.functionality.event.ids.RuleId;
 import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.INumber;
 
@@ -58,9 +57,8 @@ public class DealFormulaDamage implements IEffect {
     private List<Branch<BattleContext>> execute1(BattleContext context) {
         List<Branch<BattleContext>> outcomes = List.of(new Branch<>(context, 1.0));
 
-        outcomes = flatMap(outcomes, c -> c.dispatchEvent(RuleId.CLUTCH_EVENT));
+        outcomes = flatMap(outcomes, c -> c.dispatchEvent(GenericId.SELF_CLUTCHES, ContextSideId.TARGET));
         outcomes = flatMap(outcomes, c -> damageRollModule(c));
-        outcomes = flatMap(outcomes, c -> c.dispatchEvent(RuleId.POST_DAMAGE_EVENT));
 
         return outcomes;
     }

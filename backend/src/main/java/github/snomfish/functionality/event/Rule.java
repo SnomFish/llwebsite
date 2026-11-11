@@ -7,12 +7,10 @@ import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.condition.ICondition;
 import github.snomfish.functionality.condition.NoCondition;
 import github.snomfish.functionality.context.BattleContext;
-import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.effect.IEffect;
 import github.snomfish.functionality.effect.effects.NoEffect;
 import github.snomfish.functionality.event.ids.IGenericId;
 import github.snomfish.functionality.event.ids.IsolatedId;
-import github.snomfish.functionality.event.ids.RuleId;
 
 import static github.snomfish.functionality.branch.BranchUtil.applyProbability;
 
@@ -54,10 +52,6 @@ public class Rule {
     // builder functions
     public static Rule build() {
         return new Rule();
-    }
-    public Rule event(RuleId ruleId, ContextSideId sideId) {
-        this.events.add(new Event(ruleId, sideId));
-        return this;
     }
     public Rule event(IsolatedId ruleId) {
         this.events.add(new Event(ruleId, null));

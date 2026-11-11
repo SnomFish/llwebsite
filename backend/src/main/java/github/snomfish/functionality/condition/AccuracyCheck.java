@@ -5,7 +5,8 @@ import java.util.List;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
-import github.snomfish.functionality.event.ids.RuleId;
+import github.snomfish.functionality.context.ContextSideId;
+import github.snomfish.functionality.event.ids.GenericId;
 import github.snomfish.functionality.number.INumber;
 
 public class AccuracyCheck implements ICondition {
@@ -32,7 +33,7 @@ public class AccuracyCheck implements ICondition {
         List<Branch<Double>> accuracyBranches = accuracyNumber.execute(context);
         double probability = 0;
 
-        context.dispatchEvent(RuleId.ACCURACY_CHECK_EVENT);
+        context.dispatchEvent(GenericId.SELF_PRE_ACCURACY_CHECK, ContextSideId.USER);
 
         double cachedAccuracyModifier = (double) Value.USER().MOVE().ACCURACY_MODIFIER().get(context);
 

@@ -9,6 +9,13 @@ public enum IsolatedId implements IEventId {
     END_OF_TURN,
 
     LOOMIAN_SWAPS_IN,
+    LOOMIAN_KNOCKED_OUT,
+
+    // move
+    LOOMIAN_PRE_MOVE,
+    PRE_CHECK_ACCURACY,
+    LOOMIAN_CLUTCHES,
+    LOOMIAN_POST_MOVE,
 
     // formula damage
     PRE_DEAL_FORMULA_DAMAGE,

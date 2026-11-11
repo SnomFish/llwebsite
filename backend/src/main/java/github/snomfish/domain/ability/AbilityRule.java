@@ -11,7 +11,6 @@ import github.snomfish.functionality.effect.effects.NoEffect;
 import github.snomfish.functionality.event.Event;
 import github.snomfish.functionality.event.ids.IGenericId;
 import github.snomfish.functionality.event.ids.IsolatedId;
-import github.snomfish.functionality.event.ids.RuleId;
 
 public class AbilityRule {
     
@@ -44,10 +43,6 @@ public class AbilityRule {
             new NoCondition(),
             new NoEffect()
         );
-    }
-    public AbilityRule event(RuleId ruleId, ContextSideId sideId) {
-        this.events.add(new Event(ruleId, sideId));
-        return this;
     }
     public AbilityRule event(IsolatedId isolatedId) {
         this.events.add(new Event(isolatedId, null));

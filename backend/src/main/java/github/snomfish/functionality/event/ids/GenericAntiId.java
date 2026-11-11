@@ -4,6 +4,13 @@ public enum GenericAntiId implements IGenericId {
     NULL_EVENT, // should never be dispatched
 
     WATCHES_OPP_SWAP_IN,
+    SELF_KNOCKED_OUT_BY_OPP,
+
+    // move
+    SELF_WATCHES_OPP_PRE_MOVE,
+    SELF_WATCHES_OPP_PRE_ACCURACY_CHECK,
+    SELF_WATCHES_OPP_CLUTCH,
+    SELF_WATCHES_OPP_POST_MOVE,
 
     // formula damage
     PRE_OPP_DEAL_FORMULA_DAMAGE,

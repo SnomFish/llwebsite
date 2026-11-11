@@ -38,7 +38,6 @@ import static github.snomfish.domain.item.ItemId.*;
 import static github.snomfish.domain.species.SpeciesId.*;
 import static github.snomfish.functionality.context.ContextSideId.*;
 import static github.snomfish.functionality.event.ids.GateId.*;
-import static github.snomfish.functionality.event.ids.RuleId.*;
 
 // oi add a condition in condition schematics for general item use, offensive item use and defensive.
 // simplest solution for whe the loomian cannot use items/ are about to be pile drived by sly cavenish
@@ -79,8 +78,8 @@ public class ItemRegistry {
 		register(Item.build(CLUTCH_PLUSHIE)
 			.name("clutch plushie")
 			.rule(Rule.build()
-				.event(CLUTCH_EVENT, TARGET)
-				.condition(new Equals<>(Value.TARGET().HEALTH(), Value.TARGET().CURRENT_HEALTH()))
+				.event(GenericId.SELF_CLUTCHES)
+				.condition(Conditions.userIsAtFullHealth())
 				.effect(new ClutchEffect())
 				
 			)
@@ -183,7 +182,7 @@ public class ItemRegistry {
 		register(Item.build(RAGEFUL_PLUSHIE)
 			.name("rageful plushie")
 			.rule(Rule.build()
-				.event(DEALT_DAMAGE_EVENT, TARGET)
+				.event(GenericAntiId.RECEIVED_DAMAGE_FROM_MOVE)
 				.condition(Comparator.greaterThan()
 					.left(new ValueConstant(Value.USER().MOVE().TYPE_MODIFIER()))
 					.right(new Constant(1))

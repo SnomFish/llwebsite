@@ -37,6 +37,7 @@ import github.snomfish.functionality.effect.effects.SetValueEffect;
 import github.snomfish.functionality.effect.effects.SetWeather;
 import github.snomfish.functionality.event.Gate;
 import github.snomfish.functionality.event.Interceptor;
+import github.snomfish.functionality.event.ids.GateId;
 import github.snomfish.functionality.event.ids.GenericAntiId;
 import github.snomfish.functionality.event.ids.GenericId;
 import github.snomfish.functionality.event.ids.IsolatedId;
@@ -47,8 +48,6 @@ import github.snomfish.functionality.number.ValueConstant;
 
 import static github.snomfish.domain.ability.AbilityId.*;
 import static github.snomfish.functionality.context.ContextSideId.*;
-import static github.snomfish.functionality.event.ids.GateId.*;
-import static github.snomfish.functionality.event.ids.RuleId.*;
 
 public class AbilityRegistry {
     
@@ -78,10 +77,10 @@ public class AbilityRegistry {
 			.id(ABILITY_THIEF)
 			.name("ability thief")
 			.rule(AbilityRule.build()
-				.event(POST_DAMAGE_EVENT, USER)
+				.event(GenericId.SELF_MOVE_DEALT_DAMAGE)
 				.condition(new And(
 					new Equals<>(Value.USER().MOVE().CONTACT_TAG(), true),
-					new GateCondition(CAN_REMOVE_TARGET_ABILITY, USER)
+					new GateCondition(GateId.CAN_REMOVE_TARGET_ABILITY, USER)
 				))
 				.effect(new EffectSequence(List.of(
 					SetAbility.userActual(Value.TARGET().ABILITY_ID()),
@@ -118,8 +117,8 @@ public class AbilityRegistry {
 				)))
 			)
 			.gate(Gate.build() // prevents the ability being removed
-				.event(CAN_REMOVE_USER_ABILITY, USER)
-				.event(CAN_REMOVE_TARGET_ABILITY, TARGET)
+				.event(GateId.CAN_REMOVE_USER_ABILITY, USER)
+				.event(GateId.CAN_REMOVE_TARGET_ABILITY, TARGET)
 				.condition(new False())
 			)
 		);
@@ -137,14 +136,8 @@ public class AbilityRegistry {
 			.id(AGGRESSIVE)
 			.name("aggressive")
 			.rule(AbilityRule.build()
-				.event(USER_KNOCKED_OUT_TARGET_EVENT, USER)
+				.event(GenericId.SELF_KNOCKED_OUT_OPP)
 				.effect(ApplyStatChanges.userChangingUser()
-					.mattack(new Constant(1))	
-				)
-			)
-			.rule(AbilityRule.build()
-				.event(TARGET_KNOCKED_OUT_USER_EVENT, TARGET)
-				.effect(ApplyStatChanges.targetChangingTarget()
 					.mattack(new Constant(1))	
 				)
 			)
@@ -223,7 +216,7 @@ public class AbilityRegistry {
             .name("aqua body")
 			.rule(AbilityRule.build()
                 .event(GenericAntiId.PRE_OPP_DEAL_FORMULA_DAMAGE) // before the targets move damage is calculated
-				.condition(new GateCondition(CAN_USE_DEFENSIVE_ABILITY, USER))
+				.condition(new GateCondition(GateId.CAN_USE_DEFENSIVE_ABILITY, USER))
                 .effect(new ConditionalEffect(
 					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.FIRE),
 					Effects.multiplyValue(Value.OPP().MOVE().TYPE_MODIFIER(), new Constant(0.5))
@@ -238,7 +231,7 @@ public class AbilityRegistry {
             .id(ASSERTIVE)
             .name("assertive")
 			.rule(AbilityRule.build()
-                .event(PRE_MOVE_EVENT, USER) // before anything about the move is actually used
+                .event(GenericId.SELF_PRE_MOVE) // before anything about the move is actually used
                 .effect(new AlterTypeChart(TypeId.BRAWLER, TypeId.SPIRIT, 1))
             )
         );
@@ -317,7 +310,7 @@ public class AbilityRegistry {
 			.id(BONEHEADED)
 			.name("boneheaded")
 			.gate(Gate.build()
-				.event(CAN_TAKE_RECOIL, USER)
+				.event(GateId.CAN_TAKE_RECOIL, USER)
 				.condition(new False())
 			)
 		);
@@ -341,7 +334,7 @@ public class AbilityRegistry {
 			.id(BRUTE_FORCE)
 			.name("brute force")
 			.gate(Gate.build()
-				.event(CAN_USE_SECONDARY_EFFECTS, USER)
+				.event(GateId.CAN_USE_SECONDARY_EFFECTS, USER)
 				.condition(new False())
 			)
 		);
@@ -349,7 +342,7 @@ public class AbilityRegistry {
 			.id(BUG_FEVER)
 			.name("bug_fever")
 			.rule(AbilityRule.build()
-				.event(USER_KNOCKED_OUT_TARGET_EVENT, USER)
+				.event(GenericId.SELF_KNOCKED_OUT_OPP)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.BUG))
 				.effect(ApplyStatChanges.userChangingUser()
 					.mattack(new Constant(2))
@@ -360,7 +353,7 @@ public class AbilityRegistry {
 			.id(BULLY)
 			.name("bully")
 			.gate(Gate.build()
-				.event(CAN_USE_DEFENSIVE_ABILITY, USER)
+				.event(GateId.CAN_USE_DEFENSIVE_ABILITY, USER)
 				.condition(Comparator.lessThan()
 					.left(new ValueConstant(Value.TARGET().HEIGHT()))
 					.right(new ValueConstant(Value.USER().HEIGHT()))
@@ -368,7 +361,7 @@ public class AbilityRegistry {
 				// if the user is shorter than the target, bully does not activate so the target can use their defensive ability
 			)
 			.gate(Gate.build()
-				.event(CAN_DEFENDING_STAT_USE_STAT_BOOSTS, USER)
+				.event(GateId.CAN_DEFENDING_STAT_USE_STAT_BOOSTS, USER)
 				.condition(Comparator.lessThan()
 					.left(new ValueConstant(Value.USER().HEIGHT()))
 					.right(new ValueConstant(Value.TARGET().HEIGHT()))
@@ -379,10 +372,10 @@ public class AbilityRegistry {
 			.id(BURGLAR)
 			.name("burglar")
 			.rule(AbilityRule.build()
-				.event(DEALT_DAMAGE_EVENT, USER)
+				.event(GenericId.SELF_MOVE_DEALT_DAMAGE)
 				.condition(new And(
 					new Equals<>(Value.USER().MOVE().CONTACT_TAG(), true),
-					new GateCondition(CAN_REMOVE_TARGET_ITEM, USER)
+					new GateCondition(GateId.CAN_REMOVE_TARGET_ITEM, USER)
 				))
 				.effect(new ConditionalEffect(
 					new Equals<>(Value.USER().ITEM_ID(), ItemId.NO_ITEM),
@@ -433,7 +426,7 @@ public class AbilityRegistry {
 			.id(CHILL)
 			.name("chill")
 			.rule(AbilityRule.build()
-				.event(PRE_MOVE_EVENT, USER)
+				.event(GenericId.SELF_PRE_MOVE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.SIMPLE))
 				.effect(new EffectSequence(List.of(
 					SetType.move(TypeId.ICE),
@@ -470,8 +463,8 @@ public class AbilityRegistry {
 				))
 			)
 			.gate(Gate.build() // prevents the ability being removed
-				.event(CAN_REMOVE_USER_ABILITY, USER)
-				.event(CAN_REMOVE_TARGET_ABILITY, TARGET)
+				.event(GateId.CAN_REMOVE_USER_ABILITY, USER)
+				.event(GateId.CAN_REMOVE_TARGET_ABILITY, TARGET)
 				.condition(new False())
 			)
 		);
@@ -479,7 +472,7 @@ public class AbilityRegistry {
 			.id(CLINGY)
 			.name("clingy")
 			.gate(Gate.build()
-				.event(CAN_REMOVE_USER_ITEM, USER)
+				.event(GateId.CAN_REMOVE_USER_ITEM, USER)
 				.condition(new False())
 			)
 		);
@@ -487,10 +480,10 @@ public class AbilityRegistry {
 			.id(CLUTCH)
 			.name("clutch")
 			.rule(AbilityRule.build()
-				.event(CLUTCH_EVENT, TARGET)
+				.event(GenericId.SELF_CLUTCHES)
 				.condition(new And(
-					Conditions.targetIsAtFullHealth(),
-					new GateCondition(CAN_USE_DEFENSIVE_ABILITY, USER)
+					Conditions.userIsAtFullHealth(),
+					new GateCondition(GateId.CAN_USE_DEFENSIVE_ABILITY, TARGET)
 				))
 				.effect(new ClutchEffect())
 			)
@@ -510,7 +503,7 @@ public class AbilityRegistry {
 			.interceptor(Interceptor.build()
 				.event(GenericAntiId.SELF_PRE_DAMAGED)
 				.condition(new And(
-					new GateCondition(CAN_USE_DEFENSIVE_ABILITY, USER),
+					new GateCondition(GateId.CAN_USE_DEFENSIVE_ABILITY, USER),
 					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.FIRE)
 				))
 				.effect(
@@ -534,7 +527,7 @@ public class AbilityRegistry {
 			.id(CONFIDENCE)
 			.name("confidence")
 			.gate(Gate.build()
-				.event(CAN_MOVE_FLINCH, USER)
+				.event(GateId.CAN_MOVE_FLINCH, USER)
 				.condition(new False())
 			)
 		);
@@ -550,13 +543,12 @@ public class AbilityRegistry {
 			.id(COURSING_VENOM) // when hit by a toxic type move, absorb it to boost your own toxic type damage by 1.5x
 			.name("coursing venom")
 			.rule(AbilityRule.build()
-				.event(PRE_DAMAGE_EVENT, TARGET)
+				.event(GenericAntiId.SELF_PRE_DAMAGED)
 				.condition(new And(
-					new Equals<>(Value.USER().MOVE().TYPE(), TypeId.TOXIC),
-					new GateCondition(CAN_USE_DEFENSIVE_ABILITY, USER)
+					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.TOXIC),
+					new GateCondition(GateId.CAN_USE_DEFENSIVE_ABILITY, USER)
 				))
 				.effect(new EffectSequence(List.of(
-					Effects.multiplyValue(Value.USER().MOVE().DAMAGE(), new Constant(0.0)),
 					ApplyMechanic.toUser(MechanicId.COURSING_VENOM)
 				)))
 			)
@@ -614,7 +606,7 @@ public class AbilityRegistry {
 			.id(DEVIOUS)
 			.name("devious")
 			.gate(Gate.build()
-				.event(CAN_USE_DEFENSIVE_ABILITY, USER)
+				.event(GateId.CAN_USE_DEFENSIVE_ABILITY, USER)
 				.condition(new NoCondition())
 			)
 		);
@@ -634,7 +626,7 @@ public class AbilityRegistry {
 				.effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.3)))
 			)
 			.rule(AbilityRule.build()
-				.event(DEALT_DAMAGE_EVENT, USER)
+				.event(GenericId.SELF_MOVE_DEALT_DAMAGE)
 				.effect(new DealDirectSelfDamage(new Multiply(
 					new ValueConstant(Value.USER().HEALTH()),
 					new Constant(1/16)
@@ -697,14 +689,14 @@ public class AbilityRegistry {
 			.id(ENCHANTED_COAT)
 			.name("enchanted coat")
 			.rule(AbilityRule.build()
-				.event(PRE_DAMAGE_EVENT, TARGET)
+				.event(GenericAntiId.SELF_PRE_DAMAGED)
 				.condition(new And(
 					Comparator.greaterThan()
-						.left(new ValueConstant(Value.USER().MOVE().TYPE_MODIFIER()))
+						.left(new ValueConstant(Value.OPP().MOVE().TYPE_MODIFIER()))
 						.right(new Constant(1)),
-					new GateCondition(CAN_USE_DEFENSIVE_ABILITY, USER)
+					new GateCondition(GateId.CAN_USE_DEFENSIVE_ABILITY, USER)
 				))
-				.effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE(), new Constant(0.75)))
+				.effect(Effects.multiplyValue(Value.OPP().MOVE().DAMAGE(), new Constant(0.75)))
 			)
 		);
 		register(Ability.build()
@@ -727,8 +719,8 @@ public class AbilityRegistry {
 			.id(FACADE)
 			.name("facade")
 			.gate(Gate.build() // prevents the ability being removed
-				.event(CAN_REMOVE_USER_ABILITY, USER)
-				.event(CAN_REMOVE_TARGET_ABILITY, TARGET)
+				.event(GateId.CAN_REMOVE_USER_ABILITY, USER)
+				.event(GateId.CAN_REMOVE_TARGET_ABILITY, TARGET)
 				.condition(new False())
 			)
 		);
@@ -739,14 +731,14 @@ public class AbilityRegistry {
 				.event(GenericAntiId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new And(
 					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.AIR),
-					new GateCondition(CAN_USE_DEFENSIVE_ABILITY, TARGET)
+					new GateCondition(GateId.CAN_USE_DEFENSIVE_ABILITY, TARGET)
 				))
 				.effect(Effects.multiplyValue(Value.OPP().MOVE().DAMAGE_MODIFIER(), new Constant(0.5)))
 			)
 			.rule(AbilityRule.build()
-				.event(DEALT_DAMAGE_EVENT, TARGET)
-				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.AIR))
-				.effect(ApplyStatChanges.targetChangingTarget()
+				.event(GenericAntiId.RECEIVED_DAMAGE_FROM_MOVE)
+				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.AIR))
+				.effect(ApplyStatChanges.userChangingUser()
 					.rattack(new Constant(1))
 				)
 			)
@@ -754,8 +746,8 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(FESTIVE_SPIRIT)
 			.name("festive spirit").gate(Gate.build() // prevents the ability being removed
-				.event(CAN_REMOVE_USER_ABILITY, USER)
-				.event(CAN_REMOVE_TARGET_ABILITY, TARGET)
+				.event(GateId.CAN_REMOVE_USER_ABILITY, USER)
+				.event(GateId.CAN_REMOVE_TARGET_ABILITY, TARGET)
 				.condition(new False())
 			)
 		);
@@ -770,7 +762,7 @@ public class AbilityRegistry {
 				.event(GenericAntiId.SELF_PRE_DAMAGED)
 				.condition(new Or(
 					new Equals<>(Value.OPP().MOVE().POWDER_TAG(), true),
-					new GateCondition(CAN_USE_DEFENSIVE_ABILITY, USER)
+					new GateCondition(GateId.CAN_USE_DEFENSIVE_ABILITY, USER)
 				))
 			)
 		);
@@ -801,16 +793,16 @@ public class AbilityRegistry {
 				.event(GenericAntiId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new And(
 					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.FIRE),
-					new GateCondition(CAN_USE_DEFENSIVE_ABILITY, TARGET)
+					new GateCondition(GateId.CAN_USE_DEFENSIVE_ABILITY, TARGET)
 				))
 				.effect(
 					Effects.multiplyValue(Value.OPP().MOVE().DAMAGE_MODIFIER(), new Constant(0.5))
 				)
 			)
 			.rule(AbilityRule.build()
-				.event(DEALT_DAMAGE_EVENT, TARGET)
+				.event(GenericAntiId.RECEIVED_DAMAGE_FROM_MOVE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.FIRE))
-				.effect(ApplyStatChanges.userChangingTarget()
+				.effect(ApplyStatChanges.userChangingUser()
 					.mattack(new Constant(1))
 				)
 			)
@@ -822,7 +814,7 @@ public class AbilityRegistry {
 				.event(GenericAntiId.SELF_PRE_DAMAGED)
 				.condition(new Or(
 					new Equals<>(Value.OPP().MOVE().SOUND_TAG(), true),
-					new GateCondition(CAN_USE_DEFENSIVE_ABILITY, USER)
+					new GateCondition(GateId.CAN_USE_DEFENSIVE_ABILITY, USER)
 				))
 			)
 		);
@@ -830,9 +822,9 @@ public class AbilityRegistry {
 			.id(FRAIL_ARMOUR)
 			.name("frail armour")
 			.rule(AbilityRule.build()
-				.event(DEALT_DAMAGE_EVENT, TARGET)
-				.condition(new Equals<>(Value.USER().MOVE().CATEGORY(), CategoryId.MELEE))
-				.effect(ApplyStatChanges.targetChangingTarget()
+				.event(GenericAntiId.RECEIVED_DAMAGE_FROM_MOVE)
+				.condition(new Equals<>(Value.OPP().MOVE().CATEGORY(), CategoryId.MELEE))
+				.effect(ApplyStatChanges.userChangingUser()
 					.mdefense(new Constant(-1))
 					.speed(new Constant(2))
 				)
@@ -850,16 +842,16 @@ public class AbilityRegistry {
 			.id(GLIDE)
 			.name("glide")
 			.rule(AbilityRule.build()
-				.event(DEALT_DAMAGE_EVENT, USER)
+				.event(GenericId.SELF_MOVE_DEALT_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.AIR))
 				.effect(ApplyStatChanges.userChangingUser()
 					.speed(new Constant(1))
 				)
 			)
 			.rule(AbilityRule.build()
-				.event(DEALT_DAMAGE_EVENT, TARGET)
-				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.AIR))
-				.effect(ApplyStatChanges.targetChangingTarget()
+				.event(GenericAntiId.RECEIVED_DAMAGE_FROM_MOVE)
+				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.AIR))
+				.effect(ApplyStatChanges.userChangingUser()
 					.speed(new Constant(1))
 				)
 			)
@@ -896,7 +888,7 @@ public class AbilityRegistry {
 				.event(GenericAntiId.SELF_PRE_DAMAGED)
 				.condition(new Or(
 					new Equals<>(Value.OPP().MOVE().EXPLOSIVE_TAG(), true),
-					new GateCondition(CAN_USE_DEFENSIVE_ABILITY, USER)
+					new GateCondition(GateId.CAN_USE_DEFENSIVE_ABILITY, USER)
 				))
 			)
 		);
@@ -970,7 +962,7 @@ public class AbilityRegistry {
 				.event(GenericAntiId.SELF_PRE_DAMAGED)
 				.condition(new Or(
 					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.EARTH),
-					new GateCondition(CAN_USE_DEFENSIVE_ABILITY, USER)
+					new GateCondition(GateId.CAN_USE_DEFENSIVE_ABILITY, USER)
 				))
 			)
 		);
@@ -981,7 +973,7 @@ public class AbilityRegistry {
 				.event(GenericAntiId.SELF_PRE_DAMAGED)
 				.condition(new Or(
 					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.WATER),
-					new GateCondition(CAN_USE_DEFENSIVE_ABILITY, USER)
+					new GateCondition(GateId.CAN_USE_DEFENSIVE_ABILITY, USER)
 				))
 			)
 		);
@@ -992,7 +984,7 @@ public class AbilityRegistry {
 				.event(GenericAntiId.SELF_PRE_DAMAGED)
 				.condition(new Or(
 					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.WATER),
-					new GateCondition(CAN_USE_DEFENSIVE_ABILITY, USER)
+					new GateCondition(GateId.CAN_USE_DEFENSIVE_ABILITY, USER)
 				))
 				.effect(ApplyStatChanges.userChangingUser()
 					.mattack(new Constant(1)
@@ -1007,14 +999,14 @@ public class AbilityRegistry {
 			.id(IGNORANT)
 			.name("ignorant")
 			.gate(Gate.build()
-				.event(CAN_DEFENDING_STAT_USE_STAT_BOOSTS, TARGET)
-				.event(CAN_DEFENDING_STAT_USE_STAT_DROPS, TARGET)
-				.condition(new GateCondition(CAN_USE_DEFENSIVE_ABILITY, USER))
+				.event(GateId.CAN_DEFENDING_STAT_USE_STAT_BOOSTS, TARGET)
+				.event(GateId.CAN_DEFENDING_STAT_USE_STAT_DROPS, TARGET)
+				.condition(new GateCondition(GateId.CAN_USE_DEFENSIVE_ABILITY, USER))
 			)
 			.gate(Gate.build()
-				.event(CAN_ATTACKING_STAT_USE_STAT_BOOSTS, USER)
-				.event(CAN_ATTACKING_STAT_USE_STAT_DROPS, USER)
-				.condition(new GateCondition(CAN_USE_OFFENSIVE_ABILITY, USER))
+				.event(GateId.CAN_ATTACKING_STAT_USE_STAT_BOOSTS, USER)
+				.event(GateId.CAN_ATTACKING_STAT_USE_STAT_DROPS, USER)
+				.condition(new GateCondition(GateId.CAN_USE_OFFENSIVE_ABILITY, USER))
 			)
 		);
 		register(Ability.build()
@@ -1043,7 +1035,7 @@ public class AbilityRegistry {
 			.rule(AbilityRule.build()
 				.event(GenericAntiId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new And(
-					new GateCondition(CAN_USE_DEFENSIVE_ABILITY, TARGET),
+					new GateCondition(GateId.CAN_USE_DEFENSIVE_ABILITY, TARGET),
 					new Or(
 						new Equals<>(Value.USER().MOVE().TYPE(), TypeId.FIRE),
 						new Equals<>(Value.USER().MOVE().TYPE(), TypeId.ICE)
@@ -1076,8 +1068,8 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(LIFE_FORCE)
 			.name("life force").gate(Gate.build() // prevents the ability being removed
-				.event(CAN_REMOVE_USER_ABILITY, USER)
-				.event(CAN_REMOVE_TARGET_ABILITY, TARGET)
+				.event(GateId.CAN_REMOVE_USER_ABILITY, USER)
+				.event(GateId.CAN_REMOVE_TARGET_ABILITY, TARGET)
 				.condition(new False())
 			)
 		);
@@ -1088,7 +1080,7 @@ public class AbilityRegistry {
 				.event(GenericAntiId.SELF_PRE_DAMAGED)
 				.condition(new Or(
 					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.ELECTRIC),
-					new GateCondition(CAN_USE_DEFENSIVE_ABILITY, USER)
+					new GateCondition(GateId.CAN_USE_DEFENSIVE_ABILITY, USER)
 				))
 				.effect(ApplyStatChanges.userChangingUser()
 					.rattack(new Constant(1)
@@ -1125,7 +1117,7 @@ public class AbilityRegistry {
 			.id(MALWARE)
 			.name("malware")
 			.rule(AbilityRule.build()
-				.event(POST_DAMAGE_EVENT, TARGET) // if hit by a move
+				.event(GenericAntiId.RECEIVED_DAMAGE_FROM_MOVE) // if hit by a move
 				.condition(new Equals<>(Value.USER().MOVE().CONTACT_TAG(), true))
 				.effect(SetAbility.target(MALWARE))
 			)
@@ -1142,7 +1134,7 @@ public class AbilityRegistry {
 			.id(MASK_SWAP)
 			.name("mask_swap")
 			.rule(AbilityRule.build()
-				.event(PRE_MOVE_EVENT, USER)
+				.event(GenericId.SELF_PRE_MOVE)
 				.effect(new ConditionalEffect(
 					new Equals<>(Value.USER().MOVE().TYPE(), Value.USER().PRIMARY_TYPE()), // if the user's move doesnt match the type of move they are using, gain it as a secondary type
 					SetType.userSecondary(TypeId.NULL),
@@ -1230,7 +1222,7 @@ public class AbilityRegistry {
 				.event(GenericAntiId.SELF_PRE_DAMAGED)
 				.condition(new Or(
 					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.PLANT),
-					new GateCondition(CAN_USE_DEFENSIVE_ABILITY, USER)
+					new GateCondition(GateId.CAN_USE_DEFENSIVE_ABILITY, USER)
 				))
 				.effect(ApplyMechanic.toUser(MechanicId.NOXIOUS_WEEDS))
 			)
@@ -1249,8 +1241,8 @@ public class AbilityRegistry {
 			.id(ODD_HUSK)
 			.name("odd_husk")
 			.gate(Gate.build()
-				.event(CAN_SECONDARY_EFFECTS_AFFECT_TARGET, TARGET)
-				.condition(new Not(new GateCondition(CAN_USE_DEFENSIVE_ABILITY, USER)))
+				.event(GateId.CAN_SECONDARY_EFFECTS_AFFECT_TARGET, TARGET)
+				.condition(new Not(new GateCondition(GateId.CAN_USE_DEFENSIVE_ABILITY, USER)))
 			)
 		);
 		register(Ability.build()
@@ -1329,7 +1321,7 @@ public class AbilityRegistry {
 			.id(PRISMATIC)
 			.name("prismatic")
 			.rule(AbilityRule.build()
-				.event(PRE_DAMAGE_EVENT, TARGET)
+				.event(GenericId.SELF_PRE_DAMAGING)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.LIGHT))
 				.effect(new EffectSequence(List.of(
 					Effects.multiplyValue(Value.USER().MOVE().DAMAGE(), new Constant(0.0)),
@@ -1341,8 +1333,8 @@ public class AbilityRegistry {
 			.id(PROTECTIVE_SHELL)
 			.name("protective shell")
 			.gate(Gate.build()
-				.event(CAN_MOVE_CRIT, TARGET)
-				.condition(new Not(new GateCondition(CAN_USE_DEFENSIVE_ABILITY, USER)))
+				.event(GateId.CAN_MOVE_CRIT, TARGET)
+				.condition(new Not(new GateCondition(GateId.CAN_USE_DEFENSIVE_ABILITY, USER)))
 			)
 		);
 		register(Ability.build()
@@ -1380,7 +1372,7 @@ public class AbilityRegistry {
 				.event(GenericAntiId.SELF_PRE_DAMAGED)
 				.condition(new Or(
 					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.FIRE),
-					new GateCondition(CAN_USE_DEFENSIVE_ABILITY, USER)
+					new GateCondition(GateId.CAN_USE_DEFENSIVE_ABILITY, USER)
 				))
 			)
 		);
@@ -1419,7 +1411,7 @@ public class AbilityRegistry {
 				.event(GenericAntiId.SELF_PRE_DAMAGED)
 				.condition(new Or(
 					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.ELECTRIC),
-					new GateCondition(CAN_USE_DEFENSIVE_ABILITY, USER)
+					new GateCondition(GateId.CAN_USE_DEFENSIVE_ABILITY, USER)
 				))
 				.effect(ApplyStatChanges.userChangingUser()
 					.speed(new Constant(1)
@@ -1482,7 +1474,7 @@ public class AbilityRegistry {
 			.id(ROYAL_DECREE)
 			.name("royal_decree")
 			.rule(AbilityRule.build()
-                .event(PRE_MOVE_EVENT, USER) // before anything about the move is actually used
+                .event(GenericId.SELF_PRE_MOVE) // before anything about the move is actually used
                 .effect(new AlterTypeChart(TypeId.ELECTRIC, TypeId.EARTH, 1))
             )
 		);
@@ -1588,14 +1580,8 @@ public class AbilityRegistry {
 			.id(SOUL_SIPHON)
 			.name("soul siphon")
 			.rule(AbilityRule.build()
-				.event(USER_KNOCKED_OUT_TARGET_EVENT, USER)
+				.event(GenericId.SELF_KNOCKED_OUT_OPP)
 				.effect(ApplyStatChanges.userChangingUser()
-					.rattack(new Constant(1))	
-				)
-			)
-			.rule(AbilityRule.build()
-				.event(TARGET_KNOCKED_OUT_USER_EVENT, TARGET)
-				.effect(ApplyStatChanges.targetChangingTarget()
 					.rattack(new Constant(1))	
 				)
 			)
@@ -1692,7 +1678,7 @@ public class AbilityRegistry {
 			.id(TOXIC_FILTER)
 			.name("toxic filter")
 			.rule(AbilityRule.build()
-				.event(PRE_DAMAGE_EVENT, TARGET)
+				.event(GenericId.SELF_PRE_DAMAGING)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.TOXIC))
 				.effect(new EffectSequence(List.of(
 					Effects.multiplyValue(Value.USER().MOVE().DAMAGE(), new Constant(0.0)),
@@ -1735,8 +1721,8 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(TWO_FACE)
 			.name("two_face").gate(Gate.build() // prevents the ability being removed
-				.event(CAN_REMOVE_USER_ABILITY, USER)
-				.event(CAN_REMOVE_TARGET_ABILITY, TARGET)
+				.event(GateId.CAN_REMOVE_USER_ABILITY, USER)
+				.event(GateId.CAN_REMOVE_TARGET_ABILITY, TARGET)
 				.condition(new False())
 			)
 		);
@@ -1769,8 +1755,11 @@ public class AbilityRegistry {
 			.id(VICIOUS)
 			.name("vicious")
 			.rule(AbilityRule.build()
-				.event(PRE_DAMAGE_EVENT, USER)
-				.condition(new Equals<>(Value.USER().STATUS_ID(), StatusId.BURN))
+				.event(GenericId.SELF_PRE_DAMAGING)
+				.condition(new Or(
+					new Equals<>(Value.USER().STATUS_ID(), StatusId.POISON),
+					new Equals<>(Value.USER().STATUS_ID(), StatusId.BAD_POISON)
+				))
 				.effect(Effects.multiplyValue(Value.USER().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)))
 			)
 		);
@@ -1815,7 +1804,7 @@ public class AbilityRegistry {
 			.id(VIVID_SIGHT)
 			.name("vivid sight")
 			.rule(AbilityRule.build()
-				.event(PRE_MOVE_EVENT, USER)
+				.event(GenericId.SELF_PRE_MOVE)
 				.effect(Effects.multiplyValue(Value.USER().MOVE().ACCURACY_MODIFIER(), new Constant(1.3)))
 			)
 		);
@@ -1831,7 +1820,7 @@ public class AbilityRegistry {
 			.id(WEBBING)
 			.name("webbing")
 			.rule(AbilityRule.build()
-				.event(POST_DAMAGE_EVENT, TARGET)
+				.event(GenericAntiId.RECEIVED_DAMAGE_FROM_MOVE)
 				.condition(new Equals<>(Value.USER().MOVE().CONTACT_TAG(), true))
 				.effect(ApplyStatChanges.targetChangingUser()
 					.speed(new Constant(1))
@@ -1875,7 +1864,7 @@ public class AbilityRegistry {
 			.id(WISE)
 			.name("wise")
 			.rule(AbilityRule.build()
-				.event(PRE_DAMAGE_EVENT, USER)
+				.event(GenericId.SELF_PRE_DAMAGING)
 				.condition(Comparator.lessThan()
 					.left(new ValueConstant(Value.USER().MOVE().TYPE_MODIFIER()))
 					.right(new Constant(1))
@@ -1890,7 +1879,7 @@ public class AbilityRegistry {
 				.event(GenericAntiId.SELF_PRE_DAMAGED)
 				.condition(new Or(
 					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.PLANT),
-					new GateCondition(CAN_USE_DEFENSIVE_ABILITY, USER)
+					new GateCondition(GateId.CAN_USE_DEFENSIVE_ABILITY, USER)
 				))
 				.effect(ApplyStatChanges.userChangingUser()
 					.mattack(new Constant(1)
