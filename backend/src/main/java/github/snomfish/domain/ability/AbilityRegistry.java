@@ -45,7 +45,6 @@ import github.snomfish.functionality.event.eventIds.RuleForAllId;
 import github.snomfish.functionality.event.eventIds.RuleForTargetId;
 import github.snomfish.functionality.event.eventIds.RuleForUserId;
 import github.snomfish.functionality.event.gateIds.GateForAllId;
-import github.snomfish.functionality.event.gateIds.GateId;
 import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.INumberValueConstant;
 import github.snomfish.functionality.number.Multiply;

@@ -32,6 +32,24 @@ public class Rule {
     public IEffect effect() {return effect;}
 
 
+    // builder functions
+    public static Rule build() {
+        return new Rule();
+    }
+    public Rule event(IEventId id) {
+        this.events.add(new Event(id, null));
+        return this;
+    }
+    public Rule condition(ICondition condition) {
+        this.condition = condition;
+        return this;
+    }
+    public Rule effect(IEffect effect) {
+        this.effect = effect;
+        return this;
+    }
+
+
     public List<Branch<BattleContext>> execute(BattleContext context, Event event) {
         
         if (!events.contains(event)) {
@@ -49,23 +67,5 @@ public class Rule {
         }
         
         return effect.execute(context);
-    }
-
-
-    // builder functions
-    public static Rule build() {
-        return new Rule();
-    }
-    public Rule event(IEventId id) {
-        this.events.add(new Event(id, null));
-        return this;
-    }
-    public Rule condition(ICondition condition) {
-        this.condition = condition;
-        return this;
-    }
-    public Rule effect(IEffect effect) {
-        this.effect = effect;
-        return this;
     }
 }

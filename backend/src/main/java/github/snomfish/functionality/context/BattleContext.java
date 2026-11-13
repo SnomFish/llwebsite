@@ -12,7 +12,6 @@ import github.snomfish.functionality.event.Report;
 import github.snomfish.functionality.event.eventIds.ConstantRuleId;
 import github.snomfish.functionality.event.eventIds.RuleForAllId;
 import github.snomfish.functionality.event.gateIds.GateForAllId;
-import github.snomfish.functionality.event.gateIds.GateId;
 
 import static github.snomfish.domain.SideId.*;
 import static github.snomfish.functionality.branch.BranchUtil.flatMap;

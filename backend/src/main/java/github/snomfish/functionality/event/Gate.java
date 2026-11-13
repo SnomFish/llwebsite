@@ -24,15 +24,6 @@ public class Gate {
     }
 
 
-    private Gate(Gate copy) {
-        this.events = new ArrayList<>(copy.events);
-        this.condition = copy.condition.deepCopy();
-    }
-    public Gate deepCopy() {
-        return new Gate(this);
-    }
-
-
     // getters
     public List<Event> events() {return events;}
     public ICondition condition() {return condition;}

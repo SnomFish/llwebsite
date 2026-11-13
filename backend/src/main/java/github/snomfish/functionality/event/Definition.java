@@ -11,15 +11,15 @@ import github.snomfish.functionality.event.gateIds.IGateId;
 public class Definition<T extends Enum<T>, D extends Definition<T, D>> {
   
     
-    protected final T id;
+    protected T id;
     protected String name;
     protected final List<Rule> rules;
     protected final List<Gate> gates;
     protected final List<Interceptor> interceptors;
 
 
-    protected Definition(T id) {
-        this.id = id;
+    protected Definition() {
+        this.id = null;
         this.name = "no definition";
         this.rules = new ArrayList<>();
         this.gates = new ArrayList<>();
@@ -36,8 +36,13 @@ public class Definition<T extends Enum<T>, D extends Definition<T, D>> {
 
 
     // builder functions
-    public static <T extends Enum<T>, D extends Definition<T, D>> Definition<T, D> build(T id) {
-        return new Definition<>(id);
+    public static <T extends Enum<T>, D extends Definition<T, D>> Definition<T, D> build() {
+        return new Definition<>();
+    }
+    @SuppressWarnings("unchecked")
+    public D id(T id) {
+        this.id = id;
+        return (D) this;
     }
     @SuppressWarnings("unchecked")
     public D name(String name) {

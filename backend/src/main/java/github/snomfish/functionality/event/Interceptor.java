@@ -23,16 +23,6 @@ public class Interceptor {
     }
 
 
-    private Interceptor(Interceptor copy) {
-        this.events = new ArrayList<>(copy.events);
-        this.condition = copy.condition.deepCopy();
-        this.effect = copy.effect.deepCopy();
-    }
-    public Interceptor deepCopy() {
-        return new Interceptor(this);
-    }
-
-
     // getter
     public List<Event> events() {return events;}
     public ICondition condition() {return condition;}
