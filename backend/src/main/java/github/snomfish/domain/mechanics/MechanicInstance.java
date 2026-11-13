@@ -9,12 +9,9 @@ public class MechanicInstance implements DeepCopyable<MechanicInstance> {
     private int age;
 
 
-    public MechanicInstance(
-        MechanicId id,
-        int age
-    ) {
+    public MechanicInstance(MechanicId id) {
         this.id = id;
-        this.age = age;
+        this.age = 0;
     }
 
 
@@ -35,4 +32,9 @@ public class MechanicInstance implements DeepCopyable<MechanicInstance> {
 
     // setters
     public void age(int age) {this.age = age;}
+
+
+    public void incrementAge() {
+        this.age++;
+    }
 }

@@ -9,6 +9,7 @@ import github.snomfish.domain.Side;
 import github.snomfish.domain.ability.AbilityId;
 import github.snomfish.domain.item.ItemId;
 import github.snomfish.domain.mechanics.MechanicId;
+import github.snomfish.domain.mechanics.MechanicInstance;
 import github.snomfish.domain.move.CategoryId;
 import github.snomfish.domain.move.Move;
 import github.snomfish.domain.move.MoveTagId;
@@ -235,10 +236,21 @@ public class Value<T> {
 		(c, v) -> 	((Side) c).activeLoomian().action().setPriority(v)
 	);}
 	// MECHANICS
-	public Value<Boolean> ALL_OR_NOTHING_FOCUSING_MECHANIC() {return update(
+	public Value<MechanicInstance> MECHANIC(MechanicId id) {return update(
+		MechanicInstance.class,
+		c -> 		((Side) c).activeLoomian().mechanics().get(id),
+		(c, v) ->	((Side) c).activeLoomian().mechanics().set(v)
+	);}
+	public Value<Boolean> HAS_MECHANIC(MechanicId id) {return update(
 		Boolean.class,
-		c -> 		((Side) c).activeLoomian().mechanics().has(MechanicId.ALL_OR_NOTHING_FOCUSING),
-		(c, v) ->	((Side) c).activeLoomian().mechanics().set(MechanicId.ALL_OR_NOTHING_FOCUSING, v)
+		c ->		((Side) c).activeLoomian().mechanics().has(id),
+		null
+	);}
+	// MOVES
+	public Value<Integer> NUM_OF_MOVES() {return update(
+		Integer.class,
+		c -> 		((Side) c).activeLoomian().moves().size(),
+		null
 	);}
 	// STATS
 	public Value<Integer> CURRENT_HEALTH() {return update(

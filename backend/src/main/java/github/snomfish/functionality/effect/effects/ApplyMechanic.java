@@ -4,6 +4,7 @@ import java.util.List;
 
 import github.snomfish.domain.ActiveLoomian;
 import github.snomfish.domain.mechanics.MechanicId;
+import github.snomfish.domain.mechanics.MechanicInstance;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
@@ -44,7 +45,16 @@ public class ApplyMechanic implements IEffect {
     @Override
     public List<Branch<BattleContext>> execute(BattleContext context) {
         ActiveLoomian loomian = (ActiveLoomian) activeLoomianValue.get(context);
-        loomian.mechanics().add(mechanicId);
+        MechanicInstance instance = new MechanicInstance(mechanicId);
+
+        if (loomian.mechanics().has(mechanicId)) {
+
+            context.log(loomian.species().name() + " already has " + mechanicId.name());
+        } else {
+            
+            context.log("Applying mechanic " + mechanicId.name() + " to " + loomian.species().name());
+            loomian.mechanics().set(instance);
+        }
         
         return List.of(new Branch<>(context, 1.0)); 
     }

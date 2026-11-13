@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import github.snomfish.domain.mechanics.MechanicId;
 import github.snomfish.domain.move.structures.MoveEffect;
 import github.snomfish.domain.stats.StatId;
 import github.snomfish.domain.status.StatusId;
@@ -32,7 +33,6 @@ import github.snomfish.functionality.number.ConditionalNumber;
 import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.ValueConstant;
 
-import static github.snomfish.domain.mechanics.MechanicId.ALL_OR_NOTHING_FOCUSING;
 import static github.snomfish.domain.move.CategoryId.*;
 import static github.snomfish.domain.move.MoveId.*;
 import static github.snomfish.domain.move.MoveTagId.*;
@@ -336,11 +336,11 @@ public class MoveRegistry {
 			.energyCost(new Constant(60))
 			.basePower(new Constant(150))
 			.onTurnStart(new MoveEffect(
-				ApplyMechanic.toUser(ALL_OR_NOTHING_FOCUSING)
+				ApplyMechanic.toUser(MechanicId.ALL_OR_NOTHING_FOCUSING)
 			))
 			.condition(new And(
 				new AccuracyCheck(new Constant(100)),
-				new Equals<>(Value.USER().ALL_OR_NOTHING_FOCUSING_MECHANIC(), true)
+				new Equals<>(Value.USER().HAS_MECHANIC(MechanicId.ALL_OR_NOTHING_FOCUSING), true)
 			))
 			.onHit(new MoveEffect(
 				new DealFormulaDamage()

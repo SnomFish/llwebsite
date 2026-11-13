@@ -14,14 +14,11 @@ import static github.snomfish.functionality.branch.BranchUtil.flatMap;
 public class Mechanics implements DeepCopyable<Mechanics> {
     
 
-    private Map<MechanicId, Boolean> mechanics;
+    private Map<MechanicId, MechanicInstance> mechanics;
 
 
     public Mechanics() {
         this.mechanics = new HashMap<>();
-        for (MechanicId key : MechanicId.values()) {
-            mechanics.put(key, false);
-        }
     }
     public Mechanics(Mechanics copy) {
         this.mechanics = new HashMap<>(copy.mechanics);
@@ -35,23 +32,23 @@ public class Mechanics implements DeepCopyable<Mechanics> {
 
 
     public void incrementTurnNumber() {
-        for (MechanicId mechanicId : mechanics.keySet()) {
-            
+        for (MechanicInstance mechanic : mechanics.values()) {
+            mechanic.incrementAge();
         }
     }
 
 
-    public Boolean has(MechanicId id) {
+    public boolean has(MechanicId id) {
+        return mechanics.containsKey(id);
+    }
+    public MechanicInstance get(MechanicId id) {
         return mechanics.get(id);
     }
-    public void set(MechanicId id, boolean v) {
-        mechanics.put(id, v);
-    }
-    public void add(MechanicId id) {
-        mechanics.put(id, true);
+    public void set(MechanicInstance instance) {
+        mechanics.put(instance.id(), instance);
     }
     public void remove(MechanicId id) {
-        mechanics.put(id, false);
+        mechanics.remove(id);
     }
 
 
@@ -59,7 +56,8 @@ public class Mechanics implements DeepCopyable<Mechanics> {
         List<Branch<BattleContext>> outcomes = List.of(new Branch<>(context, 1.0));
 
         for (MechanicId id : mechanics.keySet()) {
-            if (mechanics.get(id) == false) continue;
+            if (!mechanics.containsKey(id)) continue;
+
             Mechanic mechanic = MechanicRegistry.get(id);
             outcomes = flatMap(outcomes, c -> mechanic.handleRule(c, event));
         }

@@ -225,7 +225,10 @@ public class ItemRegistry {
 			.name("specialty gloves")
 			.rule(Rule.build()
 				.event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
-				.condition(new Equals<>(Value.USER().MOVE().CATEGORY(), CategoryId.MELEE))
+				.condition(new And(
+					new Equals<>(Value.USER().MOVE().CATEGORY(), CategoryId.MELEE),
+					new Equals<>(Value.USER().NUM_OF_MOVES(), new Constant(4))
+				))
 				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)))
 			)
 			// TODO locks the user into a move
@@ -234,7 +237,10 @@ public class ItemRegistry {
 			.name("specialty goggles")
 			.rule(Rule.build()
 				.event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
-				.condition(new Equals<>(Value.USER().MOVE().CATEGORY(), CategoryId.RANGED))
+				.condition(new And(
+					new Equals<>(Value.USER().MOVE().CATEGORY(), CategoryId.RANGED),
+					new Equals<>(Value.USER().NUM_OF_MOVES(), new Constant(4))
+				))
 				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)))
 			)
 			// TODO locks the user into a move
