@@ -25,11 +25,17 @@ public class Tags<T extends Enum<T>> implements DeepCopyable<Tags<T>> {
     }
 
 
+    public boolean has(T id) {
+        return tags.containsKey(id);
+    }
     public Boolean get(T id) {
         if (!tags.containsKey(id)) tags.put(id, false);
         return tags.get(id);
     }
     public void set(T id, Boolean value) {
         tags.put(id, value);
+    }
+    public void add(T id) {
+        tags.put(id, true);
     }
 }

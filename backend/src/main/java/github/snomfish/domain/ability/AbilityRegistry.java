@@ -671,10 +671,21 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(EFFULGENT)
 			.name("effulgent")
+			.gate(Gate.build()
+			)
 		);
 		register(Ability.build()
 			.id(ELDER_MANE)
 			.name("Elder Mane")
+			.rule(Rule.build()
+				.event(GenericAntiId.PRE_OPP_DEAL_FORMULA_DAMAGE)
+				.condition(Conditions.or(
+					new Equals<>(Value.USER().MOVE().TYPE(), TypeId.BUG),
+					new Equals<>(Value.USER().MOVE().TYPE(), TypeId.DARK),
+					new Equals<>(Value.USER().MOVE().TYPE(), TypeId.SPIRIT)
+				))
+				.effect(Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(0.5)))
+			)
 		);
 		register(Ability.build()
 			.id(ELECTRIFY)
@@ -683,6 +694,11 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(ELUSIVE)
 			.name("elusive")
+			.rule(Rule.build()
+				.event(GenericAntiId.PRE_OPP_DEAL_FORMULA_DAMAGE)
+				.condition(Conditions.userHasStatusAilment())
+				.effect(Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(2/3)))
+			)
 		);
 		register(Ability.build()
 			.id(ENCHANT)

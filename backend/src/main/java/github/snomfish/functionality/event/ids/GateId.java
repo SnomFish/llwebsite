@@ -3,6 +3,8 @@ package github.snomfish.functionality.event.ids;
 public enum GateId implements IEventId {
     CAN_ATTACKING_STAT_USE_STAT_BOOSTS,
     CAN_ATTACKING_STAT_USE_STAT_DROPS,
+    CAN_USER_CONSUME_ITEM,
+    CAN_TARGET_CONSUME_ITEM,
     CAN_DEFENDING_STAT_USE_STAT_BOOSTS,
     CAN_DEFENDING_STAT_USE_STAT_DROPS,
     CAN_MOVE_CRIT,
