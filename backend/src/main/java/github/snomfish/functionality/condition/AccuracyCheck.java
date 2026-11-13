@@ -8,7 +8,6 @@ import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.event.ids.RuleForAllId;
-import github.snomfish.functionality.event.ids.RuleForUserId;
 import github.snomfish.functionality.number.INumber;
 
 public class AccuracyCheck implements ICondition {

@@ -12,7 +12,6 @@ import github.snomfish.functionality.effect.effects.DealDirectSelfDamage;
 import github.snomfish.functionality.event.Rule;
 import github.snomfish.functionality.event.ids.RuleForUserId;
 import github.snomfish.functionality.event.ids.ConstantRuleId;
-import github.snomfish.functionality.event.ids.RuleForAllId;
 import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.Multiply;
 import github.snomfish.functionality.number.ValueConstant;
