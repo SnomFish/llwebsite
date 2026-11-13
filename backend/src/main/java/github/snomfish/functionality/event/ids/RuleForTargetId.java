@@ -1,6 +1,6 @@
 package github.snomfish.functionality.event.ids;
 
-public enum ToTargetId implements IToSideId {
+public enum RuleForTargetId implements IRuleForSideId {
     NULL_EVENT, // should never be dispatched
 
     WATCHES_OPP_SWAP_IN,

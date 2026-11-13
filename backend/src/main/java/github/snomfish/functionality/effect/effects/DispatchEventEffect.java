@@ -6,28 +6,28 @@ import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.effect.IEffect;
-import github.snomfish.functionality.event.ids.ToUserId;
+import github.snomfish.functionality.event.ids.RuleForAllId;
 
 import static github.snomfish.functionality.branch.BranchUtil.flatMap;
 
 public class DispatchEventEffect implements IEffect {
     
 
-    private ToUserId genericId;
+    private RuleForAllId eventId;
     private ContextSideId sideId;
 
 
     public DispatchEventEffect(
-        ToUserId genericId,
+        RuleForAllId eventId,
         ContextSideId sideId
     ) {
-        this.genericId = genericId;
+        this.eventId = eventId;
         this.sideId = sideId;
     }
     
 
     private DispatchEventEffect(DispatchEventEffect copy) {
-        this.genericId = copy.genericId;
+        this.eventId = copy.eventId;
         this.sideId = copy.sideId;
     }
     public DispatchEventEffect deepCopy() {
@@ -39,7 +39,7 @@ public class DispatchEventEffect implements IEffect {
     public List<Branch<BattleContext>> execute(BattleContext context) {
         List<Branch<BattleContext>> outcomes = List.of(new Branch<>(context, 1));
 
-        outcomes = flatMap(outcomes, c -> c.dispatchEvent(genericId, sideId));
+        outcomes = flatMap(outcomes, c -> c.dispatchEvent(eventId, sideId));
     
         return outcomes;
     }

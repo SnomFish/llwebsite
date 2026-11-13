@@ -8,8 +8,7 @@ import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.effect.IEffect;
-import github.snomfish.functionality.event.ids.ToUserId;
-import github.snomfish.functionality.event.ids.GeneralId;
+import github.snomfish.functionality.event.ids.RuleForAllId;
 import github.snomfish.functionality.number.INumber;
 
 import static github.snomfish.functionality.branch.BranchUtil.flatMap;
@@ -19,13 +18,13 @@ public class SetWeather implements IEffect {
 
     private WeatherId weatherId;
     private INumber lifespan;
-    private ToUserId postSetEvent;
+    private RuleForAllId postSetEvent;
 
 
     private SetWeather(
         WeatherId weatherId,
         INumber lifespan,
-        ToUserId postSetEvent
+        RuleForAllId postSetEvent
     ) {
         this.weatherId = weatherId;
         this.lifespan = lifespan;
@@ -46,7 +45,7 @@ public class SetWeather implements IEffect {
     public static SetWeather userSetting(WeatherId id, INumber lifespan) {
         return new SetWeather(
             id, lifespan,
-            ToUserId.SELF_SET_WEATHER
+            RuleForAllId.LOOMIAN_SET_WEATHER
         );
     }
     /*public static SetWeather targetSetting(WeatherId id, INumber lifespan) {
@@ -64,8 +63,7 @@ public class SetWeather implements IEffect {
         if (context.gamestate().weatherInstance().weatherId() == weatherId) return outcomes;
 
         outcomes = flatMap(outcomes, c -> setWeatherModule(context));
-        outcomes = flatMap(outcomes, c -> c.dispatchEvent(postSetEvent, ContextSideId.USER)); // i think this technically activates any non Side events twice as LOOMIAN_SET_WEATHER is the isolated event stored in postSetEvent
-        outcomes = flatMap(outcomes, c -> c.dispatchEvent(GeneralId.LOOMIAN_SET_WEATHER));
+        outcomes = flatMap(outcomes, c -> c.dispatchEvent(postSetEvent, ContextSideId.USER));
         
         return outcomes;
     }

@@ -33,6 +33,24 @@ public class ContextUtil {
     }
 
 
+    public static List<Branch<BattleContext>> setFocus(List<Branch<BattleContext>> contextBranches, ContextSideId theSideThatWillBecomeUser) {
+        List<Branch<BattleContext>> outcomes = new ArrayList<>();
+
+        for (Branch<BattleContext> contextBranch : contextBranches) {
+            BattleContext context = contextBranch.value();
+            Gamestate gamestate = context.gamestate();
+            Double probability = contextBranch.probability();
+
+            outcomes.add(new Branch<>(
+                new BattleContext(gamestate, theSideThatWillBecomeUser.self(context)),
+                probability
+            ));
+        }
+
+        return outcomes;
+    } 
+
+
     public static BattleContext setFocus(BattleContext context, SideId sideId) {
         return new BattleContext(context.gamestate(), sideId);
     }

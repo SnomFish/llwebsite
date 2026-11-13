@@ -12,7 +12,7 @@ import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.effect.IEffect;
-import github.snomfish.functionality.event.ids.ToUserId;
+import github.snomfish.functionality.event.ids.RuleForAllId;
 import github.snomfish.functionality.number.INumber;
 
 import static github.snomfish.domain.stats.StatChangesId.*;
@@ -23,7 +23,7 @@ public class ApplyStatChanges implements IEffect {
 
     private ContextSideId userSideI;
     private ContextSideId targetSideI;
-    private ToUserId statLoweredEvent; // runs after each inidividual stat change if a stat is lowered
+    private RuleForAllId statLoweredEvent; // runs after each inidividual stat change if a stat is lowered
     private Value<ActiveLoomian> activeLoomianValue; // the loomian who will have their stats changed
     private Map<StatChangesId, INumber> statChanges;
 
@@ -31,7 +31,7 @@ public class ApplyStatChanges implements IEffect {
     private ApplyStatChanges(
         ContextSideId userSideI,
         ContextSideId targetSideI,
-        ToUserId statLoweredEvent,
+        RuleForAllId statLoweredEvent,
         Value<ActiveLoomian> activeLoomianValue
     ) {
         this.userSideI = userSideI;
@@ -46,7 +46,7 @@ public class ApplyStatChanges implements IEffect {
         return new ApplyStatChanges(
             ContextSideId.USER,
             ContextSideId.USER,
-            ToUserId.SELF_STATS_LOWERED_BY_SELF,
+            RuleForAllId.LOOMIAN_STATS_LOWERED_BY_SELF,
             Value.USER().LOOMIAN()
         );
     }
@@ -54,7 +54,7 @@ public class ApplyStatChanges implements IEffect {
         return new ApplyStatChanges(
             ContextSideId.USER,
             ContextSideId.TARGET,
-            ToUserId.SELF_STATS_LOWERED_BY_OPP,
+            RuleForAllId.LOOMIAN_STATS_LOWERED_BY_OTHER,
             Value.TARGET().LOOMIAN()
         );
     }
@@ -62,7 +62,7 @@ public class ApplyStatChanges implements IEffect {
         return new ApplyStatChanges(
             ContextSideId.TARGET,
             ContextSideId.USER,
-            ToUserId.SELF_STATS_LOWERED_BY_OPP,
+            RuleForAllId.LOOMIAN_STATS_LOWERED_BY_OTHER,
             Value.USER().LOOMIAN()
         );
     }
@@ -70,7 +70,7 @@ public class ApplyStatChanges implements IEffect {
         return new ApplyStatChanges(
             ContextSideId.TARGET,
             ContextSideId.TARGET,
-            ToUserId.SELF_STATS_LOWERED_BY_SELF,
+            RuleForAllId.LOOMIAN_STATS_LOWERED_BY_SELF,
             Value.TARGET().LOOMIAN()
         );
     }
@@ -122,7 +122,7 @@ public class ApplyStatChanges implements IEffect {
     public List<Branch<BattleContext>> execute(BattleContext context) {
         List<Branch<BattleContext>> outcomes = List.of(new Branch<>(context, 1.0));
 
-        outcomes = flatMap(outcomes, c -> c.dispatchEvent(ToUserId.SELF_PRE_STATS_CHANGED, userSideI));
+        outcomes = flatMap(outcomes, c -> c.dispatchEvent(RuleForAllId.PRE_LOOMIAN_STATS_CHANGED, userSideI));
         for (StatChangesId key : StatChangesId.values()) {
             outcomes = flatMap(outcomes, c -> applyStatChangeModule(context, key));
         }

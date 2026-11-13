@@ -9,7 +9,7 @@ import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.effect.IEffect;
-import github.snomfish.functionality.event.ids.ToUserId;
+import github.snomfish.functionality.event.ids.RuleForAllId;
 
 import static github.snomfish.domain.item.ItemId.NO_ITEM;
 
@@ -57,7 +57,7 @@ public class ConsumeItem implements IEffect {
 
         // currently does not check if the item can be consumed
         activeLoomian.setItemId(NO_ITEM);
-        outcomes = context.dispatchEvent(ToUserId.SELF_CONSUMED_ITEM, sideId);
+        outcomes = context.dispatchEvent(RuleForAllId.LOOMIAN_CONSUMED_ITEM, sideId);
 
         return outcomes;
     }

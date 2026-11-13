@@ -9,8 +9,7 @@ import github.snomfish.functionality.condition.NoCondition;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.effect.IEffect;
 import github.snomfish.functionality.effect.effects.NoEffect;
-import github.snomfish.functionality.event.ids.IToSideId;
-import github.snomfish.functionality.event.ids.GeneralId;
+import github.snomfish.functionality.event.ids.IEventId;
 
 import static github.snomfish.functionality.branch.BranchUtil.applyProbability;
 
@@ -58,12 +57,8 @@ public class Rule {
     public static Rule build() {
         return new Rule();
     }
-    public Rule event(GeneralId ruleId) {
-        this.events.add(new Event(ruleId, null));
-        return this;
-    }
-    public Rule event(IToSideId genericId) {
-        this.events.add(new Event(genericId, null));
+    public Rule event(IEventId id) {
+        this.events.add(new Event(id, null));
         return this;
     }
     public Rule condition(ICondition condition) {
