@@ -1,7 +1,9 @@
-package github.snomfish.functionality.event.ids;
+package github.snomfish.functionality.event.eventIds;
 
-import static github.snomfish.functionality.event.ids.RuleForTargetId.*;
-import static github.snomfish.functionality.event.ids.RuleForUserId.*;
+import static github.snomfish.functionality.event.eventIds.RuleForTargetId.*;
+import static github.snomfish.functionality.event.eventIds.RuleForUserId.*;
+
+import github.snomfish.functionality.event.IEventId;
 
 public enum RuleForAllId implements IEventId {
     NULL_EVENT(), // should never be dispatched

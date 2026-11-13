@@ -11,6 +11,7 @@ import github.snomfish.functionality.copy.DeepCopyable;
 import github.snomfish.functionality.event.Event;
 import github.snomfish.functionality.event.Gate;
 import github.snomfish.functionality.event.Rule;
+import github.snomfish.functionality.event.gateIds.IGateId;
 
 import static github.snomfish.functionality.branch.BranchUtil.applyProbability;
 import static github.snomfish.functionality.branch.BranchUtil.flatMap;
@@ -119,13 +120,13 @@ public class AbilityInstance implements DeepCopyable<AbilityInstance> {
     }
 
 
-    public double handleGate(BattleContext context, Event event) {
+    public double handleGate(BattleContext context, IGateId gateId) {
         double probability = 1;
         Ability ability = ability();
 
         for (Gate gate : ability.gates()) {
             
-            if (!gate.events().contains(event)) continue; // only fires the gate if the event matches
+            if (!gate.events().contains(gateId)) continue; // only fires the gate if the event matches
 
             probability *= gate.condition().execute(context);
         }

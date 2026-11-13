@@ -1,4 +1,4 @@
-package github.snomfish.functionality.event.ids;
+package github.snomfish.functionality.event.eventIds;
 
 public enum RuleForTargetId implements IRuleForSideId {
     NULL_EVENT, // should never be dispatched

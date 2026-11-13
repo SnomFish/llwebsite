@@ -9,7 +9,6 @@ import github.snomfish.functionality.condition.NoCondition;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.effect.IEffect;
 import github.snomfish.functionality.effect.effects.NoEffect;
-import github.snomfish.functionality.event.ids.IEventId;
 
 import static github.snomfish.functionality.branch.BranchUtil.applyProbability;
 

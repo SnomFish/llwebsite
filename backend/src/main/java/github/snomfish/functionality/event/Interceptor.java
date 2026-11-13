@@ -7,7 +7,6 @@ import github.snomfish.functionality.condition.ICondition;
 import github.snomfish.functionality.condition.NoCondition;
 import github.snomfish.functionality.effect.IEffect;
 import github.snomfish.functionality.effect.effects.NoEffect;
-import github.snomfish.functionality.event.ids.IEventId;
 
 public class Interceptor {
     

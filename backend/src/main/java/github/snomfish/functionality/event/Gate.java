@@ -6,7 +6,7 @@ import java.util.List;
 import github.snomfish.functionality.condition.ICondition;
 import github.snomfish.functionality.condition.NoCondition;
 import github.snomfish.functionality.context.ContextSideId;
-import github.snomfish.functionality.event.ids.GateId;
+import github.snomfish.functionality.event.gateIds.GateForAllId;
 
 public class Gate {
     
@@ -45,7 +45,7 @@ public class Gate {
             new NoCondition()
         );
     }
-    public Gate event(GateId eventId, ContextSideId sideId) {
+    public Gate event(GateForAllId eventId, ContextSideId sideId) {
         this.events.add(new Event(eventId, sideId));
         return this;
     }

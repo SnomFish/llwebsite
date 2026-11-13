@@ -2,17 +2,17 @@ package github.snomfish.functionality.condition;
 
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.context.ContextSideId;
-import github.snomfish.functionality.event.ids.GateId;
+import github.snomfish.functionality.event.gateIds.GateForAllId;
 
 public class GateCondition implements ICondition {
     
 
-    private GateId gateId;
+    private GateForAllId gateId;
     private ContextSideId sideId;
     
 
     public GateCondition(
-        GateId gateId,
+        GateForAllId gateId,
         ContextSideId sideId
     ) {
         this.gateId = gateId;

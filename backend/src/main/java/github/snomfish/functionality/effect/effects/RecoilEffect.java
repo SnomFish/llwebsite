@@ -11,7 +11,7 @@ import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.effect.ConditionalEffect;
 import github.snomfish.functionality.effect.IEffect;
-import github.snomfish.functionality.event.ids.GateId;
+import github.snomfish.functionality.event.gateIds.GateForAllId;
 import github.snomfish.functionality.number.INumber;
 
 public class RecoilEffect implements IEffect {
@@ -35,7 +35,7 @@ public class RecoilEffect implements IEffect {
 
     public static IEffect onUser(INumber recoilNumber) {
         return new ConditionalEffect(
-            new GateCondition(GateId.CAN_TAKE_RECOIL, ContextSideId.USER),
+            new GateCondition(GateForAllId.CAN_TAKE_RECOIL, ContextSideId.USER),
             new RecoilEffect(recoilNumber)
         );
     }

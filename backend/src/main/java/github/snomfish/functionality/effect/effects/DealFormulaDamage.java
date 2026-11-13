@@ -19,8 +19,8 @@ import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.effect.ConditionalEffect;
 import github.snomfish.functionality.effect.Effects;
 import github.snomfish.functionality.effect.IEffect;
-import github.snomfish.functionality.event.ids.GateId;
-import github.snomfish.functionality.event.ids.RuleForAllId;
+import github.snomfish.functionality.event.eventIds.RuleForAllId;
+import github.snomfish.functionality.event.gateIds.GateForAllId;
 import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.INumber;
 
@@ -96,7 +96,7 @@ public class DealFormulaDamage implements IEffect {
     private List<Branch<BattleContext>> critChanceModule(BattleContext context) {
         List<Branch<BattleContext>> outcomes = new ArrayList<>();
         
-        double canCritProbability = context.dispatchGate(GateId.CAN_MOVE_CRIT, ContextSideId.USER);
+        double canCritProbability = context.dispatchGate(GateForAllId.CAN_MOVE_CRIT, ContextSideId.USER);
 
         if (canCritProbability > 0) { // can crit
             ActiveLoomian user = context.user().activeLoomian();
@@ -143,24 +143,24 @@ public class DealFormulaDamage implements IEffect {
         List<Branch<BattleContext>> outcomes = List.of(new Branch<>(outcome, 1));
 
         outcomes = flatMap(outcomes, c -> new ConditionalEffect(
-            new GateCondition(GateId.CAN_ATTACKING_STAT_USE_STAT_BOOSTS, ContextSideId.USER),
+            new GateCondition(GateForAllId.CAN_USE_DEFENDING_STAT_BOOSTS, ContextSideId.USER),
             Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.ATTACKING_STAT), new Constant(attackingStatBoosts))
         ).execute(c));
 
         if (move.hasCrit()) {
             outcomes = flatMap(outcomes, c -> new ConditionalEffect(
-                new GateCondition(GateId.CAN_ATTACKING_STAT_USE_STAT_DROPS, ContextSideId.USER),
+                new GateCondition(GateForAllId.CAN_USE_ATTACKING_STAT_DROPS, ContextSideId.USER),
                 Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.ATTACKING_STAT), new Constant(attackingStatDrops))
             ).execute(c));
 
             outcomes = flatMap(outcomes, c -> new ConditionalEffect(
-                new GateCondition(GateId.CAN_DEFENDING_STAT_USE_STAT_BOOSTS, ContextSideId.USER),
+                new GateCondition(GateForAllId.CAN_USE_DEFENDING_STAT_BOOSTS, ContextSideId.TARGET),
                 Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.ATTACKING_STAT), new Constant(defendingStatBoosts))
             ).execute(c));
         }
 
         outcomes = flatMap(outcomes, c -> new ConditionalEffect(
-            new GateCondition(GateId.CAN_DEFENDING_STAT_USE_STAT_DROPS, ContextSideId.USER),
+            new GateCondition(GateForAllId.CAN_USE_DEFENDING_STAT_DROPS, ContextSideId.TARGET),
             Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.ATTACKING_STAT), new Constant(defendingStatDrops))
         ).execute(c));
 

@@ -6,6 +6,7 @@ import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.copy.DeepCopyable;
 import github.snomfish.functionality.event.Event;
+import github.snomfish.functionality.event.gateIds.IGateId;
 
 public class WeatherInstance implements DeepCopyable<WeatherInstance> {
     
@@ -45,5 +46,11 @@ public class WeatherInstance implements DeepCopyable<WeatherInstance> {
 
     public List<Branch<BattleContext>> handleEvent(BattleContext context, Event event) {
         return weather().handleRule(context, event);
+    }
+    public double dispatchGate(BattleContext context, IGateId gateId, double probability) {
+        
+        probability *= weather().handleGate(context, gateId);
+
+        return probability;
     }
 }

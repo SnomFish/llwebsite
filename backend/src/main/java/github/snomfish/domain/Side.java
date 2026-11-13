@@ -8,6 +8,7 @@ import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.copy.DeepCopyable;
 import github.snomfish.functionality.event.Event;
 import github.snomfish.functionality.event.Report;
+import github.snomfish.functionality.event.gateIds.IGateId;
 
 import static github.snomfish.functionality.copy.DeepCopy.deepCopyList;
 
@@ -62,9 +63,9 @@ public class Side implements DeepCopyable<Side> {
 
         return outcomes;
     }
-    public double dispatchGate(BattleContext context, Event event, double probability) {
+    public double dispatchGate(BattleContext context, IGateId gateId, double probability) {
 
-        probability = activeLoomian().dispatchGate(context, event, probability);
+        probability = activeLoomian().dispatchGate(context, gateId, probability);
 
         return probability;
     }

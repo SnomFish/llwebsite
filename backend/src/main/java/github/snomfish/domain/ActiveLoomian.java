@@ -13,6 +13,7 @@ import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.event.Event;
 import github.snomfish.functionality.event.Report;
+import github.snomfish.functionality.event.gateIds.IGateId;
 
 import static github.snomfish.functionality.branch.BranchUtil.flatMap;
 
@@ -71,9 +72,9 @@ public class ActiveLoomian extends Loomian {
 
         return outcomes;
     }
-    public double dispatchGate(BattleContext context, Event event, double probability) {
+    public double dispatchGate(BattleContext context, IGateId gateId, double probability) {
 
-        probability *= abilityInstance.handleGate(context, event);
+        probability *= abilityInstance.handleGate(context, gateId);
 
         return probability;
     }

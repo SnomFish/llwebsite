@@ -7,7 +7,8 @@ import github.snomfish.functionality.condition.RandomCondition;
 import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.effect.effects.ApplyMechanic;
 import github.snomfish.functionality.effect.effects.SetValueEffect;
-import github.snomfish.functionality.event.ids.GateId;
+import github.snomfish.functionality.event.gateIds.GateForAllId;
+import github.snomfish.functionality.event.gateIds.GateId;
 import github.snomfish.functionality.number.Add;
 import github.snomfish.functionality.number.INumber;
 import github.snomfish.functionality.number.Multiply;
@@ -21,7 +22,7 @@ public class Effects {
 
     public static IEffect flinch() {
         return new ConditionalEffect(
-            new GateCondition(GateId.CAN_MOVE_FLINCH, ContextSideId.USER),
+            new GateCondition(GateForAllId.CAN_MOVE_FLINCH, ContextSideId.USER),
             ApplyMechanic.toTarget(MechanicId.FLINCH)
         );
     }
@@ -35,7 +36,7 @@ public class Effects {
 
     public static IEffect daze() {
         return new ConditionalEffect(
-            new GateCondition(GateId.CAN_MOVE_DAZE, ContextSideId.USER),
+            new GateCondition(GateForAllId.CAN_MOVE_DAZE, ContextSideId.USER),
             ApplyMechanic.toTarget(MechanicId.DAZE)
         );
     }

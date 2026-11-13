@@ -1,4 +1,6 @@
-package github.snomfish.functionality.event.ids;
+package github.snomfish.functionality.event.eventIds;
+
+import github.snomfish.functionality.event.IEventId;
 
 public enum ConstantRuleId implements IEventId {
     PRE_TURN,

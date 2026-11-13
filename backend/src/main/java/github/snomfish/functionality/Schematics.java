@@ -1,7 +1,5 @@
 package github.snomfish.functionality;
 
-import static github.snomfish.functionality.event.ids.GateId.*;
-
 import java.util.List;
 
 import github.snomfish.domain.status.StatusId;
@@ -12,6 +10,7 @@ import github.snomfish.functionality.effect.ConditionalEffect;
 import github.snomfish.functionality.effect.EffectSequence;
 import github.snomfish.functionality.effect.IEffect;
 import github.snomfish.functionality.effect.effects.ApplyStatus;
+import github.snomfish.functionality.event.gateIds.GateForAllId;
 import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.INumber;
 import github.snomfish.functionality.number.Multiply;
@@ -27,13 +26,13 @@ public class Schematics {
     // 2026 09 26: I think this is actually a great idea 
     public static IEffect secondaryEffects(List<IEffect> effects) {
         return new ConditionalEffect(
-            new GateCondition(CAN_USE_SECONDARY_EFFECTS, ContextSideId.USER),
+            new GateCondition(GateForAllId.CAN_USE_MOVE_SECONDARY_EFFECTS, ContextSideId.USER),
             new EffectSequence(effects)
         );
     }
     public static IEffect affectsTarget(List<IEffect> effects) {
         return new ConditionalEffect(
-            new GateCondition(CAN_SECONDARY_EFFECTS_AFFECT_TARGET, ContextSideId.USER),
+            new GateCondition(GateForAllId.CAN_MOVE_SECONDARY_EFFECTS_AFFECT_TARGET, ContextSideId.USER),
             new EffectSequence(effects)
         );
     }

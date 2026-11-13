@@ -9,7 +9,7 @@ import github.snomfish.functionality.Value;
 import github.snomfish.functionality.condition.Equals;
 import github.snomfish.functionality.effect.Effects;
 import github.snomfish.functionality.event.Rule;
-import github.snomfish.functionality.event.ids.RuleForAllId;
+import github.snomfish.functionality.event.eventIds.RuleForAllId;
 import github.snomfish.functionality.number.Constant;
 
 import static github.snomfish.domain.weather.WeatherId.*;

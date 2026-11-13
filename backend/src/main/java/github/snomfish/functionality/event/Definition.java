@@ -6,6 +6,7 @@ import java.util.List;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.branch.BranchUtil;
 import github.snomfish.functionality.context.BattleContext;
+import github.snomfish.functionality.event.gateIds.IGateId;
 
 public class Definition<T extends Enum<T>, D extends Definition<T, D>> {
   
@@ -69,10 +70,17 @@ public class Definition<T extends Enum<T>, D extends Definition<T, D>> {
 
         return outcomes;
     }
-    public List<Branch<Boolean>> handleGate(BattleContext context, Event event) {
-        return null;
+    public double handleGate(BattleContext context, IGateId gateId) {
+        double probability = 1;
+
+        for (Gate gate : gates) {
+            probability *= gate.condition().execute(context);
+        }
+
+        return probability;
     }
-    public List<Branch<BattleContext>> handleInterceptor(Report report, Event event) {
-        return null;
+    public Report handleInterceptor(Report report, Event event) {
+        // FUCK
+        return report;
     }
 }

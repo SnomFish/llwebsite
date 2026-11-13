@@ -9,9 +9,10 @@ import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.copy.DeepCopyable;
 import github.snomfish.functionality.event.Event;
 import github.snomfish.functionality.event.Report;
-import github.snomfish.functionality.event.ids.GateId;
-import github.snomfish.functionality.event.ids.ConstantRuleId;
-import github.snomfish.functionality.event.ids.RuleForAllId;
+import github.snomfish.functionality.event.eventIds.ConstantRuleId;
+import github.snomfish.functionality.event.eventIds.RuleForAllId;
+import github.snomfish.functionality.event.gateIds.GateForAllId;
+import github.snomfish.functionality.event.gateIds.GateId;
 
 import static github.snomfish.domain.SideId.*;
 import static github.snomfish.functionality.branch.BranchUtil.flatMap;
@@ -113,12 +114,14 @@ public class BattleContext implements DeepCopyable<BattleContext> {
 
 
 
-    public double dispatchGate(GateId gateId, ContextSideId sideId) {
+    public double dispatchGate(GateForAllId gateId, ContextSideId sideId) {
         double probability = 1;
 
         BattleContext context = ContextUtil.setFocus(this, sideId);
-        probability = user().dispatchGate(context, new Event(gateId, ContextSideId.USER), probability);
-        probability = target().dispatchGate(context, new Event(gateId, ContextSideId.TARGET), probability);
+        probability = gamestate().weatherInstance().dispatchGate(context, gateId, probability);
+        probability = user().dispatchGate(context, gateId.forUser(), probability);
+        context = ContextUtil.reverseFocus(context);
+        probability = target().dispatchGate(context, gateId.forTarget(), probability);
 
         // outcomes is a boolean so dont fuck with the focus of the battle context rn
         // preach

@@ -29,9 +29,10 @@ import github.snomfish.functionality.effect.effects.SetType;
 import github.snomfish.functionality.effect.effects.SetWeather;
 import github.snomfish.functionality.event.Gate;
 import github.snomfish.functionality.event.Rule;
-import github.snomfish.functionality.event.ids.RuleForTargetId;
-import github.snomfish.functionality.event.ids.RuleForUserId;
-import github.snomfish.functionality.event.ids.ConstantRuleId;
+import github.snomfish.functionality.event.eventIds.ConstantRuleId;
+import github.snomfish.functionality.event.eventIds.RuleForTargetId;
+import github.snomfish.functionality.event.eventIds.RuleForUserId;
+import github.snomfish.functionality.event.gateIds.GateForAllId;
 import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.ValueConstant;
 
@@ -39,7 +40,6 @@ import static github.snomfish.domain.item.ItemId.*;
 import static github.snomfish.domain.item.ItemTagId.*;
 import static github.snomfish.domain.species.SpeciesId.*;
 import static github.snomfish.functionality.context.ContextSideId.*;
-import static github.snomfish.functionality.event.ids.GateId.*;
 
 // oi add a condition in condition schematics for general item use, offensive item use and defensive.
 // simplest solution for whe the loomian cannot use items/ are about to be pile drived by sly cavenish
@@ -230,7 +230,7 @@ public class ItemRegistry {
 				.effect(Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(2/3)))
 			)
 			.gate(Gate.build()
-				.event(CAN_USE_SUPPORT_MOVES, USER)
+				.event(GateForAllId.CAN_USE_SUPPORT_MOVES, USER)
 				.condition(new False())
 			)
 		);
@@ -243,7 +243,7 @@ public class ItemRegistry {
 				.effect(Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(2/3)))
 			)
 			.gate(Gate.build()
-				.event(CAN_USE_SUPPORT_MOVES, USER)
+				.event(GateForAllId.CAN_USE_SUPPORT_MOVES, USER)
 				.condition(new False())
 			)
 		);
