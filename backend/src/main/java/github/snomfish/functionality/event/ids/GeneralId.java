@@ -1,6 +1,6 @@
 package github.snomfish.functionality.event.ids;
 
-public enum IsolatedId implements IEventId {
+public enum GeneralId implements IEventId {
     NULL_EVENT, // should never be dispatched
 
     PRE_TURN,

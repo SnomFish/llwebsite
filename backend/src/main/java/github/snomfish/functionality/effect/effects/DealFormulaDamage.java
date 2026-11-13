@@ -20,7 +20,7 @@ import github.snomfish.functionality.effect.ConditionalEffect;
 import github.snomfish.functionality.effect.Effects;
 import github.snomfish.functionality.effect.IEffect;
 import github.snomfish.functionality.event.ids.GateId;
-import github.snomfish.functionality.event.ids.GenericId;
+import github.snomfish.functionality.event.ids.ToUserId;
 import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.INumber;
 
@@ -46,19 +46,19 @@ public class DealFormulaDamage implements IEffect {
         List<Branch<BattleContext>> outcomes = List.of(new Branch<>(context, 1.0));
         context.log("executing damage effect");
         
-        outcomes = flatMap(outcomes, c -> c.dispatchEvent(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE, ContextSideId.USER));
+        outcomes = flatMap(outcomes, c -> c.dispatchEvent(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE, ContextSideId.USER));
         outcomes = flatMap(outcomes, c -> basePowerModule(c));
         outcomes = flatMap(outcomes, c -> critChanceModule(c));
         outcomes = flatMap(outcomes, c -> damageModule(c));
         outcomes = flatMap(outcomes, c -> statModifierModule(c));
-        outcomes = flatMap(outcomes, c -> c.dispatchInterceptor(GenericId.SELF_PRE_DAMAGING, ContextSideId.USER, execute1(context)));
+        outcomes = flatMap(outcomes, c -> c.dispatchInterceptor(ToUserId.SELF_PRE_DAMAGING, ContextSideId.USER, execute1(context)));
 
         return outcomes;
     }
     private List<Branch<BattleContext>> execute1(BattleContext context) {
         List<Branch<BattleContext>> outcomes = List.of(new Branch<>(context, 1.0));
 
-        outcomes = flatMap(outcomes, c -> c.dispatchEvent(GenericId.SELF_CLUTCHES, ContextSideId.TARGET));
+        outcomes = flatMap(outcomes, c -> c.dispatchEvent(ToUserId.SELF_CLUTCHES, ContextSideId.TARGET));
         outcomes = flatMap(outcomes, c -> damageRollModule(c));
 
         return outcomes;
@@ -235,7 +235,7 @@ public class DealFormulaDamage implements IEffect {
             target.addToCurrentHealth(-damage);
 
             if (damage > 0) {
-                outcomes.addAll(flatMap(List.of(new Branch<>(outcome, 1/16)), c -> c.dispatchEvent(GenericId.SELF_MOVE_DEALT_DAMAGE, ContextSideId.USER)));
+                outcomes.addAll(flatMap(List.of(new Branch<>(outcome, 1/16)), c -> c.dispatchEvent(ToUserId.SELF_MOVE_DEALT_DAMAGE, ContextSideId.USER)));
             } else {
                 outcomes.add(new Branch<>(outcome, 1/16));
             }

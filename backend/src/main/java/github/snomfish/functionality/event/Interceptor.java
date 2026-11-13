@@ -7,7 +7,7 @@ import github.snomfish.functionality.condition.ICondition;
 import github.snomfish.functionality.condition.NoCondition;
 import github.snomfish.functionality.effect.IEffect;
 import github.snomfish.functionality.effect.effects.NoEffect;
-import github.snomfish.functionality.event.ids.IGenericId;
+import github.snomfish.functionality.event.ids.IToSideId;
 
 public class Interceptor {
     
@@ -44,7 +44,7 @@ public class Interceptor {
     public static Interceptor build() {
         return new Interceptor();
     }
-    public Interceptor event(IGenericId id) {
+    public Interceptor event(IToSideId id) {
         this.events.add(new Event(id, null));
         return this;
     }

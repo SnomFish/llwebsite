@@ -1,6 +1,6 @@
 package github.snomfish.functionality.event.ids;
 
-public enum GenericAntiId implements IGenericId {
+public enum ToTargetId implements IToSideId {
     NULL_EVENT, // should never be dispatched
 
     WATCHES_OPP_SWAP_IN,

@@ -29,9 +29,9 @@ import github.snomfish.functionality.effect.effects.SetType;
 import github.snomfish.functionality.effect.effects.SetWeather;
 import github.snomfish.functionality.event.Gate;
 import github.snomfish.functionality.event.Rule;
-import github.snomfish.functionality.event.ids.GenericAntiId;
-import github.snomfish.functionality.event.ids.GenericId;
-import github.snomfish.functionality.event.ids.IsolatedId;
+import github.snomfish.functionality.event.ids.ToTargetId;
+import github.snomfish.functionality.event.ids.ToUserId;
+import github.snomfish.functionality.event.ids.GeneralId;
 import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.ValueConstant;
 
@@ -75,7 +75,7 @@ public class ItemRegistry {
 			.id(CHOCOLATE_BAR)
 			.name("chocolate bar")
 			.rule(Rule.build()
-				.event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.event(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.effect(ConsumeItem.user())
 			)
 			.tag(CONSUMABLE)
@@ -85,7 +85,7 @@ public class ItemRegistry {
 			.id(CLUTCH_PLUSHIE)
 			.name("clutch plushie")
 			.rule(Rule.build()
-				.event(GenericId.SELF_CLUTCHES)
+				.event(ToUserId.SELF_CLUTCHES)
 				.condition(Conditions.userIsAtFullHealth())
 				.effect(new EffectSequence(
 					new ClutchEffect(),
@@ -98,7 +98,7 @@ public class ItemRegistry {
 			.id(DRAIN_ORB)
 			.name("drain orb")
 			.rule(Rule.build()
-				.event(GenericId.SELF_PRE_DRAINING_HEALTH)
+				.event(ToUserId.SELF_PRE_DRAINING_HEALTH)
 				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.HEALTH_DRAIN), new Constant(1.2)))
 			)
 		);
@@ -106,7 +106,7 @@ public class ItemRegistry {
 			.id(DROP_OF_YOUTH)
 			.name("drop of youth")
 			.rule(Rule.build()
-				.event(GenericAntiId.PRE_OPP_DEAL_FORMULA_DAMAGE)
+				.event(ToTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.OPP().CAN_EVOLVE(), true))
 				.effect(Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DEFENDING_STAT), new Constant(1.5)))
 			)
@@ -115,7 +115,7 @@ public class ItemRegistry {
 			.id(DRY_ICE)
 			.name("dry ice")
 			.rule(Rule.build()
-				.event(IsolatedId.END_OF_TURN)
+				.event(GeneralId.END_OF_TURN)
 				.effect(ApplyStatus.toUser(StatusId.FROSTBITE))
 			)
 		);
@@ -128,7 +128,7 @@ public class ItemRegistry {
 			.id(HEALTH_AMULET)
 			.name("health amulet")
 			.rule(Rule.build()
-				.event(IsolatedId.END_OF_TURN)
+				.event(GeneralId.END_OF_TURN)
 				// TODO restore 1/16 of max hp	
 			)
 		);
@@ -136,7 +136,7 @@ public class ItemRegistry {
 			.id(HEAVY_ARMOUR)
 			.name("heavy armour")
 			.rule(Rule.build()
-				.event(GenericAntiId.PRE_OPP_DEAL_FORMULA_DAMAGE)
+				.event(ToTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.OPP().MOVE().CATEGORY(), CategoryId.MELEE))
 				.effect(Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DEFENDING_STAT), new Constant(1.2)))
 			)
@@ -150,7 +150,7 @@ public class ItemRegistry {
 			.id(HEAVY_SHIELD)
 			.name("heavy shield")
 			.rule(Rule.build()
-				.event(GenericAntiId.PRE_OPP_DEAL_FORMULA_DAMAGE)
+				.event(ToTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.OPP().MOVE().CATEGORY(), CategoryId.RANGED))
 				.effect(Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DEFENDING_STAT), new Constant(1.2)))
 			)
@@ -160,7 +160,7 @@ public class ItemRegistry {
 			.id(KABUNGA_COFFEE)
 			.name("kabunga coffee")
 			.rule(Rule.build()
-				.event(IsolatedId.END_OF_TURN)
+				.event(GeneralId.END_OF_TURN)
 				.condition(new RandomCondition(new Constant(0.1)))
 				// TODO restore 1/8 of the SELF's max energy
 			)
@@ -178,7 +178,7 @@ public class ItemRegistry {
 			.id(MYSTIC_WAND)
 			.name("mystic wand")
 			.rule(Rule.build()
-				.event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.event(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new And(
 					new Equals<>(Value.USER().SPECIES_ID(), SpeciesId.SHAWCHI),
 					new Equals<>(Value.USER().MOVE().CATEGORY(), CategoryId.RANGED)
@@ -186,7 +186,7 @@ public class ItemRegistry {
 				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.ATTACKING_STAT), new Constant(1.5)))
 			)
 			.rule(Rule.build()
-				.event(GenericAntiId.PRE_OPP_DEAL_FORMULA_DAMAGE)
+				.event(ToTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new And(
 					new Equals<>(Value.SELF().SPECIES_ID(), SpeciesId.SHAWCHI),
 					new Equals<>(Value.OPP().MOVE().CATEGORY(), CategoryId.RANGED)
@@ -198,7 +198,7 @@ public class ItemRegistry {
 			.id(POWER_CUFFS)
 			.name("power cuffs")
 			.rule(Rule.build()
-				.event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.event(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.2)))
 			)
 			// TODO increase energy cost of moves by 25%
@@ -207,7 +207,7 @@ public class ItemRegistry {
 			.id(RAGEFUL_PLUSHIE)
 			.name("rageful plushie")
 			.rule(Rule.build()
-				.event(GenericAntiId.RECEIVED_DAMAGE_FROM_MOVE)
+				.event(ToTargetId.RECEIVED_DAMAGE_FROM_MOVE)
 				.condition(Comparator.greaterThan()
 					.left(new ValueConstant(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.TYPE)))
 					.right(new Constant(1))
@@ -225,7 +225,7 @@ public class ItemRegistry {
 			.id(RESTRICTIVE_ARMOUR)
 			.name("restrictive armour")
 			.rule(Rule.build()
-				.event(GenericAntiId.PRE_OPP_DEAL_FORMULA_DAMAGE)
+				.event(ToTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.OPP().MOVE().CATEGORY(), CategoryId.MELEE))
 				.effect(Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(2/3)))
 			)
@@ -238,7 +238,7 @@ public class ItemRegistry {
 			.id(RESTRICTIVE_SHIELD)
 			.name("restrictive shield")
 			.rule(Rule.build()
-				.event(GenericAntiId.PRE_OPP_DEAL_FORMULA_DAMAGE)
+				.event(ToTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.OPP().MOVE().CATEGORY(), CategoryId.RANGED))
 				.effect(Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(2/3)))
 			)
@@ -250,12 +250,15 @@ public class ItemRegistry {
 		register(Item.build()
 			.id(SPECIALY_BOOTS)
 			.name("specialty boots")
+			.rule(Rule.build()
+				.condition(new Equals<>(Value.USER().NUM_OF_MOVES(), new Constant(4)))
+			)
 		);
 		register(Item.build()
 			.id(SPECIALY_GLOVES)
 			.name("specialty gloves")
 			.rule(Rule.build()
-				.event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.event(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new And(
 					new Equals<>(Value.USER().MOVE().CATEGORY(), CategoryId.MELEE),
 					new Equals<>(Value.USER().NUM_OF_MOVES(), new Constant(4))
@@ -268,7 +271,7 @@ public class ItemRegistry {
 			.id(SPECIALY_GOGGLES)
 			.name("specialty goggles")
 			.rule(Rule.build()
-				.event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.event(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new And(
 					new Equals<>(Value.USER().MOVE().CATEGORY(), CategoryId.RANGED),
 					new Equals<>(Value.USER().NUM_OF_MOVES(), new Constant(4))
@@ -285,7 +288,7 @@ public class ItemRegistry {
 			.id(THUNDER_ORB)
 			.name("thunder orb")
 			.rule(Rule.build()
-				.event(IsolatedId.END_OF_TURN)
+				.event(GeneralId.END_OF_TURN)
 				.effect(ApplyStatus.toUser(StatusId.PARALYSIS))
 			)
 		);
@@ -293,7 +296,7 @@ public class ItemRegistry {
 			.id(VIRULENT_FANG)
 			.name("virulent fang")
 			.rule(Rule.build()
-				.event(IsolatedId.END_OF_TURN)
+				.event(GeneralId.END_OF_TURN)
 				.effect(ApplyStatus.toUser(StatusId.POISON))
 			)
 		);
@@ -301,7 +304,7 @@ public class ItemRegistry {
 			.id(VOLCANIC_ASH)
 			.name("volcanic ash")
 			.rule(Rule.build()
-				.event(IsolatedId.END_OF_TURN)
+				.event(GeneralId.END_OF_TURN)
 				.effect(ApplyStatus.toUser(StatusId.BURN))
 			)
 		);
@@ -311,7 +314,7 @@ public class ItemRegistry {
 			.id(FOG_GLOBE)
 			.name("Fog Globe")
 			.rule(Rule.build()
-				.event(GenericId.SELF_SWAPPED_IN)
+				.event(ToUserId.SELF_SWAPPED_IN)
 				.condition(new Not(new Equals<>(Value.WEATHER_ID(), WeatherId.FOG)))
 				.effect(new EffectSequence(
 					SetWeather.userSetting(WeatherId.FOG, new Constant(3)),
@@ -324,7 +327,7 @@ public class ItemRegistry {
 			.id(HEAT_GLOBE)
 			.name("Heat Globe")
 			.rule(Rule.build()
-				.event(GenericId.SELF_SWAPPED_IN)
+				.event(ToUserId.SELF_SWAPPED_IN)
 				.condition(new Not(new Equals<>(Value.WEATHER_ID(), WeatherId.HEATWAVE)))
 				.effect(new EffectSequence(
 					SetWeather.userSetting(WeatherId.HEATWAVE, new Constant(3)),
@@ -337,7 +340,7 @@ public class ItemRegistry {
 			.id(RAIN_GLOBE)
 			.name("Rain Globe")
 			.rule(Rule.build()
-				.event(GenericId.SELF_SWAPPED_IN)
+				.event(ToUserId.SELF_SWAPPED_IN)
 				.condition(new Not(new Equals<>(Value.WEATHER_ID(), WeatherId.RAIN)))
 				.effect(new EffectSequence(
 					SetWeather.userSetting(WeatherId.RAIN, new Constant(3)),
@@ -350,7 +353,7 @@ public class ItemRegistry {
 			.id(STORM_GLOBE)
 			.name("Storm Globe")
 			.rule(Rule.build()
-				.event(GenericId.SELF_SWAPPED_IN)
+				.event(ToUserId.SELF_SWAPPED_IN)
 				.condition(new Not(new Equals<>(Value.WEATHER_ID(), WeatherId.THUNDERSTORM)))
 				.effect(new EffectSequence(
 					SetWeather.userSetting(WeatherId.THUNDERSTORM, new Constant(3)),
@@ -363,7 +366,7 @@ public class ItemRegistry {
 			.id(WIND_GLOBE)
 			.name("Wind Globe")
 			.rule(Rule.build()
-				.event(GenericId.SELF_SWAPPED_IN)
+				.event(ToUserId.SELF_SWAPPED_IN)
 				.condition(new Not(new Equals<>(Value.WEATHER_ID(), WeatherId.STRONG_WINDS)))
 				.effect(new EffectSequence(
 					SetWeather.userSetting(WeatherId.STRONG_WINDS, new Constant(3)),
@@ -378,7 +381,7 @@ public class ItemRegistry {
 			.id(FOG_SCALE)
 			.name("Fog Scale")
 			.rule(Rule.build()
-				.event(GenericId.SELF_SET_WEATHER)
+				.event(ToUserId.SELF_SET_WEATHER)
 				.condition(new Equals<>(Value.WEATHER_ID(), WeatherId.FOG))
 				.effect(Effects.addValue(Value.WEATHER_LIFESPAN(), new Constant(3)))
 			)
@@ -387,7 +390,7 @@ public class ItemRegistry {
 			.id(HEAT_SCALE)
 			.name("Heat Scale")
 			.rule(Rule.build()
-				.event(GenericId.SELF_SET_WEATHER)
+				.event(ToUserId.SELF_SET_WEATHER)
 				.condition(new Equals<>(Value.WEATHER_ID(), WeatherId.HEATWAVE))
 				.effect(Effects.addValue(Value.WEATHER_LIFESPAN(), new Constant(3)))
 			)
@@ -396,7 +399,7 @@ public class ItemRegistry {
 			.id(RAIN_SCALE)
 			.name("Rain Scale")
 			.rule(Rule.build()
-				.event(GenericId.SELF_SET_WEATHER)
+				.event(ToUserId.SELF_SET_WEATHER)
 				.condition(new Equals<>(Value.WEATHER_ID(), WeatherId.RAIN))
 				.effect(Effects.addValue(Value.WEATHER_LIFESPAN(), new Constant(3)))
 			)
@@ -405,7 +408,7 @@ public class ItemRegistry {
 			.id(STORM_SCALE)
 			.name("Storm Scale")
 			.rule(Rule.build()
-				.event(GenericId.SELF_SET_WEATHER)
+				.event(ToUserId.SELF_SET_WEATHER)
 				.condition(new Equals<>(Value.WEATHER_ID(), WeatherId.THUNDERSTORM))
 				.effect(Effects.addValue(Value.WEATHER_LIFESPAN(), new Constant(3)))
 			)
@@ -414,7 +417,7 @@ public class ItemRegistry {
 			.id(WIND_SCALE)
 			.name("Wind Scale")
 			.rule(Rule.build()
-				.event(GenericId.SELF_SET_WEATHER)
+				.event(ToUserId.SELF_SET_WEATHER)
 				.condition(new Equals<>(Value.WEATHER_ID(), WeatherId.STRONG_WINDS))
 				.effect(Effects.addValue(Value.WEATHER_LIFESPAN(), new Constant(3)))
 			)
@@ -425,7 +428,7 @@ public class ItemRegistry {
 			.id(AIR_ESSENCE)
 			.name("air essence")
 			.rule(Rule.build()
-                .event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+                .event(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.AIR))
 				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.2)))
 			)
@@ -434,7 +437,7 @@ public class ItemRegistry {
 			.id(ANCIENT_ESSENCE)
 			.name("ancient essence")
 			.rule(Rule.build()
-                .event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+                .event(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.ANCIENT))
 				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.2)))
             )
@@ -443,7 +446,7 @@ public class ItemRegistry {
 			.id(BRAWLER_ESSENCE)
 			.name("brawler essence")
 			.rule(Rule.build()
-                .event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+                .event(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.BRAWLER))
 				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.2)))
             )
@@ -452,7 +455,7 @@ public class ItemRegistry {
 			.id(BUG_ESSENCE)
 			.name("bug essence")
 			.rule(Rule.build()
-                .event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+                .event(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.BUG))
 				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.2)))
             )
@@ -461,7 +464,7 @@ public class ItemRegistry {
 			.id(DARK_ESSENCE)
 			.name("dark essence")
 			.rule(Rule.build()
-                .event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+                .event(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.DARK))
 				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.2)))
             )
@@ -470,7 +473,7 @@ public class ItemRegistry {
 			.id(EARTH_ESSENCE)
 			.name("earth essence")
 			.rule(Rule.build()
-                .event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+                .event(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.EARTH))
 				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.2)))
             )
@@ -479,7 +482,7 @@ public class ItemRegistry {
 			.id(ELECTRIC_ESSENCE)
 			.name("electric essence")
 			.rule(Rule.build()
-                .event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+                .event(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.ELECTRIC))
 				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.2)))
             )
@@ -488,7 +491,7 @@ public class ItemRegistry {
 			.id(FIRE_ESSENCE)
 			.name("fire essence")
 			.rule(Rule.build()
-                .event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+                .event(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.FIRE))
 				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.2)))
             )
@@ -497,7 +500,7 @@ public class ItemRegistry {
 			.id(ICE_ESSENCE)
 			.name("ice essence")
 			.rule(Rule.build()
-                .event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+                .event(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.ICE))
 				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.2)))
             )
@@ -506,7 +509,7 @@ public class ItemRegistry {
 			.id(LIGHT_ESSENCE)
 			.name("light essence")
 			.rule(Rule.build()
-                .event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+                .event(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.LIGHT))
 				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.2)))
             )
@@ -515,7 +518,7 @@ public class ItemRegistry {
 			.id(METAL_ESSENCE)
 			.name("metal essence")
 			.rule(Rule.build()
-                .event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+                .event(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.METAL))
 				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.2)))
             )
@@ -524,7 +527,7 @@ public class ItemRegistry {
 			.id(MIND_ESSENCE)
 			.name("mind essence")
 			.rule(Rule.build()
-                .event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+                .event(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.MIND))
 				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.2)))
             )
@@ -533,7 +536,7 @@ public class ItemRegistry {
 			.id(PLANT_ESSENCE)
 			.name("plant essence")
 			.rule(Rule.build()
-                .event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+                .event(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.PLANT))
 				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.2)))
             )
@@ -542,7 +545,7 @@ public class ItemRegistry {
 			.id(SPIRIT_ESSENCE)
 			.name("spirit essence")
 			.rule(Rule.build()
-                .event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+                .event(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.SPIRIT))
 				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.2)))
             )
@@ -551,7 +554,7 @@ public class ItemRegistry {
 			.id(SIMPLE_ESSENCE)
 			.name("simple essence")
 			.rule(Rule.build()
-                .event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+                .event(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.SIMPLE))
 				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.2)))
             )
@@ -560,7 +563,7 @@ public class ItemRegistry {
 			.id(TOXIC_ESSENCE)
 			.name("toxic essence")
 			.rule(Rule.build()
-                .event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+                .event(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.TOXIC))
 				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.2)))
 			)
@@ -569,7 +572,7 @@ public class ItemRegistry {
 			.id(WATER_ESSENCE)
 			.name("water essence")
 			.rule(Rule.build()
-                .event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+                .event(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.WATER))
 				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.2)))
             )
@@ -578,7 +581,7 @@ public class ItemRegistry {
 			.id(ARCHAIC_PEARL)
 			.name("archaic pearl")
 			.rule(Rule.build()
-                .event(GenericAntiId.PRE_OPP_DEAL_FORMULA_DAMAGE)
+                .event(ToTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.ANCIENT))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(0.5)),
@@ -591,7 +594,7 @@ public class ItemRegistry {
 			.id(BLOSSOM_PEARL)
 			.name("blossom pearl")
 			.rule(Rule.build()
-                .event(GenericAntiId.PRE_OPP_DEAL_FORMULA_DAMAGE)
+                .event(ToTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.PLANT))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(0.5)),
@@ -604,7 +607,7 @@ public class ItemRegistry {
 			.id(DRAFT_PEARL)
 			.name("draft pearl")
 			.rule(Rule.build()
-                .event(GenericAntiId.PRE_OPP_DEAL_FORMULA_DAMAGE)
+                .event(ToTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.AIR))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(0.5)),
@@ -617,7 +620,7 @@ public class ItemRegistry {
 			.id(FLAME_PEARL)
 			.name("flame pearl")
 			.rule(Rule.build()
-                .event(GenericAntiId.PRE_OPP_DEAL_FORMULA_DAMAGE)
+                .event(ToTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.FIRE))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(0.5)),
@@ -630,7 +633,7 @@ public class ItemRegistry {
 			.id(FROST_PEARL)
 			.name("frost pearl")
 			.rule(Rule.build()
-                .event(GenericAntiId.PRE_OPP_DEAL_FORMULA_DAMAGE)
+                .event(ToTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.ICE))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(0.5)),
@@ -643,7 +646,7 @@ public class ItemRegistry {
 			.id(MARTIAL_PEARL)
 			.name("martial pearl")
 			.rule(Rule.build()
-                .event(GenericAntiId.PRE_OPP_DEAL_FORMULA_DAMAGE)
+                .event(ToTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.BRAWLER))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(0.5)),
@@ -656,7 +659,7 @@ public class ItemRegistry {
 			.id(MENTAL_PEARL)
 			.name("mental pearl")
 			.rule(Rule.build()
-                .event(GenericAntiId.PRE_OPP_DEAL_FORMULA_DAMAGE)
+                .event(ToTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.MIND))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(0.5)),
@@ -669,7 +672,7 @@ public class ItemRegistry {
 			.id(METALLIC_PEARL)
 			.name("metallic pearl")
 			.rule(Rule.build()
-                .event(GenericAntiId.PRE_OPP_DEAL_FORMULA_DAMAGE)
+                .event(ToTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.METAL))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(0.5)),
@@ -682,7 +685,7 @@ public class ItemRegistry {
 			.id(NOXIOUS_PEARL)
 			.name("noxious pearl")
 			.rule(Rule.build()
-                .event(GenericAntiId.PRE_OPP_DEAL_FORMULA_DAMAGE)
+                .event(ToTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.TOXIC))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(0.5)),
@@ -695,7 +698,7 @@ public class ItemRegistry {
 			.id(PLAIN_PEARL)
 			.name("plain pearl")
 			.rule(Rule.build()
-                .event(GenericAntiId.PRE_OPP_DEAL_FORMULA_DAMAGE)
+                .event(ToTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.SIMPLE))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(0.5)),
@@ -708,7 +711,7 @@ public class ItemRegistry {
 			.id(SHADE_PEARL)
 			.name("shade pearl")
 			.rule(Rule.build()
-                .event(GenericAntiId.PRE_OPP_DEAL_FORMULA_DAMAGE)
+                .event(ToTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.DARK))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(0.5)),
@@ -721,7 +724,7 @@ public class ItemRegistry {
 			.id(SHINE_PEARL)
 			.name("shine pearl")
 			.rule(Rule.build()
-                .event(GenericAntiId.PRE_OPP_DEAL_FORMULA_DAMAGE)
+                .event(ToTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.LIGHT))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(0.5)),
@@ -734,7 +737,7 @@ public class ItemRegistry {
 			.id(SPECTRAL_PEARL)
 			.name("spectral pearl")
 			.rule(Rule.build()
-                .event(GenericAntiId.PRE_OPP_DEAL_FORMULA_DAMAGE)
+                .event(ToTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.SPIRIT))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(0.5)),
@@ -747,7 +750,7 @@ public class ItemRegistry {
 			.id(TERRA_PEARL)
 			.name("terra pearl")
 			.rule(Rule.build()
-                .event(GenericAntiId.PRE_OPP_DEAL_FORMULA_DAMAGE)
+                .event(ToTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.EARTH))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(0.5)),
@@ -760,7 +763,7 @@ public class ItemRegistry {
 			.id(VOLT_PEARL)
 			.name("volt pearl")
 			.rule(Rule.build()
-                .event(GenericAntiId.PRE_OPP_DEAL_FORMULA_DAMAGE)
+                .event(ToTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.ELECTRIC))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(0.5)),
@@ -773,7 +776,7 @@ public class ItemRegistry {
 			.id(WAVE_PEARL)
 			.name("wave pearl")
 			.rule(Rule.build()
-                .event(GenericAntiId.PRE_OPP_DEAL_FORMULA_DAMAGE)
+                .event(ToTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.WATER))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(0.5)),
@@ -786,7 +789,7 @@ public class ItemRegistry {
 			.id(WEB_PEARL)
 			.name("web pearl")
 			.rule(Rule.build()
-                .event(GenericAntiId.PRE_OPP_DEAL_FORMULA_DAMAGE)
+                .event(ToTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.BUG))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(0.5)),
@@ -799,7 +802,7 @@ public class ItemRegistry {
 			.id(ARCHAIC_SHELL)
 			.name("archaic shell")
 			.rule(Rule.build()
-				.event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.event(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.ANCIENT))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)),
@@ -812,7 +815,7 @@ public class ItemRegistry {
 			.id(BLOSSOM_SHELL)
 			.name("blossom shell")
 			.rule(Rule.build()
-				.event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.event(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.PLANT))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)),
@@ -825,7 +828,7 @@ public class ItemRegistry {
 			.id(DRAFT_SHELL)
 			.name("draft shell")
 			.rule(Rule.build()
-				.event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.event(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.AIR))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)),
@@ -838,7 +841,7 @@ public class ItemRegistry {
 			.id(FLAME_SHELL)
 			.name("flame shell")
 			.rule(Rule.build()
-				.event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.event(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.FIRE))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)),
@@ -851,7 +854,7 @@ public class ItemRegistry {
 			.id(FROST_SHELL)
 			.name("frost shell")
 			.rule(Rule.build()
-				.event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.event(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.ICE))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)),
@@ -864,7 +867,7 @@ public class ItemRegistry {
 			.id(MARTIAL_SHELL)
 			.name("martial shell")
 			.rule(Rule.build()
-				.event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.event(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.BRAWLER))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)),
@@ -877,7 +880,7 @@ public class ItemRegistry {
 			.id(MENTAL_SHELL)
 			.name("mental shell")
 			.rule(Rule.build()
-				.event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.event(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.MIND))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)),
@@ -890,7 +893,7 @@ public class ItemRegistry {
 			.id(METALLIC_SHELL)
 			.name("metallic shell")
 			.rule(Rule.build()
-				.event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.event(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.METAL))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)),
@@ -903,7 +906,7 @@ public class ItemRegistry {
 			.id(NOXIOUS_SHELL)
 			.name("noxious shell")
 			.rule(Rule.build()
-				.event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.event(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.TOXIC))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)),
@@ -916,7 +919,7 @@ public class ItemRegistry {
 			.id(PLAIN_SHELL)
 			.name("plain shell")
 			.rule(Rule.build()
-				.event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.event(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.SIMPLE))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)),
@@ -929,7 +932,7 @@ public class ItemRegistry {
 			.id(SHADE_SHELL)
 			.name("shade shell")
 			.rule(Rule.build()
-				.event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.event(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.DARK))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)),
@@ -942,7 +945,7 @@ public class ItemRegistry {
 			.id(SHINE_SHELL)
 			.name("shine shell")
 			.rule(Rule.build()
-				.event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.event(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.LIGHT))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)),
@@ -955,7 +958,7 @@ public class ItemRegistry {
 			.id(SPECTRAL_SHELL)
 			.name("spectral shell")
 			.rule(Rule.build()
-				.event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.event(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.SPIRIT))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)),
@@ -968,7 +971,7 @@ public class ItemRegistry {
 			.id(TERRA_SHELL)
 			.name("terra shell")
 			.rule(Rule.build()
-				.event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.event(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.EARTH))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)),
@@ -981,7 +984,7 @@ public class ItemRegistry {
 			.id(VOLT_SHELL)
 			.name("volt shell")
 			.rule(Rule.build()
-				.event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.event(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.ELECTRIC))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)),
@@ -994,7 +997,7 @@ public class ItemRegistry {
 			.id(WAVE_SHELL)
 			.name("wave shell")
 			.rule(Rule.build()
-				.event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.event(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.WATER))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)),
@@ -1007,7 +1010,7 @@ public class ItemRegistry {
 			.id(WEB_SHELL)
 			.name("web shell")
 			.rule(Rule.build()
-				.event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.event(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.BUG))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)),
@@ -1088,7 +1091,7 @@ public class ItemRegistry {
 			.id(SCRAP_METAL)
 			.name("scrap metal")
 			.rule(Rule.build()
-				.event(GenericAntiId.PRE_OPP_DEAL_FORMULA_DAMAGE)
+				.event(ToTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Or(
 					new Equals<>(Value.SELF().SPECIES_ID(), SCORB),
 					new Equals<>(Value.SELF().SPECIES_ID(), VEYLENS)
@@ -1111,7 +1114,7 @@ public class ItemRegistry {
 			.id(FLAME_CORE)
 			.name("flame core")
 			.rule(Rule.build()
-				.event(GenericId.SELF_SWAPPED_IN)
+				.event(ToUserId.SELF_SWAPPED_IN)
 				.condition(Conditions.or(
 					new Equals<>(Value.USER().SPECIES_ID(), SCORB),
 					new Equals<>(Value.USER().SPECIES_ID(), VEYLENS),
@@ -1120,7 +1123,7 @@ public class ItemRegistry {
 				.effect(SetType.userSecondary(TypeId.FIRE))
 			)
 			.rule(Rule.build()
-				.event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.event(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new And(
 					Conditions.or(
 						new Equals<>(Value.USER().SPECIES_ID(), SCORB),
@@ -1136,7 +1139,7 @@ public class ItemRegistry {
 			.id(FREEZER_CORE)
 			.name("freezer core")
 			.rule(Rule.build()
-				.event(GenericId.SELF_SWAPPED_IN)
+				.event(ToUserId.SELF_SWAPPED_IN)
 				.condition(Conditions.or(
 					new Equals<>(Value.USER().SPECIES_ID(), SCORB),
 					new Equals<>(Value.USER().SPECIES_ID(), VEYLENS),
@@ -1145,7 +1148,7 @@ public class ItemRegistry {
 				.effect(SetType.userSecondary(TypeId.ICE))
 			)
 			.rule(Rule.build()
-				.event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.event(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new And(
 					Conditions.or(
 						new Equals<>(Value.USER().SPECIES_ID(), SCORB),
@@ -1161,7 +1164,7 @@ public class ItemRegistry {
 			.id(VOLTAIC_CORE)
 			.name("voltaic core")
 			.rule(Rule.build()
-				.event(GenericId.SELF_SWAPPED_IN)
+				.event(ToUserId.SELF_SWAPPED_IN)
 				.condition(Conditions.or(
 					new Equals<>(Value.USER().SPECIES_ID(), SCORB),
 					new Equals<>(Value.USER().SPECIES_ID(), VEYLENS),
@@ -1170,7 +1173,7 @@ public class ItemRegistry {
 				.effect(SetType.userSecondary(TypeId.ELECTRIC))
 			)
 			.rule(Rule.build()
-				.event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.event(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new And(
 					Conditions.or(
 						new Equals<>(Value.USER().SPECIES_ID(), SCORB),
@@ -1186,7 +1189,7 @@ public class ItemRegistry {
 			.id(POWER_CORE)
 			.name("power core")
 			.rule(Rule.build()
-				.event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.event(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(Conditions.or(
 					new Equals<>(Value.TARGET().SPECIES_ID(), SCORB),
 					new Equals<>(Value.TARGET().SPECIES_ID(), VEYLENS),

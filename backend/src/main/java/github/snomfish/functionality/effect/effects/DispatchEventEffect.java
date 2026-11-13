@@ -6,19 +6,19 @@ import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.effect.IEffect;
-import github.snomfish.functionality.event.ids.GenericId;
+import github.snomfish.functionality.event.ids.ToUserId;
 
 import static github.snomfish.functionality.branch.BranchUtil.flatMap;
 
 public class DispatchEventEffect implements IEffect {
     
 
-    private GenericId genericId;
+    private ToUserId genericId;
     private ContextSideId sideId;
 
 
     public DispatchEventEffect(
-        GenericId genericId,
+        ToUserId genericId,
         ContextSideId sideId
     ) {
         this.genericId = genericId;

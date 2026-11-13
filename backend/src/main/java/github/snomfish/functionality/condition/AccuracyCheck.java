@@ -7,7 +7,7 @@ import github.snomfish.functionality.Value;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.context.ContextSideId;
-import github.snomfish.functionality.event.ids.GenericId;
+import github.snomfish.functionality.event.ids.ToUserId;
 import github.snomfish.functionality.number.INumber;
 
 public class AccuracyCheck implements ICondition {
@@ -34,7 +34,7 @@ public class AccuracyCheck implements ICondition {
         List<Branch<Double>> accuracyBranches = accuracyNumber.execute(context);
         double probability = 0;
 
-        context.dispatchEvent(GenericId.SELF_PRE_ACCURACY_CHECK, ContextSideId.USER);
+        context.dispatchEvent(ToUserId.SELF_PRE_ACCURACY_CHECK, ContextSideId.USER);
 
         double cachedAccuracyModifier = (double) Value.USER().MOVE().MOVE_MODIFIER(ModifierId.ACCURACY).get(context);
 

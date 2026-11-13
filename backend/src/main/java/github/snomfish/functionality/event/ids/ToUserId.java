@@ -1,10 +1,10 @@
 package github.snomfish.functionality.event.ids;
 
-import static github.snomfish.functionality.event.ids.GenericAntiId.*;
-import static github.snomfish.functionality.event.ids.IsolatedId.*;
+import static github.snomfish.functionality.event.ids.ToTargetId.*;
+import static github.snomfish.functionality.event.ids.GeneralId.*;
 
-public enum GenericId implements IGenericId {
-    NULL_EVENT(GenericAntiId.NULL_EVENT, IsolatedId.NULL_EVENT), // should never be dispatched
+public enum ToUserId implements IToSideId {
+    NULL_EVENT(ToTargetId.NULL_EVENT, GeneralId.NULL_EVENT), // should never be dispatched
 
     SELF_SWAPPED_IN(WATCHES_OPP_SWAP_IN, LOOMIAN_SWAPS_IN),
     SELF_KNOCKED_OUT_OPP(SELF_KNOCKED_OUT_BY_OPP, LOOMIAN_KNOCKED_OUT),
@@ -37,19 +37,19 @@ public enum GenericId implements IGenericId {
     ;
 
 
-    private GenericAntiId oppId;
-    private IsolatedId isoId;
+    private ToTargetId oppId;
+    private GeneralId isoId;
 
 
-    private GenericId(
-        GenericAntiId oppId,
-        IsolatedId isoId
+    private ToUserId(
+        ToTargetId oppId,
+        GeneralId isoId
     ) {
         this.oppId = oppId;
         this.isoId = isoId;
     }
 
 
-    public GenericAntiId oppId() {return oppId;}
-    public IsolatedId isoId() {return isoId;}
+    public ToTargetId oppId() {return oppId;}
+    public GeneralId isoId() {return isoId;}
 }

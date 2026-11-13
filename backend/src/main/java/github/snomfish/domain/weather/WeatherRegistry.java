@@ -9,7 +9,7 @@ import github.snomfish.functionality.Value;
 import github.snomfish.functionality.condition.Equals;
 import github.snomfish.functionality.effect.Effects;
 import github.snomfish.functionality.event.Rule;
-import github.snomfish.functionality.event.ids.IsolatedId;
+import github.snomfish.functionality.event.ids.GeneralId;
 import github.snomfish.functionality.number.Constant;
 
 import static github.snomfish.domain.weather.WeatherId.*;
@@ -48,12 +48,12 @@ public class WeatherRegistry {
         register(Weather.build(HEATWAVE)
             .name("Heatwave")
             .rule(Rule.build() // increases the power of fire moves by 30%
-                .event(IsolatedId.PRE_DEAL_FORMULA_DAMAGE)
+                .event(GeneralId.PRE_DEAL_FORMULA_DAMAGE)
                 .condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.FIRE))
                 .effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.3)))
             )
             .rule(Rule.build() // decreases the power of water moves by 30%
-                .event(IsolatedId.PRE_DEAL_FORMULA_DAMAGE)
+                .event(GeneralId.PRE_DEAL_FORMULA_DAMAGE)
                 .condition(new Equals<>(Value.SELF().MOVE().TYPE(), TypeId.WATER))
                 .effect(Effects.multiplyValue(Value.SELF().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(0.7)))
             )
@@ -62,12 +62,12 @@ public class WeatherRegistry {
         register(Weather.build(RAIN)
             .name("Rain")
             .rule(Rule.build() // increases the power of water moves by 30%
-                .event(IsolatedId.PRE_DEAL_FORMULA_DAMAGE)
+                .event(GeneralId.PRE_DEAL_FORMULA_DAMAGE)
                 .condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.WATER))
                 .effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.3)))
             )
             .rule(Rule.build() // decreases the power of fire moves by 30%
-                .event(IsolatedId.PRE_DEAL_FORMULA_DAMAGE)
+                .event(GeneralId.PRE_DEAL_FORMULA_DAMAGE)
                 .condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.FIRE))
                 .effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(0.7)))
             )
@@ -79,7 +79,7 @@ public class WeatherRegistry {
         register(Weather.build(STRONG_WINDS)
             .name("Strong Winds")
             .rule(Rule.build() // increases the power of toxic moves by 25%
-                .event(IsolatedId.PRE_DEAL_FORMULA_DAMAGE)
+                .event(GeneralId.PRE_DEAL_FORMULA_DAMAGE)
                 .condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.TOXIC))
                 .effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.25)))
             )
@@ -89,7 +89,7 @@ public class WeatherRegistry {
         register(Weather.build(THUNDERSTORM)
             .name("Thunderstorm")
             .rule(Rule.build() // increases the power of toxic moves by 25%
-                .event(IsolatedId.PRE_DEAL_FORMULA_DAMAGE)
+                .event(GeneralId.PRE_DEAL_FORMULA_DAMAGE)
                 .condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.ELECTRIC))
                 .effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.25)))
             )

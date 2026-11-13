@@ -9,7 +9,7 @@ import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.effect.IEffect;
-import github.snomfish.functionality.event.ids.GenericId;
+import github.snomfish.functionality.event.ids.ToUserId;
 
 import static github.snomfish.domain.item.ItemId.*;
 
@@ -58,7 +58,7 @@ public class RemoveItem implements IEffect {
 
         // does not check if the loomian can have it's item removed
         activeLoomian.setItemId(NO_ITEM);
-        outcomes = context.dispatchEvent(GenericId.SELF_LOSES_ITEM, sideId);
+        outcomes = context.dispatchEvent(ToUserId.SELF_LOSES_ITEM, sideId);
 
         return outcomes;
     }

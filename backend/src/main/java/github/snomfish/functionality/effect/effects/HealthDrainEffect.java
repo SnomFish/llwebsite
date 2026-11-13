@@ -10,7 +10,7 @@ import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.effect.IEffect;
-import github.snomfish.functionality.event.ids.GenericId;
+import github.snomfish.functionality.event.ids.ToUserId;
 import github.snomfish.functionality.number.INumber;
 
 public class HealthDrainEffect implements IEffect {
@@ -39,7 +39,7 @@ public class HealthDrainEffect implements IEffect {
     public List<Branch<BattleContext>> execute(BattleContext context) {
         List<Branch<BattleContext>> outcomes = new ArrayList<>();
 
-        for(Branch<BattleContext> contextBranch : context.dispatchEvent(GenericId.SELF_PRE_DRAINING_HEALTH, ContextSideId.USER)) {
+        for(Branch<BattleContext> contextBranch : context.dispatchEvent(ToUserId.SELF_PRE_DRAINING_HEALTH, ContextSideId.USER)) {
             for(Branch<Double> drainBranch : drain.execute(context)) {
 
                 BattleContext outcome = contextBranch.value().deepCopy();

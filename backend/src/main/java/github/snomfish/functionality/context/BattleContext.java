@@ -10,8 +10,8 @@ import github.snomfish.functionality.copy.DeepCopyable;
 import github.snomfish.functionality.event.Event;
 import github.snomfish.functionality.event.Report;
 import github.snomfish.functionality.event.ids.GateId;
-import github.snomfish.functionality.event.ids.GenericId;
-import github.snomfish.functionality.event.ids.IsolatedId;
+import github.snomfish.functionality.event.ids.ToUserId;
+import github.snomfish.functionality.event.ids.GeneralId;
 
 import static github.snomfish.domain.SideId.*;
 import static github.snomfish.functionality.branch.BranchUtil.flatMap;
@@ -82,7 +82,7 @@ public class BattleContext implements DeepCopyable<BattleContext> {
     
     AFTER THAT THE EXTRA SIDE_CONTEXT_ID IS NOT NEEDED
     */
-    public List<Branch<BattleContext>> dispatchEvent(IsolatedId ruleId) {
+    public List<Branch<BattleContext>> dispatchEvent(GeneralId ruleId) {
         List<Branch<BattleContext>> outcomes = List.of(new Branch<>(this, 1.0));
 
         outcomes = flatMap(outcomes, context -> gamestate().weatherInstance().handleEvent(context, new Event(ruleId, null)));
@@ -93,7 +93,7 @@ public class BattleContext implements DeepCopyable<BattleContext> {
         outcomes = ContextUtil.setFocus(outcomes, userState);
         return outcomes;
     }
-    public List<Branch<BattleContext>> dispatchEvent(GenericId ruleId, ContextSideId sideIds) {
+    public List<Branch<BattleContext>> dispatchEvent(ToUserId ruleId, ContextSideId sideIds) {
         List<Branch<BattleContext>> outcomes = List.of(new Branch<>(this, 1.0));
 
         // weather uses the current battlecontext user target setup
@@ -124,7 +124,7 @@ public class BattleContext implements DeepCopyable<BattleContext> {
 
 
     public List<Branch<BattleContext>> dispatchInterceptor(
-        GenericId eventId,
+        ToUserId eventId,
         ContextSideId sideId,
         List<Branch<BattleContext>> trueOutcomes
     ) {

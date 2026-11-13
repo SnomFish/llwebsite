@@ -11,8 +11,8 @@ import github.snomfish.functionality.effect.EffectSequence;
 import github.snomfish.functionality.effect.Effects;
 import github.snomfish.functionality.effect.effects.RemoveMechanic;
 import github.snomfish.functionality.event.Rule;
-import github.snomfish.functionality.event.ids.GenericAntiId;
-import github.snomfish.functionality.event.ids.GenericId;
+import github.snomfish.functionality.event.ids.ToTargetId;
+import github.snomfish.functionality.event.ids.ToUserId;
 import github.snomfish.functionality.number.Constant;
 
 import static github.snomfish.domain.mechanics.MechanicId.*;
@@ -51,7 +51,7 @@ public class MechanicRegistry {
             .id(COMBUSTIBLE)
             .name("combustible")
             .rule(Rule.build()
-                .event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+                .event(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
                 .condition(new Equals<>(Value.SELF().MOVE().TYPE(), TypeId.FIRE))
                 .effect(Effects.multiplyValue(Value.SELF().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)))
             )
@@ -60,7 +60,7 @@ public class MechanicRegistry {
             .id(COURSING_VENOM)
             .name("coursing venom")
             .rule(Rule.build()
-                .event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+                .event(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
                 .condition(new Equals<>(Value.SELF().MOVE().TYPE(), TypeId.TOXIC))
                 .effect(Effects.multiplyValue(Value.SELF().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)))
             )
@@ -69,7 +69,7 @@ public class MechanicRegistry {
             .id(NOXIOUS_WEEDS)
             .name("Noxious Weeds")
             .rule(Rule.build()
-                .event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+                .event(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
                 .condition(new Equals<>(Value.SELF().MOVE().TYPE(), TypeId.PLANT))
                 .effect(Effects.multiplyValue(Value.SELF().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)))
             )
@@ -78,7 +78,7 @@ public class MechanicRegistry {
             .id(PRISMATIC)
             .name("Prismatic")
             .rule(Rule.build()
-                .event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+                .event(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
                 .condition(new Equals<>(Value.SELF().MOVE().TYPE(), TypeId.LIGHT))
                 .effect(Effects.multiplyValue(Value.SELF().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)))
             )
@@ -87,7 +87,7 @@ public class MechanicRegistry {
             .id(TOXIC_FILTER)
             .name("Toxic Filter")
             .rule(Rule.build()
-                .event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+                .event(ToUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
                 .condition(new Equals<>(Value.SELF().MOVE().TYPE(), TypeId.AIR))
                 .effect(new EffectSequence(
                     Effects.multiplyValue(Value.SELF().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)),
@@ -101,7 +101,7 @@ public class MechanicRegistry {
             .id(ALL_OR_NOTHING_FOCUSING)
             .name("Focusing for All or Nothing")
             .rule(Rule.build()
-                .event(GenericAntiId.RECEIVED_DAMAGE_FROM_MOVE)
+                .event(ToTargetId.RECEIVED_DAMAGE_FROM_MOVE)
                 .effect(RemoveMechanic.fromUser(ALL_OR_NOTHING_FOCUSING))
             )
         );

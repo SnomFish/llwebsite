@@ -6,18 +6,18 @@ import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.effect.IEffect;
-import github.snomfish.functionality.event.ids.GenericId;
+import github.snomfish.functionality.event.ids.ToUserId;
 
 public class InterceptorEffect implements IEffect {
     
 
-    private GenericId id;
+    private ToUserId id;
     private ContextSideId sideId;
     private IEffect trueEffect;
 
 
     public InterceptorEffect(
-        GenericId id,
+        ToUserId id,
         ContextSideId sideId,
         IEffect trueEffect
     ) {
