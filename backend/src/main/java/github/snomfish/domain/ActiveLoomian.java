@@ -56,6 +56,7 @@ public class ActiveLoomian extends Loomian {
 
 
     public void incrementTurnNumber() {
+        mechanics.incrementTurnNumber();
         statusTurns += 1;
     }
 

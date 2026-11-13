@@ -433,80 +433,15 @@ public class Value<T> {
         c -> 		((Move) c).damage(),
         (c, v) -> 	((Move) c).damage(v)
     );}
-    public Value<Double> ATTACKING_STAT_MODIFIER() {return update(
+	public Value<Double> MOVE_MODIFIER(ModifierId id) {return update(
 		Double.class,
-        c -> 		((Move) c).modifiers().get(ModifierId.ATTACKING_STAT),
-        (c, v) -> 	((Move) c).modifiers().set(ModifierId.ATTACKING_STAT, v)
-    );}
-    public Value<Double> DEFENDING_STAT_MODIFIER() {return update(
-		Double.class,
-        c -> 		((Move) c).modifiers().get(ModifierId.DEFENDING_STAT),
-        (c, v) -> 	((Move) c).modifiers().set(ModifierId.DEFENDING_STAT, v)
-    );}
-    public Value<Double> DAMAGE_MODIFIER() {return update(
-		Double.class,
-        c -> 		((Move) c).modifiers().get(ModifierId.DAMAGE),
-        (c, v) -> 	((Move) c).modifiers().set(ModifierId.DAMAGE, v)
-    );}
-    public Value<Double> ACCURACY_MODIFIER() {return update(
-		Double.class,
-        c -> 		((Move) c).modifiers().get(ModifierId.ACCURACY),
-        (c, v) -> 	((Move) c).modifiers().set(ModifierId.ACCURACY, v)
-    );}
-    public Value<Double> TYPE_MODIFIER() {return update(
-		Double.class,
-        c -> 		((Move) c).modifiers().get(ModifierId.TYPE),
-        (c, v) -> 	((Move) c).modifiers().set(ModifierId.TYPE, v)
-    );}
-    public Value<Double> STAB_MODIFIER() {return update(
-		Double.class,
-        c -> 		((Move) c).modifiers().get(ModifierId.STAB),
-        (c, v) -> 	((Move) c).modifiers().set(ModifierId.STAB, v)
-    );}
-    public Value<Double> CRIT_MODIFIER() {return update(
-		Double.class,
-        c -> 		((Move) c).modifiers().get(ModifierId.CRIT),
-        (c, v) -> 	((Move) c).modifiers().set(ModifierId.CRIT, v)
-    );}
-    public Value<Double> HEALTH_DRAIN_MODIFIER() {return update(
-		Double.class,
-        c -> 		((Move) c).modifiers().get(ModifierId.HEALTH_DRAIN),
-        (c, v) -> 	((Move) c).modifiers().set(ModifierId.HEALTH_DRAIN, v)
-    );}
-    public Value<Double> ENERGY_DRAIN_MODIFIER() {return update(
-		Double.class,
-        c -> 		((Move) c).modifiers().get(ModifierId.ENERGY_DRAIN),
-        (c, v) -> 	((Move) c).modifiers().set(ModifierId.ENERGY_DRAIN, v)
-    );}
-    public Value<Boolean> CONTACT_TAG() {return update(
+		c -> 		((Move) c).modifiers().get(id),
+		(c, v) -> 	((Move) c).modifiers().set(id, v)
+	);}
+	public Value<Boolean> MOVE_TAG(MoveTagId id) {return update(
 		Boolean.class,
-        c -> 		((Move) c).tags().get(MoveTagId.CONTACT),
-        (c, v) -> 	((Move) c).tags().set(MoveTagId.CONTACT, v)
-    );}
-    public Value<Boolean> EXPLOSIVE_TAG() {return update(
-		Boolean.class,
-        c -> 		((Move) c).tags().get(MoveTagId.EXPLOSIVE),
-        (c, v) -> 	((Move) c).tags().set(MoveTagId.EXPLOSIVE, v)
-    );}
-    public Value<Boolean> HEALTH_DRAIN_TAG() {return update(
-		Boolean.class,
-        c -> 		((Move) c).tags().get(MoveTagId.HEALTH_DRAIN),
-        (c, v) -> 	((Move) c).tags().set(MoveTagId.HEALTH_DRAIN, v)
-    );}
-    public Value<Boolean> POWDER_TAG() {return update(
-		Boolean.class,
-        c -> 		((Move) c).tags().get(MoveTagId.POWDER),
-        (c, v) -> 	((Move) c).tags().set(MoveTagId.POWDER, v)
-    );}
-    public Value<Boolean> RECOIL_TAG() {return update(
-		Boolean.class,
-        c -> 		((Move) c).tags().get(MoveTagId.RECOIL),
-        (c, v) -> 	((Move) c).tags().set(MoveTagId.RECOIL, v)
-    );}
-    public Value<Boolean> SOUND_TAG() {return update(
-		Boolean.class,
-        c -> 		((Move) c).tags().get(MoveTagId.SOUND),
-        (c, v) -> 	((Move) c).tags().set(MoveTagId.SOUND, v)
-    );}
+		c -> 		((Move) c).tags().get(id),
+		(c, v) -> 	((Move) c).tags().set(id, v)
+	);}
     
 }

@@ -34,21 +34,22 @@ public class Mechanics implements DeepCopyable<Mechanics> {
     }
 
 
+    public void incrementTurnNumber() {
+        for (MechanicId mechanicId : mechanics.keySet()) {
+            
+        }
+    }
+
+
     public Boolean has(MechanicId id) {
         return mechanics.get(id);
     }
-
-
     public void set(MechanicId id, boolean v) {
         mechanics.put(id, v);
     }
-
-
     public void add(MechanicId id) {
         mechanics.put(id, true);
     }
-
-
     public void remove(MechanicId id) {
         mechanics.put(id, false);
     }

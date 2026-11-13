@@ -2,6 +2,7 @@ package github.snomfish.functionality.condition;
 
 import java.util.List;
 
+import github.snomfish.domain.move.modifiers.ModifierId;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
@@ -35,7 +36,7 @@ public class AccuracyCheck implements ICondition {
 
         context.dispatchEvent(GenericId.SELF_PRE_ACCURACY_CHECK, ContextSideId.USER);
 
-        double cachedAccuracyModifier = (double) Value.USER().MOVE().ACCURACY_MODIFIER().get(context);
+        double cachedAccuracyModifier = (double) Value.USER().MOVE().MOVE_MODIFIER(ModifierId.ACCURACY).get(context);
 
         for (Branch<Double> accuracyBranch : accuracyBranches) {
             double accuracyValue = Math.clamp(accuracyBranch.value() * cachedAccuracyModifier, 0, 1);

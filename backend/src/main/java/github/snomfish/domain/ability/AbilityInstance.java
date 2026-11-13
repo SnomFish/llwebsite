@@ -10,6 +10,7 @@ import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.copy.DeepCopyable;
 import github.snomfish.functionality.event.Event;
 import github.snomfish.functionality.event.Gate;
+import github.snomfish.functionality.event.Rule;
 
 import static github.snomfish.functionality.branch.BranchUtil.applyProbability;
 import static github.snomfish.functionality.branch.BranchUtil.flatMap;
@@ -62,7 +63,7 @@ public class AbilityInstance implements DeepCopyable<AbilityInstance> {
         if (ability.oncePerBattle() && hasTriggeredThisBattle) return outcomes;
         if (ability.oncePerSwapIn() && hasTriggeredThisSwapIn) return outcomes;
 
-        for (AbilityRule rule : ability.rules()) {
+        for (Rule rule : ability.rules()) {
             outcomes = flatMap(outcomes, c -> executeRule(c, event, rule));
         }
 
@@ -70,7 +71,7 @@ public class AbilityInstance implements DeepCopyable<AbilityInstance> {
     }
 
 
-    public List<Branch<BattleContext>> executeRule(BattleContext context, Event event, AbilityRule rule) {
+    public List<Branch<BattleContext>> executeRule(BattleContext context, Event event, Rule rule) {
         List<Branch<BattleContext>> outcomes = new ArrayList<>();
 
         if (!rule.events().contains(event)) return List.of(new Branch<>(context, 1));

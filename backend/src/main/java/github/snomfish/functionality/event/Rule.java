@@ -29,6 +29,11 @@ public class Rule {
     }
 
 
+    public List<Event> events() {return events;}
+    public ICondition condition() {return condition;}
+    public IEffect effect() {return effect;}
+
+
     public List<Branch<BattleContext>> execute(BattleContext context, Event event) {
         
         if (!events.contains(event)) {

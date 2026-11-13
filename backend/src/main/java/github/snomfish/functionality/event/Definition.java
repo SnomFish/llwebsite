@@ -72,7 +72,7 @@ public class Definition<T extends Enum<T>, D extends Definition<T, D>> {
     public List<Branch<Boolean>> handleGate(BattleContext context, Event event) {
         return null;
     }
-    /*public List<Branch<BattleContext>> handleInterceptor(Report report, Event event) {
+    public List<Branch<BattleContext>> handleInterceptor(Report report, Event event) {
         return null;
-    }*/
+    }
 }

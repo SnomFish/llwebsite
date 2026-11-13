@@ -3,6 +3,7 @@ package github.snomfish.domain.mechanics;
 import java.util.HashMap;
 import java.util.Map;
 
+import github.snomfish.domain.move.modifiers.ModifierId;
 import github.snomfish.domain.type.TypeId;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.condition.Equals;
@@ -36,60 +37,68 @@ public class MechanicRegistry {
 
 
     static {
-        register(Mechanic.build(DAZE)
+        register(Mechanic.build()
+            .id(DAZE)
             .name("Daze")
         );
-        register(Mechanic.build(FLINCH)
+        register(Mechanic.build()
+            .id(FLINCH)
             .name("Flinch")
         );
 
         // mechanics caused by abilities
-        register(Mechanic.build(COMBUSTIBLE)
+        register(Mechanic.build()
+            .id(COMBUSTIBLE)
             .name("combustible")
             .rule(Rule.build()
                 .event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
                 .condition(new Equals<>(Value.SELF().MOVE().TYPE(), TypeId.FIRE))
-                .effect(Effects.multiplyValue(Value.SELF().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)))
+                .effect(Effects.multiplyValue(Value.SELF().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)))
             )
         );
-        register(Mechanic.build(COURSING_VENOM)
+        register(Mechanic.build()
+            .id(COURSING_VENOM)
             .name("coursing venom")
             .rule(Rule.build()
                 .event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
                 .condition(new Equals<>(Value.SELF().MOVE().TYPE(), TypeId.TOXIC))
-                .effect(Effects.multiplyValue(Value.SELF().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)))
+                .effect(Effects.multiplyValue(Value.SELF().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)))
             )
         );
-        register(Mechanic.build(NOXIOUS_WEEDS)
+        register(Mechanic.build()
+            .id(NOXIOUS_WEEDS)
             .name("Noxious Weeds")
             .rule(Rule.build()
                 .event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
                 .condition(new Equals<>(Value.SELF().MOVE().TYPE(), TypeId.PLANT))
-                .effect(Effects.multiplyValue(Value.SELF().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)))
+                .effect(Effects.multiplyValue(Value.SELF().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)))
             )
         );
-        register(Mechanic.build(PRISMATIC)
+        register(Mechanic.build()
+            .id(PRISMATIC)
             .name("Prismatic")
             .rule(Rule.build()
                 .event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
                 .condition(new Equals<>(Value.SELF().MOVE().TYPE(), TypeId.LIGHT))
-                .effect(Effects.multiplyValue(Value.SELF().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)))
+                .effect(Effects.multiplyValue(Value.SELF().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)))
             )
         );
-        register(Mechanic.build(TOXIC_FILTER)
+        register(Mechanic.build()
+            .id(TOXIC_FILTER)
             .name("Toxic Filter")
             .rule(Rule.build()
                 .event(GenericId.PRE_SELF_DEAL_FORMULA_DAMAGE)
                 .condition(new Equals<>(Value.SELF().MOVE().TYPE(), TypeId.AIR))
                 .effect(new EffectSequence(
-                    Effects.multiplyValue(Value.SELF().MOVE().DAMAGE_MODIFIER(), new Constant(1.5)),
+                    Effects.multiplyValue(Value.SELF().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)),
                     RemoveMechanic.fromUser(TOXIC_FILTER)
                 ))
             )
         );
 
         // mechanics caused by moves
-        register(Mechanic.build(ALL_OR_NOTHING_FOCUSING)
+        register(Mechanic.build()
+            .id(ALL_OR_NOTHING_FOCUSING)
             .name("Focusing for All or Nothing")
             .rule(Rule.build()
                 .event(GenericAntiId.RECEIVED_DAMAGE_FROM_MOVE)

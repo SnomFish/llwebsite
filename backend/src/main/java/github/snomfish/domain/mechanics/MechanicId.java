@@ -1,6 +1,8 @@
 package github.snomfish.domain.mechanics;
 
 public enum MechanicId {
+    NO_MECHANIC,
+    
     DAZE,
     FLINCH,
     

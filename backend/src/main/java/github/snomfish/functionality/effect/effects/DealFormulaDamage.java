@@ -6,6 +6,7 @@ import java.util.List;
 import github.snomfish.domain.ActiveLoomian;
 import github.snomfish.domain.ability.AbilityId;
 import github.snomfish.domain.move.Move;
+import github.snomfish.domain.move.modifiers.ModifierId;
 import github.snomfish.domain.move.modifiers.Modifiers;
 import github.snomfish.domain.stats.StatChangesId;
 import github.snomfish.domain.stats.StatId;
@@ -143,24 +144,24 @@ public class DealFormulaDamage implements IEffect {
 
         outcomes = flatMap(outcomes, c -> new ConditionalEffect(
             new GateCondition(GateId.CAN_ATTACKING_STAT_USE_STAT_BOOSTS, ContextSideId.USER),
-            Effects.multiplyValue(Value.USER().MOVE().ATTACKING_STAT_MODIFIER(), new Constant(attackingStatBoosts))
+            Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.ATTACKING_STAT), new Constant(attackingStatBoosts))
         ).execute(c));
 
         if (move.hasCrit()) {
             outcomes = flatMap(outcomes, c -> new ConditionalEffect(
                 new GateCondition(GateId.CAN_ATTACKING_STAT_USE_STAT_DROPS, ContextSideId.USER),
-                Effects.multiplyValue(Value.USER().MOVE().ATTACKING_STAT_MODIFIER(), new Constant(attackingStatDrops))
+                Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.ATTACKING_STAT), new Constant(attackingStatDrops))
             ).execute(c));
 
             outcomes = flatMap(outcomes, c -> new ConditionalEffect(
                 new GateCondition(GateId.CAN_DEFENDING_STAT_USE_STAT_BOOSTS, ContextSideId.USER),
-                Effects.multiplyValue(Value.USER().MOVE().ATTACKING_STAT_MODIFIER(), new Constant(defendingStatBoosts))
+                Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.ATTACKING_STAT), new Constant(defendingStatBoosts))
             ).execute(c));
         }
 
         outcomes = flatMap(outcomes, c -> new ConditionalEffect(
             new GateCondition(GateId.CAN_DEFENDING_STAT_USE_STAT_DROPS, ContextSideId.USER),
-            Effects.multiplyValue(Value.USER().MOVE().ATTACKING_STAT_MODIFIER(), new Constant(defendingStatDrops))
+            Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.ATTACKING_STAT), new Constant(defendingStatDrops))
         ).execute(c));
 
         move.modifiers().set(ATTACKING_STAT, attackingStatModifier);
