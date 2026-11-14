@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import github.snomfish.domain.item.ItemId;
+import github.snomfish.domain.mechanics.ids.FieldMechanicId;
 import github.snomfish.domain.mechanics.ids.LoomianMechanicId;
 import github.snomfish.domain.move.CategoryId;
 import github.snomfish.domain.move.modifiers.ModifierId;
@@ -53,6 +54,7 @@ import github.snomfish.functionality.number.Multiply;
 import github.snomfish.functionality.number.ValueConstant;
 
 import static github.snomfish.domain.ability.AbilityId.*;
+import static github.snomfish.domain.mechanics.ids.FieldMechanicId.FUNGUS_CURSE;
 import static github.snomfish.functionality.context.ContextSideId.*;
 
 public class AbilityRegistry {
@@ -1234,6 +1236,10 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(MYCOTIC)
 			.name("mycotic")
+			.rule(Rule.build()
+				.event(RuleForUserId.SELF_SWAPPED_IN)
+				.effect(ApplyMechanic.toField(FieldMechanicId.FUNGUS_CURSE).withMaxAge(4))
+			)
 		);
 		register(Ability.build()
 			.id(MYSTERIOUS_CLOAK)
@@ -1321,6 +1327,14 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(PARTNERSHIP)
 			.name("partnership")
+		);
+		register(Ability.build()
+			.id(PARTY_TRICK)
+			.name("party trick")
+			.rule(Rule.build()
+				.event(RuleForUserId.SELF_SWAPPED_IN)
+				.effect(ApplyMechanic.toUser(LoomianMechanicId.WILL_SET_BOH))
+			)
 		);
 		register(Ability.build()
 			.id(PERSISTENCE)

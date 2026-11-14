@@ -11,6 +11,7 @@ import github.snomfish.functionality._schematics.Effects;
 import github.snomfish.functionality.condition.Equals;
 import github.snomfish.functionality.effect.EffectSequence;
 import github.snomfish.functionality.effect.effects.AddType;
+import github.snomfish.functionality.effect.effects.ApplyMechanic;
 import github.snomfish.functionality.effect.effects.RemoveMechanic;
 import github.snomfish.functionality.event.Rule;
 import github.snomfish.functionality.event.ruleIds.ConstantRuleId;
@@ -58,6 +59,17 @@ public class MechanicRegistry {
             .name("Flinch")
         );
 
+        register(new Mechanic()
+            .id(WILL_SET_BOH)
+            .name("will set up bane of haste at end of turn")
+            .rule(Rule.build()
+                .event(ConstantRuleId.END_OF_TURN)
+                .effect(new EffectSequence(
+                    ApplyMechanic.toField(BANE_OF_HASTE).withMaxAge(4),
+                    RemoveMechanic.fromUser(WILL_SET_BOH)
+                ))
+            )
+        );
         register(new Mechanic()
             .id(PERCHING)
             .name("perching")

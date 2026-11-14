@@ -17,6 +17,7 @@ public class ApplyMechanic implements IEffect {
 
     private Value<MechanicInstance> mechanicInstanceValue;
     private IMechanicId mechanicId;
+    private int maxAge;
 
 
     private ApplyMechanic(
@@ -25,6 +26,7 @@ public class ApplyMechanic implements IEffect {
     ) {
         this.mechanicInstanceValue = mechanicInstanceValue;
         this.mechanicId = mechanicId;
+        this.maxAge = 999;
     }
     public static ApplyMechanic toUser(LoomianMechanicId mechanicId) {
         return new ApplyMechanic(Value.USER().LOOMIAN_MECHANIC(mechanicId), mechanicId);
@@ -41,6 +43,8 @@ public class ApplyMechanic implements IEffect {
     public static ApplyMechanic toField(FieldMechanicId mechanicId) {
         return new ApplyMechanic(Value.FIELD_MECHANIC(mechanicId), mechanicId);
     }
+
+    public ApplyMechanic withMaxAge(int maxAge) {this.maxAge = maxAge; return this;}
 
 
     private ApplyMechanic(ApplyMechanic copy) {
@@ -64,7 +68,7 @@ public class ApplyMechanic implements IEffect {
         } else {
             context.log("applying mechanic");
             BattleContext outcome = context.deepCopy();
-            instance = new MechanicInstance(mechanicId);
+            instance = new MechanicInstance(mechanicId, maxAge);
             mechanicInstanceValue.set(outcome, instance);
             return List.of(new Branch<>(outcome, 1.0));
 

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import github.snomfish.domain.mechanics.ids.FieldMechanicId;
 import github.snomfish.domain.mechanics.ids.LoomianMechanicId;
 import github.snomfish.domain.move.structures.MoveEffect;
 import github.snomfish.domain.stats.StatId;
@@ -39,6 +40,7 @@ import github.snomfish.functionality.number.ConditionalNumber;
 import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.ValueConstant;
 
+import static github.snomfish.domain.mechanics.ids.FieldMechanicId.BANE_OF_HASTE;
 import static github.snomfish.domain.move.CategoryId.*;
 import static github.snomfish.domain.move.MoveId.*;
 import static github.snomfish.domain.move.MoveTagId.*;
@@ -487,12 +489,15 @@ public class MoveRegistry {
 			.energyCost(new Constant(100))
 		);
 		register(Move.build()
-			.id(BANE_OF_HASTE)
+			.id(MoveId.BANE_OF_HASTE)
 			.name("Bane of Haste")
 			.type(TypeId.ANCIENT)
 			.category(STATUS)
 			.energyCost(new Constant(50))
 			.priority(new Constant(-7))
+			.onHit(new MoveEffect(
+				ApplyMechanic.toField(FieldMechanicId.BANE_OF_HASTE).withMaxAge(4)
+			))
 		);
 		register(Move.build()
 			.id(BANE_OF_WEILDING)
@@ -2318,7 +2323,7 @@ public class MoveRegistry {
 				new EffectSequence(List.of(
 					new DealFormulaDamage(),
 					Schematics.secondaryEffects(List.of(
-						// TODO apply bane of haste at the end of the turn
+						ApplyMechanic.toUser(LoomianMechanicId.WILL_SET_BOH)
 					))
 				))
 			))
@@ -2417,6 +2422,9 @@ public class MoveRegistry {
 			.type(TypeId.PLANT)
 			.category(STATUS)
 			.energyCost(new Constant(25))
+			.onHit(new MoveEffect(
+				ApplyMechanic.toField(FieldMechanicId.FUNGUS_CURSE).withMaxAge(4)
+			))
 		);
 		register(Move.build()
 			.id(FUSION_BARRAGE)

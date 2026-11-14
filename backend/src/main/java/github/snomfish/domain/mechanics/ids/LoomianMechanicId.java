@@ -6,6 +6,8 @@ public enum LoomianMechanicId implements IMechanicId {
     DAZE,
     FLINCH,
 
+    // MOVE SPECIFIC
+    WILL_SET_BOH,
     PERCHING,
     REVIVING,
     

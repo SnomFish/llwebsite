@@ -169,6 +169,7 @@ public enum AbilityId {
     OXIDIZE,
     PARTING_GIFT,
     PARTNERSHIP,
+    PARTY_TRICK,
     PERSISTENCE,
     PETRIFYING,
     PINCER_TRAP,
