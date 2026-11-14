@@ -9,7 +9,7 @@ import github.snomfish.functionality.effect.IEffect;
 import github.snomfish.functionality.effect.effects.NoEffect;
 import github.snomfish.functionality.event.ruleIds.IRuleId;
 
-public class Interceptor {
+public class Hook {
     
 
     private List<IRuleId> events;
@@ -17,7 +17,7 @@ public class Interceptor {
     private IEffect effect;
 
 
-    private Interceptor() {
+    private Hook() {
         this.events = new ArrayList<>();
         this.condition = new NoCondition();
         this.effect = new NoEffect();
@@ -31,18 +31,18 @@ public class Interceptor {
 
 
     // builder functions
-    public static Interceptor build() {
-        return new Interceptor();
+    public static Hook build() {
+        return new Hook();
     }
-    public Interceptor event(IRuleId id) {
+    public Hook event(IRuleId id) {
         this.events.add(id);
         return this;
     }
-    public Interceptor condition(ICondition condition) {
+    public Hook condition(ICondition condition) {
         this.condition = condition;
         return this;
     }
-    public Interceptor effect(IEffect effect) {
+    public Hook effect(IEffect effect) {
         this.effect = effect;
         return this;
     }

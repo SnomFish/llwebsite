@@ -8,7 +8,7 @@ import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.effect.IEffect;
 import github.snomfish.functionality.event.ruleIds.RuleForAllId;
 
-public class InterceptorEffect implements IEffect {
+public class HookEffect implements IEffect {
     
 
     private RuleForAllId id;
@@ -16,7 +16,7 @@ public class InterceptorEffect implements IEffect {
     private IEffect trueEffect;
 
 
-    public InterceptorEffect(
+    public HookEffect(
         RuleForAllId id,
         ContextSideId sideId,
         IEffect trueEffect
@@ -27,17 +27,17 @@ public class InterceptorEffect implements IEffect {
     }
 
 
-    private InterceptorEffect(InterceptorEffect copy) {
+    private HookEffect(HookEffect copy) {
         this.id = copy.id;
         this.sideId = copy.sideId;
         this.trueEffect = copy.trueEffect.deepCopy();
     }
-    public InterceptorEffect deepCopy() {
-        return new InterceptorEffect(this);
+    public HookEffect deepCopy() {
+        return new HookEffect(this);
     }
 
 
     public List<Branch<BattleContext>> execute(BattleContext context) {
-        return context.dispatchInterceptor(id, sideId, trueEffect.execute(context));
+        return context.dispatchHook(id, sideId, trueEffect.execute(context));
     }
 }

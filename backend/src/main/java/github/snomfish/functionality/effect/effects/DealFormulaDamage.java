@@ -51,7 +51,7 @@ public class DealFormulaDamage implements IEffect {
         outcomes = flatMap(outcomes, c -> critChanceModule(c));
         outcomes = flatMap(outcomes, c -> damageModule(c));
         outcomes = flatMap(outcomes, c -> statModifierModule(c));
-        outcomes = flatMap(outcomes, c -> c.dispatchInterceptor(RuleForAllId.PRE_DAMAGING_LOOMIAN, ContextSideId.USER, execute1(context)));
+        outcomes = flatMap(outcomes, c -> c.dispatchHook(RuleForAllId.PRE_DAMAGING_LOOMIAN, ContextSideId.USER, execute1(context)));
 
         return outcomes;
     }
@@ -199,7 +199,7 @@ public class DealFormulaDamage implements IEffect {
         Modifiers modifiers = move.modifiers();
         // types
         modifiers.mul(TYPE, move.typeChart().getModifier(move.type(), target.types()));
-        // stab (should eventually be replaced by an interceptor/gate)
+        // stab (should eventually be replaced by an hook/gate)
         AbilityId userAbilityId = user.abilityInstance().abilityId();
         if (user.types().contains(move.type()) && !(userAbilityId == AbilityId.AWAKENING || userAbilityId == AbilityId.ACE)) { // stab
             modifiers.set(STAB, 1.25);

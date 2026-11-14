@@ -38,7 +38,7 @@ import github.snomfish.functionality.effect.effects.SetType;
 import github.snomfish.functionality.effect.effects.SetValueEffect;
 import github.snomfish.functionality.effect.effects.SetWeather;
 import github.snomfish.functionality.event.Gate;
-import github.snomfish.functionality.event.Interceptor;
+import github.snomfish.functionality.event.Hook;
 import github.snomfish.functionality.event.Rule;
 import github.snomfish.functionality.event.gateIds.GateForAllId;
 import github.snomfish.functionality.event.gateIds.GateForTargetId;
@@ -322,6 +322,15 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(BRAVE_CUB)
 			.name("Brave Cub")
+			.rule(Rule.build()
+				.event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
+				.condition(Conditions.or(
+					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.BUG),
+					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.DARK),
+					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.SPIRIT)
+				))
+				.effect(Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(0.75)))
+			)
 		);
 		register(Ability.build()
 			.id(BRUTAL_WRATH)
@@ -411,11 +420,11 @@ public class AbilityRegistry {
 			.id(CADDIE)
 			.name("caddie")
 		);
-		register(Ability.build()
+		register(Ability.build() // doubles exclusive ability
 			.id(CAPTIVATING)
 			.name("captivating")
 		);
-		register(Ability.build()
+		register(Ability.build() // useless
 			.id(CAROL)
 			.name("carol")
 		);
@@ -504,7 +513,7 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(COMBUSTIBLE)
 			.name("combustible")
-			.interceptor(Interceptor.build()
+			.hook(Hook.build()
 				.event(RuleForTargetId.SELF_PRE_DAMAGED)
 				.condition(new And(
 					new GateCondition(GateForAllId.CAN_USE_DEFENSIVE_ABILITY, USER),
@@ -515,7 +524,7 @@ public class AbilityRegistry {
 				)
 			)
 		);
-		register(Ability.build() // doubles exclusive
+		register(Ability.build() // doubles exclusive ability
 			.id(COMMUNICATION)
 			.name("communication")
 		);
@@ -526,6 +535,16 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(CONDITIONED)
 			.name("Conditioned")
+			.rule(Rule.build()
+				.event(RuleForTargetId.SELF_PRE_DAMAGED)
+				.condition(new And(
+					Comparator.greaterThan()
+						.left(new ValueConstant(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.TYPE)))
+						.right(new Constant(1)),
+					new GateCondition(GateForAllId.CAN_USE_DEFENSIVE_ABILITY, USER)
+				))
+				.effect(Effects.multiplyValue(Value.OPP().MOVE().DAMAGE(), new Constant(0.75)))
+			)
 		);
 		register(Ability.build()
 			.id(CONFIDENCE)
@@ -542,6 +561,10 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(COSMIC_PRESSURE)
 			.name("cosmic_pressure")
+			.gate(Gate.build()
+				.event(GateForAllId.CAN_WEATHER_EFFECTS_AFFECT)
+				.condition(new False())
+			)
 		);
 		register(Ability.build()
 			.id(COURSING_VENOM) // when hit by a toxic type move, absorb it to boost your own toxic type damage by 1.5x
@@ -776,7 +799,7 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(FLUTTER)
 			.name("flutter")
-			.interceptor(Interceptor.build()
+			.hook(Hook.build()
 				.event(RuleForTargetId.SELF_PRE_DAMAGED)
 				.condition(new Or(
 					new Equals<>(Value.OPP().MOVE().MOVE_TAG(MoveTagId.POWDER), true),
@@ -828,7 +851,7 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(FORTISSIMO)
 			.name("fortissimo")
-			.interceptor(Interceptor.build()
+			.hook(Hook.build()
 				.event(RuleForTargetId.SELF_PRE_DAMAGED)
 				.condition(new Or(
 					new Equals<>(Value.OPP().MOVE().MOVE_TAG(MoveTagId.SOUND), true),
@@ -902,7 +925,7 @@ public class AbilityRegistry {
 		register(Ability.build() // immunity to bomb moves
 			.id(GUMMY)
 			.name("gummy")
-			.interceptor(Interceptor.build()
+			.hook(Hook.build()
 				.event(RuleForTargetId.SELF_PRE_DAMAGED)
 				.condition(new Or(
 					new Equals<>(Value.OPP().MOVE().MOVE_TAG(MoveTagId.EXPLOSIVE), true),
@@ -976,7 +999,7 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(HOVER)
 			.name("hover")
-			.interceptor(Interceptor.build()
+			.hook(Hook.build()
 				.event(RuleForTargetId.SELF_PRE_DAMAGED)
 				.condition(new Or(
 					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.EARTH),
@@ -987,7 +1010,7 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(HYDRATE)
 			.name("hydrate")
-			.interceptor(Interceptor.build()
+			.hook(Hook.build()
 				.event(RuleForTargetId.SELF_PRE_DAMAGED)
 				.condition(new Or(
 					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.WATER),
@@ -998,7 +1021,7 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(HYDRO_VORTEX)
 			.name("hydro vortex")
-			.interceptor(Interceptor.build()
+			.hook(Hook.build()
 				.event(RuleForTargetId.SELF_PRE_DAMAGED)
 				.condition(new Or(
 					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.WATER),
@@ -1093,7 +1116,7 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(LIGHTNING_ROD)
 			.name("lightning rod")
-			.interceptor(Interceptor.build()
+			.hook(Hook.build()
 				.event(RuleForTargetId.SELF_PRE_DAMAGED)
 				.condition(new Or(
 					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.ELECTRIC),
@@ -1235,7 +1258,7 @@ public class AbilityRegistry {
 			.id(NOXIOUS_WEEDS)
 			.name("noxious weeds")
 			
-			.interceptor(Interceptor.build()
+			.hook(Hook.build()
 				.event(RuleForTargetId.SELF_PRE_DAMAGED)
 				.condition(new Or(
 					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.PLANT),
@@ -1385,7 +1408,7 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(RAGING_FIRE)
 			.name("raging fire")
-			.interceptor(Interceptor.build()
+			.hook(Hook.build()
 				.event(RuleForTargetId.SELF_PRE_DAMAGED)
 				.condition(new Or(
 					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.FIRE),
@@ -1424,7 +1447,7 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(RECHARGEABLE)
 			.name("rechargeable")
-			.interceptor(Interceptor.build()
+			.hook(Hook.build()
 				.event(RuleForTargetId.SELF_PRE_DAMAGED)
 				.condition(new Or(
 					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.ELECTRIC),
@@ -1891,7 +1914,7 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(WOODSMAN)
 			.name("woodman")
-			.interceptor(Interceptor.build()
+			.hook(Hook.build()
 				.event(RuleForTargetId.SELF_PRE_DAMAGED)
 				.condition(new Or(
 					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.PLANT),

@@ -7,11 +7,12 @@ import github.snomfish.domain.ability.AbilityInstance;
 import github.snomfish.domain.mechanics.Mechanics;
 import github.snomfish.domain.stats.StatChanges;
 import github.snomfish.domain.stats.Stats;
+import github.snomfish.domain.status.StatusId;
 import github.snomfish.domain.type.TypeId;
 import github.snomfish.functionality.action.Action;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
-import github.snomfish.functionality.event.Report;
+import github.snomfish.functionality.event.HookReport;
 import github.snomfish.functionality.event.gateIds.IGateId;
 import github.snomfish.functionality.event.ruleIds.IRuleId;
 
@@ -56,12 +57,6 @@ public class ActiveLoomian extends Loomian {
     }
 
 
-    public void incrementTurnNumber() {
-        mechanics.incrementTurnNumber();
-        statusTurns += 1;
-    }
-
-
     public List<Branch<BattleContext>> dispatchRule(BattleContext context, IRuleId event) {
         List<Branch<BattleContext>> outcomes = List.of(new Branch<>(context, 1.0));
 
@@ -78,9 +73,9 @@ public class ActiveLoomian extends Loomian {
 
         return probability;
     }
-    public Report dispatchInterceptor(Report report, BattleContext context, IRuleId event) {
+    public HookReport dispatchHook(HookReport report, BattleContext context, IRuleId event) {
         
-        report.record(abilityInstance().ability().interceptors(), event);
+        report.record(abilityInstance().ability().hooks(), event);
 
         return report;
     }
@@ -108,4 +103,10 @@ public class ActiveLoomian extends Loomian {
     public void setAction(Action action) {this.action = action;}
     public void setMechanics(Mechanics mechanics) {this.mechanics = mechanics;} 
     public void setStatusTurns(int statusTurns) {this.statusTurns = statusTurns;}
+
+
+    public void incrementTurnNumber() {
+        mechanics.incrementTurnNumber();
+        statusTurns += 1;
+    }
 }

@@ -19,21 +19,21 @@ import github.snomfish.functionality.copy.DeepCopyable;
 
 public class Loomian implements DeepCopyable<Loomian> {
     
-    private SpeciesId speciesId; // doesnt get deep copied
-    private List<MoveId> moves;
-    private AbilityInstance actualAbilityInstance;
-    private ItemId itemId;
-    private StatusId statusId;
-    private Stats nature;
+    protected SpeciesId speciesId; // doesnt get deep copied
+    protected List<MoveId> moves;
+    protected AbilityInstance actualAbilityInstance;
+    protected ItemId itemId;
+    protected StatusId statusId;
+    protected Stats nature;
 
-    private Stats actualStats;
-    private int currentHealth;
-    private int currentEnergy;
-    private Stats tps;
-    private Stats ups;
+    protected Stats actualStats;
+    protected int currentHealth;
+    protected int currentEnergy;
+    protected Stats tps;
+    protected Stats ups;
 
     // eventually have these bools in an enum map
-    private boolean hasAbilityActivated;
+    protected boolean hasAbilityActivated;
 
 
     public Loomian(

@@ -7,7 +7,7 @@ import github.snomfish.domain.Side;
 import github.snomfish.domain.SideId;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.copy.DeepCopyable;
-import github.snomfish.functionality.event.Report;
+import github.snomfish.functionality.event.HookReport;
 import github.snomfish.functionality.event.gateIds.GateForAllId;
 import github.snomfish.functionality.event.ruleIds.ConstantRuleId;
 import github.snomfish.functionality.event.ruleIds.RuleForAllId;
@@ -128,18 +128,18 @@ public class BattleContext implements DeepCopyable<BattleContext> {
 
 
 
-    public List<Branch<BattleContext>> dispatchInterceptor(
+    public List<Branch<BattleContext>> dispatchHook(
         RuleForAllId eventId,
         ContextSideId sideId,
         List<Branch<BattleContext>> trueOutcomes
     ) {
-        Report report = new Report(trueOutcomes);
+        HookReport report = new HookReport(trueOutcomes);
 
         BattleContext context = ContextUtil.setFocus(this, sideId);
-        report = user().dispatchInterceptor(report, context, eventId.forUser());
+        report = user().dispatchHook(report, context, eventId.forUser());
 
         context = ContextUtil.reverseFocus(context);
-        report = target().dispatchInterceptor(report, context, eventId.forTarget());
+        report = target().dispatchHook(report, context, eventId.forTarget());
 
         context = ContextUtil.setFocus(context, userState); // resets the focus to the correct state
         return report.execute(context);

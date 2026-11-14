@@ -4,6 +4,7 @@ import static github.snomfish.functionality.event.gateIds.GateForTargetId.*;
 import static github.snomfish.functionality.event.gateIds.GateForUserId.*;
 
 public enum GateForAllId implements IGateId {
+    CAN_BE_TRAPPED                  (CAN_SELF_BE_TRAPPED,                   CAN_OPP_BE_TRAPPED),
 	CAN_CONSUME_ITEM				(CAN_SELF_CONSUME_ITEM,					CAN_OPP_CONSUME_ITEM),
 
     CAN_MOVE_CRIT					(CAN_SELF_MOVE_CRIT, 					CAN_OPP_MOVE_CRIT),
@@ -27,6 +28,10 @@ public enum GateForAllId implements IGateId {
 
 	CAN_USE_MOVE_SECONDARY_EFFECTS	(CAN_SELFS_MOVE_USE_SECONDARY_EFFECTS,	CAN_OPPS_MOVE_USE_SECONDARY_EFFECTS),
 	CAN_USE_SUPPORT_MOVES			(CAN_SELF_USE_SUPPORT_MOVES,			CAN_OPP_USE_SUPPORT_MOVES),
+
+    CAN_WEATHER_EFFECTS_AFFECT      (CAN_WEATHER_EFFECTS_AFFECT_SELF,       CAN_WEATHER_EFFECTS_AFFECT_OPP),
+
+    CAN_FALL_ASLEEP                 (CAN_SELF_FALL_ASLEEP,                  CAN_OPP_FALL_ASLEEP),
     ;
 
 

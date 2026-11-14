@@ -3,6 +3,7 @@ package github.snomfish.functionality.event.gateIds;
 
 
 public enum GateForTargetId implements IGateId {
+    CAN_OPP_BE_TRAPPED,
     CAN_OPP_CONSUME_ITEM,
 
     CAN_OPP_MOVE_CRIT,
@@ -26,5 +27,9 @@ public enum GateForTargetId implements IGateId {
 
     CAN_OPPS_MOVE_USE_SECONDARY_EFFECTS,
     CAN_OPP_USE_SUPPORT_MOVES,
+
+    CAN_WEATHER_EFFECTS_AFFECT_OPP,
+
+    CAN_OPP_FALL_ASLEEP,
     ;
 }

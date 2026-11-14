@@ -17,7 +17,7 @@ public abstract class Definition<A extends Enum<A>, B extends Definition<A, B>> 
     protected String name;
     protected List<Rule> rules;
     protected List<Gate> gates;
-    protected List<Interceptor> interceptors;
+    protected List<Hook> hooks;
 
 
     public Definition() {}
@@ -28,7 +28,7 @@ public abstract class Definition<A extends Enum<A>, B extends Definition<A, B>> 
     public String name() {return name;}
     public List<Rule> rules() {return rules;}
     public List<Gate> gates() {return gates;}
-    public List<Interceptor> interceptors() {return interceptors;}
+    public List<Hook> hooks() {return hooks;}
 
 
     // builder functions
@@ -48,8 +48,8 @@ public abstract class Definition<A extends Enum<A>, B extends Definition<A, B>> 
         this.gates.add(gate);
         return (B) this;
     }
-    public B interceptor(Interceptor interceptor) {
-        this.interceptors.add(interceptor);
+    public B hook(Hook hook) {
+        this.hooks.add(hook);
         return (B) this;
     }
 
@@ -72,9 +72,9 @@ public abstract class Definition<A extends Enum<A>, B extends Definition<A, B>> 
         
         return probability;
     }
-    public Report handleInterceptor(BattleContext context, IRuleId ruleId, Report report) {
+    public HookReport handleHook(BattleContext context, IRuleId ruleId, HookReport report) {
 
-        report.record(interceptors, ruleId);
+        report.record(hooks, ruleId);
 
         return report;
     }

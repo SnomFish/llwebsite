@@ -5,7 +5,7 @@ import java.util.List;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.copy.DeepCopyable;
-import github.snomfish.functionality.event.Report;
+import github.snomfish.functionality.event.HookReport;
 import github.snomfish.functionality.event.gateIds.IGateId;
 import github.snomfish.functionality.event.ruleIds.IRuleId;
 
@@ -52,7 +52,7 @@ public class MechanicInstance implements DeepCopyable<MechanicInstance> {
     public double handleGate(BattleContext context, IGateId gateId) {
         return mechanic().handleGate(context, gateId);
     }
-    public Report handleInterceptor(BattleContext context, IRuleId ruleId, Report report) {
-        return mechanic().handleInterceptor(context, ruleId, report);
+    public HookReport handleHook(BattleContext context, IRuleId ruleId, HookReport report) {
+        return mechanic().handleHook(context, ruleId, report);
     }
 }
