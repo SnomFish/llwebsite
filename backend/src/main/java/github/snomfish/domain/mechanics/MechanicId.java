@@ -5,6 +5,9 @@ public enum MechanicId {
     
     DAZE,
     FLINCH,
+
+    PERCHING,
+    REVIVING,
     
     COMBUSTIBLE,
     COURSING_VENOM,

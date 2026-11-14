@@ -9,8 +9,10 @@ import github.snomfish.functionality.Value;
 import github.snomfish.functionality._schematics.Effects;
 import github.snomfish.functionality.condition.Equals;
 import github.snomfish.functionality.effect.EffectSequence;
+import github.snomfish.functionality.effect.effects.AddType;
 import github.snomfish.functionality.effect.effects.RemoveMechanic;
 import github.snomfish.functionality.event.Rule;
+import github.snomfish.functionality.event.ruleIds.ConstantRuleId;
 import github.snomfish.functionality.event.ruleIds.RuleForTargetId;
 import github.snomfish.functionality.event.ruleIds.RuleForUserId;
 import github.snomfish.functionality.number.Constant;
@@ -44,6 +46,29 @@ public class MechanicRegistry {
         register(Mechanic.build()
             .id(FLINCH)
             .name("Flinch")
+        );
+
+        register(Mechanic.build()
+            .id(PERCHING)
+            .name("perching")
+            .rule(Rule.build()
+                .event(ConstantRuleId.END_OF_TURN)
+                .effect(new EffectSequence(
+                    AddType.toUser(TypeId.AIR),
+                    RemoveMechanic.fromUser(PERCHING)
+                ))
+            )
+        );
+        register(Mechanic.build()
+            .id(REVIVING)
+            .name("reviving")
+            .rule(Rule.build()
+                .event(ConstantRuleId.END_OF_TURN)
+                .effect(new EffectSequence(
+                    AddType.toUser(TypeId.SPIRIT),
+                    RemoveMechanic.fromUser(REVIVING)
+                ))
+            )
         );
 
         // mechanics caused by abilities
