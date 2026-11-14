@@ -3,7 +3,7 @@ package github.snomfish.functionality.effect.effects;
 import java.util.List;
 
 import github.snomfish.domain.ActiveLoomian;
-import github.snomfish.domain.mechanics.MechanicId;
+import github.snomfish.domain.mechanics.ids.LoomianMechanicId;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
@@ -13,20 +13,20 @@ public class RemoveMechanic implements IEffect {
         
 
     private Value<ActiveLoomian> activeLoomianValue;
-    private MechanicId mechanicId;
+    private LoomianMechanicId mechanicId;
 
 
     private RemoveMechanic(
         Value<ActiveLoomian> activeLoomianValue,
-        MechanicId mechanicId
+        LoomianMechanicId mechanicId
     ) {
         this.activeLoomianValue = activeLoomianValue;
         this.mechanicId = mechanicId;
     }
-    public static RemoveMechanic fromUser(MechanicId mechanicId) {
+    public static RemoveMechanic fromUser(LoomianMechanicId mechanicId) {
         return new RemoveMechanic(Value.USER().LOOMIAN(), mechanicId);
     }
-    public static RemoveMechanic fromTarget(MechanicId mechanicId) {
+    public static RemoveMechanic fromTarget(LoomianMechanicId mechanicId) {
         return new RemoveMechanic(Value.TARGET().LOOMIAN(), mechanicId);
     }
 

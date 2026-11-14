@@ -11,44 +11,44 @@ import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.effect.IEffect;
 import github.snomfish.functionality.number.INumber;
 
-public class Heal implements IEffect {
+public class RestoreEnergy implements IEffect {
 	
 
-	Value<ActiveLoomian> healingTarget;
+	Value<ActiveLoomian> target;
 	ContextSideId sideId;
 	INumber healingNumber;
 
 
-	private Heal(
-		Value<ActiveLoomian> healingTarget,
+	private RestoreEnergy(
+		Value<ActiveLoomian> target,
 		ContextSideId sideId,
 		INumber healingNumber
 	) {
-		this.healingTarget = healingTarget;
+		this.target = target;
 		this.sideId = sideId;
 		this.healingNumber = healingNumber;
 	}
 
 
-	private Heal(Heal copy) {
-		this.healingTarget = copy.healingTarget;
+	private RestoreEnergy(RestoreEnergy copy) {
+		this.target = copy.target;
 		this.sideId = copy.sideId;
 		this.healingNumber = copy.healingNumber.deepCopy();
 	}
-	public Heal deepCopy() {
-		return new Heal(this);
+	public RestoreEnergy deepCopy() {
+		return new RestoreEnergy(this);
 	}
 
 
 	public static IEffect user(INumber healingNumber) {
-		return new Heal(
+		return new RestoreEnergy(
 			Value.USER().LOOMIAN(),
 			ContextSideId.USER,
 			healingNumber
 		);
 	}
 	public static IEffect target(INumber healingNumber) {
-		return new Heal(
+		return new RestoreEnergy(
 			Value.TARGET().LOOMIAN(),
 			ContextSideId.TARGET,
 			healingNumber
@@ -65,10 +65,10 @@ public class Heal implements IEffect {
 			double healingValue = healingBranch.value();
 			double probability = healingBranch.probability();
 
-			ActiveLoomian loomian    = healingTarget.get(context);
-			int currentHealth        = loomian.currentHealth();
-			int maxHealth            = loomian.maxHealth();
-			int heal				 = Math.clamp((int)healingValue, 0, maxHealth - currentHealth);
+			ActiveLoomian loomian    = target.get(context);
+			int currentEnergy        = loomian.currentEnergy();
+			int maxEnergy            = loomian.maxEnergy();
+			int heal				 = Math.clamp((int)healingValue, 0, maxEnergy - currentEnergy);
 
 			if (heal == 0) { // skips healing if no healing would be done
 				nonHealingProbability *= probability; 
@@ -76,8 +76,8 @@ public class Heal implements IEffect {
 			}
 
 			BattleContext outcome = context.deepCopy();
-			currentHealth += heal;
-			healingTarget.CURRENT_HEALTH().set(outcome, currentHealth);
+			currentEnergy += heal;
+			target.CURRENT_HEALTH().set(outcome, currentEnergy);
 
 			outcomes.add(new Branch<>(
 				outcome,

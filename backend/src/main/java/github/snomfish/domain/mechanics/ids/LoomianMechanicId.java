@@ -1,6 +1,6 @@
-package github.snomfish.domain.mechanics;
+package github.snomfish.domain.mechanics.ids;
 
-public enum MechanicId {
+public enum LoomianMechanicId implements IMechanicId {
     NO_MECHANIC,
     
     DAZE,

@@ -11,7 +11,10 @@ public class Item extends Definition<ItemId, Item> {
     private Tags<ItemTagId> tags;
 
 
-    public Item() {}
+    public Item() {
+        super();
+        this.tags = new Tags<>();
+    }
 
 
     // getters

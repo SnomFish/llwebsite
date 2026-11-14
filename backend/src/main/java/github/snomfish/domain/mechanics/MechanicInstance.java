@@ -2,6 +2,8 @@ package github.snomfish.domain.mechanics;
 
 import java.util.List;
 
+import github.snomfish.domain.mechanics.ids.IMechanicId;
+import github.snomfish.domain.mechanics.ids.LoomianMechanicId;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.copy.DeepCopyable;
@@ -12,11 +14,11 @@ import github.snomfish.functionality.event.ruleIds.IRuleId;
 public class MechanicInstance implements DeepCopyable<MechanicInstance> {
     
 
-    private final MechanicId id;
+    private final IMechanicId id;
     private int age;
 
 
-    public MechanicInstance(MechanicId id) {
+    public MechanicInstance(IMechanicId id) {
         this.id = id;
         this.age = 0;
     }
@@ -32,7 +34,7 @@ public class MechanicInstance implements DeepCopyable<MechanicInstance> {
 
 
     // getters
-    public MechanicId id() {return id;}
+    public IMechanicId id() {return id;}
     public Mechanic mechanic() {return MechanicRegistry.get(id);}
     public int age() {return age;}
 

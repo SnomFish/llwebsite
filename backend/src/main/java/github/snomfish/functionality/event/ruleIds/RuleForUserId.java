@@ -4,6 +4,7 @@ public enum RuleForUserId implements IRuleForSideId {
     NULL_EVENT, // should never be dispatched
 
     SELF_SWAPPED_IN,
+    SELF_DAMAGED_BELOW_HALF,
     SELF_KNOCKED_OUT_OPP,
 
     // move

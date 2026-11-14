@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import github.snomfish.domain.Gamestate;
-import github.snomfish.domain.SideId;
+import github.snomfish.domain.side.SideId;
 import github.snomfish.functionality.branch.Branch;
 
 public class ContextUtil {

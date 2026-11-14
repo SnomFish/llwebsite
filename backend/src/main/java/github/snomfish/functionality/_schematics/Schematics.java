@@ -3,7 +3,6 @@ package github.snomfish.functionality._schematics;
 import java.util.List;
 
 import github.snomfish.domain.status.StatusId;
-import github.snomfish.functionality.Value;
 import github.snomfish.functionality.condition.GateCondition;
 import github.snomfish.functionality.condition.RandomCondition;
 import github.snomfish.functionality.context.ContextSideId;
@@ -14,8 +13,6 @@ import github.snomfish.functionality.effect.effects.ApplyStatus;
 import github.snomfish.functionality.event.gateIds.GateForAllId;
 import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.INumber;
-import github.snomfish.functionality.number.Multiply;
-import github.snomfish.functionality.number.ValueConstant;
 
 public class Schematics {
 
@@ -35,14 +32,6 @@ public class Schematics {
         return new ConditionalEffect(
             new GateCondition(GateForAllId.CAN_MOVE_SECONDARY_EFFECTS_AFFECT_TARGET, ContextSideId.USER),
             new EffectSequence(effects)
-        );
-    }
-
-
-    public static INumber tenPercentOfUserMaxEnergy() {
-        return new Multiply(
-            new ValueConstant(Value.USER().ENERGY()),
-            new Constant(0.1)
         );
     }
 

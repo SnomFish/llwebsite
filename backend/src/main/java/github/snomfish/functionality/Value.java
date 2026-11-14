@@ -5,15 +5,18 @@ import java.util.function.BiConsumer;
 import java.util.function.Function;
 
 import github.snomfish.domain.ActiveLoomian;
-import github.snomfish.domain.Side;
 import github.snomfish.domain.ability.AbilityId;
 import github.snomfish.domain.item.ItemId;
-import github.snomfish.domain.mechanics.MechanicId;
 import github.snomfish.domain.mechanics.MechanicInstance;
+import github.snomfish.domain.mechanics.Mechanics;
+import github.snomfish.domain.mechanics.ids.FieldMechanicId;
+import github.snomfish.domain.mechanics.ids.LoomianMechanicId;
+import github.snomfish.domain.mechanics.ids.SideMechanicId;
 import github.snomfish.domain.move.CategoryId;
 import github.snomfish.domain.move.Move;
 import github.snomfish.domain.move.MoveTagId;
 import github.snomfish.domain.move.modifiers.ModifierId;
+import github.snomfish.domain.side.Side;
 import github.snomfish.domain.species.Species;
 import github.snomfish.domain.species.SpeciesId;
 import github.snomfish.domain.stats.StatChangesId;
@@ -108,6 +111,7 @@ public class Value<T> {
 	);}
 
 	
+	// WEATHER
 	public static Value<WeatherId> WEATHER_ID() {return new Value<>(
 		WeatherId.class,
 		c -> c.gamestate().weatherInstance().weatherId(),
@@ -120,10 +124,23 @@ public class Value<T> {
 	);}
 
 
+	// FIELD MECHANICS
+	public static Value<Mechanics> FIELD_MECHANICS() {return new Value<>(
+		Mechanics.class,
+		c -> c.gamestate().mechanics(),
+		(c, v) -> c.gamestate().setMechanics(v)
+	);}
+	public static Value<MechanicInstance> FIELD_MECHANIC(FieldMechanicId id) {return new Value<>(
+		MechanicInstance.class,
+		c -> 		c.gamestate().mechanics().get(id),
+		(c, v) -> 	c.gamestate().mechanics().set(v)
+	);}
+
+
 	public static Value<Integer> TURN_NUMBER() {return new Value<>(
 		Integer.class,
-		c -> c.gamestate().turnNumber(),
-		(c, v) -> c.gamestate().setTurnNumber(v)
+		c -> 		c.gamestate().turnNumber(),
+		(c, v) -> 	c.gamestate().setTurnNumber(v)
 	);}
 
 
@@ -240,12 +257,27 @@ public class Value<T> {
 		(c, v) -> 	((Side) c).activeLoomian().action().setPriority(v)
 	);}
 	// MECHANICS
-	public Value<MechanicInstance> MECHANIC(MechanicId id) {return update(
+	public Value<Mechanics> SIDE_MECHANICS() {return update(
+		Mechanics.class,
+		c ->		((Side) c).mechanics(),
+		(c, v) -> 	((Side) c).setMechanics(v)
+	);}
+	public Value<MechanicInstance> SIDE_MECHANIC(SideMechanicId id) {return update(
+		MechanicInstance.class,
+		c -> 		((Side) c).mechanics().get(id),
+		(c, v) ->	((Side) c).mechanics().set(v)
+	);}
+	public Value<Mechanics> LOOMIAN_MECHANICS() {return update(
+		Mechanics.class,
+		c ->		((Side) c).activeLoomian().mechanics(),
+		(c, v) -> 	((Side) c).activeLoomian().setMechanics(v)
+	);}
+	public Value<MechanicInstance> LOOMIAN_MECHANIC(LoomianMechanicId id) {return update(
 		MechanicInstance.class,
 		c -> 		((Side) c).activeLoomian().mechanics().get(id),
 		(c, v) ->	((Side) c).activeLoomian().mechanics().set(v)
 	);}
-	public Value<Boolean> HAS_MECHANIC(MechanicId id) {return update(
+	public Value<Boolean> HAS_MECHANIC(LoomianMechanicId id) {return update(
 		Boolean.class,
 		c ->		((Side) c).activeLoomian().mechanics().has(id),
 		null

@@ -1,5 +1,6 @@
 package github.snomfish.functionality.event;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import github.snomfish.functionality.branch.Branch;
@@ -10,7 +11,7 @@ import github.snomfish.functionality.event.ruleIds.IRuleId;
 import static github.snomfish.functionality.branch.BranchUtil.flatMap;
 
 @SuppressWarnings("unchecked")
-public abstract class Definition<A extends Enum<A>, B extends Definition<A, B>> {
+public abstract class Definition<A, B extends Definition<A, B>> {
 
 
     protected A id;
@@ -20,7 +21,12 @@ public abstract class Definition<A extends Enum<A>, B extends Definition<A, B>> 
     protected List<Hook> hooks;
 
 
-    public Definition() {}
+    public Definition() {
+        this.name = "definition";
+        this.rules = new ArrayList<>();
+        this.gates = new ArrayList<>();
+        this.hooks = new ArrayList<>(); 
+    }
 
 
     // getters

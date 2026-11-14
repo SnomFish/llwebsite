@@ -1,9 +1,10 @@
 package github.snomfish.domain.mechanics;
 
+import github.snomfish.domain.mechanics.ids.IMechanicId;
 import github.snomfish.functionality.event.Definition;
 
-public class Mechanic extends Definition<MechanicId, Mechanic> {
-    
+public class Mechanic extends Definition<IMechanicId, Mechanic> {
+	
 
     private boolean hasMaxAge;
     private int maxAge;
@@ -20,10 +21,6 @@ public class Mechanic extends Definition<MechanicId, Mechanic> {
     public int maxAge() {return maxAge;}
 
 
-    // builder functions
-    public static Mechanic build() {
-        return new Mechanic();
-    }
     public Mechanic hasMaxAge(boolean hasMaxAge) {this.hasMaxAge = hasMaxAge; return this;}
     public Mechanic maxAge(int maxAge) {this.maxAge = maxAge; return this;}
 }

@@ -13,6 +13,7 @@ import github.snomfish.domain.weather.WeatherId;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality._schematics.Conditions;
 import github.snomfish.functionality._schematics.Effects;
+import github.snomfish.functionality._schematics.Numbers;
 import github.snomfish.functionality.condition.And;
 import github.snomfish.functionality.condition.Comparator;
 import github.snomfish.functionality.condition.Equals;
@@ -25,6 +26,9 @@ import github.snomfish.functionality.effect.effects.ApplyStatChanges;
 import github.snomfish.functionality.effect.effects.ApplyStatus;
 import github.snomfish.functionality.effect.effects.ClutchEffect;
 import github.snomfish.functionality.effect.effects.ConsumeItem;
+import github.snomfish.functionality.effect.effects.RestoreHealth;
+import github.snomfish.functionality.effect.effects.NoEffect;
+import github.snomfish.functionality.effect.effects.RestoreEnergy;
 import github.snomfish.functionality.effect.effects.SetType;
 import github.snomfish.functionality.effect.effects.SetWeather;
 import github.snomfish.functionality.event.Gate;
@@ -75,10 +79,13 @@ public class ItemRegistry {
 			.name("chocolate bar")
 			.rule(Rule.build()
 				.event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
-				.effect(ConsumeItem.user())
+				.effect(new EffectSequence(
+					ConsumeItem.user(),
+					new NoEffect()
+					// reduce the cost of all moves to 0 then consume when a move is used
+				))
 			)
 			.tag(CONSUMABLE)
-			// reduce the cost of all moves to 0 then consume when a move is used
 		);
 		register(Item.build()
 			.id(CLUTCH_PLUSHIE)
@@ -128,7 +135,7 @@ public class ItemRegistry {
 			.name("health amulet")
 			.rule(Rule.build()
 				.event(ConstantRuleId.END_OF_TURN)
-				// TODO restore 1/16 of max hp	
+				.effect(RestoreHealth.user(Numbers.sixteenthUserMaxHealth()))
 			)
 		);
 		register(Item.build()
@@ -161,12 +168,16 @@ public class ItemRegistry {
 			.rule(Rule.build()
 				.event(ConstantRuleId.END_OF_TURN)
 				.condition(new RandomCondition(new Constant(0.1)))
-				// TODO restore 1/8 of the SELF's max energy
+				.effect(RestoreEnergy.target(Numbers.eighthTargetMaxEnergy()))
 			)
 		);
 		register(Item.build()
 			.id(MILKSHAKE)
 			.name("milkshake")
+			.rule(Rule.build()
+				.event(RuleForUserId.SELF_DAMAGED_BELOW_HALF)
+				.effect(RestoreHealth.user(Numbers.quarterUserMaxHealth()))
+			)
 			.tag(CONSUMABLE)
 		);
 		register(Item.build()

@@ -1,5 +1,8 @@
 package github.snomfish.domain;
 
+import github.snomfish.domain.mechanics.Mechanics;
+import github.snomfish.domain.side.Side;
+import github.snomfish.domain.side.SideId;
 import github.snomfish.domain.weather.WeatherInstance;
 import github.snomfish.functionality.copy.DeepCopyable;
 
@@ -17,6 +20,7 @@ public class Gamestate implements DeepCopyable<Gamestate> {
     private Side playerSide;
     private Side enemySide;
     private WeatherInstance weather;
+    private Mechanics mechanics;
     private int turnNumber;
 
     private List<String> battleLog;
@@ -29,6 +33,7 @@ public class Gamestate implements DeepCopyable<Gamestate> {
         this.playerSide = playerSide;
         this.enemySide = enemySide;
         this.weather = new WeatherInstance(NO_WEATHER, 999);
+        this.mechanics = new Mechanics();
         this.turnNumber = 0;
 
         this.battleLog = new ArrayList<>();
@@ -37,6 +42,7 @@ public class Gamestate implements DeepCopyable<Gamestate> {
         this.playerSide = copy.playerSide.deepCopy();
         this.enemySide = copy.enemySide.deepCopy();
         this.weather = copy.weather.deepCopy();
+        this.mechanics = copy.mechanics.deepCopy();
         this.turnNumber = copy.turnNumber;
 
         this.battleLog = new ArrayList<>(copy.battleLog);
@@ -64,6 +70,7 @@ public class Gamestate implements DeepCopyable<Gamestate> {
         }
     }
     public WeatherInstance weatherInstance() {return weather;}
+    public Mechanics mechanics() {return mechanics;}
     public int turnNumber() {return turnNumber;}
     public List<String> battleLog() {return battleLog;}
 
@@ -82,6 +89,7 @@ public class Gamestate implements DeepCopyable<Gamestate> {
         }
     }
     public void setWeatherInstance(WeatherInstance weather) {this.weather = weather;}
+    public void setMechanics(Mechanics mechanics) {this.mechanics = mechanics;}
     public void setTurnNumber(int turnNumber) {this.turnNumber = turnNumber;}
     public void setBattleLog(List<String> battleLog) {this.battleLog = battleLog;}
 

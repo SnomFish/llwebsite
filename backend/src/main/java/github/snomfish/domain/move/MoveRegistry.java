@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import github.snomfish.domain.mechanics.MechanicId;
+import github.snomfish.domain.mechanics.ids.LoomianMechanicId;
 import github.snomfish.domain.move.structures.MoveEffect;
 import github.snomfish.domain.stats.StatId;
 import github.snomfish.domain.status.StatusId;
@@ -27,7 +27,7 @@ import github.snomfish.functionality.effect.effects.ApplyMechanic;
 import github.snomfish.functionality.effect.effects.ApplyStatChanges;
 import github.snomfish.functionality.effect.effects.DealFormulaDamage;
 import github.snomfish.functionality.effect.effects.EnergyDrainEffect;
-import github.snomfish.functionality.effect.effects.Heal;
+import github.snomfish.functionality.effect.effects.RestoreHealth;
 import github.snomfish.functionality.effect.effects.HealthDrainEffect;
 import github.snomfish.functionality.effect.effects.NoEffect;
 import github.snomfish.functionality.effect.effects.RecoilEffect;
@@ -342,11 +342,11 @@ public class MoveRegistry {
 			.energyCost(new Constant(60))
 			.basePower(new Constant(150))
 			.onTurnStart(new MoveEffect(
-				ApplyMechanic.toUser(MechanicId.ALL_OR_NOTHING_FOCUSING)
+				ApplyMechanic.toUser(LoomianMechanicId.ALL_OR_NOTHING_FOCUSING)
 			))
 			.condition(new And(
 				new AccuracyCheck(new Constant(100)),
-				new Equals<>(Value.USER().HAS_MECHANIC(MechanicId.ALL_OR_NOTHING_FOCUSING), true)
+				new Equals<>(Value.USER().HAS_MECHANIC(LoomianMechanicId.ALL_OR_NOTHING_FOCUSING), true)
 			))
 			.onHit(new MoveEffect(
 				new DealFormulaDamage()
@@ -524,7 +524,7 @@ public class MoveRegistry {
 			.name("barb trap")
 			.type(TypeId.TOXIC)
 			.category(STATUS)
-			.energyCost(Schematics.tenPercentOfUserMaxEnergy()) // 10% of max energy
+			.energyCost(Numbers.tenthUserMaxEnergy()) // 10% of max energy
 		);
 		register(Move.build()
 			.id(BARBS)
@@ -947,7 +947,7 @@ public class MoveRegistry {
 			.name("Briar Block")
 			.type(TypeId.PLANT)
 			.category(STATUS)
-			.energyCost(Schematics.tenPercentOfUserMaxEnergy()) // 10%
+			.energyCost(Numbers.tenthUserMaxEnergy()) // 10%
 			.priority(new Constant(4))
 		);
 		register(Move.build()
@@ -1296,7 +1296,7 @@ public class MoveRegistry {
 			// TODO requires there be hazards on the users side of the field
 			.condition(new GateCondition(GateForAllId.CAN_USE_HEALING_MOVES, USER))
 			.onHit(new MoveEffect(
-				Heal.user(Numbers.halfUserMaxHealth())
+				RestoreHealth.user(Numbers.halfUserMaxHealth())
 			))
 			.tag(HEALING)
 		);
@@ -1631,7 +1631,7 @@ public class MoveRegistry {
 			.name("Dodge")
 			.type(TypeId.SIMPLE)
 			.category(STATUS)
-			.energyCost(Schematics.tenPercentOfUserMaxEnergy()) // 10%
+			.energyCost(Numbers.tenthUserMaxEnergy()) // 10%
 			.priority(new Constant(4))
 		);
 		register(Move.build()
@@ -2733,7 +2733,7 @@ public class MoveRegistry {
 			.energyCost(new Constant(72))
 			.condition(new GateCondition(GateForAllId.CAN_USE_HEALING_MOVES, USER))
 			.onHit(new MoveEffect(
-				Heal.target(Numbers.halfTargetMaxHealth())
+				RestoreHealth.target(Numbers.halfTargetMaxHealth())
 			))
 			.tag(HEALING)
 		);
@@ -3381,7 +3381,7 @@ public class MoveRegistry {
 			.name("Magma Block")
 			.type(TypeId.FIRE)
 			.category(STATUS)
-			.energyCost(Schematics.tenPercentOfUserMaxEnergy()) // 10%
+			.energyCost(Numbers.tenthUserMaxEnergy()) // 10%
 			.priority(new Constant(4))
 		);
 		register(Move.build()
@@ -4037,9 +4037,9 @@ public class MoveRegistry {
 			.condition(new GateCondition(GateForAllId.CAN_USE_HEALING_MOVES, USER))
 			.onHit(new MoveEffect(
 				new EffectSequence(
-					Heal.user(Numbers.halfUserMaxHealth()),
+					RestoreHealth.user(Numbers.halfUserMaxHealth()),
 					RemoveType.fromUser(TypeId.AIR),
-					ApplyMechanic.toUser(MechanicId.PERCHING)
+					ApplyMechanic.toUser(LoomianMechanicId.PERCHING)
 				)
 			))
 			.tag(HEALING)
@@ -4152,7 +4152,7 @@ public class MoveRegistry {
 			.energyCost(new Constant(72))
 			.condition(new GateCondition(GateForAllId.CAN_USE_HEALING_MOVES, USER))
 			.onHit(new MoveEffect(
-				Heal.user(Numbers.halfUserMaxHealth())
+				RestoreHealth.user(Numbers.halfUserMaxHealth())
 			))
 			.tag(HEALING)
 		);
@@ -4646,7 +4646,7 @@ public class MoveRegistry {
 			.name("Recharge")
 			.condition(new GateCondition(GateForAllId.CAN_USE_HEALING_MOVES, USER))
 			.onHit(new MoveEffect(
-				Heal.user(Numbers.quarterUserMaxHealth())
+				RestoreHealth.user(Numbers.quarterUserMaxHealth())
 			))
 			.tag(HEALING)
 		);
@@ -4679,7 +4679,7 @@ public class MoveRegistry {
 			.energyCost(new Constant(72))
 			.condition(new GateCondition(GateForAllId.CAN_USE_HEALING_MOVES, USER))
 			.onHit(new MoveEffect(
-				Heal.user(Numbers.halfUserMaxHealth())
+				RestoreHealth.user(Numbers.halfUserMaxHealth())
 			))
 			.tag(HEALING)
 		);
@@ -4737,9 +4737,9 @@ public class MoveRegistry {
 			.condition(new GateCondition(GateForAllId.CAN_USE_HEALING_MOVES, USER))
 			.onHit(new MoveEffect(
 				new EffectSequence(
-					Heal.user(Numbers.halfUserMaxHealth()),
+					RestoreHealth.user(Numbers.halfUserMaxHealth()),
 					RemoveType.fromUser(TypeId.SPIRIT),
-					ApplyMechanic.toUser(MechanicId.REVIVING)
+					ApplyMechanic.toUser(LoomianMechanicId.REVIVING)
 				)
 			))
 			.tag(HEALING)
@@ -4818,7 +4818,7 @@ public class MoveRegistry {
 			.name("ruffled feathers")
 			.type(TypeId.AIR)
 			.category(STATUS)
-			.energyCost(Schematics.tenPercentOfUserMaxEnergy()) // 10% of max energy
+			.energyCost(Numbers.tenthUserMaxEnergy()) // 10% of max energy
 		);
 		register(Move.build()
 			.id(RUTHLESS_FEAST)
@@ -6051,7 +6051,7 @@ public class MoveRegistry {
 			.name("Tone Barrier")
 			.type(TypeId.SIMPLE)
 			.category(STATUS)
-			.energyCost(Schematics.tenPercentOfUserMaxEnergy()) // 10% max energy
+			.energyCost(Numbers.tenthUserMaxEnergy()) // 10% max energy
 			.priority(new Constant(4))
 			.tag(SOUND)
 		);

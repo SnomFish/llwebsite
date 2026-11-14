@@ -54,15 +54,21 @@ public class Numbers {
 			new Constant(fraction)
 		);
 	}
-	public static INumber halfUserMaxEnergy() 		{return fractionOfMaxEnergy(USER, 1/2);}
-	public static INumber thirdUserMaxEnergy() 		{return fractionOfMaxEnergy(USER, 1/3);}
-	public static INumber quarterUserMaxEnergy() 	{return fractionOfMaxEnergy(USER, 1/4);}
-	public static INumber fifthUserMaxEnergy()	 	{return fractionOfMaxEnergy(USER, 1/5);}
-	public static INumber tenthUserMaxEnergy()	 	{return fractionOfMaxEnergy(USER, 1/10);}
+	public static INumber halfUserMaxEnergy() 			{return fractionOfMaxEnergy(USER, 1/2);}
+	public static INumber thirdUserMaxEnergy() 			{return fractionOfMaxEnergy(USER, 1/3);}
+	public static INumber quarterUserMaxEnergy() 		{return fractionOfMaxEnergy(USER, 1/4);}
+	public static INumber fifthUserMaxEnergy()	 		{return fractionOfMaxEnergy(USER, 1/5);}
+	public static INumber eighthUserMaxEnergy() 		{return fractionOfMaxEnergy(USER, 1/8);}
+	public static INumber tenthUserMaxEnergy()	 		{return fractionOfMaxEnergy(USER, 1/10);}
+	public static INumber twelfthUserMaxEnergy() 		{return fractionOfMaxEnergy(USER, 1/12);}
+	public static INumber sixteenthUserMaxEnergy() 		{return fractionOfMaxEnergy(USER, 1/16);}
 
-	public static INumber halfTargetMaxEnergy() 	{return fractionOfMaxEnergy(TARGET, 1/2);}
-	public static INumber thirdTargetMaxEnergy() 	{return fractionOfMaxEnergy(TARGET, 1/3);}
-	public static INumber quarterTargetMaxEnergy() 	{return fractionOfMaxEnergy(TARGET, 1/4);}
-	public static INumber fifthTargetMaxEnergy() 	{return fractionOfMaxEnergy(TARGET, 1/5);}
-	public static INumber tenthTargetMaxEnergy() 	{return fractionOfMaxEnergy(TARGET, 1/10);}
+	public static INumber halfTargetMaxEnergy() 		{return fractionOfMaxEnergy(TARGET, 1/2);}
+	public static INumber thirdTargetMaxEnergy() 		{return fractionOfMaxEnergy(TARGET, 1/3);}
+	public static INumber quarterTargetMaxEnergy() 		{return fractionOfMaxEnergy(TARGET, 1/4);}
+	public static INumber fifthTargetMaxEnergy() 		{return fractionOfMaxEnergy(TARGET, 1/5);}
+	public static INumber eighthTargetMaxEnergy() 		{return fractionOfMaxEnergy(TARGET, 1/8);}
+	public static INumber tenthTargetMaxEnergy() 		{return fractionOfMaxEnergy(TARGET, 1/10);}
+	public static INumber twelfthTargetMaxEnergy() 		{return fractionOfMaxEnergy(TARGET, 1/12);}
+	public static INumber sixteenthTargetMaxEnergy() 	{return fractionOfMaxEnergy(TARGET, 1/16);}
 }

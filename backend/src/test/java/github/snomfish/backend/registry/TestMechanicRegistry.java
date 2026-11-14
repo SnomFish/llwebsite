@@ -2,17 +2,18 @@ package github.snomfish.backend.registry;
 
 import org.junit.jupiter.api.Test;
 
-import github.snomfish.domain.mechanics.MechanicId;
 import github.snomfish.domain.mechanics.MechanicRegistry;
+import github.snomfish.domain.mechanics.ids.IMechanicId;
 
 public class TestMechanicRegistry {
     
 
+    // this is broken fuck fuck fuck fuck fuck
     @Test
     void mechanicsHasRegisteredAllEnums() {
         GeneralRegistryTests.hasRegisteredAllEnums(
             "MechanicRegistry",
-            MechanicId.class,
+            IMechanicId.class,
             MechanicRegistry.registry()
         );
     }
@@ -22,7 +23,7 @@ public class TestMechanicRegistry {
     void allEntriesAreUnique() {
         GeneralRegistryTests.allEntriesAreUnique(
             "MechanicRegistry",
-            MechanicId.class,
+            IMechanicId.class,
             MechanicRegistry.registry()
         );
     }

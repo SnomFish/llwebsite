@@ -364,7 +364,7 @@ public class SpeciesRegistry {
 			.id(CYNAMOTH)
 			.name("cynamoth")
 			.baseTypes(List.of(BUG, AIR))
-			.baseAbilities(List.of(MYSTERIOUS_TOXINS, FLUTTER))
+			.baseAbilities(List.of(MYSTERY_TOXINS, FLUTTER))
 			.baseStats(70, 80, 55, 85, 98, 99, 88)
 			.bst(575)
 			.weight(114.3)

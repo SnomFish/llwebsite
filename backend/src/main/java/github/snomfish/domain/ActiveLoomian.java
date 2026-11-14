@@ -41,13 +41,13 @@ public class ActiveLoomian extends Loomian {
         this.mechanics = new Mechanics();
         this.statusTurns = 0;
     }
-    public ActiveLoomian(ActiveLoomian activeLoomian) {
-        super(activeLoomian);
-        this.types = new ArrayList<>(activeLoomian.types);
-        this.statChanges = activeLoomian.statChanges.deepCopy();
-        if (activeLoomian.action != null) this.action = activeLoomian.action.deepCopy();
-        this.mechanics = activeLoomian.mechanics.deepCopy();
-        this.statusTurns = activeLoomian.statusTurns;
+    public ActiveLoomian(ActiveLoomian copy) {
+        super(copy);
+        this.types = new ArrayList<>(copy.types);
+        this.statChanges = copy.statChanges.deepCopy();
+        if (copy.action != null) this.action = copy.action.deepCopy();
+        this.mechanics = copy.mechanics.deepCopy();
+        this.statusTurns = copy.statusTurns;
     }
 
 

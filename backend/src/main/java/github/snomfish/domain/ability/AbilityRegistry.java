@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import github.snomfish.domain.item.ItemId;
-import github.snomfish.domain.mechanics.MechanicId;
+import github.snomfish.domain.mechanics.ids.LoomianMechanicId;
 import github.snomfish.domain.move.CategoryId;
 import github.snomfish.domain.move.modifiers.ModifierId;
 import github.snomfish.domain.move.MoveTagId;
@@ -520,7 +520,7 @@ public class AbilityRegistry {
 					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.FIRE)
 				))
 				.effect(
-					ApplyMechanic.toUser(MechanicId.COMBUSTIBLE)
+					ApplyMechanic.toUser(LoomianMechanicId.COMBUSTIBLE)
 				)
 			)
 		);
@@ -576,7 +576,7 @@ public class AbilityRegistry {
 					new GateCondition(GateForAllId.CAN_USE_DEFENSIVE_ABILITY, USER)
 				))
 				.effect(new EffectSequence(List.of(
-					ApplyMechanic.toUser(MechanicId.COURSING_VENOM)
+					ApplyMechanic.toUser(LoomianMechanicId.COURSING_VENOM)
 				)))
 			)
 		);
@@ -1213,6 +1213,19 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(MIMIC)
 			.name("mimic")
+			.rule(Rule.build()
+				.event(RuleForUserId.SELF_SWAPPED_IN)
+				.effect(
+					ApplyStatChanges.userChangingUser()
+						.mattack(	new ValueConstant(Value.TARGET().MATTACK_STAGE_MODIFIER()))
+						.mdefense(	new ValueConstant(Value.TARGET().MDEFENSE_STAGE_MODIFIER()))
+						.rattack(	new ValueConstant(Value.TARGET().RATTACK_STAGE_MODIFIER()))
+						.rdefense(	new ValueConstant(Value.TARGET().RDEFENSE_STAGE_MODIFIER()))
+						.speed(		new ValueConstant(Value.TARGET().SPEED_STAGE_MODIFIER()))
+						.accuracy(	new ValueConstant(Value.TARGET().ACCURACY_STAGE_MODIFIER()))
+						.evasion(	new ValueConstant(Value.TARGET().EVASION_STAGE_MODIFIER()))
+				)
+			)
 		);
 		register(Ability.build()
 			.id(MOTIVATIONAL)
@@ -1225,10 +1238,6 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(MYSTERIOUS_CLOAK)
 			.name("mysterious cloak")
-		);
-		register(Ability.build()
-			.id(MYSTERIOUS_TOXINS)
-			.name("mysterious toxins")
 		);
 		register(Ability.build()
 			.id(MYSTERY_TOXINS)
@@ -1264,7 +1273,7 @@ public class AbilityRegistry {
 					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.PLANT),
 					new GateCondition(GateForAllId.CAN_USE_DEFENSIVE_ABILITY, USER)
 				))
-				.effect(ApplyMechanic.toUser(MechanicId.NOXIOUS_WEEDS))
+				.effect(ApplyMechanic.toUser(LoomianMechanicId.NOXIOUS_WEEDS))
 			)
 		);
 		register(Ability.build()
@@ -1365,7 +1374,7 @@ public class AbilityRegistry {
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.LIGHT))
 				.effect(new EffectSequence(List.of(
 					Effects.multiplyValue(Value.USER().MOVE().DAMAGE(), new Constant(0.0)),
-					ApplyMechanic.toUser(MechanicId.PRISMATIC)
+					ApplyMechanic.toUser(LoomianMechanicId.PRISMATIC)
 				)))
 			)
 		);
@@ -1722,7 +1731,7 @@ public class AbilityRegistry {
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.TOXIC))
 				.effect(new EffectSequence(List.of(
 					Effects.multiplyValue(Value.USER().MOVE().DAMAGE(), new Constant(0.0)),
-					ApplyMechanic.toUser(MechanicId.TOXIC_FILTER)
+					ApplyMechanic.toUser(LoomianMechanicId.TOXIC_FILTER)
 				)))
 			)
 		);

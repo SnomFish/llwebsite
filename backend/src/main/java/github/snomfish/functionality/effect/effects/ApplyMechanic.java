@@ -2,9 +2,11 @@ package github.snomfish.functionality.effect.effects;
 
 import java.util.List;
 
-import github.snomfish.domain.ActiveLoomian;
-import github.snomfish.domain.mechanics.MechanicId;
 import github.snomfish.domain.mechanics.MechanicInstance;
+import github.snomfish.domain.mechanics.ids.FieldMechanicId;
+import github.snomfish.domain.mechanics.ids.IMechanicId;
+import github.snomfish.domain.mechanics.ids.LoomianMechanicId;
+import github.snomfish.domain.mechanics.ids.SideMechanicId;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
@@ -13,27 +15,36 @@ import github.snomfish.functionality.effect.IEffect;
 public class ApplyMechanic implements IEffect {
     
 
-    private Value<ActiveLoomian> activeLoomianValue;
-    private MechanicId mechanicId;
+    private Value<MechanicInstance> mechanicInstanceValue;
+    private IMechanicId mechanicId;
 
 
     private ApplyMechanic(
-        Value<ActiveLoomian> activeLoomianValue,
-        MechanicId mechanicId
+        Value<MechanicInstance> mechanicInstanceValue,
+        IMechanicId mechanicId
     ) {
-        this.activeLoomianValue = activeLoomianValue;
+        this.mechanicInstanceValue = mechanicInstanceValue;
         this.mechanicId = mechanicId;
     }
-    public static ApplyMechanic toUser(MechanicId mechanicId) {
-        return new ApplyMechanic(Value.USER().LOOMIAN(), mechanicId);
+    public static ApplyMechanic toUser(LoomianMechanicId mechanicId) {
+        return new ApplyMechanic(Value.USER().LOOMIAN_MECHANIC(mechanicId), mechanicId);
     }
-    public static ApplyMechanic toTarget(MechanicId mechanicId) {
-        return new ApplyMechanic(Value.TARGET().LOOMIAN(), mechanicId);
+    public static ApplyMechanic toTarget(LoomianMechanicId mechanicId) {
+        return new ApplyMechanic(Value.TARGET().LOOMIAN_MECHANIC(mechanicId), mechanicId);
+    }
+    public static ApplyMechanic toUserSide(SideMechanicId mechanicId) {
+        return new ApplyMechanic(Value.USER().SIDE_MECHANIC(mechanicId), mechanicId);
+    }
+    public static ApplyMechanic toTargetSide(SideMechanicId mechanicId) {
+        return new ApplyMechanic(Value.TARGET().SIDE_MECHANIC(mechanicId), mechanicId);
+    }
+    public static ApplyMechanic toField(FieldMechanicId mechanicId) {
+        return new ApplyMechanic(Value.FIELD_MECHANIC(mechanicId), mechanicId);
     }
 
 
     private ApplyMechanic(ApplyMechanic copy) {
-        this.activeLoomianValue = copy.activeLoomianValue;
+        this.mechanicInstanceValue = copy.mechanicInstanceValue;
         this.mechanicId = copy.mechanicId;
     }
     @Override 
@@ -44,18 +55,20 @@ public class ApplyMechanic implements IEffect {
 
     @Override
     public List<Branch<BattleContext>> execute(BattleContext context) {
-        ActiveLoomian loomian = (ActiveLoomian) activeLoomianValue.get(context);
-        MechanicInstance instance = new MechanicInstance(mechanicId);
+        MechanicInstance instance = mechanicInstanceValue.get(context);
 
-        if (loomian.mechanics().has(mechanicId)) {
+        if (instance != null) {
+            context.log("unable to add mechanic");
+            return List.of(new Branch<>(context, 1.0)); 
 
-            context.log(loomian.species().name() + " already has " + mechanicId.name());
         } else {
-            
-            context.log("Applying mechanic " + mechanicId.name() + " to " + loomian.species().name());
-            loomian.mechanics().set(instance);
+            context.log("applying mechanic");
+            BattleContext outcome = context.deepCopy();
+            instance = new MechanicInstance(mechanicId);
+            mechanicInstanceValue.set(outcome, instance);
+            return List.of(new Branch<>(outcome, 1.0));
+
         }
         
-        return List.of(new Branch<>(context, 1.0)); 
     }
 }

@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import github.snomfish.domain.mechanics.ids.IMechanicId;
+import github.snomfish.domain.mechanics.ids.LoomianMechanicId;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.copy.DeepCopyable;
@@ -14,7 +16,7 @@ import static github.snomfish.functionality.branch.BranchUtil.flatMap;
 public class Mechanics implements DeepCopyable<Mechanics> {
     
 
-    private Map<MechanicId, MechanicInstance> mechanics;
+    private Map<IMechanicId, MechanicInstance> mechanics;
 
 
     public Mechanics() {
@@ -38,16 +40,16 @@ public class Mechanics implements DeepCopyable<Mechanics> {
     }
 
 
-    public boolean has(MechanicId id) {
+    public boolean has(IMechanicId id) {
         return mechanics.containsKey(id);
     }
-    public MechanicInstance get(MechanicId id) {
+    public MechanicInstance get(IMechanicId id) {
         return mechanics.get(id);
     }
     public void set(MechanicInstance instance) {
         mechanics.put(instance.id(), instance);
     }
-    public void remove(MechanicId id) {
+    public void remove(IMechanicId id) {
         mechanics.remove(id);
     }
 

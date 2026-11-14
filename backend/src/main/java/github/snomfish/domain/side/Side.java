@@ -1,8 +1,11 @@
-package github.snomfish.domain;
+package github.snomfish.domain.side;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import github.snomfish.domain.ActiveLoomian;
+import github.snomfish.domain.Loomian;
+import github.snomfish.domain.mechanics.Mechanics;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.copy.DeepCopyable;
@@ -18,6 +21,7 @@ public class Side implements DeepCopyable<Side> {
     private List<Loomian> party;
     private int activeLoomianI;
     private ActiveLoomian activeLoomian;
+    private Mechanics mechanics;
 
 
     public Side(
@@ -27,33 +31,36 @@ public class Side implements DeepCopyable<Side> {
         this.party = party;
         this.activeLoomianI = activeLoomianI;
         this.activeLoomian = new ActiveLoomian(party.get(activeLoomianI));
-    }
-    public Side(
-        List<Loomian> party,
-        int activeLoomianIndex,
-        ActiveLoomian activeLoomian
-    ) {
-        this.party = party;
-        this.activeLoomianI = activeLoomianIndex;
-        this.activeLoomian = activeLoomian.deepCopy(); 
+        this.mechanics = new Mechanics();
     }
 
 
+    private Side(Side copy) {
+        this.party = deepCopyList(copy.party);
+        this.activeLoomianI = copy.activeLoomianI;
+        this.activeLoomian = copy.activeLoomian.deepCopy();
+        this.mechanics = copy.mechanics.deepCopy(); 
+    }
     public Side deepCopy() {
-        return new Side(
-            deepCopyList(party),
-            activeLoomianI,
-            activeLoomian.deepCopy()
-        );
+        return new Side(this);
     }
 
 
-    public void incrementTurnNumber() {
-        for (Loomian loomian : party) {
-            loomian.incrementTurnNumber();
-        }
-        activeLoomian.incrementTurnNumber();
-    }
+    // getter
+    public List<Loomian> getParty() {return party;}
+    public int activeLoomianI() {return activeLoomianI;}
+    public ActiveLoomian activeLoomian() {return activeLoomian;}
+    public Mechanics mechanics() {return mechanics;}
+
+
+    // setter
+    public void setParty(List<Loomian> party) {this.party = party;}
+    public void setLoomian(int index, Loomian loomian) {this.party.set(index, loomian);}
+    public void setActiveLoomianI(int activeLoomianI) {this.activeLoomianI = activeLoomianI;}
+    public void setActiveLoomian(ActiveLoomian activeLoomian) {this.activeLoomian = activeLoomian;}
+    public void setMechanics(Mechanics mechanics) {this.mechanics = mechanics;}
+
+
 
 
     public List<Branch<BattleContext>> dispatchRule(BattleContext context, IRuleId event) {
@@ -77,23 +84,10 @@ public class Side implements DeepCopyable<Side> {
     }
 
 
-    // getter
-    public List<Loomian> getParty() {return party;}
-    public int activeLoomianI() {return activeLoomianI;}
-    public ActiveLoomian activeLoomian() {return activeLoomian;}
-
-
-    // setter
-    public void setParty(List<Loomian> party) {
-        this.party = party;
-    }
-    public void setLoomian(int index, Loomian loomian) {
-        this.party.set(index, loomian);
-    }
-    public void setActiveLoomianI(int activeLoomianI) {
-        this.activeLoomianI = activeLoomianI;
-    }
-    public void setActiveLoomian(ActiveLoomian activeLoomian) {
-        this.activeLoomian = activeLoomian;
+    public void incrementTurnNumber() {
+        for (Loomian loomian : party) {
+            loomian.incrementTurnNumber();
+        }
+        activeLoomian.incrementTurnNumber();
     }
 }

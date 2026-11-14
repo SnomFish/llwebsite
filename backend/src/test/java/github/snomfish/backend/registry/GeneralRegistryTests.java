@@ -10,7 +10,7 @@ public class GeneralRegistryTests {
     
 
     
-    public static <T extends Enum<T>, R> void hasRegisteredAllEnums(
+    public static <T, R> void hasRegisteredAllEnums(
         String registryName,
         Class<T> enumClass,
         Map<T, R> registry
@@ -26,7 +26,7 @@ public class GeneralRegistryTests {
     }
     
     
-    public static <T extends Enum<T>, R> void allEntriesAreUnique(
+    public static <T, R> void allEntriesAreUnique(
         String registryName,
         Class<T> enumClass,
         Map<T, R> registry

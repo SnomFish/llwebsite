@@ -1,6 +1,6 @@
 package github.snomfish.functionality._schematics;
 
-import github.snomfish.domain.mechanics.MechanicId;
+import github.snomfish.domain.mechanics.ids.LoomianMechanicId;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.condition.GateCondition;
 import github.snomfish.functionality.condition.RandomCondition;
@@ -24,7 +24,7 @@ public class Effects {
     public static IEffect flinch() {
         return new ConditionalEffect(
             new GateCondition(GateForAllId.CAN_MOVE_FLINCH, ContextSideId.USER),
-            ApplyMechanic.toTarget(MechanicId.FLINCH)
+            ApplyMechanic.toTarget(LoomianMechanicId.FLINCH)
         );
     }
     public static IEffect flinchChance(INumber flinchChanceNumber) {
@@ -38,7 +38,7 @@ public class Effects {
     public static IEffect daze() {
         return new ConditionalEffect(
             new GateCondition(GateForAllId.CAN_MOVE_DAZE, ContextSideId.USER),
-            ApplyMechanic.toTarget(MechanicId.DAZE)
+            ApplyMechanic.toTarget(LoomianMechanicId.DAZE)
         );
     }
     public static IEffect dazeChance(INumber dazeChanceNumber) {

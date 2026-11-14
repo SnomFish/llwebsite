@@ -4,6 +4,7 @@ public enum RuleForTargetId implements IRuleForSideId {
     NULL_EVENT, // should never be dispatched
 
     WATCHES_OPP_SWAP_IN,
+    OPP_DAMAGED_BELOW_HALF,
     SELF_KNOCKED_OUT_BY_OPP,
 
     // move

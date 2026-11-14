@@ -3,8 +3,8 @@ package github.snomfish.functionality.context;
 import java.util.List;
 
 import github.snomfish.domain.Gamestate;
-import github.snomfish.domain.Side;
-import github.snomfish.domain.SideId;
+import github.snomfish.domain.side.Side;
+import github.snomfish.domain.side.SideId;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.copy.DeepCopyable;
 import github.snomfish.functionality.event.HookReport;
@@ -12,7 +12,7 @@ import github.snomfish.functionality.event.gateIds.GateForAllId;
 import github.snomfish.functionality.event.ruleIds.ConstantRuleId;
 import github.snomfish.functionality.event.ruleIds.RuleForAllId;
 
-import static github.snomfish.domain.SideId.*;
+import static github.snomfish.domain.side.SideId.*;
 import static github.snomfish.functionality.branch.BranchUtil.flatMap;
 
 // this is the context of a loomian using a move
