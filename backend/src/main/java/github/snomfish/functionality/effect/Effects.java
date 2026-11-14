@@ -8,7 +8,6 @@ import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.effect.effects.ApplyMechanic;
 import github.snomfish.functionality.effect.effects.SetValueEffect;
 import github.snomfish.functionality.event.gateIds.GateForAllId;
-import github.snomfish.functionality.event.gateIds.GateId;
 import github.snomfish.functionality.number.Add;
 import github.snomfish.functionality.number.INumber;
 import github.snomfish.functionality.number.Multiply;

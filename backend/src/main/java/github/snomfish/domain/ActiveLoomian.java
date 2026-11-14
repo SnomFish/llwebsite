@@ -68,7 +68,7 @@ public class ActiveLoomian extends Loomian {
         outcomes = flatMap(outcomes, c -> abilityInstance().handleRule(c, event));
         outcomes = flatMap(outcomes, c -> item().handleRule(c, event));
         outcomes = flatMap(outcomes, c -> status().handleRule(c, event)); // has to be afunction as I only store Ids for ability item and status
-        outcomes = flatMap(outcomes, c -> mechanics.handleRule(c, event)); 
+        outcomes = flatMap(outcomes, c -> mechanics.dispatchRule(c, event)); 
 
         return outcomes;
     }

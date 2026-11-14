@@ -3,11 +3,9 @@ package github.snomfish.functionality.event;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.yaml.snakeyaml.events.Event;
-
 import github.snomfish.functionality.condition.ICondition;
 import github.snomfish.functionality.condition.NoCondition;
-import github.snomfish.functionality.event.gateIds.GateForAllId;
+import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.event.gateIds.IGateId;
 
 public class Gate {
@@ -39,5 +37,13 @@ public class Gate {
     public Gate condition(ICondition condition) {
         this.condition = condition;
         return this;
+    }
+
+
+    public double execute(BattleContext context, IGateId gateId) {
+
+        if (!events.contains(gateId)) return 1;
+
+        return condition.execute(context);
     }
 }

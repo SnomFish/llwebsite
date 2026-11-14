@@ -7,17 +7,17 @@ import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.event.gateIds.IGateId;
 import github.snomfish.functionality.event.ruleIds.IRuleId;
 
-import static github.snomfish.functionality.branch.BranchUtil.*;
+import static github.snomfish.functionality.branch.BranchUtil.flatMap;
 
 @SuppressWarnings("unchecked")
 public abstract class Definition<A extends Enum<A>, B extends Definition<A, B>> {
 
 
-    private A id;
-    private String name;
-    private List<Rule> rules;
-    private List<Gate> gates;
-    private List<Interceptor> interceptors;
+    protected A id;
+    protected String name;
+    protected List<Rule> rules;
+    protected List<Gate> gates;
+    protected List<Interceptor> interceptors;
 
 
     public Definition() {}
@@ -56,15 +56,26 @@ public abstract class Definition<A extends Enum<A>, B extends Definition<A, B>> 
 
     public List<Branch<BattleContext>> handleRule(BattleContext context, IRuleId ruleId) {
         List<Branch<BattleContext>> outcomes = List.of(new Branch<>(context, 1.0));  
-        for (Rule rule : rules) {
-            outcomes = flatMap(outcomes, branchContext -> rule.execute(context, ruleId));
+        
+        for (Rule rule : rules) {  
+            outcomes = flatMap(outcomes, c -> rule.execute(c, ruleId));
         }
+
         return outcomes;
     }
     public double handleGate(BattleContext context, IGateId gateId) {
-        return 1;
+        double probability = 1;
+
+        for (Gate gate : gates) {
+            probability *= gate.execute(context, gateId);
+        }
+        
+        return probability;
     }
     public Report handleInterceptor(BattleContext context, IRuleId ruleId, Report report) {
-        return null;
+
+        report.record(interceptors, ruleId);
+
+        return report;
     }
 }

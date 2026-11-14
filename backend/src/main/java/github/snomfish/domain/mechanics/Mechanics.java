@@ -52,14 +52,11 @@ public class Mechanics implements DeepCopyable<Mechanics> {
     }
 
 
-    public List<Branch<BattleContext>> handleRule(BattleContext context, IRuleId event) {
+    public List<Branch<BattleContext>> dispatchRule(BattleContext context, IRuleId ruleId) {
         List<Branch<BattleContext>> outcomes = List.of(new Branch<>(context, 1.0));
 
-        for (MechanicId id : mechanics.keySet()) {
-            if (!mechanics.containsKey(id)) continue;
-
-            Mechanic mechanic = MechanicRegistry.get(id);
-            outcomes = flatMap(outcomes, c -> mechanic.handleRule(c, event));
+        for (MechanicInstance instance : mechanics.values()) {
+            outcomes = flatMap(outcomes, c -> instance.handleRule(c, ruleId));
         }
 
         return outcomes;

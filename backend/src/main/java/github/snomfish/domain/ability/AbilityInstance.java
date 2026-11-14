@@ -6,9 +6,7 @@ import java.util.List;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
-import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.copy.DeepCopyable;
-import github.snomfish.functionality.event.Gate;
 import github.snomfish.functionality.event.Rule;
 import github.snomfish.functionality.event.gateIds.IGateId;
 import github.snomfish.functionality.event.ruleIds.IRuleId;
@@ -82,13 +80,15 @@ public class AbilityInstance implements DeepCopyable<AbilityInstance> {
         if (probability > 0) { // if the condition is true
             BattleContext outcome = context.deepCopy();
 
-            // idk how else to try and set the triggered booleans to true or false
-            AbilityId userAbilityId =           (AbilityId) Value.USER().ABILITY_ID().get(context);
-            AbilityId userActualAbilityId =     (AbilityId) Value.USER().ACTUAL_ABILITY_ID().get(context);
-            AbilityId targetAbilityId =         (AbilityId) Value.TARGET().ABILITY_ID().get(context);
-            AbilityId targetActualAbilityId = 	(AbilityId) Value.TARGET().ACTUAL_ABILITY_ID().get(context);
+            AbilityId abilityId =           (AbilityId) Value.USER().ABILITY_ID().get(context);
+            AbilityId actualAbilityId =     (AbilityId) Value.USER().ACTUAL_ABILITY_ID().get(context);
             
-            // set the ability to be activated
+            Value.USER().ABILITY_HAS_ACTIVATED_THIS_BATTLE().set(context, true);
+            Value.USER().ABILITY_HAS_ACTIVATED_THIS_SWAP().set(context, true);
+            if (abilityId == actualAbilityId) {
+                Value.USER().ACTUAL_ABILITY_HAS_ACTIVATED_THIS_BATTLE().set(context, true);
+                Value.USER().ACTUAL_ABILITY_HAS_ACTIVATED_THIS_SWAP().set(context, true);
+            }
 
             outcomes.addAll(applyProbability(rule.effect().execute(outcome), probability));
         }
@@ -102,16 +102,6 @@ public class AbilityInstance implements DeepCopyable<AbilityInstance> {
 
 
     public double handleGate(BattleContext context, IGateId gateId) {
-        double probability = 1;
-        Ability ability = ability();
-
-        for (Gate gate : ability.gates()) {
-            
-            if (!gate.events().contains(gateId)) continue; // only fires the gate if the event matches
-
-            probability *= gate.condition().execute(context);
-        }
-
-        return probability;
+        return ability().handleGate(context, gateId);
     }
 }

@@ -29,7 +29,6 @@ import github.snomfish.functionality.effect.effects.SetType;
 import github.snomfish.functionality.effect.effects.SetWeather;
 import github.snomfish.functionality.event.Gate;
 import github.snomfish.functionality.event.Rule;
-import github.snomfish.functionality.event.gateIds.GateForAllId;
 import github.snomfish.functionality.event.gateIds.GateForUserId;
 import github.snomfish.functionality.event.ruleIds.ConstantRuleId;
 import github.snomfish.functionality.event.ruleIds.RuleForTargetId;
@@ -40,7 +39,6 @@ import github.snomfish.functionality.number.ValueConstant;
 import static github.snomfish.domain.item.ItemId.*;
 import static github.snomfish.domain.item.ItemTagId.*;
 import static github.snomfish.domain.species.SpeciesId.*;
-import static github.snomfish.functionality.context.ContextSideId.*;
 
 // oi add a condition in condition schematics for general item use, offensive item use and defensive.
 // simplest solution for whe the loomian cannot use items/ are about to be pile drived by sly cavenish

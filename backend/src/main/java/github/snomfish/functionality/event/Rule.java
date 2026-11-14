@@ -53,9 +53,7 @@ public class Rule {
 
     public List<Branch<BattleContext>> execute(BattleContext context, IRuleId event) {
         
-        if (!events.contains(event)) {
-            return List.of(new Branch<>(context, 1.0));
-        }
+        if (!events.contains(event)) return List.of(new Branch<>(context, 1.0));
 
         List<Branch<BattleContext>> outcomes = new ArrayList<>();
         double probability = condition.execute(context);
