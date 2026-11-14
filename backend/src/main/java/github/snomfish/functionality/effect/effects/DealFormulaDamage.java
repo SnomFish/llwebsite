@@ -19,8 +19,8 @@ import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.effect.ConditionalEffect;
 import github.snomfish.functionality.effect.Effects;
 import github.snomfish.functionality.effect.IEffect;
-import github.snomfish.functionality.event.eventIds.RuleForAllId;
 import github.snomfish.functionality.event.gateIds.GateForAllId;
+import github.snomfish.functionality.event.ruleIds.RuleForAllId;
 import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.INumber;
 

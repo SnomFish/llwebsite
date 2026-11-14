@@ -1,34 +1,30 @@
 package github.snomfish.functionality.event;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import github.snomfish.functionality.branch.Branch;
-import github.snomfish.functionality.branch.BranchUtil;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.event.gateIds.IGateId;
+import github.snomfish.functionality.event.ruleIds.IRuleId;
 
-public class Definition<T extends Enum<T>, D extends Definition<T, D>> {
-  
-    
-    protected T id;
-    protected String name;
-    protected final List<Rule> rules;
-    protected final List<Gate> gates;
-    protected final List<Interceptor> interceptors;
+import static github.snomfish.functionality.branch.BranchUtil.*;
+
+@SuppressWarnings("unchecked")
+public abstract class Definition<A extends Enum<A>, B extends Definition<A, B>> {
 
 
-    protected Definition() {
-        this.id = null;
-        this.name = "no definition";
-        this.rules = new ArrayList<>();
-        this.gates = new ArrayList<>();
-        this.interceptors = new ArrayList<>();
-    }
+    private A id;
+    private String name;
+    private List<Rule> rules;
+    private List<Gate> gates;
+    private List<Interceptor> interceptors;
 
 
-    // getter
-    public T id() {return id;}
+    public Definition() {}
+
+
+    // getters
+    public A id() {return id;}
     public String name() {return name;}
     public List<Rule> rules() {return rules;}
     public List<Gate> gates() {return gates;}
@@ -36,56 +32,39 @@ public class Definition<T extends Enum<T>, D extends Definition<T, D>> {
 
 
     // builder functions
-    public static <T extends Enum<T>, D extends Definition<T, D>> Definition<T, D> build() {
-        return new Definition<>();
-    }
-    @SuppressWarnings("unchecked")
-    public D id(T id) {
+    public B id(A id) {
         this.id = id;
-        return (D) this;
+        return (B) this;
     }
-    @SuppressWarnings("unchecked")
-    public D name(String name) {
+    public B name(String name) {
         this.name = name;
-        return (D) this;
+        return (B) this;
     }
-    @SuppressWarnings("unchecked")
-    public D rule(Rule rule) {
+    public B rule(Rule rule) {
         this.rules.add(rule);
-        return (D) this;
+        return (B) this;
     }
-    @SuppressWarnings("unchecked")
-    public D gate(Gate gate) {
+    public B gate(Gate gate) {
         this.gates.add(gate);
-        return (D) this;
+        return (B) this;
     }
-    @SuppressWarnings("unchecked")
-    public D interceptor(Interceptor interceptor) {
+    public B interceptor(Interceptor interceptor) {
         this.interceptors.add(interceptor);
-        return (D) this;
+        return (B) this;
     }
 
 
-    public List<Branch<BattleContext>> handleRule(BattleContext context, Event event) {
-        List<Branch<BattleContext>> outcomes = List.of(new Branch<>(context, 1.0));
-        
+    public List<Branch<BattleContext>> handleRule(BattleContext context, IRuleId ruleId) {
+        List<Branch<BattleContext>> outcomes = List.of(new Branch<>(context, 1.0));  
         for (Rule rule : rules) {
-            outcomes = BranchUtil.flatMap(outcomes, branchContext -> rule.execute(context, event));
+            outcomes = flatMap(outcomes, branchContext -> rule.execute(context, ruleId));
         }
-
         return outcomes;
     }
     public double handleGate(BattleContext context, IGateId gateId) {
-        double probability = 1;
-
-        for (Gate gate : gates) {
-            probability *= gate.condition().execute(context);
-        }
-
-        return probability;
+        return 1;
     }
-    public Report handleInterceptor(Report report, Event event) {
-        // FUCK
-        return report;
+    public Report handleInterceptor(BattleContext context, IRuleId ruleId, Report report) {
+        return null;
     }
 }

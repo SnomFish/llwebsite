@@ -4,13 +4,13 @@ import github.snomfish.functionality.event.Definition;
 
 public class Weather extends Definition<WeatherId, Weather> {
 
-    public Weather(WeatherId id) {
-        super(id);
+    
+    public Weather() {
+        super();
     }
 
 
-    // builder functions
-    public static Weather build(WeatherId id) {
-        return new Weather(id);
+    public static Weather build() {
+        return new Weather();
     }
 }

@@ -3,15 +3,18 @@ package github.snomfish.functionality.event;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.yaml.snakeyaml.events.Event;
+
 import github.snomfish.functionality.condition.ICondition;
 import github.snomfish.functionality.condition.NoCondition;
 import github.snomfish.functionality.effect.IEffect;
 import github.snomfish.functionality.effect.effects.NoEffect;
+import github.snomfish.functionality.event.ruleIds.IRuleId;
 
 public class Interceptor {
     
 
-    private List<Event> events;
+    private List<IRuleId> events;
     private ICondition condition;
     private IEffect effect;
 
@@ -24,7 +27,7 @@ public class Interceptor {
 
 
     // getter
-    public List<Event> events() {return events;}
+    public List<IRuleId> events() {return events;}
     public ICondition condition() {return condition;}
     public IEffect effect() {return effect;}
 
@@ -33,8 +36,8 @@ public class Interceptor {
     public static Interceptor build() {
         return new Interceptor();
     }
-    public Interceptor event(IEventId id) {
-        this.events.add(new Event(id, null));
+    public Interceptor event(IRuleId id) {
+        this.events.add(id);
         return this;
     }
     public Interceptor condition(ICondition condition) {

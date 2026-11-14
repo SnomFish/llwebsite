@@ -9,13 +9,14 @@ import github.snomfish.functionality.condition.NoCondition;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.effect.IEffect;
 import github.snomfish.functionality.effect.effects.NoEffect;
+import github.snomfish.functionality.event.ruleIds.IRuleId;
 
 import static github.snomfish.functionality.branch.BranchUtil.applyProbability;
 
 public class Rule {
      
 
-    private List<Event> events;
+    private List<IRuleId> events;
     private ICondition condition;
     private IEffect effect;
 
@@ -27,7 +28,7 @@ public class Rule {
     }
 
 
-    public List<Event> events() {return events;}
+    public List<IRuleId> events() {return events;}
     public ICondition condition() {return condition;}
     public IEffect effect() {return effect;}
 
@@ -36,8 +37,8 @@ public class Rule {
     public static Rule build() {
         return new Rule();
     }
-    public Rule event(IEventId id) {
-        this.events.add(new Event(id, null));
+    public Rule event(IRuleId id) {
+        this.events.add(id);
         return this;
     }
     public Rule condition(ICondition condition) {
@@ -50,7 +51,7 @@ public class Rule {
     }
 
 
-    public List<Branch<BattleContext>> execute(BattleContext context, Event event) {
+    public List<Branch<BattleContext>> execute(BattleContext context, IRuleId event) {
         
         if (!events.contains(event)) {
             return List.of(new Branch<>(context, 1.0));

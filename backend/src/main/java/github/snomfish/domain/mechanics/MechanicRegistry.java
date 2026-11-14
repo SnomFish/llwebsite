@@ -11,8 +11,8 @@ import github.snomfish.functionality.effect.EffectSequence;
 import github.snomfish.functionality.effect.Effects;
 import github.snomfish.functionality.effect.effects.RemoveMechanic;
 import github.snomfish.functionality.event.Rule;
-import github.snomfish.functionality.event.eventIds.RuleForTargetId;
-import github.snomfish.functionality.event.eventIds.RuleForUserId;
+import github.snomfish.functionality.event.ruleIds.RuleForTargetId;
+import github.snomfish.functionality.event.ruleIds.RuleForUserId;
 import github.snomfish.functionality.number.Constant;
 
 import static github.snomfish.domain.mechanics.MechanicId.*;

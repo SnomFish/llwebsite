@@ -3,41 +3,37 @@ package github.snomfish.functionality.event;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.yaml.snakeyaml.events.Event;
+
 import github.snomfish.functionality.condition.ICondition;
 import github.snomfish.functionality.condition.NoCondition;
-import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.event.gateIds.GateForAllId;
+import github.snomfish.functionality.event.gateIds.IGateId;
 
 public class Gate {
     
 
-    private List<Event> events;
+    private List<IGateId> events;
     private ICondition condition;
 
 
-    private Gate(
-        List<Event> events,
-        ICondition condition
-    ) {
-        this.events = events;
-        this.condition = condition;
+    private Gate() {
+        this.events = new ArrayList<>();
+        this.condition = new NoCondition();
     }
 
 
     // getters
-    public List<Event> events() {return events;}
+    public List<IGateId> events() {return events;}
     public ICondition condition() {return condition;}
 
 
     // builder classes
     public static Gate build() {
-        return new Gate(
-            new ArrayList<>(),
-            new NoCondition()
-        );
+        return new Gate();
     }
-    public Gate event(GateForAllId eventId, ContextSideId sideId) {
-        this.events.add(new Event(eventId, sideId));
+    public Gate event(IGateId event) {
+        this.events.add(event);
         return this;
     }
     public Gate condition(ICondition condition) {

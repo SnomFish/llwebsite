@@ -40,11 +40,13 @@ import github.snomfish.functionality.effect.effects.SetWeather;
 import github.snomfish.functionality.event.Gate;
 import github.snomfish.functionality.event.Interceptor;
 import github.snomfish.functionality.event.Rule;
-import github.snomfish.functionality.event.eventIds.ConstantRuleId;
-import github.snomfish.functionality.event.eventIds.RuleForAllId;
-import github.snomfish.functionality.event.eventIds.RuleForTargetId;
-import github.snomfish.functionality.event.eventIds.RuleForUserId;
 import github.snomfish.functionality.event.gateIds.GateForAllId;
+import github.snomfish.functionality.event.gateIds.GateForTargetId;
+import github.snomfish.functionality.event.gateIds.GateForUserId;
+import github.snomfish.functionality.event.ruleIds.ConstantRuleId;
+import github.snomfish.functionality.event.ruleIds.RuleForAllId;
+import github.snomfish.functionality.event.ruleIds.RuleForTargetId;
+import github.snomfish.functionality.event.ruleIds.RuleForUserId;
 import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.INumberValueConstant;
 import github.snomfish.functionality.number.Multiply;
@@ -121,7 +123,7 @@ public class AbilityRegistry {
 				)))
 			)
 			.gate(Gate.build() // prevents the ability being removed
-				.event(GateForAllId.CAN_REMOVE_ABILITY, USER)
+				.event(GateForUserId.CAN_REMOVE_SELFS_ABILITY)
 				.condition(new False())
 			)
 		);
@@ -313,7 +315,7 @@ public class AbilityRegistry {
 			.id(BONEHEADED)
 			.name("boneheaded")
 			.gate(Gate.build()
-				.event(GateForAllId.CAN_TAKE_RECOIL, USER)
+				.event(GateForUserId.CAN_SELF_TAKE_RECOIL)
 				.condition(new False())
 			)
 		);
@@ -337,7 +339,7 @@ public class AbilityRegistry {
 			.id(BRUTE_FORCE)
 			.name("brute force")
 			.gate(Gate.build()
-				.event(GateForAllId.CAN_USE_MOVE_SECONDARY_EFFECTS, USER)
+				.event(GateForUserId.CAN_SELFS_MOVE_USE_SECONDARY_EFFECTS)
 				.condition(new False())
 			)
 		);
@@ -356,7 +358,7 @@ public class AbilityRegistry {
 			.id(BULLY)
 			.name("bully")
 			.gate(Gate.build()
-				.event(GateForAllId.CAN_USE_DEFENSIVE_ABILITY, USER)
+				.event(GateForTargetId.CAN_OPP_USE_DEFENSIVE_ABILITY)
 				.condition(Comparator.lessThan()
 					.left(new ValueConstant(Value.TARGET().HEIGHT()))
 					.right(new ValueConstant(Value.USER().HEIGHT()))
@@ -364,10 +366,10 @@ public class AbilityRegistry {
 				// if the user is shorter than the target, bully does not activate so the target can use their defensive ability
 			)
 			.gate(Gate.build()
-				.event(GateForAllId.CAN_USE_DEFENDING_STAT_BOOSTS, USER)
+				.event(GateForTargetId.CAN_OPP_USE_DEFENDING_STAT_BOOSTS)
 				.condition(Comparator.lessThan()
-					.left(new ValueConstant(Value.USER().HEIGHT()))
-					.right(new ValueConstant(Value.TARGET().HEIGHT()))
+					.left(new ValueConstant(Value.TARGET().HEIGHT()))
+					.right(new ValueConstant(Value.USER().HEIGHT()))
 				)
 			)
 		);
@@ -466,7 +468,7 @@ public class AbilityRegistry {
 				))
 			)
 			.gate(Gate.build() // prevents the ability being removed
-				.event(GateForAllId.CAN_REMOVE_ABILITY, USER)
+				.event(GateForUserId.CAN_REMOVE_SELFS_ABILITY)
 				.condition(new False())
 			)
 		);
@@ -474,7 +476,7 @@ public class AbilityRegistry {
 			.id(CLINGY)
 			.name("clingy")
 			.gate(Gate.build()
-				.event(GateForAllId.CAN_REMOVE_ITEM, USER)
+				.event(GateForUserId.CAN_REMOVE_SELFS_ITEM)
 				.condition(new False())
 			)
 		);
@@ -529,7 +531,7 @@ public class AbilityRegistry {
 			.id(CONFIDENCE)
 			.name("confidence")
 			.gate(Gate.build()
-				.event(GateForAllId.CAN_MOVE_FLINCH, USER)
+				.event(GateForTargetId.CAN_OPP_MOVE_FLINCH)
 				.condition(new False())
 			)
 		);
@@ -608,7 +610,7 @@ public class AbilityRegistry {
 			.id(DEVIOUS)
 			.name("devious")
 			.gate(Gate.build()
-				.event(GateForAllId.CAN_USE_DEFENSIVE_ABILITY, USER)
+				.event(GateForTargetId.CAN_OPP_USE_DEFENSIVE_ABILITY)
 				.condition(new NoCondition())
 			)
 		);
@@ -737,7 +739,7 @@ public class AbilityRegistry {
 			.id(FACADE)
 			.name("facade")
 			.gate(Gate.build() // prevents the ability being removed
-				.event(GateForAllId.CAN_REMOVE_ABILITY, USER)
+				.event(GateForUserId.CAN_REMOVE_SELFS_ITEM)
 				.condition(new False())
 			)
 		);
@@ -763,7 +765,7 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(FESTIVE_SPIRIT)
 			.name("festive spirit").gate(Gate.build() // prevents the ability being removed
-				.event(GateForAllId.CAN_REMOVE_ABILITY, USER)
+				.event(GateForUserId.CAN_REMOVE_SELFS_ITEM)
 				.condition(new False())
 			)
 		);
@@ -1015,13 +1017,13 @@ public class AbilityRegistry {
 			.id(IGNORANT)
 			.name("ignorant")
 			.gate(Gate.build()
-				.event(GateForAllId.CAN_USE_DEFENDING_STAT_BOOSTS, TARGET)
-				.event(GateForAllId.CAN_USE_DEFENDING_STAT_DROPS, TARGET)
+				.event(GateForTargetId.CAN_OPP_USE_DEFENDING_STAT_BOOSTS)
+				.event(GateForTargetId.CAN_OPP_USE_DEFENDING_STAT_DROPS)
 				.condition(new GateCondition(GateForAllId.CAN_USE_DEFENSIVE_ABILITY, USER))
 			)
 			.gate(Gate.build()
-				.event(GateForAllId.CAN_USE_ATTACKING_STAT_BOOSTS, USER)
-				.event(GateForAllId.CAN_USE_ATTACKING_STAT_DROPS, USER)
+				.event(GateForTargetId.CAN_OPP_USE_ATTACKING_STAT_BOOSTS)
+				.event(GateForTargetId.CAN_OPP_USE_ATTACKING_STAT_DROPS)
 				.condition(new GateCondition(GateForAllId.CAN_USE_OFFENSIVE_ABILITY, USER))
 			)
 		);
@@ -1084,7 +1086,7 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(LIFE_FORCE)
 			.name("life force").gate(Gate.build() // prevents the ability being removed
-				.event(GateForAllId.CAN_REMOVE_ABILITY, USER)
+				.event(GateForUserId.CAN_REMOVE_SELFS_ITEM)
 				.condition(new False())
 			)
 		);
@@ -1256,7 +1258,7 @@ public class AbilityRegistry {
 			.id(ODD_HUSK)
 			.name("odd_husk")
 			.gate(Gate.build()
-				.event(GateForAllId.CAN_MOVE_SECONDARY_EFFECTS_AFFECT_TARGET, TARGET)
+				.event(GateForTargetId.CAN_OPPS_MOVE_SECONDARY_EFFECTS_AFFECT_SELF)
 				.condition(new Not(new GateCondition(GateForAllId.CAN_USE_DEFENSIVE_ABILITY, USER)))
 			)
 		);
@@ -1348,7 +1350,7 @@ public class AbilityRegistry {
 			.id(PROTECTIVE_SHELL)
 			.name("protective shell")
 			.gate(Gate.build()
-				.event(GateForAllId.CAN_MOVE_CRIT, TARGET)
+				.event(GateForTargetId.CAN_OPP_MOVE_CRIT)
 				.condition(new Not(new GateCondition(GateForAllId.CAN_USE_DEFENSIVE_ABILITY, USER)))
 			)
 		);
@@ -1736,7 +1738,7 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(TWO_FACE)
 			.name("two_face").gate(Gate.build() // prevents the ability being removed
-				.event(GateForAllId.CAN_REMOVE_ABILITY, USER)
+				.event(GateForUserId.CAN_REMOVE_SELFS_ITEM)
 				.condition(new False())
 			)
 		);

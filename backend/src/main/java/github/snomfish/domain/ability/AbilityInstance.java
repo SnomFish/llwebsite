@@ -8,10 +8,10 @@ import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.copy.DeepCopyable;
-import github.snomfish.functionality.event.Event;
 import github.snomfish.functionality.event.Gate;
 import github.snomfish.functionality.event.Rule;
 import github.snomfish.functionality.event.gateIds.IGateId;
+import github.snomfish.functionality.event.ruleIds.IRuleId;
 
 import static github.snomfish.functionality.branch.BranchUtil.applyProbability;
 import static github.snomfish.functionality.branch.BranchUtil.flatMap;
@@ -56,7 +56,7 @@ public class AbilityInstance implements DeepCopyable<AbilityInstance> {
     public void setTriggeredThisSwapIn(boolean triggered) {hasTriggeredThisSwapIn = triggered;}
 
 
-    public List<Branch<BattleContext>> handleRule(BattleContext context, Event event) {
+    public List<Branch<BattleContext>> handleRule(BattleContext context, IRuleId event) {
         List<Branch<BattleContext>> outcomes = List.of(new Branch<>(context, 1));
         Ability ability = ability();
 
@@ -72,7 +72,7 @@ public class AbilityInstance implements DeepCopyable<AbilityInstance> {
     }
 
 
-    public List<Branch<BattleContext>> executeRule(BattleContext context, Event event, Rule rule) {
+    public List<Branch<BattleContext>> executeRule(BattleContext context, IRuleId event, Rule rule) {
         List<Branch<BattleContext>> outcomes = new ArrayList<>();
 
         if (!rule.events().contains(event)) return List.of(new Branch<>(context, 1));
@@ -88,26 +88,7 @@ public class AbilityInstance implements DeepCopyable<AbilityInstance> {
             AbilityId targetAbilityId =         (AbilityId) Value.TARGET().ABILITY_ID().get(context);
             AbilityId targetActualAbilityId = 	(AbilityId) Value.TARGET().ACTUAL_ABILITY_ID().get(context);
             
-            if (event.sideId() == ContextSideId.USER && userAbilityId == userActualAbilityId) {
-                Value.USER().ABILITY_HAS_ACTIVATED_THIS_BATTLE().set(outcome, true);
-                Value.USER().ABILITY_HAS_ACTIVATED_THIS_SWAP().set(outcome, true);
-                Value.USER().ACTUAL_ABILITY_HAS_ACTIVATED_THIS_BATTLE().set(outcome, true);
-                Value.USER().ACTUAL_ABILITY_HAS_ACTIVATED_THIS_SWAP().set(outcome, true);
-            } 
-            else if (event.sideId() == ContextSideId.USER && userAbilityId != userActualAbilityId) {
-                Value.USER().ABILITY_HAS_ACTIVATED_THIS_BATTLE().set(outcome, true);
-                Value.USER().ABILITY_HAS_ACTIVATED_THIS_SWAP().set(outcome, true);
-            }
-            else if (event.sideId() == ContextSideId.TARGET && targetAbilityId == targetActualAbilityId) {
-                Value.TARGET().ABILITY_HAS_ACTIVATED_THIS_BATTLE().set(outcome, true);
-                Value.TARGET().ABILITY_HAS_ACTIVATED_THIS_SWAP().set(outcome, true);
-                Value.TARGET().ACTUAL_ABILITY_HAS_ACTIVATED_THIS_BATTLE().set(outcome, true);
-                Value.TARGET().ACTUAL_ABILITY_HAS_ACTIVATED_THIS_SWAP().set(outcome, true);
-            } 
-            else if (event.sideId() == ContextSideId.TARGET && targetAbilityId != targetActualAbilityId) {
-                Value.TARGET().ABILITY_HAS_ACTIVATED_THIS_BATTLE().set(outcome, true);
-                Value.TARGET().ABILITY_HAS_ACTIVATED_THIS_SWAP().set(outcome, true);
-            }
+            // set the ability to be activated
 
             outcomes.addAll(applyProbability(rule.effect().execute(outcome), probability));
         }

@@ -7,6 +7,7 @@ import java.util.List;
 
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
+import github.snomfish.functionality.event.ruleIds.IRuleId;
 
 public class Report {
     
@@ -21,7 +22,7 @@ public class Report {
 
 
     // collects the interceptors which have a correct event trigger
-    public void record(List<Interceptor> interceptors, Event event) { 
+    public void record(List<Interceptor> interceptors, IRuleId event) { 
         for (Interceptor interceptor : interceptors) {
             if (!interceptor.events().contains(event)) continue; // if the interceptor doesn't have the correct event trigger then ignore it
 

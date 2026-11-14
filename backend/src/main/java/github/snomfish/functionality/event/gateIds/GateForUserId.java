@@ -1,5 +1,8 @@
 package github.snomfish.functionality.event.gateIds;
 
+
+
+
 public enum GateForUserId implements IGateId {
     CAN_SELF_CONSUME_ITEM,
 

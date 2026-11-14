@@ -1,6 +1,7 @@
 package github.snomfish.functionality.event.gateIds;
 
 
+
 public enum GateForTargetId implements IGateId {
     CAN_OPP_CONSUME_ITEM,
 

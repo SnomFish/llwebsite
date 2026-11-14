@@ -29,10 +29,11 @@ import github.snomfish.functionality.effect.effects.SetType;
 import github.snomfish.functionality.effect.effects.SetWeather;
 import github.snomfish.functionality.event.Gate;
 import github.snomfish.functionality.event.Rule;
-import github.snomfish.functionality.event.eventIds.ConstantRuleId;
-import github.snomfish.functionality.event.eventIds.RuleForTargetId;
-import github.snomfish.functionality.event.eventIds.RuleForUserId;
 import github.snomfish.functionality.event.gateIds.GateForAllId;
+import github.snomfish.functionality.event.gateIds.GateForUserId;
+import github.snomfish.functionality.event.ruleIds.ConstantRuleId;
+import github.snomfish.functionality.event.ruleIds.RuleForTargetId;
+import github.snomfish.functionality.event.ruleIds.RuleForUserId;
 import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.ValueConstant;
 
@@ -230,7 +231,7 @@ public class ItemRegistry {
 				.effect(Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(2/3)))
 			)
 			.gate(Gate.build()
-				.event(GateForAllId.CAN_USE_SUPPORT_MOVES, USER)
+				.event(GateForUserId.CAN_SELF_USE_SUPPORT_MOVES)
 				.condition(new False())
 			)
 		);
@@ -243,7 +244,7 @@ public class ItemRegistry {
 				.effect(Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(2/3)))
 			)
 			.gate(Gate.build()
-				.event(GateForAllId.CAN_USE_SUPPORT_MOVES, USER)
+				.event(GateForUserId.CAN_SELF_USE_SUPPORT_MOVES)
 				.condition(new False())
 			)
 		);

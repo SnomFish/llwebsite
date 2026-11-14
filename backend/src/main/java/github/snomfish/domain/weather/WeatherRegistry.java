@@ -9,7 +9,7 @@ import github.snomfish.functionality.Value;
 import github.snomfish.functionality.condition.Equals;
 import github.snomfish.functionality.effect.Effects;
 import github.snomfish.functionality.event.Rule;
-import github.snomfish.functionality.event.eventIds.RuleForAllId;
+import github.snomfish.functionality.event.ruleIds.RuleForAllId;
 import github.snomfish.functionality.number.Constant;
 
 import static github.snomfish.domain.weather.WeatherId.*;
@@ -34,18 +34,22 @@ public class WeatherRegistry {
 
     // ISOLATED EVENTS USE THE CURRENT BATTLE CONTEXT, AND AS DEAL_FORMULA_DAMAGE ALWAYS HAS THE USER AS THE ATTACKER, THE USER IS ALWAYS THE ATTACKER HERE
     static {
-        register(Weather.build(NO_WEATHER)
+        register(Weather.build()
+			.id(NO_WEATHER)
             .name("No Weather")
         );
-        register(Weather.build(DUST_STORM)
+        register(Weather.build()
+			.id(DUST_STORM)
             .name("Dust Storm")
         );
-        register(Weather.build(FOG)
+        register(Weather.build()
+			.id(FOG)
             .name("Fog")
             // spirit types get mold breaker on non light types
             // 2 turn moves become one turn
         );
-        register(Weather.build(HEATWAVE)
+        register(Weather.build()
+			.id(HEATWAVE)
             .name("Heatwave")
             .rule(Rule.build() // increases the power of fire moves by 30%
                 .event(RuleForAllId.PRE_DEAL_FORMULA_DAMAGE)
@@ -59,7 +63,8 @@ public class WeatherRegistry {
             )
             // moves of bug type loomians cost 10% less energy
         );
-        register(Weather.build(RAIN)
+        register(Weather.build()
+			.id(RAIN)
             .name("Rain")
             .rule(Rule.build() // increases the power of water moves by 30%
                 .event(RuleForAllId.PRE_DEAL_FORMULA_DAMAGE)
@@ -73,10 +78,12 @@ public class WeatherRegistry {
             )
             // plant types heal 1/16 max hp after each turn
         );
-        register(Weather.build(SNOWSTORM)
+        register(Weather.build()
+			.id(SNOWSTORM)
             .name("Snow Storm")
         );
-        register(Weather.build(STRONG_WINDS)
+        register(Weather.build()
+			.id(STRONG_WINDS)
             .name("Strong Winds")
             .rule(Rule.build() // increases the power of toxic moves by 25%
                 .event(RuleForAllId.PRE_DEAL_FORMULA_DAMAGE)
@@ -86,7 +93,8 @@ public class WeatherRegistry {
             // increases the speed of air type loomians by 25%
             // nullifies trapping moves
         );
-        register(Weather.build(THUNDERSTORM)
+        register(Weather.build()
+			.id(THUNDERSTORM)
             .name("Thunderstorm")
             .rule(Rule.build() // increases the power of toxic moves by 25%
                 .event(RuleForAllId.PRE_DEAL_FORMULA_DAMAGE)

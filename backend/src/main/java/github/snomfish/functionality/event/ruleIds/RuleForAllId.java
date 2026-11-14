@@ -1,11 +1,9 @@
-package github.snomfish.functionality.event.eventIds;
+package github.snomfish.functionality.event.ruleIds;
 
-import static github.snomfish.functionality.event.eventIds.RuleForTargetId.*;
-import static github.snomfish.functionality.event.eventIds.RuleForUserId.*;
+import static github.snomfish.functionality.event.ruleIds.RuleForTargetId.*;
+import static github.snomfish.functionality.event.ruleIds.RuleForUserId.*;
 
-import github.snomfish.functionality.event.IEventId;
-
-public enum RuleForAllId implements IEventId {
+public enum RuleForAllId implements IRuleId {
     NULL_EVENT(), // should never be dispatched
 
     LOOMIAN_SWAPS_IN(SELF_SWAPPED_IN, WATCHES_OPP_SWAP_IN),

@@ -10,8 +10,8 @@ import github.snomfish.functionality.condition.Equals;
 import github.snomfish.functionality.effect.Effects;
 import github.snomfish.functionality.effect.effects.DealDirectSelfDamage;
 import github.snomfish.functionality.event.Rule;
-import github.snomfish.functionality.event.eventIds.ConstantRuleId;
-import github.snomfish.functionality.event.eventIds.RuleForUserId;
+import github.snomfish.functionality.event.ruleIds.ConstantRuleId;
+import github.snomfish.functionality.event.ruleIds.RuleForUserId;
 import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.Multiply;
 import github.snomfish.functionality.number.ValueConstant;
@@ -38,17 +38,20 @@ public class StatusRegistry {
 
 
     static {
-        register(Status.build(NO_STATUS)
+        register(Status.build()
+			.id(NO_STATUS)
             .name("no status")
         );  
-        register(Status.build(POISON)
+        register(Status.build()
+			.id(POISON)
             .name("posion")
             .rule(Rule.build()
                 .event(ConstantRuleId.END_OF_TURN_STATUS_EFFECTS)
                 .effect(new DealDirectSelfDamage(new Multiply(new Constant(1/8), new ValueConstant(Value.OPP().HEALTH()))))
             )
         );
-        register(Status.build(BAD_POISON)
+        register(Status.build()
+			.id(BAD_POISON)
             .name("poison")
             .rule(Rule.build()
                 .event(ConstantRuleId.END_OF_TURN_STATUS_EFFECTS)
@@ -58,10 +61,12 @@ public class StatusRegistry {
                 )))
             )
         );
-        register(Status.build(PARALYSIS)
+        register(Status.build()
+			.id(PARALYSIS)
             .name("paralysis")
         );
-        register(Status.build(BURN)
+        register(Status.build()
+			.id(BURN)
             .name("burn")
             .rule(Rule.build()
                 .event(ConstantRuleId.END_OF_TURN_STATUS_EFFECTS)
@@ -73,7 +78,8 @@ public class StatusRegistry {
                 .effect(Effects.multiplyValue(Value.SELF().MOVE().MOVE_MODIFIER(ModifierId.ATTACKING_STAT), new Constant (2/3)))
             )
         );
-        register(Status.build(FROSTBITE)
+        register(Status.build()
+			.id(FROSTBITE)
             .name("frostbite")
             .rule(Rule.build()
                 .event(ConstantRuleId.END_OF_TURN_STATUS_EFFECTS)
@@ -85,7 +91,8 @@ public class StatusRegistry {
                 .effect(Effects.multiplyValue(Value.SELF().MOVE().MOVE_MODIFIER(ModifierId.ATTACKING_STAT), new Constant (2/3)))
             )
         );
-        register(Status.build(SLEEP)
+        register(Status.build()
+			.id(SLEEP)
             .name("sleep")
         );
     }

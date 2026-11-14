@@ -4,13 +4,13 @@ import github.snomfish.functionality.event.Definition;
 
 public class Status extends Definition<StatusId, Status> {
     
-    public Status(StatusId id) {
-        super(id);
+    
+    public Status() {
+        super();
     }
 
 
-    // builder functions
-    public static Status build(StatusId id) {
-        return new Status(id);
+    public static Status build() {
+        return new Status();
     }
 }

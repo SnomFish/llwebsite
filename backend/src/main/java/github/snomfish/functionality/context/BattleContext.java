@@ -7,11 +7,10 @@ import github.snomfish.domain.Side;
 import github.snomfish.domain.SideId;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.copy.DeepCopyable;
-import github.snomfish.functionality.event.Event;
 import github.snomfish.functionality.event.Report;
-import github.snomfish.functionality.event.eventIds.ConstantRuleId;
-import github.snomfish.functionality.event.eventIds.RuleForAllId;
 import github.snomfish.functionality.event.gateIds.GateForAllId;
+import github.snomfish.functionality.event.ruleIds.ConstantRuleId;
+import github.snomfish.functionality.event.ruleIds.RuleForAllId;
 
 import static github.snomfish.domain.SideId.*;
 import static github.snomfish.functionality.branch.BranchUtil.flatMap;
@@ -86,10 +85,10 @@ public class BattleContext implements DeepCopyable<BattleContext> {
         List<Branch<BattleContext>> outcomes = List.of(new Branch<>(this, 1.0));
         
         outcomes = ContextUtil.setFocus(outcomes, sideId);
-        outcomes = flatMap(outcomes, context -> gamestate().weatherInstance().handleEvent(context, new Event(ruleId, null)));
-        outcomes = flatMap(outcomes, context -> user().dispatchRule(context, new Event(ruleId, null)));
+        outcomes = flatMap(outcomes, context -> gamestate().weatherInstance().dispatchEvent(context, ruleId));
+        outcomes = flatMap(outcomes, context -> user().dispatchRule(context, ruleId));
         outcomes = ContextUtil.reverseFocus(outcomes);
-        outcomes = flatMap(outcomes, context -> target().dispatchRule(context, new Event(ruleId, null)));
+        outcomes = flatMap(outcomes, context -> target().dispatchRule(context, ruleId));
         
         outcomes = ContextUtil.setFocus(outcomes, userState);
         return outcomes;
@@ -98,14 +97,14 @@ public class BattleContext implements DeepCopyable<BattleContext> {
         List<Branch<BattleContext>> outcomes = List.of(new Branch<>(this, 1.0));
 
         outcomes = ContextUtil.setFocus(outcomes, sideId);
-        outcomes = flatMap(outcomes, context -> gamestate().weatherInstance().handleEvent(context, new Event(ruleId, null)));
+        outcomes = flatMap(outcomes, context -> gamestate().weatherInstance().dispatchEvent(context, ruleId));
 
-        outcomes = flatMap(outcomes, context -> user().dispatchRule(context, new Event(ruleId.forUser(), null)));
-        outcomes = flatMap(outcomes, context -> user().dispatchRule(context, new Event(ruleId, null)));
+        outcomes = flatMap(outcomes, context -> user().dispatchRule(context, ruleId.forUser()));
+        outcomes = flatMap(outcomes, context -> user().dispatchRule(context, ruleId));
 
         outcomes = ContextUtil.reverseFocus(outcomes); // target state always inverts the focus
-        outcomes = flatMap(outcomes, context -> target().dispatchRule(context, new Event(ruleId.forTarget(), null)));
-        outcomes = flatMap(outcomes, context -> target().dispatchRule(context, new Event(ruleId, null)));
+        outcomes = flatMap(outcomes, context -> target().dispatchRule(context, ruleId.forTarget()));
+        outcomes = flatMap(outcomes, context -> target().dispatchRule(context, ruleId));
 
         outcomes = ContextUtil.setFocus(outcomes, userState); // resets the focus to the correct state
         return outcomes;
@@ -137,10 +136,10 @@ public class BattleContext implements DeepCopyable<BattleContext> {
         Report report = new Report(trueOutcomes);
 
         BattleContext context = ContextUtil.setFocus(this, sideId);
-        report = user().dispatchInterceptor(report, context, new Event(eventId.forUser(), null));
+        report = user().dispatchInterceptor(report, context, eventId.forUser());
 
         context = ContextUtil.reverseFocus(context);
-        report = target().dispatchInterceptor(report, context, new Event(eventId.forTarget(), null));
+        report = target().dispatchInterceptor(report, context, eventId.forTarget());
 
         context = ContextUtil.setFocus(context, userState); // resets the focus to the correct state
         return report.execute(context);
