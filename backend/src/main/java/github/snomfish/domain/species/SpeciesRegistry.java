@@ -470,7 +470,7 @@ public class SpeciesRegistry {
 		);
 		register(Species.build()
 			.id(FLORANT_FLYCHOMP)
-			.name("florant_flychomp")
+			.name("florant flychomp")
 			.baseTypes(List.of(PLANT, BUG))
 			.baseAbilities(List.of(POWER_JAW))
 			.baseStats(105, 88, 123, 112, 55, 112, 50)
@@ -638,7 +638,7 @@ public class SpeciesRegistry {
 		);
 		register(Species.build()
 			.id(GASTROAK_TERRAFORM)
-			.name("gastroak_terraform")
+			.name("gastroak terraform")
 			.baseTypes(List.of(PLANT, EARTH))
 			.baseAbilities(List.of(INSULATED))
 			.baseStats(140, 88, 60, 45, 107, 140, 65)
@@ -662,7 +662,7 @@ public class SpeciesRegistry {
 		);
 		register(Species.build()
 			.id(WIKI_WIKI)
-			.name("wiki_wiki")
+			.name("wiki wiki")
 			.baseTypes(List.of(PLANT))
 			.baseAbilities(List.of(COMMUNICATION, MEDIC, NOXIOUS_WEEDS))
 			.baseStats(162, 125, 49, 70, 62, 70, 47)
@@ -686,7 +686,7 @@ public class SpeciesRegistry {
 		);
 		register(Species.build()
 			.id(KABUNGA_H)
-			.name("kabunga_h")
+			.name("kabunga h")
 			.baseTypes(List.of(PLANT, MIND))
 			.baseAbilities(List.of(COMMUNICATION, EXPERTISE, NOXIOUS_WEEDS))
 			.baseStats(65, 68, 23, 58, 99, 74, 5)
@@ -698,7 +698,7 @@ public class SpeciesRegistry {
 		);
 		register(Species.build()
 			.id(WAKA_LAKA)
-			.name("waka_laka")
+			.name("waka laka")
 			.baseTypes(List.of(PLANT, MIND))
 			.baseAbilities(List.of(COMMUNICATION, EXPERTISE, MYCOTIC))
 			.baseStats(104, 73, 49, 86, 124, 108, 41)
@@ -782,7 +782,7 @@ public class SpeciesRegistry {
 		);
 		register(Species.build()
 			.id(PHANCUB_V)
-			.name("phancub_v")
+			.name("phancub v")
 			.baseTypes(List.of(SPIRIT, BRAWLER))
 			.baseAbilities(List.of(IGNORANT, CLINGY))
 			.baseStats(58, 67, 52, 79, 17, 63, 46)
@@ -878,7 +878,7 @@ public class SpeciesRegistry {
 		);
 		register(Species.build()
 			.id(ERUPTIDON_MAGMADIRE)
-			.name("eruptidon_magmadire")
+			.name("eruptidon magmadire")
 			.baseTypes(List.of(FIRE, EARTH))
 			.baseAbilities(List.of(PYRO_PRO))
 			.baseStats(81, 90, 104, 90, 127, 94, 80)
@@ -914,7 +914,7 @@ public class SpeciesRegistry {
 		);
 		register(Species.build()
 			.id(KRAKALOA_LAVAFIEND)
-			.name("krakaloa_lavafiend")
+			.name("krakaloa lavafiend")
 			.baseTypes(List.of(FIRE, SPIRIT))
 			.baseAbilities(List.of(HEAT_SUMMON))
 			.baseStats(115, 125, 63, 105, 126, 109, 12)
@@ -938,7 +938,7 @@ public class SpeciesRegistry {
 		);
 		register(Species.build()
 			.id(CRAYTAL_C)
-			.name("craytal_c")
+			.name("craytal c")
 			.baseTypes(List.of(ICE, PLANT))
 			.baseAbilities(List.of(PARTING_GIFT, CHILL, REGIFT))
 			.baseStats(76, 74, 76, 43, 14, 63, 62)
@@ -998,7 +998,7 @@ public class SpeciesRegistry {
 		);
 		register(Species.build()
 			.id(CAFNOTE_M)
-			.name("cafnote_m")
+			.name("cafnote m")
 			.baseTypes(List.of(SIMPLE))
 			.baseAbilities(List.of(TRIUMPH, VIRTUOSO, BRUTE_FORCE))
 			.baseStats(60, 60, 42, 62, 42, 58, 53)
@@ -1010,7 +1010,7 @@ public class SpeciesRegistry {
 		);
 		register(Species.build()
 			.id(CAFNOTE_F)
-			.name("cafnote_f")
+			.name("cafnote f")
 			.baseTypes(List.of(SIMPLE))
 			.baseAbilities(List.of(ADORABLE, VIRTUOSO, TONE_DEAF))
 			.baseStats(60, 60, 42, 58, 42, 62, 53)
@@ -1070,7 +1070,7 @@ public class SpeciesRegistry {
 		);
 		register(Species.build()
 			.id(ICIGOOL_INCARNATE)
-			.name("icigool_incarnate")
+			.name("icigool incarnate")
 			.baseTypes(List.of(SPIRIT, ICE))
 			.baseAbilities(List.of(PARTING_GIFT, EXPERTISE, POWER_JAW))
 			.baseStats(105, 99, 132, 104, 44, 91, 50)
@@ -1154,7 +1154,7 @@ public class SpeciesRegistry {
 		);
 		register(Species.build()
 			.id(STRATUSOAR_JETWING)
-			.name("stratusoar_jetwing")
+			.name("stratusoar jetwing")
 			.baseTypes(List.of(METAL, AIR))
 			.baseAbilities(List.of(TURBULENT))
 			.baseStats(100, 100, 66, 67, 135, 78, 119)
@@ -1358,7 +1358,7 @@ public class SpeciesRegistry {
 		);
 		register(Species.build()
 			.id(SKELIC_SEASCOURGE)
-			.name("skelic_seascourge")
+			.name("skelic seascourge")
 			.baseTypes(List.of(ANCIENT, WATER))
 			.baseAbilities(List.of(RAIN_RUSH))
 			.baseStats(109, 100, 134, 92, 65, 78, 77)
@@ -1394,7 +1394,7 @@ public class SpeciesRegistry {
 		);
 		register(Species.build()
 			.id(JOLTOOTH_THUNDERKING)
-			.name("joltooth_thunderking")
+			.name("joltooth thunderking")
 			.baseTypes(List.of(ANCIENT, ELECTRIC))
 			.baseAbilities(List.of(ROYAL_DECREE))
 			.baseStats(94, 89, 136, 87, 66, 84, 109)
@@ -1682,7 +1682,7 @@ public class SpeciesRegistry {
 		);
 		register(Species.build()
 			.id(HOGANOSH_ATOMIC)
-			.name("hoganosh_atomic")
+			.name("hoganosh atomic")
 			.baseTypes(List.of(FIRE))
 			.baseAbilities(List.of(GORGE))
 			.baseStats(89, 93, 129, 95, 67, 114, 61)
@@ -2512,7 +2512,7 @@ public class SpeciesRegistry {
 	public static void init2() {
 		register(Species.build()
 			.id(IMPERIOR_ARCHFIEND)
-			.name("imperior_archfiend")
+			.name("imperior archfiend")
 			.baseTypes(List.of(DARK))
 			.baseAbilities(List.of(ACE))
 			.baseStats(97, 91, 133, 52, 140, 47, 110)
@@ -2608,7 +2608,7 @@ public class SpeciesRegistry {
 		);
 		register(Species.build()
 			.id(DREGGODYNE_TEMPEREIGN)
-			.name("dreggodyne_tempereign")
+			.name("dreggodyne tempereign")
 			.baseTypes(List.of(DARK, AIR))
 			.baseAbilities(List.of(REMORSELESS))
 			.baseStats(96, 92, 93, 77, 145, 82, 95)
@@ -2980,7 +2980,7 @@ public class SpeciesRegistry {
 		);
 		register(Species.build()
 			.id(KRAMBOSS_FROSTSHACKLED)
-			.name("kramboss_frostshackled")
+			.name("kramboss frostshackled")
 			.baseTypes(List.of(ICE, DARK))
 			.baseAbilities(List.of(METALLIC))
 			.baseStats(99, 88, 130, 101, 66, 96, 100)
@@ -4576,7 +4576,7 @@ public class SpeciesRegistry {
 		);
 		register(Species.build()
 			.id(DAKUDA_OVERCHARGED)
-			.name("dakuda_overcharged")
+			.name("dakuda overcharged")
 			.baseTypes(List.of(WATER, ELECTRIC))
 			.baseAbilities(List.of(RAIL_GUN))
 			.baseStats(119, 119, 95, 96, 157, 87, 77)
@@ -4732,7 +4732,7 @@ public class SpeciesRegistry {
 		);
 		register(Species.build()
 			.id(COSMIORE_U)
-			.name("cosmiore_u")
+			.name("cosmiore u")
 			.baseTypes(List.of(ANCIENT, MIND))
 			.baseAbilities(List.of(COSMIC_PRESSURE, IDIOSYNCRATIC))
 			.baseStats(99, 105, 134, 105, 68, 68, 96)
@@ -4744,7 +4744,7 @@ public class SpeciesRegistry {
 		);
 		register(Species.build()
 			.id(COSMIORE_C)
-			.name("cosmiore_c")
+			.name("cosmiore c")
 			.baseTypes(List.of(ANCIENT, MIND))
 			.baseAbilities(List.of(ENCHANTED_COAT, EAGER))
 			.baseStats(99, 115, 68, 115, 124, 78, 76)
@@ -4756,7 +4756,7 @@ public class SpeciesRegistry {
 		);
 		register(Species.build()
 			.id(COSMIORE_E)
-			.name("cosmiore_e")
+			.name("cosmiore e")
 			.baseTypes(List.of(ANCIENT, MIND))
 			.baseAbilities(List.of(ENCHANTED_COAT, QUICK_RECOVERY))
 			.baseStats(99, 145, 68, 135, 84, 98, 46)
@@ -4816,7 +4816,7 @@ public class SpeciesRegistry {
 		);
 		register(Species.build()
 			.id(METRONETTE_WILLBOUND)
-			.name("metronette_willbound")
+			.name("metronette willbound")
 			.baseTypes(List.of(DARK, MIND))
 			.baseAbilities(List.of(DEMANDING))
 			.baseStats(83, 98, 134, 69, 147, 79, 115)
@@ -4840,7 +4840,7 @@ public class SpeciesRegistry {
 		);
 		register(Species.build()
 			.id(GARGOLEM_B)
-			.name("gargolem_b")
+			.name("gargolem b")
 			.baseTypes(List.of(EARTH, AIR))
 			.baseAbilities(List.of(IMMUNIZED, SLY, MASTER))
 			.baseStats(55, 105, 120, 85, 120, 85, 105)
@@ -4852,7 +4852,7 @@ public class SpeciesRegistry {
 		);
 		register(Species.build()
 			.id(GARGOLEM_A)
-			.name("gargolem_a")
+			.name("gargolem a")
 			.baseTypes(List.of(EARTH, AIR))
 			.baseAbilities(List.of(IMMUNIZED, BERSERK, MASTER))
 			.baseStats(55, 105, 165, 40, 165, 40, 105)
@@ -4864,7 +4864,7 @@ public class SpeciesRegistry {
 		);
 		register(Species.build()
 			.id(GARGOLEM_D)
-			.name("gargolem_d")
+			.name("gargolem d")
 			.baseTypes(List.of(EARTH, AIR))
 			.baseAbilities(List.of(IMMUNIZED, BITTER_TOUCH, MASTER))
 			.baseStats(55, 105, 60, 165, 60, 165, 65)
@@ -4876,7 +4876,7 @@ public class SpeciesRegistry {
 		);
 		register(Species.build()
 			.id(GARGOLEM_S)
-			.name("gargolem_s")
+			.name("gargolem s")
 			.baseTypes(List.of(EARTH, AIR))
 			.baseAbilities(List.of(IMMUNIZED, CLUTCH, MASTER))
 			.baseStats(55, 105, 90, 85, 90, 85, 165)
@@ -4936,7 +4936,7 @@ public class SpeciesRegistry {
 		);
 		register(Species.build()
 			.id(CELESTING_STELLARCHIME)
-			.name("celesting_stellarchime")
+			.name("celesting stellarchime")
 			.baseTypes(List.of(METAL, LIGHT))
 			.baseAbilities(List.of(EFFULGENT))
 			.baseStats(150, 111, 82, 19, 128, 114, 121)

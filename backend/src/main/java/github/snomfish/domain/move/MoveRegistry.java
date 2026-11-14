@@ -9,26 +9,30 @@ import github.snomfish.domain.move.structures.MoveEffect;
 import github.snomfish.domain.stats.StatId;
 import github.snomfish.domain.status.StatusId;
 import github.snomfish.domain.weather.WeatherId;
-import github.snomfish.functionality.Schematics;
 import github.snomfish.functionality.Value;
+import github.snomfish.functionality._schematics.Conditions;
+import github.snomfish.functionality._schematics.Effects;
+import github.snomfish.functionality._schematics.Numbers;
+import github.snomfish.functionality._schematics.Schematics;
 import github.snomfish.functionality.condition.AccuracyCheck;
 import github.snomfish.functionality.condition.And;
 import github.snomfish.functionality.condition.Comparator;
-import github.snomfish.functionality.condition.Conditions;
 import github.snomfish.functionality.condition.Equals;
+import github.snomfish.functionality.condition.GateCondition;
 import github.snomfish.functionality.condition.RandomCondition;
 import github.snomfish.functionality.effect.ConditionalEffect;
 import github.snomfish.functionality.effect.EffectSequence;
-import github.snomfish.functionality.effect.Effects;
 import github.snomfish.functionality.effect.effects.ApplyMechanic;
 import github.snomfish.functionality.effect.effects.ApplyStatChanges;
 import github.snomfish.functionality.effect.effects.DealFormulaDamage;
 import github.snomfish.functionality.effect.effects.EnergyDrainEffect;
+import github.snomfish.functionality.effect.effects.Heal;
 import github.snomfish.functionality.effect.effects.HealthDrainEffect;
 import github.snomfish.functionality.effect.effects.NoEffect;
 import github.snomfish.functionality.effect.effects.RecoilEffect;
 import github.snomfish.functionality.effect.effects.SetType;
 import github.snomfish.functionality.effect.effects.SetWeather;
+import github.snomfish.functionality.event.gateIds.GateForAllId;
 import github.snomfish.functionality.number.ConditionalNumber;
 import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.ValueConstant;
@@ -37,6 +41,7 @@ import static github.snomfish.domain.move.CategoryId.*;
 import static github.snomfish.domain.move.MoveId.*;
 import static github.snomfish.domain.move.MoveTagId.*;
 import static github.snomfish.domain.type.TypeId.*;
+import static github.snomfish.functionality.context.ContextSideId.*;
 
 public class MoveRegistry {
 
@@ -76,7 +81,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(ADAPTIVE_ASSAULT_AIR)
-			.name("adaptive_assault_air")
+			.name("adaptive assault air")
 			.type(AIR)
 			.category(RANGED)
 			.energyCost(new Constant(35))
@@ -91,7 +96,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(ADAPTIVE_ASSAULT_ANCIENT)
-			.name("adaptive_assault_ancient")
+			.name("adaptive assault ancient")
 			.type(ANCIENT)
 			.category(MELEE)
 			.energyCost(new Constant(35))
@@ -113,7 +118,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(ADAPTIVE_ASSAULT_BRAWLER)
-			.name("adaptive_assault_brawler")
+			.name("adaptive assault brawler")
 			.type(BRAWLER)
 			.category(MELEE)
 			.energyCost(new Constant(35))
@@ -129,7 +134,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(ADAPTIVE_ASSAULT_BUG)
-			.name("adaptive_assault_bug")
+			.name("adaptive assault bug")
 			.type(BUG)
 			.category(MELEE)
 			.energyCost(new Constant(35))
@@ -145,7 +150,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(ADAPTIVE_ASSAULT_FIRE)
-			.name("adaptive_assault_fire")
+			.name("adaptive assault fire")
 			.type(FIRE)
 			.category(RANGED)
 			.energyCost(new Constant(35))
@@ -162,7 +167,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(ADAPTIVE_ASSAULT_ICE)
-			.name("adaptive_assault_ice")
+			.name("adaptive assault ice")
 			.type(ICE)
 			.category(MELEE)
 			.energyCost(new Constant(35))
@@ -180,7 +185,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(ADAPTIVE_ASSAULT_SIMPLE)
-			.name("adaptive_assault_simple")
+			.name("adaptive assault simple")
 			.type(SIMPLE)
 			.category(MELEE)
 			.priority(new Constant(1))
@@ -196,7 +201,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(ADAPTIVE_ASSAULT_SPIRIT)
-			.name("adaptive_assault_spirit")
+			.name("adaptive assault spirit")
 			.type(SPIRIT)
 			.category(MELEE)
 			.energyCost(new Constant(35))
@@ -212,7 +217,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(ADAPTIVE_ASSAULT_TOXIC)
-			.name("adaptive_assault_toxic")
+			.name("adaptive assault toxic")
 			.type(TOXIC)
 			.category(RANGED)
 			.energyCost(new Constant(35))
@@ -229,7 +234,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(ADAPTIVE_ASSAULT_WATER)
-			.name("adaptive_assault_water")
+			.name("adaptive assault water")
 			.type(WATER)
 			.category(RANGED)
 			.energyCost(new Constant(35))
@@ -349,7 +354,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(ANCIENT_ROAR)
-			.name("ancient_roar")
+			.name("ancient roar")
 			.type(ANCIENT)
 			.category(STATUS)
 			.energyCost(new Constant(50))
@@ -458,7 +463,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(BANANA_SLAM)
-			.name("banana_slam")
+			.name("banana slam")
 			.type(BRAWLER)
 			.category(MELEE)
 			.energyCost(new Constant(55))
@@ -515,7 +520,7 @@ public class MoveRegistry {
 		// TODO add baneful gnash
 		register(Move.build()
 			.id(BARB_TRAP) // MAN I HAVE NO IDEA, MAYBE HAVE THIS APPLY A ONE TURN MECHANIC ON THE USER????
-			.name("barb_trap")
+			.name("barb trap")
 			.type(TOXIC)
 			.category(STATUS)
 			.energyCost(Schematics.tenPercentOfUserMaxEnergy()) // 10% of max energy
@@ -598,15 +603,17 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(BEASTS_SLUMBER)
-			.name("beasts_slumber")
+			.name("beasts slumber")
 			.type(ANCIENT)
 			.category(STATUS)
 			.energyCost(new Constant(65))
+			.condition(new GateCondition(GateForAllId.CAN_USE_HEALING_MOVES, USER))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					// applys beast slumber mechanic
 				))
 			))
+			.tag(HEALING)
 		);
 		register(Move.build()
 			.id(BEQUEATH)
@@ -673,7 +680,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(BLAZE_PUNCH)
-			.name("blaze_punch")
+			.name("blaze punch")
 			.type(FIRE)
 			.category(MELEE)
 			.energyCost(new Constant(35))
@@ -727,12 +734,15 @@ public class MoveRegistry {
 		// TODO add bloodmeal
 		register(Move.build()
 			.id(BLOOD_DRAIN)
-			.name("blood_drain")
+			.name("blood drain")
 			.type(DARK)
 			.category(MELEE)
 			.energyCost(new Constant(30))
 			.basePower(new Constant(20))
-			.condition(new AccuracyCheck(new Constant(90)))
+			.condition(new And(
+				new AccuracyCheck(new Constant(90)),
+				new GateCondition(GateForAllId.CAN_USE_HEALING_MOVES, USER)
+			))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					new DealFormulaDamage(),
@@ -742,6 +752,7 @@ public class MoveRegistry {
 				))
 			))
 			.tag(CONTACT)
+			.tag(HEALING)
 			.tag(HEALTH_DRAIN)
 		);
 		register(Move.build()
@@ -814,7 +825,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(BONE_CRUNCH)
-			.name("bone_crunch")
+			.name("bone crunch")
 			.type(TOXIC)
 			.category(MELEE)
 			.energyCost(new Constant(46))
@@ -888,7 +899,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(BRAIN_FREEZE)
-			.name("brain_freeze")
+			.name("brain freeze")
 			.type(ICE)
 			.category(RANGED)
 			.energyCost(new Constant(44))
@@ -958,7 +969,10 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(20))
 			.basePower(new Constant(30))
-			.condition(new AccuracyCheck(new Constant(100)))
+			.condition(new And(
+				new AccuracyCheck(new Constant(100)),
+				new GateCondition(GateForAllId.CAN_USE_HEALING_MOVES, USER)
+			))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					new DealFormulaDamage(),
@@ -968,6 +982,7 @@ public class MoveRegistry {
 				))
 			))
 			.tag(CONTACT)
+			.tag(HEALING)
 			.tag(HEALTH_DRAIN)
 		);
 		register(Move.build()
@@ -1075,6 +1090,7 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(0))
 			.basePower(new Constant(100))
+			.condition(new GateCondition(GateForAllId.CAN_USE_HEALING_MOVES, USER))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					new DealFormulaDamage(),
@@ -1084,6 +1100,7 @@ public class MoveRegistry {
 				))
 			))
 			.tag(CONTACT)
+			.tag(HEALING)
 			.tag(HEALTH_DRAIN)
 			.tag(SOUL_MOVE)
 		);
@@ -1218,7 +1235,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(CLAMP_CLAW)
-			.name("clamp_claw")
+			.name("clamp claw")
 			.type(BUG)
 			.category(MELEE)
 			.energyCost(new Constant(50))
@@ -1271,10 +1288,16 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(CLEAN_UP)
-			.name("clean_up")
+			.name("clean up")
 			.type(METAL)
 			.category(STATUS)
 			.energyCost(new Constant(50))
+			// TODO requires there be hazards on the users side of the field
+			.condition(new GateCondition(GateForAllId.CAN_USE_HEALING_MOVES, USER))
+			.onHit(new MoveEffect(
+				Heal.user(Numbers.halfUserMaxHealth())
+			))
+			.tag(HEALING)
 		);
 		// this may not work as I am attempting to set the move values before selective a move
 		register(Move.build()
@@ -1319,7 +1342,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(COMPLETE_DEMOLITION)
-			.name("complete_demolition")
+			.name("complete demolition")
 			.type(METAL)
 			.category(MELEE)
 			.energyCost(new Constant(50))
@@ -1395,7 +1418,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(COUNTER_STANCE)
-			.name("counter_stance")
+			.name("counter stance")
 			.type(BRAWLER)
 			.category(MELEE)
 			.priority(new Constant(1))
@@ -1448,7 +1471,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(DART_BURST)
-			.name("dart_burst")
+			.name("dart burst")
 			.type(METAL)
 			.category(RANGED)
 			.energyCost(new Constant(40))
@@ -1612,7 +1635,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(DOUBLE_BEAT)
-			.name("double_beat")
+			.name("double beat")
 			.type(AIR)
 			.category(MELEE)
 			.energyCost(new Constant(40))
@@ -1628,7 +1651,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(DOUBLE_STING) // NEEDS TO BE MADE INTO A BARRAGE
-			.name("double_sting")
+			.name("double sting")
 			.type(BUG)
 			.category(MELEE)
 			.energyCost(new Constant(28))
@@ -1678,12 +1701,16 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
-			.condition(new AccuracyCheck(new Constant(100)))
+			.condition(new And(
+				new AccuracyCheck(new Constant(100)),
+				new GateCondition(GateForAllId.CAN_USE_HEALING_MOVES, USER)
+			))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					new DealFormulaDamage()
 				))
 			))
+			.tag(HEALING)
 		);
 		register(Move.build()
 			.id(DOWNPOUR)
@@ -1802,7 +1829,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(EGG_LOB)
-			.name("egg_lob")
+			.name("egg lob")
 			.type(DARK)
 			.category(RANGED)
 			.energyCost(new Constant(46))
@@ -1830,7 +1857,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(EGG_STORM)
-			.name("egg_storm")
+			.name("egg storm")
 			.type(DARK)
 			.category(RANGED)
 			.energyCost(new Constant(52))
@@ -1899,7 +1926,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(ELEMENTAL_BURST)
-			.name("elemental_burst")
+			.name("elemental burst")
 			.type(ANCIENT)
 			.category(RANGED)
 			.energyCost(new Constant(50))
@@ -2005,7 +2032,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(EXPERT_ONSLAUGHT)
-			.name("expert_onslaught")
+			.name("expert onslaught")
 			.type(SIMPLE)
 			.category(RANGED)
 			.energyCost(new Constant(40))
@@ -2046,7 +2073,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(FIERY_FONDANT)
-			.name("fiery_fondant")
+			.name("fiery fondant")
 			.type(FIRE)
 			.category(MELEE)
 			.energyCost(new Constant(55))
@@ -2256,7 +2283,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(FOUL_CHANT)
-			.name("foul_chant")
+			.name("foul chant")
 			.type(MIND)
 			.category(RANGED)
 			.energyCost(new Constant(45))
@@ -2417,6 +2444,8 @@ public class MoveRegistry {
 			.type(DARK)
 			.category(STATUS)
 			.energyCost(new Constant(30))
+			.condition(new GateCondition(GateForAllId.CAN_USE_HEALING_MOVES, USER))
+			.tag(HEALING)
 		);
 		register(Move.build()
 			.id(GALE_FORCE)
@@ -2464,7 +2493,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(GHOSTLY_HOWL)
-			.name("ghostly_howl")
+			.name("ghostly howl")
 			.type(SPIRIT)
 			.category(RANGED)
 			.energyCost(new Constant(38))
@@ -2495,7 +2524,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(GLOOM_FANGS)
-			.name("gloom_fangs")
+			.name("gloom fangs")
 			.type(DARK)
 			.category(MELEE)
 			.energyCost(new Constant(36))
@@ -2510,7 +2539,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(GLOOMINOUS_FANGS)
-			.name("gloominous_fangs")
+			.name("gloominous fangs")
 			.type(SIMPLE)
 			.category(MELEE)
 			.energyCost(new Constant(46))
@@ -2575,7 +2604,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(GOBBLE_GOOP)
-			.name("gobble_goop")
+			.name("gobble goop")
 			.type(TOXIC)
 			.category(RANGED)
 			.energyCost(new Constant(40))
@@ -2592,7 +2621,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(GOOP_SPOUT)
-			.name("goop_spout")
+			.name("goop spout")
 			.type(ANCIENT)
 			.category(RANGED)
 			.energyCost(new Constant(35))
@@ -2701,6 +2730,11 @@ public class MoveRegistry {
 			.type(PLANT)
 			.category(STATUS)
 			.energyCost(new Constant(72))
+			.condition(new GateCondition(GateForAllId.CAN_USE_HEALING_MOVES, USER))
+			.onHit(new MoveEffect(
+				Heal.target(Numbers.halfTargetMaxHealth())
+			))
+			.tag(HEALING)
 		);
 		register(Move.build()
 			.id(HASTEN)
@@ -2750,6 +2784,8 @@ public class MoveRegistry {
 			.type(MIND)
 			.category(STATUS)
 			.energyCost(new Constant(40))
+			.condition(new GateCondition(GateForAllId.CAN_USE_HEALING_MOVES, USER))
+			.tag(HEALING)
 		);
 		register(Move.build()
 			.id(HEART_BREAK)
@@ -2831,10 +2867,12 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(HERBAL_REMEDY)
-			.name("herbal_remedy")
+			.name("herbal remedy")
 			.type(PLANT)
 			.category(STATUS)
 			.energyCost(new Constant(70))
+			.condition(new GateCondition(GateForAllId.CAN_USE_HEALING_MOVES, USER))
+			.tag(HEALING)
 		);
 		register(Move.build()
 			.id(HIGH_PITCH_SCREECH)
@@ -2853,7 +2891,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(HOLY_SLASH)
-			.name("holy_slash")
+			.name("holy slash")
 			.type(METAL)
 			.category(RANGED)
 			.energyCost(new Constant(35))
@@ -2900,7 +2938,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(HORN_DASHI)
-			.name("horn_dashi")
+			.name("horn dashi")
 			.type(BRAWLER)
 			.category(MELEE)
 			.priority(new Constant(-6))
@@ -2962,7 +3000,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(HYPER_STING)
-			.name("hyper_sting")
+			.name("hyper sting")
 			.type(LIGHT)
 			.category(MELEE)
 			.energyCost(new Constant(50))
@@ -2999,7 +3037,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(ICICLE_FANGS)
-			.name("icicle_fangs")
+			.name("icicle fangs")
 			.type(ICE)
 			.category(MELEE)
 			.energyCost(new Constant(40))
@@ -3022,7 +3060,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(ICICLE_TREMOR)
-			.name("icicle_tremor")
+			.name("icicle tremor")
 			.type(ICE)
 			.category(MELEE)
 			.energyCost(new Constant(50))
@@ -3150,7 +3188,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(KINDLED_RAGE)
-			.name("kindled_rage")
+			.name("kindled rage")
 			.type(FIRE)
 			.category(MELEE)
 			.energyCost(new Constant(45))
@@ -3197,7 +3235,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(LAVA_SLASH)
-			.name("lava_slash")
+			.name("lava slash")
 			.type(FIRE)
 			.category(MELEE)
 			.energyCost(new Constant(45))
@@ -3236,7 +3274,10 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(48))
 			.basePower(new Constant(75))
-			.condition(new AccuracyCheck(new Constant(100)))
+			.condition(new And(
+				new AccuracyCheck(new Constant(100)),
+				new GateCondition(GateForAllId.CAN_USE_HEALING_MOVES, USER)
+			))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					new DealFormulaDamage(),
@@ -3245,6 +3286,7 @@ public class MoveRegistry {
 					))
 				))
 			))
+			.tag(HEALING)
 			.tag(HEALTH_DRAIN)
 		);
 		register(Move.build()
@@ -3280,7 +3322,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(LUMINOUS_ROAR)
-			.name("luminous_roar")
+			.name("luminous roar")
 			.type(LIGHT)
 			.category(RANGED)
 			.energyCost(new Constant(36))
@@ -3318,7 +3360,10 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(35))
 			.basePower(new Constant(50))
-			.condition(new AccuracyCheck(new Constant(100)))
+			.condition(new And(
+				new AccuracyCheck(new Constant(100)),
+				new GateCondition(GateForAllId.CAN_USE_HEALING_MOVES, USER)
+			))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					new DealFormulaDamage(),
@@ -3327,6 +3372,7 @@ public class MoveRegistry {
 					))
 				))
 			))
+			.tag(HEALING)
 			.tag(HEALTH_DRAIN)
 		);
 		register(Move.build()
@@ -3339,7 +3385,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(MAGMA_BURST)
-			.name("magma_burst")
+			.name("magma burst")
 			.type(FIRE)
 			.category(RANGED)
 			.energyCost(new Constant(45))
@@ -3405,7 +3451,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(MARSH_WAVE)
-			.name("marsh_wave")
+			.name("marsh wave")
 			.type(WATER)
 			.category(RANGED)
 			.energyCost(new Constant(45))
@@ -3536,7 +3582,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(METEOR_CRASH)
-			.name("meteor_crash")
+			.name("meteor crash")
 			.type(ANCIENT)
 			.category(RANGED)
 			.energyCost(new Constant(50))
@@ -3550,7 +3596,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(METEOR_SMASH)
-			.name("meteor_smash")
+			.name("meteor smash")
 			.type(ANCIENT)
 			.category(MELEE)
 			.energyCost(new Constant(50))
@@ -3569,7 +3615,10 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(48))
 			.basePower(new Constant(75))
-			.condition(new AccuracyCheck(new Constant(100)))
+			.condition(new And(
+				new AccuracyCheck(new Constant(100)),
+				new GateCondition(GateForAllId.CAN_USE_HEALING_MOVES, USER)
+			))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					new DealFormulaDamage(),
@@ -3578,6 +3627,7 @@ public class MoveRegistry {
 					))
 				))
 			))
+			.tag(HEALING)
 			.tag(HEALTH_DRAIN)
 		);
 		register(Move.build()
@@ -3690,7 +3740,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(MYSTIC_BREEZE)
-			.name("mystic_breeze")
+			.name("mystic breeze")
 			.type(BUG)
 			.category(RANGED)
 			.energyCost(new Constant(30))
@@ -3740,7 +3790,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(NATURES_RAGE)
-			.name("natures_rage")
+			.name("natures rage")
 			.type(PLANT)
 			.category(MELEE)
 			.energyCost(new Constant(55))
@@ -3819,7 +3869,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(OUT_OF_ORDER)
-			.name("out_of_order")
+			.name("out of order")
 			.type(ICE)
 			.category(RANGED)
 			.energyCost(new Constant(60))
@@ -3867,7 +3917,10 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(80))
-			.condition(new AccuracyCheck(new Constant(100)))
+			.condition(new And(
+				new AccuracyCheck(new Constant(100)),
+				new GateCondition(GateForAllId.CAN_USE_HEALING_MOVES, USER)
+			))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					new DealFormulaDamage(),
@@ -3878,6 +3931,7 @@ public class MoveRegistry {
 			))
 			.tag(BITING)
 			.tag(CONTACT)
+			.tag(HEALING)
 			.tag(HEALTH_DRAIN)
 		);
 		register(Move.build()
@@ -3957,7 +4011,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(PEPPERMINT_BREATH)
-			.name("peppermint_breath")
+			.name("peppermint breath")
 			.type(ICE)
 			.category(RANGED)
 			.energyCost(new Constant(40))
@@ -3979,6 +4033,12 @@ public class MoveRegistry {
 			.type(AIR)
 			.category(STATUS)
 			.energyCost(new Constant(72))
+			.condition(new GateCondition(GateForAllId.CAN_USE_HEALING_MOVES, USER))
+			.onHit(new MoveEffect(
+				Heal.user(Numbers.halfUserMaxHealth())
+				// TODO removes air typing
+			))
+			.tag(HEALING)
 		);
 		register(Move.build()
 			.id(PESTER)
@@ -4060,19 +4120,25 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
-			.condition(new AccuracyCheck(new Constant(100)))
+			.condition(new And(
+				new AccuracyCheck(new Constant(100)),
+				new GateCondition(GateForAllId.CAN_USE_HEALING_MOVES, USER)
+			))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					new DealFormulaDamage()
 				))
 			))
+			.tag(HEALING)
 		);
 		register(Move.build()
 			.id(PHOENIX_FLAME)
-			.name("phoenix_flame")
+			.name("phoenix flame")
 			.type(FIRE)
 			.category(STATUS)
 			.energyCost(new Constant(0)) // 0 is the display but it takes all of your energy
+			.condition(new GateCondition(GateForAllId.CAN_USE_HEALING_MOVES, USER))
+			.tag(HEALING)
 		);
 		register(Move.build()
 			.id(PHOTOSYNTHESIS)
@@ -4080,6 +4146,11 @@ public class MoveRegistry {
 			.type(PLANT)
 			.category(STATUS)
 			.energyCost(new Constant(72))
+			.condition(new GateCondition(GateForAllId.CAN_USE_HEALING_MOVES, USER))
+			.onHit(new MoveEffect(
+				Heal.user(Numbers.halfUserMaxHealth())
+			))
+			.tag(HEALING)
 		);
 		register(Move.build()
 			.id(PIERCING_DRIVE)
@@ -4179,7 +4250,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(POWER_DRAW)
-			.name("power_draw")
+			.name("power draw")
 			.type(ELECTRIC)
 			.category(RANGED)
 			.energyCost(new Constant(50))
@@ -4225,7 +4296,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(POWER_SURGE)
-			.name("power_surge")
+			.name("power surge")
 			.type(ELECTRIC)
 			.category(RANGED)
 			.energyCost(new Constant(50))
@@ -4314,7 +4385,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(PSYCHAL_SLAP)
-			.name("psychal_slap")
+			.name("psychal slap")
 			.type(MIND)
 			.category(MELEE)
 			.energyCost(new Constant(45))
@@ -4426,7 +4497,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(RADIANT_FORECAST)
-			.name("radiant_forecast")
+			.name("radiant forecast")
 			.type(LIGHT)
 			.category(RANGED)
 			.energyCost(new Constant(44))
@@ -4537,7 +4608,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(RAPID_FIRE)
-			.name("rapid_fire")
+			.name("rapid fire")
 			.type(FIRE)
 			.category(RANGED)
 			.energyCost(new Constant(32))
@@ -4551,7 +4622,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(RAZOR_SLASH)
-			.name("razor_slash")
+			.name("razor slash")
 			.type(METAL)
 			.category(MELEE)
 			.energyCost(new Constant(50))
@@ -4569,6 +4640,8 @@ public class MoveRegistry {
 		register(Move.build()
 			.id(RECHARGE)
 			.name("Recharge")
+			.condition(new GateCondition(GateForAllId.CAN_USE_HEALING_MOVES, USER))
+			.tag(HEALING)
 		);
 		register(Move.build()
 			.id(RECYCLE)
@@ -4597,6 +4670,11 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(STATUS)
 			.energyCost(new Constant(72))
+			.condition(new GateCondition(GateForAllId.CAN_USE_HEALING_MOVES, USER))
+			.onHit(new MoveEffect(
+				Heal.user(Numbers.halfUserMaxHealth())
+			))
+			.tag(HEALING)
 		);
 		register(Move.build()
 			.id(REPEATING_TUNE)
@@ -4649,6 +4727,12 @@ public class MoveRegistry {
 			.type(SPIRIT)
 			.category(STATUS)
 			.energyCost(new Constant(72))
+			.condition(new GateCondition(GateForAllId.CAN_USE_HEALING_MOVES, USER))
+			.onHit(new MoveEffect(
+				Heal.user(Numbers.halfUserMaxHealth())
+				// TODO removes spirit typing
+			))
+			.tag(HEALING)
 		);
 		register(Move.build()
 			.id(REVOLUTION)
@@ -4721,7 +4805,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(RUFFLED_FEATHERS)
-			.name("ruffled_feathers")
+			.name("ruffled feathers")
 			.type(AIR)
 			.category(STATUS)
 			.energyCost(Schematics.tenPercentOfUserMaxEnergy()) // 10% of max energy
@@ -4760,17 +4844,21 @@ public class MoveRegistry {
 			.type(PLANT)
 			.category(STATUS)
 			.energyCost(new Constant(30))
-			.condition(new AccuracyCheck(new Constant(90)))
+			.condition(new And(
+				new AccuracyCheck(new Constant(90)),
+				new GateCondition(GateForAllId.CAN_USE_HEALING_MOVES, USER)
+			))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					// apply sap plant mechanic
 				))
 			))
+			.tag(HEALING)
 			.tag(HEALTH_DRAIN)
 		);
 		register(Move.build()
 			.id(SAVAGE_GREED)
-			.name("savage_greed")
+			.name("savage greed")
 			.type(ANCIENT)
 			.category(MELEE)
 			.energyCost(new Constant(55))
@@ -4785,7 +4873,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(SAVAGE_HORN)
-			.name("savage_horn")
+			.name("savage horn")
 			.type(BUG)
 			.category(MELEE)
 			.energyCost(new Constant(60))
@@ -4822,7 +4910,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(SEA_SONG)
-			.name("sea_song")
+			.name("sea song")
 			.type(WATER)
 			.category(RANGED)
 			.energyCost(new Constant(60))
@@ -4838,7 +4926,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(SEARING_STEEL)
-			.name("searing_steel")
+			.name("searing steel")
 			.type(METAL)
 			.category(MELEE)
 			.energyCost(new Constant(48))
@@ -4856,7 +4944,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(SECOND_WIND)
-			.name("second_wind")
+			.name("second wind")
 			.type(AIR)
 			.category(STATUS)
 			.energyCost(new Constant(0))
@@ -4864,10 +4952,12 @@ public class MoveRegistry {
 		register(Move.build()
 			.id(SERENE_GIFT)
 			.name("Serene Gift")
+			.condition(new GateCondition(GateForAllId.CAN_USE_HEALING_MOVES, USER))
+			.tag(HEALING)
 		);
 		register(Move.build()
 			.id(SHADOW_LURK)
-			.name("shadow_lurk")
+			.name("shadow lurk")
 			.type(DARK)
 			.category(RANGED)
 			.energyCost(new Constant(55))
@@ -4880,7 +4970,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(SHADOW_PULSE)
-			.name("shadow_pulse")
+			.name("shadow pulse")
 			.type(DARK)
 			.category(RANGED)
 			.energyCost(new Constant(40))
@@ -4957,7 +5047,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(SHELL_BASH)
-			.name("shell_bash")
+			.name("shell bash")
 			.type(WATER)
 			.category(MELEE)
 			.energyCost(new Constant(56))
@@ -4971,7 +5061,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(SHELL_SHRAPNEL)
-			.name("shell_shrapnel")
+			.name("shell shrapnel")
 			.type(WATER)
 			.category(RANGED)
 			.energyCost(new Constant(56))
@@ -5129,6 +5219,8 @@ public class MoveRegistry {
 			.type(SIMPLE)
 			.category(STATUS)
 			.energyCost(new Constant(50))
+			.condition(new GateCondition(GateForAllId.CAN_USE_HEALING_MOVES, USER))
+			.tag(HEALING)
 		);
 		register(Move.build()
 			.id(SNORE_SPORES)
@@ -5164,10 +5256,12 @@ public class MoveRegistry {
 			.type(WATER)
 			.category(STATUS)
 			.energyCost(new Constant(50))
+			.condition(new GateCondition(GateForAllId.CAN_USE_HEALING_MOVES, USER))
+			.tag(HEALING)
 		);
 		register(Move.build()
 			.id(SOLAR_PUNCH)
-			.name("solar_punch")
+			.name("solar punch")
 			.type(LIGHT)
 			.category(MELEE)
 			.energyCost(new Constant(50))
@@ -5182,12 +5276,15 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(SOUL_DRAIN)
-			.name("soul_drain")
+			.name("soul drain")
 			.type(DARK)
 			.category(RANGED)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(80))
-			.condition(new AccuracyCheck(new Constant(100)))
+			.condition(new And(
+				new AccuracyCheck(new Constant(100)),
+				new GateCondition(GateForAllId.CAN_USE_HEALING_MOVES, USER)
+			))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					new DealFormulaDamage(),
@@ -5196,11 +5293,12 @@ public class MoveRegistry {
 					))
 				))
 			))
+			.tag(HEALING)
 			.tag(HEALTH_DRAIN)
 		);
 		register(Move.build()
 			.id(SOUL_HARVEST)
-			.name("soul_harvest")
+			.name("soul harvest")
 			.type(SPIRIT)
 			.category(MELEE)
 			.energyCost(new Constant(30))
@@ -5288,7 +5386,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(SPIT_OUT)
-			.name("spit_out")
+			.name("spit out")
 			.type(SIMPLE)
 			.category(RANGED)
 			.energyCost(new Constant(50))
@@ -5461,7 +5559,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(STEEL_TRAP)
-			.name("steel_trap")
+			.name("steel trap")
 			.type(METAL)
 			.category(MELEE)
 			.energyCost(new Constant(35))
@@ -5494,7 +5592,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(STORM_SUMMON)
-			.name("storm_summon")
+			.name("storm summon")
 			.type(ELECTRIC)
 			.category(RANGED)
 			.energyCost(new Constant(46))
@@ -5666,6 +5764,8 @@ public class MoveRegistry {
 			.type(PLANT)
 			.category(STATUS)
 			.energyCost(new Constant(40))
+			.condition(new GateCondition(GateForAllId.CAN_USE_HEALING_MOVES, USER))
+			.tag(HEALING)
 		);
 		register(Move.build()
 			.id(TALENT_TRADE)
@@ -5730,7 +5830,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(TELEKINETIC_SWEEP)
-			.name("telekinetic_sweep")
+			.name("telekinetic sweep")
 			.type(MIND)
 			.category(MELEE)
 			.energyCost(new Constant(45))
@@ -5778,7 +5878,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(THORN_SLAM)
-			.name("thorn_slam")
+			.name("thorn slam")
 			.type(PLANT)
 			.category(MELEE)
 			.energyCost(new Constant(55))
@@ -5947,7 +6047,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(TORRENTIAL_SLASH)
-			.name("torrential_slash")
+			.name("torrential slash")
 			.type(WATER)
 			.category(MELEE)
 			.energyCost(new Constant(50))
@@ -6021,7 +6121,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(TRICK_SHOT)
-			.name("trick_shot")
+			.name("trick shot")
 			.type(SPIRIT)
 			.category(RANGED)
 			.priority(new Constant(1))
@@ -6050,7 +6150,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(TRIP_ROOT)
-			.name("trip_root")
+			.name("trip root")
 			.type(PLANT)
 			.category(RANGED)
 			.energyCost(new Constant(30))
@@ -6091,7 +6191,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(TWIRLY_WHIRL)
-			.name("twirly_whirl")
+			.name("twirly whirl")
 			.type(BUG)
 			.category(RANGED)
 			.energyCost(new Constant(40))
@@ -6196,7 +6296,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(VICIOUS_SNAP)
-			.name("vicious_snap")
+			.name("vicious snap")
 			.type(WATER)
 			.category(MELEE)
 			.energyCost(new Constant(45))
@@ -6225,22 +6325,26 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(VITAL_JAB)
-			.name("Vital Slash")
+			.name("Vital Jab")
 			.type(BRAWLER)
 			.category(MELEE)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(80))
-			.condition(new AccuracyCheck(new Constant(100)))
+			.condition(new And(
+				new AccuracyCheck(new Constant(100)),
+				new GateCondition(GateForAllId.CAN_USE_HEALING_MOVES, USER)
+			))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					new DealFormulaDamage()
 				))
 			))
 			.tag(CONTACT)
+			.tag(HEALING)
 		);
 		register(Move.build()
 			.id(VITAL_SURGE)
-			.name("vital_surge")
+			.name("vital surge")
 			.type(BRAWLER)
 			.category(RANGED)
 			.energyCost(new Constant(55))
@@ -6318,7 +6422,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(WINTERS_FURY)
-			.name("winters_fury")
+			.name("winters fury")
 			.type(ICE)
 			.category(MELEE)
 			.energyCost(new Constant(55))
@@ -6345,7 +6449,7 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(YETIS_WRATH)
-			.name("yetis_wrath")
+			.name("yetis wrath")
 			.type(EARTH)
 			.category(MELEE)
 			.energyCost(new Constant(60))

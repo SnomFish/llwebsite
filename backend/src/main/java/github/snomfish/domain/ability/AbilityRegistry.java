@@ -13,9 +13,10 @@ import github.snomfish.domain.status.StatusId;
 import github.snomfish.domain.type.TypeId;
 import github.snomfish.domain.weather.WeatherId;
 import github.snomfish.functionality.Value;
+import github.snomfish.functionality._schematics.Conditions;
+import github.snomfish.functionality._schematics.Effects;
 import github.snomfish.functionality.condition.And;
 import github.snomfish.functionality.condition.Comparator;
-import github.snomfish.functionality.condition.Conditions;
 import github.snomfish.functionality.condition.Equals;
 import github.snomfish.functionality.condition.False;
 import github.snomfish.functionality.condition.GateCondition;
@@ -26,7 +27,6 @@ import github.snomfish.functionality.condition.Or;
 import github.snomfish.functionality.condition.RandomCondition;
 import github.snomfish.functionality.effect.ConditionalEffect;
 import github.snomfish.functionality.effect.EffectSequence;
-import github.snomfish.functionality.effect.Effects;
 import github.snomfish.functionality.effect.effects.AlterTypeChart;
 import github.snomfish.functionality.effect.effects.ApplyMechanic;
 import github.snomfish.functionality.effect.effects.ApplyStatChanges;
@@ -203,7 +203,7 @@ public class AbilityRegistry {
 		);
 		register(Ability.build() // completed
 			.id(APPLIED_FRUSTRATION)
-			.name("applied_frustration")
+			.name("applied frustration")
 			.rule(Rule.build()
 				.event(RuleForUserId.SELF_STATS_LOWERED_BY_OPP)
 				.effect(ApplyStatChanges.userChangingUser()
@@ -354,7 +354,7 @@ public class AbilityRegistry {
 		);
 		register(Ability.build()
 			.id(BUG_FEVER)
-			.name("bug_fever")
+			.name("bug fever")
 			.rule(Rule.build()
 				.event(RuleForUserId.SELF_KNOCKED_OUT_OPP)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.BUG))
@@ -405,7 +405,7 @@ public class AbilityRegistry {
 		// increases the damage of the users fire type moves by 25%
 		register(Ability.build()
 			.id(BURNING_RAGE)
-			.name("burning_rage")
+			.name("burning rage")
 			.rule(Rule.build()
 				.event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.FIRE))
@@ -414,7 +414,7 @@ public class AbilityRegistry {
 		);
 		register(Ability.build()
 			.id(BURSTING_SEAMS)
-			.name("bursting_seams")
+			.name("bursting seams")
 		);
 		register(Ability.build() // doubles exclusive ability
 			.id(CADDIE)
@@ -451,7 +451,7 @@ public class AbilityRegistry {
 		// increases the damage of the user's ice type moves by 25%
 		register(Ability.build()
 			.id(CHILLING_PASSION)
-			.name("chilling_passion")
+			.name("chilling passion")
 			.rule(Rule.build()
 				.event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.ICE))
@@ -560,7 +560,7 @@ public class AbilityRegistry {
 		);
 		register(Ability.build()
 			.id(COSMIC_PRESSURE)
-			.name("cosmic_pressure")
+			.name("cosmic pressure")
 			.gate(Gate.build()
 				.event(GateForAllId.CAN_WEATHER_EFFECTS_AFFECT)
 				.condition(new False())
@@ -594,7 +594,7 @@ public class AbilityRegistry {
 		);
 		register(Ability.build()
 			.id(DEEP_FROSTBITE)
-			.name("deep_frostbite")
+			.name("deep frostbite")
 		);
 		register(Ability.build()
 			.id(DEFENSIVE_PRIORITY)
@@ -614,7 +614,7 @@ public class AbilityRegistry {
 		);
 		register(Ability.build() // increases the power of the users water type moves by 1.25x
 			.id(DEPTHS_BORNE)
-			.name("depths_borne")
+			.name("depths borne")
 			.rule(Rule.build()
 				.event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.SELF().MOVE().TYPE(), TypeId.WATER))
@@ -662,7 +662,7 @@ public class AbilityRegistry {
 		);
 		register(Ability.build()
 			.id(DOUBLE_STRIKE)
-			.name("double_strike")
+			.name("double strike")
 		);
 		register(Ability.build()
             .id(DRAINAGE)
@@ -768,7 +768,7 @@ public class AbilityRegistry {
 		);
 		register(Ability.build() // reduces the damage taken from air type attacks and boosts it's rattack one stage when hit by one
 			.id(FANNING_FLAME)
-			.name("fanning_flame")
+			.name("fanning flame")
 			.rule(Rule.build()
 				.event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new And(
@@ -974,15 +974,15 @@ public class AbilityRegistry {
 		);
 		register(Ability.build()
 			.id(HEAVY_FISTS)
-			.name("heavy_fists")
+			.name("heavy fists")
 		);
 		register(Ability.build()
 			.id(HERD_BEHAVIOR)
-			.name("herd_behavior")
+			.name("herd behavior")
 		);
 		register(Ability.build()
 			.id(HIGH_EXPLOSIVE)
-			.name("high_explosive")
+			.name("high explosive")
 		);
 		register(Ability.build()
 			.id(HIGH_PRESSURE)
@@ -1095,7 +1095,7 @@ public class AbilityRegistry {
 		);
 		register(Ability.build() // increase the damage of the users earth type moves by 25%
 			.id(LAND_BORNE)
-			.name("land_borne")
+			.name("land borne")
 			.rule(Rule.build()
 				.event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.SELF().MOVE().TYPE(), TypeId.EARTH))
@@ -1133,7 +1133,7 @@ public class AbilityRegistry {
 		);
 		register(Ability.build()
 			.id(LUCK_OF_THE_SEA)
-			.name("luck_of_the_sea")
+			.name("luck_of_the sea")
 			.rule(Rule.build()
 				.event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.CRIT), new Constant(1.5))) // generic crit modifier = 1.5 and is always applied, so a 1.5 boost brings it to 2.25
@@ -1172,7 +1172,7 @@ public class AbilityRegistry {
 		);
 		register(Ability.build()
 			.id(MASK_SWAP)
-			.name("mask_swap")
+			.name("mask swap")
 			.rule(Rule.build()
 				.event(RuleForUserId.SELF_PRE_MOVE)
 				.effect(new ConditionalEffect(
@@ -1188,7 +1188,7 @@ public class AbilityRegistry {
 		);
 		register(Ability.build()
 			.id(MEAN_SPIRITED)
-			.name("mean_spirited")
+			.name("mean spirited")
 		);
 		register(Ability.build()
 			.id(MEDIC)
@@ -1228,7 +1228,7 @@ public class AbilityRegistry {
 		);
 		register(Ability.build()
 			.id(MYSTERIOUS_TOXINS)
-			.name("mysterious_toxins")
+			.name("mysterious toxins")
 		);
 		register(Ability.build()
 			.id(MYSTERY_TOXINS)
@@ -1236,7 +1236,7 @@ public class AbilityRegistry {
 		);
 		register(Ability.build()
 			.id(MYSTIC_TONE)
-			.name("mystic_tone")
+			.name("mystic tone")
 		);
 		register(Ability.build()
 			.id(NEUTRALIZE)
@@ -1244,7 +1244,7 @@ public class AbilityRegistry {
 		);
 		register(Ability.build()
 			.id(NIGHT_LIGHT)
-			.name("night_light")
+			.name("night light")
 		);
 		register(Ability.build()
 			.id(NIGHTMARISH)
@@ -1269,7 +1269,7 @@ public class AbilityRegistry {
 		);
 		register(Ability.build()
 			.id(OBSIDIAN_HEART)
-			.name("obsidian_heart")
+			.name("obsidian heart")
 			//.rule() // increase the cost of ancient type moves by 10%
 			.rule(Rule.build()
 				.event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
@@ -1279,7 +1279,7 @@ public class AbilityRegistry {
 		);
 		register(Ability.build()
 			.id(ODD_HUSK)
-			.name("odd_husk")
+			.name("odd husk")
 			.gate(Gate.build()
 				.event(GateForTargetId.CAN_OPPS_MOVE_SECONDARY_EFFECTS_AFFECT_SELF)
 				.condition(new Not(new GateCondition(GateForAllId.CAN_USE_DEFENSIVE_ABILITY, USER)))
@@ -1287,7 +1287,7 @@ public class AbilityRegistry {
 		);
 		register(Ability.build()
 			.id(ONE_OF_MANY)
-			.name("one_of_many")
+			.name("one_of many")
 		);
 		register(Ability.build()
 			.id(OVERCHARGED)
@@ -1323,7 +1323,7 @@ public class AbilityRegistry {
 		);
 		register(Ability.build()
 			.id(PINCER_TRAP)
-			.name("pincer_trap")
+			.name("pincer trap")
 		);
 		register(Ability.build()
 			.id(PITCH_BLACK)
@@ -1391,7 +1391,7 @@ public class AbilityRegistry {
 		);
 		register(Ability.build()
 			.id(PYRO_PRO)
-			.name("pyro_pro")
+			.name("pyro pro")
 		);
 		register(Ability.build()
 			.id(PYRO)
@@ -1418,7 +1418,7 @@ public class AbilityRegistry {
 		);
 		register(Ability.build()
 			.id(RAIL_GUN)
-			.name("rail_gun")
+			.name("rail gun")
 		);
 		register(Ability.build()
 			.id(RAIN_RUSH)
@@ -1512,7 +1512,7 @@ public class AbilityRegistry {
 		);
 		register(Ability.build()
 			.id(ROYAL_DECREE)
-			.name("royal_decree")
+			.name("royal decree")
 			.rule(Rule.build()
                 .event(RuleForUserId.SELF_PRE_MOVE) // before anything about the move is actually used
                 .effect(new AlterTypeChart(TypeId.ELECTRIC, TypeId.EARTH, 1))
@@ -1573,7 +1573,7 @@ public class AbilityRegistry {
 		);
 		register(Ability.build() // boosts the power of air type moves by 1.25x
 			.id(SKY_BORNE)
-			.name("sky_borne")
+			.name("sky borne")
 			.rule(Rule.build()
 				.event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.SELF().MOVE().TYPE(), TypeId.AIR))
@@ -1668,7 +1668,7 @@ public class AbilityRegistry {
 		);
 		register(Ability.build()
 			.id(SWEET_AROMA)
-			.name("sweet_aroma")
+			.name("sweet aroma")
 		);
 		register(Ability.build()
 			.id(SWEET_TOUCH)
@@ -1692,7 +1692,7 @@ public class AbilityRegistry {
 		);
 		register(Ability.build()
 			.id(THIRD_DEGREE_BURN)
-			.name("third_degree_burn")
+			.name("third_degree burn")
 		);
 		register(Ability.build()
 			.id(THRIVING_PACE)
@@ -1712,7 +1712,7 @@ public class AbilityRegistry {
 		);
 		register(Ability.build()
 			.id(TOTAL_ECLIPSE)
-			.name("total_eclipse")
+			.name("total eclipse")
 		);
 		register(Ability.build()
 			.id(TOXIC_FILTER)
@@ -1736,7 +1736,7 @@ public class AbilityRegistry {
 		);
 		register(Ability.build()
 			.id(TOXIC_TOUCH)
-			.name("toxic_touch")
+			.name("toxic touch")
 		);
 		register(Ability.build()
 			.id(TRADER)
@@ -1760,7 +1760,7 @@ public class AbilityRegistry {
 		);
 		register(Ability.build()
 			.id(TWO_FACE)
-			.name("two_face").gate(Gate.build() // prevents the ability being removed
+			.name("two face").gate(Gate.build() // prevents the ability being removed
 				.event(GateForUserId.CAN_REMOVE_SELFS_ITEM)
 				.condition(new False())
 			)
@@ -1775,7 +1775,7 @@ public class AbilityRegistry {
 		);
 		register(Ability.build()
 			.id(UPPER_HAND)
-			.name("upper_hand")
+			.name("upper hand")
 		);
 		register(Ability.build()
 			.id(VENGEANCE)

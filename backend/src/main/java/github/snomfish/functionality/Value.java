@@ -24,6 +24,7 @@ import github.snomfish.domain.weather.WeatherId;
 import github.snomfish.domain.weather.WeatherInstance;
 import github.snomfish.functionality.action.Action;
 import github.snomfish.functionality.context.BattleContext;
+import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.number.INumber;
 
 public class Value<T> {
@@ -97,6 +98,9 @@ public class Value<T> {
 		c -> c.target(),
 		null
 	);}
+	public static Value<Side> SIDE(ContextSideId sideId) {
+		return (sideId == ContextSideId.USER) ? USER() : TARGET();
+	}
     public static Value<WeatherInstance> WEATHER() {return new Value<>(
 		WeatherInstance.class,
 		c -> c.gamestate().weatherInstance(),

@@ -2,9 +2,13 @@ package github.snomfish.functionality.event.gateIds;
 
 
 
+
 public enum GateForTargetId implements IGateId {
     CAN_OPP_BE_TRAPPED,
     CAN_OPP_CONSUME_ITEM,
+    CAN_OPP_FALL_ASLEEP,
+    CAN_OPP_TAKE_RECOIL,
+    CAN_WEATHER_EFFECTS_AFFECT_OPP,
 
     CAN_OPP_MOVE_CRIT,
     CAN_OPP_MOVE_DAZE,
@@ -16,8 +20,6 @@ public enum GateForTargetId implements IGateId {
     CAN_REMOVE_OPPS_ABILITY,
     CAN_REMOVE_OPPS_ITEM,
 
-    CAN_OPP_TAKE_RECOIL,
-
     CAN_OPP_USE_ATTACKING_STAT_BOOSTS,
     CAN_OPP_USE_ATTACKING_STAT_DROPS,
     CAN_OPP_USE_DEFENDING_STAT_BOOSTS,
@@ -26,10 +28,7 @@ public enum GateForTargetId implements IGateId {
     CAN_OPP_USE_OFFENSIVE_ABILITY,
 
     CAN_OPPS_MOVE_USE_SECONDARY_EFFECTS,
+    CAN_OPP_USE_HEALING_MOVES,
     CAN_OPP_USE_SUPPORT_MOVES,
-
-    CAN_WEATHER_EFFECTS_AFFECT_OPP,
-
-    CAN_OPP_FALL_ASLEEP,
     ;
 }

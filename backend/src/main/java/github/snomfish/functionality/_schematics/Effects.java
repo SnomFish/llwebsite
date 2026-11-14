@@ -1,10 +1,12 @@
-package github.snomfish.functionality.effect;
+package github.snomfish.functionality._schematics;
 
 import github.snomfish.domain.mechanics.MechanicId;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.condition.GateCondition;
 import github.snomfish.functionality.condition.RandomCondition;
 import github.snomfish.functionality.context.ContextSideId;
+import github.snomfish.functionality.effect.ConditionalEffect;
+import github.snomfish.functionality.effect.IEffect;
 import github.snomfish.functionality.effect.effects.ApplyMechanic;
 import github.snomfish.functionality.effect.effects.SetValueEffect;
 import github.snomfish.functionality.event.gateIds.GateForAllId;

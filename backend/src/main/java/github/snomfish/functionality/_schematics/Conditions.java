@@ -1,8 +1,13 @@
-package github.snomfish.functionality.condition;
+package github.snomfish.functionality._schematics;
 
 import github.snomfish.domain.status.StatusId;
 import github.snomfish.domain.weather.WeatherId;
 import github.snomfish.functionality.Value;
+import github.snomfish.functionality.condition.And;
+import github.snomfish.functionality.condition.Equals;
+import github.snomfish.functionality.condition.ICondition;
+import github.snomfish.functionality.condition.Not;
+import github.snomfish.functionality.condition.Or;
 import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.INumber;
 import github.snomfish.functionality.number.Modulus;

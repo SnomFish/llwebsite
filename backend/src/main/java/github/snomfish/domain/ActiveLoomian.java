@@ -7,7 +7,6 @@ import github.snomfish.domain.ability.AbilityInstance;
 import github.snomfish.domain.mechanics.Mechanics;
 import github.snomfish.domain.stats.StatChanges;
 import github.snomfish.domain.stats.Stats;
-import github.snomfish.domain.status.StatusId;
 import github.snomfish.domain.type.TypeId;
 import github.snomfish.functionality.action.Action;
 import github.snomfish.functionality.branch.Branch;

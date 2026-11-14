@@ -1,8 +1,9 @@
-package github.snomfish.functionality;
+package github.snomfish.functionality._schematics;
 
 import java.util.List;
 
 import github.snomfish.domain.status.StatusId;
+import github.snomfish.functionality.Value;
 import github.snomfish.functionality.condition.GateCondition;
 import github.snomfish.functionality.condition.RandomCondition;
 import github.snomfish.functionality.context.ContextSideId;

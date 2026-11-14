@@ -4,6 +4,7 @@ public enum MoveTagId {
     BITING,
     CONTACT,
     EXPLOSIVE,
+    HEALING,
     HEALTH_DRAIN,
     KICKING,
     MULTI_HIT,
