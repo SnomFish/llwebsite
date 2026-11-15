@@ -19,11 +19,11 @@ import github.snomfish.functionality.condition.Not;
 import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.effect.EffectSequence;
 import github.snomfish.functionality.effect.effects.AddType;
-import github.snomfish.functionality.effect.effects.ApplyMechanic;
 import github.snomfish.functionality.effect.effects.ApplyStatChanges;
 import github.snomfish.functionality.effect.effects.ApplyStatus;
 import github.snomfish.functionality.effect.effects.DealDirectDamage;
 import github.snomfish.functionality.effect.effects.RemoveMechanic;
+import github.snomfish.functionality.effect.effects.SetFieldMechanic;
 import github.snomfish.functionality.event.Rule;
 import github.snomfish.functionality.event.gateIds.GateForAllId;
 import github.snomfish.functionality.event.ruleIds.ConstantRuleId;
@@ -79,7 +79,7 @@ public class MechanicRegistry {
             .rule(Rule.build()
                 .event(ConstantRuleId.END_OF_TURN)
                 .effect(new EffectSequence(
-                    ApplyMechanic.toField(BANE_OF_HASTE).withMaxAge(4),
+                    SetFieldMechanic.baneOfHaste().withMaxAge(5),
                     RemoveMechanic.fromUser(WILL_SET_BOH)
                 ))
             )

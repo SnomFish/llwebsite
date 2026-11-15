@@ -58,7 +58,7 @@ public class SetHazards implements IEffect {
 			case BARBS -> 			setBarbs(context);
 			case BANANA_PEEL ->		setBananaPeel(context);
 		};
-
+ 
 		return List.of(new Branch<>(outcome, 1.0));
 	}
 

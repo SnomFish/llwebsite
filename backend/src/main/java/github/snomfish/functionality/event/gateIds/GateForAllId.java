@@ -4,6 +4,7 @@ import static github.snomfish.functionality.event.gateIds.GateForTargetId.*;
 import static github.snomfish.functionality.event.gateIds.GateForUserId.*;
 
 public enum GateForAllId implements IGateId {
+    CAN_BE_INTIMIDATED              (CAN_SELF_BE_INTIMIDATED,               CAN_OPP_BE_INTIMIDATED),
     CAN_BE_TRAPPED                  (CAN_SELF_BE_TRAPPED,                   CAN_OPP_BE_TRAPPED),
 	CAN_CONSUME_ITEM				(CAN_SELF_CONSUME_ITEM,					CAN_OPP_CONSUME_ITEM),
     CAN_FALL_ASLEEP                 (CAN_SELF_FALL_ASLEEP,                  CAN_OPP_FALL_ASLEEP),

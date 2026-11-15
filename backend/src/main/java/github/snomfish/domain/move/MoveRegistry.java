@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import github.snomfish.domain.mechanics.ids.FieldMechanicId;
 import github.snomfish.domain.mechanics.ids.LoomianMechanicId;
 import github.snomfish.domain.move.structures.MoveEffect;
 import github.snomfish.domain.stats.StatId;
@@ -32,6 +31,7 @@ import github.snomfish.functionality.effect.effects.ClearHazards;
 import github.snomfish.functionality.effect.effects.DealFormulaDamage;
 import github.snomfish.functionality.effect.effects.EnergyDrainEffect;
 import github.snomfish.functionality.effect.effects.RestoreHealth;
+import github.snomfish.functionality.effect.effects.SetFieldMechanic;
 import github.snomfish.functionality.effect.effects.SetHazards;
 import github.snomfish.functionality.effect.effects.HealthDrainEffect;
 import github.snomfish.functionality.effect.effects.NoEffect;
@@ -502,7 +502,7 @@ public class MoveRegistry {
 			.energyCost(new Constant(50))
 			.priority(new Constant(-7))
 			.onHit(new MoveEffect(
-				ApplyMechanic.toField(FieldMechanicId.BANE_OF_HASTE).withMaxAge(4)
+				SetFieldMechanic.baneOfHaste().withMaxAge(5)
 			))
 		);
 		register(Move.build()
@@ -2338,7 +2338,7 @@ public class MoveRegistry {
 				new EffectSequence(List.of(
 					new DealFormulaDamage(),
 					Schematics.secondaryEffects(List.of(
-						ApplyMechanic.toUser(LoomianMechanicId.WILL_SET_BOH)
+						SetFieldMechanic.baneOfHaste().withMaxAge(5)
 					))
 				))
 			))
@@ -2438,7 +2438,7 @@ public class MoveRegistry {
 			.category(STATUS)
 			.energyCost(new Constant(25))
 			.onHit(new MoveEffect(
-				ApplyMechanic.toField(FieldMechanicId.FUNGUS_CURSE).withMaxAge(4)
+				SetFieldMechanic.fungusCurse().withMaxAge(5)
 			))
 		);
 		register(Move.build()

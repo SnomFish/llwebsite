@@ -267,6 +267,11 @@ public class Value<T> {
 		c -> 		((Side) c).mechanics().get(id),
 		(c, v) ->	((Side) c).mechanics().set(v)
 	);}
+	public Value<Integer> MAX_AGE() {return update(
+		Integer.class,
+		c ->		((MechanicInstance) c).maxAge(),
+		(c, v) ->	((MechanicInstance) c).maxAge(v)
+	);}
 	public Value<Mechanics> LOOMIAN_MECHANICS() {return update(
 		Mechanics.class,
 		c ->		((Side) c).activeLoomian().mechanics(),

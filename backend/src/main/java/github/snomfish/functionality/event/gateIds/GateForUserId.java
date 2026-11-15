@@ -4,6 +4,7 @@ package github.snomfish.functionality.event.gateIds;
 
 
 public enum GateForUserId implements IGateId {
+    CAN_SELF_BE_INTIMIDATED,
     CAN_SELF_BE_TRAPPED,
     CAN_SELF_CONSUME_ITEM,
     CAN_SELF_FALL_ASLEEP,

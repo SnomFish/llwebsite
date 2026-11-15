@@ -30,7 +30,11 @@ public enum RuleForUserId implements IRuleForSideId {
     SELF_STATS_LOWERED_BY_OPP,
     SELF_STATS_LOWERED_BY_SELF,
 
-    // weather
+    // setting
+    SELF_SET_BANE_OF_HASTE,
+    SELF_SET_FUNGUS_CURSE,
+    SELF_SET_NEAR_ENCHANTMENT,
+    SELF_SET_FAR_ENCHANTMENT,
     SELF_SET_WEATHER,
     ;
 }

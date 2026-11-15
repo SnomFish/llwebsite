@@ -4,6 +4,7 @@ package github.snomfish.functionality.event.gateIds;
 
 
 public enum GateForTargetId implements IGateId {
+    CAN_OPP_BE_INTIMIDATED,
     CAN_OPP_BE_TRAPPED,
     CAN_OPP_CONSUME_ITEM,
     CAN_OPP_FALL_ASLEEP,

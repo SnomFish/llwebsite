@@ -7,6 +7,7 @@ import java.util.Map;
 import github.snomfish.domain.item.ItemId;
 import github.snomfish.domain.mechanics.ids.FieldMechanicId;
 import github.snomfish.domain.mechanics.ids.LoomianMechanicId;
+import github.snomfish.domain.mechanics.ids.SideMechanicId;
 import github.snomfish.domain.move.CategoryId;
 import github.snomfish.domain.move.modifiers.ModifierId;
 import github.snomfish.domain.move.MoveTagId;
@@ -35,6 +36,7 @@ import github.snomfish.functionality.effect.effects.ClutchEffect;
 import github.snomfish.functionality.effect.effects.DealDirectSelfDamage;
 import github.snomfish.functionality.effect.effects.DispatchEventEffect;
 import github.snomfish.functionality.effect.effects.SetAbility;
+import github.snomfish.functionality.effect.effects.SetFieldMechanic;
 import github.snomfish.functionality.effect.effects.SetHazards;
 import github.snomfish.functionality.effect.effects.SetType;
 import github.snomfish.functionality.effect.effects.SetValueEffect;
@@ -1242,7 +1244,7 @@ public class AbilityRegistry {
 			.name("mycotic")
 			.rule(Rule.build()
 				.event(RuleForUserId.SELF_SWAPPED_IN)
-				.effect(ApplyMechanic.toField(FieldMechanicId.FUNGUS_CURSE).withMaxAge(4))
+				.effect(SetFieldMechanic.fungusCurse().withMaxAge(5))
 			)
 		);
 		register(Ability.build()
@@ -1340,13 +1342,38 @@ public class AbilityRegistry {
 				.effect(ApplyMechanic.toUser(LoomianMechanicId.WILL_SET_BOH))
 			)
 		);
-		register(Ability.build()
+		register(Ability.build() // increases the lifespan of some side mechanics
 			.id(PERSISTENCE)
 			.name("persistence")
+			.rule(Rule.build()
+				.event(RuleForUserId.SELF_SET_WEATHER)
+				.effect(Effects.addValue(Value.WEATHER_LIFESPAN(), new Constant(1)))
+			)
+			.rule(Rule.build()
+				.event(RuleForUserId.SELF_SET_NEAR_ENCHANTMENT)
+				.effect(Effects.addValue(Value.USER().SIDE_MECHANIC(SideMechanicId.NEAR_ENCHANTMENT).MAX_AGE(), new Constant(1)))
+			)
+			.rule(Rule.build()
+				.event(RuleForUserId.SELF_SET_FAR_ENCHANTMENT)
+				.effect(Effects.addValue(Value.USER().SIDE_MECHANIC(SideMechanicId.FAR_ENCHANTMENT).MAX_AGE(), new Constant(1)))
+			)
+			.rule(Rule.build()
+				.event(RuleForUserId.SELF_SET_BANE_OF_HASTE)
+				.effect(Effects.addValue(Value.FIELD_MECHANIC(FieldMechanicId.BANE_OF_HASTE).MAX_AGE(), new Constant(1)))
+			)
+			.rule(Rule.build()
+				.event(RuleForUserId.SELF_SET_FUNGUS_CURSE)
+				.effect(Effects.addValue(Value.FIELD_MECHANIC(FieldMechanicId.FUNGUS_CURSE).MAX_AGE(), new Constant(1)))
+			)
 		);
 		register(Ability.build()
 			.id(PETRIFYING)
 			.name("petrifying")
+			.rule(Rule.build()
+				.event(RuleForUserId.SELF_SWAPPED_IN)
+				.condition(new GateCondition(GateForAllId.CAN_BE_INTIMIDATED, TARGET))
+				.effect(ApplyStatChanges.userChangingTarget().mattack(new Constant(-1)))
+			)
 		);
 		register(Ability.build()
 			.id(PINCER_TRAP)
@@ -1717,6 +1744,11 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(TERRIFYING)
 			.name("terrifying")
+			.rule(Rule.build()
+				.event(RuleForUserId.SELF_SWAPPED_IN)
+				.condition(new GateCondition(GateForAllId.CAN_BE_INTIMIDATED, TARGET))
+				.effect(ApplyStatChanges.userChangingTarget().mattack(new Constant(-1)))
+			)
 		);
 		register(Ability.build()
 			.id(TERRITORIAL)

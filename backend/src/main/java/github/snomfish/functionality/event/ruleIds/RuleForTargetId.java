@@ -30,7 +30,11 @@ public enum RuleForTargetId implements IRuleForSideId {
     LOWERED_OPP_STATS,
     WATCHES_OPP_LOWER_OPP_STATS,
 
-    // weather
+    // setting
+    OPP_SET_BANE_OF_HASTE,
+    OPP_SET_FUNGUS_CURSE,
+    OPP_SET_NEAR_ENCHANTMENT,
+    OPP_SET_FAR_ENCHANTMENT,
     OPP_SET_WEATHER,
     ;
 }
