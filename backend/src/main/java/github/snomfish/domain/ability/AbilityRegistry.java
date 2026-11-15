@@ -55,7 +55,6 @@ import github.snomfish.functionality.number.Multiply;
 import github.snomfish.functionality.number.ValueConstant;
 
 import static github.snomfish.domain.ability.AbilityId.*;
-import static github.snomfish.domain.mechanics.ids.FieldMechanicId.FUNGUS_CURSE;
 import static github.snomfish.functionality.context.ContextSideId.*;
 
 public class AbilityRegistry {

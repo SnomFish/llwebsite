@@ -16,6 +16,7 @@ public class SetHazards implements IEffect {
 		ICICLE_TRAPS,
 		POISON_BARBS,
 		BARBS,
+		BANANA_PEEL
 	}
 
 
@@ -44,6 +45,9 @@ public class SetHazards implements IEffect {
 	public static SetHazards barbs() {
 		return new SetHazards(HazardId.BARBS);
 	}
+	public static SetHazards bananaPeel() {
+		return new SetHazards(HazardId.BANANA_PEEL);
+	}
 
 
 	// ALWAYS SETS HAZARDS ON THE TARGETS SIDE OF THE FIELD
@@ -52,6 +56,7 @@ public class SetHazards implements IEffect {
 			case ICICLE_TRAPS -> 	setIcicleTraps(context);
 			case POISON_BARBS -> 	setPoisonBarbs(context);
 			case BARBS -> 			setBarbs(context);
+			case BANANA_PEEL ->		setBananaPeel(context);
 		};
 
 		return List.of(new Branch<>(outcome, 1.0));
@@ -103,6 +108,17 @@ public class SetHazards implements IEffect {
 		else {
 			ApplyMechanic.toTargetSide(SideMechanicId.SINGLE_BARBS);
 		}
+
+		return outcome;
+	}
+
+
+	private BattleContext setBananaPeel(BattleContext context) {
+		Mechanics mechanics = Value.TARGET().SIDE_MECHANICS().get(context);
+		if (mechanics.has(SideMechanicId.BANANA_PEEL)) return context;
+
+		BattleContext outcome = context.deepCopy();
+		ApplyMechanic.toTargetSide(SideMechanicId.BANANA_PEEL);
 
 		return outcome;
 	}

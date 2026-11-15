@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import github.snomfish.domain.mechanics.ids.IMechanicId;
+import github.snomfish.domain.move.CategoryId;
 import github.snomfish.domain.move.modifiers.ModifierId;
 import github.snomfish.domain.status.StatusId;
 import github.snomfish.domain.type.TypeId;
@@ -19,6 +20,7 @@ import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.effect.EffectSequence;
 import github.snomfish.functionality.effect.effects.AddType;
 import github.snomfish.functionality.effect.effects.ApplyMechanic;
+import github.snomfish.functionality.effect.effects.ApplyStatChanges;
 import github.snomfish.functionality.effect.effects.ApplyStatus;
 import github.snomfish.functionality.effect.effects.DealDirectDamage;
 import github.snomfish.functionality.effect.effects.RemoveMechanic;
@@ -276,10 +278,29 @@ public class MechanicRegistry {
         register(new Mechanic()
             .id(NEAR_ENCHANTMENT)
             .name("near enchantment")
+            .rule(Rule.build()
+                .event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
+                .condition(new Equals<>(Value.TARGET().MOVE().CATEGORY(), CategoryId.MELEE))
+                .effect(Effects.multiplyValue(Value.TARGET().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(0.5)))
+            )
         );
         register(new Mechanic()
             .id(FAR_ENCHANTMENT)
             .name("far enchantment")
+            .rule(Rule.build()
+                .event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
+                .condition(new Equals<>(Value.TARGET().MOVE().CATEGORY(), CategoryId.RANGED))
+                .effect(Effects.multiplyValue(Value.TARGET().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(0.5)))
+            )
+        );
+        register(new Mechanic()
+            .id(FAR_ENCHANTMENT)
+            .name("far enchantment")
+            .rule(Rule.build()
+                .event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
+                .condition(new Equals<>(Value.TARGET().MOVE().CATEGORY(), CategoryId.RANGED))
+                .effect(ApplyStatChanges.targetChangingUser().speed(new Constant(-1)))
+            )
         );
         register(new Mechanic()
             .id(AUGMENT)

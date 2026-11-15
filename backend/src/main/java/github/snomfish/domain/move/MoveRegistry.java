@@ -21,11 +21,14 @@ import github.snomfish.functionality.condition.And;
 import github.snomfish.functionality.condition.Comparator;
 import github.snomfish.functionality.condition.Equals;
 import github.snomfish.functionality.condition.GateCondition;
+import github.snomfish.functionality.condition.HasHazards;
 import github.snomfish.functionality.condition.RandomCondition;
 import github.snomfish.functionality.effect.ConditionalEffect;
 import github.snomfish.functionality.effect.EffectSequence;
 import github.snomfish.functionality.effect.effects.ApplyMechanic;
 import github.snomfish.functionality.effect.effects.ApplyStatChanges;
+import github.snomfish.functionality.effect.effects.ClearEnchantments;
+import github.snomfish.functionality.effect.effects.ClearHazards;
 import github.snomfish.functionality.effect.effects.DealFormulaDamage;
 import github.snomfish.functionality.effect.effects.EnergyDrainEffect;
 import github.snomfish.functionality.effect.effects.RestoreHealth;
@@ -41,7 +44,6 @@ import github.snomfish.functionality.number.ConditionalNumber;
 import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.ValueConstant;
 
-import static github.snomfish.domain.mechanics.ids.FieldMechanicId.BANE_OF_HASTE;
 import static github.snomfish.domain.move.CategoryId.*;
 import static github.snomfish.domain.move.MoveId.*;
 import static github.snomfish.domain.move.MoveTagId.*;
@@ -488,6 +490,9 @@ public class MoveRegistry {
 			.type(TypeId.SIMPLE)
 			.category(STATUS)
 			.energyCost(new Constant(100))
+			.onHit(new MoveEffect(
+				SetHazards.bananaPeel()
+			))
 		);
 		register(Move.build()
 			.id(MoveId.BANE_OF_HASTE)
@@ -1019,8 +1024,8 @@ public class MoveRegistry {
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
 					ApplyStatChanges.userChangingUser()
-						.rattack(new Constant(1))
-					// clear hazards
+						.rattack(new Constant(1)),
+					ClearHazards.fromUser()
 				))
 			))
 		);
@@ -1303,9 +1308,15 @@ public class MoveRegistry {
 			.category(STATUS)
 			.energyCost(new Constant(50))
 			// TODO requires there be hazards on the users side of the field
-			.condition(new GateCondition(GateForAllId.CAN_USE_HEALING_MOVES, USER))
+			.condition(new And(
+				new GateCondition(GateForAllId.CAN_USE_HEALING_MOVES, USER),
+				HasHazards.user()
+			))
 			.onHit(new MoveEffect(
-				RestoreHealth.user(Numbers.halfUserMaxHealth())
+				new EffectSequence(
+					ClearHazards.fromUser(),
+					RestoreHealth.user(Numbers.halfUserMaxHealth())
+				)
 			))
 			.tag(HEALING)
 		);
@@ -2695,9 +2706,9 @@ public class MoveRegistry {
 			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					// clear hazards
 					ApplyStatChanges.userChangingUser()
-						.mattack(new Constant(1))
+						.mattack(new Constant(1)),
+					ClearHazards.fromUser()
 				))
 			))
 		);
@@ -3749,7 +3760,8 @@ public class MoveRegistry {
 					new DealFormulaDamage(),
 					Schematics.secondaryEffects(List.of(
 						ApplyStatChanges.userChangingUser()
-							.accuracy(new Constant(1))
+							.accuracy(new Constant(1)),
+						ClearHazards.fromUser()
 					))
 				))
 			))
@@ -5352,7 +5364,10 @@ public class MoveRegistry {
 			.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						ClearEnchantments.fromTarget()
+					))
 				))
 			))
 		);
@@ -5844,12 +5859,21 @@ public class MoveRegistry {
 			.category(STATUS)
 			.energyCost(new Constant(20))
 		);
-		register(Move.build()
+		register(Move.build() // TODO make the move fail if the opponent has the ability staunch
 			.id(TEAR_DOWN)
 			.name("Tear Down")
 			.type(TypeId.SIMPLE)
 			.category(STATUS)
 			.energyCost(new Constant(35))
+			.onHit(new MoveEffect(
+				new EffectSequence(List.of(
+					ApplyStatChanges.userChangingTarget().mdefense(new Constant(-1)),
+					ClearHazards.fromUser(),
+					ClearHazards.fromTarget(),
+					ClearEnchantments.fromUser(),
+					ClearEnchantments.fromTarget()
+				))
+			))
 		);
 		register(Move.build()
 			.id(TEASE)

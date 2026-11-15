@@ -1,13 +1,16 @@
 package github.snomfish.domain.mechanics.ids;
 
 public enum SideMechanicId implements IMechanicId {
-	ICICLE_TRAP,
+	// HAZARDS
+    ICICLE_TRAP,
     HALF_ICICLE_TRAP,
     SINGLE_POISON_BARBS,
     DOUBLE_POISON_BARBS,
     SINGLE_BARBS,
     DOUBLE_BARBS,
     TRIPLE_BARBS,
+    BANANA_PEEL,
+    
     HASTEN,
     NEAR_ENCHANTMENT,
     FAR_ENCHANTMENT,

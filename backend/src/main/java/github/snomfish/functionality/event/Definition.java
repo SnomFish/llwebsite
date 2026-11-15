@@ -15,18 +15,10 @@ public abstract class Definition<A, B extends Definition<A, B>> {
 
 
     protected A id;
-    protected String name;
-    protected List<Rule> rules;
-    protected List<Gate> gates;
-    protected List<Hook> hooks;
-
-
-    public Definition() {
-        this.name = "definition";
-        this.rules = new ArrayList<>();
-        this.gates = new ArrayList<>();
-        this.hooks = new ArrayList<>(); 
-    }
+    protected String name = "definition";
+    protected List<Rule> rules = new ArrayList<>();
+    protected List<Gate> gates = new ArrayList<>();
+    protected List<Hook> hooks = new ArrayList<>();
 
 
     // getters
