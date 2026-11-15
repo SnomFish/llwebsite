@@ -9,9 +9,16 @@ public class ListContains<T> implements ICondition {
       
 
     private Value<List<T>> list;
-    private Value<T> value;
+    private Object value;
 
 
+    public ListContains(
+        Value<List<T>> list,
+        T value
+    ) {
+        this.list = list;
+        this.value = value;
+    }
     public ListContains(
         Value<List<T>> list,
         Value<T> value
@@ -21,18 +28,17 @@ public class ListContains<T> implements ICondition {
     }
 
 
-    // both are type Value, so no deep copying is needed here
-    @Override
+    private ListContains(ListContains<T> copy) {
+        this.list = copy.list;
+        this.value = copy.value;
+    }
     public ListContains<T> deepCopy() {
-        return new ListContains<>(
-            list,
-            value
-        );
+        return new ListContains<>(this);
     }
 
 
     @Override 
     public double execute(BattleContext context) {
-        return list.get(context).contains(value.get(context)) ? 1 : 0;
+        return list.get(context).contains(Value.resolve(value, context)) ? 1 : 0;
     }
 }

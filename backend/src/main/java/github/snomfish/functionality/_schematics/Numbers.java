@@ -29,6 +29,7 @@ public class Numbers {
 	public static INumber thirdUserMaxHealth() 			{return fractionOfMaxHealth(USER, 1/3);}
 	public static INumber quarterUserMaxHealth() 		{return fractionOfMaxHealth(USER, 1/4);}
 	public static INumber fifthUserMaxHealth() 			{return fractionOfMaxHealth(USER, 1/5);}
+	public static INumber sixthUserMaxHealth()			{return fractionOfMaxHealth(USER, 1/6);}
 	public static INumber eighthUserMaxHealth() 		{return fractionOfMaxHealth(USER, 1/8);}
 	public static INumber tenthUserMaxHealth() 			{return fractionOfMaxHealth(USER, 1/10);}
 	public static INumber twelfthUserMaxHealth() 		{return fractionOfMaxHealth(USER, 1/12);}

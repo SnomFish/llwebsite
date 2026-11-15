@@ -29,6 +29,7 @@ import github.snomfish.functionality.effect.effects.ApplyStatChanges;
 import github.snomfish.functionality.effect.effects.DealFormulaDamage;
 import github.snomfish.functionality.effect.effects.EnergyDrainEffect;
 import github.snomfish.functionality.effect.effects.RestoreHealth;
+import github.snomfish.functionality.effect.effects.SetHazards;
 import github.snomfish.functionality.effect.effects.HealthDrainEffect;
 import github.snomfish.functionality.effect.effects.NoEffect;
 import github.snomfish.functionality.effect.effects.RecoilEffect;
@@ -537,6 +538,9 @@ public class MoveRegistry {
 			.type(TypeId.METAL)
 			.category(STATUS)
 			.energyCost(new Constant(20))
+			.onHit(new MoveEffect(
+				SetHazards.barbs()
+			))
 		);
 		register(Move.build()
 			.id(BARTER)
@@ -3062,10 +3066,13 @@ public class MoveRegistry {
 		);
 		register(Move.build()
 			.id(ICICLE_TRAP)
-			.name("Icicle Trap")
+			.name("icicle trap")
 			.type(TypeId.ICE)
 			.category(STATUS)
 			.energyCost(new Constant(45))
+			.onHit(new MoveEffect(
+				SetHazards.icicleTraps()
+			))
 		);
 		register(Move.build()
 			.id(ICICLE_TREMOR)
@@ -4244,6 +4251,9 @@ public class MoveRegistry {
 			.type(TypeId.TOXIC)
 			.category(STATUS)
 			.energyCost(new Constant(25))
+			.onHit(new MoveEffect(
+				SetHazards.poisonBarbs()
+			))
 		);
 		register(Move.build()
 			.id(POUNCE)
@@ -5058,7 +5068,10 @@ public class MoveRegistry {
 			.condition(new AccuracyCheck(new Constant(90)))
 			.onHit(new MoveEffect(
 				new EffectSequence(List.of(
-					new DealFormulaDamage()
+					new DealFormulaDamage(),
+					Schematics.secondaryEffects(List.of(
+						SetHazards.barbs()
+					))
 				))
 			))
 			.tag(CONTACT)

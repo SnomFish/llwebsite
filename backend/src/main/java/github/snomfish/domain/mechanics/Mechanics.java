@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import github.snomfish.domain.mechanics.ids.IMechanicId;
-import github.snomfish.domain.mechanics.ids.LoomianMechanicId;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.copy.DeepCopyable;

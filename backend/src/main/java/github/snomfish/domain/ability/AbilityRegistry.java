@@ -35,6 +35,7 @@ import github.snomfish.functionality.effect.effects.ClutchEffect;
 import github.snomfish.functionality.effect.effects.DealDirectSelfDamage;
 import github.snomfish.functionality.effect.effects.DispatchEventEffect;
 import github.snomfish.functionality.effect.effects.SetAbility;
+import github.snomfish.functionality.effect.effects.SetHazards;
 import github.snomfish.functionality.effect.effects.SetType;
 import github.snomfish.functionality.effect.effects.SetValueEffect;
 import github.snomfish.functionality.effect.effects.SetWeather;
@@ -1008,6 +1009,10 @@ public class AbilityRegistry {
 					new GateCondition(GateForAllId.CAN_USE_DEFENSIVE_ABILITY, USER)
 				))
 			)
+			.gate(Gate.build()
+				.event(GateForUserId.CAN_HAZARDS_AFFECT_SELF)
+				.condition(new False())
+			)
 		);
 		register(Ability.build()
 			.id(HYDRATE)
@@ -1656,6 +1661,11 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(SPINE_BREAK)
 			.name("spine break")
+			.rule(Rule.build()
+				.event(RuleForTargetId.HIT_BY_MOVE)
+				.condition(new Equals<>(Value.OPP().MOVE().MOVE_TAG(MoveTagId.CONTACT), true))
+				.effect(SetHazards.poisonBarbs())
+			)
 		);
 		register(Ability.build()
 			.id(SPOILS_OF_WAR)

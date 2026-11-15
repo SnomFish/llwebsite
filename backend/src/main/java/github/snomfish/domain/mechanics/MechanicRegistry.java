@@ -5,19 +5,31 @@ import java.util.Map;
 
 import github.snomfish.domain.mechanics.ids.IMechanicId;
 import github.snomfish.domain.move.modifiers.ModifierId;
+import github.snomfish.domain.status.StatusId;
 import github.snomfish.domain.type.TypeId;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality._schematics.Effects;
+import github.snomfish.functionality._schematics.Numbers;
+import github.snomfish.functionality.condition.And;
 import github.snomfish.functionality.condition.Equals;
+import github.snomfish.functionality.condition.GateCondition;
+import github.snomfish.functionality.condition.ListContains;
+import github.snomfish.functionality.condition.Not;
+import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.effect.EffectSequence;
 import github.snomfish.functionality.effect.effects.AddType;
 import github.snomfish.functionality.effect.effects.ApplyMechanic;
+import github.snomfish.functionality.effect.effects.ApplyStatus;
+import github.snomfish.functionality.effect.effects.DealDirectDamage;
 import github.snomfish.functionality.effect.effects.RemoveMechanic;
 import github.snomfish.functionality.event.Rule;
+import github.snomfish.functionality.event.gateIds.GateForAllId;
 import github.snomfish.functionality.event.ruleIds.ConstantRuleId;
 import github.snomfish.functionality.event.ruleIds.RuleForTargetId;
 import github.snomfish.functionality.event.ruleIds.RuleForUserId;
 import github.snomfish.functionality.number.Constant;
+import github.snomfish.functionality.number.Multiply;
+import github.snomfish.functionality.number.TypeMultiplier;
 
 import static github.snomfish.domain.mechanics.ids.FieldMechanicId.*;
 import static github.snomfish.domain.mechanics.ids.LoomianMechanicId.*;
@@ -160,14 +172,102 @@ public class MechanicRegistry {
         register(new Mechanic()
             .id(ICICLE_TRAP)
             .name("icicle trap")
+            .rule(Rule.build()
+                .event(RuleForUserId.SELF_SWAPPED_IN)
+                .condition(new And(
+                    new Not(new ListContains<>(Value.USER().TYPES(), TypeId.ICE)),
+                    new GateCondition(GateForAllId.CAN_HAZARDS_AFFECT, ContextSideId.USER)
+                ))
+                .effect(new DealDirectDamage(
+                    new Multiply(Numbers.eighthUserMaxHealth(), TypeMultiplier.onUser(TypeId.ICE))
+                ))
+            )
         );
         register(new Mechanic()
-            .id(POISON_BARBS)
-            .name("poison barbs")
+            .id(HALF_ICICLE_TRAP)
+            .name("half icicle trap")
+            .rule(Rule.build()
+                .event(RuleForUserId.SELF_SWAPPED_IN)
+                .condition(new And(
+                    new Not(new ListContains<>(Value.USER().TYPES(), TypeId.ICE)),
+                    new GateCondition(GateForAllId.CAN_HAZARDS_AFFECT, ContextSideId.USER)
+                ))
+                .effect(new DealDirectDamage(
+                    new Multiply(Numbers.sixteenthUserMaxHealth(), TypeMultiplier.onUser(TypeId.ICE))
+                ))
+            )
         );
         register(new Mechanic()
-            .id(BARBS)
-            .name("barbs")
+            .id(SINGLE_POISON_BARBS)
+            .name("single poison barbs")
+            .rule(Rule.build()
+                .event(RuleForUserId.SELF_SWAPPED_IN)
+                .condition(new And(
+                    new Not(new ListContains<>(Value.USER().TYPES(), TypeId.AIR)),
+                    new Not(new ListContains<>(Value.USER().TYPES(), TypeId.TOXIC)),
+                    new GateCondition(GateForAllId.CAN_HAZARDS_AFFECT, ContextSideId.USER)
+                ))
+                .effect(ApplyStatus.toUser(StatusId.POISON))
+            )
+            .rule(Rule.build() // removes the poison barbs if a toxic type swaps in
+                .event(RuleForUserId.SELF_SWAPPED_IN)
+                .condition(new ListContains<>(Value.USER().TYPES(), TypeId.TOXIC))
+                .effect(RemoveMechanic.fromUserSide(SINGLE_POISON_BARBS))
+            )
+        ); // removes the poison barbs if a toxic type swaps in
+        register(new Mechanic()
+            .id(DOUBLE_POISON_BARBS)
+            .name("double poison barbs")
+            .rule(Rule.build()
+                .event(RuleForUserId.SELF_SWAPPED_IN)
+                .condition(new And(
+                    new Not(new ListContains<>(Value.USER().TYPES(), TypeId.AIR)),
+                    new Not(new ListContains<>(Value.USER().TYPES(), TypeId.TOXIC)),
+                    new GateCondition(GateForAllId.CAN_HAZARDS_AFFECT, ContextSideId.USER)
+                ))
+                .effect(ApplyStatus.toUser(StatusId.BAD_POISON))
+            )
+            .rule(Rule.build() // removes the poison barbs if a toxic type swaps in
+                .event(RuleForUserId.SELF_SWAPPED_IN)
+                .condition(new ListContains<>(Value.USER().TYPES(), TypeId.TOXIC))
+                .effect(RemoveMechanic.fromUserSide(DOUBLE_POISON_BARBS))
+            )
+        );
+        register(new Mechanic()
+            .id(SINGLE_BARBS)
+            .name("single barbs")
+            .rule(Rule.build()
+                .event(RuleForUserId.SELF_SWAPPED_IN)
+                .condition(new And(
+                    new Not(new ListContains<>(Value.USER().TYPES(), TypeId.AIR)),
+                    new GateCondition(GateForAllId.CAN_HAZARDS_AFFECT, ContextSideId.USER)
+                ))
+                .effect(new DealDirectDamage(Numbers.eighthUserMaxHealth()))
+            )
+        );
+        register(new Mechanic()
+            .id(DOUBLE_BARBS)
+            .name("double barbs")
+            .rule(Rule.build()
+                .event(RuleForUserId.SELF_SWAPPED_IN)
+                .condition(new And(
+                    new Not(new ListContains<>(Value.USER().TYPES(), TypeId.AIR)),
+                    new GateCondition(GateForAllId.CAN_HAZARDS_AFFECT, ContextSideId.USER)
+                ))
+                .effect(new DealDirectDamage(Numbers.sixthUserMaxHealth()))
+            )
+        );
+        register(new Mechanic()
+            .id(TRIPLE_BARBS)
+            .name("triple barbs")
+            .rule(Rule.build()
+                .event(RuleForUserId.SELF_SWAPPED_IN)
+                .condition(new And(
+                    new Not(new ListContains<>(Value.USER().TYPES(), TypeId.AIR)),
+                    new GateCondition(GateForAllId.CAN_HAZARDS_AFFECT, ContextSideId.USER)
+                ))
+                .effect(new DealDirectDamage(Numbers.quarterUserMaxHealth()))
+            )
         );
         register(new Mechanic()
             .id(HASTEN)
