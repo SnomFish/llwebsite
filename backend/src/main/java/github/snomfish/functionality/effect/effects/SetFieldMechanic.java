@@ -17,6 +17,7 @@ public class SetFieldMechanic implements IEffect {
 
 	public enum MechanicId {
 		BANE_OF_HASTE,
+		BANE_OF_WIELDING,
 		FUNGUS_CURSE;
 	}
 
@@ -34,6 +35,9 @@ public class SetFieldMechanic implements IEffect {
 
 	public static SetFieldMechanic baneOfHaste() {
 		return new SetFieldMechanic(MechanicId.BANE_OF_HASTE);
+	}
+	public static SetFieldMechanic baneOfWielding() {
+		return new SetFieldMechanic(MechanicId.BANE_OF_WIELDING);
 	}
 	public static SetFieldMechanic fungusCurse() {
 		return new SetFieldMechanic(MechanicId.FUNGUS_CURSE);
@@ -54,8 +58,9 @@ public class SetFieldMechanic implements IEffect {
 
 	public List<Branch<BattleContext>> execute(BattleContext context) {
 		return switch (mechanic) {
-			case BANE_OF_HASTE -> 	setBaneOfHaste(context);
-			case FUNGUS_CURSE -> 	setFungusCurse(context);
+			case BANE_OF_HASTE -> 		setBaneOfHaste(context);
+			case BANE_OF_WIELDING -> 	setBaneOfWielding(context);
+			case FUNGUS_CURSE -> 		setFungusCurse(context);
 		};
 	}
 
@@ -72,7 +77,21 @@ public class SetFieldMechanic implements IEffect {
 			outcomes = RemoveMechanic.fromField(FieldMechanicId.BANE_OF_HASTE).execute(context);
 		}
 
-		
+		return outcomes;
+	}
+
+
+	public List<Branch<BattleContext>> setBaneOfWielding(BattleContext context) {
+		Mechanics mechanics = context.gamestate().mechanics();
+		List<Branch<BattleContext>> outcomes;
+
+		if (!mechanics.has(FieldMechanicId.BANE_OF_WIELDING)) {
+			outcomes = ApplyMechanic.toField(FieldMechanicId.BANE_OF_WIELDING).withMaxAge(maxAge).execute(context);
+			outcomes = flatMap(outcomes, c -> c.dispatchEvent(RuleForAllId.LOOMIAN_SET_BANE_OF_WIELDING, ContextSideId.USER));
+
+		} else { // if bane of wielding is already up, remove it
+			outcomes = RemoveMechanic.fromField(FieldMechanicId.BANE_OF_WIELDING).execute(context);
+		}
 
 		return outcomes;
 	}
@@ -89,7 +108,6 @@ public class SetFieldMechanic implements IEffect {
 		} else { // if fungus curse is already set up, remove it
 			outcomes = RemoveMechanic.fromField(FieldMechanicId.FUNGUS_CURSE).execute(context);
 		}
-		
 
 		return outcomes;
 	}

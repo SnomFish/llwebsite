@@ -5,7 +5,6 @@ import java.util.List;
 
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.condition.ICondition;
-import github.snomfish.functionality.condition.NoCondition;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.effect.IEffect;
 import github.snomfish.functionality.effect.effects.NoEffect;
@@ -17,19 +16,19 @@ public class Rule {
      
 
     private List<IRuleId> events;
-    private ICondition condition;
+    private List<ICondition> conditions;
     private IEffect effect;
 
 
     private Rule() {
         this.events = new ArrayList<>();
-        this.condition = new NoCondition();
+        this.conditions = new ArrayList<>();
         this.effect = new NoEffect();
     }
 
 
     public List<IRuleId> events() {return events;}
-    public ICondition condition() {return condition;}
+    public List<ICondition> conditions() {return conditions;}
     public IEffect effect() {return effect;}
 
 
@@ -42,7 +41,7 @@ public class Rule {
         return this;
     }
     public Rule condition(ICondition condition) {
-        this.condition = condition;
+        this.conditions.add(condition);
         return this;
     }
     public Rule effect(IEffect effect) {
@@ -56,7 +55,10 @@ public class Rule {
         if (!events.contains(event)) return List.of(new Branch<>(context, 1.0));
 
         List<Branch<BattleContext>> outcomes = new ArrayList<>();
-        double probability = condition.execute(context);
+        double probability = 1;
+        for (ICondition condition : conditions) {
+            probability *= condition.execute(context);
+        }
 
         if (probability > 0) {
             outcomes.addAll(applyProbability(effect.execute(context), probability));

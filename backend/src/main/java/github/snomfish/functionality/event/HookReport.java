@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import github.snomfish.functionality.branch.Branch;
+import github.snomfish.functionality.condition.ICondition;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.event.ruleIds.IRuleId;
 
@@ -43,7 +44,10 @@ public class HookReport {
 
         for (Hook hook : hooks) {
             
-            double probability = hook.condition().execute(context);
+            double probability = 1;
+            for (ICondition condition : hook.conditions()) {
+                probability *= condition.execute(context);
+            }
             double probabilityChunk = probabilityToRunTrue * probability;
             probabilityToRunTrue -= probabilityChunk;
             // the new probabilityToRunTrue is not the probability leftover

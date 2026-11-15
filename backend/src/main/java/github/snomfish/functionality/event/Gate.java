@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import github.snomfish.functionality.condition.ICondition;
-import github.snomfish.functionality.condition.NoCondition;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.event.gateIds.IGateId;
 
@@ -12,18 +11,18 @@ public class Gate {
     
 
     private List<IGateId> events;
-    private ICondition condition;
+    private List<ICondition> conditions;
 
 
     private Gate() {
         this.events = new ArrayList<>();
-        this.condition = new NoCondition();
+        this.conditions = new ArrayList<>();
     }
 
 
     // getters
     public List<IGateId> events() {return events;}
-    public ICondition condition() {return condition;}
+    public List<ICondition> conditions() {return conditions;}
 
 
     // builder classes
@@ -35,7 +34,7 @@ public class Gate {
         return this;
     }
     public Gate condition(ICondition condition) {
-        this.condition = condition;
+        this.conditions.add(condition);
         return this;
     }
 
@@ -44,6 +43,11 @@ public class Gate {
 
         if (!events.contains(gateId)) return 1;
 
-        return condition.execute(context);
+        double probability = 1;
+        for (ICondition condition : conditions) {
+            probability *= condition.execute(context);
+        }
+
+        return probability;
     }
 }

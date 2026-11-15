@@ -13,6 +13,7 @@ import github.snomfish.functionality._schematics.Effects;
 import github.snomfish.functionality._schematics.Numbers;
 import github.snomfish.functionality.condition.And;
 import github.snomfish.functionality.condition.Equals;
+import github.snomfish.functionality.condition.False;
 import github.snomfish.functionality.condition.GateCondition;
 import github.snomfish.functionality.condition.ListContains;
 import github.snomfish.functionality.condition.Not;
@@ -24,6 +25,7 @@ import github.snomfish.functionality.effect.effects.ApplyStatus;
 import github.snomfish.functionality.effect.effects.DealDirectDamage;
 import github.snomfish.functionality.effect.effects.RemoveMechanic;
 import github.snomfish.functionality.effect.effects.SetFieldMechanic;
+import github.snomfish.functionality.event.Gate;
 import github.snomfish.functionality.event.Rule;
 import github.snomfish.functionality.event.gateIds.GateForAllId;
 import github.snomfish.functionality.event.ruleIds.ConstantRuleId;
@@ -272,8 +274,12 @@ public class MechanicRegistry {
             )
         );
         register(new Mechanic()
-            .id(HASTEN)
-            .name("hasten")
+            .id(AUGMENT)
+            .name("augment")
+        );
+        register(new Mechanic()
+            .id(SWIFTEN)
+            .name("swiften")
         );
         register(new Mechanic()
             .id(NEAR_ENCHANTMENT)
@@ -302,10 +308,6 @@ public class MechanicRegistry {
                 .effect(ApplyStatChanges.targetChangingUser().speed(new Constant(-1)))
             )
         );
-        register(new Mechanic()
-            .id(AUGMENT)
-            .name("augment")
-        );
     }
 
 
@@ -314,6 +316,14 @@ public class MechanicRegistry {
         register(new Mechanic()
             .id(BANE_OF_HASTE)
             .name("bane of haste")
+        );
+        register(new Mechanic()
+            .id(BANE_OF_WIELDING)
+            .name("bane of wielding")
+            .gate(Gate.build()
+                .event(GateForAllId.CAN_USE_ITEMS)
+                .condition(new False())
+            )
         );
         register(new Mechanic()
             .id(FUNGUS_CURSE)

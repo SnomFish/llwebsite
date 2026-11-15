@@ -1325,11 +1325,23 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(OXIDIZE)
 			.name("oxidize")
+			.rule(Rule.build()
+				.event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
+				.condition(new And(
+					new Equals<>(Value.OPP().MOVE().CATEGORY(), CategoryId.RANGED),
+					new Or(
+						Conditions.rainActive(),
+						Conditions.strongWindsActive()
+					)
+				))
+				.effect(Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DEFENDING_STAT), new Constant(1.5)))
+			)
 		);
 		register(Ability.build()
 			.id(PARTING_GIFT)
 			.name("parting gift")
 		);
+		// doubles exclusive
 		register(Ability.build()
 			.id(PARTNERSHIP)
 			.name("partnership")
@@ -1360,6 +1372,10 @@ public class AbilityRegistry {
 			.rule(Rule.build()
 				.event(RuleForUserId.SELF_SET_BANE_OF_HASTE)
 				.effect(Effects.addValue(Value.FIELD_MECHANIC(FieldMechanicId.BANE_OF_HASTE).MAX_AGE(), new Constant(1)))
+			)
+			.rule(Rule.build()
+				.event(RuleForUserId.SELF_SET_BANE_OF_WIELDING)
+				.effect(Effects.addValue(Value.FIELD_MECHANIC(FieldMechanicId.BANE_OF_WIELDING).MAX_AGE(), new Constant(1)))
 			)
 			.rule(Rule.build()
 				.event(RuleForUserId.SELF_SET_FUNGUS_CURSE)

@@ -1,8 +1,6 @@
 package github.snomfish.domain;
 
 import github.snomfish.domain.mechanics.Mechanics;
-import github.snomfish.domain.side.Side;
-import github.snomfish.domain.side.SideId;
 import github.snomfish.domain.weather.WeatherInstance;
 import github.snomfish.functionality.copy.DeepCopyable;
 

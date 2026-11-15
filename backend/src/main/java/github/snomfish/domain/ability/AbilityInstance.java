@@ -5,6 +5,7 @@ import java.util.List;
 
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.branch.Branch;
+import github.snomfish.functionality.condition.ICondition;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.copy.DeepCopyable;
 import github.snomfish.functionality.event.Rule;
@@ -75,7 +76,10 @@ public class AbilityInstance implements DeepCopyable<AbilityInstance> {
 
         if (!rule.events().contains(event)) return List.of(new Branch<>(context, 1));
 
-        double probability = rule.condition().execute(context);
+        double probability = 1;
+        for (ICondition condition : rule.conditions()) {
+            probability *= condition.execute(context);
+        }
 
         if (probability > 0) { // if the condition is true
             BattleContext outcome = context.deepCopy();

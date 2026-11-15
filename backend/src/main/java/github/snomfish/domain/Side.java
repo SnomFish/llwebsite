@@ -1,10 +1,8 @@
-package github.snomfish.domain.side;
+package github.snomfish.domain;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import github.snomfish.domain.ActiveLoomian;
-import github.snomfish.domain.Loomian;
 import github.snomfish.domain.mechanics.Mechanics;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;

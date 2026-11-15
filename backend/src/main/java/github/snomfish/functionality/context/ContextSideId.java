@@ -2,7 +2,7 @@ package github.snomfish.functionality.context;
 
 import java.util.function.Function;
 
-import github.snomfish.domain.side.SideId;
+import github.snomfish.domain.SideId;
 
 public enum ContextSideId {
     USER(

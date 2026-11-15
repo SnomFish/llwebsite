@@ -5,6 +5,7 @@ import java.util.function.BiConsumer;
 import java.util.function.Function;
 
 import github.snomfish.domain.ActiveLoomian;
+import github.snomfish.domain.Side;
 import github.snomfish.domain.ability.AbilityId;
 import github.snomfish.domain.item.ItemId;
 import github.snomfish.domain.mechanics.MechanicInstance;
@@ -16,7 +17,6 @@ import github.snomfish.domain.move.CategoryId;
 import github.snomfish.domain.move.Move;
 import github.snomfish.domain.move.MoveTagId;
 import github.snomfish.domain.move.modifiers.ModifierId;
-import github.snomfish.domain.side.Side;
 import github.snomfish.domain.species.Species;
 import github.snomfish.domain.species.SpeciesId;
 import github.snomfish.domain.stats.StatChangesId;

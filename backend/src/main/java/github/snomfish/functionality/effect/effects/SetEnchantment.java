@@ -3,6 +3,7 @@ package github.snomfish.functionality.effect.effects;
 import java.util.List;
 
 import github.snomfish.domain.mechanics.Mechanics;
+import github.snomfish.domain.mechanics.ids.FieldMechanicId;
 import github.snomfish.domain.mechanics.ids.SideMechanicId;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.branch.Branch;
@@ -16,6 +17,8 @@ public class SetEnchantment {
 	
 
 	public enum EnchantmentId {
+		AUGMENT,
+		SWIFTEN,
 		NEAR_ENCHANTMENT,
 		FAR_ENCHANTMENT
 	}
@@ -39,6 +42,12 @@ public class SetEnchantment {
 	}
 
 
+	public static SetEnchantment augment() {
+		return new SetEnchantment(EnchantmentId.AUGMENT);
+	}
+	public static SetEnchantment swiften() {
+		return new SetEnchantment(EnchantmentId.SWIFTEN);
+	}
 	public static SetEnchantment nearEnchantment() {
 		return new SetEnchantment(EnchantmentId.NEAR_ENCHANTMENT);
 	}
@@ -54,6 +63,8 @@ public class SetEnchantment {
 	// ALWAYS SETS ENCHANTMENTS FOR THE USER'S SIDE OF THE FIELD
 	public List<Branch<BattleContext>> execute(BattleContext context) {
 		return switch (enchantment) {
+			case AUGMENT ->				setAugment(context);
+			case SWIFTEN ->				setSwiften(context);
 			case NEAR_ENCHANTMENT -> 	setNearEnchantment(context);
 			case FAR_ENCHANTMENT -> 	setFarEnchantment(context);
 		};
@@ -61,6 +72,30 @@ public class SetEnchantment {
 
 
 	private List<Branch<BattleContext>> wrap(BattleContext context) {return List.of(new Branch<>(context, 1));}
+
+
+	public List<Branch<BattleContext>> setAugment(BattleContext context) {
+		Mechanics mechanics = context.gamestate().mechanics();
+		if (mechanics.has(SideMechanicId.AUGMENT)) return wrap(context);
+
+		List<Branch<BattleContext>> outcomes;
+		outcomes = ApplyMechanic.toUserSide(SideMechanicId.AUGMENT).withMaxAge(maxAge).execute(context);
+		outcomes = flatMap(outcomes, c -> c.dispatchEvent(RuleForAllId.LOOMIAN_SET_AUGMENT, ContextSideId.USER));
+
+		return outcomes;
+	}
+
+
+	public List<Branch<BattleContext>> setSwiften(BattleContext context) {
+		Mechanics mechanics = context.gamestate().mechanics();
+		if (mechanics.has(SideMechanicId.SWIFTEN)) return wrap(context);
+
+		List<Branch<BattleContext>> outcomes;
+		outcomes = ApplyMechanic.toUserSide(SideMechanicId.SWIFTEN).withMaxAge(maxAge).execute(context);
+		outcomes = flatMap(outcomes, c -> c.dispatchEvent(RuleForAllId.LOOMIAN_SET_SWIFTEN, ContextSideId.USER));
+
+		return outcomes;
+	}
 
 
 	private List<Branch<BattleContext>> setNearEnchantment(BattleContext context) {

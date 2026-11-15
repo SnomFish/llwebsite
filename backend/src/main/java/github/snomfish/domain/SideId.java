@@ -1,4 +1,4 @@
-package github.snomfish.domain.side;
+package github.snomfish.domain;
 
 public enum SideId {
     PLAYER,

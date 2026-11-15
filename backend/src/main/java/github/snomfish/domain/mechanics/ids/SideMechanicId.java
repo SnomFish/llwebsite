@@ -11,7 +11,7 @@ public enum SideMechanicId implements IMechanicId {
     TRIPLE_BARBS,
     BANANA_PEEL,
     
-    HASTEN,
+    SWIFTEN,
     NEAR_ENCHANTMENT,
     FAR_ENCHANTMENT,
     AUGMENT;
