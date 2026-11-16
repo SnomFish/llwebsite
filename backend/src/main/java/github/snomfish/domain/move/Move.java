@@ -47,6 +47,8 @@ public class Move implements DeepCopyable<Move> {
     private int critChance;
     private int damage;
 
+    private boolean canMoveFail;
+    private boolean hasMoveFailed;
     private boolean hasCrit; // could be added to tags
 
 
@@ -75,35 +77,39 @@ public class Move implements DeepCopyable<Move> {
         this.critChance = 0;
         this.damage = 0;
 
+        this.canMoveFail = false;
+        this.hasMoveFailed = false;
         this.hasCrit = false;
     }
 
-    public Move(Move move) {
-        this.id = move.id;
-        this.name = move.name;
-        this.condition = move.condition.deepCopy();
-        this.type = move.type;
-        this.category = move.category;
-        this.energyCost = move.energyCost.deepCopy();
-        this.priority = move.priority.deepCopy();
+    public Move(Move copy) {
+        this.id = 				copy.id;
+        this.name = 			copy.name;
+        this.condition = 		copy.condition.deepCopy();
+        this.type = 			copy.type;
+        this.category = 		copy.category;
+        this.energyCost = 		copy.energyCost.deepCopy();
+        this.priority = 		copy.priority.deepCopy();
 
-        this.onTurnStart = move.onTurnStart.deepCopy();
-        this.beforeMove = move.beforeMove.deepCopy();
-        this.onHit = move.onHit.deepCopy();
-        this.afterMove = move.afterMove.deepCopy();
-        this.onMiss = move.onMiss.deepCopy();
+        this.onTurnStart =      copy.onTurnStart.deepCopy();
+        this.beforeMove =       copy.beforeMove.deepCopy();
+        this.onHit =            copy.onHit.deepCopy();
+        this.afterMove =        copy.afterMove.deepCopy();
+        this.onMiss =           copy.onMiss.deepCopy();
 
-        this.basePower = move.basePower.deepCopy();
-        this.attackingStatId = move.attackingStatId;
-        this.defendingStatId = move.defendingStatId;
-        this.tags = move.tags.deepCopy();
-        this.modifiers = move.modifiers.deepCopy();
-        this.typeChart = move.typeChart.deepCopy();
+        this.basePower = 		copy.basePower.deepCopy();
+        this.attackingStatId =  copy.attackingStatId;
+        this.defendingStatId =  copy.defendingStatId;
+        this.tags = 			copy.tags.deepCopy();
+        this.modifiers = 		copy.modifiers.deepCopy();
+        this.typeChart = 		copy.typeChart.deepCopy();
 
-        this.critChance = move.critChance;
-        this.damage = move.damage;
+        this.critChance = 		copy.critChance;
+        this.damage = 			copy.damage;
 
-        this.hasCrit = move.hasCrit;
+        this.canMoveFail = 		copy.canMoveFail;
+        this.hasMoveFailed = 	copy.hasMoveFailed;
+        this.hasCrit = 			copy.hasCrit;
     }
     @Override 
     public Move deepCopy() {
@@ -136,6 +142,8 @@ public class Move implements DeepCopyable<Move> {
     public int critChance() {return critChance;}
     public int damage() {return damage;}
 
+    public boolean canMoveFail() {return canMoveFail;}
+    public boolean hasMoveFailed() {return hasMoveFailed;}
     public boolean hasCrit() {return hasCrit;}
 
 
@@ -227,10 +235,9 @@ public class Move implements DeepCopyable<Move> {
 		this.damage = damage;
 		return this;
 	}
-    public Move hasCrit(boolean hasCrit) {
-		this.hasCrit = hasCrit;
-		return this;
-	}
+    public void setCanMoveFail(boolean canMoveFail) {this.canMoveFail = canMoveFail;}
+    public void setHasMoveFailed(boolean hasMoveFailed) {this.hasMoveFailed = hasMoveFailed;}
+    public void hasCrit(boolean hasCrit) {this.hasCrit = hasCrit;}
 
 
 

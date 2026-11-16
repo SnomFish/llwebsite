@@ -6,6 +6,7 @@ import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.INumber;
 import github.snomfish.functionality.number.Multiply;
 import github.snomfish.functionality.number.ValueConstant;
+import github.snomfish.functionality.number.WeightedRange;
 
 import static github.snomfish.functionality.context.ContextSideId.*;
 
@@ -13,6 +14,15 @@ public class Numbers {
 	
 
 	private Numbers() {}
+
+
+	public static INumber WeightedTwoToFiveHits() {
+		return WeightedRange.build()
+			.add(new Constant(2), 1/3)
+			.add(new Constant(3), 1/3)
+			.add(new Constant(4), 1/6)
+			.add(new Constant(5), 1/6);
+	}
 
 
 	// FRACTIONS OF MAX HEALTH

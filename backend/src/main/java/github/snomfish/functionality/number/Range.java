@@ -6,22 +6,34 @@ import java.util.List;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 
+import static github.snomfish.functionality.branch.BranchUtil.applyProbability;
+import static github.snomfish.functionality.copy.DeepCopy.deepCopyList;
+
 public class Range implements INumber {
     
 
-    private List<Double> values;
+    private List<INumber> numbers;
 
     
-    public Range(List<Double> values) {
-        this.values = values;
+    private Range() {
+        this.numbers = new ArrayList<>();
     }
 
 
-    @Override 
+    public static Range build() {
+        return new Range();
+    }
+    public Range add(INumber number) {
+        this.numbers.add(number);
+        return this;
+    }
+
+
+    private Range(Range copy) {
+        this.numbers = deepCopyList(numbers);
+    }
     public Range deepCopy() {
-        return new Range(
-            new ArrayList<>(values)
-        );
+        return new Range(this);
     }
 
 
@@ -30,12 +42,9 @@ public class Range implements INumber {
         
         List<Branch<Double>> outcomes = new ArrayList<>();
 
-        double probability = 1 / values.size();
-        for (Double value : values) {
-            outcomes.add(new Branch<>(
-                value,
-                probability
-            ));
+        double probability = 1 / numbers.size();
+        for (INumber number : numbers) {
+            outcomes.addAll(applyProbability(number.execute(context), probability));
         }
 
         return outcomes;

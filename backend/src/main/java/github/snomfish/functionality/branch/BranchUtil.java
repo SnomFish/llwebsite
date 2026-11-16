@@ -14,6 +14,14 @@ public class BranchUtil {
     private BranchUtil() {}
 
 
+    public static <A> List<Branch<A>> wrap(A a) {
+        return List.of(new Branch<>(a, 1));
+    }
+    public static <A> List<Branch<A>> wrap(A a, double probability) {
+        return List.of(new Branch<>(a, probability));
+    }
+
+
     // takes in a list of Branches and a function that creates more branches and applies that function to each original branch, 
     // then packs all the results into one list
     public static <A, B> List<Branch<B>> flatMap(

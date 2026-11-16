@@ -496,5 +496,15 @@ public class Value<T> {
 		c -> 		((Move) c).tags().get(id),
 		(c, v) -> 	((Move) c).tags().set(id, v)
 	);}
+	public Value<Boolean> CAN_MOVE_FAIL() {return update(
+		Boolean.class,
+		c -> 		((Move) c).canMoveFail(),
+		(c, v) ->	((Move) c).setCanMoveFail(v)
+	);}
+	public Value<Boolean> HAS_MOVE_FAILED() {return update(
+		Boolean.class,
+		c -> 		((Move) c).hasMoveFailed(),
+		(c, v) ->	((Move) c).setHasMoveFailed(v)
+	);}
     
 }
