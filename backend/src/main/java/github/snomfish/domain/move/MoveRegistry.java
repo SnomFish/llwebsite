@@ -35,11 +35,11 @@ import github.snomfish.functionality.effect.effects.SetFieldMechanic;
 import github.snomfish.functionality.effect.effects.SetHazards;
 import github.snomfish.functionality.effect.effects.HealthDrainEffect;
 import github.snomfish.functionality.effect.effects.NoEffect;
+import github.snomfish.functionality.effect.effects.Pivot;
 import github.snomfish.functionality.effect.effects.RecoilEffect;
 import github.snomfish.functionality.effect.effects.RemoveType;
 import github.snomfish.functionality.effect.effects.SetType;
 import github.snomfish.functionality.effect.effects.SetValue;
-import github.snomfish.functionality.effect.effects.SetValueIEffect;
 import github.snomfish.functionality.effect.effects.SetWeather;
 import github.snomfish.functionality.event.gateIds.GateForAllId;
 import github.snomfish.functionality.number.ConditionalNumber;
@@ -373,6 +373,7 @@ public class MoveRegistry {
 			.onHit(SingleHit.build()
 				.condition(new AccuracyCheck(new Constant(90)))
 				.primary(new DealFormulaDamage())
+				.secondary(ApplyStatChanges.userChangingTarget().mdefense(new Constant(-1)))
 			)
 			.tag(CONTACT)
 		);
@@ -401,6 +402,16 @@ public class MoveRegistry {
 			.name("Aura Burst")
 			.type(TypeId.BRAWLER)
 			.category(RANGED)
+			.energyCost(new Constant(50))
+			.basePower(new Constant(90))
+			.onHit(SingleHit.build()
+				.condition(new AccuracyCheck(new Constant(100)))
+				.primary(new DealFormulaDamage())
+				.secondary(new ConditionalEffect(
+					new RandomCondition(new Constant(0.1)),
+					ApplyStatChanges.userChangingTarget().rdefense(new Constant(-1))
+				))
+			)
 		);
 		register(Move.build()
 			.id(BAFFLE)
@@ -409,7 +420,14 @@ public class MoveRegistry {
 			.category(STATUS)
 			.energyCost(new Constant(50))
 			.tag(PIVOT)
+			.onHit(SingleHit.build()
 				.condition(new AccuracyCheck(new Constant(100)))
+				.primary(ApplyStatChanges.userChangingTarget()
+					.mattack(new Constant(-1))
+					.rattack(new Constant(-1))
+				)
+				.secondary(new Pivot())
+			)
 		);
 		register(Move.build()
 			.id(BAG_OF_TRICKS)
@@ -543,9 +561,13 @@ public class MoveRegistry {
 			.energyCost(new Constant(50))
 			.basePower(new Constant(90))
 			.attackingStat(StatId.MDEFENSE)
-				.condition(new AccuracyCheck(new Constant(100)))
 			.onHit(SingleHit.build()
+				.condition(new AccuracyCheck(new Constant(100)))
 				.primary(new DealFormulaDamage())
+				.secondary(new ConditionalEffect(
+					new RandomCondition(new Constant(0.1)),
+					ApplyStatChanges.userChangingTarget().mdefense(new Constant(-1))
+				))
 			)
 			.tag(CONTACT)
 		);
@@ -732,6 +754,10 @@ public class MoveRegistry {
 			.onHit(SingleHit.build()
 				.condition(new AccuracyCheck(new Constant(100)))
 				.primary(new DealFormulaDamage())
+				.secondary(new ConditionalEffect(
+					new RandomCondition(new Constant(0.1)),
+					ApplyStatChanges.userChangingTarget().mdefense(new Constant(-1))
+				))
 			)
 		);
 		register(Move.build()
@@ -788,6 +814,10 @@ public class MoveRegistry {
 			.onHit(SingleHit.build()
 				.condition(new AccuracyCheck(new Constant(100)))
 				.primary(new DealFormulaDamage())
+				.secondary(new ConditionalEffect(
+					new RandomCondition(new Constant(0.1)),
+					ApplyStatChanges.userChangingTarget().mdefense(new Constant(-1))
+				))
 			)
 			.tag(CONTACT)
 		);
@@ -1050,6 +1080,9 @@ public class MoveRegistry {
 			.category(STATUS)
 			.energyCost(new Constant(25))
 			.condition(new AccuracyCheck(new Constant(100)))
+			.onHit(SingleHit.build()
+				.primary(ApplyStatChanges.userChangingTarget().rdefense(new Constant(-2)))
+			)
 		);
 		register(Move.build()
 			.id(CHARRED_CLAWS)
@@ -1182,6 +1215,7 @@ public class MoveRegistry {
 			.onHit(SingleHit.build()
 				.condition(new AccuracyCheck(new Constant(100)))
 				.primary(new DealFormulaDamage())
+				.secondary(ApplyStatChanges.userChangingTarget().speed(new Constant(-1)))
 			)
 			.tag(CONTACT)
 			.tag(KICKING)
@@ -1285,6 +1319,10 @@ public class MoveRegistry {
 			.onHit(SingleHit.build()
 				.condition(new AccuracyCheck(new Constant(100)))
 				.primary(new DealFormulaDamage())
+				.secondary(new ConditionalEffect(
+					new RandomCondition(new Constant(0.1)),
+					ApplyStatChanges.userChangingTarget().rdefense(new Constant(-1))
+				))
 			)
 		);
 		register(Move.build()
@@ -1336,6 +1374,18 @@ public class MoveRegistry {
 		register(Move.build()
 			.id(CYCLONE_VORTEX)
 			.name("cyclone vortex")
+			.type(TypeId.AIR)
+			.category(MELEE)
+			.energyCost(new Constant(52))
+			.basePower(new Constant(100))
+			.onHit(SingleHit.build()
+				.condition(new AccuracyCheck(new Constant(80)))
+				.primary(new DealFormulaDamage())
+				.secondary(new ConditionalEffect(
+					new RandomCondition(new Constant(0.1)),
+					ApplyStatChanges.userChangingTarget().speed(new Constant(-1))
+				))
+			)
 		);
 		register(Move.build()
 			.id(DARK_SURGE)
@@ -1381,7 +1431,10 @@ public class MoveRegistry {
 			.type(TypeId.SIMPLE)
 			.category(STATUS)
 			.energyCost(new Constant(10))
-			.condition(new AccuracyCheck(new Constant(100)))
+			.onHit(SingleHit.build()
+				.condition(new AccuracyCheck(new Constant(100)))
+				.primary(ApplyStatChanges.userChangingTarget().mdefense(new Constant(-1)))
+			)
 		);
 		register(Move.build()
 			.id(DAYDREAM)
@@ -1453,6 +1506,10 @@ public class MoveRegistry {
 			.onHit(SingleHit.build()
 				.condition(new AccuracyCheck(new Constant(100)))
 				.primary(new DealFormulaDamage())
+				.secondary(new ConditionalEffect(
+					new RandomCondition(new Constant(0.1)),
+					ApplyStatChanges.userChangingTarget().rdefense(new Constant(-1))
+				))
 			)
 			.tag(SOUND)
 		);
@@ -1619,6 +1676,7 @@ public class MoveRegistry {
 			.onHit(SingleHit.build()
 				.condition(new AccuracyCheck(new Constant(90)))
 				.primary(new DealFormulaDamage())
+				.secondary(ApplyStatChanges.userChangingUser().rattack(new Constant(-2)))
 			)
 		);
 		register(Move.build()
@@ -1665,9 +1723,18 @@ public class MoveRegistry {
 		register(Move.build()
 			.id(DUAL_FROSTBLADE)
 			.name("dual frostblade")
+			.type(TypeId.ICE)
+			.category(MELEE)
+			.energyCost(new Constant(50))
+			.basePower(new Constant(50))
 			.onHit(Barrage.build()
 				.range(new Constant(2))
+				.condition(new AccuracyCheck(new Constant(90)))
 				.primary(new DealFormulaDamage())
+				.secondary(new ConditionalEffect(
+					new RandomCondition(new Constant(0.1)),
+					ApplyStatChanges.userChangingTarget().mdefense(new Constant(-1))
+				))
 			)
 			.tag(MULTI_HIT)
 		);
@@ -1705,7 +1772,13 @@ public class MoveRegistry {
 			.type(TypeId.SIMPLE)
 			.category(STATUS)
 			.energyCost(new Constant(25))
-			.condition(new AccuracyCheck(new Constant(100)))
+			.onHit(SingleHit.build()
+				.condition(new AccuracyCheck(new Constant(100)))
+				.primary(ApplyStatChanges.userChangingTarget()
+					.mdefense(new Constant(-1))
+					.speed(new Constant(-1))
+				)
+			)
 		);
 		register(Move.build()
 			.id(EGG_LOB)
@@ -1839,6 +1912,9 @@ public class MoveRegistry {
 			.type(TypeId.SIMPLE)
 			.category(STATUS)
 			.energyCost(new Constant(25))
+			.onHit(SingleHit.build()
+				.primary(ApplyStatChanges.userChangingTarget().mattack(new Constant(-2)))
+			)
 		);
 		register(Move.build()
 			.id(ENERGIZE)
@@ -2002,6 +2078,10 @@ public class MoveRegistry {
 			.onHit(SingleHit.build()
 				.condition(new AccuracyCheck(new Constant(100)))
 				.primary(new DealFormulaDamage())
+				.secondary(new ConditionalEffect(
+					new RandomCondition(new Constant(0.1)),
+					ApplyStatChanges.userChangingTarget().rattack(new Constant(-1))
+				))
 			)
 		);
 		register(Move.build()
@@ -2119,10 +2199,34 @@ public class MoveRegistry {
 		register(Move.build()
 			.id(FOCUS_BEAM)
 			.name("Focus Beam")
+			.type(TypeId.LIGHT)
+			.category(RANGED)
+			.energyCost(new Constant(60))
+			.basePower(new Constant(120))
+			.onHit(SingleHit.build()
+				.condition(new AccuracyCheck(new Constant(100)))
+				.primary(new DealFormulaDamage())
+				.secondary(ApplyStatChanges.userChangingUser()
+					.mdefense(new Constant(-1))
+					.rdefense(new Constant(-1))
+				)
+			)
 		);
 		register(Move.build()
 			.id(FORGED_CLAWS)
 			.name("Forged Claws")
+			.type(TypeId.METAL)
+			.category(MELEE)
+			.energyCost(new Constant(52))
+			.basePower(new Constant(100))
+			.onHit(SingleHit.build()
+				.condition(new AccuracyCheck(new Constant(80)))
+				.primary(new DealFormulaDamage())
+				.secondary(new ConditionalEffect(
+					new RandomCondition(new Constant(0.1)),
+					ApplyStatChanges.userChangingTarget().mdefense(new Constant(-1))
+				))
+			)
 		);
 		register(Move.build()
 			.id(FOUL_CHANT)
@@ -2224,6 +2328,10 @@ public class MoveRegistry {
 			.onHit(SingleHit.build()
 				.condition(new AccuracyCheck(new Constant(100)))
 				.primary(new DealFormulaDamage())
+				.secondary(new ConditionalEffect(
+					new RandomCondition(new Constant(0.1)),
+					ApplyStatChanges.userChangingTarget().speed(new Constant(-1))
+				))
 			)
 		);
 		register(Move.build()
@@ -2416,6 +2524,15 @@ public class MoveRegistry {
 		register(Move.build()
 			.id(GLOW_BEAM)
 			.name("Glow Beam")
+			.type(TypeId.LIGHT)
+			.category(RANGED)
+			.energyCost(new Constant(60))
+			.basePower(new Constant(130))
+			.onHit(SingleHit.build()
+				.condition(new AccuracyCheck(new Constant(90)))
+				.primary(new DealFormulaDamage())
+				.secondary(ApplyStatChanges.userChangingUser().rattack(new Constant(-2)))
+			)
 		);
 		register(Move.build()
 			.id(GNARLY_GASH)
@@ -2427,6 +2544,10 @@ public class MoveRegistry {
 			.onHit(SingleHit.build()
 				.condition(new AccuracyCheck(new Constant(100)))
 				.primary(new DealFormulaDamage())
+				.secondary(new ConditionalEffect(
+					new RandomCondition(new Constant(0.1)),
+					ApplyStatChanges.userChangingTarget().mdefense(new Constant(-1))
+				))
 			)
 			.tag(CONTACT)
 			.tag(SLASHING)
@@ -2497,7 +2618,10 @@ public class MoveRegistry {
 			.type(TypeId.SIMPLE)
 			.category(STATUS)
 			.energyCost(new Constant(10))
-			.condition(new AccuracyCheck(new Constant(100)))
+			.onHit(SingleHit.build()
+				.condition(new AccuracyCheck(new Constant(100)))
+				.primary(ApplyStatChanges.userChangingTarget().mattack(new Constant(-1)))
+			)	
 		);
 		register(Move.build()
 			.id(GULP)
@@ -2607,6 +2731,10 @@ public class MoveRegistry {
 			.onHit(SingleHit.build()
 				.condition(new AccuracyCheck(new Constant(100)))
 				.primary(new DealFormulaDamage())
+				.secondary(new ConditionalEffect(
+					new RandomCondition(new Constant(0.1)),
+					ApplyStatChanges.userChangingTarget().speed(new Constant(-1))
+				))
 			)
 			.tag(CONTACT)
 		);
@@ -2917,6 +3045,10 @@ public class MoveRegistry {
 			.onHit(SingleHit.build()
 				.condition(new AccuracyCheck(new Constant(100)))
 				.primary(new DealFormulaDamage())
+				.secondary(new ConditionalEffect(
+					new RandomCondition(new Constant(0.1)),
+					ApplyStatChanges.userChangingTarget().speed(new Constant(-1))
+				))
 			)
 		);
 		register(Move.build()
@@ -3010,6 +3142,7 @@ public class MoveRegistry {
 			.basePower(new Constant(100))
 			.onHit(SingleHit.build()
 				.primary(new DealFormulaDamage())
+				// TODO lowers defense on the side it attacked on
 			)
 			.tag(SOUL_MOVE)
 		);
@@ -3042,6 +3175,10 @@ public class MoveRegistry {
 			.onHit(SingleHit.build()
 				.condition(new AccuracyCheck(new Constant(90)))
 				.primary(new DealFormulaDamage())
+				.secondary(new ConditionalEffect(
+					new RandomCondition(new Constant(0.1)),
+					ApplyStatChanges.userChangingTarget().mdefense(new Constant(-1))
+				))
 			)
 		);
 		register(Move.build()
@@ -3208,6 +3345,7 @@ public class MoveRegistry {
 			.onHit(SingleHit.build()
 				.condition(new AccuracyCheck(new Constant(100)))
 				.primary(new DealFormulaDamage())
+				.secondary(ApplyStatChanges.userChangingTarget().rdefense(new Constant(-1)))
 			)
 		);
 		register(Move.build()
@@ -3296,6 +3434,12 @@ public class MoveRegistry {
 			.type(TypeId.METAL)
 			.category(STATUS)
 			.energyCost(new Constant(25))
+			.onHit(SingleHit.build()
+				.primary(ApplyStatChanges.userChangingTarget()
+					.mdefense(new Constant(-1))
+					.rdefense(new Constant(-1))
+				)
+			)
 		);
 		register(Move.build()
 			.id(METAL_SWIPES)
@@ -3432,6 +3576,7 @@ public class MoveRegistry {
 			.onHit(SingleHit.build()
 				.condition(new AccuracyCheck(new Constant(100)))
 				.primary(new DealFormulaDamage())
+				.secondary(ApplyStatChanges.userChangingTarget().speed(new Constant(-1)))
 			)
 		);
 		register(Move.build()
@@ -3490,6 +3635,10 @@ public class MoveRegistry {
 			.onHit(SingleHit.build()
 				.condition(new AccuracyCheck(new Constant(100)))
 				.primary(new DealFormulaDamage())
+				.secondary(new ConditionalEffect(
+					new RandomCondition(new Constant(0.1)),
+					ApplyStatChanges.userChangingTarget().rdefense(new Constant(-1))
+				))
 			)
 		);
 		register(Move.build()
@@ -3537,6 +3686,10 @@ public class MoveRegistry {
 			.onHit(SingleHit.build()
 				.condition(new AccuracyCheck(new Constant(100)))
 				.primary(new DealFormulaDamage())
+				.secondary(new ConditionalEffect(
+					new RandomCondition(new Constant(0.1)),
+					ApplyStatChanges.userChangingTarget().rattack(new Constant(-1))
+				))
 			)
 		);
 		register(Move.build()
@@ -3545,6 +3698,9 @@ public class MoveRegistry {
 			.type(TypeId.TOXIC)
 			.category(STATUS)
 			.energyCost(new Constant(10))
+			.onHit(SingleHit.build()
+				.primary(ApplyStatChanges.userChangingTarget().speed(new Constant(-1)))
+			)
 		);
 		register(Move.build()
 			.id(OPPRESS)
@@ -3597,6 +3753,7 @@ public class MoveRegistry {
 			.onHit(SingleHit.build()
 				.condition(new AccuracyCheck(new Constant(100)))
 				.primary(new DealFormulaDamage())
+				.secondary(ApplyStatChanges.userChangingUser().rattack(new Constant(-1)))
 			)
 		);
 		register(Move.build()
@@ -3731,6 +3888,10 @@ public class MoveRegistry {
 			.onHit(SingleHit.build()
 				.condition(new AccuracyCheck(new Constant(100)))
 				.primary(new DealFormulaDamage())
+				.secondary(new ConditionalEffect(
+					new RandomCondition(new Constant(0.1)),
+					ApplyStatChanges.userChangingTarget().rattack(new Constant(-1))
+				))
 			)
 		);
 		register(Move.build()
@@ -4086,6 +4247,10 @@ public class MoveRegistry {
 			.onHit(SingleHit.build()
 				.condition(new AccuracyCheck(new Constant(100)))
 				.primary(new DealFormulaDamage())
+				.secondary(new ConditionalEffect(
+					new RandomCondition(new Constant(0.1)),
+					ApplyStatChanges.userChangingTarget().rattack(new Constant(-1))
+				))
 			)
 		);
 		register(Move.build()
@@ -4251,6 +4416,7 @@ public class MoveRegistry {
 			.onHit(SingleHit.build()
 				.condition(new AccuracyCheck(new Constant(90)))
 				.primary(new DealFormulaDamage())
+				.secondary(ApplyStatChanges.userChangingTarget().rattack(new Constant(-1)))
 			)
 			.tag(SOUND)
 		);
@@ -4417,6 +4583,10 @@ public class MoveRegistry {
 			.onHit(SingleHit.build()
 				.condition(new AccuracyCheck(new Constant(100)))
 				.primary(new DealFormulaDamage())
+				.secondary(ApplyStatChanges.userChangingUser()
+					.mdefense(new Constant(-1))
+					.rdefense(new Constant(-1))
+				)
 			)
 			.tag(CONTACT)
 		);
@@ -4670,6 +4840,10 @@ public class MoveRegistry {
 			.onHit(SingleHit.build()
 				.condition(new AccuracyCheck(new Constant(100)))
 				.primary(new DealFormulaDamage())
+				.secondary(ApplyStatChanges.userChangingUser()
+					.mdefense(new Constant(-1))
+					.rdefense(new Constant(-1))
+				)
 			)
 		);
 		register(Move.build()
@@ -4682,6 +4856,10 @@ public class MoveRegistry {
 			.onHit(SingleHit.build()
 				.condition(new AccuracyCheck(new Constant(100)))
 				.primary(new DealFormulaDamage())
+				.secondary(ApplyStatChanges.userChangingUser()
+					.mdefense(new Constant(-1))
+					.rdefense(new Constant(-1))
+				)
 			)
 		);
 		register(Move.build()
@@ -4792,6 +4970,10 @@ public class MoveRegistry {
 			.onHit(SingleHit.build()
 				.condition(new AccuracyCheck(new Constant(95)))
 				.primary(new DealFormulaDamage())
+				.secondary(new ConditionalEffect(
+					new RandomCondition(new Constant(0.1)),
+					ApplyStatChanges.userChangingTarget().speed(new Constant(-1))
+				))
 			)
 		);
 		register(Move.build()
@@ -4934,6 +5116,10 @@ public class MoveRegistry {
 			.onHit(SingleHit.build()
 				.condition(new AccuracyCheck(new Constant(100)))
 				.primary(new DealFormulaDamage())
+				.secondary(new ConditionalEffect(
+					new RandomCondition(new Constant(0.1)),
+					ApplyStatChanges.userChangingTarget().rdefense(new Constant(-1))
+				))
 			)
 		);
 		register(Move.build()
@@ -4960,6 +5146,7 @@ public class MoveRegistry {
 			.onHit(SingleHit.build()
 				.condition(new AccuracyCheck(new Constant(100)))
 				.primary(new DealFormulaDamage())
+				.secondary(ApplyStatChanges.userChangingTarget().rdefense(new Constant(-1)))
 			)
 		);
 		register(Move.build()
@@ -5022,9 +5209,7 @@ public class MoveRegistry {
 			.energyCost(new Constant(10))
 			.onHit(SingleHit.build()
 				.condition(new AccuracyCheck(new Constant(100)))
-				.primary(ApplyStatChanges.userChangingTarget()
-					.mdefense(new Constant(-1))
-				)	
+				.primary(ApplyStatChanges.userChangingTarget().mdefense(new Constant(-1)))
 			)
 		);
 		register(Move.build()
@@ -5050,7 +5235,10 @@ public class MoveRegistry {
 			.type(TypeId.SIMPLE)
 			.category(STATUS)
 			.energyCost(new Constant(10))
-			.condition(new AccuracyCheck(new Constant(100)))
+			.onHit(SingleHit.build()
+				.condition(new AccuracyCheck(new Constant(100)))
+				.primary(ApplyStatChanges.userChangingTarget().mdefense(new Constant(-1)))
+			)
 		);
 		register(Move.build()
 			.id(STARTLE)
@@ -5427,6 +5615,7 @@ public class MoveRegistry {
 			.onHit(SingleHit.build()
 				.condition(new AccuracyCheck(new Constant(100)))
 				.primary(new DealFormulaDamage())
+				.secondary(ApplyStatChanges.userChangingUser().mattack(new Constant(-1)))
 			)
 			.tag(CONTACT)
 		);
@@ -5635,6 +5824,13 @@ public class MoveRegistry {
 			.type(TypeId.SIMPLE)
 			.category(STATUS)
 			.energyCost(new Constant(50))
+			.onHit(SingleHit.build()
+				.primary(ApplyStatChanges.userChangingTarget()
+					.mattack(new Constant(-2))
+					.rattack(new Constant(-2))
+				)
+				// TODO secondary: faint
+			)
 		);
 		register(Move.build()
 			.id(TRICK_SHOT)
@@ -5813,6 +6009,10 @@ public class MoveRegistry {
 			.onHit(SingleHit.build()
 				.condition(new AccuracyCheck(new Constant(100)))
 				.primary(new DealFormulaDamage())
+				.secondary(new ConditionalEffect(
+					new RandomCondition(new Constant(0.1)),
+					ApplyStatChanges.userChangingTarget().speed(new Constant(-1))
+				))
 			)
 		);
 		register(Move.build()
@@ -5842,6 +6042,10 @@ public class MoveRegistry {
 			.onHit(SingleHit.build()
 				.condition(new AccuracyCheck(new Constant(80)))
 				.primary(new DealFormulaDamage())
+				.secondary(new ConditionalEffect(
+					new RandomCondition(new Constant(0.1)),
+					ApplyStatChanges.userChangingTarget().rdefense(new Constant(-1))
+				))
 			)
 		);
 		register(Move.build()
@@ -5879,7 +6083,7 @@ public class MoveRegistry {
 			.energyCost(new Constant(10))
 			.onHit(SingleHit.build()
 				.condition(new AccuracyCheck(new Constant(90)))
-				.primary(new DealFormulaDamage())
+				.primary(ApplyStatChanges.userChangingTarget().speed(new Constant(-1)))
 			)
 		);
 		register(Move.build()
@@ -5935,6 +6139,10 @@ public class MoveRegistry {
 			.onHit(SingleHit.build()
 				.condition(new AccuracyCheck(new Constant(100)))
 				.primary(new DealFormulaDamage())
+				.secondary(ApplyStatChanges.userChangingUser()
+					.mdefense(new Constant(-1))
+					.rdefense(new Constant(-1))
+				)
 			)
 			.tag(CONTACT)
 		);
