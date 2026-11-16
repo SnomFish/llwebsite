@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
+import github.snomfish.functionality._schematics.Conditions;
+import github.snomfish.functionality.condition.ICondition;
 import github.snomfish.functionality.context.BattleContext;
 
 public class BranchUtil {
@@ -76,6 +78,29 @@ public class BranchUtil {
             branch.multiplyProbability(probability);
         }
         return branches;
+    }
+
+    
+
+
+    // FUCKING PARSE IN THIS::[FUNCTION_NAME] OTHERWISE THIS WILL NOT WORK
+    public static List<Branch<BattleContext>> resolveConditions(
+        BattleContext context,
+        List<ICondition> conditions,
+        Function<BattleContext, List<Branch<BattleContext>>> function
+    ) {
+        List<Branch<BattleContext>> outcomes = new ArrayList<>();
+
+		double probability = Conditions.resolve(context, conditions);
+		if (probability > 0) {
+			outcomes.addAll(applyProbability(function.apply(context), probability));
+
+		}
+		if (probability < 1) {
+			outcomes.addAll(applyProbability(wrap(context), probability));
+		}
+
+        return outcomes;
     }
 
 

@@ -8,7 +8,7 @@ import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.effect.ConditionalEffect;
 import github.snomfish.functionality.effect.IEffect;
 import github.snomfish.functionality.effect.effects.ApplyMechanic;
-import github.snomfish.functionality.effect.effects.SetValueEffect;
+import github.snomfish.functionality.effect.effects.SetValueIEffect;
 import github.snomfish.functionality.event.gateIds.GateForAllId;
 import github.snomfish.functionality.number.Add;
 import github.snomfish.functionality.number.INumber;
@@ -50,16 +50,16 @@ public class Effects {
 
 
     public static IEffect addValue(Value<? extends Number> value, INumber addition) {
-        return new SetValueEffect<>(value, new Add(new ValueConstant(value), addition));
+        return new SetValueIEffect<>(value, new Add(new ValueConstant(value), addition));
     }
     public static IEffect addValue(Value<? extends Number> value, Value<? extends Number> addition) {
-        return new SetValueEffect<>(value, new Add(new ValueConstant(value), new ValueConstant(addition)));
+        return new SetValueIEffect<>(value, new Add(new ValueConstant(value), new ValueConstant(addition)));
     }
 
     public static IEffect multiplyValue(Value<? extends Number> value, INumber multiplier) {
-        return new SetValueEffect<>(value, new Multiply(new ValueConstant(value), multiplier));
+        return new SetValueIEffect<>(value, new Multiply(new ValueConstant(value), multiplier));
     }
     public static IEffect multiplyValue(Value<? extends Number> value, Value<? extends Number> multiplier) {
-        return new SetValueEffect<>(value, new Multiply(new ValueConstant(value), new ValueConstant(multiplier)));
+        return new SetValueIEffect<>(value, new Multiply(new ValueConstant(value), new ValueConstant(multiplier)));
     }
 }

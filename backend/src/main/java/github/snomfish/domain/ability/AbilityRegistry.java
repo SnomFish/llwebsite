@@ -41,7 +41,7 @@ import github.snomfish.functionality.effect.effects.SetAbility;
 import github.snomfish.functionality.effect.effects.SetFieldMechanic;
 import github.snomfish.functionality.effect.effects.SetHazards;
 import github.snomfish.functionality.effect.effects.SetType;
-import github.snomfish.functionality.effect.effects.SetValueEffect;
+import github.snomfish.functionality.effect.effects.SetValueIEffect;
 import github.snomfish.functionality.effect.effects.SetWeather;
 import github.snomfish.functionality.event.Gate;
 import github.snomfish.functionality.event.Hook;
@@ -109,7 +109,7 @@ public class AbilityRegistry {
 			.rule(Rule.build()
                 .event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE) // right before a moves damage is calculated
 				.condition(new ListContains<>(Value.USER().TYPES(), Value.USER().MOVE().TYPE()))
-				.effect(new SetValueEffect<>(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.STAB), new Constant(2.0)))
+				.effect(new SetValueIEffect<>(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.STAB), new Constant(2.0)))
             )
 		);
 		register(Ability.build() // completed
@@ -250,7 +250,7 @@ public class AbilityRegistry {
             .name("awakening")
 			.rule(Rule.build()
                 .event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE) // right before a moves damage is calculated
-                .effect(new SetValueEffect<>(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.STAB), new Constant(1.5)))
+                .effect(new SetValueIEffect<>(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.STAB), new Constant(1.5)))
             )
         );
         register(Ability.build() // completed

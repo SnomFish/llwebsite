@@ -1,5 +1,7 @@
 package github.snomfish.functionality._schematics;
 
+import java.util.List;
+
 import github.snomfish.domain.status.StatusId;
 import github.snomfish.domain.weather.WeatherId;
 import github.snomfish.functionality.Value;
@@ -8,6 +10,7 @@ import github.snomfish.functionality.condition.Equals;
 import github.snomfish.functionality.condition.ICondition;
 import github.snomfish.functionality.condition.Not;
 import github.snomfish.functionality.condition.Or;
+import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.INumber;
 import github.snomfish.functionality.number.Modulus;
@@ -16,6 +19,16 @@ public class Conditions {
     
 
     private Conditions() {}
+
+
+    public static Double resolve(BattleContext context, List<ICondition> conditions) {
+        double probability = 1;
+        for (ICondition condition : conditions) {
+            probability *= condition.execute(context);
+            if (probability == 0) return 0.0; // returning early if the answer is no
+        }
+        return probability;
+    }
 
 
     public static ICondition and(ICondition a, ICondition b, ICondition c) {

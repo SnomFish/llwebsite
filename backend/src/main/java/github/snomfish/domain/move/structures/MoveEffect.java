@@ -7,13 +7,14 @@ import github.snomfish.functionality.Value;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.context.ContextSideId;
+import github.snomfish.functionality.copy.DeepCopyable;
 import github.snomfish.functionality.effect.IEffect;
 import github.snomfish.functionality.event.gateIds.GateForAllId;
 
 import static github.snomfish.functionality.branch.BranchUtil.flatMap;
 import static github.snomfish.functionality.branch.BranchUtil.wrap;
 
-public class MoveEffect implements IMove {
+public class MoveEffect implements DeepCopyable<MoveEffect> {
 
     
     private List<IEffect> primaries;
@@ -36,25 +37,17 @@ public class MoveEffect implements IMove {
 
 
     // getter
-    public List<IEffect> primary() {return primaries;}
-    public List<IEffect> secondary() {return secondaries;}
+    public List<IEffect> primaries() {return primaries;}
+    public List<IEffect> secondaries() {return secondaries;}
     
     
-    // builder functions
-    public static MoveEffect build() {
-        return new MoveEffect();
-    }
-    public MoveEffect primary(IEffect effect) {
-        this.primaries.add(effect);
-        return this;
-    }
-    public MoveEffect secondary(IEffect effect) {
-        this.secondaries.add(effect);
-        return this;
-    }
+    // setters (ish)
+    public void addPrimary(IEffect effect) {this.primaries.add(effect);}
+    public void addSecondary(IEffect effect) {this.secondaries.add(effect);}
 
 
-    @Override
+
+    
     public List<Branch<BattleContext>> execute(BattleContext context) {
         List<Branch<BattleContext>> outcomes = wrap(context);
 

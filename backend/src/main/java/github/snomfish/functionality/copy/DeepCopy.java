@@ -13,4 +13,12 @@ public class DeepCopy {
         }
         return newList;
     }
+
+
+    public static <T> T resolveDeepCopy(DeepCopyable<T> obj) {
+        return obj.deepCopy();
+    }
+    public static <T> T resolveDeepCopy(T obj) {
+        return obj;
+    }
 }

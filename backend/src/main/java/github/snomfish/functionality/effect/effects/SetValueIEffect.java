@@ -10,12 +10,12 @@ import github.snomfish.functionality.effect.IEffect;
 import github.snomfish.functionality.number.INumber;
 import github.snomfish.functionality.number.NumberUtil;
 
-public class SetValueEffect<T extends Number> implements IEffect {
+public class SetValueIEffect<T extends Number> implements IEffect {
 
     private Value<T> value;
     private INumber newValue;
 
-    public SetValueEffect(
+    public SetValueIEffect(
         Value<T> value,
         INumber newValue
     ) {
@@ -25,8 +25,8 @@ public class SetValueEffect<T extends Number> implements IEffect {
 
 
     @Override
-    public SetValueEffect<T> deepCopy() {
-        return new SetValueEffect<>(
+    public SetValueIEffect<T> deepCopy() {
+        return new SetValueIEffect<>(
             value,
             newValue.deepCopy()
         );
