@@ -5,6 +5,7 @@ public enum RuleForTargetId implements IRuleForSideId {
 
     WATCHES_OPP_SWAP_IN,
     OPP_DAMAGED_BELOW_HALF,
+    OPP_FAINTED,
     SELF_KNOCKED_OUT_BY_OPP,
 
     // move
@@ -16,7 +17,7 @@ public enum RuleForTargetId implements IRuleForSideId {
     // formula damage
     PRE_OPP_DEAL_FORMULA_DAMAGE,
     SELF_PRE_DAMAGED,
-    HIT_BY_MOVE,
+    //HIT_BY_MOVE,
     RECEIVED_DAMAGE_FROM_MOVE,
     SELF_PRE_HEALTH_DRAINED,
     SELF_PRE_ENERGY_DRAINED,

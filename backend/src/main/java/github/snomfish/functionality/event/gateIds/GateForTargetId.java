@@ -8,6 +8,7 @@ public enum GateForTargetId implements IGateId {
     CAN_OPP_BE_TRAPPED,
     CAN_OPP_CONSUME_ITEM,
     CAN_OPP_FALL_ASLEEP,
+    CAN_OPP_FLINCH,
     CAN_OPP_TAKE_RECOIL,
     CAN_OPP_USE_ITEMS,
     CAN_HAZARDS_AFFECT_OPP,

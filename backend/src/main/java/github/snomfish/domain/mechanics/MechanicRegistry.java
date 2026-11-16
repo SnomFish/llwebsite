@@ -20,6 +20,7 @@ import github.snomfish.functionality.condition.Not;
 import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.effect.EffectSequence;
 import github.snomfish.functionality.effect.effects.AddType;
+import github.snomfish.functionality.effect.effects.AlterTypeChart;
 import github.snomfish.functionality.effect.effects.ApplyStatChanges;
 import github.snomfish.functionality.effect.effects.ApplyStatus;
 import github.snomfish.functionality.effect.effects.DealDirectDamage;
@@ -29,6 +30,7 @@ import github.snomfish.functionality.event.Gate;
 import github.snomfish.functionality.event.Rule;
 import github.snomfish.functionality.event.gateIds.GateForAllId;
 import github.snomfish.functionality.event.ruleIds.ConstantRuleId;
+import github.snomfish.functionality.event.ruleIds.RuleForAllId;
 import github.snomfish.functionality.event.ruleIds.RuleForTargetId;
 import github.snomfish.functionality.event.ruleIds.RuleForUserId;
 import github.snomfish.functionality.number.Constant;
@@ -328,6 +330,11 @@ public class MechanicRegistry {
         register(new Mechanic()
             .id(FUNGUS_CURSE)
             .name("fungus curse")
+            .rule(Rule.build()
+                .event(RuleForAllId.PRE_DEAL_FORMULA_DAMAGE)
+                .effect(new AlterTypeChart(TypeId.LIGHT, TypeId.PLANT, 2))
+                .effect(new AlterTypeChart(TypeId.DARK, TypeId.PLANT, 0))
+            )
         );
     }
 }

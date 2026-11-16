@@ -5,6 +5,7 @@ public enum RuleForUserId implements IRuleForSideId {
 
     SELF_SWAPPED_IN,
     SELF_DAMAGED_BELOW_HALF,
+    SELF_FAINTED,
     SELF_KNOCKED_OUT_OPP,
 
     // move
@@ -16,7 +17,7 @@ public enum RuleForUserId implements IRuleForSideId {
     // formula damage
     PRE_SELF_DEAL_FORMULA_DAMAGE,
     SELF_PRE_DAMAGING,
-    SELF_MOVE_HIT,
+    //SELF_MOVE_HIT,
     SELF_MOVE_DEALT_DAMAGE,
     SELF_PRE_DRAINING_HEALTH,
     SELF_PRE_DRAINING_ENERGY,

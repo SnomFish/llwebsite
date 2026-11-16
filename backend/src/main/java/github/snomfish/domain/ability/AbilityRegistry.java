@@ -32,6 +32,8 @@ import github.snomfish.functionality.effect.EffectSequence;
 import github.snomfish.functionality.effect.effects.AlterTypeChart;
 import github.snomfish.functionality.effect.effects.ApplyMechanic;
 import github.snomfish.functionality.effect.effects.ApplyStatChanges;
+import github.snomfish.functionality.effect.effects.ApplyStatus;
+import github.snomfish.functionality.effect.effects.ClearHazards;
 import github.snomfish.functionality.effect.effects.ClutchEffect;
 import github.snomfish.functionality.effect.effects.DealDirectSelfDamage;
 import github.snomfish.functionality.effect.effects.DispatchEventEffect;
@@ -88,10 +90,9 @@ public class AbilityRegistry {
 			.name("ability thief")
 			.rule(Rule.build()
 				.event(RuleForUserId.SELF_MOVE_DEALT_DAMAGE)
-				.condition(new And(
-					new Equals<>(Value.USER().MOVE().MOVE_TAG(MoveTagId.CONTACT), true),
-					new GateCondition(GateForAllId.CAN_REMOVE_ABILITY, TARGET)
-				))
+				.condition(new Equals<>(Value.USER().MOVE().MOVE_TAG(MoveTagId.CONTACT), true))
+				.condition(new GateCondition(GateForAllId.CAN_MOVE_MAKE_CONTACT, USER))
+				.condition(new GateCondition(GateForAllId.CAN_REMOVE_ABILITY, TARGET))
 				.effect(new EffectSequence(List.of(
 					SetAbility.userActual(Value.TARGET().ABILITY_ID()),
 					SetAbility.user(Value.TARGET().ABILITY_ID()),
@@ -391,10 +392,9 @@ public class AbilityRegistry {
 			.name("burglar")
 			.rule(Rule.build()
 				.event(RuleForUserId.SELF_MOVE_DEALT_DAMAGE)
-				.condition(new And(
-					new Equals<>(Value.USER().MOVE().MOVE_TAG(MoveTagId.CONTACT), true),
-					new GateCondition(GateForAllId.CAN_REMOVE_ITEM, TARGET)
-				))
+				.condition(new Equals<>(Value.USER().MOVE().MOVE_TAG(MoveTagId.CONTACT), true))
+				.condition(new GateCondition(GateForAllId.CAN_REMOVE_ITEM, TARGET))
+				.condition(new GateCondition(GateForAllId.CAN_MOVE_MAKE_CONTACT, USER))
 				.effect(new ConditionalEffect(
 					new Equals<>(Value.USER().ITEM_ID(), ItemId.NO_ITEM),
 					new EffectSequence(List.of(
@@ -498,10 +498,8 @@ public class AbilityRegistry {
 			.name("clutch")
 			.rule(Rule.build()
 				.event(RuleForUserId.SELF_CLUTCHES)
-				.condition(new And(
-					Conditions.userIsAtFullHealth(),
-					new GateCondition(GateForAllId.CAN_USE_DEFENSIVE_ABILITY, TARGET)
-				))
+				.condition(Conditions.userIsAtFullHealth())
+				.condition(new GateCondition(GateForAllId.CAN_USE_DEFENSIVE_ABILITY, TARGET))
 				.effect(new ClutchEffect())
 			)
 		);
@@ -511,7 +509,8 @@ public class AbilityRegistry {
 			.rule(Rule.build()
 				.event(RuleForUserId.SELF_STATS_LOWERED_BY_OPP)
 				.effect(ApplyStatChanges.userChangingUser()
-					.mattack(new Constant(2)))
+					.mattack(new Constant(2))
+				)
 			)
 		);
 		register(Ability.build()
@@ -519,13 +518,9 @@ public class AbilityRegistry {
 			.name("combustible")
 			.hook(Hook.build()
 				.event(RuleForTargetId.SELF_PRE_DAMAGED)
-				.condition(new And(
-					new GateCondition(GateForAllId.CAN_USE_DEFENSIVE_ABILITY, USER),
-					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.FIRE)
-				))
-				.effect(
-					ApplyMechanic.toUser(LoomianMechanicId.COMBUSTIBLE)
-				)
+				.condition(new GateCondition(GateForAllId.CAN_USE_DEFENSIVE_ABILITY, USER))
+				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.FIRE))
+				.effect(ApplyMechanic.toUser(LoomianMechanicId.COMBUSTIBLE))
 			)
 		);
 		register(Ability.build() // doubles exclusive ability
@@ -541,12 +536,11 @@ public class AbilityRegistry {
 			.name("Conditioned")
 			.rule(Rule.build()
 				.event(RuleForTargetId.SELF_PRE_DAMAGED)
-				.condition(new And(
-					Comparator.greaterThan()
-						.left(new ValueConstant(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.TYPE)))
-						.right(new Constant(1)),
-					new GateCondition(GateForAllId.CAN_USE_DEFENSIVE_ABILITY, USER)
+				.condition(Comparator.greaterThan()
+					.left(new ValueConstant(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.TYPE)))
+					.right(new Constant(1)
 				))
+				.condition(new GateCondition(GateForAllId.CAN_USE_DEFENSIVE_ABILITY, USER))
 				.effect(Effects.multiplyValue(Value.OPP().MOVE().DAMAGE(), new Constant(0.75)))
 			)
 		);
@@ -555,6 +549,10 @@ public class AbilityRegistry {
 			.name("confidence")
 			.gate(Gate.build()
 				.event(GateForTargetId.CAN_OPP_MOVE_FLINCH)
+				.condition(new False())
+			)
+			.gate(Gate.build()
+				.event(GateForUserId.CAN_SELF_FLINCH)
 				.condition(new False())
 			)
 		);
@@ -575,10 +573,8 @@ public class AbilityRegistry {
 			.name("coursing venom")
 			.rule(Rule.build()
 				.event(RuleForTargetId.SELF_PRE_DAMAGED)
-				.condition(new And(
-					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.TOXIC),
-					new GateCondition(GateForAllId.CAN_USE_DEFENSIVE_ABILITY, USER)
-				))
+				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.TOXIC))
+				.condition(new GateCondition(GateForAllId.CAN_USE_DEFENSIVE_ABILITY, USER))
 				.effect(new EffectSequence(List.of(
 					ApplyMechanic.toUser(LoomianMechanicId.COURSING_VENOM)
 				)))
@@ -592,9 +588,15 @@ public class AbilityRegistry {
 			.id(DAWN)
 			.name("dawn")
 		);
-		register(Ability.build() // doubles exclusive
+		register(Ability.build()
 			.id(DEAD_OF_WINTER)
 			.name("Dead of Winter")
+			.hook(Hook.build()
+				.event(RuleForTargetId.SELF_PRE_DAMAGED)
+				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.FIRE))
+				.condition(new GateCondition(GateForAllId.CAN_USE_DEFENSIVE_ABILITY, USER))
+				.effect(SetWeather.userSetting(WeatherId.SNOWSTORM, new Constant(5)))
+			)
 		);
 		register(Ability.build()
 			.id(DEEP_FROSTBITE)
@@ -628,6 +630,10 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(DESIGNATED_CHOMPERS)
 			.name("designated chompers")
+			.gate(Gate.build()
+				.event(GateForUserId.CAN_SELF_MOVE_MAKE_CONTACT)
+				.condition(new Equals<>(Value.USER().MOVE().MOVE_TAG(MoveTagId.BITING), false))
+			)
 		);
 		register(Ability.build()
 			.id(DETONATE)
@@ -737,12 +743,11 @@ public class AbilityRegistry {
 			.name("enchanted coat")
 			.rule(Rule.build()
 				.event(RuleForTargetId.SELF_PRE_DAMAGED)
-				.condition(new And(
-					Comparator.greaterThan()
-						.left(new ValueConstant(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.TYPE)))
-						.right(new Constant(1)),
-					new GateCondition(GateForAllId.CAN_USE_DEFENSIVE_ABILITY, USER)
-				))
+				.condition(Comparator.greaterThan()
+					.left(new ValueConstant(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.TYPE)))
+					.right(new Constant(1))
+				)
+				.condition(new GateCondition(GateForAllId.CAN_USE_DEFENSIVE_ABILITY, USER))
 				.effect(Effects.multiplyValue(Value.OPP().MOVE().DAMAGE(), new Constant(0.75)))
 			)
 		);
@@ -775,10 +780,8 @@ public class AbilityRegistry {
 			.name("fanning flame")
 			.rule(Rule.build()
 				.event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
-				.condition(new And(
-					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.AIR),
-					new GateCondition(GateForAllId.CAN_USE_DEFENSIVE_ABILITY, TARGET)
-				))
+				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.AIR))
+				.condition(new GateCondition(GateForAllId.CAN_USE_DEFENSIVE_ABILITY, TARGET))
 				.effect(Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(0.5)))
 			)
 			.rule(Rule.build()
@@ -824,10 +827,8 @@ public class AbilityRegistry {
 			.name("foresight")
 			.rule(Rule.build()
 				.event(ConstantRuleId.START_OF_TURN)
-				.condition(new And(
-					new Equals<>(Value.USER().CURRENT_HEALTH(), Value.USER().HEALTH()),
-					new Equals<>(Value.USER().MOVE().TYPE(), TypeId.MIND)
-				))
+				.condition(new Equals<>(Value.USER().CURRENT_HEALTH(), Value.USER().HEALTH()))
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.MIND))
 				.effect(Effects.addValue(Value.USER().PRIORITY(), new Constant(1)))
 			)
 		);
@@ -836,13 +837,9 @@ public class AbilityRegistry {
 			.name("forge")
 			.rule(Rule.build()
 				.event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
-				.condition(new And(
-					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.FIRE),
-					new GateCondition(GateForAllId.CAN_USE_DEFENSIVE_ABILITY, TARGET)
-				))
-				.effect(
-					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(0.5))
-				)
+				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.FIRE))
+				.condition(new GateCondition(GateForAllId.CAN_USE_DEFENSIVE_ABILITY, TARGET))
+				.effect(Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(0.5)))
 			)
 			.rule(Rule.build()
 				.event(RuleForTargetId.RECEIVED_DAMAGE_FROM_MOVE)
@@ -1083,12 +1080,10 @@ public class AbilityRegistry {
 			.name("insulated")
 			.rule(Rule.build()
 				.event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
-				.condition(new And(
-					new GateCondition(GateForAllId.CAN_USE_DEFENSIVE_ABILITY, TARGET),
-					new Or(
-						new Equals<>(Value.USER().MOVE().TYPE(), TypeId.FIRE),
-						new Equals<>(Value.USER().MOVE().TYPE(), TypeId.ICE)
-					)
+				.condition(new GateCondition(GateForAllId.CAN_USE_DEFENSIVE_ABILITY, TARGET))
+				.condition(new Or(
+					new Equals<>(Value.USER().MOVE().TYPE(), TypeId.FIRE),
+					new Equals<>(Value.USER().MOVE().TYPE(), TypeId.ICE)
 				))
 				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(0.5)))
 			)
@@ -1166,7 +1161,8 @@ public class AbilityRegistry {
 			.name("malware")
 			.rule(Rule.build()
 				.event(RuleForTargetId.RECEIVED_DAMAGE_FROM_MOVE) // if hit by a move
-				.condition(new Equals<>(Value.USER().MOVE().MOVE_TAG(MoveTagId.CONTACT), true))
+				.condition(new Equals<>(Value.OPP().MOVE().MOVE_TAG(MoveTagId.CONTACT), true))
+				.condition(new GateCondition(GateForAllId.CAN_MOVE_MAKE_CONTACT, TARGET))
 				.effect(SetAbility.target(MALWARE))
 			)
 		);
@@ -1327,12 +1323,10 @@ public class AbilityRegistry {
 			.name("oxidize")
 			.rule(Rule.build()
 				.event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
-				.condition(new And(
-					new Equals<>(Value.OPP().MOVE().CATEGORY(), CategoryId.RANGED),
-					new Or(
-						Conditions.rainActive(),
-						Conditions.strongWindsActive()
-					)
+				.condition(new Equals<>(Value.OPP().MOVE().CATEGORY(), CategoryId.RANGED))
+				.condition(new Or(
+					Conditions.rainActive(),
+					Conditions.strongWindsActive()
 				))
 				.effect(Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DEFENDING_STAT), new Constant(1.5)))
 			)
@@ -1603,10 +1597,21 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(SCORCHING_SKIN)
 			.name("scorching skin")
+			.rule(Rule.build()
+				.event(RuleForTargetId.RECEIVED_DAMAGE_FROM_MOVE)
+				.condition(new Equals<>(Value.TARGET().MOVE().MOVE_TAG(MoveTagId.CONTACT), true))
+				.condition(new RandomCondition(new Constant(0.3)))
+				.effect(ApplyStatus.toTarget(StatusId.BURN))
+			)
 		);
 		register(Ability.build()
 			.id(SEIZE)
 			.name("seize")
+			.hook(Hook.build()
+				.event(RuleForTargetId.SELF_PRE_DAMAGED)
+				.condition(new Equals<>(Value.TARGET().MOVE().MOVE_TAG(MoveTagId.PIVOT), true))
+				.condition(new GateCondition(GateForAllId.CAN_USE_DEFENSIVE_ABILITY, USER))
+			)
 		);
 		register(Ability.build()
 			.id(SENDOFF)
@@ -1615,6 +1620,10 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(SELF_DESTRUCT)
 			.name("Self Destruct")
+			.rule(Rule.build()
+				.event(RuleForUserId.SELF_FAINTED)
+				.effect(ClearHazards.fromUser())
+			)
 		);
 		register(Ability.build()
 			.id(SHAKEDOWN)
@@ -1623,13 +1632,19 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(SHARP_CLAWS)
 			.name("sharp claws")
+			.rule(Rule.build()
+				.event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.condition(new Equals<>(Value.USER().MOVE().MOVE_TAG(MoveTagId.CONTACT), true))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.3)))
+			)
 		);
 		register(Ability.build() // when hit by a contact move, the attacker loses 1/16 of their max hp
 			.id(SHARP_EDGES)
 			.name("sharp edges")
 			.rule(Rule.build()
-				.event(RuleForTargetId.HIT_BY_MOVE)
+				.event(RuleForTargetId.RECEIVED_DAMAGE_FROM_MOVE)
 				.condition(new Equals<>(Value.OPP().MOVE().MOVE_TAG(MoveTagId.CONTACT), true))
+				.condition(new GateCondition(GateForAllId.CAN_MOVE_MAKE_CONTACT, TARGET))
 				.effect(new DealDirectSelfDamage(new Multiply(new Constant(1/16), new ValueConstant(Value.OPP().HEALTH()))))
 			)
 		);
@@ -1704,8 +1719,9 @@ public class AbilityRegistry {
 			.id(SPINE_BREAK)
 			.name("spine break")
 			.rule(Rule.build()
-				.event(RuleForTargetId.HIT_BY_MOVE)
+				.event(RuleForTargetId.RECEIVED_DAMAGE_FROM_MOVE)
 				.condition(new Equals<>(Value.OPP().MOVE().MOVE_TAG(MoveTagId.CONTACT), true))
+				.condition(new GateCondition(GateForAllId.CAN_MOVE_MAKE_CONTACT, TARGET))
 				.effect(SetHazards.poisonBarbs())
 			)
 		);
@@ -1892,10 +1908,8 @@ public class AbilityRegistry {
 			.name("vigorous")
 			.rule(Rule.build()
 				.event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
-				.condition(new And(
-					Conditions.userHasStatusAilment(),
-					new Equals<>(Value.USER().MOVE().CATEGORY(), CategoryId.MELEE)
-				))
+				.condition(Conditions.userHasStatusAilment())
+				.condition(new Equals<>(Value.USER().MOVE().CATEGORY(), CategoryId.MELEE))
 				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)))
 			)
 			.rule(Rule.build()
@@ -1941,6 +1955,7 @@ public class AbilityRegistry {
 			.rule(Rule.build()
 				.event(RuleForTargetId.RECEIVED_DAMAGE_FROM_MOVE)
 				.condition(new Equals<>(Value.USER().MOVE().MOVE_TAG(MoveTagId.CONTACT), true))
+				.condition(new GateCondition(GateForAllId.CAN_MOVE_MAKE_CONTACT, TARGET))
 				.effect(ApplyStatChanges.targetChangingUser()
 					.speed(new Constant(1))
 				)
@@ -1964,10 +1979,8 @@ public class AbilityRegistry {
 			.name("wildfire")
 			.rule(Rule.build()
 				.event(ConstantRuleId.PRE_TURN)
-				.condition(new And(
-					new Equals<>(Value.USER().CURRENT_HEALTH(), Value.USER().HEALTH()),
-					new Equals<>(Value.USER().MOVE().TYPE(), TypeId.MIND)
-				))
+				.condition(new Equals<>(Value.USER().CURRENT_HEALTH(), Value.USER().HEALTH()))
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.MIND))
 				.effect(Effects.addValue(Value.SELF().PRIORITY(), new Constant(1)))
 			)
 		);

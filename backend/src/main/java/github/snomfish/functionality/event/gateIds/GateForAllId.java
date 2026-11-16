@@ -8,6 +8,7 @@ public enum GateForAllId implements IGateId {
     CAN_BE_TRAPPED                  (CAN_SELF_BE_TRAPPED,                   CAN_OPP_BE_TRAPPED),
 	CAN_CONSUME_ITEM				(CAN_SELF_CONSUME_ITEM,					CAN_OPP_CONSUME_ITEM),
     CAN_FALL_ASLEEP                 (CAN_SELF_FALL_ASLEEP,                  CAN_OPP_FALL_ASLEEP),
+    CAN_FLINCH                      (CAN_SELF_FLINCH,                       CAN_OPP_FLINCH),
 	CAN_TAKE_RECOIL					(CAN_SELF_TAKE_RECOIL,					CAN_OPP_TAKE_RECOIL),
     CAN_USE_ITEMS                   (CAN_SELF_USE_ITEMS,					CAN_OPP_USE_ITEMS),
     CAN_HAZARDS_AFFECT              (CAN_HAZARDS_AFFECT_SELF,               CAN_HAZARDS_AFFECT_OPP),

@@ -3,7 +3,6 @@ package github.snomfish.functionality.effect.effects;
 import java.util.List;
 
 import github.snomfish.domain.mechanics.Mechanics;
-import github.snomfish.domain.mechanics.ids.FieldMechanicId;
 import github.snomfish.domain.mechanics.ids.SideMechanicId;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.branch.Branch;
