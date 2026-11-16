@@ -814,6 +814,7 @@ public class MoveRegistry {
 				.range(Numbers.WeightedTwoToFiveHits())
 				.primary(new DealFormulaDamage())
 			)
+			.tag(MULTI_HIT)
 		);
 		register(Move.build()
 			.id(BRACE)
@@ -991,6 +992,7 @@ public class MoveRegistry {
 				)
 				.primary(new DealFormulaDamage())
 			)
+			.tag(MULTI_HIT)
 		);
 		// TODO add calamitous crash
 		register(Move.build()
@@ -1368,6 +1370,7 @@ public class MoveRegistry {
 				)
 				.primary(new DealFormulaDamage())
 			)
+			.tag(MULTI_HIT)
 		);
 		register(Move.build()
 			.id(DAWDLE)
@@ -1397,6 +1400,7 @@ public class MoveRegistry {
 				.primary(new DealFormulaDamage())
 			)
 			.tag(CONTACT)
+			.tag(MULTI_HIT)
 		);
 		register(Move.build()
 			.id(DEEP_FREEZE)
@@ -1519,6 +1523,7 @@ public class MoveRegistry {
 				.primary(new DealFormulaDamage())
 			)
 			.tag(CONTACT)
+			.tag(MULTI_HIT)
 		);
 		register(Move.build()
 			.id(DOUBLE_STING) // NEEDS TO BE MADE INTO A BARRAGE
@@ -1537,6 +1542,7 @@ public class MoveRegistry {
 				))
 			)
 			.tag(CONTACT)
+			.tag(MULTI_HIT)
 		);
 		register(Move.build()
 			.id(DOUBLE_SWIPE)
@@ -1552,6 +1558,8 @@ public class MoveRegistry {
 				.range(new Constant(2))
 				.primary(new DealFormulaDamage())
 			)
+			.tag(CONTACT)
+			.tag(MULTI_HIT)
 		);
 		register(Move.build()
 			.id(DOUBLE_WHACK)
@@ -1567,6 +1575,7 @@ public class MoveRegistry {
 				.primary(new DealFormulaDamage())
 			)
 			.tag(CONTACT)
+			.tag(MULTI_HIT)
 		);
 		register(Move.build()
 			.id(DOUSE)
@@ -1657,6 +1666,7 @@ public class MoveRegistry {
 				.range(new Constant(2))
 				.primary(new DealFormulaDamage())
 			)
+			.tag(MULTI_HIT)
 		);
 		register(Move.build()
 			.id(EAR_SLAP)
@@ -1671,6 +1681,7 @@ public class MoveRegistry {
 				.primary(new DealFormulaDamage())
 			)
 			.tag(CONTACT)
+			.tag(MULTI_HIT)
 			.tag(SLAPPING)
 		);
 		register(Move.build()
@@ -2166,6 +2177,7 @@ public class MoveRegistry {
 				.range(Numbers.WeightedTwoToFiveHits())
 				.primary(new DealFormulaDamage())
 			)
+			.tag(MULTI_HIT)
 		);
 		register(Move.build()
 			.id(FROST_BEAM)
@@ -2259,7 +2271,7 @@ public class MoveRegistry {
 			.type(TypeId.LIGHT)
 			.category(MELEE)
 			.energyCost(new Constant(0))
-			.onHit(MoveEffect.build() // TODO change this to a cascade as if one deal damage fails then the whole move will be marked as failed and the rest of hte primaries wouldnt be applied
+			.onHit(MoveEffect.build() // TODO change this to a cascade as if one deal damage fails then the whole move will be marked as failed and the rest of the primaries wouldnt be applied
 				.primary(new DealFormulaDamage())
 				.primary(SetType.move(TypeId.ELECTRIC))
 				.primary(new DealFormulaDamage())
@@ -2270,6 +2282,7 @@ public class MoveRegistry {
 				.primary(SetType.move(TypeId.DARK))
 				.primary(new DealFormulaDamage())
 			)
+			.tag(MULTI_HIT)
 			.tag(SOUL_MOVE)
 		);
 		register(Move.build()
@@ -3283,6 +3296,7 @@ public class MoveRegistry {
 				.primary(new DealFormulaDamage())
 			)
 			.tag(CONTACT)
+			.tag(MULTI_HIT)
 			.tag(SLASHING)
 		);
 		register(Move.build()
@@ -3657,6 +3671,7 @@ public class MoveRegistry {
 				.range(new Constant(2))
 				.primary(new DealFormulaDamage())
 			)
+			.tag(MULTI_HIT)
 		);
 		register(Move.build()
 			.id(PEPPERMINT_BREATH)
@@ -3808,6 +3823,7 @@ public class MoveRegistry {
 		register(Move.build()
 			.id(PILE_BUNKER)
 			.name("Pile Bunker")
+			.tag(MULTI_HIT)
 		);
 		register(Move.build()
 			.id(PILFER)
@@ -3834,6 +3850,7 @@ public class MoveRegistry {
 				.range(Numbers.WeightedTwoToFiveHits())
 				.primary(new DealFormulaDamage())
 			)
+			.tag(MULTI_HIT)
 		);
 		register(Move.build()
 			.id(PLUNGE)
@@ -4203,6 +4220,7 @@ public class MoveRegistry {
 				.range(Numbers.WeightedTwoToFiveHits())
 				.primary(new DealFormulaDamage())
 			)
+			.tag(MULTI_HIT)
 		);
 		register(Move.build()
 			.id(RAZOR_SLASH)
@@ -4271,6 +4289,7 @@ public class MoveRegistry {
 				.range(Numbers.WeightedTwoToFiveHits())
 				.primary(new DealFormulaDamage())
 			)
+			.tag(MULTI_HIT)
 			.tag(SOUND)
 		);
 		register(Move.build()
@@ -4394,6 +4413,7 @@ public class MoveRegistry {
 				.primary(new DealFormulaDamage())
 			)
 			.tag(CONTACT)
+			.tag(MULTI_HIT)
 			.tag(SOUL_MOVE)
 		);
 		register(Move.build()
@@ -5845,9 +5865,9 @@ public class MoveRegistry {
 					.add(new Constant(3))
 				)
 				.primary(new DealFormulaDamage())
-				.secondary()
 			)
 			.tag(CONTACT)
+			.tag(MULTI_HIT)
 		);
 		register(Move.build()
 			.id(WONDER_HERB)
