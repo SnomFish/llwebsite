@@ -160,14 +160,14 @@ public class WeatherRegistry {
             .rule(Rule.build() // loomians cannot fall asleep, if they are asleep already then immediately wake them up
                 .event(RuleForAllId.LOOMIAN_SET_WEATHER)
                 .condition(new Equals<>(Value.USER().STATUS_ID(), StatusId.SLEEP))
-                .effect(ClearStatus.toUser())
+                .effect(ClearStatus.user())
             )
             .rule(Rule.build() // loomians cannot fall asleep, if they are asleep already then immediately wake them up
                 .event(RuleForAllId.LOOMIAN_SET_WEATHER)
                 .condition(new Equals<>(Value.TARGET().STATUS_ID(), StatusId.SLEEP))
-                .effect(ClearStatus.toTarget())
+                .effect(ClearStatus.target())
             )
-            .gate(Gate.build()
+            .gate(Gate.build() // prevents loomians from falling asleep in the future
                 .event(GateForAllId.CAN_FALL_ASLEEP)
                 .condition(new False())
             )

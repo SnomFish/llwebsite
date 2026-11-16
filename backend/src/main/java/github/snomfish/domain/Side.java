@@ -45,7 +45,7 @@ public class Side implements DeepCopyable<Side> {
 
 
     // getter
-    public List<Loomian> getParty() {return party;}
+    public List<Loomian> party() {return party;}
     public int activeLoomianI() {return activeLoomianI;}
     public ActiveLoomian activeLoomian() {return activeLoomian;}
     public Mechanics mechanics() {return mechanics;}

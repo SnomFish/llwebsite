@@ -10,8 +10,6 @@ import github.snomfish.domain.stats.StatId;
 import github.snomfish.domain.type.TypeChart;
 import github.snomfish.domain.type.TypeId;
 import github.snomfish.functionality.branch.Branch;
-import github.snomfish.functionality.condition.ICondition;
-import github.snomfish.functionality.condition.NoCondition;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.copy.DeepCopyable;
 import github.snomfish.functionality.number.Constant;
@@ -25,17 +23,15 @@ public class Move implements DeepCopyable<Move> {
 
     private MoveId id;
     private String name;
-    private ICondition condition;
     private TypeId type;
     private CategoryId category;
     private INumber energyCost;
     private INumber priority;
 
     private IMove onTurnStart;
-    private IMove beforeMove;
-    private IMove onHit;
-    private IMove afterMove;
-    private IMove onMiss;
+    private IMove preMove;
+    private IMove onMove;
+    private IMove postMove;
 
     private INumber basePower;
     private StatId attackingStatId;
@@ -55,17 +51,15 @@ public class Move implements DeepCopyable<Move> {
     public Move() {
         this.id = 			MoveId.NO_MOVE;
         this.name = 		"No Move";
-        this.condition = 	new NoCondition();
         this.type = 		TypeId.NULL;
         this.category = 	CategoryId.MELEE;
         this.energyCost = 	new Constant(0);
         this.priority = 	new Constant(0);
 
         this.onTurnStart =  new NoMove();
-        this.beforeMove = 	new NoMove();
-        this.onHit =        new NoMove();
-        this.afterMove =    new NoMove();
-        this.onMiss = 		new NoMove();
+        this.preMove = 		new NoMove();
+        this.onMove = 		new NoMove();
+        this.postMove =    	new NoMove();
 
         this.basePower = 	new Constant(0);
         this.attackingStatId = StatId.MATTACK;
@@ -85,17 +79,15 @@ public class Move implements DeepCopyable<Move> {
     public Move(Move copy) {
         this.id = 				copy.id;
         this.name = 			copy.name;
-        this.condition = 		copy.condition.deepCopy();
         this.type = 			copy.type;
         this.category = 		copy.category;
         this.energyCost = 		copy.energyCost.deepCopy();
         this.priority = 		copy.priority.deepCopy();
 
         this.onTurnStart =      copy.onTurnStart.deepCopy();
-        this.beforeMove =       copy.beforeMove.deepCopy();
-        this.onHit =            copy.onHit.deepCopy();
-        this.afterMove =        copy.afterMove.deepCopy();
-        this.onMiss =           copy.onMiss.deepCopy();
+        this.preMove =          copy.preMove.deepCopy();
+        this.onMove =           copy.onMove.deepCopy();
+        this.postMove =         copy.postMove.deepCopy();
 
         this.basePower = 		copy.basePower.deepCopy();
         this.attackingStatId =  copy.attackingStatId;
@@ -120,17 +112,15 @@ public class Move implements DeepCopyable<Move> {
     // getter
     public MoveId id() {return id;}
     public String name() {return name;}
-    public ICondition condition() {return condition;}
     public TypeId type() {return type;}
     public CategoryId category() {return category;}
     public INumber energyCost() {return energyCost;}
     public INumber priority() {return priority;}
 
     public IMove onTurnStart() {return onTurnStart;}
-    public IMove beforeMove() {return beforeMove;}
-    public IMove onHit() {return onHit;}
-    public IMove afterMove() {return afterMove;}
-    public IMove onMiss() {return onMiss;}
+    public IMove preMove() {return preMove;}
+    public IMove onMove() {return onMove;}
+    public IMove postMove() {return postMove;}
 
     public INumber basePower() {return basePower;}
     public StatId attackingStatId() {return attackingStatId;}
@@ -151,90 +141,29 @@ public class Move implements DeepCopyable<Move> {
 	public static Move build() {
 		return new Move();
 	}
-	public Move id(MoveId id) {
-		this.id = id;
-		return this;
-	}
-    public Move moveId(MoveId moveId) {
-		this.id = moveId;
-		return this;
-	}
-    public Move name(String name) {
-		this.name = name;
-		return this;
-	}
-    public Move condition(ICondition condition) {
-		this.condition = condition;
-		return this;
-	}
-    public Move type(TypeId type) {
-		this.type = type;
-		return this;
-	}
-    public Move category(CategoryId category) {
-		this.category = category;
-		return this;
-	}
-    public Move energyCost(INumber energyCost) {
-		this.energyCost = energyCost;
-		return this;
-	}
-    public Move priority(INumber priority) {
-		this.priority = priority;
-		return this;
-	}
-	public Move onTurnStart(IMove onTurnStart) {
-		this.onTurnStart = onTurnStart;
-		return this;
-	}
-    public Move beforeMove(IMove beforeMove) {
-		this.beforeMove = beforeMove;
-		return this;
-	}
-    public Move onHit(IMove onHit) {
-		this.onHit = onHit;
-		return this;
-	}
-    public Move afterMove(IMove afterMove) {
-		this.afterMove = afterMove;
-		return this;
-	}
-    public Move onMiss(IMove onMiss) {
-		this.onMiss = onMiss;
-		return this;
-	}
-    public Move basePower(INumber basePower) {
-		this.basePower = basePower;
-		return this;
-	}
-    public Move attackingStat(StatId attackingStatId) {
-		this.attackingStatId = attackingStatId;
-		return this;
-	}
-    public Move defendingStat(StatId defendingStatId) {
-		this.defendingStatId = defendingStatId;
-		return this;
-	}
-    public Move tag(MoveTagId tag) {
-		this.tags.set(tag, true);
-		return this;
-	}
-    public Move modifiers(Modifiers modifiers) {
-		this.modifiers = modifiers;
-		return this;
-	}
-    public Move typeChart(TypeChart typeChart) {
-		this.typeChart = typeChart;
-		return this;
-	}
-    public Move critChance(int critChance) {
-		this.critChance = critChance;
-		return this;
-	}
-    public Move damage(int damage) {
-		this.damage = damage;
-		return this;
-	}
+	public Move id(MoveId id) {this.id = id; return this;}
+    public Move moveId(MoveId moveId) {this.id = moveId; return this;}
+    public Move name(String name) {this.name = name; return this;}
+    public Move type(TypeId type) {this.type = type; return this;}
+    public Move category(CategoryId category) {this.category = category; return this;}
+    public Move energyCost(INumber energyCost) {this.energyCost = energyCost; return this;}
+    public Move priority(INumber priority) {this.priority = priority; return this;}
+
+	public Move onTurnStart(IMove onTurnStart) {this.onTurnStart = onTurnStart; return this;}
+    public Move preMove(IMove preMove) {this.preMove = preMove; return this;}
+    public Move onMove(IMove onHit) {this.onMove = onHit; return this;}
+    public Move postMove(IMove postMove) {this.postMove = postMove; return this;}
+
+    public Move basePower(INumber basePower) {this.basePower = basePower; return this;}
+    public Move attackingStat(StatId attackingStatId) {this.attackingStatId = attackingStatId; return this;}
+    public Move defendingStat(StatId defendingStatId) {this.defendingStatId = defendingStatId; return this;}
+    public Move tag(MoveTagId tag) {this.tags.set(tag, true); return this;}
+    public Move modifiers(Modifiers modifiers) {this.modifiers = modifiers; return this;}
+    public Move typeChart(TypeChart typeChart) {this.typeChart = typeChart; return this;}
+
+    public Move critChance(int critChance) {this.critChance = critChance; return this;}
+    public Move damage(int damage) {this.damage = damage; return this;}
+
     public void setCanMoveFail(boolean canMoveFail) {this.canMoveFail = canMoveFail;}
     public void setHasMoveFailed(boolean hasMoveFailed) {this.hasMoveFailed = hasMoveFailed;}
     public void hasCrit(boolean hasCrit) {this.hasCrit = hasCrit;}
@@ -244,24 +173,12 @@ public class Move implements DeepCopyable<Move> {
 
     // this bich does not think about energy cost
     public List<Branch<BattleContext>> execute(BattleContext context) {
-        List<Branch<BattleContext>> beforeMoveOutcomes = beforeMove.execute(context);
-        List<Branch<BattleContext>> moveOutcomes = new ArrayList<>();
+        List<Branch<BattleContext>> outcomes = wrap(context);
 
-        Double conditionProbability = condition.execute(context);
+		outcomes = flatMap(outcomes, c -> preMove.execute(context));
+		outcomes = flatMap(outcomes, c -> onMove.execute(context));
+		outcomes = flatMap(outcomes, c -> postMove.execute(context));
 
-        if (conditionProbability > 0) {
-            moveOutcomes = applyProbability(
-                flatMap(beforeMoveOutcomes, c -> onHit.execute(c)), 
-                conditionProbability
-            );
-        } 
-        if (conditionProbability < 1) {
-            moveOutcomes = applyProbability(
-                flatMap(beforeMoveOutcomes, c -> onMiss.execute(c)), 
-                1-conditionProbability
-            );
-        }
-
-        return flatMap(moveOutcomes, c -> afterMove.execute(c));
+		return outcomes;
     }
 }

@@ -5,6 +5,7 @@ import java.util.function.BiConsumer;
 import java.util.function.Function;
 
 import github.snomfish.domain.ActiveLoomian;
+import github.snomfish.domain.Loomian;
 import github.snomfish.domain.Side;
 import github.snomfish.domain.ability.AbilityId;
 import github.snomfish.domain.item.ItemId;
@@ -144,6 +145,11 @@ public class Value<T> {
 	);}
 
 
+	public Value<List<Loomian>> PARTY() {return update(
+		null,
+		c -> 		((Side) c).party(),
+		null
+	);}
     public Value<ActiveLoomian> LOOMIAN() {return update(
 		ActiveLoomian.class,
 		c -> 		((Side) c).activeLoomian(),

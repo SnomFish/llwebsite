@@ -7,6 +7,8 @@ public enum LoomianMechanicId implements IMechanicId {
     FLINCH,
 
     // MOVE SPECIFIC
+    BEASTS_SLUMBER,
+    SLUMBER,
     WILL_SET_BOH,
     PERCHING,
     REVIVING,

@@ -25,6 +25,7 @@ import github.snomfish.functionality.effect.effects.ApplyStatChanges;
 import github.snomfish.functionality.effect.effects.ApplyStatus;
 import github.snomfish.functionality.effect.effects.DealDirectDamage;
 import github.snomfish.functionality.effect.effects.RemoveMechanic;
+import github.snomfish.functionality.effect.effects.RestoreHealth;
 import github.snomfish.functionality.effect.effects.SetFieldMechanic;
 import github.snomfish.functionality.event.Gate;
 import github.snomfish.functionality.event.Rule;
@@ -77,6 +78,30 @@ public class MechanicRegistry {
             .name("Flinch")
         );
 
+        register(new Mechanic()
+            .id(BEASTS_SLUMBER)
+            .name("beasts slumber")
+            .rule(Rule.build()
+                .event(ConstantRuleId.END_OF_TURN)
+                .effect(RestoreHealth.user(Numbers.thirdUserMaxHealth()))
+            )
+            .onAppliedEffect(ApplyStatChanges.userChangingUser()
+                .mdefense(new Constant(1))
+                .rdefense(new Constant(1))
+            )
+            .onRemoveEffect(ApplyStatChanges.userChangingUser()
+                .mdefense(new Constant(-1))
+                .rdefense(new Constant(-1))
+            )
+        );
+        register(new Mechanic()
+            .id(SLUMBER)
+            .name("slumber")
+            .rule(Rule.build()
+                .event(ConstantRuleId.END_OF_TURN)
+                .effect(RestoreHealth.user(Numbers.thirdUserMaxHealth()))
+            )
+        );
         register(new Mechanic()
             .id(WILL_SET_BOH)
             .name("will set up bane of haste at end of turn")
