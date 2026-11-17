@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 import github.snomfish.functionality._schematics.Conditions;
 import github.snomfish.functionality.condition.ICondition;
 import github.snomfish.functionality.context.BattleContext;
+import github.snomfish.functionality.event.Rule;
 
 public class BranchUtil {
 
@@ -92,12 +94,35 @@ public class BranchUtil {
         List<Branch<BattleContext>> outcomes = new ArrayList<>();
 
 		double probability = Conditions.resolve(context, conditions);
+
+        if (0 <= probability && probability <= 1) throw new RuntimeException("probabiltiy is outside range 0 and 1, this is unexpected.");
+
 		if (probability > 0) {
 			outcomes.addAll(applyProbability(function.apply(context), probability));
-
 		}
 		if (probability < 1) {
-			outcomes.addAll(applyProbability(wrap(context), probability));
+			outcomes.add(new Branch<>(context, 1-probability));
+		}
+
+        return outcomes;
+    }
+    public static List<Branch<BattleContext>> resolveConditions(
+        BattleContext context,
+        List<ICondition> conditions,
+        Rule rule,
+        BiFunction<BattleContext, Rule, List<Branch<BattleContext>>> function
+    ) {
+        List<Branch<BattleContext>> outcomes = new ArrayList<>();
+
+		double probability = Conditions.resolve(context, conditions);
+
+        if (0 <= probability && probability <= 1) throw new RuntimeException("probabiltiy is outside range 0 and 1, this is unexpected.");
+
+		if (probability > 0) {
+			outcomes.addAll(applyProbability(function.apply(context, rule), probability));
+		}
+		if (probability < 1) {
+			outcomes.add(new Branch<>(context, 1-probability));
 		}
 
         return outcomes;

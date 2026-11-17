@@ -7,29 +7,30 @@ import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.condition.ICondition;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.effect.IEffect;
-import github.snomfish.functionality.effect.effects.NoEffect;
 import github.snomfish.functionality.event.ruleIds.IRuleId;
 
-import static github.snomfish.functionality.branch.BranchUtil.applyProbability;
+import static github.snomfish.functionality.branch.BranchUtil.flatMap;
+import static github.snomfish.functionality.branch.BranchUtil.resolveConditions;
+import static github.snomfish.functionality.branch.BranchUtil.wrap;
 
 public class Rule {
      
 
     private List<IRuleId> events;
     private List<ICondition> conditions;
-    private IEffect effect;
+    private List<IEffect> effects;
 
 
     private Rule() {
         this.events = new ArrayList<>();
         this.conditions = new ArrayList<>();
-        this.effect = new NoEffect();
+        this.effects = new ArrayList<>();
     }
 
 
     public List<IRuleId> events() {return events;}
     public List<ICondition> conditions() {return conditions;}
-    public IEffect effect() {return effect;}
+    public List<IEffect> effects() {return effects;}
 
 
     // builder functions
@@ -45,28 +46,25 @@ public class Rule {
         return this;
     }
     public Rule effect(IEffect effect) {
-        this.effect = effect;
+        this.effects.add(effect);
         return this;
     }
 
 
     public List<Branch<BattleContext>> execute(BattleContext context, IRuleId event) {
-        
         if (!events.contains(event)) return List.of(new Branch<>(context, 1.0));
 
-        List<Branch<BattleContext>> outcomes = new ArrayList<>();
-        double probability = 1;
-        for (ICondition condition : conditions) {
-            probability *= condition.execute(context);
+        return resolveConditions(context, conditions, this::executeEffects);
+    }
+
+
+    public List<Branch<BattleContext>> executeEffects(BattleContext context) {
+        List<Branch<BattleContext>> outcomes = wrap(context);
+
+        for (IEffect effect : effects) {
+            outcomes = flatMap(outcomes, c -> effect.execute(c));
         }
 
-        if (probability > 0) {
-            outcomes.addAll(applyProbability(effect.execute(context), probability));
-        }
-        if (probability < 1) {
-            outcomes.addAll(applyProbability(effect.execute(context), 1-probability));
-        }
-        
-        return effect.execute(context);
+        return outcomes;
     }
 }

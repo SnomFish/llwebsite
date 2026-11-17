@@ -8,12 +8,14 @@ import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.condition.ICondition;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.copy.DeepCopyable;
+import github.snomfish.functionality.event.HookReport;
 import github.snomfish.functionality.event.Rule;
 import github.snomfish.functionality.event.gateIds.IGateId;
 import github.snomfish.functionality.event.ruleIds.IRuleId;
 
 import static github.snomfish.functionality.branch.BranchUtil.applyProbability;
 import static github.snomfish.functionality.branch.BranchUtil.flatMap;
+import static github.snomfish.functionality.branch.BranchUtil.resolveConditions;
 
 public class AbilityInstance implements DeepCopyable<AbilityInstance> {
     
@@ -72,40 +74,32 @@ public class AbilityInstance implements DeepCopyable<AbilityInstance> {
 
 
     public List<Branch<BattleContext>> executeRule(BattleContext context, IRuleId event, Rule rule) {
-        List<Branch<BattleContext>> outcomes = new ArrayList<>();
-
         if (!rule.events().contains(event)) return List.of(new Branch<>(context, 1));
 
-        double probability = 1;
-        for (ICondition condition : rule.conditions()) {
-            probability *= condition.execute(context);
+        return resolveConditions(context, rule.conditions(), rule, this::executeRuleEffects);
+    }
+    public List<Branch<BattleContext>> executeRuleEffects(BattleContext context, Rule rule) {
+        List<Branch<BattleContext>> outcomes = new ArrayList<>();
+        BattleContext outcome = context.deepCopy();
+
+        AbilityId abilityId =           (AbilityId) Value.USER().ABILITY_ID().get(outcome);
+        AbilityId actualAbilityId =     (AbilityId) Value.USER().ACTUAL_ABILITY_ID().get(outcome);
+        
+        Value.USER().ABILITY_HAS_ACTIVATED_THIS_BATTLE().set(outcome, true);
+        Value.USER().ABILITY_HAS_ACTIVATED_THIS_SWAP().set(outcome, true);
+        if (abilityId == actualAbilityId) {
+            Value.USER().ACTUAL_ABILITY_HAS_ACTIVATED_THIS_BATTLE().set(outcome, true);
+            Value.USER().ACTUAL_ABILITY_HAS_ACTIVATED_THIS_SWAP().set(outcome, true);
         }
 
-        if (probability > 0) { // if the condition is true
-            BattleContext outcome = context.deepCopy();
-
-            AbilityId abilityId =           (AbilityId) Value.USER().ABILITY_ID().get(context);
-            AbilityId actualAbilityId =     (AbilityId) Value.USER().ACTUAL_ABILITY_ID().get(context);
-            
-            Value.USER().ABILITY_HAS_ACTIVATED_THIS_BATTLE().set(context, true);
-            Value.USER().ABILITY_HAS_ACTIVATED_THIS_SWAP().set(context, true);
-            if (abilityId == actualAbilityId) {
-                Value.USER().ACTUAL_ABILITY_HAS_ACTIVATED_THIS_BATTLE().set(context, true);
-                Value.USER().ACTUAL_ABILITY_HAS_ACTIVATED_THIS_SWAP().set(context, true);
-            }
-
-            outcomes.addAll(applyProbability(rule.effect().execute(outcome), probability));
-        }
-        if (probability < 1) {
-            BattleContext outcome = context.deepCopy();
-            outcomes.add(new Branch<>(outcome, 1-probability));
-        }
-
-		return outcomes;
+        return rule.executeEffects(outcome);
     }
 
 
     public double handleGate(BattleContext context, IGateId gateId) {
         return ability().handleGate(context, gateId);
+    }
+    public HookReport handleInterceptor(BattleContext context, IRuleId ruleId, HookReport report) {
+        return ability().handleHook(context, ruleId, report);
     }
 }
