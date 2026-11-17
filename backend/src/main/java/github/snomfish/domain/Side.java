@@ -74,11 +74,9 @@ public class Side implements DeepCopyable<Side> {
 
         return probability;
     }
-    public HookReport dispatchHook(HookReport report, BattleContext context, IRuleId event) {
+    public void dispatchHook(HookReport report, BattleContext context, IRuleId event) {
         
-        report = activeLoomian().dispatchHook(report, context, event);
-
-        return report;
+        activeLoomian().dispatchHook(report, context, event);
     }
 
 

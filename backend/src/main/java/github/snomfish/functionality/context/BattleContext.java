@@ -136,10 +136,10 @@ public class BattleContext implements DeepCopyable<BattleContext> {
         HookReport report = new HookReport(trueOutcomes);
 
         BattleContext context = ContextUtil.setFocus(this, sideId);
-        report = user().dispatchHook(report, context, eventId.forUser());
+        user().dispatchHook(report, context, eventId.forUser());
 
         context = ContextUtil.reverseFocus(context);
-        report = target().dispatchHook(report, context, eventId.forTarget());
+        target().dispatchHook(report, context, eventId.forTarget());
 
         context = ContextUtil.setFocus(context, userState); // resets the focus to the correct state
         return report.execute(context);

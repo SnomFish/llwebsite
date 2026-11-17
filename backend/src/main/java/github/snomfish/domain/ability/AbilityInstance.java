@@ -1,11 +1,9 @@
 package github.snomfish.domain.ability;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.branch.Branch;
-import github.snomfish.functionality.condition.ICondition;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.copy.DeepCopyable;
 import github.snomfish.functionality.event.HookReport;
@@ -13,7 +11,6 @@ import github.snomfish.functionality.event.Rule;
 import github.snomfish.functionality.event.gateIds.IGateId;
 import github.snomfish.functionality.event.ruleIds.IRuleId;
 
-import static github.snomfish.functionality.branch.BranchUtil.applyProbability;
 import static github.snomfish.functionality.branch.BranchUtil.flatMap;
 import static github.snomfish.functionality.branch.BranchUtil.resolveConditions;
 
@@ -79,7 +76,6 @@ public class AbilityInstance implements DeepCopyable<AbilityInstance> {
         return resolveConditions(context, rule.conditions(), rule, this::executeRuleEffects);
     }
     public List<Branch<BattleContext>> executeRuleEffects(BattleContext context, Rule rule) {
-        List<Branch<BattleContext>> outcomes = new ArrayList<>();
         BattleContext outcome = context.deepCopy();
 
         AbilityId abilityId =           (AbilityId) Value.USER().ABILITY_ID().get(outcome);
