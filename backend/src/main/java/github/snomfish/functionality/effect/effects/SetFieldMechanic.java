@@ -71,7 +71,7 @@ public class SetFieldMechanic implements IEffect {
 
 		if (!mechanics.has(FieldMechanicId.BANE_OF_HASTE)) {
 			outcomes = ApplyMechanic.toField(FieldMechanicId.BANE_OF_HASTE).withMaxAge(maxAge).execute(context);
-			outcomes = flatMap(outcomes, c -> c.dispatchEvent(RuleForAllId.LOOMIAN_SET_BANE_OF_HASTE, ContextSideId.USER));
+			outcomes = flatMap(outcomes, c -> c.dispatchRule(RuleForAllId.LOOMIAN_SET_BANE_OF_HASTE, ContextSideId.USER));
 
 		} else { // if bane of haste is already up, remove it
 			outcomes = RemoveMechanic.fromField(FieldMechanicId.BANE_OF_HASTE).execute(context);
@@ -87,7 +87,7 @@ public class SetFieldMechanic implements IEffect {
 
 		if (!mechanics.has(FieldMechanicId.BANE_OF_WIELDING)) {
 			outcomes = ApplyMechanic.toField(FieldMechanicId.BANE_OF_WIELDING).withMaxAge(maxAge).execute(context);
-			outcomes = flatMap(outcomes, c -> c.dispatchEvent(RuleForAllId.LOOMIAN_SET_BANE_OF_WIELDING, ContextSideId.USER));
+			outcomes = flatMap(outcomes, c -> c.dispatchRule(RuleForAllId.LOOMIAN_SET_BANE_OF_WIELDING, ContextSideId.USER));
 
 		} else { // if bane of wielding is already up, remove it
 			outcomes = RemoveMechanic.fromField(FieldMechanicId.BANE_OF_WIELDING).execute(context);
@@ -103,7 +103,7 @@ public class SetFieldMechanic implements IEffect {
 
 		if (!mechanics.has(FieldMechanicId.FUNGUS_CURSE)) {
 			outcomes = ApplyMechanic.toField(FieldMechanicId.FUNGUS_CURSE).withMaxAge(maxAge).execute(context);
-			outcomes = flatMap(outcomes, c -> c.dispatchEvent(RuleForAllId.LOOMIAN_SET_FUNGUS_CURSE, ContextSideId.USER));
+			outcomes = flatMap(outcomes, c -> c.dispatchRule(RuleForAllId.LOOMIAN_SET_FUNGUS_CURSE, ContextSideId.USER));
 
 		} else { // if fungus curse is already set up, remove it
 			outcomes = RemoveMechanic.fromField(FieldMechanicId.FUNGUS_CURSE).execute(context);

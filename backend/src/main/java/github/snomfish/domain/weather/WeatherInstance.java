@@ -44,13 +44,10 @@ public class WeatherInstance implements DeepCopyable<WeatherInstance> {
     public void setLifespan(int lifespan) {this.lifespan = lifespan;}
 
 
-    public List<Branch<BattleContext>> dispatchEvent(BattleContext context, IRuleId event) {
+    public List<Branch<BattleContext>> dispatchRule(BattleContext context, IRuleId event) {
         return weather().handleRule(context, event);
     }
-    public double dispatchGate(BattleContext context, IGateId gateId, double probability) {
-        
-        probability *= weather().handleGate(context, gateId);
-
-        return probability;
+    public double dispatchGate(BattleContext context, IGateId gateId) {
+        return weather().handleGate(context, gateId);
     }
 }

@@ -10,7 +10,7 @@ public class TestWeatherRegistry {
 
     @Test
     void weatherHasRegisteredAllEnums() {
-        GeneralRegistryTests.hasRegisteredAllEnums(
+        GeneralTestRegistry.hasRegisteredAllEnums(
             "WeatherRegistry",
             WeatherId.values(),
             WeatherRegistry.registry()
@@ -20,7 +20,7 @@ public class TestWeatherRegistry {
     
     @Test
     void allEntriesAreUnique() {
-        GeneralRegistryTests.allEntriesAreUnique(
+        GeneralTestRegistry.allEntriesAreUnique(
             "WeatherRegistry",
             WeatherId.values(),
             WeatherRegistry.registry()

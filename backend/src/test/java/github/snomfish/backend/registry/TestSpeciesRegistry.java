@@ -10,7 +10,7 @@ public class TestSpeciesRegistry {
 
     @Test
     void speciesHasRegisteredAllEnums() {
-        GeneralRegistryTests.hasRegisteredAllEnums(
+        GeneralTestRegistry.hasRegisteredAllEnums(
             "SpeciesRegistry",
             SpeciesId.values(),
             SpeciesRegistry.registry()
@@ -20,7 +20,7 @@ public class TestSpeciesRegistry {
     
     @Test
     void allEntriesAreUnique() {
-        GeneralRegistryTests.allEntriesAreUnique(
+        GeneralTestRegistry.allEntriesAreUnique(
             "SpeciesRegistry",
             SpeciesId.values(),
             SpeciesRegistry.registry()

@@ -65,18 +65,22 @@ public class Side implements DeepCopyable<Side> {
         List<Branch<BattleContext>> outcomes = new ArrayList<>();
 
         outcomes = activeLoomian().dispatchRule(context, event);
+        outcomes = mechanics.dispatchRule(context, event);
 
         return outcomes;
     }
-    public double dispatchGate(BattleContext context, IGateId gateId, double probability) {
+    public double dispatchGate(BattleContext context, IGateId gateId) {
+        double probability = 1;
 
-        probability = activeLoomian().dispatchGate(context, gateId, probability);
+        probability *= activeLoomian().dispatchGate(context, gateId);
+        probability *= mechanics.dispatchGate(context, gateId);
 
         return probability;
     }
     public void dispatchHook(HookReport report, BattleContext context, IRuleId event) {
         
         activeLoomian().dispatchHook(report, context, event);
+        mechanics.dispatchHook(report, context, event);
     }
 
 

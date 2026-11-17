@@ -39,7 +39,7 @@ public class HealthDrainEffect implements IEffect {
     public List<Branch<BattleContext>> execute(BattleContext context) {
         List<Branch<BattleContext>> outcomes = new ArrayList<>();
 
-        for(Branch<BattleContext> contextBranch : context.dispatchEvent(RuleForAllId.PRE_DRAINING_HEALTH, ContextSideId.USER)) {
+        for(Branch<BattleContext> contextBranch : context.dispatchRule(RuleForAllId.PRE_DRAINING_HEALTH, ContextSideId.USER)) {
             for(Branch<Double> drainBranch : drain.execute(context)) {
 
                 BattleContext outcome = contextBranch.value().deepCopy();

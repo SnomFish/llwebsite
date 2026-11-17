@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.junit.jupiter.api.Assertions;
 
-public class GeneralRegistryTests {
+public class GeneralTestRegistry {
     
 
     

@@ -63,7 +63,7 @@ public class SetWeather implements IEffect {
         if (context.gamestate().weatherInstance().weatherId() == weatherId) return outcomes;
 
         outcomes = flatMap(outcomes, c -> setWeatherModule(context));
-        outcomes = flatMap(outcomes, c -> c.dispatchEvent(postSetEvent, ContextSideId.USER));
+        outcomes = flatMap(outcomes, c -> c.dispatchRule(postSetEvent, ContextSideId.USER));
         
         return outcomes;
     }

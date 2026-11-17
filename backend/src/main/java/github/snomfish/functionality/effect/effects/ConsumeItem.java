@@ -57,7 +57,7 @@ public class ConsumeItem implements IEffect {
 
         // currently does not check if the item can be consumed
         activeLoomian.setItemId(NO_ITEM);
-        outcomes = context.dispatchEvent(RuleForAllId.LOOMIAN_CONSUMED_ITEM, sideId);
+        outcomes = context.dispatchRule(RuleForAllId.LOOMIAN_CONSUMED_ITEM, sideId);
 
         return outcomes;
     }

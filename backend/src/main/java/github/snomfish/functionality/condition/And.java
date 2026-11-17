@@ -27,7 +27,7 @@ public class And implements ICondition {
     @Override
     public And deepCopy() {
         return new And(this);
-    } 
+    }
 
 
     @Override

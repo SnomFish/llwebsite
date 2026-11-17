@@ -122,7 +122,7 @@ public class ApplyStatChanges implements IEffect {
     public List<Branch<BattleContext>> execute(BattleContext context) {
         List<Branch<BattleContext>> outcomes = List.of(new Branch<>(context, 1.0));
 
-        outcomes = flatMap(outcomes, c -> c.dispatchEvent(RuleForAllId.PRE_LOOMIAN_STATS_CHANGED, userSideI));
+        outcomes = flatMap(outcomes, c -> c.dispatchRule(RuleForAllId.PRE_LOOMIAN_STATS_CHANGED, userSideI));
         for (StatChangesId key : StatChangesId.values()) {
             outcomes = flatMap(outcomes, c -> applyStatChangeModule(context, key));
         }
@@ -166,7 +166,7 @@ public class ApplyStatChanges implements IEffect {
 
         // if a stat was lowered then trigger this
         if (deltaStage < 0) {
-            outcomes = flatMap(outcomes, c -> c.dispatchEvent(statLoweredEvent, targetSideI));
+            outcomes = flatMap(outcomes, c -> c.dispatchRule(statLoweredEvent, targetSideI));
         }
 
         return outcomes;

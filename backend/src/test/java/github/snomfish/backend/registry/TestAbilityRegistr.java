@@ -10,7 +10,7 @@ public class TestAbilityRegistr {
 
     @Test
     void hasRegisteredAllEnums() {
-        GeneralRegistryTests.hasRegisteredAllEnums(
+        GeneralTestRegistry.hasRegisteredAllEnums(
             "AbilityRegistry",
             AbilityId.values(),
             AbilityRegistry.registry()
@@ -20,7 +20,7 @@ public class TestAbilityRegistr {
 
     @Test
     void allEntriesAreUnique() {
-        GeneralRegistryTests.allEntriesAreUnique(
+        GeneralTestRegistry.allEntriesAreUnique(
             "AbilityRegistry",
             AbilityId.values(),
             AbilityRegistry.registry()

@@ -27,7 +27,7 @@ public class TestMechanicRegistry {
 
     @Test
     void mechanicsHasRegisteredAllEnums() {
-        GeneralRegistryTests.hasRegisteredAllEnums(
+        GeneralTestRegistry.hasRegisteredAllEnums(
             "MechanicRegistry",
             allMechanicIds(),
             MechanicRegistry.registry()
@@ -37,7 +37,7 @@ public class TestMechanicRegistry {
 
     @Test
     void allEntriesAreUnique() {
-        GeneralRegistryTests.allEntriesAreUnique(
+        GeneralTestRegistry.allEntriesAreUnique(
             "MechanicRegistry",
             allMechanicIds(),
             MechanicRegistry.registry()

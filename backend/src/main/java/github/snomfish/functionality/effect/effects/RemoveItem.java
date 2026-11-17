@@ -58,7 +58,7 @@ public class RemoveItem implements IEffect {
 
         // does not check if the loomian can have it's item removed
         activeLoomian.setItemId(NO_ITEM);
-        outcomes = context.dispatchEvent(RuleForAllId.LOOMIAN_LOST_ITEM, sideId);
+        outcomes = context.dispatchRule(RuleForAllId.LOOMIAN_LOST_ITEM, sideId);
 
         return outcomes;
     }

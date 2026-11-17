@@ -46,7 +46,7 @@ public class DealFormulaDamage implements IEffect {
         List<Branch<BattleContext>> outcomes = List.of(new Branch<>(context, 1.0));
         context.log("executing damage effect");
         
-        outcomes = flatMap(outcomes, c -> c.dispatchEvent(RuleForAllId.PRE_DEAL_FORMULA_DAMAGE, ContextSideId.USER));
+        outcomes = flatMap(outcomes, c -> c.dispatchRule(RuleForAllId.PRE_DEAL_FORMULA_DAMAGE, ContextSideId.USER));
         outcomes = flatMap(outcomes, c -> basePowerModule(c));
         outcomes = flatMap(outcomes, c -> critChanceModule(c));
         outcomes = flatMap(outcomes, c -> damageModule(c));
@@ -58,7 +58,7 @@ public class DealFormulaDamage implements IEffect {
     private List<Branch<BattleContext>> execute1(BattleContext context) {
         List<Branch<BattleContext>> outcomes = List.of(new Branch<>(context, 1.0));
 
-        outcomes = flatMap(outcomes, c -> c.dispatchEvent(RuleForAllId.LOOMIAN_CLUTCHES, ContextSideId.TARGET));
+        outcomes = flatMap(outcomes, c -> c.dispatchRule(RuleForAllId.LOOMIAN_CLUTCHES, ContextSideId.TARGET));
         outcomes = flatMap(outcomes, c -> damageRollModule(c));
 
         return outcomes;
@@ -235,7 +235,7 @@ public class DealFormulaDamage implements IEffect {
             target.addToCurrentHealth(-damage);
 
             if (damage > 0) {
-                outcomes.addAll(flatMap(List.of(new Branch<>(outcome, 1/16)), c -> c.dispatchEvent(RuleForAllId.DEALT_FORMULA_DAMAGE, ContextSideId.USER)));
+                outcomes.addAll(flatMap(List.of(new Branch<>(outcome, 1/16)), c -> c.dispatchRule(RuleForAllId.DEALT_FORMULA_DAMAGE, ContextSideId.USER)));
             } else {
                 outcomes.add(new Branch<>(outcome, 1/16));
             }

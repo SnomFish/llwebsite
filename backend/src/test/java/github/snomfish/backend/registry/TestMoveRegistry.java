@@ -10,7 +10,7 @@ public class TestMoveRegistry {
 
     @Test
     void moveHasRegisteredAllEnums() {
-        GeneralRegistryTests.hasRegisteredAllEnums(
+        GeneralTestRegistry.hasRegisteredAllEnums(
             "MoveRegistry",
             MoveId.values(),
             MoveRegistry.registry()
@@ -20,7 +20,7 @@ public class TestMoveRegistry {
     
     @Test
     void allEntriesAreUnique() {
-        GeneralRegistryTests.allEntriesAreUnique(
+        GeneralTestRegistry.allEntriesAreUnique(
             "MoveRegistry",
             MoveId.values(),
             MoveRegistry.registry()

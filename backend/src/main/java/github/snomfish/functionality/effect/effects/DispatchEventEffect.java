@@ -39,7 +39,7 @@ public class DispatchEventEffect implements IEffect {
     public List<Branch<BattleContext>> execute(BattleContext context) {
         List<Branch<BattleContext>> outcomes = List.of(new Branch<>(context, 1));
 
-        outcomes = flatMap(outcomes, c -> c.dispatchEvent(eventId, sideId));
+        outcomes = flatMap(outcomes, c -> c.dispatchRule(eventId, sideId));
     
         return outcomes;
     }

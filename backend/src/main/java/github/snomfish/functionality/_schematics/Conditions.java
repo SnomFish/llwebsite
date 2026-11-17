@@ -22,7 +22,7 @@ public class Conditions {
 
 
     public static void checkProbability(double probability) {
-        if (probability < 0 || 1 > probability) throw new RuntimeException("probability reached unacceptable value \"" + probability + "\"");
+        if (probability < 0 || 1 < probability) throw new RuntimeException("probability reached unacceptable value \"" + probability + "\"");
     }
 
 

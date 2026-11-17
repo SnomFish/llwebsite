@@ -68,36 +68,29 @@ public class BattleContext implements DeepCopyable<BattleContext> {
     }
 
 
-    // events
-    /* 
-    THESE EVENTS WORK FOR EVENTS LIKE "WEATHER_STARTED" WHERE THE EVENT NEEDS TO APPLY TO BOTH PARTIES
-    AND THE EVENT AFFECTS BOTH PARTIES EVENLY
-
-    FOR A TRUELY GENERIC EVENT A NEW SYSTEM NEEDS TO BE USED
-    EACH EVENT MUST HAVE A COUNTER PART, E.G: "SWAPPED_IN" AND "THE_OTHER_GUY_SWAPPED_IN"
-
-    THE INITIAL FUNCTION CALL NEEDS TO SPECIFY WETHER THE USER OR THE TARGET GETS THE FIRST EVENT ("SWAPPED IN")
-    AND THE OTHER SIDE GETS THE OTHER FUNCTION
     
-    AFTER THAT THE EXTRA SIDE_CONTEXT_ID IS NOT NEEDED
-    */
-    public List<Branch<BattleContext>> dispatchEvent(ConstantRuleId ruleId, ContextSideId sideId) {
+
+    public List<Branch<BattleContext>> dispatchRule(ConstantRuleId ruleId, ContextSideId sideId) {
         List<Branch<BattleContext>> outcomes = List.of(new Branch<>(this, 1.0));
         
         outcomes = ContextUtil.setFocus(outcomes, sideId);
-        outcomes = flatMap(outcomes, context -> gamestate().weatherInstance().dispatchEvent(context, ruleId));
+        outcomes = flatMap(outcomes, context -> gamestate().weatherInstance().dispatchRule(context, ruleId));
+        outcomes = flatMap(outcomes, context -> gamestate().mechanics().dispatchRule(context, ruleId));
+
         outcomes = flatMap(outcomes, context -> user().dispatchRule(context, ruleId));
+
         outcomes = ContextUtil.reverseFocus(outcomes);
         outcomes = flatMap(outcomes, context -> target().dispatchRule(context, ruleId));
         
         outcomes = ContextUtil.setFocus(outcomes, userState);
         return outcomes;
     }
-    public List<Branch<BattleContext>> dispatchEvent(RuleForAllId ruleId, ContextSideId sideId) {
+    public List<Branch<BattleContext>> dispatchRule(RuleForAllId ruleId, ContextSideId sideId) {
         List<Branch<BattleContext>> outcomes = List.of(new Branch<>(this, 1.0));
 
         outcomes = ContextUtil.setFocus(outcomes, sideId);
-        outcomes = flatMap(outcomes, context -> gamestate().weatherInstance().dispatchEvent(context, ruleId));
+        outcomes = flatMap(outcomes, context -> gamestate().weatherInstance().dispatchRule(context, ruleId));
+        outcomes = flatMap(outcomes, context -> gamestate().mechanics().dispatchRule(context, ruleId));
 
         outcomes = flatMap(outcomes, context -> user().dispatchRule(context, ruleId.forUser()));
         outcomes = flatMap(outcomes, context -> user().dispatchRule(context, ruleId));
@@ -112,16 +105,18 @@ public class BattleContext implements DeepCopyable<BattleContext> {
 
 
 
+
     public double dispatchGate(GateForAllId gateId, ContextSideId sideId) {
         double probability = 1;
 
         BattleContext context = ContextUtil.setFocus(this, sideId);
-        probability = gamestate().weatherInstance().dispatchGate(context, gateId, probability);
-        probability = user().dispatchGate(context, gateId.forUser(), probability);
+        probability *= gamestate().weatherInstance().dispatchGate(context, gateId);
+        probability *= gamestate().mechanics().dispatchGate(context, gateId);
+        probability *= user().dispatchGate(context, gateId.forUser());
         context = ContextUtil.reverseFocus(context);
-        probability = target().dispatchGate(context, gateId.forTarget(), probability);
+        probability *= target().dispatchGate(context, gateId.forTarget());
 
-        // outcomes is a boolean so dont fuck with the focus of the battle context rn
+        // outcomes is a boolean so dont fuck with the focus of the battle context rn (context is being discarded anyway so it doesnt matter)
         // preach
         return probability;
     }

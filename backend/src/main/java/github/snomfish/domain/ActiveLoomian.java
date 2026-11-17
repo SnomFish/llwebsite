@@ -106,7 +106,8 @@ public class ActiveLoomian extends Loomian {
 
         return outcomes;
     }
-    public double dispatchGate(BattleContext context, IGateId gateId, double probability) {
+    public double dispatchGate(BattleContext context, IGateId gateId) {
+        double probability = 1;
 
         probability *= abilityInstance.handleGate(context, gateId);
         probability *= item().handleGate(context, gateId);

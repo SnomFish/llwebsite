@@ -79,7 +79,7 @@ public class SetEnchantment {
 
 		List<Branch<BattleContext>> outcomes;
 		outcomes = ApplyMechanic.toUserSide(SideMechanicId.AUGMENT).withMaxAge(maxAge).execute(context);
-		outcomes = flatMap(outcomes, c -> c.dispatchEvent(RuleForAllId.LOOMIAN_SET_AUGMENT, ContextSideId.USER));
+		outcomes = flatMap(outcomes, c -> c.dispatchRule(RuleForAllId.LOOMIAN_SET_AUGMENT, ContextSideId.USER));
 
 		return outcomes;
 	}
@@ -91,7 +91,7 @@ public class SetEnchantment {
 
 		List<Branch<BattleContext>> outcomes;
 		outcomes = ApplyMechanic.toUserSide(SideMechanicId.SWIFTEN).withMaxAge(maxAge).execute(context);
-		outcomes = flatMap(outcomes, c -> c.dispatchEvent(RuleForAllId.LOOMIAN_SET_SWIFTEN, ContextSideId.USER));
+		outcomes = flatMap(outcomes, c -> c.dispatchRule(RuleForAllId.LOOMIAN_SET_SWIFTEN, ContextSideId.USER));
 
 		return outcomes;
 	}
@@ -103,7 +103,7 @@ public class SetEnchantment {
 		
 		List<Branch<BattleContext>> outcomes;
 		outcomes = ApplyMechanic.toUserSide(SideMechanicId.NEAR_ENCHANTMENT).withMaxAge(maxAge).execute(context);
-		outcomes = flatMap(outcomes, c -> c.dispatchEvent(RuleForAllId.LOOMIAN_SET_NEAR_ENCHANTMENT, ContextSideId.USER));
+		outcomes = flatMap(outcomes, c -> c.dispatchRule(RuleForAllId.LOOMIAN_SET_NEAR_ENCHANTMENT, ContextSideId.USER));
 
 		return outcomes;
 	}
@@ -115,7 +115,7 @@ public class SetEnchantment {
 
 		List<Branch<BattleContext>> outcomes;
 		outcomes = ApplyMechanic.toUserSide(SideMechanicId.FAR_ENCHANTMENT).withMaxAge(maxAge).execute(context);
-		outcomes = flatMap(outcomes, c -> c.dispatchEvent(RuleForAllId.LOOMIAN_SET_FAR_ENCHANTMENT, ContextSideId.USER));
+		outcomes = flatMap(outcomes, c -> c.dispatchRule(RuleForAllId.LOOMIAN_SET_FAR_ENCHANTMENT, ContextSideId.USER));
 
 		return outcomes;
 	}
