@@ -4,6 +4,7 @@ import java.util.List;
 
 import github.snomfish.functionality.context.BattleContext;
 
+import static github.snomfish.functionality._schematics.Conditions.checkProbability;
 import static github.snomfish.functionality.copy.DeepCopy.deepCopyList;
 
 public class And implements ICondition {
@@ -37,6 +38,7 @@ public class And implements ICondition {
             probability *= condition.execute(context);
         }
 
+        checkProbability(probability);
         return probability;
     }
 }

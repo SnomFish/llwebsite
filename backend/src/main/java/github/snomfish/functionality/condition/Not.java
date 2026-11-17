@@ -1,5 +1,7 @@
 package github.snomfish.functionality.condition;
 
+import static github.snomfish.functionality._schematics.Conditions.checkProbability;
+
 import github.snomfish.functionality.context.BattleContext;
 
 public class Not implements ICondition {
@@ -24,6 +26,8 @@ public class Not implements ICondition {
 
     @Override 
     public double execute(BattleContext context) {
-        return 1 - condition.execute(context);
+        double probability = 1 - condition.execute(context);
+        checkProbability(probability);
+        return probability;
     }
 }

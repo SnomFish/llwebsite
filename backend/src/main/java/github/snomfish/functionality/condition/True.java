@@ -14,6 +14,7 @@ public class True implements ICondition {
 
 
     public double execute(BattleContext context) {
+        // does not need to be checked
         return 1.0;
     } 
 }

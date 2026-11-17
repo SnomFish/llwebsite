@@ -47,6 +47,7 @@ public class HasHazards implements ICondition {
 		hasHazards = hasHazards || mechanics.has(SideMechanicId.TRIPLE_BARBS);
 		hasHazards = hasHazards || mechanics.has(SideMechanicId.BANANA_PEEL);
 
+		// does not need to be checked
 		return hasHazards ? 1 : 0;
 	}
 }

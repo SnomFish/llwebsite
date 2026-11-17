@@ -39,6 +39,7 @@ public class ListContains<T> implements ICondition {
 
     @Override 
     public double execute(BattleContext context) {
+        // does not need to be checked
         return list.get(context).contains(Value.resolve(value, context)) ? 1 : 0;
     }
 }

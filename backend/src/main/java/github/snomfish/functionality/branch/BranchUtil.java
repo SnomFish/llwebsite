@@ -12,6 +12,8 @@ import github.snomfish.functionality.condition.ICondition;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.event.Rule;
 
+import static github.snomfish.functionality._schematics.Conditions.checkProbability;
+
 public class BranchUtil {
 
 
@@ -95,8 +97,6 @@ public class BranchUtil {
 
 		double probability = Conditions.resolve(context, conditions);
 
-        if (0 <= probability && probability <= 1) throw new RuntimeException("probabiltiy is outside range 0 and 1, this is unexpected.");
-
 		if (probability > 0) {
 			outcomes.addAll(applyProbability(function.apply(context), probability));
 		}
@@ -115,8 +115,6 @@ public class BranchUtil {
         List<Branch<BattleContext>> outcomes = new ArrayList<>();
 
 		double probability = Conditions.resolve(context, conditions);
-
-        if (0 <= probability && probability <= 1) throw new RuntimeException("probabiltiy is outside range 0 and 1, this is unexpected.");
 
 		if (probability > 0) {
 			outcomes.addAll(applyProbability(function.apply(context, rule), probability));

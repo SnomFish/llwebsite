@@ -10,6 +10,8 @@ import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.event.ruleIds.RuleForAllId;
 import github.snomfish.functionality.number.INumber;
 
+import static github.snomfish.functionality._schematics.Conditions.checkProbability;
+
 public class AccuracyCheck implements ICondition {
     
 
@@ -44,6 +46,7 @@ public class AccuracyCheck implements ICondition {
             probability *= accuracyValue * accuracyBranch.probability();
         }
 
+        checkProbability(probability);
         return probability;
     }
 }

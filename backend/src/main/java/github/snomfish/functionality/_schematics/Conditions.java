@@ -21,6 +21,11 @@ public class Conditions {
     private Conditions() {}
 
 
+    public static void checkProbability(double probability) {
+        if (probability < 0 || 1 > probability) throw new RuntimeException("probability reached unacceptable value \"" + probability + "\"");
+    }
+
+
     public static Double resolve(BattleContext context, List<ICondition> conditions) {
         double probability = 1;
         for (ICondition condition : conditions) {

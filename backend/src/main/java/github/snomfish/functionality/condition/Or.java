@@ -2,6 +2,8 @@ package github.snomfish.functionality.condition;
 
 import github.snomfish.functionality.context.BattleContext;
 
+import static github.snomfish.functionality._schematics.Conditions.checkProbability;
+
 public class Or implements ICondition {
       
 
@@ -27,9 +29,11 @@ public class Or implements ICondition {
 
     @Override
     public double execute(BattleContext context) {
-        Double probabilityA = conditionA.execute(context);
-        Double probabilityB = conditionB.execute(context);
+        double probabilityA = conditionA.execute(context);
+        double probabilityB = conditionB.execute(context);
 
-        return (probabilityA + probabilityB) - (probabilityA * probabilityB);
+        double probability = (probabilityA + probabilityB) - (probabilityA * probabilityB);
+        checkProbability(probability);
+        return probability;
     }
 }

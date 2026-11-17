@@ -4,6 +4,8 @@ import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.number.INumber;
 
+import static github.snomfish.functionality._schematics.Conditions.checkProbability;
+
 public class RandomCondition implements ICondition {
     
 
@@ -32,6 +34,7 @@ public class RandomCondition implements ICondition {
             probability += Math.clamp(branch.value(), 0, 1) * branch.probability();    
         }
 
+        checkProbability(probability);
         return probability;
     }
 }

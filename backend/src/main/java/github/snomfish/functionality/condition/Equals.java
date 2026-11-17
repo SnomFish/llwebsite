@@ -35,6 +35,7 @@ public class Equals<T> implements ICondition {
         T value1 = Value.resolve(object1, context);
         T value2 = Value.resolve(object2, context);
 
+        // does not need to be checked
         return value1 == value2 ? 1 : 0;
     }
 }

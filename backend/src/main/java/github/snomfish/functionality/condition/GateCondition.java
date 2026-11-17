@@ -30,7 +30,8 @@ public class GateCondition implements ICondition {
 
 
     public double execute(BattleContext context) {
-        return context.dispatchGate(gateId, sideId);
+        // theoretically this does not need to be checked
 
+        return context.dispatchGate(gateId, sideId);
     }
 }

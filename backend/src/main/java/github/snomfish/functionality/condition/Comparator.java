@@ -7,6 +7,7 @@ import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.INumber;
 
+import static github.snomfish.functionality._schematics.Conditions.checkProbability;
 import static github.snomfish.functionality.condition.ComparatorId.*;
 
 public class Comparator implements ICondition {
@@ -78,6 +79,8 @@ public class Comparator implements ICondition {
             }
         }
 
-        return numOfTrueComparisons / numOfComparisons;
+        double probability = numOfTrueComparisons / numOfComparisons;
+        checkProbability(probability);
+        return probability;
     }
 }
