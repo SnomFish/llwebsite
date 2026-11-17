@@ -1,14 +1,25 @@
 package github.snomfish;
 
+import java.util.List;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import github.snomfish.domain.*;
+import github.snomfish.domain.ability.*;
+import github.snomfish.domain.item.*;
+import github.snomfish.domain.move.*;
+import github.snomfish.domain.species.*;
+import github.snomfish.domain.stats.*;
+import github.snomfish.domain.status.*;
+import github.snomfish.functionality.action.MoveAction;
+import github.snomfish.functionality.context.BattleContext;
 
 @SpringBootApplication
 public class Main {
 
 	public static void main(String[] args) {
-		// tests if enums can be parsed into the new Value system (they can)
-		/*Loomian embit = new Loomian(
+		Loomian embit = new Loomian(
 			SpeciesId.EMBIT,
 			List.of(
 				MoveId.PARASITIZE
@@ -25,12 +36,8 @@ public class Main {
 		BattleContext context = new BattleContext(gamestate, SideId.PLAYER);
 		context.user().activeLoomian().setAction(new MoveAction(0, MoveRegistry.get(MoveId.PARASITIZE)));
 
-		Boolean test = false;
-		System.out.println("control: " + test.toString());
-		Value<Boolean> value = Value.USER().MOVE().MOVE_TAG(MoveTagId.EXPLOSIVE);
-		test = value.get(context);
-		System.out.println("test: " + test.toString());
-		*/
+		
+		
 
 		SpringApplication.run(Main.class, args);
 	}

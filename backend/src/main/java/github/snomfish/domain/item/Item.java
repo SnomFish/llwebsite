@@ -1,7 +1,7 @@
 package github.snomfish.domain.item;
 
+import github.snomfish.domain.Tags;
 import github.snomfish.functionality.event.Definition;
-import github.snomfish.functionality.tags.Tags;
 
 // item is only ever called from the registry, therefore it should remain constant
 // same with ability

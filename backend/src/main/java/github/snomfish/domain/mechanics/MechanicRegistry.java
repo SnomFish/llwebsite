@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import github.snomfish.domain.mechanics.ids.IMechanicId;
+import github.snomfish.domain.modifiers.MoveModifierId;
 import github.snomfish.domain.move.CategoryId;
-import github.snomfish.domain.move.modifiers.ModifierId;
 import github.snomfish.domain.status.StatusId;
 import github.snomfish.domain.type.TypeId;
 import github.snomfish.functionality.Value;
@@ -148,7 +148,7 @@ public class MechanicRegistry {
             .rule(Rule.build()
                 .event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
                 .condition(new Equals<>(Value.SELF().MOVE().TYPE(), TypeId.FIRE))
-                .effect(Effects.multiplyValue(Value.SELF().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)))
+                .effect(Effects.multiplyValue(Value.SELF().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.5)))
             )
         );
         register(new Mechanic()
@@ -157,7 +157,7 @@ public class MechanicRegistry {
             .rule(Rule.build()
                 .event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
                 .condition(new Equals<>(Value.SELF().MOVE().TYPE(), TypeId.TOXIC))
-                .effect(Effects.multiplyValue(Value.SELF().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)))
+                .effect(Effects.multiplyValue(Value.SELF().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.5)))
             )
         );
         register(new Mechanic()
@@ -166,7 +166,7 @@ public class MechanicRegistry {
             .rule(Rule.build()
                 .event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
                 .condition(new Equals<>(Value.SELF().MOVE().TYPE(), TypeId.PLANT))
-                .effect(Effects.multiplyValue(Value.SELF().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)))
+                .effect(Effects.multiplyValue(Value.SELF().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.5)))
             )
         );
         register(new Mechanic()
@@ -175,7 +175,7 @@ public class MechanicRegistry {
             .rule(Rule.build()
                 .event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
                 .condition(new Equals<>(Value.SELF().MOVE().TYPE(), TypeId.LIGHT))
-                .effect(Effects.multiplyValue(Value.SELF().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)))
+                .effect(Effects.multiplyValue(Value.SELF().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.5)))
             )
         );
         register(new Mechanic()
@@ -185,7 +185,7 @@ public class MechanicRegistry {
                 .event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
                 .condition(new Equals<>(Value.SELF().MOVE().TYPE(), TypeId.AIR))
                 .effect(new EffectSequence(
-                    Effects.multiplyValue(Value.SELF().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)),
+                    Effects.multiplyValue(Value.SELF().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.5)),
                     RemoveMechanic.fromUser(TOXIC_FILTER)
                 ))
             )
@@ -331,7 +331,7 @@ public class MechanicRegistry {
             .rule(Rule.build()
                 .event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
                 .condition(new Equals<>(Value.TARGET().MOVE().CATEGORY(), CategoryId.MELEE))
-                .effect(Effects.multiplyValue(Value.TARGET().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(0.5)))
+                .effect(Effects.multiplyValue(Value.TARGET().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(0.5)))
             )
         );
         register(new Mechanic()
@@ -340,7 +340,7 @@ public class MechanicRegistry {
             .rule(Rule.build()
                 .event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
                 .condition(new Equals<>(Value.TARGET().MOVE().CATEGORY(), CategoryId.RANGED))
-                .effect(Effects.multiplyValue(Value.TARGET().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(0.5)))
+                .effect(Effects.multiplyValue(Value.TARGET().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(0.5)))
             )
         );
     }

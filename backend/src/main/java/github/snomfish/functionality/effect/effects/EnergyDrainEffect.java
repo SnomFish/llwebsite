@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import github.snomfish.domain.ActiveLoomian;
+import github.snomfish.domain.modifiers.MoveModifierId;
 import github.snomfish.domain.move.Move;
-import github.snomfish.domain.move.modifiers.ModifierId;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.context.ContextSideId;
@@ -45,7 +45,7 @@ public class EnergyDrainEffect implements IEffect {
                 BattleContext outcome = contextBranch.value().deepCopy();
                 ActiveLoomian user	 = outcome.user().activeLoomian();
                 Move move			 = user.action().move();
-                int energyDrain      = (int) (move.damage() * move.modifiers().get(ModifierId.ENERGY_DRAIN) * drainBranch.value());
+                int energyDrain      = (int) (move.damage() * move.modifiers().get(MoveModifierId.ENERGY_DRAIN) * drainBranch.value());
     
 				energyDrain = Math.min(energyDrain, user.maxEnergy() - user.currentEnergy()); // prevents the drain from over healing
 				user.addToCurrentEnergy(energyDrain);

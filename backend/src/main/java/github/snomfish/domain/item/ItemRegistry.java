@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import github.snomfish.domain.modifiers.MoveModifierId;
 import github.snomfish.domain.move.CategoryId;
-import github.snomfish.domain.move.modifiers.ModifierId;
 import github.snomfish.domain.species.SpeciesId;
 import github.snomfish.domain.status.StatusId;
 import github.snomfish.domain.type.TypeId;
@@ -110,7 +110,7 @@ public class ItemRegistry {
 			.rule(Rule.build()
 				.event(RuleForUserId.SELF_PRE_DRAINING_HEALTH)
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
-				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.HEALTH_DRAIN), new Constant(1.2)))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.HEALTH_DRAIN), new Constant(1.2)))
 			)
 		);
 		register(Item.build() // TODO currently will not boost the damage of body crash and stratgem
@@ -120,7 +120,7 @@ public class ItemRegistry {
 				.event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.OPP().CAN_EVOLVE(), true))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
-				.effect(Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DEFENDING_STAT), new Constant(1.5)))
+				.effect(Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DEFENDING_STAT), new Constant(1.5)))
 			)
 		);
 		register(Item.build()
@@ -153,7 +153,7 @@ public class ItemRegistry {
 				.event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.OPP().MOVE().CATEGORY(), CategoryId.MELEE))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
-				.effect(Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DEFENDING_STAT), new Constant(1.2)))
+				.effect(Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DEFENDING_STAT), new Constant(1.2)))
 			)
 			// TODO increase costs of moves by 15%
 		);
@@ -168,7 +168,7 @@ public class ItemRegistry {
 				.event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.OPP().MOVE().CATEGORY(), CategoryId.RANGED))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
-				.effect(Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DEFENDING_STAT), new Constant(1.2)))
+				.effect(Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DEFENDING_STAT), new Constant(1.2)))
 			)
 			// TODO increase costs of moves by 15%
 		);
@@ -204,14 +204,14 @@ public class ItemRegistry {
 				.condition(new Equals<>(Value.USER().SPECIES_ID(), SpeciesId.SHAWCHI))
 				.condition(new Equals<>(Value.USER().MOVE().CATEGORY(), CategoryId.RANGED))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
-				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.ATTACKING_STAT), new Constant(1.5)))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.ATTACKING_STAT), new Constant(1.5)))
 			)
 			.rule(Rule.build()
 				.event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.SELF().SPECIES_ID(), SpeciesId.SHAWCHI))
 				.condition(new Equals<>(Value.OPP().MOVE().CATEGORY(), CategoryId.RANGED))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
-				.effect(Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DEFENDING_STAT), new Constant(1.5)))
+				.effect(Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DEFENDING_STAT), new Constant(1.5)))
 			)
 		);
 		register(Item.build()
@@ -220,7 +220,7 @@ public class ItemRegistry {
 			.rule(Rule.build()
 				.event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
-				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.2)))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.2)))
 			)
 			// TODO increase energy cost of moves by 25%
 		);
@@ -230,7 +230,7 @@ public class ItemRegistry {
 			.rule(Rule.build()
 				.event(RuleForTargetId.RECEIVED_DAMAGE_FROM_MOVE)
 				.condition(Comparator.greaterThan()
-					.left(new ValueConstant(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.TYPE)))
+					.left(new ValueConstant(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.TYPE)))
 					.right(new Constant(1))
 				)
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
@@ -250,7 +250,7 @@ public class ItemRegistry {
 				.event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.OPP().MOVE().CATEGORY(), CategoryId.MELEE))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
-				.effect(Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(2/3)))
+				.effect(Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(2/3)))
 			)
 			.gate(Gate.build()
 				.event(GateForUserId.CAN_SELF_USE_SUPPORT_MOVES)
@@ -264,7 +264,7 @@ public class ItemRegistry {
 				.event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.OPP().MOVE().CATEGORY(), CategoryId.RANGED))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
-				.effect(Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(2/3)))
+				.effect(Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(2/3)))
 			)
 			.gate(Gate.build()
 				.event(GateForUserId.CAN_SELF_USE_SUPPORT_MOVES)
@@ -286,7 +286,7 @@ public class ItemRegistry {
 				.condition(new Equals<>(Value.USER().MOVE().CATEGORY(), CategoryId.MELEE))
 				.condition(new Equals<>(Value.USER().NUM_OF_MOVES(), new Constant(4)))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
-				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.5)))
 			)
 			// TODO locks the user into a move
 		);
@@ -298,7 +298,7 @@ public class ItemRegistry {
 				.condition(new Equals<>(Value.USER().MOVE().CATEGORY(), CategoryId.RANGED))
 				.condition(new Equals<>(Value.USER().NUM_OF_MOVES(), new Constant(4)))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
-				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.5)))
 			)
 			// TODO locks the user into a move
 		);
@@ -466,7 +466,7 @@ public class ItemRegistry {
                 .event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.AIR))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
-				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.2)))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.2)))
 			)
 		);
 		register(Item.build()
@@ -476,7 +476,7 @@ public class ItemRegistry {
                 .event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.ANCIENT))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
-				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.2)))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.2)))
             )
 		);
 		register(Item.build()
@@ -486,7 +486,7 @@ public class ItemRegistry {
                 .event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.BRAWLER))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
-				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.2)))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.2)))
             )
 		);
 		register(Item.build()
@@ -496,7 +496,7 @@ public class ItemRegistry {
                 .event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.BUG))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
-				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.2)))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.2)))
             )
 		);
 		register(Item.build()
@@ -506,7 +506,7 @@ public class ItemRegistry {
                 .event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.DARK))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
-				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.2)))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.2)))
             )
 		);
 		register(Item.build()
@@ -516,7 +516,7 @@ public class ItemRegistry {
                 .event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.EARTH))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
-				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.2)))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.2)))
             )
 		);
 		register(Item.build()
@@ -526,7 +526,7 @@ public class ItemRegistry {
                 .event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.ELECTRIC))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
-				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.2)))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.2)))
             )
 		);
 		register(Item.build()
@@ -536,7 +536,7 @@ public class ItemRegistry {
                 .event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.FIRE))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
-				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.2)))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.2)))
             )
 		);
 		register(Item.build()
@@ -546,7 +546,7 @@ public class ItemRegistry {
                 .event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.ICE))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
-				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.2)))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.2)))
             )
 		);
 		register(Item.build()
@@ -556,7 +556,7 @@ public class ItemRegistry {
                 .event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.LIGHT))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
-				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.2)))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.2)))
             )
 		);
 		register(Item.build()
@@ -566,7 +566,7 @@ public class ItemRegistry {
                 .event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.METAL))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
-				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.2)))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.2)))
             )
 		);
 		register(Item.build()
@@ -576,7 +576,7 @@ public class ItemRegistry {
                 .event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.MIND))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
-				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.2)))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.2)))
             )
 		);
 		register(Item.build()
@@ -586,7 +586,7 @@ public class ItemRegistry {
                 .event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.PLANT))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
-				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.2)))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.2)))
             )
 		);
 		register(Item.build()
@@ -596,7 +596,7 @@ public class ItemRegistry {
                 .event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.SPIRIT))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
-				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.2)))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.2)))
             )
 		);
 		register(Item.build()
@@ -606,7 +606,7 @@ public class ItemRegistry {
                 .event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.SIMPLE))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
-				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.2)))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.2)))
             )
 		);
 		register(Item.build()
@@ -616,7 +616,7 @@ public class ItemRegistry {
                 .event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.TOXIC))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
-				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.2)))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.2)))
 			)
 		);
 		register(Item.build()
@@ -626,7 +626,7 @@ public class ItemRegistry {
                 .event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.WATER))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
-				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.2)))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.2)))
             )
 		);
 		register(Item.build()
@@ -637,7 +637,7 @@ public class ItemRegistry {
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.ANCIENT))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
 				.effect(new EffectSequence(
-					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(0.5)),
+					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(0.5)),
 					ConsumeItem.target()
 				))
 			)
@@ -651,7 +651,7 @@ public class ItemRegistry {
 				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.PLANT))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
 				.effect(new EffectSequence(
-					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(0.5)),
+					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(0.5)),
 					ConsumeItem.target()
 				))
             )
@@ -665,7 +665,7 @@ public class ItemRegistry {
 				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.AIR))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
 				.effect(new EffectSequence(
-					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(0.5)),
+					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(0.5)),
 					ConsumeItem.target()
 				))
             )
@@ -679,7 +679,7 @@ public class ItemRegistry {
 				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.FIRE))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
 				.effect(new EffectSequence(
-					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(0.5)),
+					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(0.5)),
 					ConsumeItem.target()
 				))
             )
@@ -693,7 +693,7 @@ public class ItemRegistry {
 				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.ICE))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
 				.effect(new EffectSequence(
-					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(0.5)),
+					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(0.5)),
 					ConsumeItem.target()
 				))
             )
@@ -707,7 +707,7 @@ public class ItemRegistry {
 				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.BRAWLER))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
 				.effect(new EffectSequence(
-					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(0.5)),
+					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(0.5)),
 					ConsumeItem.target()
 				))
             )
@@ -721,7 +721,7 @@ public class ItemRegistry {
 				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.MIND))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
 				.effect(new EffectSequence(
-					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(0.5)),
+					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(0.5)),
 					ConsumeItem.target()
 				))
             )
@@ -735,7 +735,7 @@ public class ItemRegistry {
 				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.METAL))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
 				.effect(new EffectSequence(
-					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(0.5)),
+					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(0.5)),
 					ConsumeItem.target()
 				))
             )
@@ -749,7 +749,7 @@ public class ItemRegistry {
 				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.TOXIC))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
 				.effect(new EffectSequence(
-					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(0.5)),
+					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(0.5)),
 					ConsumeItem.target()
 				))
             )
@@ -763,7 +763,7 @@ public class ItemRegistry {
 				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.SIMPLE))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
 				.effect(new EffectSequence(
-					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(0.5)),
+					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(0.5)),
 					ConsumeItem.target()
 				))
             )
@@ -777,7 +777,7 @@ public class ItemRegistry {
 				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.DARK))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
 				.effect(new EffectSequence(
-					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(0.5)),
+					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(0.5)),
 					ConsumeItem.target()
 				))
             )
@@ -791,7 +791,7 @@ public class ItemRegistry {
 				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.LIGHT))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
 				.effect(new EffectSequence(
-					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(0.5)),
+					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(0.5)),
 					ConsumeItem.target()
 				))
             )
@@ -805,7 +805,7 @@ public class ItemRegistry {
 				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.SPIRIT))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
 				.effect(new EffectSequence(
-					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(0.5)),
+					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(0.5)),
 					ConsumeItem.target()
 				))
             )
@@ -819,7 +819,7 @@ public class ItemRegistry {
 				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.EARTH))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
 				.effect(new EffectSequence(
-					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(0.5)),
+					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(0.5)),
 					ConsumeItem.target()
 				))
             )
@@ -833,7 +833,7 @@ public class ItemRegistry {
 				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.ELECTRIC))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
 				.effect(new EffectSequence(
-					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(0.5)),
+					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(0.5)),
 					ConsumeItem.target()
 				))
             )
@@ -847,7 +847,7 @@ public class ItemRegistry {
 				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.WATER))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
 				.effect(new EffectSequence(
-					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(0.5)),
+					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(0.5)),
 					ConsumeItem.target()
 				))
             )
@@ -861,7 +861,7 @@ public class ItemRegistry {
 				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.BUG))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
 				.effect(new EffectSequence(
-					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(0.5)),
+					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(0.5)),
 					ConsumeItem.target()
 				))
             )
@@ -875,7 +875,7 @@ public class ItemRegistry {
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.ANCIENT))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
 				.effect(new EffectSequence(
-					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)),
+					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.5)),
 					ConsumeItem.user()
 				))
 			)
@@ -889,7 +889,7 @@ public class ItemRegistry {
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.PLANT))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
 				.effect(new EffectSequence(
-					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)),
+					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.5)),
 					ConsumeItem.user()
 				))
 			)
@@ -903,7 +903,7 @@ public class ItemRegistry {
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.AIR))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
 				.effect(new EffectSequence(
-					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)),
+					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.5)),
 					ConsumeItem.user()
 				))
 			)
@@ -917,7 +917,7 @@ public class ItemRegistry {
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.FIRE))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
 				.effect(new EffectSequence(
-					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)),
+					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.5)),
 					ConsumeItem.user()
 				))
 			)
@@ -931,7 +931,7 @@ public class ItemRegistry {
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.ICE))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
 				.effect(new EffectSequence(
-					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)),
+					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.5)),
 					ConsumeItem.user()
 				))
 			)
@@ -945,7 +945,7 @@ public class ItemRegistry {
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.BRAWLER))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
 				.effect(new EffectSequence(
-					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)),
+					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.5)),
 					ConsumeItem.user()
 				))
 			)
@@ -959,7 +959,7 @@ public class ItemRegistry {
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.MIND))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
 				.effect(new EffectSequence(
-					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)),
+					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.5)),
 					ConsumeItem.user()
 				))
 			)
@@ -973,7 +973,7 @@ public class ItemRegistry {
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.METAL))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
 				.effect(new EffectSequence(
-					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)),
+					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.5)),
 					ConsumeItem.user()
 				))
 			)
@@ -987,7 +987,7 @@ public class ItemRegistry {
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.TOXIC))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
 				.effect(new EffectSequence(
-					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)),
+					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.5)),
 					ConsumeItem.user()
 				))
 			)
@@ -1001,7 +1001,7 @@ public class ItemRegistry {
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.SIMPLE))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
 				.effect(new EffectSequence(
-					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)),
+					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.5)),
 					ConsumeItem.user()
 				))
 			)
@@ -1015,7 +1015,7 @@ public class ItemRegistry {
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.DARK))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
 				.effect(new EffectSequence(
-					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)),
+					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.5)),
 					ConsumeItem.user()
 				))
 			)
@@ -1029,7 +1029,7 @@ public class ItemRegistry {
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.LIGHT))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
 				.effect(new EffectSequence(
-					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)),
+					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.5)),
 					ConsumeItem.user()
 				))
 			)
@@ -1043,7 +1043,7 @@ public class ItemRegistry {
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.SPIRIT))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
 				.effect(new EffectSequence(
-					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)),
+					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.5)),
 					ConsumeItem.user()
 				))
 			)
@@ -1057,7 +1057,7 @@ public class ItemRegistry {
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.EARTH))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
 				.effect(new EffectSequence(
-					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)),
+					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.5)),
 					ConsumeItem.user()
 				))
 			)
@@ -1071,7 +1071,7 @@ public class ItemRegistry {
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.ELECTRIC))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
 				.effect(new EffectSequence(
-					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)),
+					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.5)),
 					ConsumeItem.user()
 				))
 			)
@@ -1085,7 +1085,7 @@ public class ItemRegistry {
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.WATER))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
 				.effect(new EffectSequence(
-					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)),
+					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.5)),
 					ConsumeItem.user()
 				))
 			)
@@ -1099,7 +1099,7 @@ public class ItemRegistry {
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.BUG))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
 				.effect(new EffectSequence(
-					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.5)),
+					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.5)),
 					ConsumeItem.user()
 				))
 			)
@@ -1221,7 +1221,7 @@ public class ItemRegistry {
 					new Equals<>(Value.USER().MOVE().TYPE(), TypeId.FIRE)
 				))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
-				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.2)))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.2)))
 			)
 		);
 		register(Item.build()
@@ -1246,7 +1246,7 @@ public class ItemRegistry {
 				))
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.ICE))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
-				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.2)))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.2)))
 			)
 		);
 		register(Item.build()
@@ -1271,7 +1271,7 @@ public class ItemRegistry {
 				))
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.ELECTRIC))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
-				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.2)))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.2)))
 			)
 		);
 		register(Item.build() // power cuffs for scorb line
@@ -1285,7 +1285,7 @@ public class ItemRegistry {
 					new Equals<>(Value.TARGET().SPECIES_ID(), GARDRONE)
 				))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
-				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.2)))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.2)))
 			)
 			// TODO increase energy cost of moves by 25%
 		);

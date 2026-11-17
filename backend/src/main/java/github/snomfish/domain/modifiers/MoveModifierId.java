@@ -1,6 +1,6 @@
-package github.snomfish.domain.move.modifiers;
+package github.snomfish.domain.modifiers;
 
-public enum ModifierId {
+public enum MoveModifierId implements IModifierId {
     ATTACKING_STAT,
     DEFENDING_STAT,
     PRIORITY,

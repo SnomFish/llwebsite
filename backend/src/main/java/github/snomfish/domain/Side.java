@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import github.snomfish.domain.mechanics.Mechanics;
+import github.snomfish.domain.modifiers.Modifiers;
+import github.snomfish.domain.modifiers.SideModifierId;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.copy.DeepCopyable;
@@ -20,6 +22,7 @@ public class Side implements DeepCopyable<Side> {
     private int activeLoomianI;
     private ActiveLoomian activeLoomian;
     private Mechanics mechanics;
+    private Modifiers<SideModifierId> modifiers;
 
 
     public Side(
@@ -30,6 +33,7 @@ public class Side implements DeepCopyable<Side> {
         this.activeLoomianI = activeLoomianI;
         this.activeLoomian = new ActiveLoomian(party.get(activeLoomianI));
         this.mechanics = new Mechanics();
+        this.modifiers = new Modifiers<>();
     }
 
 
@@ -37,7 +41,8 @@ public class Side implements DeepCopyable<Side> {
         this.party = deepCopyList(copy.party);
         this.activeLoomianI = copy.activeLoomianI;
         this.activeLoomian = copy.activeLoomian.deepCopy();
-        this.mechanics = copy.mechanics.deepCopy(); 
+        this.mechanics = copy.mechanics.deepCopy();
+        this.modifiers = copy.modifiers.deepCopy();
     }
     public Side deepCopy() {
         return new Side(this);
@@ -49,6 +54,7 @@ public class Side implements DeepCopyable<Side> {
     public int activeLoomianI() {return activeLoomianI;}
     public ActiveLoomian activeLoomian() {return activeLoomian;}
     public Mechanics mechanics() {return mechanics;}
+    public Modifiers<SideModifierId> modifiers() {return modifiers;}
 
 
     // setter
@@ -57,6 +63,7 @@ public class Side implements DeepCopyable<Side> {
     public void setActiveLoomianI(int activeLoomianI) {this.activeLoomianI = activeLoomianI;}
     public void setActiveLoomian(ActiveLoomian activeLoomian) {this.activeLoomian = activeLoomian;}
     public void setMechanics(Mechanics mechanics) {this.mechanics = mechanics;}
+    public void setModifiers(Modifiers<SideModifierId> modifiers) {this.modifiers = modifiers;}
 
 
 

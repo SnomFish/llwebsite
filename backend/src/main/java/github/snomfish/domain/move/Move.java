@@ -2,7 +2,8 @@ package github.snomfish.domain.move;
 
 import java.util.List;
 
-import github.snomfish.domain.move.modifiers.Modifiers;
+import github.snomfish.domain.Tags;
+import github.snomfish.domain.modifiers.Modifiers;
 import github.snomfish.domain.move.structures.IMove;
 import github.snomfish.domain.move.structures.NoMove;
 import github.snomfish.domain.stats.StatId;
@@ -13,7 +14,6 @@ import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.copy.DeepCopyable;
 import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.INumber;
-import github.snomfish.functionality.tags.Tags;
 
 import static github.snomfish.functionality.branch.BranchUtil.*;
 

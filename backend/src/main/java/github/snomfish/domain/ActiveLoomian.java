@@ -9,6 +9,7 @@ import github.snomfish.domain.stats.StatChanges;
 import github.snomfish.domain.stats.Stats;
 import github.snomfish.domain.type.TypeId;
 import github.snomfish.functionality.action.IAction;
+import github.snomfish.functionality.action.NoAction;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.event.HookReport;
@@ -41,7 +42,7 @@ public class ActiveLoomian extends Loomian {
         this.types = new ArrayList<>(loomian.species().baseTypes());
         this.stats = actualStats().deepCopy();
         this.statChanges = new StatChanges();
-        this.action = null;
+        this.action = new NoAction();
         this.mechanics = new Mechanics();
         this.statusTurns = 0;
 

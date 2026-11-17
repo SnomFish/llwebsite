@@ -7,6 +7,7 @@ import java.util.function.Function;
 import github.snomfish.domain.ActiveLoomian;
 import github.snomfish.domain.Loomian;
 import github.snomfish.domain.Side;
+import github.snomfish.domain.SideId;
 import github.snomfish.domain.ability.AbilityId;
 import github.snomfish.domain.item.ItemId;
 import github.snomfish.domain.mechanics.MechanicInstance;
@@ -14,10 +15,10 @@ import github.snomfish.domain.mechanics.Mechanics;
 import github.snomfish.domain.mechanics.ids.FieldMechanicId;
 import github.snomfish.domain.mechanics.ids.LoomianMechanicId;
 import github.snomfish.domain.mechanics.ids.SideMechanicId;
+import github.snomfish.domain.modifiers.MoveModifierId;
 import github.snomfish.domain.move.CategoryId;
 import github.snomfish.domain.move.Move;
 import github.snomfish.domain.move.MoveTagId;
-import github.snomfish.domain.move.modifiers.ModifierId;
 import github.snomfish.domain.species.Species;
 import github.snomfish.domain.species.SpeciesId;
 import github.snomfish.domain.stats.StatChangesId;
@@ -109,6 +110,18 @@ public class Value<T> {
 		WeatherInstance.class,
 		c -> c.gamestate().weatherInstance(),
 		null
+	);}
+
+
+	public static Value<List<SideId>> SPEED_ORDER() {return new Value<>(
+		null,
+		c -> c.gamestate().speedOrder(),
+		(c, v) -> c.gamestate().setSpeedOrder(v)
+	);}
+	public static Value<SideId> SPEED_ORDER(int i) {return new Value<>(
+		SideId.class,
+		c -> c.gamestate().speedOrder().get(i),
+		(c, v) -> c.gamestate().speedOrder().set(i, v)
 	);}
 
 	
@@ -503,7 +516,7 @@ public class Value<T> {
         c -> 		((Move) c).damage(),
         (c, v) -> 	((Move) c).damage(v)
     );}
-	public Value<Double> MOVE_MODIFIER(ModifierId id) {return update(
+	public Value<Double> MOVE_MODIFIER(MoveModifierId id) {return update(
 		Double.class,
 		c -> 		((Move) c).modifiers().get(id),
 		(c, v) -> 	((Move) c).modifiers().set(id, v)

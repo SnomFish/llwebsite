@@ -3,8 +3,8 @@ package github.snomfish.domain.status;
 import java.util.HashMap;
 import java.util.Map;
 
+import github.snomfish.domain.modifiers.MoveModifierId;
 import github.snomfish.domain.move.CategoryId;
-import github.snomfish.domain.move.modifiers.ModifierId;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality._schematics.Effects;
 import github.snomfish.functionality.condition.Equals;
@@ -75,7 +75,7 @@ public class StatusRegistry {
             .rule(Rule.build() // reduces mattack by 33%
                 .event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
                 .condition(new Equals<>(Value.SELF().MOVE().CATEGORY(), CategoryId.MELEE))
-                .effect(Effects.multiplyValue(Value.SELF().MOVE().MOVE_MODIFIER(ModifierId.ATTACKING_STAT), new Constant (2/3)))
+                .effect(Effects.multiplyValue(Value.SELF().MOVE().MOVE_MODIFIER(MoveModifierId.ATTACKING_STAT), new Constant (2/3)))
             )
         );
         register(Status.build()
@@ -88,7 +88,7 @@ public class StatusRegistry {
             .rule(Rule.build() // reduces rattack by 33%
                 .event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
                 .condition(new Equals<>(Value.SELF().MOVE().CATEGORY(), CategoryId.RANGED))
-                .effect(Effects.multiplyValue(Value.SELF().MOVE().MOVE_MODIFIER(ModifierId.ATTACKING_STAT), new Constant (2/3)))
+                .effect(Effects.multiplyValue(Value.SELF().MOVE().MOVE_MODIFIER(MoveModifierId.ATTACKING_STAT), new Constant (2/3)))
             )
         );
         register(Status.build()

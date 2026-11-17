@@ -1,4 +1,4 @@
-package github.snomfish.functionality.tags;
+package github.snomfish.domain;
 
 import java.util.HashMap;
 import java.util.Map;
