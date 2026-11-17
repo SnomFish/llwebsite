@@ -1,6 +1,5 @@
 package github.snomfish.domain.move;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import github.snomfish.domain.move.modifiers.Modifiers;

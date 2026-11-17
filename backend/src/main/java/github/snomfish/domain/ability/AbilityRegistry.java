@@ -724,6 +724,14 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(ELECTRIFY)
 			.name("Electrify")
+			.rule(Rule.build()
+				.event(RuleForUserId.SELF_PRE_MOVE)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.SIMPLE))
+				.effect(new EffectSequence(
+					SetType.move(TypeId.ELECTRIC),
+					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.2))
+				))
+			)
 		);
 		register(Ability.build()
 			.id(ELUSIVE)
@@ -1058,6 +1066,14 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(ILLUMINATE)
 			.name("illuminate")
+			.rule(Rule.build()
+				.event(RuleForUserId.SELF_PRE_MOVE)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.SIMPLE))
+				.effect(new EffectSequence(
+					SetType.move(TypeId.LIGHT),
+					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.2))
+				))
+			)		
 		);
 		register(Ability.build()
 			.id(IMMUNIZED)
@@ -1213,6 +1229,14 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(METAMORPHOSIS)
 			.name("metamorphosis")
+			.rule(Rule.build()
+				.event(RuleForUserId.SELF_PRE_MOVE)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.SIMPLE))
+				.effect(new EffectSequence(
+					SetType.move(TypeId.BUG),
+					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.2))
+				))
+			)
 		);
 		register(Ability.build()
 			.id(MIMIC)
@@ -1258,6 +1282,14 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(NEUTRALIZE)
 			.name("neutralize")
+			.rule(Rule.build()
+				.event(RuleForUserId.SELF_PRE_MOVE)
+				.condition(new Not(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.SIMPLE)))
+				.effect(new EffectSequence(
+					SetType.move(TypeId.SIMPLE),
+					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.2))
+				))
+			)
 		);
 		register(Ability.build()
 			.id(NIGHT_LIGHT)
@@ -1317,6 +1349,14 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(OVERSHADOW)
 			.name("overshadow")
+			.rule(Rule.build()
+				.event(RuleForUserId.SELF_PRE_MOVE)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.SIMPLE))
+				.effect(new EffectSequence(
+					SetType.move(TypeId.DARK),
+					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.2))
+				))
+			)
 		);
 		register(Ability.build()
 			.id(OXIDIZE)
@@ -1853,6 +1893,14 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(TURBULENT)
 			.name("turbulent")
+			.rule(Rule.build()
+				.event(RuleForUserId.SELF_PRE_MOVE)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.SIMPLE))
+				.effect(new EffectSequence(
+					SetType.move(TypeId.LIGHT),
+					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.2))
+				))
+			)
 		);
 		register(Ability.build()
 			.id(TWO_FACE)
@@ -1872,6 +1920,14 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(UPPER_HAND)
 			.name("upper hand")
+			.rule(Rule.build()
+				.event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.condition(new Or(
+					new Equals<>(Value.TARGET().HAS_ACTED_THIS_TURN(), false),
+					new Equals<>(Value.TARGET().HAS_SWAPPED_IN_THIS_TURN(), true)
+				))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.3)))
+			)
 		);
 		register(Ability.build()
 			.id(VENGEANCE)
@@ -1948,6 +2004,14 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(WATCHER)
 			.name("watcher")
+			.rule(Rule.build()
+				.event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.condition(new Or(
+					new Equals<>(Value.TARGET().HAS_ACTED_THIS_TURN(), true),
+					new Equals<>(Value.TARGET().HAS_SWAPPED_IN_THIS_TURN(), true)
+				))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(1.3)))
+			)
 		);
 		register(Ability.build() // completed
 			.id(WEBBING)

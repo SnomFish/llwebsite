@@ -250,6 +250,17 @@ public class Value<T> {
 		c -> 		((Side) c).activeLoomian().statusTurns(),
 		(c, v) -> 	((Side) c).activeLoomian().setStatusTurns(v)
 	);}
+	// BOOLEANS
+	public Value<Boolean> HAS_ACTED_THIS_TURN() {return update(
+		Boolean.class,
+		c ->		((Side) c).activeLoomian().hasActedThisTurn(),
+		(c, v) ->	((Side) c).activeLoomian().setActedThisTurn(v)
+	);}
+	public Value<Boolean> HAS_SWAPPED_IN_THIS_TURN() {return update(
+		Boolean.class,
+		c ->		((Side) c).activeLoomian().hasSwappedInThisTurn(),
+		(c, v) ->	((Side) c).activeLoomian().setSwappedInThisTurn(v)
+	);}
 	// ACTION
 	public Value<Action> ACTION() {return update(
 		Action.class,
