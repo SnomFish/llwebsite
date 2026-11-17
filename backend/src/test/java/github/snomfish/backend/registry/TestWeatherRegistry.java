@@ -12,7 +12,7 @@ public class TestWeatherRegistry {
     void weatherHasRegisteredAllEnums() {
         GeneralRegistryTests.hasRegisteredAllEnums(
             "WeatherRegistry",
-            WeatherId.class,
+            WeatherId.values(),
             WeatherRegistry.registry()
         );
     }
@@ -22,7 +22,7 @@ public class TestWeatherRegistry {
     void allEntriesAreUnique() {
         GeneralRegistryTests.allEntriesAreUnique(
             "WeatherRegistry",
-            WeatherId.class,
+            WeatherId.values(),
             WeatherRegistry.registry()
         );
     }

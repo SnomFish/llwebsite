@@ -12,10 +12,10 @@ public class GeneralRegistryTests {
     
     public static <T, R> void hasRegisteredAllEnums(
         String registryName,
-        Class<T> enumClass,
+        T[] enumValues,
         Map<T, R> registry
     ) {
-        List<T> missing = Arrays.stream(enumClass.getEnumConstants())
+        List<T> missing = Arrays.stream(enumValues)
             .filter(id -> !registry.containsKey(id))
             .toList();
 
@@ -28,7 +28,7 @@ public class GeneralRegistryTests {
     
     public static <T, R> void allEntriesAreUnique(
         String registryName,
-        Class<T> enumClass,
+        T[] enumValues,
         Map<T, R> registry
     ) {
         Map<T, R> uniqueEntries = new java.util.HashMap<>();

@@ -12,7 +12,7 @@ public class TestMoveRegistry {
     void moveHasRegisteredAllEnums() {
         GeneralRegistryTests.hasRegisteredAllEnums(
             "MoveRegistry",
-            MoveId.class,
+            MoveId.values(),
             MoveRegistry.registry()
         );
     }
@@ -22,7 +22,7 @@ public class TestMoveRegistry {
     void allEntriesAreUnique() {
         GeneralRegistryTests.allEntriesAreUnique(
             "MoveRegistry",
-            MoveId.class,
+            MoveId.values(),
             MoveRegistry.registry()
         );
     }

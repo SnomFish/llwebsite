@@ -12,7 +12,7 @@ public class TestSpeciesRegistry {
     void speciesHasRegisteredAllEnums() {
         GeneralRegistryTests.hasRegisteredAllEnums(
             "SpeciesRegistry",
-            SpeciesId.class,
+            SpeciesId.values(),
             SpeciesRegistry.registry()
         );
     }
@@ -22,7 +22,7 @@ public class TestSpeciesRegistry {
     void allEntriesAreUnique() {
         GeneralRegistryTests.allEntriesAreUnique(
             "SpeciesRegistry",
-            SpeciesId.class,
+            SpeciesId.values(),
             SpeciesRegistry.registry()
         );
     }

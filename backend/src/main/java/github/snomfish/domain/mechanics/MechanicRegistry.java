@@ -70,6 +70,11 @@ public class MechanicRegistry {
 
     public static void loadLoomian() {
         register(new Mechanic()
+            .id(NO_MECHANIC)
+            .name("no mechanic")
+        );
+
+        register(new Mechanic()
             .id(DAZE)
             .name("Daze")
         );
@@ -301,6 +306,18 @@ public class MechanicRegistry {
             )
         );
         register(new Mechanic()
+            .id(BANANA_PEEL)
+            .name("banana peel")
+            .rule(Rule.build()
+                .event(RuleForUserId.SELF_SWAPPED_IN)
+                .condition(new And(
+                    new Not(new ListContains<>(Value.USER().TYPES(), TypeId.AIR)),
+                    new GateCondition(GateForAllId.CAN_HAZARDS_AFFECT, ContextSideId.USER)
+                ))
+                .effect(ApplyStatChanges.targetChangingUser().speed(new Constant(-1)))
+            )
+        );
+        register(new Mechanic()
             .id(AUGMENT)
             .name("augment")
         );
@@ -324,15 +341,6 @@ public class MechanicRegistry {
                 .event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
                 .condition(new Equals<>(Value.TARGET().MOVE().CATEGORY(), CategoryId.RANGED))
                 .effect(Effects.multiplyValue(Value.TARGET().MOVE().MOVE_MODIFIER(ModifierId.DAMAGE), new Constant(0.5)))
-            )
-        );
-        register(new Mechanic()
-            .id(FAR_ENCHANTMENT)
-            .name("far enchantment")
-            .rule(Rule.build()
-                .event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
-                .condition(new Equals<>(Value.TARGET().MOVE().CATEGORY(), CategoryId.RANGED))
-                .effect(ApplyStatChanges.targetChangingUser().speed(new Constant(-1)))
             )
         );
     }

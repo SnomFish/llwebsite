@@ -12,7 +12,7 @@ public class TestStatusRegistry {
     void statusHasRegisteredAllEnums() {
         GeneralRegistryTests.hasRegisteredAllEnums(
             "StatusRegistry",
-            StatusId.class,
+            StatusId.values(),
             StatusRegistry.registry()
         );
     }
@@ -22,7 +22,7 @@ public class TestStatusRegistry {
     void allEntriesAreUnique() {
         GeneralRegistryTests.allEntriesAreUnique(
             "StatusRegistry",
-            StatusId.class,
+            StatusId.values(),
             StatusRegistry.registry()
         );
     }

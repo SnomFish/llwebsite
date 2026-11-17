@@ -12,7 +12,7 @@ public class TestItemRegistry {
     void itemHasRegisteredAllEnums() {
         GeneralRegistryTests.hasRegisteredAllEnums(
             "ItemRegistry",
-            ItemId.class,
+            ItemId.values(),
             ItemRegistry.registry()
         );
     }
@@ -22,7 +22,7 @@ public class TestItemRegistry {
     void allEntriesAreUnique() {
         GeneralRegistryTests.allEntriesAreUnique(
             "ItemRegistry",
-            ItemId.class,
+            ItemId.values(),
             ItemRegistry.registry()
         );
     }
