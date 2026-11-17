@@ -1,10 +1,15 @@
 package github.snomfish.functionality.action;
 
-import github.snomfish.domain.move.Move;
+import java.util.List;
 
-public class MoveAction extends Action {
+import github.snomfish.domain.move.Move;
+import github.snomfish.functionality.branch.Branch;
+import github.snomfish.functionality.context.BattleContext;
+
+public class MoveAction implements IAction {
     
 
+    private int priority;
     private Move move;
 
 
@@ -12,31 +17,34 @@ public class MoveAction extends Action {
         int priority,
         Move move
     ) {
-        super(priority);
+        this.priority = priority;
         this.move = move;
     }
 
 
     private MoveAction(MoveAction copy) {
-        super(copy);
+        this.priority = copy.priority;
         this.move = copy.move.deepCopy();
     }
-    @Override
     public MoveAction deepCopy() {
         return new MoveAction(this);
     } 
 
 
     // getter
-    @Override 
-    public Move move() {
-        return move;
-    }
+    public ActionId id() {return ActionId.MOVE;}
+    public int priority() {return priority;} 
+    public Move move() {return move;}
+    public int switchTarget() {throw new RuntimeException("Attempted to get switch target from a move action");}
 
 
     // setter
-    @Override 
-    public void setMove(Move move) {
-        this.move = move;
+    public void setPriority(int priority) {this.priority = priority;}
+    public void setMove(Move move) {this.move = move;}
+    public void setSwitchTarget(int switchTarget) {throw new RuntimeException("Attempted to get switch target from a move action");}
+
+
+    public List<Branch<BattleContext>> execute(BattleContext context) {
+        return move.execute(context);
     }
 }

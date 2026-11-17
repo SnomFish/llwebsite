@@ -26,7 +26,7 @@ import github.snomfish.domain.type.TypeChart;
 import github.snomfish.domain.type.TypeId;
 import github.snomfish.domain.weather.WeatherId;
 import github.snomfish.domain.weather.WeatherInstance;
-import github.snomfish.functionality.action.Action;
+import github.snomfish.functionality.action.IAction;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.number.INumber;
@@ -262,8 +262,8 @@ public class Value<T> {
 		(c, v) ->	((Side) c).activeLoomian().setSwappedInThisTurn(v)
 	);}
 	// ACTION
-	public Value<Action> ACTION() {return update(
-		Action.class,
+	public Value<IAction> ACTION() {return update(
+		IAction.class,
 		c -> 		((Side) c).activeLoomian().action(),
 		(c, v) -> 	((Side) c).activeLoomian().setAction(v)
 	);}

@@ -8,7 +8,7 @@ import github.snomfish.domain.mechanics.Mechanics;
 import github.snomfish.domain.stats.StatChanges;
 import github.snomfish.domain.stats.Stats;
 import github.snomfish.domain.type.TypeId;
-import github.snomfish.functionality.action.Action;
+import github.snomfish.functionality.action.IAction;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.event.HookReport;
@@ -25,7 +25,7 @@ public class ActiveLoomian extends Loomian {
     private AbilityInstance abilityInstance;
     private Stats stats;
     private StatChanges statChanges;
-    private Action action;
+    private IAction action;
     private Mechanics mechanics; // extra functionality that is temp added to an onfield loomian such as coursing venom being in effect
     private int statusTurns;
 
@@ -73,7 +73,7 @@ public class ActiveLoomian extends Loomian {
     public AbilityInstance abilityInstance() {return abilityInstance;}
     public Stats stats() {return stats;}
     public StatChanges statChanges() {return statChanges;}
-    public Action action() {return action;}
+    public IAction action() {return action;}
     public Mechanics mechanics() {return mechanics;}
     public int statusTurns() {return statusTurns;}
 
@@ -88,7 +88,7 @@ public class ActiveLoomian extends Loomian {
     public void setAbilityInstance(AbilityInstance abilityInstance) {this.abilityInstance = abilityInstance;}
     public void setStats(Stats stats) {this.stats = stats;}
     public void setStatChanges(StatChanges statChanges) {this.statChanges = statChanges;}
-    public void setAction(Action action) {this.action = action;}
+    public void setAction(IAction action) {this.action = action;}
     public void setMechanics(Mechanics mechanics) {this.mechanics = mechanics;} 
     public void setStatusTurns(int statusTurns) {this.statusTurns = statusTurns;}
 
@@ -122,6 +122,14 @@ public class ActiveLoomian extends Loomian {
         report.record(item().hooks(), event);
         report.record(status().hooks(), event);
         mechanics.dispatchHook(report, context, event);
+    }
+
+
+    public List<Branch<BattleContext>> executeAction(BattleContext context) {
+        this.hasActedThisTurn = true;
+        List<Branch<BattleContext>> outcomes = action.execute(context);
+        // setting any values here would not register on any of the outcomee
+        return outcomes;
     }
 
 

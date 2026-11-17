@@ -28,7 +28,6 @@ public class ClutchEffect implements IEffect {
 
         damage = (int)Math.min(damage, target.currentHealth()-1);
         outcome.user().activeLoomian().action().move().damage(damage);
-        target.setHasAbilityActivated(true);
 
         return List.of(new Branch<>(outcome, 1.0));
     }

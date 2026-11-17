@@ -33,7 +33,7 @@ public class Loomian implements DeepCopyable<Loomian> {
     protected Stats ups;
 
     // eventually have these bools in an enum map
-    protected boolean hasAbilityActivated;
+    protected boolean hasFainted;
 
 
     public Loomian(
@@ -59,7 +59,7 @@ public class Loomian implements DeepCopyable<Loomian> {
         this.currentHealth = (int) actualStats.health();
         this.currentEnergy = (int) actualStats.energy();
 
-        this.hasAbilityActivated = false;
+        this.hasFainted = false;
     }
 
 
@@ -77,7 +77,7 @@ public class Loomian implements DeepCopyable<Loomian> {
         this.tps = loomian.tps;
         this.ups = loomian.ups;
 
-        this.hasAbilityActivated = loomian.hasAbilityActivated;
+        this.hasFainted = loomian.hasFainted;
     }
 
 
@@ -110,7 +110,7 @@ public class Loomian implements DeepCopyable<Loomian> {
     public Stats tps() {return tps;}
     public Stats ups() {return ups;}
 
-    public boolean hasAbilityActivated() {return hasAbilityActivated;}
+    public boolean hasFainted() {return hasFainted;}
 
 
     // setter
@@ -127,7 +127,7 @@ public class Loomian implements DeepCopyable<Loomian> {
     public void setTps(Stats tps) {this.tps = tps;}
     public void setUps(Stats ups) {this.ups = ups;}
 
-    public void setHasAbilityActivated(boolean hasAbilityActivated) {this.hasAbilityActivated = hasAbilityActivated;}
+    public void setHasFainted(boolean hasFainted) {this.hasFainted = hasFainted;}
 
 
     // adders

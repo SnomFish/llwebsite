@@ -12,8 +12,6 @@ import github.snomfish.functionality.condition.ICondition;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.event.Rule;
 
-import static github.snomfish.functionality._schematics.Conditions.checkProbability;
-
 public class BranchUtil {
 
 
