@@ -103,4 +103,23 @@ public class ContextUtil {
     public static BattleContext reverseFocus(BattleContext context) {
         return new BattleContext(context.gamestate(), context.targetState());
     }
+
+
+    
+    
+    public static List<Branch<Gamestate>> deContext(List<Branch<BattleContext>> contextBranchs) {
+        List<Branch<Gamestate>> gamestates = new ArrayList<>();
+
+        for (Branch<BattleContext> contextBranch : contextBranchs) {
+            BattleContext context = contextBranch.value();
+            double contextProbability = contextBranch.probability();
+
+            gamestates.add(new Branch<>(
+                context.gamestate(),
+                contextProbability
+            ));
+        }
+
+        return gamestates;
+    }
 }

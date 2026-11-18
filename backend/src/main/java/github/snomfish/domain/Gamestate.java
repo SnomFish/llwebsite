@@ -4,20 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import github.snomfish.domain.mechanics.Mechanics;
-import github.snomfish.domain.modifiers.SideModifierId;
-import github.snomfish.domain.stats.StatChangesId;
 import github.snomfish.domain.weather.WeatherId;
 import github.snomfish.domain.weather.WeatherInstance;
-import github.snomfish.functionality.Value;
-import github.snomfish.functionality.branch.Branch;
-import github.snomfish.functionality.context.BattleContext;
-import github.snomfish.functionality.context.ContextSideId;
-import github.snomfish.functionality.context.ContextUtil;
 import github.snomfish.functionality.copy.DeepCopyable;
-import github.snomfish.functionality.event.ruleIds.ConstantRuleId;
-
-import static github.snomfish.functionality.branch.BranchUtil.flatMap;
-import static github.snomfish.functionality.branch.BranchUtil.wrap;
 
 // the gamestate is mutable.
 // then branching the gamestate is copied and the new changes are applied to each gamestate

@@ -22,24 +22,26 @@ public class BattleEngine {
 
 
 	// assumes both loomians already have an action
-    public static List<Branch<BattleContext>> executeTurn(Gamestate gamestate) {
+    public static List<Branch<Gamestate>> executeTurn(Gamestate gamestate) {
         BattleContext context = new BattleContext(gamestate, SideId.PLAYER);
         List<Branch<BattleContext>> outcomes = wrap(context);
         
+		// start of turn
         outcomes = flatMap(outcomes, c -> c.dispatchRule(ConstantRuleId.START_OF_TURN, ContextSideId.USER));
         outcomes = flatMap(outcomes, c -> c.dispatchRule(ConstantRuleId.PRE_CALC_SPEED_ORDER, ContextSideId.USER));
         outcomes = flatMap(outcomes, c -> setSpeedOrder(c));
 		
+		// action execution
 		outcomes = ContextUtil.setFocus(outcomes, Value.SPEED_ORDER(1));
 		outcomes = flatMap(outcomes, c -> c.user().activeLoomian().executeAction(c));
 
 		outcomes = ContextUtil.setFocus(outcomes, Value.SPEED_ORDER(2));
 		outcomes = flatMap(outcomes, c -> c.user().activeLoomian().executeAction(c));
 
-		outcomes = flatMap(outcomes, c -> c.dispatchRule(ConstantRuleId.END_OF_TURN_STATUS_EFFECTS, ContextSideId.USER));
+		// end of turn
 		outcomes = flatMap(outcomes, c -> c.dispatchRule(ConstantRuleId.END_OF_TURN, ContextSideId.USER));
 
-        return null;
+        return ContextUtil.deContext(outcomes);
     }
     private static List<Branch<BattleContext>> setSpeedOrder(BattleContext context) {
         List<Branch<BattleContext>> outcomes = new ArrayList<>();

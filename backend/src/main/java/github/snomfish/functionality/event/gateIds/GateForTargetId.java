@@ -37,7 +37,5 @@ public enum GateForTargetId implements IGateId {
     CAN_OPPS_MOVE_USE_SECONDARY_EFFECTS,
     CAN_OPP_SELECT_MOVE,
     CAN_OPP_USE_MOVE,
-    CAN_OPP_USE_HEALING_MOVES,
-    CAN_OPP_USE_SUPPORT_MOVES,
     ;
 }

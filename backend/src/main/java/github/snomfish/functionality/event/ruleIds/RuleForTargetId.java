@@ -18,7 +18,6 @@ public enum RuleForTargetId implements IRuleForSideId {
     // formula damage
     PRE_OPP_DEAL_FORMULA_DAMAGE,
     SELF_PRE_DAMAGED,
-    //HIT_BY_MOVE,
     RECEIVED_DAMAGE_FROM_MOVE,
     SELF_PRE_HEALTH_DRAINED,
     SELF_PRE_ENERGY_DRAINED,
