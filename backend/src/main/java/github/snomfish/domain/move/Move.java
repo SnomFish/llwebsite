@@ -1,8 +1,10 @@
 package github.snomfish.domain.move;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import github.snomfish.domain.modifiers.Modifiers;
+import github.snomfish.domain.modifiers.MoveModifierId;
 import github.snomfish.domain.move.structures.IMove;
 import github.snomfish.domain.move.structures.NoMove;
 import github.snomfish.domain.stats.StatId;
@@ -10,11 +12,25 @@ import github.snomfish.domain.tags.MoveTagId;
 import github.snomfish.domain.tags.Tags;
 import github.snomfish.domain.type.TypeChart;
 import github.snomfish.domain.type.TypeId;
+import github.snomfish.functionality.Value;
+import github.snomfish.functionality._schematics.Effects;
 import github.snomfish.functionality.branch.Branch;
+import github.snomfish.functionality.condition.Comparator;
+import github.snomfish.functionality.condition.GateCondition;
+import github.snomfish.functionality.condition.ICondition;
 import github.snomfish.functionality.context.BattleContext;
+import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.copy.DeepCopyable;
+import github.snomfish.functionality.effect.IEffect;
+import github.snomfish.functionality.effect.effects.ResetModifier;
+import github.snomfish.functionality.effect.effects.SetValueIEffect;
+import github.snomfish.functionality.event.gateIds.GateForAllId;
+import github.snomfish.functionality.event.ruleIds.RuleForAllId;
 import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.INumber;
+import github.snomfish.functionality.number.INumberValueConstant;
+import github.snomfish.functionality.number.Multiply;
+import github.snomfish.functionality.number.ValueConstant;
 
 import static github.snomfish.functionality.branch.BranchUtil.*;
 
@@ -37,9 +53,10 @@ public class Move implements DeepCopyable<Move> {
     private StatId attackingStatId;
     private StatId defendingStatId;
     private Tags<MoveTagId> tags;
-    private Modifiers modifiers;
+    private Modifiers<MoveModifierId> modifiers;
     private TypeChart typeChart;
 
+    private int calcedEnergyCost;
     private int critChance;
     private int damage;
 
@@ -65,9 +82,10 @@ public class Move implements DeepCopyable<Move> {
         this.attackingStatId = StatId.MATTACK;
         this.defendingStatId = StatId.MDEFENSE;
         this.tags = 		new Tags<MoveTagId>();
-        this.modifiers = 	new Modifiers();
+        this.modifiers = 	new Modifiers<>();
         this.typeChart = 	TypeChart.get();
 
+        this.calcedEnergyCost = 0;
         this.critChance = 0;
         this.damage = 0;
 
@@ -96,6 +114,7 @@ public class Move implements DeepCopyable<Move> {
         this.modifiers = 		copy.modifiers.deepCopy();
         this.typeChart = 		copy.typeChart.deepCopy();
 
+        this.calcedEnergyCost = copy.calcedEnergyCost;
         this.critChance = 		copy.critChance;
         this.damage = 			copy.damage;
 
@@ -126,9 +145,10 @@ public class Move implements DeepCopyable<Move> {
     public StatId attackingStatId() {return attackingStatId;}
     public StatId defendingStatId() {return defendingStatId;}
     public Tags<MoveTagId> tags() {return tags;}
-    public Modifiers modifiers() {return modifiers;}
+    public Modifiers<MoveModifierId> modifiers() {return modifiers;}
     public TypeChart typeChart() {return typeChart;}
 
+    public int calcedEnergyCost() {return calcedEnergyCost;}
     public int critChance() {return critChance;}
     public int damage() {return damage;}
 
@@ -158,9 +178,10 @@ public class Move implements DeepCopyable<Move> {
     public Move attackingStat(StatId attackingStatId) {this.attackingStatId = attackingStatId; return this;}
     public Move defendingStat(StatId defendingStatId) {this.defendingStatId = defendingStatId; return this;}
     public Move tag(MoveTagId tag) {this.tags.set(tag, true); return this;}
-    public Move modifiers(Modifiers modifiers) {this.modifiers = modifiers; return this;}
+    public Move modifiers(Modifiers<MoveModifierId> modifiers) {this.modifiers = modifiers; return this;}
     public Move typeChart(TypeChart typeChart) {this.typeChart = typeChart; return this;}
 
+    public Move calcedEnergyCost(int calcedEnergyCost) {this.calcedEnergyCost = calcedEnergyCost; return this;}
     public Move critChance(int critChance) {this.critChance = critChance; return this;}
     public Move damage(int damage) {this.damage = damage; return this;}
 
@@ -173,12 +194,52 @@ public class Move implements DeepCopyable<Move> {
 
     // this bich does not think about energy cost
     public List<Branch<BattleContext>> execute(BattleContext context) {
+        List<Branch<BattleContext>> outcomes = new ArrayList<>();
+        List<ICondition> conditions = List.of(new GateCondition(GateForAllId.CAN_USE_MOVE, ContextSideId.USER));
+
+        outcomes = flatMap(outcomes, c -> c.dispatchRule(RuleForAllId.PRE_MOVE, ContextSideId.USER));
+        outcomes = resolveConditions(context, conditions, this::executeEnergyCost); // can use the move
+
+		return outcomes;
+    }
+
+
+    public List<Branch<BattleContext>> executeEnergyCost(BattleContext context) {
+        List<Branch<BattleContext>> outcomes = wrap(context);
+        IEffect calcEnergyCost = new SetValueIEffect<>(
+            Value.USER().MOVE().CALCED_ENERGY_COST(),
+            new Multiply(
+                new INumberValueConstant(Value.USER().MOVE().ENERGY_COST()),
+                new ValueConstant(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.ENERGY_COST))
+            )
+        );
+        List<ICondition> conditions = List.of( // current energy calc is just the energy cost * energy cost modifier
+            Comparator.greaterThanEqualTo()
+                .left(new ValueConstant(Value.USER().CURRENT_ENERGY()))
+                .right(new ValueConstant(Value.USER().CALCED_ENERGY_COST()))
+        );
+
+        // resets the energy cost right before the pre energy calc effect
+        outcomes = flatMap(outcomes, c -> ResetModifier.userMove(MoveModifierId.ENERGY_COST).execute(c));
+        outcomes = flatMap(outcomes, c -> c.dispatchRule(RuleForAllId.PRE_ENERGY_CALC, ContextSideId.USER));
+        outcomes = flatMap(outcomes, c -> calcEnergyCost.execute(c));
+        outcomes = resolveConditions(context, conditions, this::execute);
+        
+
+        return outcomes;
+    }
+
+
+    public List<Branch<BattleContext>> executeMove(BattleContext context) {
         List<Branch<BattleContext>> outcomes = wrap(context);
 
-		outcomes = flatMap(outcomes, c -> preMove.execute(context));
+        // update flatmaps so I can just give it outcomes and an IEffect
+        // removes energy from the user according to the final energy cost of the move
+        outcomes = flatMap(outcomes, Effects.subtractValue(Value.USER().CURRENT_ENERGY(), Value.USER().MOVE().CALCED_ENERGY_COST()));
+        outcomes = flatMap(outcomes, c -> preMove.execute(context));
 		outcomes = flatMap(outcomes, c -> onMove.execute(context));
 		outcomes = flatMap(outcomes, c -> postMove.execute(context));
 
-		return outcomes;
+        return outcomes;
     }
 }

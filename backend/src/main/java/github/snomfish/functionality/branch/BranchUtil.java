@@ -10,6 +10,7 @@ import java.util.function.Function;
 import github.snomfish.functionality._schematics.Conditions;
 import github.snomfish.functionality.condition.ICondition;
 import github.snomfish.functionality.context.BattleContext;
+import github.snomfish.functionality.effect.IEffect;
 import github.snomfish.functionality.event.Rule;
 
 public class BranchUtil {
@@ -45,25 +46,11 @@ public class BranchUtil {
         }
         return outcomes;
     }
-
-
-    public static List<Branch<Boolean>> flatMap(
-        BattleContext context,
-        List<Branch<Boolean>> oldBranches,
-        Function<BattleContext, List<Branch<Boolean>>> function
+    public static List<Branch<BattleContext>> flatMap(
+        List<Branch<BattleContext>> branches,
+        IEffect effect
     ) {
-        List<Branch<Boolean>> outcomes = new ArrayList<>();
-        for (Branch<Boolean> oldBranch : oldBranches) {
-
-            List<Branch<Boolean>> newBranches = function.apply(context);
-            for (Branch<Boolean> newBranch : newBranches) {
-                outcomes.add(new Branch<>(
-                    oldBranch.value() && newBranch.value(),
-                    oldBranch.probability() * newBranch.probability()
-                ));
-            }
-        }
-        return outcomes;
+        return flatMap(branches, c -> effect.execute(c));
     }
 
 

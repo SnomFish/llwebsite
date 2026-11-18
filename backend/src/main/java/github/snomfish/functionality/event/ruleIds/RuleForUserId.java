@@ -10,6 +10,7 @@ public enum RuleForUserId implements IRuleForSideId {
 
     // move
     SELF_PRE_MOVE,
+    SELF_PRE_ENERGY_CALC,
     SELF_PRE_ACCURACY_CHECK,
     SELF_CLUTCHES,
     SELF_POST_MOVE,

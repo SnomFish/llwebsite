@@ -11,6 +11,7 @@ import github.snomfish.functionality.effect.effects.ApplyMechanic;
 import github.snomfish.functionality.effect.effects.SetValueIEffect;
 import github.snomfish.functionality.event.gateIds.GateForAllId;
 import github.snomfish.functionality.number.Add;
+import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.INumber;
 import github.snomfish.functionality.number.Multiply;
 import github.snomfish.functionality.number.ValueConstant;
@@ -54,6 +55,9 @@ public class Effects {
     }
     public static IEffect addValue(Value<? extends Number> value, Value<? extends Number> addition) {
         return new SetValueIEffect<>(value, new Add(new ValueConstant(value), new ValueConstant(addition)));
+    }
+    public static IEffect subtractValue(Value<? extends Number> value, Value<? extends Number> addition) {
+        return new SetValueIEffect<>(value, new Add(new ValueConstant(value), new Multiply(new ValueConstant(addition), new Constant(-1))));
     }
 
     public static IEffect multiplyValue(Value<? extends Number> value, INumber multiplier) {

@@ -15,7 +15,9 @@ import github.snomfish.domain.mechanics.Mechanics;
 import github.snomfish.domain.mechanics.ids.FieldMechanicId;
 import github.snomfish.domain.mechanics.ids.LoomianMechanicId;
 import github.snomfish.domain.mechanics.ids.SideMechanicId;
+import github.snomfish.domain.modifiers.Modifiers;
 import github.snomfish.domain.modifiers.MoveModifierId;
+import github.snomfish.domain.modifiers.SideModifierId;
 import github.snomfish.domain.move.CategoryId;
 import github.snomfish.domain.move.Move;
 import github.snomfish.domain.species.Species;
@@ -309,6 +311,11 @@ public class Value<T> {
 		c -> 		((Side) c).mechanics().get(id),
 		(c, v) ->	((Side) c).mechanics().set(v)
 	);}
+	public Value<Double> SIDE_MODIFIER(SideModifierId id) {return update(
+		Double.class,
+		c -> 		((Side) c).modifiers().get(id),
+		(c, v) ->	((Side) c).modifiers().set(id, v)
+	);}
 	public Value<Integer> MAX_AGE() {return update(
 		Integer.class,
 		c ->		((MechanicInstance) c).maxAge(),
@@ -518,10 +525,20 @@ public class Value<T> {
         c -> 		((Move) c).damage(),
         (c, v) -> 	((Move) c).critChance(v)
     );}
+    public Value<INumber> ENERGY_COST() {return update(
+		INumber.class,
+        c -> 		((Move) c).energyCost(),
+        (c, v) -> 	((Move) c).energyCost(v)
+    );}
     public Value<INumber> BASE_POWER() {return update(
 		INumber.class,
         c -> 		((Move) c).basePower(),
         (c, v) -> 	((Move) c).basePower(v)
+    );}
+    public Value<Integer> CALCED_ENERGY_COST() {return update(
+		Integer.class,
+        c -> 		((Move) c).calcedEnergyCost(),
+        (c, v) -> 	((Move) c).calcedEnergyCost(v)
     );}
     public Value<Integer> DAMAGE() {return update(
 		Integer.class,
