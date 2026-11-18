@@ -108,10 +108,12 @@ public class Gamestate implements DeepCopyable<Gamestate> {
 
 
     public void incrementTurnNumber() {
-        this.turnNumber += 1;
-        playerSide.incrementTurnNumber();
-        enemySide.incrementTurnNumber();
+        this.turnNumber++;
+        this.playerSide.incrementTurnNumber();
+        this.enemySide.incrementTurnNumber();
     }
+
+
     public void clearWeather() {this.weather = new WeatherInstance(WeatherId.NO_WEATHER, 999);}
     // add a way to decriment the lifespan
 
@@ -126,62 +128,5 @@ public class Gamestate implements DeepCopyable<Gamestate> {
     }
 
 
-    // assumes both loomians already have an action
-    public List<Branch<BattleContext>> executeTurn() {
-        BattleContext context = new BattleContext(this, SideId.PLAYER);
-        List<Branch<BattleContext>> outcomes = wrap(context);
-        
-        outcomes = flatMap(outcomes, c -> c.dispatchRule(ConstantRuleId.START_OF_TURN, ContextSideId.USER));
-        outcomes = flatMap(outcomes, c -> c.dispatchRule(ConstantRuleId.PRE_CALC_SPEED_ORDER, ContextSideId.USER));
-        outcomes = flatMap(outcomes, c -> setSpeedOrder(c));
-		
-		outcomes = ContextUtil.setFocus(outcomes, Value.SPEED_ORDER(1));
-		outcomes = flatMap(outcomes, c -> c.user().activeLoomian().executeAction(c));
-
-		outcomes = ContextUtil.setFocus(outcomes, Value.SPEED_ORDER(2));
-		outcomes = flatMap(outcomes, c -> c.user().activeLoomian().executeAction(c));
-
-		outcomes = flatMap(outcomes, c -> c.dispatchRule(ConstantRuleId.END_OF_TURN_STATUS_EFFECTS, ContextSideId.USER));
-		outcomes = flatMap(outcomes, c -> c.dispatchRule(ConstantRuleId.END_OF_TURN, ContextSideId.USER));
-
-        return null;
-    }
-    private List<Branch<BattleContext>> setSpeedOrder(BattleContext context) {
-        List<Branch<BattleContext>> outcomes = new ArrayList<>();
-        BattleContext outcome = context.deepCopy();
-
-        int playerPriority = playerSide.activeLoomian().action().priority();
-        int enemyPriority = enemySide.activeLoomian().action().priority();
-        int playerSpeed = (int) (playerSide.activeLoomian().actualStats().speed() * 
-                            	playerSide.activeLoomian().statChanges().multiplier(StatChangesId.SPEED) * 
-                            	playerSide.modifiers().get(SideModifierId.SPEED));
-        int enemySpeed = (int) (enemySide.activeLoomian().actualStats().speed() * 
-                            	enemySide.activeLoomian().statChanges().multiplier(StatChangesId.SPEED) * 
-                            	enemySide.modifiers().get(SideModifierId.SPEED));
-                            
-		boolean equalPriority = playerPriority == enemyPriority;
-
-        if ((playerPriority > enemyPriority) || (equalPriority && playerSpeed > enemySpeed)) {
-			// player is faster
-			outcome.gamestate().setSpeedOrder(List.of(SideId.PLAYER, SideId.ENEMY));
-			outcomes.add(new Branch<>(outcome, 1));
-
-        } else if ((playerPriority < enemyPriority) || (equalPriority && playerSpeed < enemySpeed)) {
-			// enemy is faster
-			outcome.gamestate().setSpeedOrder(List.of(SideId.ENEMY, SideId.PLAYER));
-			outcomes.add(new Branch<>(outcome, 1));
-
-        } else {
-			// speed tie
-			outcome.gamestate().setSpeedOrder(List.of(SideId.PLAYER, SideId.ENEMY));
-			outcomes.add(new Branch<>(outcome, 0.5));
-			outcome = context.deepCopy();
-			outcome.gamestate().setSpeedOrder(List.of(SideId.ENEMY, SideId.PLAYER));
-			outcomes.add(new Branch<>(outcome, 0.5));
-
-        }
-        
-        
-        return outcomes;
-    }
+    
 }

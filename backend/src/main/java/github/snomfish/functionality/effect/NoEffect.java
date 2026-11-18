@@ -1,10 +1,9 @@
-package github.snomfish.functionality.effect.effects;
+package github.snomfish.functionality.effect;
 
 import java.util.List;
 
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
-import github.snomfish.functionality.effect.IEffect;
 
 public class NoEffect implements IEffect {
     

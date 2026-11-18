@@ -23,7 +23,7 @@ import github.snomfish.functionality.effect.effects.AddType;
 import github.snomfish.functionality.effect.effects.AlterTypeChart;
 import github.snomfish.functionality.effect.effects.ApplyStatChanges;
 import github.snomfish.functionality.effect.effects.ApplyStatus;
-import github.snomfish.functionality.effect.effects.DealDirectDamage;
+import github.snomfish.functionality.effect.effects.RemoveHealth;
 import github.snomfish.functionality.effect.effects.RemoveMechanic;
 import github.snomfish.functionality.effect.effects.RestoreHealth;
 import github.snomfish.functionality.effect.effects.SetFieldMechanic;
@@ -41,6 +41,7 @@ import github.snomfish.functionality.number.TypeMultiplier;
 import static github.snomfish.domain.mechanics.ids.FieldMechanicId.*;
 import static github.snomfish.domain.mechanics.ids.LoomianMechanicId.*;
 import static github.snomfish.domain.mechanics.ids.SideMechanicId.*;
+import static github.snomfish.domain.tags.MechanicTagId.*;
 
 public class MechanicRegistry {
 
@@ -72,6 +73,14 @@ public class MechanicRegistry {
         register(new Mechanic()
             .id(NO_MECHANIC)
             .name("no mechanic")
+        );
+        register(new Mechanic()
+            .id(RESTING)
+            .name("resting")
+            .rule(Rule.build() 
+                .event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
+                .effect(Effects.multiplyValue(Value.TARGET().MOVE().MOVE_MODIFIER(MoveModifierId.DEFENDING_STAT), new Constant(2/3)))
+            )
         );
 
         register(new Mechanic()
@@ -214,10 +223,11 @@ public class MechanicRegistry {
                     new Not(new ListContains<>(Value.USER().TYPES(), TypeId.ICE)),
                     new GateCondition(GateForAllId.CAN_HAZARDS_AFFECT, ContextSideId.USER)
                 ))
-                .effect(new DealDirectDamage(
+                .effect(RemoveHealth.user(
                     new Multiply(Numbers.eighthUserMaxHealth(), TypeMultiplier.onUser(TypeId.ICE))
                 ))
             )
+            .tag(HAZARD)
         );
         register(new Mechanic()
             .id(HALF_ICICLE_TRAP)
@@ -228,10 +238,11 @@ public class MechanicRegistry {
                     new Not(new ListContains<>(Value.USER().TYPES(), TypeId.ICE)),
                     new GateCondition(GateForAllId.CAN_HAZARDS_AFFECT, ContextSideId.USER)
                 ))
-                .effect(new DealDirectDamage(
+                .effect(RemoveHealth.user(
                     new Multiply(Numbers.sixteenthUserMaxHealth(), TypeMultiplier.onUser(TypeId.ICE))
                 ))
             )
+            .tag(HAZARD)
         );
         register(new Mechanic()
             .id(SINGLE_POISON_BARBS)
@@ -250,7 +261,8 @@ public class MechanicRegistry {
                 .condition(new ListContains<>(Value.USER().TYPES(), TypeId.TOXIC))
                 .effect(RemoveMechanic.fromUserSide(SINGLE_POISON_BARBS))
             )
-        ); // removes the poison barbs if a toxic type swaps in
+            .tag(HAZARD)
+        ); // TODO removes the poison barbs if a toxic type swaps in
         register(new Mechanic()
             .id(DOUBLE_POISON_BARBS)
             .name("double poison barbs")
@@ -268,6 +280,7 @@ public class MechanicRegistry {
                 .condition(new ListContains<>(Value.USER().TYPES(), TypeId.TOXIC))
                 .effect(RemoveMechanic.fromUserSide(DOUBLE_POISON_BARBS))
             )
+            .tag(HAZARD)
         );
         register(new Mechanic()
             .id(SINGLE_BARBS)
@@ -278,8 +291,9 @@ public class MechanicRegistry {
                     new Not(new ListContains<>(Value.USER().TYPES(), TypeId.AIR)),
                     new GateCondition(GateForAllId.CAN_HAZARDS_AFFECT, ContextSideId.USER)
                 ))
-                .effect(new DealDirectDamage(Numbers.eighthUserMaxHealth()))
+                .effect(RemoveHealth.user(Numbers.eighthUserMaxHealth()))
             )
+            .tag(HAZARD)
         );
         register(new Mechanic()
             .id(DOUBLE_BARBS)
@@ -290,8 +304,9 @@ public class MechanicRegistry {
                     new Not(new ListContains<>(Value.USER().TYPES(), TypeId.AIR)),
                     new GateCondition(GateForAllId.CAN_HAZARDS_AFFECT, ContextSideId.USER)
                 ))
-                .effect(new DealDirectDamage(Numbers.sixthUserMaxHealth()))
+                .effect(RemoveHealth.user(Numbers.sixthUserMaxHealth()))
             )
+            .tag(HAZARD)
         );
         register(new Mechanic()
             .id(TRIPLE_BARBS)
@@ -302,8 +317,9 @@ public class MechanicRegistry {
                     new Not(new ListContains<>(Value.USER().TYPES(), TypeId.AIR)),
                     new GateCondition(GateForAllId.CAN_HAZARDS_AFFECT, ContextSideId.USER)
                 ))
-                .effect(new DealDirectDamage(Numbers.quarterUserMaxHealth()))
+                .effect(RemoveHealth.user(Numbers.quarterUserMaxHealth()))
             )
+            .tag(HAZARD)
         );
         register(new Mechanic()
             .id(BANANA_PEEL)
@@ -316,6 +332,7 @@ public class MechanicRegistry {
                 ))
                 .effect(ApplyStatChanges.targetChangingUser().speed(new Constant(-1)))
             )
+            .tag(HAZARD)
         );
         register(new Mechanic()
             .id(AUGMENT)
@@ -333,6 +350,7 @@ public class MechanicRegistry {
                 .condition(new Equals<>(Value.TARGET().MOVE().CATEGORY(), CategoryId.MELEE))
                 .effect(Effects.multiplyValue(Value.TARGET().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(0.5)))
             )
+            .tag(ENCHANTMENT)
         );
         register(new Mechanic()
             .id(FAR_ENCHANTMENT)
@@ -342,6 +360,7 @@ public class MechanicRegistry {
                 .condition(new Equals<>(Value.TARGET().MOVE().CATEGORY(), CategoryId.RANGED))
                 .effect(Effects.multiplyValue(Value.TARGET().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(0.5)))
             )
+            .tag(ENCHANTMENT)
         );
     }
 
@@ -351,6 +370,7 @@ public class MechanicRegistry {
         register(new Mechanic()
             .id(BANE_OF_HASTE)
             .name("bane of haste")
+            .tag(BANE)
         );
         register(new Mechanic()
             .id(BANE_OF_WIELDING)
@@ -359,6 +379,7 @@ public class MechanicRegistry {
                 .event(GateForAllId.CAN_USE_ITEMS)
                 .condition(new False())
             )
+            .tag(BANE)
         );
         register(new Mechanic()
             .id(FUNGUS_CURSE)

@@ -61,13 +61,6 @@ public class BattleContext implements DeepCopyable<BattleContext> {
             case TARGET -> target;
         };
     }
-
-
-    public void incrementTurnNumber() {
-        this.gamestate.incrementTurnNumber();
-    }
-
-
     
 
     public List<Branch<BattleContext>> dispatchRule(ConstantRuleId ruleId, ContextSideId sideId) {

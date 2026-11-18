@@ -7,8 +7,9 @@ import github.snomfish.domain.modifiers.MoveModifierId;
 import github.snomfish.domain.move.CategoryId;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality._schematics.Effects;
+import github.snomfish.functionality._schematics.Numbers;
 import github.snomfish.functionality.condition.Equals;
-import github.snomfish.functionality.effect.effects.DealDirectSelfDamage;
+import github.snomfish.functionality.effect.effects.RemoveHealth;
 import github.snomfish.functionality.event.Rule;
 import github.snomfish.functionality.event.ruleIds.ConstantRuleId;
 import github.snomfish.functionality.event.ruleIds.RuleForUserId;
@@ -47,7 +48,7 @@ public class StatusRegistry {
             .name("posion")
             .rule(Rule.build()
                 .event(ConstantRuleId.END_OF_TURN_STATUS_EFFECTS)
-                .effect(new DealDirectSelfDamage(new Multiply(new Constant(1/8), new ValueConstant(Value.OPP().HEALTH()))))
+                .effect(RemoveHealth.user(Numbers.eighthTargetMaxHealth()))
             )
         );
         register(Status.build()
@@ -55,8 +56,8 @@ public class StatusRegistry {
             .name("poison")
             .rule(Rule.build()
                 .event(ConstantRuleId.END_OF_TURN_STATUS_EFFECTS)
-                .effect(new DealDirectSelfDamage(new Multiply(
-                    new Constant(1/16),
+                .effect(RemoveHealth.user(new Multiply(
+                    Numbers.sixteenthUserMaxHealth(),
                     new ValueConstant(Value.USER().STATUS_TURNS())
                 )))
             )
@@ -70,7 +71,7 @@ public class StatusRegistry {
             .name("burn")
             .rule(Rule.build()
                 .event(ConstantRuleId.END_OF_TURN_STATUS_EFFECTS)
-                .effect(new DealDirectSelfDamage(new Constant(1/16)))
+                .effect(RemoveHealth.user(Numbers.sixteenthUserMaxHealth()))
             )
             .rule(Rule.build() // reduces mattack by 33%
                 .event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
@@ -83,7 +84,7 @@ public class StatusRegistry {
             .name("frostbite")
             .rule(Rule.build()
                 .event(ConstantRuleId.END_OF_TURN_STATUS_EFFECTS)
-                .effect(new DealDirectSelfDamage(new Constant(1/16)))
+                .effect(RemoveHealth.user(Numbers.sixteenthUserMaxHealth()))
             )
             .rule(Rule.build() // reduces rattack by 33%
                 .event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)

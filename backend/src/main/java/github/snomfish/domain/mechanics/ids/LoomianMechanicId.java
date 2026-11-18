@@ -2,6 +2,7 @@ package github.snomfish.domain.mechanics.ids;
 
 public enum LoomianMechanicId implements IMechanicId {
     NO_MECHANIC,
+    RESTING,
     
     DAZE,
     FLINCH,

@@ -67,6 +67,7 @@ public class Numbers {
 	}
 	public static INumber halfUserMaxEnergy() 			{return fractionOfMaxEnergy(USER, 1/2);}
 	public static INumber thirdUserMaxEnergy() 			{return fractionOfMaxEnergy(USER, 1/3);}
+	public static INumber twoThirdsUserMaxEnergy()		{return fractionOfMaxEnergy(USER, 2/3);}
 	public static INumber quarterUserMaxEnergy() 		{return fractionOfMaxEnergy(USER, 1/4);}
 	public static INumber fifthUserMaxEnergy()	 		{return fractionOfMaxEnergy(USER, 1/5);}
 	public static INumber eighthUserMaxEnergy() 		{return fractionOfMaxEnergy(USER, 1/8);}
@@ -76,6 +77,7 @@ public class Numbers {
 
 	public static INumber halfTargetMaxEnergy() 		{return fractionOfMaxEnergy(TARGET, 1/2);}
 	public static INumber thirdTargetMaxEnergy() 		{return fractionOfMaxEnergy(TARGET, 1/3);}
+	public static INumber twoThirdsTargetMaxEnergy()	{return fractionOfMaxEnergy(TARGET, 2/3);}
 	public static INumber quarterTargetMaxEnergy() 		{return fractionOfMaxEnergy(TARGET, 1/4);}
 	public static INumber fifthTargetMaxEnergy() 		{return fractionOfMaxEnergy(TARGET, 1/5);}
 	public static INumber eighthTargetMaxEnergy() 		{return fractionOfMaxEnergy(TARGET, 1/8);}

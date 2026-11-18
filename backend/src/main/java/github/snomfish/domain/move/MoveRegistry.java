@@ -23,20 +23,19 @@ import github.snomfish.functionality.condition.GateCondition;
 import github.snomfish.functionality.condition.HasHazards;
 import github.snomfish.functionality.condition.RandomCondition;
 import github.snomfish.functionality.effect.ConditionalEffect;
+import github.snomfish.functionality.effect.NoEffect;
 import github.snomfish.functionality.effect.effects.ApplyMechanic;
 import github.snomfish.functionality.effect.effects.ApplyStatChanges;
 import github.snomfish.functionality.effect.effects.ApplyStatus;
 import github.snomfish.functionality.effect.effects.ClearEnchantments;
 import github.snomfish.functionality.effect.effects.ClearHazards;
 import github.snomfish.functionality.effect.effects.ClearStatus;
-import github.snomfish.functionality.effect.effects.DealDirectDamage;
 import github.snomfish.functionality.effect.effects.DealFormulaDamage;
 import github.snomfish.functionality.effect.effects.EnergyDrainEffect;
 import github.snomfish.functionality.effect.effects.RestoreHealth;
 import github.snomfish.functionality.effect.effects.SetFieldMechanic;
 import github.snomfish.functionality.effect.effects.SetHazards;
 import github.snomfish.functionality.effect.effects.HealthDrainEffect;
-import github.snomfish.functionality.effect.effects.NoEffect;
 import github.snomfish.functionality.effect.effects.Pivot;
 import github.snomfish.functionality.effect.effects.RecoilEffect;
 import github.snomfish.functionality.effect.effects.RemoveEnergy;
@@ -92,6 +91,7 @@ public class MoveRegistry {
 			.onMove(SingleHit.build()
 				.primary(new DealFormulaDamage())
 				.secondary(RemoveEnergy.user(new Constant(10000))) // removes all the users current energy (because of the clamp I can also just remove 10_000)
+				.secondary(RemoveHealth.user(Numbers.eighthUserMaxHealth()))
 			)
 		);
 

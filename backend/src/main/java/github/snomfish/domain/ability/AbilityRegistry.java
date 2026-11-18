@@ -19,6 +19,7 @@ import github.snomfish.domain.weather.WeatherId;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality._schematics.Conditions;
 import github.snomfish.functionality._schematics.Effects;
+import github.snomfish.functionality._schematics.Numbers;
 import github.snomfish.functionality.condition.And;
 import github.snomfish.functionality.condition.Comparator;
 import github.snomfish.functionality.condition.Equals;
@@ -37,8 +38,8 @@ import github.snomfish.functionality.effect.effects.ApplyStatChanges;
 import github.snomfish.functionality.effect.effects.ApplyStatus;
 import github.snomfish.functionality.effect.effects.ClearHazards;
 import github.snomfish.functionality.effect.effects.ClutchEffect;
-import github.snomfish.functionality.effect.effects.DealDirectSelfDamage;
 import github.snomfish.functionality.effect.effects.DispatchEventEffect;
+import github.snomfish.functionality.effect.effects.RemoveHealth;
 import github.snomfish.functionality.effect.effects.SetAbility;
 import github.snomfish.functionality.effect.effects.SetFieldMechanic;
 import github.snomfish.functionality.effect.effects.SetHazards;
@@ -57,7 +58,6 @@ import github.snomfish.functionality.event.ruleIds.RuleForTargetId;
 import github.snomfish.functionality.event.ruleIds.RuleForUserId;
 import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.INumberValueConstant;
-import github.snomfish.functionality.number.Multiply;
 import github.snomfish.functionality.number.ValueConstant;
 
 import static github.snomfish.domain.ability.AbilityId.*;
@@ -667,10 +667,7 @@ public class AbilityRegistry {
 			)
 			.rule(Rule.build()
 				.event(RuleForUserId.SELF_MOVE_DEALT_DAMAGE)
-				.effect(new DealDirectSelfDamage(new Multiply(
-					new ValueConstant(Value.USER().HEALTH()),
-					new Constant(1/16)
-				)))
+				.effect(RemoveHealth.user(Numbers.sixteenthUserMaxHealth()))
 			)
 		);
 		register(Ability.build()
@@ -1742,7 +1739,7 @@ public class AbilityRegistry {
 				.event(RuleForTargetId.RECEIVED_DAMAGE_FROM_MOVE)
 				.condition(new Equals<>(Value.OPP().MOVE().MOVE_TAG(MoveTagId.CONTACT), true))
 				.condition(new GateCondition(GateForAllId.CAN_MOVE_MAKE_CONTACT, TARGET))
-				.effect(new DealDirectSelfDamage(new Multiply(new Constant(1/16), new ValueConstant(Value.OPP().HEALTH()))))
+				.effect(RemoveHealth.target(Numbers.sixteenthTargetMaxHealth()))
 			)
 		);
 		register(Ability.build()
