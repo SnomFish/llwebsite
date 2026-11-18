@@ -29,6 +29,7 @@ import github.snomfish.functionality.effect.effects.ApplyStatus;
 import github.snomfish.functionality.effect.effects.ClearEnchantments;
 import github.snomfish.functionality.effect.effects.ClearHazards;
 import github.snomfish.functionality.effect.effects.ClearStatus;
+import github.snomfish.functionality.effect.effects.DealDirectDamage;
 import github.snomfish.functionality.effect.effects.DealFormulaDamage;
 import github.snomfish.functionality.effect.effects.EnergyDrainEffect;
 import github.snomfish.functionality.effect.effects.RestoreHealth;
@@ -38,6 +39,8 @@ import github.snomfish.functionality.effect.effects.HealthDrainEffect;
 import github.snomfish.functionality.effect.effects.NoEffect;
 import github.snomfish.functionality.effect.effects.Pivot;
 import github.snomfish.functionality.effect.effects.RecoilEffect;
+import github.snomfish.functionality.effect.effects.RemoveEnergy;
+import github.snomfish.functionality.effect.effects.RemoveHealth;
 import github.snomfish.functionality.effect.effects.RemoveType;
 import github.snomfish.functionality.effect.effects.SetType;
 import github.snomfish.functionality.effect.effects.SetValue;
@@ -79,6 +82,21 @@ public class MoveRegistry {
 			.id(NO_MOVE)
 			.name("No Move")
 		);
+		register(Move.build()
+			.id(FLAIL)
+			.name("flail")
+			.type(TypeId.NULL)
+			.category(MELEE)
+			.energyCost(new Constant(0))
+			.basePower(new Constant(30))
+			.onMove(SingleHit.build()
+				.primary(new DealFormulaDamage())
+				.secondary(RemoveEnergy.user(new Constant(10000))) // removes all the users current energy (because of the clamp I can also just remove 10_000)
+			)
+		);
+
+
+
 		register(Move.build()
 			.id(ACCELERATE)
 			.name("Accerlerate")

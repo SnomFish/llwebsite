@@ -196,7 +196,7 @@ public class DealFormulaDamage implements IEffect {
 
 
         // modifiers
-        Modifiers modifiers = move.modifiers();
+        Modifiers<MoveModifierId> modifiers = move.modifiers();
         // types
         modifiers.mul(TYPE, move.typeChart().getModifier(move.type(), target.types()));
         // stab (should eventually be replaced by an hook/gate)

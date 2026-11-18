@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 import github.snomfish.functionality._schematics.Conditions;
 import github.snomfish.functionality.condition.ICondition;
@@ -76,39 +77,54 @@ public class BranchUtil {
     public static List<Branch<BattleContext>> resolveConditions(
         BattleContext context,
         List<ICondition> conditions,
-        Function<BattleContext, List<Branch<BattleContext>>> function
+        Supplier<List<Branch<BattleContext>>> trueFunction,
+        Supplier<List<Branch<BattleContext>>> falseFunction
     ) {
+        double probability = Conditions.resolve(context, conditions);
+
         List<Branch<BattleContext>> outcomes = new ArrayList<>();
 
-		double probability = Conditions.resolve(context, conditions);
-
-		if (probability > 0) {
-			outcomes.addAll(applyProbability(function.apply(context), probability));
-		}
-		if (probability < 1) {
-			outcomes.add(new Branch<>(context, 1-probability));
-		}
+        if (probability > 0) {
+            outcomes.addAll(applyProbability(trueFunction.get(), probability));
+        }
+        if (probability < 1) {
+            outcomes.addAll(applyProbability(falseFunction.get(), 1 - probability));
+        }
 
         return outcomes;
     }
     public static List<Branch<BattleContext>> resolveConditions(
         BattleContext context,
         List<ICondition> conditions,
+        Function<BattleContext, List<Branch<BattleContext>>> function
+    ) {
+        return resolveConditions(context, conditions,
+            () -> function.apply(context),
+            () -> wrap(context)
+        );
+    }
+    public static List<Branch<BattleContext>> resolveConditions(
+        BattleContext context,
+        List<ICondition> conditions,
+        Function<BattleContext, List<Branch<BattleContext>>> trueFunction,
+        Function<BattleContext, List<Branch<BattleContext>>> falseFunction
+    ) {
+        return resolveConditions(context, conditions,
+            () -> trueFunction.apply(context),
+            () -> falseFunction.apply(context)
+        );
+    }
+
+    public static List<Branch<BattleContext>> resolveConditions(
+        BattleContext context,
+        List<ICondition> conditions,
         Rule rule,
         BiFunction<BattleContext, Rule, List<Branch<BattleContext>>> function
     ) {
-        List<Branch<BattleContext>> outcomes = new ArrayList<>();
-
-		double probability = Conditions.resolve(context, conditions);
-
-		if (probability > 0) {
-			outcomes.addAll(applyProbability(function.apply(context, rule), probability));
-		}
-		if (probability < 1) {
-			outcomes.add(new Branch<>(context, 1-probability));
-		}
-
-        return outcomes;
+        return resolveConditions(context, conditions,
+            () -> function.apply(context, rule),
+            () -> wrap(context)
+        );
     }
 
 

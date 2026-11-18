@@ -213,7 +213,7 @@ public class Move implements DeepCopyable<Move> {
                 new ValueConstant(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.ENERGY_COST))
             )
         );
-        List<ICondition> conditions = List.of( // current energy calc is just the energy cost * energy cost modifier
+        List<ICondition> hasEnoughEnergy = List.of( // current energy calc is just the energy cost * energy cost modifier
             Comparator.greaterThanEqualTo()
                 .left(new ValueConstant(Value.USER().CURRENT_ENERGY()))
                 .right(new ValueConstant(Value.USER().CALCED_ENERGY_COST()))
@@ -223,10 +223,22 @@ public class Move implements DeepCopyable<Move> {
         outcomes = flatMap(outcomes, c -> ResetModifier.userMove(MoveModifierId.ENERGY_COST).execute(c));
         outcomes = flatMap(outcomes, c -> c.dispatchRule(RuleForAllId.PRE_ENERGY_CALC, ContextSideId.USER));
         outcomes = flatMap(outcomes, c -> calcEnergyCost.execute(c));
-        outcomes = resolveConditions(context, conditions, this::execute);
+        outcomes = resolveConditions(context, hasEnoughEnergy,
+            this::executeMove,
+            this::executeFlail
+        );
         
 
         return outcomes;
+    }
+
+
+    public List<Branch<BattleContext>> executeFlail(BattleContext context) {
+        BattleContext outcome = context.deepCopy();
+
+        
+
+        return wrap(outcome);
     }
 
 
