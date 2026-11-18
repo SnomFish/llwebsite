@@ -1,11 +1,11 @@
-package github.snomfish.domain;
+package github.snomfish.domain.tags;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import github.snomfish.functionality.copy.DeepCopyable;
 
-public class Tags<T extends Enum<T>> implements DeepCopyable<Tags<T>> {
+public class Tags<T extends ITagId> implements DeepCopyable<Tags<T>> {
     
 
     private Map<T, Boolean> tags;

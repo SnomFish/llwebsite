@@ -2,11 +2,12 @@ package github.snomfish.domain.move;
 
 import java.util.List;
 
-import github.snomfish.domain.Tags;
 import github.snomfish.domain.modifiers.Modifiers;
 import github.snomfish.domain.move.structures.IMove;
 import github.snomfish.domain.move.structures.NoMove;
 import github.snomfish.domain.stats.StatId;
+import github.snomfish.domain.tags.MoveTagId;
+import github.snomfish.domain.tags.Tags;
 import github.snomfish.domain.type.TypeChart;
 import github.snomfish.domain.type.TypeId;
 import github.snomfish.functionality.branch.Branch;

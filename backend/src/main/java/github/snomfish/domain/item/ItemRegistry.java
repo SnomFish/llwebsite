@@ -43,8 +43,8 @@ import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.ValueConstant;
 
 import static github.snomfish.domain.item.ItemId.*;
-import static github.snomfish.domain.item.ItemTagId.*;
 import static github.snomfish.domain.species.SpeciesId.*;
+import static github.snomfish.domain.tags.ItemTagId.*;
 
 // oi add a condition in condition schematics for general item use, offensive item use and defensive.
 // simplest solution for whe the loomian cannot use items/ are about to be pile drived by sly cavenish
@@ -122,6 +122,7 @@ public class ItemRegistry {
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
 				.effect(Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DEFENDING_STAT), new Constant(1.5)))
 			)
+			.tag(PUNCTURABLE)
 		);
 		register(Item.build()
 			.id(DRY_ICE)
@@ -155,6 +156,7 @@ public class ItemRegistry {
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
 				.effect(Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DEFENDING_STAT), new Constant(1.2)))
 			)
+			.tag(PUNCTURABLE)
 			// TODO increase costs of moves by 15%
 		);
 		register(Item.build()
@@ -170,6 +172,7 @@ public class ItemRegistry {
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
 				.effect(Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DEFENDING_STAT), new Constant(1.2)))
 			)
+			.tag(PUNCTURABLE)
 			// TODO increase costs of moves by 15%
 		);
 		register(Item.build()
@@ -256,6 +259,7 @@ public class ItemRegistry {
 				.event(GateForUserId.CAN_SELF_USE_SUPPORT_MOVES)
 				.condition(new Not(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER)))
 			)
+			.tag(PUNCTURABLE)
 		);
 		register(Item.build()
 			.id(RESTRICTIVE_SHIELD)
@@ -270,6 +274,7 @@ public class ItemRegistry {
 				.event(GateForUserId.CAN_SELF_USE_SUPPORT_MOVES)
 				.condition(new Not(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER)))
 			)
+			.tag(PUNCTURABLE)
 		);
 		register(Item.build()
 			.id(SPECIALY_BOOTS)
@@ -642,6 +647,7 @@ public class ItemRegistry {
 				))
 			)
 			.tag(CONSUMABLE)
+			.tag(PUNCTURABLE)
 		);
 		register(Item.build()
 			.id(BLOSSOM_PEARL)
@@ -656,6 +662,7 @@ public class ItemRegistry {
 				))
             )
 			.tag(CONSUMABLE)
+			.tag(PUNCTURABLE)
 		);
 		register(Item.build()
 			.id(DRAFT_PEARL)
@@ -670,6 +677,7 @@ public class ItemRegistry {
 				))
             )
 			.tag(CONSUMABLE)
+			.tag(PUNCTURABLE)
 		);
 		register(Item.build()
 			.id(FLAME_PEARL)
@@ -684,6 +692,7 @@ public class ItemRegistry {
 				))
             )
 			.tag(CONSUMABLE)
+			.tag(PUNCTURABLE)
 		);
 		register(Item.build()
 			.id(FROST_PEARL)
@@ -698,6 +707,7 @@ public class ItemRegistry {
 				))
             )
 			.tag(CONSUMABLE)
+			.tag(PUNCTURABLE)
 		);
 		register(Item.build()
 			.id(MARTIAL_PEARL)
@@ -712,6 +722,7 @@ public class ItemRegistry {
 				))
             )
 			.tag(CONSUMABLE)
+			.tag(PUNCTURABLE)
 		);
 		register(Item.build()
 			.id(MENTAL_PEARL)
@@ -726,6 +737,7 @@ public class ItemRegistry {
 				))
             )
 			.tag(CONSUMABLE)
+			.tag(PUNCTURABLE)
 		);
 		register(Item.build()
 			.id(METALLIC_PEARL)
@@ -740,6 +752,7 @@ public class ItemRegistry {
 				))
             )
 			.tag(CONSUMABLE)
+			.tag(PUNCTURABLE)
 		);
 		register(Item.build()
 			.id(NOXIOUS_PEARL)
@@ -754,6 +767,7 @@ public class ItemRegistry {
 				))
             )
 			.tag(CONSUMABLE)
+			.tag(PUNCTURABLE)
 		);
 		register(Item.build()
 			.id(PLAIN_PEARL)
@@ -768,6 +782,7 @@ public class ItemRegistry {
 				))
             )
 			.tag(CONSUMABLE)
+			.tag(PUNCTURABLE)
 		);
 		register(Item.build()
 			.id(SHADE_PEARL)
@@ -782,6 +797,7 @@ public class ItemRegistry {
 				))
             )
 			.tag(CONSUMABLE)
+			.tag(PUNCTURABLE)
 		);
 		register(Item.build()
 			.id(SHINE_PEARL)
@@ -796,6 +812,7 @@ public class ItemRegistry {
 				))
             )
 			.tag(CONSUMABLE)
+			.tag(PUNCTURABLE)
 		);
 		register(Item.build()
 			.id(SPECTRAL_PEARL)
@@ -810,6 +827,7 @@ public class ItemRegistry {
 				))
             )
 			.tag(CONSUMABLE)
+			.tag(PUNCTURABLE)
 		);
 		register(Item.build()
 			.id(TERRA_PEARL)
@@ -824,6 +842,7 @@ public class ItemRegistry {
 				))
             )
 			.tag(CONSUMABLE)
+			.tag(PUNCTURABLE)
 		);
 		register(Item.build()
 			.id(VOLT_PEARL)
@@ -838,6 +857,7 @@ public class ItemRegistry {
 				))
             )
 			.tag(CONSUMABLE)
+			.tag(PUNCTURABLE)
 		);
 		register(Item.build()
 			.id(WAVE_PEARL)
@@ -852,6 +872,7 @@ public class ItemRegistry {
 				))
             )
 			.tag(CONSUMABLE)
+			.tag(PUNCTURABLE)
 		);
 		register(Item.build()
 			.id(WEB_PEARL)
@@ -866,6 +887,7 @@ public class ItemRegistry {
 				))
             )
 			.tag(CONSUMABLE)
+			.tag(PUNCTURABLE)
 		);
 		register(Item.build()
 			.id(ARCHAIC_SHELL)

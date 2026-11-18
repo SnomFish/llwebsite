@@ -18,11 +18,13 @@ import github.snomfish.domain.mechanics.ids.SideMechanicId;
 import github.snomfish.domain.modifiers.MoveModifierId;
 import github.snomfish.domain.move.CategoryId;
 import github.snomfish.domain.move.Move;
-import github.snomfish.domain.move.MoveTagId;
 import github.snomfish.domain.species.Species;
 import github.snomfish.domain.species.SpeciesId;
 import github.snomfish.domain.stats.StatChangesId;
 import github.snomfish.domain.status.StatusId;
+import github.snomfish.domain.tags.AbilityTagId;
+import github.snomfish.domain.tags.ItemTagId;
+import github.snomfish.domain.tags.MoveTagId;
 import github.snomfish.domain.type.TypeChart;
 import github.snomfish.domain.type.TypeId;
 import github.snomfish.domain.weather.WeatherId;
@@ -231,6 +233,11 @@ public class Value<T> {
 		c -> 		((Side) c).activeLoomian().abilityInstance().hasTriggeredThisSwapIn(),
 		(c, v) -> 	((Side) c).activeLoomian().abilityInstance().setTriggeredThisSwapIn(v)
 	);}
+	public Value<Boolean> ABILITY_TAG(AbilityTagId id) {return update(
+		Boolean.class,
+		c -> 		((Side) c).activeLoomian().abilityInstance().ability().tags().get(id),
+		(c, v) -> 	((Side) c).activeLoomian().abilityInstance().ability().tags().set(id, v)
+	);}
 	public Value<AbilityId> ACTUAL_ABILITY_ID() {return update(
 		AbilityId.class,
 		c -> 		((Side) c).activeLoomian().actualAbilityInstance().abilityId(),
@@ -251,6 +258,11 @@ public class Value<T> {
 		ItemId.class,
 		c -> 		((Side) c).activeLoomian().itemId(),
 		(c, v) -> 	((Side) c).activeLoomian().setItemId(v)
+	);}
+	public Value<Boolean> ITEM_TAG(ItemTagId id) {return update(
+		Boolean.class,
+		c -> 		((Side) c).activeLoomian().item().tags().get(id),
+		(c, v) -> 	((Side) c).activeLoomian().item().tags().set(id, v)
 	);}
 	// STATUS
 	public Value<StatusId> STATUS_ID() {return update(

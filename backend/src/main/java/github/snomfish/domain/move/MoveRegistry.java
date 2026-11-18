@@ -51,7 +51,7 @@ import github.snomfish.functionality.number.WeightedRange;
 
 import static github.snomfish.domain.move.CategoryId.*;
 import static github.snomfish.domain.move.MoveId.*;
-import static github.snomfish.domain.move.MoveTagId.*;
+import static github.snomfish.domain.tags.MoveTagId.*;
 import static github.snomfish.functionality.context.ContextSideId.*;
 
 public class MoveRegistry {

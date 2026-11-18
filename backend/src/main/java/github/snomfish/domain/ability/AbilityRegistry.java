@@ -10,8 +10,10 @@ import github.snomfish.domain.mechanics.ids.LoomianMechanicId;
 import github.snomfish.domain.mechanics.ids.SideMechanicId;
 import github.snomfish.domain.modifiers.MoveModifierId;
 import github.snomfish.domain.move.CategoryId;
-import github.snomfish.domain.move.MoveTagId;
 import github.snomfish.domain.status.StatusId;
+import github.snomfish.domain.tags.AbilityTagId;
+import github.snomfish.domain.tags.ItemTagId;
+import github.snomfish.domain.tags.MoveTagId;
 import github.snomfish.domain.type.TypeId;
 import github.snomfish.domain.weather.WeatherId;
 import github.snomfish.functionality.Value;
@@ -59,6 +61,7 @@ import github.snomfish.functionality.number.Multiply;
 import github.snomfish.functionality.number.ValueConstant;
 
 import static github.snomfish.domain.ability.AbilityId.*;
+import static github.snomfish.domain.tags.AbilityTagId.*;
 import static github.snomfish.functionality.context.ContextSideId.*;
 
 public class AbilityRegistry {
@@ -968,6 +971,7 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(HARD_CANDY)
 			.name("hard candy")
+			.tag(PUNCTURABLE)
 		);
 		register(Ability.build()
 			.id(HARMONIZE)
@@ -1406,6 +1410,7 @@ public class AbilityRegistry {
 				))
 				.effect(Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DEFENDING_STAT), new Constant(1.5)))
 			)
+			.tag(PUNCTURABLE)
 		);
 		register(Ability.build()
 			.id(PARTING_GIFT)
@@ -1528,6 +1533,21 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(PUNCTURE)
 			.name("puncture")
+			.gate(Gate.build()
+				.event(GateForTargetId.CAN_OPP_USE_DEFENDING_STAT_BOOSTS)
+				.condition(new Equals<>(Value.USER().MOVE().MOVE_TAG(MoveTagId.BITING), false))
+				.condition(new Not(new Equals<>(Value.USER().MOVE().CATEGORY(), CategoryId.MELEE)))
+			)
+			.gate(Gate.build()
+				.event(GateForTargetId.CAN_OPP_USE_ABILITY)
+				.condition(new Equals<>(Value.USER().MOVE().MOVE_TAG(MoveTagId.BITING), false))
+				.condition(new Equals<>(Value.USER().ABILITY_TAG(AbilityTagId.PUNCTURABLE), false))
+			)
+			.gate(Gate.build()
+				.event(GateForTargetId.CAN_OPP_USE_ITEM)
+				.condition(new Equals<>(Value.USER().MOVE().MOVE_TAG(MoveTagId.BITING), false))
+				.condition(new Equals<>(Value.USER().ITEM_TAG(ItemTagId.PUNCTURABLE), false))
+			)
 		);
 		register(Ability.build()
 			.id(PYRO_PRO)
@@ -1665,6 +1685,7 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(SAFETY_POT)
 			.name("safety pot")
+			.tag(PUNCTURABLE)
 		);
 		register(Ability.build()
 			.id(SALVAGE)
@@ -1744,10 +1765,12 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(SLICK_SCALES)
 			.name("Slick Scales")
+			.tag(PUNCTURABLE)
 		);
 		register(Ability.build()
 			.id(SLICK_SHELL)
 			.name("slick shell")
+			.tag(PUNCTURABLE)
 		);
 		register(Ability.build()
 			.id(SLIMY)
@@ -1844,6 +1867,7 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(TANK)
 			.name("tank")
+			.tag(PUNCTURABLE)
 		);
 		register(Ability.build()
 			.id(TEMPER)
@@ -1917,6 +1941,7 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(TRASH_ARMOUR)
 			.name("trash armour")
+			.tag(PUNCTURABLE)
 		);
 		register(Ability.build()
 			.id(TRIUMPH)
