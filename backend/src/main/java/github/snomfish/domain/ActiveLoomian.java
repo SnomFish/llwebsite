@@ -17,8 +17,6 @@ import github.snomfish.functionality.event.RuleReport;
 import github.snomfish.functionality.event.gateIds.IGateId;
 import github.snomfish.functionality.event.ruleIds.IRuleId;
 
-import static github.snomfish.functionality.branch.BranchUtil.flatMap;
-
 // ALL LOOMIAN PARAMETERS ARE PRIVATE BY CHOICE
 public class ActiveLoomian extends Loomian {
 
