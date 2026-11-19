@@ -57,6 +57,11 @@ public class Mechanics implements DeepCopyable<Mechanics> {
             report.record(instance.mechanic().rules(), ruleId);
         }
     }
+    public void dispatchHook(HookReport report, IRuleId hookId) {
+        for (MechanicInstance instance : mechanics.values()) {
+            report.record(instance.mechanic().hooks(), hookId);
+        }
+    }
     public double dispatchGate(BattleContext context, IGateId gateId) {
         double probability = 1;
 
@@ -65,13 +70,5 @@ public class Mechanics implements DeepCopyable<Mechanics> {
         }
 
         return probability;
-    }
-    public HookReport dispatchHook(HookReport report, BattleContext context, IRuleId ruleId) {
-
-        for (MechanicInstance instance : mechanics.values()) {
-            instance.handleHook(context, ruleId, report);
-        }
-
-        return report;
     }
 }

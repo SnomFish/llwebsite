@@ -102,6 +102,12 @@ public class ActiveLoomian extends Loomian {
         report.record(status().rules(), ruleId);
         mechanics.dispatchRule(report, ruleId);
     }
+    public void dispatchHook(HookReport report, IRuleId hookId) {
+        report.record(abilityInstance().ability().hooks(), hookId);
+        report.record(item().hooks(), hookId);
+        report.record(status().hooks(), hookId);
+        mechanics.dispatchHook(report, hookId);
+    }
     public double dispatchGate(BattleContext context, IGateId gateId) {
         double probability = 1;
 
@@ -111,13 +117,6 @@ public class ActiveLoomian extends Loomian {
         probability *= mechanics().dispatchGate(context, gateId);
 
         return probability;
-    }
-    public void dispatchHook(HookReport report, BattleContext context, IRuleId event) {
-        
-        report.record(abilityInstance().ability().hooks(), event);
-        report.record(item().hooks(), event);
-        report.record(status().hooks(), event);
-        mechanics.dispatchHook(report, context, event);
     }
 
 

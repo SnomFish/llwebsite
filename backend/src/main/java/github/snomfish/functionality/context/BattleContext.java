@@ -75,6 +75,7 @@ public class BattleContext implements DeepCopyable<BattleContext> {
     }
     
 
+
     public List<Branch<BattleContext>> dispatchRule(ConstantRuleId ruleId, ContextSideId sideId) {
         SideId selfState = selfState(sideId);
         SideId oppState = oppState(sideId);
@@ -106,6 +107,22 @@ public class BattleContext implements DeepCopyable<BattleContext> {
 
 
 
+    public List<Branch<BattleContext>> dispatchHook(RuleForAllId hookId, ContextSideId sideId, List<Branch<BattleContext>> noHookOutcomes) {
+        SideId selfState = selfState(sideId);
+        SideId oppState = oppState(sideId);
+        HookReport report = new HookReport(selfState);
+
+        gamestate.weatherInstance().dispatchHook(report, hookId);
+        gamestate.mechanics().dispatchHook(report, hookId);
+        user.dispatchHook(report, hookId.forUser());
+
+        report.setCurrentSideThatIsUser(oppState);
+        target.dispatchHook(report, hookId.forTarget());
+
+        return report.execute(this, noHookOutcomes);
+    }
+
+
 
     public double dispatchGate(GateForAllId gateId, ContextSideId sideId) {
         double probability = 1;
@@ -120,25 +137,6 @@ public class BattleContext implements DeepCopyable<BattleContext> {
         // outcomes is a boolean so dont fuck with the focus of the battle context rn (context is being discarded anyway so it doesnt matter)
         // preach
         return probability;
-    }
-
-
-
-    public List<Branch<BattleContext>> dispatchHook(
-        RuleForAllId eventId,
-        ContextSideId sideId,
-        List<Branch<BattleContext>> trueOutcomes
-    ) {
-        HookReport report = new HookReport(trueOutcomes);
-
-        BattleContext context = ContextUtil.setFocus(this, sideId);
-        user().dispatchHook(report, context, eventId.forUser());
-
-        context = ContextUtil.reverseFocus(context);
-        target().dispatchHook(report, context, eventId.forTarget());
-
-        context = ContextUtil.setFocus(context, userState); // resets the focus to the correct state
-        return report.execute(context);
     }
 
 

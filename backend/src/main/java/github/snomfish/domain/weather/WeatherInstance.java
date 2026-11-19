@@ -2,6 +2,7 @@ package github.snomfish.domain.weather;
 
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.copy.DeepCopyable;
+import github.snomfish.functionality.event.HookReport;
 import github.snomfish.functionality.event.RuleReport;
 import github.snomfish.functionality.event.gateIds.IGateId;
 import github.snomfish.functionality.event.ruleIds.IRuleId;
@@ -44,6 +45,9 @@ public class WeatherInstance implements DeepCopyable<WeatherInstance> {
 
     public void dispatchRule(RuleReport report, IRuleId ruleId) {
         report.record(weather().rules(), ruleId);
+    }
+    public void dispatchHook(HookReport report, IRuleId hookId) {
+        report.record(weather().hooks(), hookId);
     }
     public double dispatchGate(BattleContext context, IGateId gateId) {
         return weather().handleGate(context, gateId);

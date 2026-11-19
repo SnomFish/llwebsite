@@ -71,6 +71,10 @@ public class Side implements DeepCopyable<Side> {
         activeLoomian.dispatchRule(report, ruleId);
         mechanics.dispatchRule(report, ruleId);
     }
+    public void dispatchHook(HookReport report, IRuleId hookId) {
+        activeLoomian.dispatchHook(report, hookId);
+        mechanics.dispatchHook(report, hookId);
+    }
     public double dispatchGate(BattleContext context, IGateId gateId) {
         double probability = 1;
 
@@ -78,11 +82,6 @@ public class Side implements DeepCopyable<Side> {
         probability *= mechanics.dispatchGate(context, gateId);
 
         return probability;
-    }
-    public void dispatchHook(HookReport report, BattleContext context, IRuleId event) {
-        
-        activeLoomian().dispatchHook(report, context, event);
-        mechanics.dispatchHook(report, context, event);
     }
 
 

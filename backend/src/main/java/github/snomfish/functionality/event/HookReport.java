@@ -3,9 +3,11 @@ package github.snomfish.functionality.event;
 import java.util.ArrayList;
 import java.util.List;
 
+import github.snomfish.domain.SideId;
+import github.snomfish.functionality._schematics.Conditions;
 import github.snomfish.functionality.branch.Branch;
-import github.snomfish.functionality.condition.ICondition;
 import github.snomfish.functionality.context.BattleContext;
+import github.snomfish.functionality.context.ContextUtil;
 import github.snomfish.functionality.event.ruleIds.IRuleId;
 
 import static github.snomfish.functionality.branch.BranchUtil.applyProbability;
@@ -13,55 +15,82 @@ import static github.snomfish.functionality.branch.BranchUtil.applyProbability;
 public class HookReport {
     
 
-    List<Branch<BattleContext>> trueOutcomes;
-    List<Hook> hooks;
+    public record Pair(
+		Hook hook,
+		SideId sideThatIsUser // relative to the original context
+	) {}
 
 
-    public HookReport(List<Branch<BattleContext>> trueOutcomes) {
-        this.trueOutcomes = trueOutcomes;
+	private SideId currentSideThatIsUser;
+	private PriorityList<Pair> collection;
+	
+	
+	public HookReport(SideId sideId) {
+		this.currentSideThatIsUser = sideId;
+		this.collection = new PriorityList<>();
+	}
+
+
+	public void setCurrentSideThatIsUser(SideId sideId) {
+		this.currentSideThatIsUser = sideId;
+	}
+
+
+	// adds a hook if it has the same triggering event as the one being dispatched
+	public void record(List<Hook> hooks, IRuleId ruleId) {
+		for (Hook hook : hooks) {
+			if (hook.events().contains(ruleId)) {
+				Pair pair = new Pair(hook, currentSideThatIsUser);
+				int priority = hook.priority();
+				
+				collection.add(pair, priority);
+			}
+		}
+	}
+
+
+
+
+    public List<Branch<BattleContext>> execute(
+        BattleContext context,
+        List<Branch<BattleContext>> noHookOutcomes
+    ) {
+        return recursiveExecute(
+            context,
+            1,
+            collection.values(),
+            noHookOutcomes
+        );
     }
+    private List<Branch<BattleContext>> recursiveExecute(
+        BattleContext context,
+        double leftoverProbability,
+        List<Pair> pairList,
+        List<Branch<BattleContext>> noHookOutcomes
+    ) {
+        if (leftoverProbability <= 0) return new ArrayList<>(); // means that all previous interceptors have covered all possible gamestates
+        if (pairList.size() == 0) return noHookOutcomes; // the failing function would go here
 
+        Pair pair = pairList.get(0);
+        pairList.remove(0);
+        Hook hook = pair.hook;
+        SideId sideId = pair.sideThatIsUser;
+        BattleContext outcome = ContextUtil.setFocus(context, sideId);
+        double probability = Conditions.resolve(outcome, hook.conditions());
 
-
-
-    // collects the hooks which have a correct event trigger
-    public void record(List<Hook> hooks, IRuleId event) { 
-        for (Hook hook : hooks) {
-            if (!hook.events().contains(event)) continue; // if the hook doesn't have the correct event trigger then ignore it
-
-            this.hooks.add(hook);            
-        }
-    }
-
-
-
-
-    // this does not work with shifting focus
-    // SHIT SHIT SHIT
-    public List<Branch<BattleContext>> execute(BattleContext context) {
         List<Branch<BattleContext>> outcomes = new ArrayList<>();
-        double probabilityToRunTrue = 1;
-
-        for (Hook hook : hooks) {
-            
-            double probability = 1;
-            for (ICondition condition : hook.conditions()) {
-                probability *= condition.execute(context);
-            }
-            double probabilityChunk = probabilityToRunTrue * probability;
-            probabilityToRunTrue -= probabilityChunk;
-            // the new probabilityToRunTrue is not the probability leftover
-            // the new probabiltiyToRunFalse (1-[]) is the probability given to the new effect
-            
-            if (probability > 0) {
-                outcomes.addAll(applyProbability(hook.effect().execute(context), probabilityChunk));
-            }
-            if (probabilityToRunTrue == 0) break; // early break incase an intercepter occurs 100% of the time
+        if (probability > 0) {
+            outcomes.addAll(applyProbability(hook.effect().execute(outcome), probability * leftoverProbability));
         }
-        if (probabilityToRunTrue > 0) {
-            outcomes.addAll(applyProbability(trueOutcomes, probabilityToRunTrue));
+        if (probability < 1) {
+            outcomes.addAll(recursiveExecute(
+                context,
+                (1-probability) * leftoverProbability,
+                pairList,
+                noHookOutcomes
+            ));
         }
 
-        return null;
+        return outcomes;
     }
 }
