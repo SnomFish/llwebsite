@@ -42,16 +42,23 @@ public class SwitchAction implements IAction {
 
 
     // getter
-    public ActionId id() {return ActionId.SWITCH;}
-    public int priority() {return priority;}
-    public Move move() {throw new RuntimeException("Attempted to get active move from a switch action");}
-    public int switchTarget() {return switchTarget;}
+    public ActionId id() 			{return ActionId.SWITCH;}
+    public int priority() 			{return priority;}
+    public Move move() 				{throw new RuntimeException("Attempted to get active move from a switch action");}
+    public int switchTarget() 		{return switchTarget;}
+	public boolean willSoulBurst() 	{return false;}
 
 
     // setter
-    public void setPriority(int priority) {this.priority = priority;}
-    public void setMove(Move move) {throw new RuntimeException("Attempted to set active move in a switch action");}
-    public void setSwitchTarget(int switchTarget) {this.switchTarget = switchTarget;}
+    public void setPriority(int priority) 				{this.priority = priority;}
+    public void setMove(Move move)                      {throw new RuntimeException("Attempted to set active move in a switch action");}
+    public void setSwitchTarget(int switchTarget)       {this.switchTarget = switchTarget;}
+	public void setWillSoulBurst(boolean willSoulBurst) {throw new RuntimeException("Attempted to set willSoulBurst from a no_action");}
+
+
+    public boolean isSelectable(BattleContext context) {
+        return true;
+    }
 
 
     public List<Branch<BattleContext>> execute(BattleContext context) {

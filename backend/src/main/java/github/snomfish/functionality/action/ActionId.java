@@ -4,5 +4,7 @@ public enum ActionId {
 	NO_ACTION,
 	MOVE,
 	SWITCH,
+	WAIT,
+	REST,
 	;
 }

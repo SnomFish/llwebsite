@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import github.snomfish.domain.item.ItemId;
+import github.snomfish.domain.move.MoveId;
+
 import static github.snomfish.domain.ability.AbilityId.*;
 import static github.snomfish.domain.move.MoveId.*;
 import static github.snomfish.domain.species.SpeciesId.*;
@@ -466,7 +469,9 @@ public class SpeciesRegistry {
 			.weight(111.76)
 			.height(74.0)
 			.learnset(List.of(BAIT, BRIAR_BLOCK, BUG_BITE, BULK_UP, BURROW, BUSH_WHACK, DAWDLE, DODGE, ENERGY_SURGE, GAIN_DRAIN, GNAW, LIFE_DRAIN, MAGNIFY, MEGA_CHOMP, MUDSLIDE, NATURES_FORCE, PARASITIZE, PESTER, PESTILENCE, PHEROBLAST, PHOTOSYNTHESIS, PINE_SHOT, POISON, SAFEGUARD, SAP_PLANT, SPARE, TAKE_ROOT, TAMP, THISTLE_SLASH, TRICKY_TACTICS, VICE_JAWS, VINE_LASH, WONDER_HERB))
-			.canEvolve(true)
+			.canEvolve(false)
+			.canSoulBurst(true)
+			.soulItem(ItemId.FLORABURST)
 		);
 		register(Species.build()
 			.id(FLORANT_FLYCHOMP)
@@ -478,7 +483,8 @@ public class SpeciesRegistry {
 			.weight(111.76)
 			.height(74.0)
 			.learnset(List.of(BAIT, BRIAR_BLOCK, BUG_BITE, BULK_UP, BURROW, BUSH_WHACK, DAWDLE, DODGE, ENERGY_SURGE, GAIN_DRAIN, GNAW, LIFE_DRAIN, MAGNIFY, MEGA_CHOMP, MUDSLIDE, NATURES_FORCE, PARASITIZE, PESTER, PESTILENCE, PHEROBLAST, PHOTOSYNTHESIS, PINE_SHOT, POISON, SAFEGUARD, SAP_PLANT, SPARE, TAKE_ROOT, TAMP, THISTLE_SLASH, TRICKY_TACTICS, VICE_JAWS, VINE_LASH, WONDER_HERB))
-			.canEvolve(true)
+			.canEvolve(false)
+			.soulMove(MoveId.CARNIVOROUS_SNAP)
 		);
 		register(Species.build()
 			.id(GRUBBY)
@@ -514,7 +520,7 @@ public class SpeciesRegistry {
 			.weight(165.1)
 			.height(83.0)
 			.learnset(List.of(AIR_WHIP, BANEFUL_BASH, BRACE, BUG_BITE, DODGE, DOUBLE_STING, DRUDGE, GNAW, LIFE_DRAIN, MUCK_BLAST, PARASITIZE, PESTILENCE, POISON_BARBS, PROVOKE, ROUGH_UP, SLIME, SPARE, STARE, STING, VENOM_CHOMP, WING_SLAP))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(TERRACLAW)
@@ -526,7 +532,7 @@ public class SpeciesRegistry {
 			.weight(111.76)
 			.height(73.0)
 			.learnset(List.of(BANEFUL_BASH, BARBS, BODY_SLAM, BRACE, BUG_BITE, BULK_UP, CLAMP_CLAW, CYCLONE_SLAM, DODGE, DOUBLE_BEAT, EERIE_STARE, GNAW, HEADBUTT, MEGA_CHOMP, MUD_SPATTER, PARASITIZE, PESTILENCE, PROVOKE, ROUGH_UP, SPARE, STARE, STING, VENOM_CHOMP, VITAL_JAB, WING_SLAP))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(KLEPTYKE)
@@ -550,7 +556,7 @@ public class SpeciesRegistry {
 			.weight(121.92)
 			.height(67.0)
 			.learnset(List.of(BAG_OF_TRICKS, BARBS, BARTER, BODY_SLAM, CHARADE, CHASE_DOWN, CHOMP, DARK_SURGE, DAWDLE, DODGE, GNARLY_GASH, HOP_KICK, ICICLE_TRAP, ILL_WILL, MEGA_CHOMP, MEGA_PUNCH, NAB, PILFER, POUNCE, PREEMPTIVE_STRIKE, PROVOKE, QUICK_POUNCE, RANT, ROGUE_ASSAULT, SCAPEGOAT, SHARPEN, SLAP_DOWN, SPARE, TRICKY_TACTICS))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(BABORE)
@@ -574,7 +580,7 @@ public class SpeciesRegistry {
 			.weight(124.46)
 			.height(118.0)
 			.learnset(List.of(AIM, BODY_CRASH, BODY_SLAM, BOULDER_BLAST, BULK_UP, BURROW, CHOMP, DODGE, EARTHQUAKE, HEADBUTT, MEGA_CHOMP, MUCK_BUCK, MUD_SPATTER, POUNCE, QUICKSAND, QUICK_POUNCE, RAGING_TACKLE, ROGUE_ASSAULT))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(GEKLOW)
@@ -598,7 +604,7 @@ public class SpeciesRegistry {
 			.weight(129.54)
 			.height(126.0)
 			.learnset(List.of(DAZZLING_BARRAGE, DODGE, EARTHQUAKE, ENERGIZE, EXAMINE, FLASH_N_FLEE, GAMMA_PULSE, JOLT, LANDSLIDE, LIGHT_DASH, LUSTER_LOOT, MAGNIFY, MUDSLIDE, REJUVENATE, SHINE, SPARE, STARE, STATIC_SHOCK, TASE, THUNDERSTRIKE, THUNDER_BLAST, THUNDER_CRASH, ZIP_ZAP))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(SLUGLING)
@@ -634,7 +640,9 @@ public class SpeciesRegistry {
 			.weight(236.22)
 			.height(287.0)
 			.learnset(List.of(BRIAR_BLOCK, DAWDLE, DODGE, EARTHQUAKE, LANDSLIDE, LEAF_BARRAGE, LIFE_DRAIN, MUDSLIDE, NATURES_FORCE, PEACE_OF_MIND, PETAL_PUMMEL, PHOTOSYNTHESIS, PINE_SHOT, POISON, RETURN_TO_SENDER, SAP_PLANT, SLIME, SPARE, STRATAGEM, STRIKE, TAKE_ROOT, TAMP, TRIP_ROOT))
-			.canEvolve(true)
+			.canEvolve(false)
+			.canSoulBurst(true)
+			.soulItem(ItemId.GASTROBURST)
 		);
 		register(Species.build()
 			.id(GASTROAK_TERRAFORM)
@@ -646,7 +654,8 @@ public class SpeciesRegistry {
 			.weight(236.22)
 			.height(287.0)
 			.learnset(List.of(BRIAR_BLOCK, DAWDLE, DODGE, EARTHQUAKE, LANDSLIDE, LEAF_BARRAGE, LIFE_DRAIN, MUDSLIDE, NATURES_FORCE, PEACE_OF_MIND, PETAL_PUMMEL, PHOTOSYNTHESIS, PINE_SHOT, POISON, RETURN_TO_SENDER, SAP_PLANT, SLIME, SPARE, STRATAGEM, STRIKE, TAKE_ROOT, TAMP, TRIP_ROOT))
-			.canEvolve(true)
+			.canEvolve(false)
+			.soulMove(MoveId.FLORA_BLAST)
 		);
 		register(Species.build()
 			.id(KABUNGA)
@@ -670,7 +679,7 @@ public class SpeciesRegistry {
 			.weight(215.9)
 			.height(260.0)
 			.learnset(List.of(BAIT, BARTER, BEQUEATH, BRACE, BUSH_WHACK, COCONUT_BOMB, DODGE, HEALTH_GIFT, HERBAL_REMEDY, HYPNOTIZE, ILL_WILL, LIFE_DRAIN, MUCK_BLAST, MUDSLIDE, NATURES_FORCE, PETAL_PUMMEL, PHOTOSYNTHESIS, PINE_SHOT, POISON, PROVOKE, REJUVENATE, SAP_PLANT, SCAPEGOAT, SPARE, STRIKE, TEAR_DOWN, TOXIC_SPORES, WONDER_HERB))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(CHARTIKI)
@@ -682,7 +691,7 @@ public class SpeciesRegistry {
 			.weight(254.0)
 			.height(180.0)
 			.learnset(List.of(BARTER, BLAZE_PUNCH, BRACE, BRIAR_BLOCK, BURN_UP, BUSH_WHACK, COCONUT_BOMB, DODGE, FIRE_BREATH, FLARE_BLAST, ILL_WILL, LIFE_DRAIN, MUCK_BLAST, NATURES_FORCE, PETAL_PUMMEL, PHOTOSYNTHESIS, PINE_SHOT, PROVOKE, REJUVENATE, SCAPEGOAT, SPARE, STRIKE, TEAR_DOWN, TOXIC_SPORES, WONDER_HERB))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(KABUNGA_H)
@@ -706,7 +715,7 @@ public class SpeciesRegistry {
 			.weight(187.96)
 			.height(245.0)
 			.learnset(List.of(BAG_OF_TRICKS, BANE_OF_HASTE, BARTER, BRACE, BRAINWASH, DISSIPATE, DODGE, FLABBERGAST, FUNGUS_CURSE, GAMMA_PULSE, ILL_WILL, LIFE_DRAIN, LUSTER_LOOT, MUCK_BLAST, NATURES_FORCE, PEACE_OF_MIND, PETAL_PUMMEL, PHOTOSYNTHESIS, PINE_SHOT, PROVOKE, PSYCHO_BLAST, REJUVENATE, SCAPEGOAT, SPARE, STRIKE, TEAR_DOWN, THUNDERSTRIKE, TOXIC_SPORES, ZIP_ZAP))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(SHAWCHI)
@@ -718,7 +727,7 @@ public class SpeciesRegistry {
 			.weight(114.3)
 			.height(42.0)
 			.learnset(List.of(AIM, BAG_OF_TRICKS, BANE_OF_HASTE, BARTER, BRAINWASH, DAWDLE, DISSIPATE, DODGE, ELEMENTAL_BURST, FLABBERGAST, FOUL_CHANT, FROST_BEAM, HEALTH_GIFT, MINDS_EYE, PEACE_OF_MIND, PSYCHO_BLAST, PYROKINESIS, QUICK_POUNCE, SPARE, SWIPE, TEAR_DOWN, THUNDERSTRIKE))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(RAKRAWLA)
@@ -742,7 +751,7 @@ public class SpeciesRegistry {
 			.weight(154.94)
 			.height(234.0)
 			.learnset(List.of(BLAZE_CHOMP, BODY_SLAM, BOULDER_BLAST, BURROW, CHARRED_CLAWS, CHASE_DOWN, CHOMP, DODGE, EARTHQUAKE, EXAMINE, GNAW, HARROW, ILL_WILL, MUDSLIDE, MUD_SPATTER, PHANTOM_SLASH, PROVOKE, RAGING_TACKLE, REJUVENATE, SAFEGUARD, SHARPEN, SLASH, SPARE, SWAT, SWIPE, TALENT_TRADE, THUNDER_CHOMP))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(GUMPOD)
@@ -766,7 +775,7 @@ public class SpeciesRegistry {
 			.weight(157.48)
 			.height(230.0)
 			.learnset(List.of(BATTERING_RAM, BRACE, BURN_UP, DODGE, EERIE_STARE, FROST_BEAM, GEYSER, HYDRO_SLASH, MAROON, MUDSLIDE, SCAPEGOAT, SLEET_SHOT, SLUMBER, SOFT_WATER, SPARE, SPRAY, TEAR_DOWN, TSUNAMI, WATER_BOMB))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(PHANCUB)
@@ -802,7 +811,7 @@ public class SpeciesRegistry {
 			.weight(203.2)
 			.height(210.0)
 			.learnset(List.of(BARBS, BULK_UP, CHASE_DOWN, DODGE, FINAL_RUSE, HARROW, HOP_KICK, PEP_JAB, PHANTOM_SLASH, PROVOKE, PUNCH, QUICK_PUNCH, SHADOWBOX, SHADOW_SPRINT, SHARPEN, SLAP_DOWN, SLASH, SOUL_STORM, SPARE, SPECTRAL_BURST, STARE, STARTLE, STEEL_TRAP))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(URSNAC)
@@ -814,7 +823,7 @@ public class SpeciesRegistry {
 			.weight(187.96)
 			.height(160.0)
 			.learnset(List.of(BAFFLE, CHASE_DOWN, DODGE, FINAL_RUSE, GAIN_DRAIN, HEART_BREAK, PEP_JAB, PHANTOM_SLASH, PUNCH, QUICK_PUNCH, ROUGH_UP, SHADOW_SPRINT, SHARPEN, SLAP_DOWN, SLASH, SPARE, SPECTRAL_BURST, STARE, STARTLE))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(WHISPUP)
@@ -838,7 +847,7 @@ public class SpeciesRegistry {
 			.weight(149.86)
 			.height(50.0)
 			.learnset(List.of(ACCELERATE, BLAZE_CHOMP, DARK_SURGE, DODGE, FADE_AWAY, FINAL_RUSE, FIRE_BREATH, FLARE_BLAST, GHOSTLY_HOWL, GNAW, HARROW, MEGA_CHOMP, PHANTOM_BLAST, PHANTOM_SLASH, POWER_FOCUS, SHADOW_SPRINT, SINGE, SOUL_STORM, SPARE, SPECTRAL_BURST, STARE, STARTLE, STRETCH))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(SKILAVA)
@@ -874,7 +883,9 @@ public class SpeciesRegistry {
 			.weight(266.7)
 			.height(226.0)
 			.learnset(List.of(BLAZE_CHOMP, BLAZE_OF_GLORY, BLAZE_RUSH, BRAWN_BOOST, DARK_SURGE, DODGE, EARTHQUAKE, FIRE_BREATH, FIRE_SLAM, GNAW, GROWL, LANDSLIDE, LAVA_SLASH, MAGMA_BLOCK, MAGNIFY, MUDSLIDE, MUD_SPATTER, PHANTOM_SLASH, POWER_FOCUS, PROVOKE, QUICK_POUNCE, RAGING_FLAME, SINGE, SLASH, SPARE, STRETCH, TEAR_DOWN))
-			.canEvolve(true)
+			.canEvolve(false)
+			.canSoulBurst(true)
+			.soulItem(ItemId.ERUPTIBURST)
 		);
 		register(Species.build()
 			.id(ERUPTIDON_MAGMADIRE)
@@ -886,7 +897,8 @@ public class SpeciesRegistry {
 			.weight(266.7)
 			.height(226.0)
 			.learnset(List.of(BLAZE_CHOMP, BLAZE_OF_GLORY, BLAZE_RUSH, BRAWN_BOOST, DARK_SURGE, DODGE, EARTHQUAKE, FIRE_BREATH, FIRE_SLAM, GNAW, GROWL, LANDSLIDE, LAVA_SLASH, MAGMA_BLOCK, MAGNIFY, MUDSLIDE, MUD_SPATTER, PHANTOM_SLASH, POWER_FOCUS, PROVOKE, QUICK_POUNCE, RAGING_FLAME, SINGE, SLASH, SPARE, STRETCH, TEAR_DOWN))
-			.canEvolve(true)
+			.canEvolve(false)
+			.soulMove(MoveId.HELLSTORM)
 		);
 		register(Species.build()
 			.id(CRAYTAL)
@@ -910,7 +922,9 @@ public class SpeciesRegistry {
 			.weight(205.74)
 			.height(343.0)
 			.learnset(List.of(BLAZE_OF_GLORY, BLAZE_RUSH, BRACE, BRAWN_BOOST, CHARRED_CLAWS, DARK_SURGE, DODGE, EERIE_STARE, FIRE_BREATH, FIRE_SLAM, FLARE_BLAST, HIGH_PITCH_SCREECH, MAGMA_BLOCK, MAGMA_BURST, MUDSLIDE, MUD_SPATTER, PHANTOM_SLASH, POWER_FOCUS, RAGING_FLAME, REJUVENATE, SCAPEGOAT, SINGE, SLASH, SPARE, SPECTRAL_BURST, SWIPE, TEAR_DOWN, TRICKY_TACTICS))
-			.canEvolve(true)
+			.canEvolve(false)
+			.canSoulBurst(true)
+			.soulItem(ItemId.KRAKABURST)
 		);
 		register(Species.build()
 			.id(KRAKALOA_LAVAFIEND)
@@ -922,7 +936,8 @@ public class SpeciesRegistry {
 			.weight(205.74)
 			.height(343.0)
 			.learnset(List.of(BLAZE_OF_GLORY, BLAZE_RUSH, BRACE, BRAWN_BOOST, CHARRED_CLAWS, DARK_SURGE, DODGE, EERIE_STARE, FIRE_BREATH, FIRE_SLAM, FLARE_BLAST, HIGH_PITCH_SCREECH, MAGMA_BLOCK, MAGMA_BURST, MUDSLIDE, MUD_SPATTER, PHANTOM_SLASH, POWER_FOCUS, RAGING_FLAME, REJUVENATE, SCAPEGOAT, SINGE, SLASH, SPARE, SPECTRAL_BURST, SWIPE, TEAR_DOWN, TRICKY_TACTICS))
-			.canEvolve(true)
+			.canEvolve(false)
+			.soulMove(MoveId.ERUPTION)
 		);
 		register(Species.build()
 			.id(VOLKALOA)
@@ -934,7 +949,7 @@ public class SpeciesRegistry {
 			.weight(198.12)
 			.height(238.0)
 			.learnset(List.of(BLAZE_CHOMP, BLAZE_OF_GLORY, BLAZE_PUNCH, BLAZE_RUSH, BRACE, BRAWN_BOOST, CHARRED_CLAWS, COCONUT_BOMB, DODGE, FIRE_BREATH, FIRE_SLAM, FLARE_BLAST, HIGH_PITCH_SCREECH, ILL_WILL, MUDSLIDE, MUD_SPATTER, PHANTOM_SLASH, POWER_FOCUS, PRIMAL_SLASH, RAGING_FLAME, REJUVENATE, SAVAGE_GREED, SINGE, SLASH, SPARE, SWIPE, TEAR_DOWN, TRICKY_TACTICS))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(CRAYTAL_C)
@@ -958,7 +973,7 @@ public class SpeciesRegistry {
 			.weight(205.74)
 			.height(149.0)
 			.learnset(List.of(BRACE, BRAWN_BOOST, BRIAR_BLOCK, BUSH_WHACK, DODGE, EARTHQUAKE, FLURRY, FROST_BEAM, FUNGUS_CURSE, HYPNOTIZE, ICE_HAMMER, ICICLE_TRAP, ILL_WILL, LEAF_BARRAGE, PETAL_PUMMEL, RAGING_TACKLE, REJUVENATE, SAP_PLANT, SNOWDOZER, SPARE, THISTLE_SLASH, TIMBER_THRASH, TRICKY_TACTICS, VINE_LASH))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(IGNEOL)
@@ -994,7 +1009,7 @@ public class SpeciesRegistry {
 			.weight(256.54)
 			.height(295.0)
 			.learnset(List.of(BARBS, BEASTS_SLUMBER, BODY_CRASH, BODY_SLAM, BRACE, BURROW, DINO_CLAWS, DODGE, DRUDGE, EARTHQUAKE, GNAW, HEADBUTT, MEGA_CHOMP, MUCK_BUCK, MUDSLIDE, MUD_SPATTER, OUTBURST, POWER_FOCUS, PRIMAL_SLASH, PROVOKE, RAGING_TACKLE, SCAPEGOAT, SHARPEN, SPARE))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(CAFNOTE_M)
@@ -1030,7 +1045,7 @@ public class SpeciesRegistry {
 			.weight(177.8)
 			.height(414.0)
 			.learnset(List.of(BATTLE_CHIME, BATTLE_HORN, BODY_SLAM, DODGE, DRIVING_FORCE, EARTHQUAKE, HEADBUTT, MEGA_CHOMP, PROVOKE, QUICK_POUNCE, RAGING_TACKLE, ROGUE_ASSAULT, SPARE, STARE, STRETCH, STRIKE, TONE_BARRIER))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(MOOTUNE)
@@ -1042,7 +1057,7 @@ public class SpeciesRegistry {
 			.weight(172.72)
 			.height(324.0)
 			.learnset(List.of(DISSONANT_CHORD, DODGE, GAMMA_PULSE, HARMONIOUS_CHORD, HULLABALOO, MAGNIFY, PEACE_OF_MIND, PROVOKE, QUICK_POUNCE, RAGING_HOWL, REPEATING_TUNE, RESONATE, SPARE, STARE, STRETCH, STRIKE, TEASE, TEASE))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(GOBBIDEMIC)
@@ -1054,7 +1069,7 @@ public class SpeciesRegistry {
 			.weight(101.6)
 			.height(95.0)
 			.learnset(List.of(AIR_BLADE, BAIT, BARBS, CORRODE, DODGE, FAR_ENCHANTMENT, GOBBLE_GOOP, GUST, HEALTH_GIFT, HYPNOTIZE, MUCK_BLAST, NEAR_ENCHANTMENT, PECK, POISON, POISON_BARBS, PROVOKE, SLIME, SPARE, SQUAWK, STING, STRETCH, TEAR_DOWN, TRIP_ROOT, WONDER_HERB))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(ICIGOOL)
@@ -1066,7 +1081,9 @@ public class SpeciesRegistry {
 			.weight(109.22)
 			.height(15.0)
 			.learnset(List.of(BAFFLE, BAG_OF_TRICKS, BANE_OF_HASTE, BARBS, BARTER, BLAZE_CHOMP, CHILLY_CHOMP, CHOMP, DARK_SURGE, DODGE, FADE_AWAY, FROST_BEAM, GAIN_DRAIN, HEALTH_GIFT, HYPNOTIZE, ICE_HAMMER, ICICLE_FANGS, ICICLE_TRAP, ILL_WILL, IMPERSONATE, MEGA_CHOMP, PHANTOM_SLASH, REJUVENATE, SNOWDOZER, SOUL_STORM, SPARE, SPECTRAL_BURST, STARTLE, THUNDER_CHOMP, TRICKY_TACTICS))
-			.canEvolve(true)
+			.canEvolve(false)
+			.canSoulBurst(true)
+			.soulItem(ItemId.ICIBURST)
 		);
 		register(Species.build()
 			.id(ICIGOOL_INCARNATE)
@@ -1078,7 +1095,8 @@ public class SpeciesRegistry {
 			.weight(109.22)
 			.height(15.0)
 			.learnset(List.of(BAFFLE, BAG_OF_TRICKS, BANE_OF_HASTE, BARBS, BARTER, BLAZE_CHOMP, CHILLY_CHOMP, CHOMP, DARK_SURGE, DODGE, FADE_AWAY, FROST_BEAM, GAIN_DRAIN, HEALTH_GIFT, HYPNOTIZE, ICE_HAMMER, ICICLE_FANGS, ICICLE_TRAP, ILL_WILL, IMPERSONATE, MEGA_CHOMP, PHANTOM_SLASH, REJUVENATE, SNOWDOZER, SOUL_STORM, SPARE, SPECTRAL_BURST, STARTLE, THUNDER_CHOMP, TRICKY_TACTICS))
-			.canEvolve(true)
+			.canEvolve(false)
+			.soulMove(MoveId.FRIGHTFUL_SUPRISE)
 		);
 		register(Species.build()
 			.id(PYRAMIND)
@@ -1102,7 +1120,7 @@ public class SpeciesRegistry {
 			.weight(218.44)
 			.height(367.0)
 			.learnset(List.of(BANE_OF_HASTE, BOULDER_BLAST, BRAINWASH, BULK_UP, CEREBRAL_SLASH, CLIMATE_CANNON, DARK_SURGE, DEJA_VU, DISSIPATE, DODGE, DRACO_BEAM, DRUDGE, EARTHQUAKE, FLABBERGAST, GAIN_DRAIN, HARROW, HASTEN, HOP_KICK, HULLABALOO, JUDGEMENT, LANDSLIDE, MEMORIZE, MINDS_EYE, MIND_DRAIN, MUDSLIDE, MUD_SPATTER, OUTBURST, PEACE_OF_MIND, PHANTOM_BLAST, PHANTOM_SLASH, PROVOKE, PSYCHO_BLAST, RANT, RETURN_TO_SENDER, ROCK_SLIDE, ROGUE_ASSAULT, SAFEGUARD, SHREWD_BLAST, SPARE, SPECTRAL_BURST, SPECTRAL_BURST, TALENT_TRADE, TEAR_DOWN, TRIBUTE))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(BURROACH)
@@ -1126,7 +1144,7 @@ public class SpeciesRegistry {
 			.weight(165.1)
 			.height(127.0)
 			.learnset(List.of(BARBS, BATTERING_RAM, BODY_CRASH, BUG_BITE, BULK_UP, BURROW, CLAY_SLAP, DODGE, EARTHQUAKE, EERIE_STARE, GNAW, HEADBUTT, MOLT, MUD_SPATTER, PARASITIZE, POISON, PROVOKE, SLAP_DOWN, SPARE, STRETCH, VENOM_CHOMP))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(WHIMPOR)
@@ -1150,7 +1168,9 @@ public class SpeciesRegistry {
 			.weight(228.6)
 			.height(487.0)
 			.learnset(List.of(AIR_BLADE, AIR_SHOT, BODY_SLAM, BRACE, CYCLONE_SLAM, DISSONANT_CHORD, DODGE, ENERGY_SURGE, HEAVY_BASH, JET_STREAM, JUMP_START, MAGNIFY, METAL_BLAST, METAL_SHRIEK, METAL_SWIPES, PERCH, REFLECTION_BURST, SECOND_WIND, SPARE, STUN, TAIL_SLAP, TEAR_DOWN))
-			.canEvolve(true)
+			.canEvolve(false)
+			.canSoulBurst(true)
+			.soulItem(ItemId.STRATBURST)
 		);
 		register(Species.build()
 			.id(STRATUSOAR_JETWING)
@@ -1162,7 +1182,8 @@ public class SpeciesRegistry {
 			.weight(228.6)
 			.height(487.0)
 			.learnset(List.of(AIR_BLADE, AIR_SHOT, BODY_SLAM, BRACE, CYCLONE_SLAM, DISSONANT_CHORD, DODGE, ENERGY_SURGE, HEAVY_BASH, JET_STREAM, JUMP_START, MAGNIFY, METAL_BLAST, METAL_SHRIEK, METAL_SWIPES, PERCH, REFLECTION_BURST, SECOND_WIND, SPARE, STUN, TAIL_SLAP, TEAR_DOWN))
-			.canEvolve(true)
+			.canEvolve(false)
+			.soulMove(MoveId.AIRSTRIKE)
 		);
 		register(Species.build()
 			.id(TERRITI)
@@ -1186,7 +1207,7 @@ public class SpeciesRegistry {
 			.weight(203.2)
 			.height(396.0)
 			.learnset(List.of(BAG_OF_TRICKS, BARTER, BASH, CANISTER_BURST, CLIMATE_CANNON, CORRODE, DAWDLE, DODGE, DOWNPOUR, FAR_ENCHANTMENT, GALE_FORCE, GRAFFITI, HEAVY_BASH, HOP_KICK, HYPNOTIZE, MEGA_PUNCH, METAL_BLAST, MUCK_BLAST, NEAR_ENCHANTMENT, PAINT_SHOWER, POISON, POWER_FOCUS, PROVOKE, PUNCH, SPARE, SQUARE_ONE, STEEL_CRUSHER, STUN, TRICKY_TACTICS))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(OPERAPTOR)
@@ -1222,7 +1243,7 @@ public class SpeciesRegistry {
 			.weight(299.72)
 			.height(892.0)
 			.learnset(List.of(BODY_SLAM, BURROW, CHOMP, CLAMP, CLAY_SLAP, COMPLETE_DEMOLITION, DODGE, EARTHQUAKE, GNAW, HEADBUTT, HEAVY_BASH, METAL_SHRIEK, MUD_SPATTER, POWER_FOCUS, QUICKSAND, SHARPEN, SLUMBER, SPARE, STEEL_CRUSHER, TEAR_DOWN, THUNDER_CHOMP, VICE_JAWS))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(CHOMPACTOR)
@@ -1246,7 +1267,7 @@ public class SpeciesRegistry {
 			.weight(200.66)
 			.height(425.0)
 			.learnset(List.of(ACCELERATE, AIM, AQUA_JAWS, BARBS, BASH, BLAZE_CHOMP, BULK_UP, CHILLY_CHOMP, CHOMP, CLEAN_UP, DODGE, DOUBLE_WHACK, GNAW, HEAVY_BASH, MEGA_CHOMP, METAL_SWIPES, OIL_LEAK, POISON, QUICK_PUNCH, RECYCLE, SPARE, STEEL_CRUSHER, THUNDER_CHOMP, VICE_JAWS))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(SCORB)
@@ -1282,7 +1303,7 @@ public class SpeciesRegistry {
 			.weight(187.96)
 			.height(148.0)
 			.learnset(List.of(ACCELERATE, BASH, DEEP_FREEZE, DODGE, EERIE_STARE, EXAMINE, FIRE_BREATH, FIRE_SLAM, FLURRY, FROST_BEAM, HEAVY_BASH, JUMP_START, METAL_BLAST, METAL_SHRIEK, MINDS_EYE, PRECISION_BOLT, RAGING_FLAME, REFLECTION_BURST, SINGE, SLEET_SHOT, SNOWDOZER, SPARE, STATIC_SHOCK, STEEL_CRUSHER, THUNDERSTRIKE, THUNDER_SLAM))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(POOCHROL)
@@ -1306,7 +1327,7 @@ public class SpeciesRegistry {
 			.weight(137.16)
 			.height(94.0)
 			.learnset(List.of(BLAZE_CHOMP, CHASE_DOWN, CHILLY_CHOMP, CHOMP, DODGE, GROWL, HEAVY_BASH, MEGA_CHOMP, METAL_SWIPES, MUD_SPATTER, PRECISION_BOLT, PROVOKE, QUICK_POUNCE, ROUGH_UP, SHARPEN, SPARE, STATIC_SHOCK, TASE, THUNDERSTRIKE, THUNDER_CHOMP, VICE_JAWS, ZIP_ZAP))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(GOPPIE)
@@ -1330,7 +1351,7 @@ public class SpeciesRegistry {
 			.weight(251.46)
 			.height(138.0)
 			.learnset(List.of(BODY_SLAM, CHOMP, DARK_SURGE, DAWDLE, DODGE, EERIE_STARE, FLURRY, FROST_BEAM, HYDRO_BLAST, HYDRO_SLASH, ILL_WILL, MAGNIFY, MAROON, PLUNGE, RANT, REJUVENATE, SLEET_SHOT, SPARE, SPRAY, STARE, STRIKE, TSUNAMI, WATER_BOMB, ZIP_ZAP))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(PYKE)
@@ -1354,7 +1375,9 @@ public class SpeciesRegistry {
 			.weight(193.04)
 			.height(76.0)
 			.learnset(List.of(AQUA_JAWS, BAFFLE, BRACE, BULK_UP, CHARADE, CHILLY_CHOMP, CHOMP, CONFOUND, DODGE, DRUDGE, FADE_AWAY, FINAL_RUSE, HARROW, HYDRO_BLAST, ICICLE_TRAP, ILL_WILL, MAROON, MEGA_CHOMP, OUTBURST, PHANTOM_SLASH, PIERCING_DRIVE, PLUNGE, PRIMAL_SLASH, PROVOKE, SHADOW_SPRINT, SOUL_STORM, SPARE, SPECTRAL_BURST, SPRAY, SQUARE_ONE, TAIL_SLAP, TEASE, TSUNAMI, WATER_BOMB, WAVE_WRECKER))
-			.canEvolve(true)
+			.canEvolve(false)
+			.canSoulBurst(true)
+			.soulItem(ItemId.SKELIBURST)
 		);
 		register(Species.build()
 			.id(SKELIC_SEASCOURGE)
@@ -1366,7 +1389,8 @@ public class SpeciesRegistry {
 			.weight(193.04)
 			.height(76.0)
 			.learnset(List.of(AQUA_JAWS, BAFFLE, BRACE, BULK_UP, CHARADE, CHILLY_CHOMP, CHOMP, CONFOUND, DODGE, DRUDGE, FADE_AWAY, FINAL_RUSE, HARROW, HYDRO_BLAST, ICICLE_TRAP, ILL_WILL, MAROON, MEGA_CHOMP, OUTBURST, PHANTOM_SLASH, PIERCING_DRIVE, PLUNGE, PRIMAL_SLASH, PROVOKE, SHADOW_SPRINT, SOUL_STORM, SPARE, SPECTRAL_BURST, SPRAY, SQUARE_ONE, TAIL_SLAP, TEASE, TSUNAMI, WATER_BOMB, WAVE_WRECKER))
-			.canEvolve(true)
+			.canEvolve(false)
+			.soulMove(MoveId.HEEDLESS_RUSH)
 		);
 		register(Species.build()
 			.id(ZALEO)
@@ -1390,7 +1414,9 @@ public class SpeciesRegistry {
 			.weight(154.94)
 			.height(137.0)
 			.learnset(List.of(BAMBOOZLE, BANE_OF_HASTE, BRAWN_BOOST, BULK_UP, CLAY_SLAP, DINO_CLAWS, DODGE, EARTHQUAKE, ILL_WILL, JUMP_START, MUD_SPATTER, POWER_SIPHON, PRECISION_BOLT, PRIMAL_SLASH, SHARPEN, SHREWD_BLAST, SPARE, STATIC_SHOCK, TASE, THUNDERSTRIKE, THUNDER_CLAP, THUNDER_CRASH, THUNDER_SLAM, ZIP_ZAP))
-			.canEvolve(true)
+			.canEvolve(false)
+			.canSoulBurst(true)
+			.soulItem(ItemId.JOLTBURST)
 		);
 		register(Species.build()
 			.id(JOLTOOTH_THUNDERKING)
@@ -1402,7 +1428,8 @@ public class SpeciesRegistry {
 			.weight(154.94)
 			.height(137.0)
 			.learnset(List.of(BAMBOOZLE, BANE_OF_HASTE, BRAWN_BOOST, BULK_UP, CLAY_SLAP, DINO_CLAWS, DODGE, EARTHQUAKE, ILL_WILL, JUMP_START, MUD_SPATTER, POWER_SIPHON, PRECISION_BOLT, PRIMAL_SLASH, SHARPEN, SHREWD_BLAST, SPARE, STATIC_SHOCK, TASE, THUNDERSTRIKE, THUNDER_CLAP, THUNDER_CRASH, THUNDER_SLAM, ZIP_ZAP))
-			.canEvolve(true)
+			.canEvolve(false)
+			.soulMove(MoveId.FULGER_FANGS)
 		);
 		register(Species.build()
 			.id(DOBO)
@@ -1426,7 +1453,7 @@ public class SpeciesRegistry {
 			.weight(187.96)
 			.height(87.0)
 			.learnset(List.of(AIR_BLADE, BANE_OF_HASTE, BEQUEATH, BURN_UP, CONFOUND, DAWDLE, DISSIPATE, DODGE, DRACO_BEAM, FIRE_BREATH, FLARE_BLAST, JET_STREAM, MAGNIFY, MUD_SPATTER, PEACE_OF_MIND, PECK, PHOENIX_FLAME, POWER_FOCUS, PRIMAL_SLASH, PROVOKE, PYROKINESIS, RAGING_FLAME, RETURN_TO_SENDER, SHREWD_BLAST, SINGE, SPARE, SQUAWK, WONDER_HERB))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(KYOGO)
@@ -1450,7 +1477,7 @@ public class SpeciesRegistry {
 			.weight(132.08)
 			.height(68.0)
 			.learnset(List.of(AUGMENT, BAFFLE, BARBS, BARTER, BULK_UP, CHOMP, CHOP, DARK_SURGE, DINO_CLAWS, DODGE, DRACO_BEAM, EGG_LOB, GNAW, HEADBUTT, ILL_WILL, MEGA_PUNCH, MUD_SPATTER, PILFER, POISON_BARBS, POWER_FOCUS, PRIMAL_SLASH, PROVOKE, SCAPEGOAT, SCAVENGE, SLAP_DOWN, SPARE, STRETCH, TEASE, VENOM_CHOMP))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(WILEDILE)
@@ -1474,7 +1501,7 @@ public class SpeciesRegistry {
 			.weight(261.62)
 			.height(224.0)
 			.learnset(List.of(AQUA_JAWS, BARBS, BOOM_BASH, BULK_UP, BUSH_WHACK, CHOMP, DODGE, DRIVING_FORCE, EXAMINE, FUNGUS_CURSE, GNARLY_GASH, GNAW, GROWL, HYDRO_SLASH, ILL_WILL, LANDSLIDE, LIFE_DRAIN, MAROON, MARSH_WAVE, MEGA_CHOMP, MUDSLIDE, MUD_SPATTER, NATURES_FORCE, PETAL_PUMMEL, PHOTOSYNTHESIS, PROVOKE, SAP_PLANT, SLAP_DOWN, SPARE, SPRAY, TEAR_DOWN, THISTLE_SLASH, TSUNAMI, VINE_LASH, WAVE_WRECKER))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(AMPOLE)
@@ -1510,7 +1537,7 @@ public class SpeciesRegistry {
 			.weight(142.24)
 			.height(122.0)
 			.learnset(List.of(CEREBRAL_SLASH, DEJA_VU, DODGE, ELECTRO_PUNCH, FLABBERGAST, HYPNOTIZE, ILL_WILL, JUDGEMENT, JUMP_START, MEGA_PUNCH, PEACE_OF_MIND, POWER_FOCUS, PRECISION_BOLT, PSYCHAL_SLAP, PSYCHO_BLAST, QUICK_POUNCE, SLAP_DOWN, SPARE, STATIC_SHOCK, STRETCH, STRIKE, TASE, THUNDERSTRIKE, THUNDER_BLAST, THUNDER_SLAM, ZIP_ZAP))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(PWUFF)
@@ -1534,7 +1561,7 @@ public class SpeciesRegistry {
 			.weight(73.66)
 			.height(31.0)
 			.learnset(List.of(AQUA_JAWS, BANEFUL_BASH, BONE_CRUNCH, BRACE, BRAWN_BOOST, BULK_UP, CHILLY_CHOMP, DODGE, FLURRY, HEADBUTT, HYDRO_SLASH, ICICLE_TRAP, ILL_WILL, MAROON, POISON, POWER_FOCUS, REJUVENATE, SHARPEN, SPARE, SPRAY, STRETCH, TAIL_SLAP, TEASE, TSUNAMI, VENOM_CHOMP, WATER_BOMB, WAVE_WRECKER))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(BARBLAST)
@@ -1546,7 +1573,7 @@ public class SpeciesRegistry {
 			.weight(76.2)
 			.height(74.0)
 			.learnset(List.of(AQUA_JAWS, BANEFUL_BASH, BRACE, BRAWN_BOOST, CHILLY_CHOMP, DODGE, FLURRY, HEADBUTT, HYDRO_SLASH, ICICLE_TRAP, ILL_WILL, MAROON, POISON, POWER_FOCUS, REJUVENATE, SHARPEN, SPARE, SPRAY, STRETCH, TAIL_SLAP, TEASE, TOXIBLAST, TSUNAMI, VENOM_CHOMP, WATER_BOMB, WAVE_WRECKER))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(SWIMP)
@@ -1582,7 +1609,7 @@ public class SpeciesRegistry {
 			.weight(165.1)
 			.height(61.0)
 			.learnset(List.of(AQUA_JAWS, BARTER, BULK_UP, CHARADE, CHILLY_CHOMP, CHOMP, CLAY_SLAP, DODGE, ILL_WILL, MEGA_CHOMP, MUD_SPATTER, PLUNGE, PRIMAL_SLASH, PROVOKE, QUICK_POUNCE, SHREWD_BLAST, SLEET_SHOT, SPARE, SPRAY, STARE, STRETCH, TAIL_SLAP, TEASE, TOXIC_TAIL, VENOM_CHOMP, VICE_JAWS, VICIOUS_SNAP, WATER_BOMB, WAVE_WRECKER))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(HYDRINI)
@@ -1618,7 +1645,7 @@ public class SpeciesRegistry {
 			.weight(139.7)
 			.height(126.0)
 			.learnset(List.of(AQUA_JAWS, BANEFUL_BASH, BUG_BITE, BURROW, CLAY_SLAP, CLIMATE_CANNON, COUNTER_POISE, DISSIPATE, DODGE, DOUSE, DOWNPOUR, EERIE_STARE, GUST, HYDRO_BLAST, HYDRO_SLASH, ILL_WILL, JET_STREAM, MAROON, PARASITIZE, PEACE_OF_MIND, PESTER, PHEROBLAST, SOFT_WATER, SPARE, SPRAY, THUNDER_CHOMP, TSUNAMI, VENOM_CHOMP, WATER_BOMB))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(CERATOT)
@@ -1654,7 +1681,7 @@ public class SpeciesRegistry {
 			.weight(172.72)
 			.height(768.0)
 			.learnset(List.of(BRAWN_BOOST, BRIAR_BLOCK, BULK_UP, CHOMP, DINO_CLAWS, DODGE, EARTHQUAKE, GNAW, HEADBUTT, ILL_WILL, LEAF_BARRAGE, LIFE_DRAIN, MEGA_CHOMP, MUD_SPATTER, OUTBURST, PETAL_PUMMEL, PRIMAL_SLASH, ROGUE_ASSAULT, SAP_PLANT, SPARE, STARE, TAKE_ROOT, TIMBER_THRASH, VINE_LASH))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(CUPOINK)
@@ -1678,7 +1705,9 @@ public class SpeciesRegistry {
 			.weight(129.54)
 			.height(89.0)
 			.learnset(List.of(BAIT, BANEFUL_BASH, BATTLE_CHIME, BLAZE_OF_GLORY, BODY_SLAM, BULK_UP, CHOMP, DODGE, FIERY_FONDANT, FIRE_SLAM, HEADBUTT, ILL_WILL, MEGA_CHOMP, MUCK_BUCK, MUDSLIDE, POUNCE, RAGING_TACKLE, REJUVENATE, SHARPEN, SINGE, SPARE, STARE, TEAR_DOWN, VENOM_CHOMP))
-			.canEvolve(true)
+			.canEvolve(false)
+			.canSoulBurst(true)
+			.soulItem(ItemId.NOSHBURST)
 		);
 		register(Species.build()
 			.id(HOGANOSH_ATOMIC)
@@ -1690,7 +1719,8 @@ public class SpeciesRegistry {
 			.weight(129.54)
 			.height(89.0)
 			.learnset(List.of(BAIT, BANEFUL_BASH, BATTLE_CHIME, BLAZE_OF_GLORY, BODY_SLAM, BULK_UP, CHOMP, DODGE, FIERY_FONDANT, FIRE_SLAM, HEADBUTT, ILL_WILL, MEGA_CHOMP, MUCK_BUCK, MUDSLIDE, POUNCE, RAGING_TACKLE, REJUVENATE, SHARPEN, SINGE, SPARE, STARE, TEAR_DOWN, VENOM_CHOMP))
-			.canEvolve(true)
+			.canEvolve(false)
+			.soulMove(MoveId.MELTDOWN)
 		);
 		register(Species.build()
 			.id(MOCHIBI)
@@ -1726,7 +1756,7 @@ public class SpeciesRegistry {
 			.weight(134.62)
 			.height(145.0)
 			.learnset(List.of(BAMBOOZLE, BITTER_COLD, BOOM_BASH, CHARADE, CHILLY_CHOMP, DEEP_FREEZE, DODGE, ENERGY_BREAK, FLURRY, FROST_BEAM, FROST_BREATH, HOP_KICK, HULLABALOO, ICICLE_TRAP, MINDS_EYE, NATURES_FORCE, PEACE_OF_MIND, PEPPERMINT_BREATH, PREEMPTIVE_STRIKE, RETURN_TO_SENDER, SCAPEGOAT, SLEET_SHOT, SNOWDOZER, SPARE, STRIKE, TEASE))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(GWURM)
@@ -1762,7 +1792,7 @@ public class SpeciesRegistry {
 			.weight(96.52)
 			.height(34.0)
 			.learnset(List.of(BARBS, BUG_BITE, BURROW, DODGE, EERIE_STARE, GNAW, GUST, HYPNOTIZE, JET_STREAM, LIFE_DRAIN, PESTER, PESTILENCE, PHEROBLAST, POISON_BARBS, POWER_FOCUS, PROVOKE, RETURN_TO_SENDER, SAP_PLANT, SPARE, SPARE, TALENT_TRADE, TAMP, TWIRLY_WHIRL))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(PIPSEE)
@@ -1798,7 +1828,7 @@ public class SpeciesRegistry {
 			.weight(114.3)
 			.height(6.0)
 			.learnset(List.of(AIR_BLADE, BEQUEATH, BRACE, CLIMATE_CANNON, CYCLONE_SLAM, DODGE, GALE_FORCE, GUST, HASTEN, JET_STREAM, LEAF_BARRAGE, LIFE_DRAIN, LUSTER_LOOT, MAGNIFY, MINDS_EYE, NATURES_FORCE, PETAL_PUMMEL, PHOTOSYNTHESIS, PINE_SHOT, SAP_PLANT, SNORE_SPORES, SPARE, STATIC_SPORES, TAKE_ROOT, TEMPEST, TRIBUTE, TYPHOON, WONDER_HERB))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(VARI)
@@ -1822,7 +1852,7 @@ public class SpeciesRegistry {
 			.weight(172.72)
 			.height(232.0)
 			.learnset(List.of(ADAPTIVE_ASSAULT_SIMPLE, BAMBOOZLE, BODY_CRASH, BODY_SLAM, BULK_UP, DAWDLE, DODGE, EERIE_STARE, HEADBUTT, ILL_WILL, MEGA_CHOMP, POWER_FOCUS, QUICK_POUNCE, RAGING_TACKLE, SCAPEGOAT, SPARE, SPARE, STAMPEDE, STRETCH, STRIKE, TEAR_DOWN))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(WENDOLEN)
@@ -1834,7 +1864,7 @@ public class SpeciesRegistry {
 			.weight(210.82)
 			.height(190.0)
 			.learnset(List.of(ADAPTIVE_ASSAULT_SPIRIT, BARTER, BODY_SLAM, DARK_SURGE, DAWDLE, DAZZLING_BARRAGE, DODGE, FADE_AWAY, FINAL_RUSE, FROST_BEAM, HEADBUTT, MEGA_CHOMP, PHANTOM_BLAST, PHANTOM_SLASH, POWER_FOCUS, QUICK_POUNCE, SHADOW_SPRINT, SPARE, SPARE, SPECTRAL_BURST, STRETCH, STRIKE, TEAR_DOWN))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(KIROLEN)
@@ -1846,7 +1876,7 @@ public class SpeciesRegistry {
 			.weight(175.26)
 			.height(213.0)
 			.learnset(List.of(ADAPTIVE_ASSAULT_ANCIENT, BLAZE_RUSH, BODY_SLAM, DAWDLE, DODGE, DRACO_BEAM, FIRE_BREATH, FIRE_SLAM, HEADBUTT, ILL_WILL, MEGA_KICK, OUTBURST, POWER_FOCUS, PRIMAL_SLASH, QUICK_POUNCE, REJUVENATE, ROUGH_UP, SCAPEGOAT, SHARPEN, SHREWD_BLAST, SPARE, SPARE, STRETCH, STRIKE, TEAR_DOWN))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(ZEPHOLEN)
@@ -1858,7 +1888,7 @@ public class SpeciesRegistry {
 			.weight(185.42)
 			.height(201.0)
 			.learnset(List.of(ADAPTIVE_ASSAULT_AIR, AIR_BLADE, BODY_SLAM, DAWDLE, DODGE, GUST, HEADBUTT, LANDSLIDE, MUDSLIDE, MUD_SPATTER, PEACE_OF_MIND, PERCH, POWER_FOCUS, PROVOKE, QUICK_POUNCE, RESONATE, SPARE, SPARE, SPITE, STRETCH, STRIKE, TEAR_DOWN, TYPHOON))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(VENOLEN)
@@ -1870,7 +1900,7 @@ public class SpeciesRegistry {
 			.weight(195.58)
 			.height(243.0)
 			.learnset(List.of(ADAPTIVE_ASSAULT_TOXIC, BARTER, BODY_SLAM, CHARADE, CORRODE, DAWDLE, DISSONANT_CHORD, DODGE, HEADBUTT, LANDSLIDE, MUCK_BLAST, MUDSLIDE, MUD_SPATTER, POISON, POWER_FOCUS, QUICK_POUNCE, REJUVENATE, ROCK_SLIDE, SLIME, SPARE, SPARE, STRETCH, STRIKE, TEAR_DOWN, TOXIC_TAIL, TRICKY_TACTICS))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(WRESOLEN)
@@ -1882,7 +1912,7 @@ public class SpeciesRegistry {
 			.weight(205.74)
 			.height(345.0)
 			.learnset(List.of(ADAPTIVE_ASSAULT_BRAWLER, BLAZE_PUNCH, BODY_SLAM, BOOM_BASH, BUCK_UP, BULK_UP, DAWDLE, DODGE, DRIVING_FORCE, ELECTRO_PUNCH, FROST_PUNCH, HEADBUTT, ILL_WILL, PEP_JAB, POWER_FOCUS, QUICK_POUNCE, SHADOWBOX, SPARE, SPARE, STRETCH, STRIKE, TEAR_DOWN))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(BUZZOLEN)
@@ -1894,7 +1924,7 @@ public class SpeciesRegistry {
 			.weight(96.52)
 			.height(42.0)
 			.learnset(List.of(ADAPTIVE_ASSAULT_BUG, BANEFUL_BASH, BARTER, BODY_SLAM, BUCK_UP, BULK_UP, COUNTER_POISE, CYCLONE_SLAM, DAWDLE, DODGE, DOUBLE_BEAT, DOUBLE_STING, HEADBUTT, HYPER_STING, ILL_WILL, LUNGE, NOSEDIVE, PARASITIZE, POISON_BARBS, POWER_FOCUS, QUICK_POUNCE, SPARE, SPARE, STRETCH, STRIKE, TEAR_DOWN, TOXIC_TAIL, TRIBUTE, VENOM_SLASH))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(TUNDROLEN)
@@ -1906,7 +1936,7 @@ public class SpeciesRegistry {
 			.weight(185.42)
 			.height(341.0)
 			.learnset(List.of(ADAPTIVE_ASSAULT_ICE, BLINDSPOT_BATTER, BODY_CRASH, BODY_SLAM, BULK_UP, CHILLY_CHOMP, DAWDLE, DODGE, FROST_BEAM, HEADBUTT, ICE_HAMMER, ICICLE_TRAP, ILL_WILL, MUDSLIDE, POWER_FOCUS, PROVOKE, QUICK_POUNCE, REJUVENATE, SLAP_DOWN, SPARE, SPARE, SPIKE_RUSH, STRETCH, STRIKE, TEAR_DOWN))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(PYROLEN)
@@ -1918,7 +1948,7 @@ public class SpeciesRegistry {
 			.weight(175.26)
 			.height(243.0)
 			.learnset(List.of(ADAPTIVE_ASSAULT_FIRE, BODY_SLAM, BOOM_BASH, DAWDLE, DODGE, FIRE_BREATH, FIRE_SLAM, FLAMING_KICK, FLARE_BLAST, HEADBUTT, ILL_WILL, MUDSLIDE, MUD_SPATTER, PEACE_OF_MIND, POWER_FOCUS, QUICK_POUNCE, REJUVENATE, SHREWD_BLAST, SPARE, SPARE, STRETCH, STRIKE, TEAR_DOWN))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(HYDROLEN)
@@ -1930,7 +1960,7 @@ public class SpeciesRegistry {
 			.weight(160.02)
 			.height(155.0)
 			.learnset(List.of(ADAPTIVE_ASSAULT_WATER, AIR_BLADE, BODY_SLAM, BULK_UP, DAWDLE, DODGE, HEADBUTT, HYDRO_SLASH, ILL_WILL, MAROON, PEACE_OF_MIND, PLUNGE, POWER_FOCUS, QUICK_POUNCE, SPARE, SPARE, STRETCH, STRIKE, TEAR_DOWN, THISTLE_SLASH, TRIBUTE, TSUNAMI, WATER_BOMB))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(COPLING)
@@ -1966,7 +1996,7 @@ public class SpeciesRegistry {
 			.weight(203.2)
 			.height(367.0)
 			.learnset(List.of(BAMBOOZLE, BANE_OF_HASTE, BARBS, BULK_UP, CHOMP, CONFOUND, DODGE, DOUBLE_WHACK, DOWNPOUR, DRIVING_FORCE, GALE_FORCE, GNAW, HEADBUTT, HEAVY_BASH, ILL_WILL, METAL_SHRIEK, METAL_SWIPES, OUTBURST, PRIMAL_SLASH, PROVOKE, REJUVENATE, SAFEGUARD, SHARPEN, SHREWD_BLAST, SPARE, STEEL_CRUSHER, TEAR_DOWN, TEASE, TUNE_UP, VICE_JAWS))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(SPIRIVII)
@@ -2002,7 +2032,7 @@ public class SpeciesRegistry {
 			.weight(195.58)
 			.height(173.0)
 			.learnset(List.of(BARTER, BRACE, BRAWN_BOOST, BUG_BITE, BULK_UP, CHASE_DOWN, COUNTER_POISE, DODGE, DRIVING_FORCE, EARTHQUAKE, EERIE_STARE, EMPATHIZE, FINAL_RUSE, GNAW, HARROW, HAZY_SHROUD, ICICLE_TREMOR, ILL_WILL, MUD_SPATTER, PARASITIZE, PESTER, PROVOKE, PSYCHAL_CHOMP, SOUL_HARVEST, SOUL_STORM, SPARE, SPECTRAL_BURST, STARE, STARTLE, STUPEFY, SWIPE, TEAR_DOWN))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(SNOWL)
@@ -2038,7 +2068,7 @@ public class SpeciesRegistry {
 			.weight(157.48)
 			.height(71.0)
 			.learnset(List.of(AIR_BLADE, AIR_WHIP, BAFFLE, BRAIN_EXERCISE, BRAIN_FREEZE, CHILLY_CHOMP, DODGE, FROST_BEAM, ICICLE_TRAP, JET_STREAM, MUD_SPATTER, PEACE_OF_MIND, PERCH, POWER_FOCUS, PREEMPTIVE_STRIKE, PROVOKE, RANT, RESONATE, SCAVENGE, SLEET_SHOT, SNOWDOZER, SPARE, SQUARE_ONE))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(SNAGULL)
@@ -2074,7 +2104,7 @@ public class SpeciesRegistry {
 			.weight(167.64)
 			.height(47.0)
 			.learnset(List.of(AIR_BLADE, AIR_SHOT, BARTER, BUCK_UP, DODGE, EERIE_STARE, GALE_FORCE, GNAW, GUST, JET_STREAM, MAROON, MUCK_BLAST, PECK, PERCH, POISON, POISON_BARBS, PROVOKE, RAGING_HOWL, SCAVENGE, SLIME, SPARE, SQUAWK, STRETCH, SWIPE, TEAR_DOWN, TYPHOON, VENOM_CHOMP))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(MAKAME)
@@ -2110,7 +2140,7 @@ public class SpeciesRegistry {
 			.weight(198.12)
 			.height(298.0)
 			.learnset(List.of(AQUA_JAWS, BATTLE_HORN, BODY_CRASH, BRACE, CHARADE, CHILLY_CHOMP, DISSONANT_CHORD, DODGE, EXAMINE, FROST_BEAM, GNAW, HARMONIOUS_CHORD, MAROON, PEACE_OF_MIND, PLUNGE, RANT, REJUVENATE, REPEATING_TUNE, RESONATE, SEA_SONG, SLEET_SHOT, SOFT_WATER, SPARE, SPRAY, TSUNAMI, WATER_BOMB))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(CAVENISH)
@@ -2134,7 +2164,7 @@ public class SpeciesRegistry {
 			.weight(220.98)
 			.height(184.0)
 			.learnset(List.of(BAFFLE, BANANA_SPLIT, CHARADE, DODGE, FROST_BEAM, HARVEST, LEAF_BARRAGE, LIFE_DRAIN, MAGNIFY, MAROON, NATURES_FORCE, PETAL_PUMMEL, PHOTOSYNTHESIS, PLUNGE, POUNCE, PROVOKE, SAP_PLANT, SCAPEGOAT, SLAP_DOWN, SPARE, SPRAY, TEAR_DOWN, TEASE, TSUNAMI, WATER_BOMB, WONDER_HERB))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(KANKI)
@@ -2158,7 +2188,7 @@ public class SpeciesRegistry {
 			.weight(129.54)
 			.height(104.0)
 			.learnset(List.of(BLUDGEON, BODY_SLAM, BULK_UP, CHASE_DOWN, CLAWBER, DRIVING_FORCE, EERIE_STARE, HYDRO_SLASH, ICE_HAMMER, ILL_WILL, PIERCING_DRIVE, RAGING_TACKLE, ROUGH_UP, SHARPEN, SPRAY, STRIKE, SWAT, SWIPE, WAVE_WRECKER))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(SHARPOD)
@@ -2182,7 +2212,7 @@ public class SpeciesRegistry {
 			.weight(167.64)
 			.height(639.0)
 			.learnset(List.of(AQUA_JAWS, BAFFLE, BASH, CHOMP, DODGE, DOUBLE_WHACK, FADE_AWAY, ILL_WILL, METAL_SWIPES, MUD_SPATTER, PLUNGE, PROVOKE, SHARPEN, SPARE, SPRAY, STEEL_CRUSHER, THUNDER_CHOMP, TSUNAMI, TUNE_UP, VICE_JAWS, WATER_BOMB, WAVE_WRECKER))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(LUMICA)
@@ -2206,7 +2236,7 @@ public class SpeciesRegistry {
 			.weight(86.36)
 			.height(87.0)
 			.learnset(List.of(BANEFUL_BASH, BARBS, BLINDSPOT_BATTER, BRACE, BULK_UP, DODGE, EERIE_STARE, GNAW, HEADBUTT, HYDRO_SLASH, HYPNOTIZE, ICICLE_TRAP, PIERCING_DRIVE, POISON_BARBS, PROVOKE, SCAPEGOAT, SHARPEN, SLUMBER, SPARE, SPRAY, SQUARE_ONE, STING, TAMP, TEAR_DOWN, WATER_BOMB, WAVE_WRECKER))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(POLYPI)
@@ -2242,7 +2272,7 @@ public class SpeciesRegistry {
 			.weight(144.78)
 			.height(66.0)
 			.learnset(List.of(DAWDLE, DEEP_FREEZE, DEJA_VU, DISPERSE, DODGE, ENAMOR, ENERGY_SURGE, FLASH, FLASH_N_FLEE, FROST_BEAM, GAMMA_PULSE, MAGNIFY, MAROON, PEACE_OF_MIND, PROVOKE, RESONATE, SHINE, SOFT_WATER, SPARE, SPRAY, STUN, TEASE, TSUNAMI, WATER_BOMB))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(TAOSHI)
@@ -2266,7 +2296,7 @@ public class SpeciesRegistry {
 			.weight(127.0)
 			.height(65.0)
 			.learnset(List.of(AUGMENT, BARTER, BEQUEATH, BLINDSPOT_BATTER, BODY_SLAM, BULK_UP, CHOMP, DAWDLE, DISSIPATE, DODGE, EMPATHIZE, FAR_ENCHANTMENT, GNAW, MEGA_CHOMP, MUD_SPATTER, NEAR_ENCHANTMENT, QUICK_POUNCE, REJUVENATE, SCAPEGOAT, SHARPEN, SPARE, STRETCH, STUN, SWAT, SWIPE, TEAR_DOWN))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(KITTONE)
@@ -2290,7 +2320,7 @@ public class SpeciesRegistry {
 			.weight(111.76)
 			.height(48.0)
 			.learnset(List.of(BAIT, BARTER, BOOM_BASH, DISCORDANCE, DISSONANT_CHORD, DODGE, GNAW, HARMONIOUS_CHORD, HASTEN, HIGH_PITCH_SCREECH, HULLABALOO, HYPNOTIZE, ILL_WILL, MAGNIFY, PEACE_OF_MIND, PEACE_OF_MIND, PREEMPTIVE_STRIKE, PROVOKE, QUICK_POUNCE, RAGING_HOWL, RANT, REPEATING_TUNE, RESONATE, SCAPEGOAT, SLAP_DOWN, SPARE, SPLITTING_HEADACHE, STARE, STRETCH, SWAT, TAIL_SLAP, TONE_BARRIER))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(SOMATA)
@@ -2314,7 +2344,7 @@ public class SpeciesRegistry {
 			.weight(157.48)
 			.height(73.0)
 			.learnset(List.of(BAIT, BAIT, BRAINWASH, DAWDLE, DEJA_VU, DISSIPATE, DODGE, DOWNPOUR, FAR_ENCHANTMENT, FLABBERGAST, GUST, HEALTH_GIFT, MAROON, MINDS_EYE, MIND_DRAIN, NEAR_ENCHANTMENT, PEACE_OF_MIND, RANT, REJUVENATE, SPARE, SPRAY, STRATAGEM, TEAR_DOWN, TSUNAMI, WATER_BOMB, WONDER_HERB))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(BOONARY)
@@ -2326,7 +2356,7 @@ public class SpeciesRegistry {
 			.weight(25.4)
 			.height(1.0)
 			.learnset(List.of(EMULATE, STARTLE, STUPEFY))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(CINNABOO)
@@ -2350,7 +2380,7 @@ public class SpeciesRegistry {
 			.weight(177.8)
 			.height(242.0)
 			.learnset(List.of(BAG_OF_TRICKS, BOOM_BASH, CHARADE, DODGE, FADE_AWAY, FINAL_RUSE, HEADBUTT, HEALTH_GIFT, MINDS_EYE, MUCK_BLAST, PEACE_OF_MIND, POISON, PROVOKE, SAFEGUARD, SLIME, SPARE, SPECTRAL_BURST, SPITE, STARE, STARTLE, STRETCH, STUPEFY, TEAR_DOWN, TRICKY_TACTICS, WONDER_HERB))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(SWIRELLE)
@@ -2362,7 +2392,7 @@ public class SpeciesRegistry {
 			.weight(86.36)
 			.height(19.0)
 			.learnset(List.of(AIR_BLADE, AIR_SHOT, DODGE, JET_STREAM, MUD_SPATTER, NOSEDIVE, PERCH, PILFER, PROVOKE, QUICK_POUNCE, SCAVENGE, SPARE, STRETCH, STRIKE, SWAT))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(SWISHY)
@@ -2386,7 +2416,7 @@ public class SpeciesRegistry {
 			.weight(193.04)
 			.height(189.0)
 			.learnset(List.of(BRACE, DODGE, EMPATHIZE, EXAMINE, FROST_BEAM, GULP, HEALTH_GIFT, HYDRO_BLAST, LANDSLIDE, MAROON, MUDSLIDE, PEACE_OF_MIND, PLUNGE, PROVOKE, RECYCLE, SCAPEGOAT, SOFT_WATER, SPARE, SPRAY, SQUARE_ONE, STRATAGEM, STRIKE, TSUNAMI, WATER_BOMB))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(BUNPUFF)
@@ -2410,7 +2440,7 @@ public class SpeciesRegistry {
 			.weight(170.18)
 			.height(89.0)
 			.learnset(List.of(BOOM_BASH, BOULDER_BLAST, BRAWN_BOOST, BURROW, DODGE, EARTHQUAKE, GNAW, HOP_KICK, LANDSLIDE, LEAF_BARRAGE, LIFE_DRAIN, MAGNIFY, MUD_SPATTER, NAB, NATURES_FORCE, PETAL_PUMMEL, PHEROBLAST, PINE_SHOT, POISON, QUICKSAND, SAP_PLANT, SPARE, SWAT, TEASE, TIMBER_THRASH, WONDER_HERB))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(DRACTUS)
@@ -2446,7 +2476,7 @@ public class SpeciesRegistry {
 			.weight(302.26)
 			.height(376.0)
 			.learnset(List.of(BARBS, BEQUEATH, BODY_CRASH, BRIAR_BLOCK, BULK_UP, BUSH_WHACK, COCONUT_BOMB, DODGE, ENERGY_BREAK, GROWL, HARVEST, HYDRO_SLASH, ILL_WILL, LIFE_DRAIN, MAROON, MUDSLIDE, MUD_SPATTER, NATURES_FORCE, PEACE_OF_MIND, PETAL_PUMMEL, PINE_SHOT, PRIMAL_SLASH, PROVOKE, SAP_PLANT, SHREWD_BLAST, SLASH, SPARE, SPLITTING_HEADACHE, STRETCH, TAIL_SLAP, TAKE_ROOT, THISTLE_SLASH, THORN_SLAM, TSUNAMI, VINE_LASH, WATER_BOMB, WAVE_WRECKER, WONDER_HERB))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(VOLPUP)
@@ -2470,7 +2500,7 @@ public class SpeciesRegistry {
 			.weight(218.44)
 			.height(318.0)
 			.learnset(List.of(BANEFUL_BASH, BULK_UP, CHOMP, DODGE, ELECTRO_PUNCH, GNARLY_GASH, GNAW, ILL_WILL, MEGA_CHOMP, MUCK_BLAST, POISON, PRIMAL_SLASH, SHARPEN, SLASH, SPARE, STARE, STATIC_SHOCK, STRETCH, STUN, SWAT, THUNDERSTRIKE, THUNDER_CHOMP, THUNDER_CRASH, VENOM_CHOMP, ZIP_ZAP))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(IMPKIN)
@@ -2506,7 +2536,9 @@ public class SpeciesRegistry {
 			.weight(195.58)
 			.height(145.0)
 			.learnset(List.of(BAG_OF_TRICKS, BAMBOOZLE, BARBS, BARTER, BOOM_BASH, BRAWN_BOOST, CHARADE, CHASE_DOWN, DARK_SURGE, DEJA_VU, DODGE, GNARLY_GASH, HEADBUTT, HEALTH_GIFT, ILL_WILL, LUNGE, MEMORIZE, MINDS_EYE, PEACE_OF_MIND, PILFER, POWER_FOCUS, PRIMAL_SLASH, PROVOKE, RANT, SAVAGE_HORN, SCAPEGOAT, SHARPEN, SHREWD_BLAST, SLAP_DOWN, SPARE, SPLITTING_HEADACHE, STARTLE, STRETCH, TALENT_TRADE, TEASE, TRIBUTE, TRICKY_TACTICS, VITAL_SURGE))
-			.canEvolve(true)
+			.canEvolve(false)
+			.canSoulBurst(true)
+			.soulItem(ItemId.IMPERIBURST)
 		);
 	}
 	public static void init2() {
@@ -2520,7 +2552,8 @@ public class SpeciesRegistry {
 			.weight(195.58)
 			.height(145.0)
 			.learnset(List.of(BAG_OF_TRICKS, BAMBOOZLE, BARBS, BARTER, BOOM_BASH, BRAWN_BOOST, CHARADE, CHASE_DOWN, DARK_SURGE, DEJA_VU, DODGE, GNARLY_GASH, HEADBUTT, HEALTH_GIFT, ILL_WILL, LUNGE, MEMORIZE, MINDS_EYE, PEACE_OF_MIND, PILFER, POWER_FOCUS, PRIMAL_SLASH, PROVOKE, RANT, SAVAGE_HORN, SCAPEGOAT, SHARPEN, SHREWD_BLAST, SLAP_DOWN, SPARE, SPLITTING_HEADACHE, STARTLE, STRETCH, TALENT_TRADE, TEASE, TRIBUTE, TRICKY_TACTICS, VITAL_SURGE))
-			.canEvolve(true)
+			.canEvolve(false)
+			.soulMove(MoveId.LAST_LAUGH)
 		);
 		register(Species.build()
 			.id(MISTLEBUD)
@@ -2544,7 +2577,7 @@ public class SpeciesRegistry {
 			.weight(63.5)
 			.height(15.0)
 			.learnset(List.of(DAWDLE, DISPERSE, DODGE, ENERGY_SURGE, FLASH_N_FLEE, GAMMA_PULSE, HEALTH_GIFT, LEAF_BARRAGE, LIFE_DRAIN, LUSTER_LOOT, NATURES_FORCE, NOVA_BLAST, PEACE_OF_MIND, PETAL_PUMMEL, PHEROBLAST, SAP_PLANT, SHINE, SPARE, SPECTRAL_BURST, SUMMON, WONDER_HERB))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(CRYOCUB)
@@ -2568,7 +2601,7 @@ public class SpeciesRegistry {
 			.weight(187.96)
 			.height(198.0)
 			.learnset(List.of(BODY_SLAM, BRAWN_BOOST, BURROW, CHILLY_CHOMP, CHOMP, CLAY_SLAP, DAWDLE, DODGE, FLURRY, FROST_BEAM, GNAW, ICE_HAMMER, ICICLE_TRAP, ILL_WILL, MEGA_PUNCH, ROGUE_ASSAULT, SNOWDOZER, SPARE, SPIKE_RUSH, SWIPE, TAMP))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(KYEGGO)
@@ -2604,7 +2637,9 @@ public class SpeciesRegistry {
 			.weight(264.16)
 			.height(322.0)
 			.learnset(List.of(AIR_BLADE, BAMBOOZLE, DARK_SURGE, DINO_CLAWS, DODGE, DOUBLE_BEAT, DRACO_BEAM, EERIE_STARE, EGG_STORM, GNARLY_GASH, HEADBUTT, HIGH_PITCH_SCREECH, JET_STREAM, MEGA_CHOMP, MUD_SPATTER, NAB, NOSEDIVE, OUTBURST, PEACE_OF_MIND, PROVOKE, RANT, SHREWD_BLAST, SLUMBER, SPARE, STARE, TAIL_SLAP, TEAR_DOWN, TEASE))
-			.canEvolve(true)
+			.canEvolve(false)
+			.canSoulBurst(true)
+			.soulItem(ItemId.DREGGOBURST)
 		);
 		register(Species.build()
 			.id(DREGGODYNE_TEMPEREIGN)
@@ -2616,7 +2651,8 @@ public class SpeciesRegistry {
 			.weight(264.16)
 			.height(322.0)
 			.learnset(List.of(AIR_BLADE, BAMBOOZLE, DARK_SURGE, DINO_CLAWS, DODGE, DOUBLE_BEAT, DRACO_BEAM, EERIE_STARE, EGG_STORM, GNARLY_GASH, HEADBUTT, HIGH_PITCH_SCREECH, JET_STREAM, MEGA_CHOMP, MUD_SPATTER, NAB, NOSEDIVE, OUTBURST, PEACE_OF_MIND, PROVOKE, RANT, SHREWD_BLAST, SLUMBER, SPARE, STARE, TAIL_SLAP, TEAR_DOWN, TEASE))
-			.canEvolve(true)
+			.canEvolve(false)
+			.soulMove(MoveId.EGG_ONSLAUGHT)
 		);
 		register(Species.build()
 			.id(WISPUR)
@@ -2652,7 +2688,7 @@ public class SpeciesRegistry {
 			.weight(124.46)
 			.height(11.0)
 			.learnset(List.of(APPARITION, BLINDSPOT_BATTER, CHARADE, CHASE_DOWN, CLIMATE_CANNON, DAWDLE, DODGE, FADE_AWAY, FINAL_RUSE, FLASH, FLASH_N_FLEE, FLURRY, FROST_BEAM, GAMMA_PULSE, HAZY_SHROUD, LUSTER_LOOT, MAGNIFY, MINDS_EYE, NOVA_BLAST, PEACE_OF_MIND, PHANTOM_BLAST, SAFEGUARD, SHADOW_SPRINT, SHINE, SLEET_SHOT, SOUL_STORM, SPARE, SPECTRAL_BURST, SQUARE_ONE, STARTLE, TEAR_DOWN, TRICKY_TACTICS))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(SMOAL)
@@ -2688,7 +2724,7 @@ public class SpeciesRegistry {
 			.weight(193.04)
 			.height(653.0)
 			.learnset(List.of(BANEFUL_BASH, BARBS, BASH, BLAZE_PUNCH, BOILING_PRESS, BULK_UP, BURN_UP, CLIMATE_CANNON, CORRODE, DODGE, DOUBLE_WHACK, DRIVING_FORCE, EARTHQUAKE, EERIE_STARE, FIRE_BREATH, FIRE_SLAM, FLARE_BLAST, GROWL, HEAT_WAVE, HEAVY_BASH, ILL_WILL, KINDLED_RAGE, LANDSLIDE, METAL_BLAST, MUCK_BLAST, PAINT_SHOWER, POISON, POWER_FOCUS, SINGE, SLIME, SPARE, STEEL_CRUSHER, TAMP, TEAR_DOWN, TRIBUTE))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(SHERBOT)
@@ -2700,7 +2736,7 @@ public class SpeciesRegistry {
 			.weight(144.78)
 			.height(211.0)
 			.learnset(List.of(AIR_BLADE, BARBS, BASH, BURN_UP, DEEP_FREEZE, DEJA_VU, DISSONANT_CHORD, DODGE, FLURRY, FROST_BEAM, GUST, HARMONIOUS_CHORD, HEAVY_BASH, ICICLE_TRAP, JET_STREAM, JUMP_START, METAL_BLAST, METAL_SHRIEK, OUT_OF_ORDER, PEACE_OF_MIND, RESONATE, SLEET_SHOT, SPARE, SPLITTING_HEADACHE, SQUAWK, STRIKE, TASE, TEAR_DOWN, TRIBUTE, TUNE_UP, ZIP_ZAP))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(LLAMBA)
@@ -2736,7 +2772,7 @@ public class SpeciesRegistry {
 			.weight(203.2)
 			.height(205.0)
 			.learnset(List.of(ACCELERATE, BODY_SLAM, BOOM_BASH, BULK_UP, CHASE_DOWN, DAYDREAM, DODGE, ENERGY_BREAK, GROWL, HEADBUTT, HEALTH_GIFT, HIGH_PITCH_SCREECH, ILL_WILL, MEGA_KICK, MUD_SPATTER, NAB, PEACE_OF_MIND, POWER_FOCUS, PROVOKE, QUICK_POUNCE, RAGING_HOWL, RAGING_TACKLE, RECYCLE, SCAPEGOAT, SLUMBER, SPARE, SPIT, SPIT_OUT, STAMPEDE, STRETCH))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(FENTERN)
@@ -2760,7 +2796,7 @@ public class SpeciesRegistry {
 			.weight(157.48)
 			.height(87.0)
 			.learnset(List.of(BAFFLE, BAIT, BARBS, BARTER, BEQUEATH, BODY_SLAM, DAWDLE, DODGE, DRIVING_FORCE, HEADBUTT, HEALTH_GIFT, ILL_WILL, PROVOKE, QUICK_POUNCE, RANT, RECYCLE, SCAPEGOAT, SLAP_DOWN, SLASH, SLUMBER, SPARE, STRETCH, STRIKE, TEAMWORK, TEAR_DOWN, TRIBUTE, TRICKY_TACTICS))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(SINGEEL)
@@ -2784,7 +2820,7 @@ public class SpeciesRegistry {
 			.weight(200.66)
 			.height(77.0)
 			.learnset(List.of(BAMBOOZLE, BRACE, BULK_UP, CONFOUND, DARK_SURGE, DODGE, EARTHQUAKE, ELECTRO_PUNCH, ENERGIZE, GAIN_DRAIN, GNARLY_GASH, HYDRO_SLASH, JOLT, LANDSLIDE, MEGA_CHOMP, MEGA_PUNCH, MUDSLIDE, PESTER, PHEROBLAST, PLUNGE, PRECISION_BOLT, PRIMAL_SLASH, PROVOKE, SAFEGUARD, SHADOW_LURK, SHREWD_BLAST, SLAP_DOWN, SOFT_WATER, SPARE, SPRAY, STATIC_SHOCK, TAMP, TASE, THUNDERSTRIKE, THUNDER_CRASH, THUNDER_SLAM, TRICKY_TACTICS, WONDER_HERB, ZIP_ZAP))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(CRABUSHI)
@@ -2808,7 +2844,7 @@ public class SpeciesRegistry {
 			.weight(93.98)
 			.height(43.0)
 			.learnset(List.of(BARBS, BULK_UP, CHOP, DODGE, DRUDGE, HEAVY_BASH, HYDRO_SLASH, METAL_SWIPES, PLUNGE, PROVOKE, RAZOR_SLASH, ROGUE_ASSAULT, SCAPEGOAT, SHARPEN, SLASH, SPARE, STEEL_CRUSHER, STRIKE, SWIPE, TRIBUTE, WAVE_WRECKER))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(TERIPOD)
@@ -2832,7 +2868,7 @@ public class SpeciesRegistry {
 			.weight(127.0)
 			.height(74.0)
 			.learnset(List.of(AQUA_JAWS, BANE_OF_HASTE, BLINDSPOT_BATTER, BODY_SLAM, BUG_BITE, DAZZLING_BARRAGE, DINO_CLAWS, DODGE, DRUDGE, ENERGY_SURGE, FLASH, FLASH_N_FLEE, GAMMA_PULSE, HYDRO_SLASH, HYPER_STING, HYPNOTIZE, LUNGE, LUSTER_LOOT, MAROON, NOVA_BLAST, PARASITIZE, PRIMAL_SLASH, SHINE, SHREWD_BLAST, SLASH, SPARE, WAVE_WRECKER))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(SKAMPI)
@@ -2856,7 +2892,7 @@ public class SpeciesRegistry {
 			.weight(83.82)
 			.height(21.0)
 			.learnset(List.of(ACCELERATE, BANE_OF_HASTE, BATTERING_RAM, BODY_CRASH, BOOM_BASH, BRACE, CHASE_DOWN, COUNTER_POISE, DODGE, EERIE_STARE, MAROON, PEACE_OF_MIND, PHEROBLAST, PLUNGE, POUNCE, PREEMPTIVE_STRIKE, PROVOKE, QUICK_POUNCE, RECYCLE, ROGUE_ASSAULT, SHELL_SHRAPNEL, SPARE, SPRAY, STARE, STRETCH, TRIBUTE, TSUNAMI, VITAL_JAB, WAVE_WRECKER))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(SHRIMPOSTE)
@@ -2868,7 +2904,7 @@ public class SpeciesRegistry {
 			.weight(93.98)
 			.height(28.0)
 			.learnset(List.of(ACCELERATE, BANE_OF_HASTE, BATTERING_RAM, BODY_CRASH, BRACE, BULK_UP, CHASE_DOWN, COUNTER_POISE, DODGE, EERIE_STARE, FAR_ENCHANTMENT, HYDRO_SLASH, MAROON, MEGA_PUNCH, NEAR_ENCHANTMENT, PARASITIZE, PLUNGE, POUNCE, PREEMPTIVE_STRIKE, PROVOKE, QUICK_POUNCE, RECYCLE, ROGUE_ASSAULT, SHELL_BASH, SPARE, SPRAY, STARE, STRETCH, TRIBUTE, TSUNAMI, VITAL_JAB, WAVE_WRECKER))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(DOKAN)
@@ -2892,7 +2928,7 @@ public class SpeciesRegistry {
 			.weight(106.68)
 			.height(65.0)
 			.learnset(List.of(AQUA_JAWS, BAFFLE, BANEFUL_BASH, BULK_UP, BURROW, CLAY_SLAP, DODGE, EARTHQUAKE, HEADBUTT, ICICLE_TRAP, ILL_WILL, LANDSLIDE, MAROON, MUCK_BLAST, MUD_SPATTER, PLUNGE, QUICKSAND, SPARE, STARE, STING, TAMP, TOXIC_TAIL, VENOM_CHOMP))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(MIRRAMI)
@@ -2916,7 +2952,7 @@ public class SpeciesRegistry {
 			.weight(180.34)
 			.height(54.0)
 			.learnset(List.of(BAFFLE, BAG_OF_TRICKS, BAMBOOZLE, BULK_UP, CHASE_DOWN, DARK_SURGE, DEJA_VU, DODGE, DOUBLE_WHACK, FADE_AWAY, FAR_ENCHANTMENT, FINAL_RUSE, ILL_WILL, IMPERSONATE, METAL_BLAST, METAL_SHRIEK, METAL_SWIPES, NEAR_ENCHANTMENT, PEACE_OF_MIND, PHANTOM_SLASH, POWER_FOCUS, REFLECTION_BURST, SHADOW_SPRINT, SHATTER, SOUL_STORM, SPARE, SPECTRAL_BURST, SQUARE_ONE, STEEL_CRUSHER, STUPEFY, THUNDER_CHOMP, TRICKY_TACTICS))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(THAWMIN)
@@ -2928,7 +2964,7 @@ public class SpeciesRegistry {
 			.weight(144.78)
 			.height(74.0)
 			.learnset(List.of(BAG_OF_TRICKS, BANE_OF_HASTE, BARTER, BRACE, BRAINWASH, DEEP_FREEZE, DISSIPATE, DODGE, FLABBERGAST, FROST_BEAM, ICE_HAMMER, ICICLE_TRAP, ILL_WILL, LIFE_DRAIN, MUCK_BLAST, NATURES_FORCE, PEACE_OF_MIND, PETAL_PUMMEL, PHOTOSYNTHESIS, PINE_SHOT, PROVOKE, PSYCHO_BLAST, REJUVENATE, SCAPEGOAT, SLEET_SHOT, SNOWDOZER, SPARE, STRIKE, TEAR_DOWN, THUNDERSTRIKE, TOXIC_SPORES))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(LESHENT)
@@ -2940,7 +2976,7 @@ public class SpeciesRegistry {
 			.weight(195.58)
 			.height(233.0)
 			.learnset(List.of(BAMBOOZLE, BRACE, BRAWN_BOOST, BRIAR_BLOCK, BUSH_WHACK, CHOMP, DODGE, EARTHQUAKE, FLURRY, FROST_BEAM, GNARLY_GASH, HYPNOTIZE, ICE_HAMMER, ICICLE_TRAP, ILL_WILL, LEAF_BARRAGE, PETAL_PUMMEL, PROVOKE, RAGING_TACKLE, REJUVENATE, SAP_PLANT, SLAP_DOWN, SNOWDOZER, SPARE, THISTLE_SLASH, TIMBER_THRASH, TRICKY_TACTICS, VINE_LASH))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(KAYUTE)
@@ -2976,7 +3012,9 @@ public class SpeciesRegistry {
 			.weight(205.74)
 			.height(286.0)
 			.learnset(List.of(BAFFLE, BAMBOOZLE, BARBS, BATTLE_CHIME, BODY_SLAM, BULK_UP, CHILLY_CHOMP, CHOMP, DARK_SURGE, DODGE, FLURRY, FROST_BEAM, FROST_BREATH, GNARLY_GASH, GNAW, ICE_HAMMER, ICICLE_TRAP, ILL_WILL, MEGA_CHOMP, METAL_SHRIEK, PRIMAL_SLASH, PROVOKE, SLAP_DOWN, SLEET_SHOT, SPARE, SPIKE_RUSH, SQUARE_ONE, STRETCH, VICE_JAWS, WONDER_HERB))
-			.canEvolve(true)
+			.canEvolve(false)
+			.canSoulBurst(true)
+			.soulItem(ItemId.KRAMBURST)
 		);
 		register(Species.build()
 			.id(KRAMBOSS_FROSTSHACKLED)
@@ -2988,7 +3026,8 @@ public class SpeciesRegistry {
 			.weight(205.74)
 			.height(286.0)
 			.learnset(List.of(BAFFLE, BAMBOOZLE, BARBS, BATTLE_CHIME, BODY_SLAM, BULK_UP, CHILLY_CHOMP, CHOMP, DARK_SURGE, DODGE, FLURRY, FROST_BEAM, FROST_BREATH, GNARLY_GASH, GNAW, ICE_HAMMER, ICICLE_TRAP, ILL_WILL, MEGA_CHOMP, METAL_SHRIEK, PRIMAL_SLASH, PROVOKE, SLAP_DOWN, SLEET_SHOT, SPARE, SPIKE_RUSH, SQUARE_ONE, STRETCH, VICE_JAWS, WONDER_HERB))
-			.canEvolve(true)
+			.canEvolve(false)
+			.soulMove(MoveId.RUTHLESS_FEAST)
 		);
 		register(Species.build()
 			.id(LEOPAW)
@@ -3012,7 +3051,7 @@ public class SpeciesRegistry {
 			.weight(200.66)
 			.height(196.0)
 			.learnset(List.of(BLINDSPOT_BATTER, BODY_SLAM, BRAWN_BOOST, BULK_UP, DAZZLING_BARRAGE, DODGE, ENERGY_SURGE, FLASH, FLASH_N_FLEE, FROST_BEAM, FROST_PUNCH, GAMMA_PULSE, ICE_HAMMER, ICICLE_TRAP, ILL_WILL, LIGHT_DASH, MEGA_PUNCH, POUNCE, PRIMAL_SLASH, QUICK_POUNCE, RADIANT_RUSH, SLASH, SNOWDOZER, SOLAR_PUNCH, SPARE, SWAT, TEAMWORK))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(EYEBRELLA)
@@ -3036,7 +3075,7 @@ public class SpeciesRegistry {
 			.weight(149.86)
 			.height(11.0)
 			.learnset(List.of(BAMBOOZLE, BULK_UP, DARK_SURGE, DODGE, DOWNPOUR, FADE_AWAY, FINAL_RUSE, GUST, HARROW, HYDRO_SLASH, ILL_WILL, MAROON, MEGA_CHOMP, MUDSLIDE, PLUNGE, POWER_FOCUS, PROVOKE, RANT, REVOLUTION, SLAP_DOWN, SOFT_WATER, SOUL_STORM, SPARE, SPECTRAL_BURST, SPRAY, SQUARE_ONE, STARTLE, STUPEFY, THUNDER_CHOMP, THUNDER_CRASH, TRIBUTE, TSUNAMI, WATER_BOMB, WAVE_WRECKER))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(LISSEN)
@@ -3060,7 +3099,7 @@ public class SpeciesRegistry {
 			.weight(119.38)
 			.height(28.0)
 			.learnset(List.of(BAIT, BRAINWASH, CEREBRAL_SLASH, CONCLUSION, DEJA_VU, DISSIPATE, DISSONANT_CHORD, DODGE, FADE_AWAY, FINAL_RUSE, FLABBERGAST, HARMONIOUS_CHORD, HIGH_PITCH_SCREECH, HULLABALOO, HYPNOTIZE, ILL_WILL, LIFE_DRAIN, NATURES_FORCE, PEACE_OF_MIND, PESTER, POWER_FOCUS, PROVOKE, PSYCHO_BLAST, RAGING_HOWL, REPEATING_TUNE, RESONATE, SAFEGUARD, SOUL_STORM, SPARE, SPECTRAL_BURST, SPITE, SPLITTING_HEADACHE, STARTLE, STUPEFY, TEAMWORK, TRIBUTE, WONDER_HERB))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(LANTOT)
@@ -3084,7 +3123,7 @@ public class SpeciesRegistry {
 			.weight(101.6)
 			.height(16.0)
 			.learnset(List.of(BLAZE_CHOMP, BURN_UP, DODGE, ENERGY_SURGE, FADE_AWAY, FINAL_RUSE, FIRE_BREATH, FIRE_SLAM, FLARE, FLASH, GAMMA_PULSE, HARROW, ILL_WILL, LUSTER_LOOT, POWER_FOCUS, PYROKINESIS, RADIANT_RUSH, RAGING_FLAME, SINGE, SOUL_STORM, SPARE, SPECTRAL_BURST, STARTLE, STUPEFY, TRIBUTE))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(MILGOO)
@@ -3108,7 +3147,7 @@ public class SpeciesRegistry {
 			.weight(160.02)
 			.height(70.0)
 			.learnset(List.of(AUGMENT, CONFOUND, CORRODE, DODGE, ENERGY_BREAK, FADE_AWAY, FAR_ENCHANTMENT, FINAL_RUSE, GOOP_SPOUT, ILL_WILL, MUCK_BLAST, NEAR_ENCHANTMENT, PEACE_OF_MIND, POISON, POWER_FOCUS, SHREWD_BLAST, SLIME, SOUL_STORM, SPARE, SPECTRAL_BURST, STARTLE, STUPEFY, TRIBUTE, VENOM_SLASH))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(NAUTLING)
@@ -3132,7 +3171,7 @@ public class SpeciesRegistry {
 			.weight(129.54)
 			.height(120.0)
 			.learnset(List.of(BANE_OF_HASTE, BRAINWASH, BRAIN_EXERCISE, CONFOUND, DINO_CLAWS, DODGE, ENERGY_BREAK, FLABBERGAST, MIND_DRAIN, PEACE_OF_MIND, PSYCHO_BLAST, SAFEGUARD, SHRIEK, SPARE, SPLITTING_HEADACHE, STRIKE, TAMP, TSUNAMI))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(NAUKOUT)
@@ -3144,7 +3183,7 @@ public class SpeciesRegistry {
 			.weight(134.62)
 			.height(101.0)
 			.learnset(List.of(BANE_OF_HASTE, BULK_UP, CONFOUND, DINO_CLAWS, DODGE, MEGA_PUNCH, PRIMAL_SLASH, PUNCH, QUICK_PUNCH, SAFEGUARD, SHADOWBOX, SHRIEK, SPARE, STRIKE, TAMP, VITAL_JAB, WAVE_WRECKER))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(YUTINY)
@@ -3180,7 +3219,7 @@ public class SpeciesRegistry {
 			.weight(279.4)
 			.height(556.0)
 			.learnset(List.of(AIR_BLADE, AQUA_JAWS, AUGMENT, BODY_SLAM, BULK_UP, CYCLONE_SLAM, DINO_CLAWS, DODGE, GUST, HEADBUTT, ILL_WILL, NEAR_ENCHANTMENT, NOSEDIVE, OUTBURST, PECK, PERCH, PRIMAL_SLASH, PROVOKE, RUFFLED_FEATHERS, SAFEGUARD, SHARPEN, SLASH, SPARE, STARE, WAVE_WRECKER))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(VENILE)
@@ -3216,7 +3255,7 @@ public class SpeciesRegistry {
 			.weight(294.64)
 			.height(637.0)
 			.learnset(List.of(AUGMENT, BAIT, BANEFUL_BASH, BARB_TRAP, BODY_SLAM, DINO_CLAWS, DODGE, FAR_ENCHANTMENT, HEADBUTT, ILL_WILL, MEGA_PUNCH, OUTBURST, POISON, POISON_BARBS, PRIMAL_SLASH, PROVOKE, SHARPEN, SLASH, SPARE, STARE, TOXIC_TAIL, VENOM_CHOMP, VENOM_SLASH))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(NYMVOLT)
@@ -3252,7 +3291,7 @@ public class SpeciesRegistry {
 			.weight(175.26)
 			.height(106.0)
 			.learnset(List.of(BUG_BITE, CLIMATE_CANNON, DISPERSE, DISSIPATE, DODGE, ENERGIZE, ENERGY_BREAK, ENERGY_SURGE, FLASH, JOLT, JUMP_START, LIGHTSPEED_RAY, PESTER, PESTILENCE, PHEROBLAST, POWER_SIPHON, POWER_SURGE, PRECISION_BOLT, PREEMPTIVE_STRIKE, PROVOKE, REJUVENATE, SHINE, SPARE, SQUARE_ONE, STATIC_SHOCK, STUN, TEAMWORK, TEAR_DOWN, THUNDERSTORM, THUNDERSTRIKE, THUNDER_BLAST, TRIBUTE, TRICKY_TACTICS, ZIP_ZAP))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(CICALUTE)
@@ -3276,7 +3315,7 @@ public class SpeciesRegistry {
 			.weight(81.28)
 			.height(29.0)
 			.learnset(List.of(AIR_BLADE, BRACE, BRAINWASH, BUG_BITE, DEJA_VU, DISCORDANCE, DISSONANT_CHORD, DODGE, FLABBERGAST, GUST, HARMONIOUS_CHORD, HIGH_PITCH_SCREECH, HULLABALOO, LANDSLIDE, MINDS_EYE, MUDSLIDE, MUD_SPATTER, PEACE_OF_MIND, PESTER, PHEROBLAST, PSYCHO_BLAST, REJUVENATE, REPEATING_TUNE, RESONATE, SHRIEK, SPARE, SQUARE_ONE, STRATAGEM, TEAR_DOWN, TEAR_DOWN, TONE_BARRIER))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(GOSWING)
@@ -3300,7 +3339,7 @@ public class SpeciesRegistry {
 			.weight(101.6)
 			.height(33.0)
 			.learnset(List.of(AIR_SHOT, BAFFLE, BARBS, BARTER, BODY_SLAM, BULK_UP, CHARADE, CHASE_DOWN, DODGE, DOUBLE_BEAT, EMPATHIZE, ENAMOR, EXAMINE, FAR_ENCHANTMENT, GUST, ICICLE_TRAP, ILL_WILL, NAB, NEAR_ENCHANTMENT, NOSEDIVE, PECK, PERCH, PLUNGE, POISON_BARBS, PREEMPTIVE_STRIKE, PROVOKE, QUICK_POUNCE, RAGING_TACKLE, ROGUE_ASSAULT, SCAVENGE, SHARPEN, SLAP_DOWN, SLASH, SPARE, STRIKE, TEAMWORK, TEAR_DOWN, WAVE_WRECKER))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(BANOOH)
@@ -3324,7 +3363,7 @@ public class SpeciesRegistry {
 			.weight(104.14)
 			.height(37.0)
 			.learnset(List.of(BANANA_SLAM, BANANA_SPLIT, BARTER, BODY_SLAM, BRAWN_BOOST, BULK_UP, CHASE_DOWN, COCONUT_BOMB, DAYDREAM, DODGE, FROST_BEAM, FROST_PUNCH, HARVEST, HEADBUTT, ICICLE_TRAP, PREEMPTIVE_STRIKE, RAGING_TACKLE, SCAPEGOAT, SLAP_DOWN, SPARE, STARE, STRETCH, TAMP, TEAMWORK, TEAR_DOWN, WONDER_HERB))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(SPIRWIX)
@@ -3348,7 +3387,7 @@ public class SpeciesRegistry {
 			.weight(63.5)
 			.height(18.0)
 			.learnset(List.of(BARBS, BEQUEATH, BURN_UP, CHARADE, CHASE_DOWN, DEJA_VU, DODGE, FADE_AWAY, FIRE_BREATH, FLARE_BLAST, GAMMA_PULSE, HULLABALOO, ILL_WILL, INCINERATE, PEACE_OF_MIND, PEPPER_BURST, PHANTOM_BLAST, PROVOKE, RAGING_FLAME, RANT, SAFEGUARD, SCAPEGOAT, SHINE, SHREWD_BLAST, SINGE, SPARE, SPECTRAL_BURST, SPLITTING_HEADACHE, SQUARE_ONE, STARE, TEAMWORK, TRIBUTE, TRICKY_TACTICS))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(GRIEVESTONE)
@@ -3372,7 +3411,7 @@ public class SpeciesRegistry {
 			.weight(218.44)
 			.height(747.0)
 			.learnset(List.of(AUGMENT, BANE_OF_HASTE, BARBS, BODY_CRASH, DEJA_VU, DISSONANT_CHORD, DODGE, EMPATHIZE, ENERGY_BREAK, EXAMINE, ILL_WILL, LANDSLIDE, MUDSLIDE, MUD_SPATTER, PEACE_OF_MIND, PEBBLE_TOSS, PHANTOM_BLAST, PROVOKE, QUICKSAND, ROCK_SLIDE, SAP_PLANT, SCAPEGOAT, SHRIEK, SLUMBER, SOUL_STORM, SPARE, SPECTRAL_BURST, SPLITTING_HEADACHE, SQUARE_ONE, STUPEFY, SUMMON, TRIBUTE, TRICK_SHOT))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(JIMBY)
@@ -3396,7 +3435,7 @@ public class SpeciesRegistry {
 			.weight(81.28)
 			.height(24.0)
 			.learnset(List.of(DEJA_VU, DISSONANT_CHORD, DODGE, EMPATHIZE, FLURRY, FROST_BEAM, FROST_BREATH, HARMONIOUS_CHORD, HEALTH_GIFT, HULLABALOO, ICICLE_TRAP, MAGNIFY, PEACE_OF_MIND, POWER_FOCUS, PSYCHO_BLAST, RAGING_HOWL, RECYCLE, REPEATING_TUNE, SAP_PLANT, SCAPEGOAT, SHRIEK, SLUMBER, SPARE, TEAMWORK, TEAR_DOWN, TONE_BARRIER, TRIBUTE, WONDER_HERB))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(WASSEL)
@@ -3420,7 +3459,7 @@ public class SpeciesRegistry {
 			.weight(287.02)
 			.height(187.0)
 			.learnset(List.of(BITTER_COLD, BLINDSPOT_BATTER, BULK_UP, CHASE_DOWN, CHILLY_CHOMP, DEEP_FREEZE, DEJA_VU, DISPERSE, DODGE, FAR_ENCHANTMENT, FLURRY, FROST_BEAM, GAMMA_PULSE, GNAW, ICICLE_TRAP, ICICLE_TREMOR, ILL_WILL, LIGHTSPEED_RAY, LIGHT_DASH, NAB, NEAR_ENCHANTMENT, NOVA_BLAST, PROVOKE, PSYCHAL_CHOMP, RADIANT_RUSH, SLEET_SHOT, SLUMBER, SPARE, STRATAGEM, STRETCH, UNDERMINE))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(SNICLE)
@@ -3444,7 +3483,7 @@ public class SpeciesRegistry {
 			.weight(218.44)
 			.height(56.0)
 			.learnset(List.of(BAMBOOZLE, BULK_UP, CHARADE, CHASE_DOWN, CHILLY_CHOMP, CHOMP, DARK_SURGE, DAYDREAM, DEJA_VU, DODGE, DRUDGE, EERIE_STARE, FINAL_RUSE, FLURRY, FROST_BEAM, FROST_BREATH, GNAW, HARROW, ICICLE_FANGS, ICICLE_TRAP, ILL_WILL, MEGA_CHOMP, NAB, POISON, POWER_FOCUS, PREEMPTIVE_STRIKE, PROVOKE, QUICK_POUNCE, ROUGH_UP, SLUMBER, SOUL_STORM, SPIKE_RUSH, SQUARE_ONE, TRICKY_TACTICS, VENOM_CHOMP, VICE_JAWS))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(NUKICHI)
@@ -3468,7 +3507,7 @@ public class SpeciesRegistry {
 			.weight(93.98)
 			.height(68.0)
 			.learnset(List.of(BAG_OF_TRICKS, BAMBOOZLE, BARTER, BODY_SLAM, BULK_UP, COCONUT_BOMB, DODGE, EMULATE, ENAMOR, FAR_ENCHANTMENT, HARROW, HEADBUTT, HOODWINK, IMPERSONATE, NEAR_ENCHANTMENT, PHANTOM_SLASH, POUNCE, RAGING_TACKLE, REJUVENATE, SCAPEGOAT, SHADOW_SPRINT, SHARPEN, SLASH, SPARE, STUPEFY, SWAT, TEAMWORK, TEASE, TEASE, TRICKY_TACTICS, VITAL_JAB, WONDER_HERB))
-			.canEvolve(true)
+			.canEvolve(false)
 		);
 		register(Species.build()
 			.id(TERRACOLT)
@@ -3553,6 +3592,8 @@ public class SpeciesRegistry {
 			.height(129.54)
 			.learnset(List.of(BINDING_OATH, GROWL, POUNCE, METAL_SWIPES, BRACE, QUICK_POUNCE, BASH, BARBS, SWIPE, HEAVY_BASH, POWER_FOCUS, SLASH, ROCKET_JAB, BODY_SLAM, VICE_JAWS, SCAPEGOAT, ROUGH_UP, STEEL_CRUSHER, COUNTER_ASSAULT, MEGA_CHOMP, ROGUE_ASSAULT, BULK_UP, DODGE, ILL_WILL, SPARE))
 			.canEvolve(false)
+			.canSoulBurst(true)
+			.soulItem(ItemId.FENBURST_M)
 		);
 		register(Species.build()
 			.id(FENREIGN_ICE)
@@ -3565,6 +3606,34 @@ public class SpeciesRegistry {
 			.height(129.54)
 			.learnset(List.of(BINDING_OATH, GROWL, POUNCE, FLURRY, BRACE, QUICK_POUNCE, FROST_BREATH, ICICLE_TRAP, SWIPE, CHILLY_CHOMP, POWER_FOCUS, SLASH, SPIKE_RUSH, BODY_SLAM, ICICLE_FANGS, SCAPEGOAT, ROUGH_UP, ICICLE_TREMOR, COUNTER_ASSAULT, MEGA_CHOMP, ROGUE_ASSAULT, BULK_UP, DODGE, FROST_BEAM, ILL_WILL, SPARE))
 			.canEvolve(false)
+			.canSoulBurst(true)
+			.soulItem(ItemId.FENBURST_I)
+		);
+		register(Species.build()
+			.id(FENREIGN_SOLMANE)
+			.name("fenreign solmane")
+			.baseTypes(List.of(METAL, LIGHT))
+			.baseAbilities(List.of(ILLUMINATE))
+			.baseStats(87, 78, 130, 119, 54, 64, 117)
+			.bst(649)
+			.weight(24.49)
+			.height(129.54)
+			.learnset(List.of(BINDING_OATH, GROWL, POUNCE, METAL_SWIPES, BRACE, QUICK_POUNCE, BASH, BARBS, SWIPE, HEAVY_BASH, POWER_FOCUS, SLASH, ROCKET_JAB, BODY_SLAM, VICE_JAWS, SCAPEGOAT, ROUGH_UP, STEEL_CRUSHER, COUNTER_ASSAULT, MEGA_CHOMP, ROGUE_ASSAULT, BULK_UP, DODGE, ILL_WILL, SPARE))
+			.canEvolve(false)
+			.soulMove(MoveId.STEELSPINE_SURGE)
+		);
+		register(Species.build()
+			.id(FENREIGN_LUNAMANE)
+			.name("fenreign lunamane")
+			.baseTypes(List.of(ICE, DARK))
+			.baseAbilities(List.of(OVERSHADOW))
+			.baseStats(87, 78, 130, 119, 54, 64, 117)
+			.bst(649)
+			.weight(24.49)
+			.height(129.54)
+			.learnset(List.of(BINDING_OATH, GROWL, POUNCE, FLURRY, BRACE, QUICK_POUNCE, FROST_BREATH, ICICLE_TRAP, SWIPE, CHILLY_CHOMP, POWER_FOCUS, SLASH, SPIKE_RUSH, BODY_SLAM, ICICLE_FANGS, SCAPEGOAT, ROUGH_UP, ICICLE_TREMOR, COUNTER_ASSAULT, MEGA_CHOMP, ROGUE_ASSAULT, BULK_UP, DODGE, FROST_BEAM, ILL_WILL, SPARE))
+			.canEvolve(false)
+			.soulMove(MoveId.FROSTSPINE_SURGE)
 		);
 		register(Species.build()
 			.id(VERMADOR)
@@ -3961,6 +4030,8 @@ public class SpeciesRegistry {
 			.height(999)
 			.learnset(List.of(SINGE, PEBBLE_TOSS, STARE, BURROW, MUD_SPATTER, FIRE_SLAM, EERIE_STARE, TEAMWORK, CLAY_SLAP, BLAZE_PUNCH, POWER_FOCUS, TAMP, BOULDER_BLAST, BURN_TRUE, BODY_SLAM, SAFEGUARD, EARTHQUAKE, LANDSLIDE, MUDSLIDE, MAGMA_BLOCK, BURN_UP, RAGING_FLAME, BLAZE_RUSH, BLAZE_OF_GLORY, RAGING_TACKLE, RAGING_HOWL, RESONATE, TRIBUTE, BANE_OF_HASTE, DODGE, REJUVENATE, BARTER, ILL_WILL, FIRE_BREATH, BULK_UP, PEACE_OF_MIND, MUD_SPATTER, SPARE))
 			.canEvolve(false)
+			.canSoulBurst(true)
+			.soulItem(ItemId.GLINTBURST)
 		);
 		register(Species.build()
 			.id(GLINTERRA_WATER)
@@ -3973,6 +4044,8 @@ public class SpeciesRegistry {
 			.height(999)
 			.learnset(List.of(SPRAY, PEBBLE_TOSS, STARE, BURROW, MUD_SPATTER, WATER_BOMB, EERIE_STARE, TEAMWORK, CLAY_SLAP, MAROON, POWER_FOCUS, TAMP, BOULDER_BLAST, FOUNTAIN_BEAM, BODY_SLAM, SAFEGUARD, EARTHQUAKE, LANDSLIDE, MUDSLIDE, SOFT_WATER, RAGING_TACKLE, RAGING_HOWL, RESONATE, TRIBUTE, BANE_OF_HASTE, DODGE, REJUVENATE, BARTER, ILL_WILL, MAROON, TSUNAMI, BULK_UP, PEACE_OF_MIND, PLUNGE, MUD_SPATTER, SPARE))
 			.canEvolve(false)
+			.canSoulBurst(true)
+			.soulItem(ItemId.GLINTBURST)
 		);
 		register(Species.build()
 			.id(GLINTERRA_ELECTRIC)
@@ -3985,6 +4058,8 @@ public class SpeciesRegistry {
 			.height(999)
 			.learnset(List.of(STATIC_SHOCK, PEBBLE_TOSS, STARE, BURROW, MUD_SPATTER, PRECISION_BOLT, EERIE_STARE, TEAMWORK, CLAY_SLAP, ELECTRO_PUNCH, POWER_FOCUS, TAMP, BOULDER_BLAST, STRATEGIC_SURGE, BODY_SLAM, SAFEGUARD, EARTHQUAKE, LANDSLIDE, MUDSLIDE, STUN, THUNDER_CRASH, JOLT, THUNDER_CLAP, JUMP_START, POWER_SIPHON, RAGING_TACKLE, RAGING_HOWL, RESONATE, TRIBUTE, BANE_OF_HASTE, DODGE, REJUVENATE, BARTER, ILL_WILL, BULK_UP, THUNDERSTRIKE, PEACE_OF_MIND, MUD_SPATTER, SPARE))
 			.canEvolve(false)
+			.canSoulBurst(true)
+			.soulItem(ItemId.GLINTBURST)
 		);
 		register(Species.build()
 			.id(GLINTERRA_LIGHT)
@@ -3997,6 +4072,8 @@ public class SpeciesRegistry {
 			.height(999)
 			.learnset(List.of(SHINE, PEBBLE_TOSS, STARE, BURROW, MUD_SPATTER, LUSTER_LOOT, EERIE_STARE, TEAMWORK, CLAY_SLAP, ENERGY_SURGE, POWER_FOCUS, TAMP, BOULDER_BLAST, GLOW_BEAM, BODY_SLAM, SAFEGUARD, EARTHQUAKE, LANDSLIDE, MUDSLIDE, LIGHTSPEED_RAY, FLASH, SWIFTEN, NOVA_BLAST, RAGING_TACKLE, RAGING_HOWL, RESONATE, TRIBUTE, BANE_OF_HASTE, DODGE, REJUVENATE, BARTER, ILL_WILL, BULK_UP, PEACE_OF_MIND, GAMMA_PULSE, MUD_SPATTER, SPARE))
 			.canEvolve(false)
+			.canSoulBurst(true)
+			.soulItem(ItemId.GLINTBURST)
 		);
 		register(Species.build()
 			.id(GLINTERRA_DARK)
@@ -4009,6 +4086,8 @@ public class SpeciesRegistry {
 			.height(999)
 			.learnset(List.of(AGGRAVATE, PEBBLE_TOSS, STARE, BURROW, MUD_SPATTER, BAMBOOZLE, EERIE_STARE, TEAMWORK, CLAY_SLAP, SLAP_DOWN, POWER_FOCUS, TAMP, BOULDER_BLAST, RANCOROUS_ROLLOUT, BODY_SLAM, SAFEGUARD, EARTHQUAKE, LANDSLIDE, MUDSLIDE, TRICKY_TACTICS, SQUARE_ONE, RANT, PROVOKE, RAGING_TACKLE, RAGING_HOWL, RESONATE, TRIBUTE, BANE_OF_HASTE, DODGE, REJUVENATE, BARTER, ILL_WILL, BULK_UP, PEACE_OF_MIND, DARK_SURGE, MUD_SPATTER, SPARE))
 			.canEvolve(false)
+			.canSoulBurst(true)
+			.soulItem(ItemId.GLINTBURST)
 		);
 		register(Species.build()
 			.id(GEOKNIGHT_GLINTERRA_FIRE)
@@ -4019,8 +4098,9 @@ public class SpeciesRegistry {
 			.bst(625)
 			.weight(999)
 			.height(999)
-			.learnset(List.of(FUSION_BARRAGE, SINGE, PEBBLE_TOSS, STARE, BURROW, MUD_SPATTER, FIRE_SLAM, EERIE_STARE, TEAMWORK, CLAY_SLAP, BLAZE_PUNCH, POWER_FOCUS, TAMP, BOULDER_BLAST, BURN_TRUE, BODY_SLAM, SAFEGUARD, EARTHQUAKE, LANDSLIDE, MUDSLIDE, MAGMA_BLOCK, BURN_UP, RAGING_FLAME, BLAZE_RUSH, BLAZE_OF_GLORY, RAGING_TACKLE, RAGING_HOWL, RESONATE, TRIBUTE, BANE_OF_HASTE, DODGE, REJUVENATE, BARTER, ILL_WILL, FIRE_BREATH, BULK_UP, PEACE_OF_MIND, MUD_SPATTER, SPARE))
+			.learnset(List.of(SINGE, PEBBLE_TOSS, STARE, BURROW, MUD_SPATTER, FIRE_SLAM, EERIE_STARE, TEAMWORK, CLAY_SLAP, BLAZE_PUNCH, POWER_FOCUS, TAMP, BOULDER_BLAST, BURN_TRUE, BODY_SLAM, SAFEGUARD, EARTHQUAKE, LANDSLIDE, MUDSLIDE, MAGMA_BLOCK, BURN_UP, RAGING_FLAME, BLAZE_RUSH, BLAZE_OF_GLORY, RAGING_TACKLE, RAGING_HOWL, RESONATE, TRIBUTE, BANE_OF_HASTE, DODGE, REJUVENATE, BARTER, ILL_WILL, FIRE_BREATH, BULK_UP, PEACE_OF_MIND, MUD_SPATTER, SPARE))
 			.canEvolve(false)
+			.soulMove(MoveId.FUSION_BARRAGE)
 		);
 		register(Species.build()
 			.id(GEOKNIGHT_GLINTERRA_WATER)
@@ -4031,8 +4111,9 @@ public class SpeciesRegistry {
 			.bst(625)
 			.weight(999)
 			.height(999)
-			.learnset(List.of(FUSION_BARRAGE, SPRAY, PEBBLE_TOSS, STARE, BURROW, MUD_SPATTER, WATER_BOMB, EERIE_STARE, TEAMWORK, CLAY_SLAP, MAROON, POWER_FOCUS, TAMP, BOULDER_BLAST, FOUNTAIN_BEAM, BODY_SLAM, SAFEGUARD, EARTHQUAKE, LANDSLIDE, MUDSLIDE, SOFT_WATER, RAGING_TACKLE, RAGING_HOWL, RESONATE, TRIBUTE, BANE_OF_HASTE, DODGE, REJUVENATE, BARTER, ILL_WILL, MAROON, TSUNAMI, BULK_UP, PEACE_OF_MIND, PLUNGE, MUD_SPATTER, SPARE))
+			.learnset(List.of(SPRAY, PEBBLE_TOSS, STARE, BURROW, MUD_SPATTER, WATER_BOMB, EERIE_STARE, TEAMWORK, CLAY_SLAP, MAROON, POWER_FOCUS, TAMP, BOULDER_BLAST, FOUNTAIN_BEAM, BODY_SLAM, SAFEGUARD, EARTHQUAKE, LANDSLIDE, MUDSLIDE, SOFT_WATER, RAGING_TACKLE, RAGING_HOWL, RESONATE, TRIBUTE, BANE_OF_HASTE, DODGE, REJUVENATE, BARTER, ILL_WILL, MAROON, TSUNAMI, BULK_UP, PEACE_OF_MIND, PLUNGE, MUD_SPATTER, SPARE))
 			.canEvolve(false)
+			.soulMove(MoveId.FUSION_BARRAGE)
 		);
 		register(Species.build()
 			.id(GEOKNIGHT_GLINTERRA_ELECTRIC)
@@ -4043,8 +4124,9 @@ public class SpeciesRegistry {
 			.bst(625)
 			.weight(999)
 			.height(999)
-			.learnset(List.of(FUSION_BARRAGE, STATIC_SHOCK, PEBBLE_TOSS, STARE, BURROW, MUD_SPATTER, PRECISION_BOLT, EERIE_STARE, TEAMWORK, CLAY_SLAP, ELECTRO_PUNCH, POWER_FOCUS, TAMP, BOULDER_BLAST, STRATEGIC_SURGE, BODY_SLAM, SAFEGUARD, EARTHQUAKE, LANDSLIDE, MUDSLIDE, STUN, THUNDER_CRASH, JOLT, THUNDER_CLAP, JUMP_START, POWER_SIPHON, RAGING_TACKLE, RAGING_HOWL, RESONATE, TRIBUTE, BANE_OF_HASTE, DODGE, REJUVENATE, BARTER, ILL_WILL, BULK_UP, THUNDERSTRIKE, PEACE_OF_MIND, MUD_SPATTER, SPARE))
+			.learnset(List.of(STATIC_SHOCK, PEBBLE_TOSS, STARE, BURROW, MUD_SPATTER, PRECISION_BOLT, EERIE_STARE, TEAMWORK, CLAY_SLAP, ELECTRO_PUNCH, POWER_FOCUS, TAMP, BOULDER_BLAST, STRATEGIC_SURGE, BODY_SLAM, SAFEGUARD, EARTHQUAKE, LANDSLIDE, MUDSLIDE, STUN, THUNDER_CRASH, JOLT, THUNDER_CLAP, JUMP_START, POWER_SIPHON, RAGING_TACKLE, RAGING_HOWL, RESONATE, TRIBUTE, BANE_OF_HASTE, DODGE, REJUVENATE, BARTER, ILL_WILL, BULK_UP, THUNDERSTRIKE, PEACE_OF_MIND, MUD_SPATTER, SPARE))
 			.canEvolve(false)
+			.soulMove(MoveId.FUSION_BARRAGE)
 		);
 		register(Species.build()
 			.id(GEOKNIGHT_GLINTERRA_LIGHT)
@@ -4055,8 +4137,9 @@ public class SpeciesRegistry {
 			.bst(625)
 			.weight(999)
 			.height(999)
-			.learnset(List.of(FUSION_BARRAGE, SHINE, PEBBLE_TOSS, STARE, BURROW, MUD_SPATTER, LUSTER_LOOT, EERIE_STARE, TEAMWORK, CLAY_SLAP, ENERGY_SURGE, POWER_FOCUS, TAMP, BOULDER_BLAST, GLOW_BEAM, BODY_SLAM, SAFEGUARD, EARTHQUAKE, LANDSLIDE, MUDSLIDE, LIGHTSPEED_RAY, FLASH, SWIFTEN, NOVA_BLAST, RAGING_TACKLE, RAGING_HOWL, RESONATE, TRIBUTE, BANE_OF_HASTE, DODGE, REJUVENATE, BARTER, ILL_WILL, BULK_UP, PEACE_OF_MIND, GAMMA_PULSE, MUD_SPATTER, SPARE))
+			.learnset(List.of(SHINE, PEBBLE_TOSS, STARE, BURROW, MUD_SPATTER, LUSTER_LOOT, EERIE_STARE, TEAMWORK, CLAY_SLAP, ENERGY_SURGE, POWER_FOCUS, TAMP, BOULDER_BLAST, GLOW_BEAM, BODY_SLAM, SAFEGUARD, EARTHQUAKE, LANDSLIDE, MUDSLIDE, LIGHTSPEED_RAY, FLASH, SWIFTEN, NOVA_BLAST, RAGING_TACKLE, RAGING_HOWL, RESONATE, TRIBUTE, BANE_OF_HASTE, DODGE, REJUVENATE, BARTER, ILL_WILL, BULK_UP, PEACE_OF_MIND, GAMMA_PULSE, MUD_SPATTER, SPARE))
 			.canEvolve(false)
+			.soulMove(MoveId.FUSION_BARRAGE)
 		);
 		register(Species.build()
 			.id(GEOKNIGHT_GLINTERRA_DARK)
@@ -4067,8 +4150,9 @@ public class SpeciesRegistry {
 			.bst(625)
 			.weight(999)
 			.height(999)
-			.learnset(List.of(FUSION_BARRAGE, AGGRAVATE, PEBBLE_TOSS, STARE, BURROW, MUD_SPATTER, BAMBOOZLE, EERIE_STARE, TEAMWORK, CLAY_SLAP, SLAP_DOWN, POWER_FOCUS, TAMP, BOULDER_BLAST, RANCOROUS_ROLLOUT, BODY_SLAM, SAFEGUARD, EARTHQUAKE, LANDSLIDE, MUDSLIDE, TRICKY_TACTICS, SQUARE_ONE, RANT, PROVOKE, RAGING_TACKLE, RAGING_HOWL, RESONATE, TRIBUTE, BANE_OF_HASTE, DODGE, REJUVENATE, BARTER, ILL_WILL, BULK_UP, PEACE_OF_MIND, DARK_SURGE, MUD_SPATTER, SPARE))
+			.learnset(List.of(AGGRAVATE, PEBBLE_TOSS, STARE, BURROW, MUD_SPATTER, BAMBOOZLE, EERIE_STARE, TEAMWORK, CLAY_SLAP, SLAP_DOWN, POWER_FOCUS, TAMP, BOULDER_BLAST, RANCOROUS_ROLLOUT, BODY_SLAM, SAFEGUARD, EARTHQUAKE, LANDSLIDE, MUDSLIDE, TRICKY_TACTICS, SQUARE_ONE, RANT, PROVOKE, RAGING_TACKLE, RAGING_HOWL, RESONATE, TRIBUTE, BANE_OF_HASTE, DODGE, REJUVENATE, BARTER, ILL_WILL, BULK_UP, PEACE_OF_MIND, DARK_SURGE, MUD_SPATTER, SPARE))
 			.canEvolve(false)
+			.soulMove(MoveId.FUSION_BARRAGE)
 		);
 		register(Species.build()
 			.id(NOCTULITE)
@@ -4573,6 +4657,8 @@ public class SpeciesRegistry {
 			.height(298.0)
 			.learnset(List.of(BULK_UP, DODGE, ENERGIZE, GAMMA_PULSE, GROWL, ILL_WILL, MAROON, PLUNGE, POWER_FOCUS, PROVOKE, SLAP_DOWN, SPARE, SPRAY, STATIC_SHOCK, STUN, SWIPE, THUNDERSTRIKE, THUNDER_BLAST, THUNDER_CRASH, THUNDER_SLAM, TORRENTIAL_SLASH, TSUNAMI, WATER_BOMB))
 			.canEvolve(false)
+			.canSoulBurst(true)
+			.soulItem(ItemId.DAKUBURST)
 		);
 		register(Species.build()
 			.id(DAKUDA_OVERCHARGED)
@@ -4585,6 +4671,7 @@ public class SpeciesRegistry {
 			.height(298.0)
 			.learnset(List.of(BULK_UP, DODGE, ENERGIZE, GAMMA_PULSE, GROWL, ILL_WILL, MAROON, PLUNGE, POWER_FOCUS, PROVOKE, SLAP_DOWN, SPARE, SPRAY, STATIC_SHOCK, STUN, SWIPE, THUNDERSTRIKE, THUNDER_BLAST, THUNDER_CRASH, THUNDER_SLAM, TORRENTIAL_SLASH, TSUNAMI, WATER_BOMB))
 			.canEvolve(false)
+			.soulMove(MoveId.ELECTRO_BLAST)
 		);
 		register(Species.build()
 			.id(YAMASHKIGAL)
@@ -4813,6 +4900,8 @@ public class SpeciesRegistry {
 			.height(67.0)
 			.learnset(List.of(BAG_OF_TRICKS, BARBS, BARTER, BRAINWASH, BULK_UP, CEREBRAL_SLASH, CHARADE, CHOMP, DARK_SURGE, DEJA_VU, DODGE, EERIE_STARE, FLABBERGAST, GNARLY_GASH, HARROW, HYPNOTIZE, ILL_WILL, JUDGEMENT, MEGA_PUNCH, MINDS_EYE, MIND_DRAIN, MUD_SPATTER, PEACE_OF_MIND, PHANTOM_SLASH, POWER_FOCUS, PROVOKE, PSYCHO_BLAST, PYROKINESIS, ROGUE_ASSAULT, SOUL_STORM, SPARE, STUPEFY))
 			.canEvolve(false)
+			.canSoulBurst(true)
+			.soulItem(ItemId.METROBURST)
 		);
 		register(Species.build()
 			.id(METRONETTE_WILLBOUND)
@@ -4825,6 +4914,7 @@ public class SpeciesRegistry {
 			.height(67.0)
 			.learnset(List.of(BAG_OF_TRICKS, BARBS, BARTER, BRAINWASH, BULK_UP, CEREBRAL_SLASH, CHARADE, CHOMP, DARK_SURGE, DEJA_VU, DODGE, EERIE_STARE, FLABBERGAST, GNARLY_GASH, HARROW, HYPNOTIZE, ILL_WILL, JUDGEMENT, MEGA_PUNCH, MINDS_EYE, MIND_DRAIN, MUD_SPATTER, PEACE_OF_MIND, PHANTOM_SLASH, POWER_FOCUS, PROVOKE, PSYCHO_BLAST, PYROKINESIS, ROGUE_ASSAULT, SOUL_STORM, SPARE, STUPEFY))
 			.canEvolve(false)
+			.soulMove(MoveId.SINISTER_SHACKLES)
 		);
 		register(Species.build()
 			.id(NEVERMARE)
@@ -4933,6 +5023,8 @@ public class SpeciesRegistry {
 			.height(47.0)
 			.learnset(List.of(BARBS, BARTER, BASH, DEJA_VU, DISPERSE, DISSONANT_CHORD, DODGE, ENERGY_BREAK, FLASH, FLASH_N_FLEE, GAMMA_PULSE, HARMONIOUS_CHORD, HEALTH_GIFT, HEAVY_BASH, HULLABALOO, ICICLE_TRAP, LIGHTSPEED_RAY, LUSTER_LOOT, METAL_BLAST, MINDS_EYE, NOVA_BLAST, PEACE_OF_MIND, REFLECTION_BURST, REPEATING_TUNE, RESONATE, SHINE, SPARE, SUMMON, TEAR_DOWN, TONE_BARRIER))
 			.canEvolve(false)
+			.canSoulBurst(true)
+			.soulItem(ItemId.CELEBURST)
 		);
 		register(Species.build()
 			.id(CELESTING_STELLARCHIME)
@@ -4945,6 +5037,7 @@ public class SpeciesRegistry {
 			.height(47.0)
 			.learnset(List.of(BARBS, BARTER, BASH, DEJA_VU, DISPERSE, DISSONANT_CHORD, DODGE, ENERGY_BREAK, FLASH, FLASH_N_FLEE, GAMMA_PULSE, HARMONIOUS_CHORD, HEALTH_GIFT, HEAVY_BASH, HULLABALOO, ICICLE_TRAP, LIGHTSPEED_RAY, LUSTER_LOOT, METAL_BLAST, MINDS_EYE, NOVA_BLAST, PEACE_OF_MIND, REFLECTION_BURST, REPEATING_TUNE, RESONATE, SHINE, SPARE, SUMMON, TEAR_DOWN, TONE_BARRIER))
 			.canEvolve(false)
+			.soulMove(MoveId.MIRACLE_BEAM)
 		);
 		register(Species.build()
 			.id(MIMASK)

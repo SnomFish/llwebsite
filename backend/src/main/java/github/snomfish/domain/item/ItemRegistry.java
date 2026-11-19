@@ -1190,6 +1190,14 @@ public class ItemRegistry {
 			.name("Kramburst")
 		);
 		register(Item.build()
+			.id(FENBURST_M)
+			.name("fenburst m")
+		);
+		register(Item.build()
+			.id(FENBURST_I)
+			.name("fenburst i")
+		);
+		register(Item.build()
 			.id(GLINTBURST)
 			.name("Glintburst")
 		);

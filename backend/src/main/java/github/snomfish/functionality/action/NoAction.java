@@ -31,11 +31,18 @@ public class NoAction implements IAction {
 	public int priority() {return priority;}
 	public Move move() 			{throw new RuntimeException("Attempted to get move from a no_action");}
 	public int switchTarget() 	{throw new RuntimeException("Attempted to get switchTarget from a no_action");}
+	public boolean willSoulBurst() {return false;}
 
 
 	public void setPriority(int priority) {this.priority = priority;}
-	public void setMove(Move move) 					{throw new RuntimeException("Attempted to set move from a no_action");}
-	public void setSwitchTarget(int switchTarget) 	{throw new RuntimeException("Attempted to set switchTarget from a no_action");}
+	public void setMove(Move move) 						{throw new RuntimeException("Attempted to set move from a no_action");}
+	public void setSwitchTarget(int switchTarget) 		{throw new RuntimeException("Attempted to set switchTarget from a no_action");}
+	public void setWillSoulBurst(boolean willSoulBurst) {throw new RuntimeException("Attempted to set willSoulBurst from a no_action");}
+
+
+	public boolean isSelectable(BattleContext context) {
+        return true;
+    }
 
 
 	public List<Branch<BattleContext>> execute(BattleContext context) {

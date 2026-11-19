@@ -12,6 +12,7 @@ public class WaitAction implements IAction {
 	
 
 	private int priority;
+    private boolean willSoulBurst;
 
 
     public WaitAction(
@@ -30,15 +31,22 @@ public class WaitAction implements IAction {
 
 
     // getter
-    public ActionId id() {return ActionId.SWITCH;}
-    public int priority() {return priority;}
-    public Move move() 			{throw new RuntimeException("Attempted to get move from a wait action");}
-	public int switchTarget() 	{throw new RuntimeException("Attempted to get switchTarget from a wait action");}
+    public ActionId id()            {return ActionId.SWITCH;}
+    public int priority()           {return priority;}
+    public Move move() 			    {throw new RuntimeException("Attempted to get move from a wait action");}
+	public int switchTarget() 	    {throw new RuntimeException("Attempted to get switchTarget from a wait action");}
+    public boolean willSoulBurst()  {return willSoulBurst;}
 
 
-	public void setPriority(int priority) {this.priority = priority;}
-	public void setMove(Move move) 					{throw new RuntimeException("Attempted to set move from a wait action");}
-	public void setSwitchTarget(int switchTarget) 	{throw new RuntimeException("Attempted to set switchTarget from a wait action");}
+	public void setPriority(int priority)               {this.priority = priority;}
+	public void setMove(Move move) 					    {throw new RuntimeException("Attempted to set move from a wait action");}
+	public void setSwitchTarget(int switchTarget) 	    {throw new RuntimeException("Attempted to set switchTarget from a wait action");}
+    public void setWillSoulBurst(boolean willSoulBurst) {this.willSoulBurst = willSoulBurst;}
+
+
+    public boolean isSelectable(BattleContext context) {
+        return true;
+    }
 
 
     public List<Branch<BattleContext>> execute(BattleContext context) {

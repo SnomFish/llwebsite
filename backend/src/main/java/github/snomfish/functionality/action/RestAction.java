@@ -14,6 +14,7 @@ public class RestAction implements IAction {
 	
 
 	private int priority;
+    private boolean willSoulBurst;
 
 
     public RestAction(
@@ -25,6 +26,7 @@ public class RestAction implements IAction {
     
     protected RestAction(RestAction copy) {
         this.priority = copy.priority;
+        this.willSoulBurst = copy.willSoulBurst;
     }
     public RestAction deepCopy() {
         return new RestAction(this);
@@ -32,15 +34,22 @@ public class RestAction implements IAction {
 
 
     // getter
-    public ActionId id() {return ActionId.SWITCH;}
-    public int priority() {return priority;}
-    public Move move() 			{throw new RuntimeException("Attempted to get move from a rest action");}
-	public int switchTarget() 	{throw new RuntimeException("Attempted to get switchTarget from a rest action");}
+    public ActionId id()            {return ActionId.SWITCH;}
+    public int priority()           {return priority;}
+    public Move move() 			    {throw new RuntimeException("Attempted to get move from a rest action");}
+	public int switchTarget() 	    {throw new RuntimeException("Attempted to get switchTarget from a rest action");}
+    public boolean willSoulBurst()  {return willSoulBurst;}
 
 
-	public void setPriority(int priority) {this.priority = priority;}
-	public void setMove(Move move) 					{throw new RuntimeException("Attempted to set move from a rest action");}
-	public void setSwitchTarget(int switchTarget) 	{throw new RuntimeException("Attempted to set switchTarget from a rest action");}
+	public void setPriority(int priority)               {this.priority = priority;}
+	public void setMove(Move move) 					    {throw new RuntimeException("Attempted to set move from a rest action");}
+	public void setSwitchTarget(int switchTarget) 	    {throw new RuntimeException("Attempted to set switchTarget from a rest action");}
+    public void setWillSoulBurst(boolean willSoulBurst) {this.willSoulBurst = willSoulBurst;}
+
+
+    public boolean isSelectable(BattleContext context) {
+        return true;
+    }
 
 
     public List<Branch<BattleContext>> execute(BattleContext context) {

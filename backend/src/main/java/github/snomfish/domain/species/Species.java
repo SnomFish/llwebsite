@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import github.snomfish.domain.ability.AbilityId;
+import github.snomfish.domain.item.ItemId;
 import github.snomfish.domain.move.MoveId;
 import github.snomfish.domain.stats.Stats;
 import github.snomfish.domain.type.TypeId;
@@ -22,6 +23,10 @@ public class Species {
     private List<MoveId> learnset;
     private boolean canEvolve;
 
+    private boolean canSoulBurst;
+    private ItemId soulItemId;
+    private MoveId soulMoveId;
+
 
     public Species() {
         this.id = SpeciesId.NO_SPECIES;
@@ -34,6 +39,9 @@ public class Species {
         this.weight = -1;
         this.learnset = new ArrayList<>();
         this.canEvolve = false;
+        this.canSoulBurst = false;
+        this.soulItemId = ItemId.NO_ITEM;
+        this.soulMoveId = MoveId.NO_MOVE;
     }
 
 
@@ -48,6 +56,9 @@ public class Species {
     public double weight() {return weight;}
     public List<MoveId> learnset() {return learnset;}
     public boolean canEvolve() {return canEvolve;}
+    public boolean canSoulBurst() {return canSoulBurst;}
+    public ItemId soulItemId() {return soulItemId;}
+    public MoveId soulMoveId() {return soulMoveId;}
 
 
     // builder functions
@@ -92,6 +103,18 @@ public class Species {
     }
     public Species canEvolve(boolean canEvolve) {
         this.canEvolve = canEvolve;
+        return this;
+    }
+    public Species canSoulBurst(boolean canSoulBurst) {
+        this.canSoulBurst = canSoulBurst;
+        return this;
+    }
+    public Species soulItem(ItemId itemId) {
+        this.soulItemId = itemId;
+        return this;
+    }
+    public Species soulMove(MoveId moveId) {
+        this.soulMoveId = moveId;
         return this;
     }
 }
