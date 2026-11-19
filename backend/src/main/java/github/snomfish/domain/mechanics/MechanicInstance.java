@@ -55,9 +55,6 @@ public class MechanicInstance implements DeepCopyable<MechanicInstance> {
     }
 
 
-    public List<Branch<BattleContext>> handleRule(BattleContext context, IRuleId ruleId) {
-        return mechanic().handleRule(context, ruleId);
-    }
     public double handleGate(BattleContext context, IGateId gateId) {
         return mechanic().handleGate(context, gateId);
     }

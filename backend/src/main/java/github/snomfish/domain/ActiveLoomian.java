@@ -13,6 +13,7 @@ import github.snomfish.functionality.action.NoAction;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.event.HookReport;
+import github.snomfish.functionality.event.RuleReport;
 import github.snomfish.functionality.event.gateIds.IGateId;
 import github.snomfish.functionality.event.ruleIds.IRuleId;
 
@@ -97,15 +98,11 @@ public class ActiveLoomian extends Loomian {
     public void setSwappedInThisTurn(boolean hasSwappedInThisTurn) {this.hasSwappedInThisTurn = hasSwappedInThisTurn;}
 
 
-    public List<Branch<BattleContext>> dispatchRule(BattleContext context, IRuleId event) {
-        List<Branch<BattleContext>> outcomes = List.of(new Branch<>(context, 1.0));
-
-        outcomes = flatMap(outcomes, c -> abilityInstance().handleRule(c, event));
-        outcomes = flatMap(outcomes, c -> item().handleRule(c, event));
-        outcomes = flatMap(outcomes, c -> status().handleRule(c, event)); // has to be afunction as I only store Ids for ability item and status
-        outcomes = flatMap(outcomes, c -> mechanics.dispatchRule(c, event)); 
-
-        return outcomes;
+    public void dispatchRule(RuleReport report, IRuleId ruleId) {
+        report.record(abilityInstance.ability().rules(), ruleId);
+        report.record(item().rules(), ruleId);
+        report.record(status().rules(), ruleId);
+        mechanics.dispatchRule(report, ruleId);
     }
     public double dispatchGate(BattleContext context, IGateId gateId) {
         double probability = 1;

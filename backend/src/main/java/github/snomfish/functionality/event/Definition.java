@@ -9,6 +9,7 @@ import github.snomfish.functionality.event.gateIds.IGateId;
 import github.snomfish.functionality.event.ruleIds.IRuleId;
 
 import static github.snomfish.functionality.branch.BranchUtil.flatMap;
+import static github.snomfish.functionality.branch.BranchUtil.wrap;
 
 @SuppressWarnings("unchecked")
 public abstract class Definition<A, B extends Definition<A, B>> {
@@ -52,15 +53,6 @@ public abstract class Definition<A, B extends Definition<A, B>> {
     }
 
 
-    public List<Branch<BattleContext>> handleRule(BattleContext context, IRuleId ruleId) {
-        List<Branch<BattleContext>> outcomes = List.of(new Branch<>(context, 1.0));  
-        
-        for (Rule rule : rules) {  
-            outcomes = flatMap(outcomes, c -> rule.execute(c, ruleId));
-        }
-
-        return outcomes;
-    }
     public double handleGate(BattleContext context, IGateId gateId) {
         double probability = 1;
 

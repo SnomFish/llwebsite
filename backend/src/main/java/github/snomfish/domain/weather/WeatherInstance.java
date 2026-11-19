@@ -5,6 +5,7 @@ import java.util.List;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.copy.DeepCopyable;
+import github.snomfish.functionality.event.RuleReport;
 import github.snomfish.functionality.event.gateIds.IGateId;
 import github.snomfish.functionality.event.ruleIds.IRuleId;
 
@@ -44,8 +45,8 @@ public class WeatherInstance implements DeepCopyable<WeatherInstance> {
     public void setLifespan(int lifespan) {this.lifespan = lifespan;}
 
 
-    public List<Branch<BattleContext>> dispatchRule(BattleContext context, IRuleId event) {
-        return weather().handleRule(context, event);
+    public void dispatchRule(RuleReport report, IRuleId ruleId) {
+        report.record(weather().rules(), ruleId);
     }
     public double dispatchGate(BattleContext context, IGateId gateId) {
         return weather().handleGate(context, gateId);

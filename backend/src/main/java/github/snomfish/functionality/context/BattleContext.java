@@ -8,12 +8,12 @@ import github.snomfish.domain.SideId;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.copy.DeepCopyable;
 import github.snomfish.functionality.event.HookReport;
+import github.snomfish.functionality.event.RuleReport;
 import github.snomfish.functionality.event.gateIds.GateForAllId;
 import github.snomfish.functionality.event.ruleIds.ConstantRuleId;
 import github.snomfish.functionality.event.ruleIds.RuleForAllId;
 
 import static github.snomfish.domain.SideId.*;
-import static github.snomfish.functionality.branch.BranchUtil.flatMap;
 
 // this is the context of a loomian using a move
 // this could be a record
@@ -53,6 +53,18 @@ public class BattleContext implements DeepCopyable<BattleContext> {
     public Gamestate gamestate() {return gamestate;}
     public SideId userState() {return userState;}
     public SideId targetState() {return targetState;}
+    public SideId selfState(ContextSideId sideId) {
+        return switch (sideId) {
+            case USER -> userState;
+            case TARGET -> targetState;
+        };
+    }
+    public SideId oppState(ContextSideId sideId) {
+        return switch (sideId) {
+            case USER -> targetState;
+            case TARGET -> userState;
+        };
+    }
     public Side user() {return user;}
     public Side target() {return target;}
     public Side side(ContextSideId sideId) {
@@ -64,36 +76,32 @@ public class BattleContext implements DeepCopyable<BattleContext> {
     
 
     public List<Branch<BattleContext>> dispatchRule(ConstantRuleId ruleId, ContextSideId sideId) {
-        List<Branch<BattleContext>> outcomes = List.of(new Branch<>(this, 1.0));
-        
-        outcomes = ContextUtil.setFocus(outcomes, sideId);
-        outcomes = flatMap(outcomes, context -> gamestate().weatherInstance().dispatchRule(context, ruleId));
-        outcomes = flatMap(outcomes, context -> gamestate().mechanics().dispatchRule(context, ruleId));
+        SideId selfState = selfState(sideId);
+        SideId oppState = oppState(sideId);
+        RuleReport report = new RuleReport(selfState);
 
-        outcomes = flatMap(outcomes, context -> user().dispatchRule(context, ruleId));
+        gamestate.weatherInstance().dispatchRule(report, ruleId);
+        gamestate.mechanics().dispatchRule(report, ruleId);
+        user.dispatchRule(report, ruleId);
 
-        outcomes = ContextUtil.reverseFocus(outcomes);
-        outcomes = flatMap(outcomes, context -> target().dispatchRule(context, ruleId));
-        
-        outcomes = ContextUtil.setFocus(outcomes, userState);
-        return outcomes;
+        report.setCurrentSideThatIsUser(oppState);
+        target.dispatchRule(report, ruleId);
+
+        return report.execute(this);
     }
     public List<Branch<BattleContext>> dispatchRule(RuleForAllId ruleId, ContextSideId sideId) {
-        List<Branch<BattleContext>> outcomes = List.of(new Branch<>(this, 1.0));
+        SideId selfState = selfState(sideId);
+        SideId oppState = oppState(sideId);
+        RuleReport report = new RuleReport(selfState);
 
-        outcomes = ContextUtil.setFocus(outcomes, sideId);
-        outcomes = flatMap(outcomes, context -> gamestate().weatherInstance().dispatchRule(context, ruleId));
-        outcomes = flatMap(outcomes, context -> gamestate().mechanics().dispatchRule(context, ruleId));
+        gamestate.weatherInstance().dispatchRule(report, ruleId);
+        gamestate.mechanics().dispatchRule(report, ruleId);
+        user.dispatchRule(report, ruleId.forUser());
 
-        outcomes = flatMap(outcomes, context -> user().dispatchRule(context, ruleId.forUser()));
-        outcomes = flatMap(outcomes, context -> user().dispatchRule(context, ruleId));
+        report.setCurrentSideThatIsUser(oppState);
+        target.dispatchRule(report, ruleId.forTarget());
 
-        outcomes = ContextUtil.reverseFocus(outcomes); // target state always inverts the focus
-        outcomes = flatMap(outcomes, context -> target().dispatchRule(context, ruleId.forTarget()));
-        outcomes = flatMap(outcomes, context -> target().dispatchRule(context, ruleId));
-
-        outcomes = ContextUtil.setFocus(outcomes, userState); // resets the focus to the correct state
-        return outcomes;
+        return report.execute(this);
     }
 
 

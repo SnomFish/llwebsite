@@ -10,6 +10,7 @@ import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.copy.DeepCopyable;
 import github.snomfish.functionality.event.HookReport;
+import github.snomfish.functionality.event.RuleReport;
 import github.snomfish.functionality.event.gateIds.IGateId;
 import github.snomfish.functionality.event.ruleIds.IRuleId;
 
@@ -68,13 +69,9 @@ public class Side implements DeepCopyable<Side> {
 
 
 
-    public List<Branch<BattleContext>> dispatchRule(BattleContext context, IRuleId event) {
-        List<Branch<BattleContext>> outcomes = new ArrayList<>();
-
-        outcomes = activeLoomian().dispatchRule(context, event);
-        outcomes = mechanics.dispatchRule(context, event);
-
-        return outcomes;
+    public void dispatchRule(RuleReport report, IRuleId ruleId) {
+        activeLoomian.dispatchRule(report, ruleId);
+        mechanics.dispatchRule(report, ruleId);
     }
     public double dispatchGate(BattleContext context, IGateId gateId) {
         double probability = 1;

@@ -9,6 +9,7 @@ import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.copy.DeepCopyable;
 import github.snomfish.functionality.event.HookReport;
+import github.snomfish.functionality.event.RuleReport;
 import github.snomfish.functionality.event.gateIds.IGateId;
 import github.snomfish.functionality.event.ruleIds.IRuleId;
 
@@ -55,14 +56,10 @@ public class Mechanics implements DeepCopyable<Mechanics> {
     }
 
 
-    public List<Branch<BattleContext>> dispatchRule(BattleContext context, IRuleId ruleId) {
-        List<Branch<BattleContext>> outcomes = List.of(new Branch<>(context, 1.0));
-
+    public void dispatchRule(RuleReport report, IRuleId ruleId) {
         for (MechanicInstance instance : mechanics.values()) {
-            outcomes = flatMap(outcomes, c -> instance.handleRule(c, ruleId));
+            report.record(instance.mechanic().rules(), ruleId);
         }
-
-        return outcomes;
     }
     public double dispatchGate(BattleContext context, IGateId gateId) {
         double probability = 1;

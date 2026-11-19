@@ -14,12 +14,14 @@ public class Hook {
     private List<IRuleId> events;
     private List<ICondition> conditions;
     private IEffect effect;
+    private int priority;
 
 
     private Hook() {
         this.events = new ArrayList<>();
         this.conditions = new ArrayList<>();
         this.effect = new NoEffect();
+        this.priority = 0;
     }
 
 
@@ -27,22 +29,15 @@ public class Hook {
     public List<IRuleId> events() {return events;}
     public List<ICondition> conditions() {return conditions;}
     public IEffect effect() {return effect;}
+    public int priority() {return priority;}
 
 
     // builder functions
     public static Hook build() {
         return new Hook();
     }
-    public Hook event(IRuleId id) {
-        this.events.add(id);
-        return this;
-    }
-    public Hook condition(ICondition condition) {
-        this.conditions.add(condition);
-        return this;
-    }
-    public Hook effect(IEffect effect) {
-        this.effect = effect;
-        return this;
-    }
+    public Hook event(IRuleId id) {this.events.add(id); return this;}
+    public Hook condition(ICondition condition) {this.conditions.add(condition); return this;}
+    public Hook effect(IEffect effect) {this.effect = effect; return this;}
+    public Hook priority(int priority) {this.priority = priority; return this;}
 }

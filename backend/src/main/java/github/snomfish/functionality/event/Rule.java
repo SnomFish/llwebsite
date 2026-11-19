@@ -19,41 +19,34 @@ public class Rule {
     private List<IRuleId> events;
     private List<ICondition> conditions;
     private List<IEffect> effects;
+    private int priority;
 
 
     private Rule() {
         this.events = new ArrayList<>();
         this.conditions = new ArrayList<>();
         this.effects = new ArrayList<>();
+        this.priority = 0;
     }
 
 
     public List<IRuleId> events() {return events;}
     public List<ICondition> conditions() {return conditions;}
     public List<IEffect> effects() {return effects;}
+    public int priority() {return priority;}
 
 
     // builder functions
     public static Rule build() {
         return new Rule();
     }
-    public Rule event(IRuleId id) {
-        this.events.add(id);
-        return this;
-    }
-    public Rule condition(ICondition condition) {
-        this.conditions.add(condition);
-        return this;
-    }
-    public Rule effect(IEffect effect) {
-        this.effects.add(effect);
-        return this;
-    }
+    public Rule event(IRuleId id) {this.events.add(id); return this;}
+    public Rule condition(ICondition condition) {this.conditions.add(condition); return this;}
+    public Rule effect(IEffect effect) {this.effects.add(effect); return this;}
+    public Rule priority(int priority) {this.priority = priority; return this;}
 
 
-    public List<Branch<BattleContext>> execute(BattleContext context, IRuleId event) {
-        if (!events.contains(event)) return List.of(new Branch<>(context, 1.0));
-
+    public List<Branch<BattleContext>> execute(BattleContext context) {
         return resolveConditions(context, conditions, this::executeEffects);
     }
 
