@@ -3,13 +3,9 @@ package github.snomfish.functionality.event;
 import java.util.ArrayList;
 import java.util.List;
 
-import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.event.gateIds.IGateId;
 import github.snomfish.functionality.event.ruleIds.IRuleId;
-
-import static github.snomfish.functionality.branch.BranchUtil.flatMap;
-import static github.snomfish.functionality.branch.BranchUtil.wrap;
 
 @SuppressWarnings("unchecked")
 public abstract class Definition<A, B extends Definition<A, B>> {

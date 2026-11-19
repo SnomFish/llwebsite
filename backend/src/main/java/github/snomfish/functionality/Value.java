@@ -15,7 +15,6 @@ import github.snomfish.domain.mechanics.Mechanics;
 import github.snomfish.domain.mechanics.ids.FieldMechanicId;
 import github.snomfish.domain.mechanics.ids.LoomianMechanicId;
 import github.snomfish.domain.mechanics.ids.SideMechanicId;
-import github.snomfish.domain.modifiers.Modifiers;
 import github.snomfish.domain.modifiers.MoveModifierId;
 import github.snomfish.domain.modifiers.SideModifierId;
 import github.snomfish.domain.move.CategoryId;

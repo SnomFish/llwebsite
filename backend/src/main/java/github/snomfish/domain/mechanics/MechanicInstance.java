@@ -1,9 +1,6 @@
 package github.snomfish.domain.mechanics;
 
-import java.util.List;
-
 import github.snomfish.domain.mechanics.ids.IMechanicId;
-import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.copy.DeepCopyable;
 import github.snomfish.functionality.event.HookReport;

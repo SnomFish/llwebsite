@@ -1,12 +1,10 @@
 package github.snomfish.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import github.snomfish.domain.mechanics.Mechanics;
 import github.snomfish.domain.modifiers.Modifiers;
 import github.snomfish.domain.modifiers.SideModifierId;
-import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.copy.DeepCopyable;
 import github.snomfish.functionality.event.HookReport;
