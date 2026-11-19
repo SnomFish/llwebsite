@@ -6,10 +6,11 @@ import static github.snomfish.functionality.event.ruleIds.RuleForUserId.*;
 public enum RuleForAllId implements IRuleId {
     NULL_EVENT(), // should never be dispatched
 
+    LOOMAIN_SWAPS_OUT                   (SELF_SWAPS_OUT,                        OPP_SWAPS_OUT),
     LOOMIAN_SWAPS_IN					(SELF_SWAPPED_IN, 						WATCHES_OPP_SWAP_IN),
 	LOOMIAN_DAMAGED_BELOW_HALF			(SELF_DAMAGED_BELOW_HALF,				OPP_DAMAGED_BELOW_HALF),
     LOOMIAN_FAINTED                     (SELF_FAINTED,                          OPP_FAINTED),
-    LOOMIAN_KNOCKED_OUT_BY_OTHER		(SELF_KNOCKED_OUT_OPP, 					SELF_KNOCKED_OUT_BY_OPP),
+    LOOMIAN_KNOCKED_OUT_BY_OTHER		(SELF_KNOCKED_OUT_OPP, 					OPP_KNOCKED_OUT),
 
     // move
     PRE_MOVE                            (SELF_PRE_MOVE,                         OPP_PRE_MOVE),

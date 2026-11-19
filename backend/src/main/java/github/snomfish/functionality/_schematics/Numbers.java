@@ -5,6 +5,7 @@ import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.INumber;
 import github.snomfish.functionality.number.Multiply;
+import github.snomfish.functionality.number.Subtract;
 import github.snomfish.functionality.number.ValueConstant;
 import github.snomfish.functionality.number.WeightedRange;
 
@@ -84,4 +85,20 @@ public class Numbers {
 	public static INumber tenthTargetMaxEnergy() 		{return fractionOfMaxEnergy(TARGET, 1/10);}
 	public static INumber twelfthTargetMaxEnergy() 		{return fractionOfMaxEnergy(TARGET, 1/12);}
 	public static INumber sixteenthTargetMaxEnergy() 	{return fractionOfMaxEnergy(TARGET, 1/16);}
+
+
+	// FRACTIONS OF MISSING HEALTH
+	private static INumber fractionOfMissingHealth(
+		ContextSideId sideId,
+		double fraction
+	) {
+		return new Multiply(
+			new Subtract(
+				new ValueConstant(Value.SIDE(sideId).HEALTH()),
+				new ValueConstant(Value.SIDE(sideId).CURRENT_HEALTH())
+			),
+			new Constant(fraction)
+		);
+	}
+	public static INumber thirdOfUserMissingHealth()	{return fractionOfMissingHealth(USER, 1/3);}
 }

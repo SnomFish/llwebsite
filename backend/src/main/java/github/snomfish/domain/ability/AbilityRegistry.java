@@ -9,6 +9,7 @@ import github.snomfish.domain.mechanics.ids.FieldMechanicId;
 import github.snomfish.domain.mechanics.ids.LoomianMechanicId;
 import github.snomfish.domain.mechanics.ids.SideMechanicId;
 import github.snomfish.domain.modifiers.MoveModifierId;
+import github.snomfish.domain.modifiers.SideModifierId;
 import github.snomfish.domain.move.CategoryId;
 import github.snomfish.domain.status.StatusId;
 import github.snomfish.domain.tags.AbilityTagId;
@@ -37,9 +38,14 @@ import github.snomfish.functionality.effect.effects.ApplyMechanic;
 import github.snomfish.functionality.effect.effects.ApplyStatChanges;
 import github.snomfish.functionality.effect.effects.ApplyStatus;
 import github.snomfish.functionality.effect.effects.ClearHazards;
+import github.snomfish.functionality.effect.effects.ClearStatChanges;
+import github.snomfish.functionality.effect.effects.ClearStatus;
 import github.snomfish.functionality.effect.effects.ClutchEffect;
 import github.snomfish.functionality.effect.effects.DispatchEventEffect;
 import github.snomfish.functionality.effect.effects.RemoveHealth;
+import github.snomfish.functionality.effect.effects.RemoveMechanic;
+import github.snomfish.functionality.effect.effects.RestoreEnergy;
+import github.snomfish.functionality.effect.effects.RestoreHealth;
 import github.snomfish.functionality.effect.effects.SetAbility;
 import github.snomfish.functionality.effect.effects.SetFieldMechanic;
 import github.snomfish.functionality.effect.effects.SetHazards;
@@ -58,6 +64,7 @@ import github.snomfish.functionality.event.ruleIds.RuleForTargetId;
 import github.snomfish.functionality.event.ruleIds.RuleForUserId;
 import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.INumberValueConstant;
+import github.snomfish.functionality.number.Multiply;
 import github.snomfish.functionality.number.ValueConstant;
 
 import static github.snomfish.domain.ability.AbilityId.*;
@@ -104,6 +111,7 @@ public class AbilityRegistry {
 					new DispatchEventEffect(RuleForAllId.LOOMIAN_SWAPS_IN, USER)
 				)))
 			)
+			.tag(CANNOT_BE_REPLICATED)
 			.setOncePerBattle()
 		);
 		register(Ability.build() // completed
@@ -236,9 +244,14 @@ public class AbilityRegistry {
 				))
             )
         );
-        register(Ability.build() // completed
+        register(Ability.build()
             .id(ARCTIC)
             .name("arctic")
+			.rule(Rule.build()
+				.event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.condition(Conditions.snowstormActive())
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.3)))
+			)
         );
         register(Ability.build() // completed
             .id(ASSERTIVE)
@@ -355,6 +368,7 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(BRUTE_FORCE)
 			.name("brute force")
+			// TODO implement boosts for moves with secondary effects 
 			.gate(Gate.build()
 				.event(GateForUserId.CAN_SELFS_MOVE_USE_SECONDARY_EFFECTS)
 				.condition(new False())
@@ -487,6 +501,7 @@ public class AbilityRegistry {
 				.event(GateForUserId.CAN_REMOVE_SELFS_ABILITY)
 				.condition(new False())
 			)
+			.tag(CANNOT_BE_REPLICATED)
 		);
 		register(Ability.build()
 			.id(CLINGY)
@@ -621,7 +636,8 @@ public class AbilityRegistry {
 			.id(DEMANDING)
 			.name("demanding")
 		);
-		register(Ability.build() // increases the power of the users water type moves by 1.25x
+		// increases the power of the users water type moves by 1.25x
+		register(Ability.build()
 			.id(DEPTHS_BORNE)
 			.name("depths borne")
 			.rule(Rule.build()
@@ -653,6 +669,11 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(DIRT_DASH)
 			.name("Dirt Dash")
+			.rule(Rule.build()
+				.event(ConstantRuleId.PRE_CALC_SPEED_ORDER)
+				.condition(Conditions.duststormActive())
+				.effect(Effects.multiplyValue(Value.USER().SIDE_MODIFIER(SideModifierId.SPEED), new Constant(2)))
+			)
 		);
 		register(Ability.build()
 			.id(DISENCHANT)
@@ -689,23 +710,50 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(DUST_DEVIL)
 			.name("dust devil")
+			.rule(Rule.build()
+				.event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.condition(Conditions.duststormActive())
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.3)))
+			)
 		);
-		register(Ability.build()
+		register(Ability.build() // doubles exclusive
 			.id(DUSK)
 			.name("dusk")
 		);
 		register(Ability.build()
 			.id(EAGER)
 			.name("eager")
+			.rule(Rule.build()
+				.event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.5)))
+			)
+			.gate(Gate.build()	
+				.event(GateForUserId.CAN_SELF_USE_SUPPORT_MOVES)
+				.condition(new False())
+			)
+			.gate(Gate.build()
+				.event(GateForUserId.CAN_SELF_USE_ITEMS)
+				.condition(new False())
+			)
 		);
 		register(Ability.build()
 			.id(EARTHMOVER)
 			.name("Earthmover")
+			.hook(Hook.build()
+				.event(RuleForTargetId.SELF_PRE_DAMAGED)
+				.condition(new Or(
+					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.EARTH),
+					new GateCondition(GateForAllId.CAN_USE_DEFENSIVE_ABILITY, USER)
+				))
+				.effect(RestoreHealth.user(Numbers.quarterUserMaxHealth()))
+			)
 		);
 		register(Ability.build()
 			.id(EFFULGENT)
 			.name("effulgent")
 			.gate(Gate.build()
+				.event(GateForTargetId.CAN_OPP_CONSUME_ITEM)
+				.condition(new False())
 			)
 		);
 		register(Ability.build()
@@ -766,22 +814,37 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(EXPERTISE)
 			.name("expertise")
+			.rule(Rule.build()
+				.event(RuleForUserId.SELF_PRE_ENERGY_CALC)
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.ENERGY_COST), new Constant(0.75)))
+			)
 		);
 		register(Ability.build()
 			.id(EXTENDED_REACH)
 			.name("Extended Reach")
+			.gate(Gate.build()
+				.event(GateForUserId.CAN_SELF_MOVE_MAKE_CONTACT)
+				.condition(new False())
+			)
 		);
 		register(Ability.build()
 			.id(EXTRATERRESTRIAL)
 			.name("Extraterrestrial")
+			// TODO implement sure hit effect
+			.rule(Rule.build()
+				.event(RuleForUserId.SELF_PRE_ENERGY_CALC)
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.ENERGY_COST), new Constant(0.9)))
+			)
 		);
 		register(Ability.build()
 			.id(FACADE)
 			.name("facade")
+			// TODO implement
 			.gate(Gate.build() // prevents the ability being removed
 				.event(GateForUserId.CAN_REMOVE_SELFS_ITEM)
 				.condition(new False())
 			)
+			.tag(CANNOT_BE_REPLICATED)
 		);
 		register(Ability.build() // reduces the damage taken from air type attacks and boosts it's rattack one stage when hit by one
 			.id(FANNING_FLAME)
@@ -806,6 +869,7 @@ public class AbilityRegistry {
 				.event(GateForUserId.CAN_REMOVE_SELFS_ITEM)
 				.condition(new False())
 			)
+			.tag(CANNOT_BE_REPLICATED)
 		);
 		register(Ability.build()
 			.id(FINESSE)
@@ -887,6 +951,10 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(FRENZY)
 			.name("frenzy")
+			.rule(Rule.build()
+				.event(RuleForUserId.SELF_KNOCKED_OUT_OPP)
+				.effect(RestoreEnergy.user(new ValueConstant(Value.TARGET().CURRENT_ENERGY())))
+			)
 		);
 		register(Ability.build()
 			.id(GAIN_FEEDING)
@@ -997,18 +1065,45 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(HIGH_EXPLOSIVE)
 			.name("high explosive")
+			.rule(Rule.build()
+				.event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.condition(new Equals<>(Value.USER().MOVE().MOVE_TAG(MoveTagId.EXPLOSIVE), true))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.5)))
+			)
+			.gate(Gate.build()
+				.event(GateForUserId.CAN_SELFS_MOVE_USE_SECONDARY_EFFECTS)
+				.condition(new False())
+			)
 		);
 		register(Ability.build()
 			.id(HIGH_PRESSURE)
 			.name("high pressure")
+			.rule(Rule.build()
+				.event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.WATER))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.25)))
+			)
 		);
 		register(Ability.build()
 			.id(HIGH_STRUNG)
 			.name("High Strung")
+			.rule(Rule.build()
+				.event(RuleForUserId.SELF_DAMAGED_BELOW_HALF)
+				.effect(ApplyStatChanges.userChangingUser()
+					.mattack(new Constant(1))
+					.rattack(new Constant(1))
+					.speed(new Constant(1))
+				)
+			)
 		);
 		register(Ability.build()
 			.id(HOTFOOT)
 			.name("hotfoot")
+			.rule(Rule.build()
+				.event(ConstantRuleId.PRE_CALC_SPEED_ORDER)
+				.condition(Conditions.heatwaveActive())
+				.effect(Effects.multiplyValue(Value.USER().SIDE_MODIFIER(SideModifierId.SPEED), new Constant(2)))
+			)
 		);
 		register(Ability.build()
 			.id(HOVER)
@@ -1034,6 +1129,7 @@ public class AbilityRegistry {
 					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.WATER),
 					new GateCondition(GateForAllId.CAN_USE_DEFENSIVE_ABILITY, USER)
 				))
+				.effect(RestoreEnergy.target(Numbers.quarterTargetMaxEnergy()))
 			)
 		);
 		register(Ability.build()
@@ -1136,6 +1232,7 @@ public class AbilityRegistry {
 				.event(GateForUserId.CAN_REMOVE_SELFS_ITEM)
 				.condition(new False())
 			)
+			.tag(CANNOT_BE_REPLICATED)
 		);
 		register(Ability.build()
 			.id(LIGHTNING_ROD)
@@ -1331,19 +1428,42 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(NIGHT_LIGHT)
 			.name("night light")
+			.rule(Rule.build()
+				.event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.DARK))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(0.75)))
+			)
+			.rule(Rule.build()
+				.event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
+				.condition(new Equals<>(Value.TARGET().MOVE().TYPE(), TypeId.DARK))
+				.effect(Effects.multiplyValue(Value.TARGET().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(0.75)))
+			)
 		);
 		register(Ability.build()
 			.id(NIGHTMARISH)
 			.name("nightmarish")
+			.rule(Rule.build()
+				.event(ConstantRuleId.END_OF_TURN)
+				.condition(new Equals<>(Value.TARGET().STATUS_ID(), StatusId.SLEEP))
+				.effect(RemoveHealth.target(Numbers.eighthTargetMaxHealth()))
+			)
 		);
 		register(Ability.build()
 			.id(NOXIOUS_RAZORBACK)
 			.name("Noxious Razorback")
+			.rule(Rule.build()
+				.event(RuleForTargetId.RECEIVED_DAMAGE_FROM_MOVE)
+				.condition(new Equals<>(Value.TARGET().MOVE().MOVE_TAG(MoveTagId.CONTACT), true))
+				.effect(RemoveHealth.target(Numbers.eighthTargetMaxHealth()))
+				.effect(new ConditionalEffect(
+					new RandomCondition(new Constant(0.1)),
+					ApplyStatus.toTarget(StatusId.POISON)
+				))
+			)
 		);
 		register(Ability.build()
 			.id(NOXIOUS_WEEDS)
 			.name("noxious weeds")
-			
 			.hook(Hook.build()
 				.event(RuleForTargetId.SELF_PRE_DAMAGED)
 				.condition(new Or(
@@ -1358,6 +1478,11 @@ public class AbilityRegistry {
 			.name("obsidian heart")
 			//.rule() // increase the cost of ancient type moves by 10%
 			.rule(Rule.build()
+				.event(RuleForUserId.SELF_PRE_ENERGY_CALC)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.ANCIENT))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.ENERGY_COST), new Constant(1.1)))
+			)
+			.rule(Rule.build()
 				.event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.ANCIENT))
 				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.5)))
@@ -1371,17 +1496,43 @@ public class AbilityRegistry {
 				.condition(new Not(new GateCondition(GateForAllId.CAN_USE_DEFENSIVE_ABILITY, USER)))
 			)
 		);
+		// clear the status effects before they occur
 		register(Ability.build()
 			.id(ONE_OF_MANY)
 			.name("one_of many")
+			.rule(Rule.build()
+				.event(ConstantRuleId.END_OF_TURN)
+				.effect(ClearStatus.user())
+				.effect(ClearStatChanges.userDrops())
+				.effect(RemoveMechanic.fromUser(LoomianMechanicId.PROVOKE))
+				.effect(RemoveMechanic.fromUser(LoomianMechanicId.SAP_PLANT))
+				.effect(RemoveMechanic.fromUser(LoomianMechanicId.TEASE))
+			)
 		);
+		// the current rule implementations change the context when dispatching the same event to either side, so targetting the move that will be used cannot be done
+		/// to fix another dispatch function must exists where no context switching occurs with constant rules
 		register(Ability.build()
 			.id(OVERCHARGED)
 			.name("overcharged")
+			.rule(Rule.build()
+				.event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.ELECTRIC))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.3)))
+			)
+			.rule(Rule.build()
+				.event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
+				.condition(new Equals<>(Value.TARGET().MOVE().TYPE(), TypeId.ELECTRIC))
+				.effect(Effects.multiplyValue(Value.TARGET().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.3)))
+			)
 		);
 		register(Ability.build()
 			.id(OVERCLOCK)
 			.name("overclock")
+			.rule(Rule.build()
+				.event(ConstantRuleId.PRE_CALC_SPEED_ORDER)
+				.condition(Conditions.thunderstormActive())
+				.effect(Effects.multiplyValue(Value.USER().SIDE_MODIFIER(SideModifierId.SPEED), new Constant(2)))
+			)
 		);
 		register(Ability.build()
 			.id(OVERSHADOW)
@@ -1470,30 +1621,73 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(PITCH_BLACK)
 			.name("pitch black")
+			.rule(Rule.build()
+				.event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.DARK))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.25)))
+			)
 		);
-		register(Ability.build()
+		register(Ability.build() // doubles exclusive
 			.id(PLAYFUL)
 			.name("playful")
 		);
 		register(Ability.build()
 			.id(PLUVIAL)
 			.name("pluvial")
+			.rule(Rule.build()
+				.event(ConstantRuleId.END_OF_TURN)
+				.condition(Conditions.rainActive())
+				.effect(RestoreHealth.user(Numbers.sixteenthUserMaxHealth()))
+			)
 		);
 		register(Ability.build()
 			.id(POWER_CLAW)
 			.name("power claw")
+			.rule(Rule.build()
+				.event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.condition(new Equals<>(Value.USER().MOVE().MOVE_TAG(MoveTagId.SLASHING), true))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.5)))
+			)
+			.gate(Gate.build()
+				.event(GateForUserId.CAN_SELF_MOVE_CRIT)
+				.condition(new Not(new Equals<>(Value.USER().MOVE().MOVE_TAG(MoveTagId.SLASHING), true)))
+			)
 		);
 		register(Ability.build()
 			.id(POWER_JAW)
 			.name("power jaw")
+			.rule(Rule.build()
+				.event(RuleForUserId.SELF_PRE_ENERGY_CALC)
+				.condition(new Equals<>(Value.USER().MOVE().MOVE_TAG(MoveTagId.BITING), true))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.ENERGY_COST), new Constant(1.1)))	
+			)
+			.rule(Rule.build()
+				.event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.condition(new Equals<>(Value.USER().MOVE().MOVE_TAG(MoveTagId.BITING), true))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.5)))
+			)
 		);
 		register(Ability.build()
 			.id(POWER_LEGS)
 			.name("power legs")
+			.rule(Rule.build()
+				.event(RuleForUserId.SELF_PRE_ENERGY_CALC)
+				.condition(new Equals<>(Value.USER().MOVE().MOVE_TAG(MoveTagId.KICKING), true))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.ENERGY_COST), new Constant(1.1)))	
+			)
+			.rule(Rule.build()
+				.event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.condition(new Equals<>(Value.USER().MOVE().MOVE_TAG(MoveTagId.KICKING), true))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.5)))
+			)
 		);
 		register(Ability.build()
 			.id(POWER_NAPPER)
 			.name("power napper")
+			.rule(Rule.build()
+				.event(RuleForUserId.SELF_SWAPS_OUT)
+				.effect(RestoreHealth.user(Numbers.thirdOfUserMissingHealth()))
+			)
 		);
 		register(Ability.build()
 			.id(PREMONITION)
@@ -1522,10 +1716,25 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(PROWLER)
 			.name("prowler")
+			.rule(Rule.build()
+				.event(ConstantRuleId.PRE_CALC_SPEED_ORDER)
+				.condition(Conditions.fogActive())
+				.effect(Effects.multiplyValue(Value.USER().SIDE_MODIFIER(SideModifierId.SPEED), new Constant(2)))
+			)
 		);
 		register(Ability.build()
 			.id(PUGILIST)
 			.name("pugilist")
+			.rule(Rule.build()
+				.event(RuleForUserId.SELF_PRE_ENERGY_CALC)
+				.condition(new Equals<>(Value.USER().MOVE().MOVE_TAG(MoveTagId.PUNCHING), true))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.ENERGY_COST), new Constant(1.1)))	
+			)
+			.rule(Rule.build()
+				.event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.condition(new Equals<>(Value.USER().MOVE().MOVE_TAG(MoveTagId.PUNCHING), true))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.5)))
+			)
 		);
 		register(Ability.build()
 			.id(PUNCTURE)
@@ -1549,14 +1758,33 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(PYRO_PRO)
 			.name("pyro pro")
+			.rule(Rule.build()
+				.event(RuleForUserId.SELF_PRE_ENERGY_CALC)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.FIRE))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.ENERGY_COST), new Constant(0.9)))
+			)
+			.rule(Rule.build()
+				.event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.FIRE))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.25)))
+			)
 		);
 		register(Ability.build()
 			.id(PYRO)
 			.name("pyro")
+			.rule(Rule.build()
+				.event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.FIRE))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.25)))
+			)
 		);
 		register(Ability.build()
 			.id(QUICK_RECOVERY)
 			.name("quick recovery")
+			.rule(Rule.build()
+				.event(RuleForUserId.SELF_SWAPS_OUT)
+				.effect(ClearStatus.user())
+			)
 		);
 		register(Ability.build()
 			.id(RADIANCE)
@@ -1571,15 +1799,31 @@ public class AbilityRegistry {
 					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.FIRE),
 					new GateCondition(GateForAllId.CAN_USE_DEFENSIVE_ABILITY, USER)
 				))
+				.effect(RestoreEnergy.target(Numbers.quarterTargetMaxEnergy()))
 			)
 		);
 		register(Ability.build()
 			.id(RAIL_GUN)
 			.name("rail gun")
+			.rule(Rule.build()
+				.event(RuleForUserId.SELF_PRE_ENERGY_CALC)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.ELECTRIC))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.ENERGY_COST), new Constant(1.1)))
+			)
+			.rule(Rule.build()
+				.event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.ELECTRIC))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.5)))
+			)
 		);
 		register(Ability.build()
 			.id(RAIN_RUSH)
 			.name("rain rush")
+			.rule(Rule.build()
+				.event(ConstantRuleId.PRE_CALC_SPEED_ORDER)
+				.condition(Conditions.rainActive())
+				.effect(Effects.multiplyValue(Value.USER().SIDE_MODIFIER(SideModifierId.SPEED), new Constant(2)))
+			)
 		);
 		register(Ability.build()
 			.id(RAIN_SUMMON)
@@ -1592,14 +1836,31 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(RAVENOUS)
 			.name("ravenous")
+			.rule(Rule.build()
+				.event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.effect(ClearStatChanges.targetBoosts())
+			)
 		);
 		register(Ability.build()
 			.id(RAZOR_SHARP)
 			.name("razor sharp")
+			.rule(Rule.build()
+				.event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.condition(new Equals<>(Value.USER().MOVE().CATEGORY(), CategoryId.MELEE))
+				.effect(Effects.addValue(Value.USER().CRIT_CHANCE(), new Constant(1)))	
+			)
 		);
 		register(Ability.build()
 			.id(REAPER)
 			.name("reaper")
+			.rule(Rule.build()
+				.event(RuleForUserId.SELF_KNOCKED_OUT_OPP)
+				.effect(new ConditionalEffect(
+					new ListContains<>(Value.TARGET().TYPES(), TypeId.LIGHT),
+					RestoreHealth.user(Numbers.halfUserMaxHealth()),
+					RestoreHealth.user(Numbers.quarterUserMaxHealth())
+				))
+			)
 		);
 		register(Ability.build()
 			.id(RECHARGEABLE)
@@ -1615,9 +1876,14 @@ public class AbilityRegistry {
 				))
 			)
 		);
+		// users mdefense and rdefense are boosted by 10%
 		register(Ability.build()
 			.id(RECRUIT)
 			.name("recruit")
+			.rule(Rule.build()
+				.event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
+				.effect(Effects.multiplyValue(Value.TARGET().MOVE().MOVE_MODIFIER(MoveModifierId.DEFENDING_STAT), new Constant(1.1)))
+			)
 		);
 		register(Ability.build()
 			.id(RECURRENT)
@@ -1626,6 +1892,13 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(REFLECTIVE)
 			.name("reflective")
+			.hook(Hook.build()
+				.event(RuleForTargetId.SELF_PRE_DAMAGED)
+				.condition(new Or(
+					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.LIGHT),
+					new GateCondition(GateForAllId.CAN_USE_DEFENSIVE_ABILITY, USER)
+				))
+			)
 		);
 		register(Ability.build()
 			.id(REGIFT)
@@ -1634,18 +1907,48 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(REGURGITATE)
 			.name("regurgitate")
+			.rule(Rule.build()
+				.event(RuleForUserId.SELF_FAINTED)
+				.event(RuleForUserId.SELF_KNOCKED_OUT_OPP)
+				.effect(ApplyStatChanges.userChangingTarget()
+					.mdefense(new Constant(-1))
+					.rdefense(new Constant(-1))
+				)
+			)
 		);
 		register(Ability.build()
 			.id(REIGN)
 			.name("reign")
+			.rule(Rule.build()
+				.event(RuleForUserId.SELF_PRE_ENERGY_CALC)
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.ENERGY_COST), new Constant(0.9)))
+			)
+			.rule(Rule.build()
+				.event(RuleForTargetId.OPP_PRE_ENERGY_CALC)
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.ENERGY_COST), new Constant(1.1)))
+			)
 		);
 		register(Ability.build()
 			.id(REMORSELESS)
 			.name("remorseless")
+			.rule(Rule.build()
+				.event(RuleForTargetId.OPP_FAINTED)
+				.event(RuleForTargetId.OPP_KNOCKED_OUT_BY_SELF)
+				.effect(ApplyStatChanges.userChangingUser()
+					.mattack(new Constant(1))	
+					.rattack(new Constant(1))	
+				)
+			)
 		);
 		register(Ability.build()
 			.id(REPLICATE)
 			.name("replicate")
+			.rule(Rule.build()
+				.event(RuleForUserId.SELF_SWAPPED_IN)
+				.condition(new Equals<>(Value.TARGET().ABILITY_TAG(CANNOT_BE_REPLICATED), false))
+				.effect(SetAbility.user(Value.TARGET().ABILITY_ID()))
+			)
+			.tag(CANNOT_BE_REPLICATED)
 		);
 		register(Ability.build()
 			.id(REPUGNANT)
@@ -1654,10 +1957,21 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(RESENTFUL)
 			.name("resentful")
+			.rule(Rule.build()
+				.event(RuleForTargetId.OPP_KNOCKED_OUT)
+				.effect(RemoveHealth.target(
+					new Multiply(new ValueConstant(Value.USER().MOVE().DAMAGE()), new Constant(0.5))
+				))
+			)
 		);
 		register(Ability.build()
 			.id(RESILIENCE)
 			.name("resilience")
+			.rule(Rule.build()
+				.event(RuleForTargetId.RECEIVED_DAMAGE_FROM_MOVE)
+				.condition(new Equals<>(Value.USER().MOVE().MOVE_TAG(MoveTagId.CONTACT), true))
+				.effect(ApplyStatChanges.userChangingUser().mdefense(new Constant(1)))
+			)
 		);
 		register(Ability.build()
 			.id(REV_UP)
@@ -1784,6 +2098,11 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(SNOW_GLIDER)
 			.name("Snow Glider")
+			.rule(Rule.build()
+				.event(ConstantRuleId.PRE_CALC_SPEED_ORDER)
+				.condition(Conditions.snowstormActive())
+				.effect(Effects.multiplyValue(Value.USER().SIDE_MODIFIER(SideModifierId.SPEED), new Constant(2)))
+			)
 		);
 		register(Ability.build()
 			.id(SOB)
@@ -1792,6 +2111,14 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(SOLAR_POWERED)
 			.name("Solar Powered")
+			.hook(Hook.build()
+				.event(RuleForTargetId.SELF_PRE_DAMAGED)
+				.condition(new Or(
+					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.LIGHT),
+					new GateCondition(GateForAllId.CAN_USE_DEFENSIVE_ABILITY, USER)
+				))
+				.effect(RestoreEnergy.target(Numbers.quarterTargetMaxEnergy()))
+			)
 		);
 		register(Ability.build()
 			.id(SOUL_HOARDER)
@@ -1828,6 +2155,14 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(SPONGE)
 			.name("sponge")
+			.hook(Hook.build()
+				.event(RuleForTargetId.SELF_PRE_DAMAGED)
+				.condition(new Or(
+					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.WATER),
+					new GateCondition(GateForAllId.CAN_USE_DEFENSIVE_ABILITY, USER)
+				))
+				.effect(RestoreHealth.user(Numbers.quarterUserMaxHealth()))
+			)
 		);
 		register(Ability.build()
 			.id(STAUNCH)
@@ -1840,6 +2175,11 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(STOKED)
 			.name("Stoked")
+			.rule(Rule.build()
+				.event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.condition(Conditions.heatwaveActive())
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.3)))
+			)
 		);
 		register(Ability.build()
 			.id(SUGAR_RUSH)
@@ -1869,6 +2209,10 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(TEMPER)
 			.name("temper")
+			.rule(Rule.build()
+				.event(RuleForUserId.SELF_DAMAGED_BELOW_HALF)
+				.effect(ApplyStatChanges.userChangingUser().rattack(new Constant(1)))
+			)
 		);
 		register(Ability.build()
 			.id(TERRIFYING)
@@ -1947,6 +2291,11 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(TUMULTUOUS)
 			.name("tumultuous")
+			.rule(Rule.build()
+				.event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.condition(Conditions.strongWindsActive())
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.3)))
+			)
 		);
 		register(Ability.build()
 			.id(TURBULENT)
@@ -1962,10 +2311,12 @@ public class AbilityRegistry {
 		);
 		register(Ability.build()
 			.id(TWO_FACE)
+			// TODO implement
 			.name("two face").gate(Gate.build() // prevents the ability being removed
 				.event(GateForUserId.CAN_REMOVE_SELFS_ITEM)
 				.condition(new False())
 			)
+			.tag(CANNOT_BE_REPLICATED)
 		);
 		register(Ability.build() // completed
 			.id(UNGRACIOUS_HOST)

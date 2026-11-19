@@ -8,18 +8,20 @@ public enum LoomianMechanicId implements IMechanicId {
     FLINCH,
 
     // MOVE SPECIFIC
+    ALL_OR_NOTHING_FOCUSING,
     BEASTS_SLUMBER,
-    SLUMBER,
-    WILL_SET_BOH,
     PERCHING,
     REVIVING,
+    PROVOKE,
+    SAP_PLANT,
+    SLUMBER,
+    TEASE,
+    WILL_SET_BOH,
     
     COMBUSTIBLE,
     COURSING_VENOM,
     NOXIOUS_WEEDS,
     PRISMATIC,
     TOXIC_FILTER,
-    
-    ALL_OR_NOTHING_FOCUSING,
     ;
 }

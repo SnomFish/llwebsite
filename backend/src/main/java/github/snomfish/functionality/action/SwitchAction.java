@@ -55,17 +55,20 @@ public class SwitchAction implements IAction {
 
 
     public List<Branch<BattleContext>> execute(BattleContext context) {
-        List<Branch<BattleContext>> outcomes = new ArrayList<>();
+        List<Branch<BattleContext>> finalOutcomes = new ArrayList<>();
         double probability = context.dispatchGate(GateForAllId.CAN_SWITCH, ContextSideId.USER);
 
         if (probability > 0) {
-            outcomes.addAll(applyProbability(executeSwitch(context), probability));
+            List<Branch<BattleContext>> outcomes = wrap(context);
+            outcomes = flatMap(outcomes, c -> c.dispatchRule(RuleForAllId.LOOMAIN_SWAPS_OUT, ContextSideId.USER));
+            outcomes = applyProbability(flatMap(outcomes, this::executeSwitch), probability);
+            finalOutcomes.addAll(outcomes);
         }
         if (probability < 1) {
-            outcomes.add(new Branch<>(context, 1-probability));
+            finalOutcomes.add(new Branch<>(context, 1-probability));
         }
 
-        return outcomes;
+        return finalOutcomes;
     }
 
 

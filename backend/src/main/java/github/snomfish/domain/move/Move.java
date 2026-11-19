@@ -14,6 +14,7 @@ import github.snomfish.domain.type.TypeChart;
 import github.snomfish.domain.type.TypeId;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality._schematics.Effects;
+import github.snomfish.functionality.action.MoveAction;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.condition.Comparator;
 import github.snomfish.functionality.condition.GateCondition;
@@ -236,8 +237,11 @@ public class Move implements DeepCopyable<Move> {
     public List<Branch<BattleContext>> executeFlail(BattleContext context) {
         BattleContext outcome = context.deepCopy();
 
-        
-
+        MoveAction flailAction = new MoveAction(
+            outcome.user().activeLoomian().action().priority(),
+            MoveRegistry.get(MoveId.FLAIL)
+        );
+        outcome.user().activeLoomian().setAction(flailAction);
         return wrap(outcome);
     }
 

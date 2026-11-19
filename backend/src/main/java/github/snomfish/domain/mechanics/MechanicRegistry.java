@@ -30,6 +30,7 @@ import github.snomfish.functionality.effect.effects.SetFieldMechanic;
 import github.snomfish.functionality.event.Gate;
 import github.snomfish.functionality.event.Rule;
 import github.snomfish.functionality.event.gateIds.GateForAllId;
+import github.snomfish.functionality.event.gateIds.GateForUserId;
 import github.snomfish.functionality.event.ruleIds.ConstantRuleId;
 import github.snomfish.functionality.event.ruleIds.RuleForAllId;
 import github.snomfish.functionality.event.ruleIds.RuleForTargetId;
@@ -83,6 +84,7 @@ public class MechanicRegistry {
             )
         );
 
+
         register(new Mechanic()
             .id(DAZE)
             .name("Daze")
@@ -92,6 +94,16 @@ public class MechanicRegistry {
             .name("Flinch")
         );
 
+
+        // MOVE SPECIFIC
+        register(new Mechanic()
+            .id(ALL_OR_NOTHING_FOCUSING)
+            .name("Focusing for All or Nothing")
+            .rule(Rule.build()
+                .event(RuleForTargetId.RECEIVED_DAMAGE_FROM_MOVE)
+                .effect(RemoveMechanic.fromUser(ALL_OR_NOTHING_FOCUSING))
+            )
+        );
         register(new Mechanic()
             .id(BEASTS_SLUMBER)
             .name("beasts slumber")
@@ -109,6 +121,45 @@ public class MechanicRegistry {
             )
         );
         register(new Mechanic()
+            .id(PERCHING)
+            .name("perching")
+            .rule(Rule.build()
+                .event(ConstantRuleId.END_OF_TURN)
+                .effect(AddType.toUser(TypeId.AIR))
+                .effect(RemoveMechanic.fromUser(PERCHING))
+            )
+        );
+        register(new Mechanic()
+            .id(PROVOKE)
+            .name("provoke")
+            .gate(Gate.build()
+                .event(GateForUserId.CAN_SELF_USE_SUPPORT_MOVES)
+                .condition(new False())
+            )
+            .gate(Gate.build()
+                .event(GateForUserId.CAN_SELF_SELECT_MOVE)
+                .condition(new Not(new Equals<>(Value.USER().MOVE().CATEGORY(), CategoryId.STATUS)))
+            )
+        );
+        register(new Mechanic()
+            .id(REVIVING)
+            .name("reviving")
+            .rule(Rule.build()
+                .event(ConstantRuleId.END_OF_TURN)
+                .effect(AddType.toUser(TypeId.SPIRIT))
+                .effect(RemoveMechanic.fromUser(REVIVING))
+            )
+        );
+        register(new Mechanic()
+            .id(SAP_PLANT)
+            .name("sap plant")
+            .rule(Rule.build()
+                .event(ConstantRuleId.END_OF_TURN)
+                .effect(RemoveHealth.user(Numbers.eighthUserMaxHealth()))
+                .effect(RestoreHealth.target(Numbers.eighthUserMaxHealth()))
+            )
+        );
+        register(new Mechanic()
             .id(SLUMBER)
             .name("slumber")
             .rule(Rule.build()
@@ -117,36 +168,17 @@ public class MechanicRegistry {
             )
         );
         register(new Mechanic()
+            .id(TEASE)
+            .name("tease")
+            // TODO implement tease mechanic
+        );
+        register(new Mechanic()
             .id(WILL_SET_BOH)
             .name("will set up bane of haste at end of turn")
             .rule(Rule.build()
                 .event(ConstantRuleId.END_OF_TURN)
-                .effect(new EffectSequence(
-                    SetFieldMechanic.baneOfHaste().withMaxAge(5),
-                    RemoveMechanic.fromUser(WILL_SET_BOH)
-                ))
-            )
-        );
-        register(new Mechanic()
-            .id(PERCHING)
-            .name("perching")
-            .rule(Rule.build()
-                .event(ConstantRuleId.END_OF_TURN)
-                .effect(new EffectSequence(
-                    AddType.toUser(TypeId.AIR),
-                    RemoveMechanic.fromUser(PERCHING)
-                ))
-            )
-        );
-        register(new Mechanic()
-            .id(REVIVING)
-            .name("reviving")
-            .rule(Rule.build()
-                .event(ConstantRuleId.END_OF_TURN)
-                .effect(new EffectSequence(
-                    AddType.toUser(TypeId.SPIRIT),
-                    RemoveMechanic.fromUser(REVIVING)
-                ))
+                .effect(SetFieldMechanic.baneOfHaste().withMaxAge(5))
+                .effect(RemoveMechanic.fromUser(WILL_SET_BOH))
             )
         );
 
@@ -197,16 +229,6 @@ public class MechanicRegistry {
                     Effects.multiplyValue(Value.SELF().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.5)),
                     RemoveMechanic.fromUser(TOXIC_FILTER)
                 ))
-            )
-        );
-
-        // mechanics caused by moves
-        register(new Mechanic()
-            .id(ALL_OR_NOTHING_FOCUSING)
-            .name("Focusing for All or Nothing")
-            .rule(Rule.build()
-                .event(RuleForTargetId.RECEIVED_DAMAGE_FROM_MOVE)
-                .effect(RemoveMechanic.fromUser(ALL_OR_NOTHING_FOCUSING))
             )
         );
     }

@@ -80,7 +80,7 @@ public class HookReport {
 
         List<Branch<BattleContext>> outcomes = new ArrayList<>();
         if (probability > 0) {
-            outcomes.addAll(applyProbability(hook.effect().execute(outcome), probability * leftoverProbability));
+            outcomes.addAll(applyProbability(hook.executeEffects(outcome), probability * leftoverProbability));
         }
         if (probability < 1) {
             outcomes.addAll(recursiveExecute(
