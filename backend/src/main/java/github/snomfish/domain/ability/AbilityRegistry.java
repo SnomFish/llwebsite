@@ -1933,7 +1933,7 @@ public class AbilityRegistry {
 			.name("remorseless")
 			.rule(Rule.build()
 				.event(RuleForTargetId.OPP_FAINTED)
-				.event(RuleForTargetId.OPP_KNOCKED_OUT_BY_SELF)
+				.event(RuleForTargetId.OPP_KNOCKED_OUT)
 				.effect(ApplyStatChanges.userChangingUser()
 					.mattack(new Constant(1))	
 					.rattack(new Constant(1))	

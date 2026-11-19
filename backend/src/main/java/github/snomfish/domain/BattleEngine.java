@@ -3,7 +3,6 @@ package github.snomfish.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import github.snomfish.domain.modifiers.MoveModifierId;
 import github.snomfish.domain.modifiers.SideModifierId;
 import github.snomfish.domain.stats.StatChangesId;
 import github.snomfish.functionality.Value;
