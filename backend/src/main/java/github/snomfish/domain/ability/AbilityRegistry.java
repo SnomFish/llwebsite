@@ -2107,6 +2107,10 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(SOB)
 			.name("sob")
+			.rule(Rule.build()
+				.event(RuleForUserId.SELF_SWAPPED_IN)
+				.effect(ClearStatChanges.targetChanges())
+			)
 		);
 		register(Ability.build()
 			.id(SOLAR_POWERED)
@@ -2137,6 +2141,7 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(SPECIALIZATION)
 			.name("specialization")
+
 		);
 		register(Ability.build()
 			.id(SPINE_BREAK)
@@ -2167,6 +2172,10 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(STAUNCH)
 			.name("staunch")
+			.gate(Gate.build()
+				.event(GateForUserId.CAN_SELF_GET_STAT_CHANGES)
+				.condition(new False())
+			)
 		);
 		register(Ability.build()
 			.id(STICKY)

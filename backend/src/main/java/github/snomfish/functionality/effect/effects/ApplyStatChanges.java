@@ -12,11 +12,14 @@ import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.effect.IEffect;
+import github.snomfish.functionality.event.gateIds.GateForAllId;
 import github.snomfish.functionality.event.ruleIds.RuleForAllId;
 import github.snomfish.functionality.number.INumber;
 
 import static github.snomfish.domain.stats.StatChangesId.*;
 import static github.snomfish.functionality.branch.BranchUtil.flatMap;
+import static github.snomfish.functionality.branch.BranchUtil.resolveConditions;
+import static github.snomfish.functionality.branch.BranchUtil.wrap;
 
 public class ApplyStatChanges implements IEffect {
     
@@ -120,11 +123,17 @@ public class ApplyStatChanges implements IEffect {
 
     @Override 
     public List<Branch<BattleContext>> execute(BattleContext context) {
-        List<Branch<BattleContext>> outcomes = List.of(new Branch<>(context, 1.0));
+        return resolveConditions(context, GateForAllId.CAN_GET_STAT_CHANGES, targetSideI, this::test);
+    }
+
+
+    // I could not think of a name for this function
+    private List<Branch<BattleContext>> test(BattleContext context) {
+        List<Branch<BattleContext>> outcomes = wrap(context);
 
         outcomes = flatMap(outcomes, c -> c.dispatchRule(RuleForAllId.PRE_LOOMIAN_STATS_CHANGED, userSideI));
         for (StatChangesId key : StatChangesId.values()) {
-            outcomes = flatMap(outcomes, c -> applyStatChangeModule(context, key));
+            outcomes = flatMap(outcomes, c -> this.applyStatChangeModule(context, key));
         }
 
         return outcomes;

@@ -9,10 +9,13 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 import github.snomfish.functionality._schematics.Conditions;
+import github.snomfish.functionality.condition.GateCondition;
 import github.snomfish.functionality.condition.ICondition;
 import github.snomfish.functionality.context.BattleContext;
+import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.effect.IEffect;
 import github.snomfish.functionality.event.Rule;
+import github.snomfish.functionality.event.gateIds.GateForAllId;
 
 public class BranchUtil {
 
@@ -125,6 +128,18 @@ public class BranchUtil {
             () -> function.apply(context, rule),
             () -> wrap(context)
         );
+    }
+
+    public static List<Branch<BattleContext>> resolveConditions(
+        BattleContext context,
+        GateForAllId gateForAllId,
+        ContextSideId sideId,
+        Function<BattleContext, List<Branch<BattleContext>>> function
+    ) {
+        return resolveConditions(context, List.of(new GateCondition(gateForAllId, sideId)),
+			() -> function.apply(context),
+            () -> wrap(context)
+		);
     }
 
 
