@@ -294,6 +294,7 @@ public enum SpeciesId {
     // route 9
     MININK,
     ERSPRING,
+    ERSPRING_SPRINGHOP,
     WOLKIN_METAL,
     WOLKIN_ICE,
     FENREIGN_METAL,

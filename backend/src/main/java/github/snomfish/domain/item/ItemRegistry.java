@@ -1276,6 +1276,14 @@ public class ItemRegistry {
 			)
 		);
 		register(Item.build()
+			.id(SPRINGBURST)
+			.name("springburst m")
+			.gate(Gate.build()
+				.event(GateForUserId.CAN_REMOVE_SELFS_ITEM)
+				.condition(new False())
+			)
+		);
+		register(Item.build()
 			.id(FENBURST_M)
 			.name("fenburst m")
 			.gate(Gate.build()

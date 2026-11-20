@@ -1568,6 +1568,14 @@ public class AbilityRegistry {
 			.tag(PUNCTURABLE)
 		);
 		register(Ability.build()
+			.id(PACKED_PUNCH)
+			.name("packed punch")
+			.rule(Rule.build()
+				.event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(2)))
+			)
+		);
+		register(Ability.build()
 			.id(PARTING_GIFT)
 			.name("parting gift")
 		);

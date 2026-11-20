@@ -167,6 +167,7 @@ public enum AbilityId {
     OVERCLOCK,
     OVERSHADOW,
     OXIDIZE,
+    PACKED_PUNCH,
     PARTING_GIFT,
     PARTNERSHIP,
     PARTY_TRICK,

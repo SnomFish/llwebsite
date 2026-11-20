@@ -108,6 +108,7 @@ public enum ItemId {
     DREGGOBURST,
     IMPERIBURST,
     KRAMBURST,
+    SPRINGBURST,
     FENBURST_M,
     FENBURST_I,
     GLINTBURST,

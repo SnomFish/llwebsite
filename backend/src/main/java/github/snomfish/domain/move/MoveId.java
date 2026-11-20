@@ -395,6 +395,7 @@ public enum MoveId {
     SPITE,
     SPLITTING_HEADACHE,
     SPRAY,
+    SPRING_LOADED_PUNCH,
     SQUARE_ONE,
     SQUAWK,
     STALK,
