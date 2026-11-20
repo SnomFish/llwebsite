@@ -197,11 +197,16 @@ public class Value<T> {
 		c -> 		((Side) c).activeLoomian().species().height(),
 		null
 	);}
-	public Value<Boolean> CAN_EVOLVE() {return update(
+	public Value<Boolean> CAN_SPECIES_EVOLVE() {return update(
 		Boolean.class,
 		c -> 		((Side) c).activeLoomian().species().canEvolve(),
 		null
-	);}
+	);}	
+	public Value<Boolean> CAN_SPECIES_SOUL_BURST() {return update(
+		Boolean.class,
+		c -> 		((Side) c).activeLoomian().species().canSoulBurst(),
+		null
+	);}	
 	// TYPES
     public Value<List<TypeId>> TYPES() {return update(
 		null,

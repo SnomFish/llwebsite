@@ -11,19 +11,14 @@ import static github.snomfish.functionality.branch.BranchUtil.wrap;
 public class WaitAction implements IAction {
 	
 
-	private int priority;
     private boolean willSoulBurst;
 
 
-    public WaitAction(
-        int priority
-    ) {
-        this.priority = priority;
-    }
+    public WaitAction() {}
 
     
     protected WaitAction(WaitAction copy) {
-        this.priority = copy.priority;
+        this.willSoulBurst = copy.willSoulBurst;
     }
     public WaitAction deepCopy() {
         return new WaitAction(this);
@@ -32,15 +27,15 @@ public class WaitAction implements IAction {
 
     // getter
     public ActionId id()            {return ActionId.SWITCH;}
-    public int priority()           {return priority;}
+    public int priority()           {return 8;}
     public Move move() 			    {throw new RuntimeException("Attempted to get move from a wait action");}
 	public int switchTarget() 	    {throw new RuntimeException("Attempted to get switchTarget from a wait action");}
     public boolean willSoulBurst()  {return willSoulBurst;}
 
 
-	public void setPriority(int priority)               {this.priority = priority;}
-	public void setMove(Move move) 					    {throw new RuntimeException("Attempted to set move from a wait action");}
-	public void setSwitchTarget(int switchTarget) 	    {throw new RuntimeException("Attempted to set switchTarget from a wait action");}
+	public void setPriority(int priority)               {throw new RuntimeException("Attempted to set priority in a wait action");}
+	public void setMove(Move move) 					    {throw new RuntimeException("Attempted to set move in a wait action");}
+	public void setSwitchTarget(int switchTarget) 	    {throw new RuntimeException("Attempted to set switchTarget in a wait action");}
     public void setWillSoulBurst(boolean willSoulBurst) {this.willSoulBurst = willSoulBurst;}
 
 

@@ -138,7 +138,7 @@ public class AbilityRegistry {
 					new ConditionalEffect(Conditions.thunderstormActive(),	SetType.userPrimary(TypeId.ELECTRIC))
 				)))
 			)
-			.gate(Gate.build() // prevents the ability being removed
+			.gate(Gate.build()
 				.event(GateForUserId.CAN_REMOVE_SELFS_ABILITY)
 				.condition(new False())
 			)
@@ -497,7 +497,7 @@ public class AbilityRegistry {
 					))
 				))
 			)
-			.gate(Gate.build() // prevents the ability being removed
+			.gate(Gate.build()
 				.event(GateForUserId.CAN_REMOVE_SELFS_ABILITY)
 				.condition(new False())
 			)
@@ -840,8 +840,8 @@ public class AbilityRegistry {
 			.id(FACADE)
 			.name("facade")
 			// TODO implement
-			.gate(Gate.build() // prevents the ability being removed
-				.event(GateForUserId.CAN_REMOVE_SELFS_ITEM)
+			.gate(Gate.build()
+				.event(GateForUserId.CAN_REMOVE_SELFS_ABILITY)
 				.condition(new False())
 			)
 			.tag(CANNOT_BE_REPLICATED)
@@ -865,8 +865,8 @@ public class AbilityRegistry {
 		);
 		register(Ability.build()
 			.id(FESTIVE_SPIRIT)
-			.name("festive spirit").gate(Gate.build() // prevents the ability being removed
-				.event(GateForUserId.CAN_REMOVE_SELFS_ITEM)
+			.gate(Gate.build()
+				.event(GateForUserId.CAN_REMOVE_SELFS_ABILITY)
 				.condition(new False())
 			)
 			.tag(CANNOT_BE_REPLICATED)
@@ -1228,8 +1228,8 @@ public class AbilityRegistry {
 		);
 		register(Ability.build()
 			.id(LIFE_FORCE)
-			.name("life force").gate(Gate.build() // prevents the ability being removed
-				.event(GateForUserId.CAN_REMOVE_SELFS_ITEM)
+			.gate(Gate.build()
+				.event(GateForUserId.CAN_REMOVE_SELFS_ABILITY)
 				.condition(new False())
 			)
 			.tag(CANNOT_BE_REPLICATED)
@@ -1324,9 +1324,16 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(MERGE)
 			.name("merge")
-			// TODO: reduces the cost of all the users move to 0
+			.rule(Rule.build()
+				.event(RuleForUserId.SELF_PRE_ENERGY_CALC)
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.ENERGY_COST), new Constant(0)))
+			)
 			.gate(Gate.build()
 				.event(GateForUserId.CAN_SELF_USE_SUPPORT_MOVES)
+				.condition(new False())
+			)
+			.gate(Gate.build()
+				.event(GateForUserId.CAN_REMOVE_SELFS_ABILITY)
 				.condition(new False())
 			)
 		);
@@ -2321,8 +2328,9 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(TWO_FACE)
 			// TODO implement
-			.name("two face").gate(Gate.build() // prevents the ability being removed
-				.event(GateForUserId.CAN_REMOVE_SELFS_ITEM)
+			.name("two face")
+			.gate(Gate.build()
+				.event(GateForUserId.CAN_REMOVE_SELFS_ABILITY)
 				.condition(new False())
 			)
 			.tag(CANNOT_BE_REPLICATED)
@@ -2372,9 +2380,14 @@ public class AbilityRegistry {
 				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.5)))
 			)
 		);
+		// the user cannot fall asleep
 		register(Ability.build()
 			.id(VIGILANT)
 			.name("vigilant")
+			.gate(Gate.build()
+				.event(GateForUserId.CAN_SELF_FALL_ASLEEP)
+				.condition(new False())
+			)
 		);
 		// increases the users melee attack by 50% if they are inflicted by a status ailment and removes the damage drop from burn
 		register(Ability.build() // completed

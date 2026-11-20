@@ -472,6 +472,7 @@ public class SpeciesRegistry {
 			.canEvolve(false)
 			.canSoulBurst(true)
 			.soulItem(ItemId.FLORABURST)
+			.soulSpecies(FLORANT_FLYCHOMP)
 		);
 		register(Species.build()
 			.id(FLORANT_FLYCHOMP)
@@ -643,6 +644,7 @@ public class SpeciesRegistry {
 			.canEvolve(false)
 			.canSoulBurst(true)
 			.soulItem(ItemId.GASTROBURST)
+			.soulSpecies(GASTROAK_TERRAFORM)
 		);
 		register(Species.build()
 			.id(GASTROAK_TERRAFORM)
@@ -886,6 +888,7 @@ public class SpeciesRegistry {
 			.canEvolve(false)
 			.canSoulBurst(true)
 			.soulItem(ItemId.ERUPTIBURST)
+			.soulSpecies(ERUPTIDON_MAGMADIRE)
 		);
 		register(Species.build()
 			.id(ERUPTIDON_MAGMADIRE)
@@ -925,6 +928,7 @@ public class SpeciesRegistry {
 			.canEvolve(false)
 			.canSoulBurst(true)
 			.soulItem(ItemId.KRAKABURST)
+			.soulSpecies(KRAKALOA_LAVAFIEND)
 		);
 		register(Species.build()
 			.id(KRAKALOA_LAVAFIEND)
@@ -1084,6 +1088,7 @@ public class SpeciesRegistry {
 			.canEvolve(false)
 			.canSoulBurst(true)
 			.soulItem(ItemId.ICIBURST)
+			.soulSpecies(ICIGOOL_INCARNATE)
 		);
 		register(Species.build()
 			.id(ICIGOOL_INCARNATE)
@@ -1171,6 +1176,7 @@ public class SpeciesRegistry {
 			.canEvolve(false)
 			.canSoulBurst(true)
 			.soulItem(ItemId.STRATBURST)
+			.soulSpecies(STRATUSOAR_JETWING)
 		);
 		register(Species.build()
 			.id(STRATUSOAR_JETWING)
@@ -1708,6 +1714,7 @@ public class SpeciesRegistry {
 			.canEvolve(false)
 			.canSoulBurst(true)
 			.soulItem(ItemId.NOSHBURST)
+			.soulSpecies(HOGANOSH_ATOMIC)
 		);
 		register(Species.build()
 			.id(HOGANOSH_ATOMIC)
@@ -2539,6 +2546,7 @@ public class SpeciesRegistry {
 			.canEvolve(false)
 			.canSoulBurst(true)
 			.soulItem(ItemId.IMPERIBURST)
+			.soulSpecies(IMPERIOR_ARCHFIEND)
 		);
 	}
 	public static void init2() {
@@ -2640,6 +2648,7 @@ public class SpeciesRegistry {
 			.canEvolve(false)
 			.canSoulBurst(true)
 			.soulItem(ItemId.DREGGOBURST)
+			.soulSpecies(DREGGODYNE_TEMPEREIGN)
 		);
 		register(Species.build()
 			.id(DREGGODYNE_TEMPEREIGN)
@@ -3015,6 +3024,7 @@ public class SpeciesRegistry {
 			.canEvolve(false)
 			.canSoulBurst(true)
 			.soulItem(ItemId.KRAMBURST)
+			.soulSpecies(KRAMBOSS_FROSTSHACKLED)
 		);
 		register(Species.build()
 			.id(KRAMBOSS_FROSTSHACKLED)
@@ -3594,6 +3604,7 @@ public class SpeciesRegistry {
 			.canEvolve(false)
 			.canSoulBurst(true)
 			.soulItem(ItemId.FENBURST_M)
+			.soulSpecies(FENREIGN_SOLMANE)
 		);
 		register(Species.build()
 			.id(FENREIGN_ICE)
@@ -3608,6 +3619,7 @@ public class SpeciesRegistry {
 			.canEvolve(false)
 			.canSoulBurst(true)
 			.soulItem(ItemId.FENBURST_I)
+			.soulSpecies(FENREIGN_LUNAMANE)
 		);
 		register(Species.build()
 			.id(FENREIGN_SOLMANE)
@@ -4026,12 +4038,13 @@ public class SpeciesRegistry {
 			.baseAbilities(List.of(CLUTCH, TANK, COMBATIVE))
 			.baseStats(50, 75, 111, 96, 60, 93, 40)
 			.bst(525)
-			.weight(999)
-			.height(999)
+			.weight(68.04)
+			.height(76.2)
 			.learnset(List.of(SINGE, PEBBLE_TOSS, STARE, BURROW, MUD_SPATTER, FIRE_SLAM, EERIE_STARE, TEAMWORK, CLAY_SLAP, BLAZE_PUNCH, POWER_FOCUS, TAMP, BOULDER_BLAST, BURN_TRUE, BODY_SLAM, SAFEGUARD, EARTHQUAKE, LANDSLIDE, MUDSLIDE, MAGMA_BLOCK, BURN_UP, RAGING_FLAME, BLAZE_RUSH, BLAZE_OF_GLORY, RAGING_TACKLE, RAGING_HOWL, RESONATE, TRIBUTE, BANE_OF_HASTE, DODGE, REJUVENATE, BARTER, ILL_WILL, FIRE_BREATH, BULK_UP, PEACE_OF_MIND, MUD_SPATTER, SPARE))
 			.canEvolve(false)
 			.canSoulBurst(true)
 			.soulItem(ItemId.GLINTBURST)
+			.soulSpecies(GLINTERRA_GEOKNIGHT_FIRE)
 		);
 		register(Species.build()
 			.id(GLINTERRA_WATER)
@@ -4040,12 +4053,13 @@ public class SpeciesRegistry {
 			.baseAbilities(List.of(CLUTCH, CAVERNOUS, SPONGE))
 			.baseStats(111, 75, 50, 60, 93, 96, 40)
 			.bst(525)
-			.weight(999)
-			.height(999)
+			.weight(68.04)
+			.height(76.2)
 			.learnset(List.of(SPRAY, PEBBLE_TOSS, STARE, BURROW, MUD_SPATTER, WATER_BOMB, EERIE_STARE, TEAMWORK, CLAY_SLAP, MAROON, POWER_FOCUS, TAMP, BOULDER_BLAST, FOUNTAIN_BEAM, BODY_SLAM, SAFEGUARD, EARTHQUAKE, LANDSLIDE, MUDSLIDE, SOFT_WATER, RAGING_TACKLE, RAGING_HOWL, RESONATE, TRIBUTE, BANE_OF_HASTE, DODGE, REJUVENATE, BARTER, ILL_WILL, MAROON, TSUNAMI, BULK_UP, PEACE_OF_MIND, PLUNGE, MUD_SPATTER, SPARE))
 			.canEvolve(false)
 			.canSoulBurst(true)
 			.soulItem(ItemId.GLINTBURST)
+			.soulSpecies(GLINTERRA_GEOKNIGHT_WATER)
 		);
 		register(Species.build()
 			.id(GLINTERRA_ELECTRIC)
@@ -4054,12 +4068,13 @@ public class SpeciesRegistry {
 			.baseAbilities(List.of(CLUTCH, ELECTRIFY, ANALYZE))
 			.baseStats(60, 75, 96, 93, 111, 50, 40)
 			.bst(525)
-			.weight(999)
-			.height(999)
+			.weight(68.04)
+			.height(76.2)
 			.learnset(List.of(STATIC_SHOCK, PEBBLE_TOSS, STARE, BURROW, MUD_SPATTER, PRECISION_BOLT, EERIE_STARE, TEAMWORK, CLAY_SLAP, ELECTRO_PUNCH, POWER_FOCUS, TAMP, BOULDER_BLAST, STRATEGIC_SURGE, BODY_SLAM, SAFEGUARD, EARTHQUAKE, LANDSLIDE, MUDSLIDE, STUN, THUNDER_CRASH, JOLT, THUNDER_CLAP, JUMP_START, POWER_SIPHON, RAGING_TACKLE, RAGING_HOWL, RESONATE, TRIBUTE, BANE_OF_HASTE, DODGE, REJUVENATE, BARTER, ILL_WILL, BULK_UP, THUNDERSTRIKE, PEACE_OF_MIND, MUD_SPATTER, SPARE))
 			.canEvolve(false)
 			.canSoulBurst(true)
 			.soulItem(ItemId.GLINTBURST)
+			.soulSpecies(GLINTERRA_GEOKNIGHT_ELECTRIC)
 		);
 		register(Species.build()
 			.id(GLINTERRA_LIGHT)
@@ -4068,12 +4083,13 @@ public class SpeciesRegistry {
 			.baseAbilities(List.of(CLUTCH, MYSTERIOUS_CLOAK, SEIZE))
 			.baseStats(93, 75, 60, 50, 96, 111, 40)
 			.bst(525)
-			.weight(999)
-			.height(999)
+			.weight(68.04)
+			.height(76.2)
 			.learnset(List.of(SHINE, PEBBLE_TOSS, STARE, BURROW, MUD_SPATTER, LUSTER_LOOT, EERIE_STARE, TEAMWORK, CLAY_SLAP, ENERGY_SURGE, POWER_FOCUS, TAMP, BOULDER_BLAST, GLOW_BEAM, BODY_SLAM, SAFEGUARD, EARTHQUAKE, LANDSLIDE, MUDSLIDE, LIGHTSPEED_RAY, FLASH, SWIFTEN, NOVA_BLAST, RAGING_TACKLE, RAGING_HOWL, RESONATE, TRIBUTE, BANE_OF_HASTE, DODGE, REJUVENATE, BARTER, ILL_WILL, BULK_UP, PEACE_OF_MIND, GAMMA_PULSE, MUD_SPATTER, SPARE))
 			.canEvolve(false)
 			.canSoulBurst(true)
 			.soulItem(ItemId.GLINTBURST)
+			.soulSpecies(GLINTERRA_GEOKNIGHT_LIGHT)
 		);
 		register(Species.build()
 			.id(GLINTERRA_DARK)
@@ -4082,15 +4098,16 @@ public class SpeciesRegistry {
 			.baseAbilities(List.of(CLUTCH, BITTER_TOUCH, IGNORANT))
 			.baseStats(96, 75, 93, 111, 50, 60, 40)
 			.bst(525)
-			.weight(999)
-			.height(999)
+			.weight(68.04)
+			.height(76.2)
 			.learnset(List.of(AGGRAVATE, PEBBLE_TOSS, STARE, BURROW, MUD_SPATTER, BAMBOOZLE, EERIE_STARE, TEAMWORK, CLAY_SLAP, SLAP_DOWN, POWER_FOCUS, TAMP, BOULDER_BLAST, RANCOROUS_ROLLOUT, BODY_SLAM, SAFEGUARD, EARTHQUAKE, LANDSLIDE, MUDSLIDE, TRICKY_TACTICS, SQUARE_ONE, RANT, PROVOKE, RAGING_TACKLE, RAGING_HOWL, RESONATE, TRIBUTE, BANE_OF_HASTE, DODGE, REJUVENATE, BARTER, ILL_WILL, BULK_UP, PEACE_OF_MIND, DARK_SURGE, MUD_SPATTER, SPARE))
 			.canEvolve(false)
 			.canSoulBurst(true)
 			.soulItem(ItemId.GLINTBURST)
+			.soulSpecies(GLINTERRA_GEOKNIGHT_DARK)
 		);
 		register(Species.build()
-			.id(GEOKNIGHT_GLINTERRA_FIRE)
+			.id(GLINTERRA_GEOKNIGHT_FIRE)
 			.name("geoknight glinterra")
 			.baseTypes(List.of(EARTH, FIRE))
 			.baseAbilities(List.of(MERGE))
@@ -4103,7 +4120,7 @@ public class SpeciesRegistry {
 			.soulMove(MoveId.FUSION_BARRAGE)
 		);
 		register(Species.build()
-			.id(GEOKNIGHT_GLINTERRA_WATER)
+			.id(GLINTERRA_GEOKNIGHT_WATER)
 			.name("geoknight glinterra")
 			.baseTypes(List.of(EARTH, WATER))
 			.baseAbilities(List.of(MERGE))
@@ -4116,7 +4133,7 @@ public class SpeciesRegistry {
 			.soulMove(MoveId.FUSION_BARRAGE)
 		);
 		register(Species.build()
-			.id(GEOKNIGHT_GLINTERRA_ELECTRIC)
+			.id(GLINTERRA_GEOKNIGHT_ELECTRIC)
 			.name("geoknight glinterra")
 			.baseTypes(List.of(EARTH, ELECTRIC))
 			.baseAbilities(List.of(MERGE))
@@ -4129,7 +4146,7 @@ public class SpeciesRegistry {
 			.soulMove(MoveId.FUSION_BARRAGE)
 		);
 		register(Species.build()
-			.id(GEOKNIGHT_GLINTERRA_LIGHT)
+			.id(GLINTERRA_GEOKNIGHT_LIGHT)
 			.name("geoknight glinterra")
 			.baseTypes(List.of(EARTH, LIGHT))
 			.baseAbilities(List.of(MERGE))
@@ -4142,7 +4159,7 @@ public class SpeciesRegistry {
 			.soulMove(MoveId.FUSION_BARRAGE)
 		);
 		register(Species.build()
-			.id(GEOKNIGHT_GLINTERRA_DARK)
+			.id(GLINTERRA_GEOKNIGHT_DARK)
 			.name("geoknight glinterra")
 			.baseTypes(List.of(EARTH, DARK))
 			.baseAbilities(List.of(MERGE))
@@ -4659,6 +4676,7 @@ public class SpeciesRegistry {
 			.canEvolve(false)
 			.canSoulBurst(true)
 			.soulItem(ItemId.DAKUBURST)
+			.soulSpecies(DAKUDA_OVERCHARGED)
 		);
 		register(Species.build()
 			.id(DAKUDA_OVERCHARGED)
@@ -4902,6 +4920,7 @@ public class SpeciesRegistry {
 			.canEvolve(false)
 			.canSoulBurst(true)
 			.soulItem(ItemId.METROBURST)
+			.soulSpecies(METRONETTE_WILLBOUND)
 		);
 		register(Species.build()
 			.id(METRONETTE_WILLBOUND)
@@ -5025,6 +5044,7 @@ public class SpeciesRegistry {
 			.canEvolve(false)
 			.canSoulBurst(true)
 			.soulItem(ItemId.CELEBURST)
+			.soulSpecies(CELESTING_STELLARCHIME)
 		);
 		register(Species.build()
 			.id(CELESTING_STELLARCHIME)

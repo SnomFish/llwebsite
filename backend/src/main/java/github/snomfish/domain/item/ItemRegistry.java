@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import github.snomfish.domain.modifiers.MoveModifierId;
+import github.snomfish.domain.modifiers.SideModifierId;
 import github.snomfish.domain.move.CategoryId;
 import github.snomfish.domain.species.SpeciesId;
 import github.snomfish.domain.status.StatusId;
@@ -17,13 +18,13 @@ import github.snomfish.functionality._schematics.Numbers;
 import github.snomfish.functionality.condition.And;
 import github.snomfish.functionality.condition.Comparator;
 import github.snomfish.functionality.condition.Equals;
+import github.snomfish.functionality.condition.False;
 import github.snomfish.functionality.condition.GateCondition;
 import github.snomfish.functionality.condition.Not;
 import github.snomfish.functionality.condition.Or;
 import github.snomfish.functionality.condition.RandomCondition;
 import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.effect.EffectSequence;
-import github.snomfish.functionality.effect.NoEffect;
 import github.snomfish.functionality.effect.effects.ApplyStatChanges;
 import github.snomfish.functionality.effect.effects.ApplyStatus;
 import github.snomfish.functionality.effect.effects.ClutchEffect;
@@ -63,7 +64,7 @@ public class ItemRegistry {
 
     private static void register(Item item) {
 		if (registry.containsKey(item.id())) throw new RuntimeException("ItemRegistry attempted to register duplicate entry \"" + item.id().name() + "\"");
-        registry.put(item.id(), item);
+		registry.put(item.id(), item);
     }
 
 
@@ -80,12 +81,11 @@ public class ItemRegistry {
 			.id(CHOCOLATE_BAR)
 			.name("chocolate bar")
 			.rule(Rule.build()
-				.event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.event(RuleForUserId.SELF_PRE_ENERGY_CALC)
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
 				.effect(new EffectSequence(
-					ConsumeItem.user(),
-					new NoEffect()
-					// reduce the cost of all moves to 0 then consume when a move is used
+					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.ENERGY_COST), new Constant(0)),
+					ConsumeItem.user()
 				))
 			)
 			.tag(CONSUMABLE)
@@ -118,8 +118,8 @@ public class ItemRegistry {
 			.name("drop of youth")
 			.rule(Rule.build()
 				.event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
-				.condition(new Equals<>(Value.OPP().CAN_EVOLVE(), true))
-				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
+				.condition(new Equals<>(Value.OPP().CAN_SPECIES_EVOLVE(), true))
+				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.TARGET))
 				.effect(Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DEFENDING_STAT), new Constant(1.5)))
 			)
 			.tag(PUNCTURABLE)
@@ -136,7 +136,11 @@ public class ItemRegistry {
 		register(Item.build()
 			.id(ENERGY_ORB)
 			.name("energy orb")
-			// TODO decrease the cost of moves by 25%
+			.rule(Rule.build()
+				.event(RuleForUserId.SELF_PRE_ENERGY_CALC)
+				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.ENERGY_COST), new Constant(0.75)))
+			)
 		);
 		register(Item.build()
 			.id(HEALTH_AMULET)
@@ -151,29 +155,42 @@ public class ItemRegistry {
 			.id(HEAVY_ARMOUR)
 			.name("heavy armour")
 			.rule(Rule.build()
+				.event(RuleForUserId.SELF_PRE_ENERGY_CALC)
+				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.ENERGY_COST), new Constant(1.15)))
+			)
+			.rule(Rule.build()
 				.event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.OPP().MOVE().CATEGORY(), CategoryId.MELEE))
-				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
+				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.TARGET))
 				.effect(Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DEFENDING_STAT), new Constant(1.2)))
 			)
 			.tag(PUNCTURABLE)
-			// TODO increase costs of moves by 15%
 		);
 		register(Item.build()
 			.id(HEAVY_SHACKLES)
 			.name("heavy shackles")
+			.rule(Rule.build()
+				.event(ConstantRuleId.PRE_CALC_SPEED_ORDER)
+				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
+				.effect(Effects.multiplyValue(Value.USER().SIDE_MODIFIER(SideModifierId.SPEED), new Constant(0)))
+			)
 		);
 		register(Item.build()
 			.id(HEAVY_SHIELD)
 			.name("heavy shield")
 			.rule(Rule.build()
+				.event(RuleForUserId.SELF_PRE_ENERGY_CALC)
+				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.ENERGY_COST), new Constant(1.15)))
+			)
+			.rule(Rule.build()
 				.event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.OPP().MOVE().CATEGORY(), CategoryId.RANGED))
-				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
+				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.TARGET))
 				.effect(Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DEFENDING_STAT), new Constant(1.2)))
 			)
 			.tag(PUNCTURABLE)
-			// TODO increase costs of moves by 15%
 		);
 		register(Item.build()
 			.id(KABUNGA_COFFEE)
@@ -198,6 +215,7 @@ public class ItemRegistry {
 		register(Item.build()
 			.id(MYSTERIOUS_DUST)
 			.name("mysterious dust")
+			// TODO IMPLEMENT
 		);
 		register(Item.build()
 			.id(MYSTIC_WAND)
@@ -213,7 +231,7 @@ public class ItemRegistry {
 				.event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.SELF().SPECIES_ID(), SpeciesId.SHAWCHI))
 				.condition(new Equals<>(Value.OPP().MOVE().CATEGORY(), CategoryId.RANGED))
-				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
+				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.TARGET))
 				.effect(Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DEFENDING_STAT), new Constant(1.5)))
 			)
 		);
@@ -221,11 +239,15 @@ public class ItemRegistry {
 			.id(POWER_CUFFS)
 			.name("power cuffs")
 			.rule(Rule.build()
+				.event(RuleForUserId.SELF_PRE_ENERGY_CALC)
+				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.ENERGY_COST), new Constant(1.25)))
+			)
+			.rule(Rule.build()
 				.event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
 				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.2)))
 			)
-			// TODO increase energy cost of moves by 25%
 		);
 		register(Item.build()
 			.id(RAGEFUL_PLUSHIE)
@@ -236,7 +258,7 @@ public class ItemRegistry {
 					.left(new ValueConstant(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.TYPE)))
 					.right(new Constant(1))
 				)
-				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
+				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.TARGET))
 				.effect(new EffectSequence(
 					ApplyStatChanges.targetChangingTarget()
 						.mattack(new Constant(2))
@@ -252,11 +274,12 @@ public class ItemRegistry {
 			.rule(Rule.build()
 				.event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.OPP().MOVE().CATEGORY(), CategoryId.MELEE))
-				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
+				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.TARGET))
 				.effect(Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(2/3)))
 			)
 			.gate(Gate.build()
 				.event(GateForUserId.CAN_SELF_USE_SUPPORT_MOVES)
+				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
 				.condition(new Not(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER)))
 			)
 			.tag(PUNCTURABLE)
@@ -267,11 +290,12 @@ public class ItemRegistry {
 			.rule(Rule.build()
 				.event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.OPP().MOVE().CATEGORY(), CategoryId.RANGED))
-				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
+				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.TARGET))
 				.effect(Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(2/3)))
 			)
 			.gate(Gate.build()
 				.event(GateForUserId.CAN_SELF_USE_SUPPORT_MOVES)
+				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
 				.condition(new Not(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER)))
 			)
 			.tag(PUNCTURABLE)
@@ -280,7 +304,9 @@ public class ItemRegistry {
 			.id(SPECIALY_BOOTS)
 			.name("specialty boots")
 			.rule(Rule.build()
+				// TODO IMPLEMENT
 				.condition(new Equals<>(Value.USER().NUM_OF_MOVES(), new Constant(4)))
+				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
 			)
 		);
 		register(Item.build()
@@ -640,7 +666,7 @@ public class ItemRegistry {
 			.rule(Rule.build()
                 .event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.ANCIENT))
-				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
+				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.TARGET))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(0.5)),
 					ConsumeItem.target()
@@ -655,7 +681,7 @@ public class ItemRegistry {
 			.rule(Rule.build()
                 .event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.PLANT))
-				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
+				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.TARGET))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(0.5)),
 					ConsumeItem.target()
@@ -670,7 +696,7 @@ public class ItemRegistry {
 			.rule(Rule.build()
                 .event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.AIR))
-				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
+				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.TARGET))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(0.5)),
 					ConsumeItem.target()
@@ -685,7 +711,7 @@ public class ItemRegistry {
 			.rule(Rule.build()
                 .event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.FIRE))
-				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
+				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.TARGET))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(0.5)),
 					ConsumeItem.target()
@@ -700,7 +726,7 @@ public class ItemRegistry {
 			.rule(Rule.build()
                 .event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.ICE))
-				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
+				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.TARGET))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(0.5)),
 					ConsumeItem.target()
@@ -715,7 +741,7 @@ public class ItemRegistry {
 			.rule(Rule.build()
                 .event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.BRAWLER))
-				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
+				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.TARGET))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(0.5)),
 					ConsumeItem.target()
@@ -730,7 +756,7 @@ public class ItemRegistry {
 			.rule(Rule.build()
                 .event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.MIND))
-				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
+				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.TARGET))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(0.5)),
 					ConsumeItem.target()
@@ -745,7 +771,7 @@ public class ItemRegistry {
 			.rule(Rule.build()
                 .event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.METAL))
-				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
+				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.TARGET))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(0.5)),
 					ConsumeItem.target()
@@ -760,7 +786,7 @@ public class ItemRegistry {
 			.rule(Rule.build()
                 .event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.TOXIC))
-				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
+				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.TARGET))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(0.5)),
 					ConsumeItem.target()
@@ -775,7 +801,7 @@ public class ItemRegistry {
 			.rule(Rule.build()
                 .event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.SIMPLE))
-				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
+				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.TARGET))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(0.5)),
 					ConsumeItem.target()
@@ -790,7 +816,7 @@ public class ItemRegistry {
 			.rule(Rule.build()
                 .event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.DARK))
-				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
+				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.TARGET))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(0.5)),
 					ConsumeItem.target()
@@ -805,7 +831,7 @@ public class ItemRegistry {
 			.rule(Rule.build()
                 .event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.LIGHT))
-				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
+				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.TARGET))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(0.5)),
 					ConsumeItem.target()
@@ -820,7 +846,7 @@ public class ItemRegistry {
 			.rule(Rule.build()
                 .event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.SPIRIT))
-				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
+				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.TARGET))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(0.5)),
 					ConsumeItem.target()
@@ -835,7 +861,7 @@ public class ItemRegistry {
 			.rule(Rule.build()
                 .event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.EARTH))
-				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
+				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.TARGET))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(0.5)),
 					ConsumeItem.target()
@@ -850,7 +876,7 @@ public class ItemRegistry {
 			.rule(Rule.build()
                 .event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.ELECTRIC))
-				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
+				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.TARGET))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(0.5)),
 					ConsumeItem.target()
@@ -865,7 +891,7 @@ public class ItemRegistry {
 			.rule(Rule.build()
                 .event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.WATER))
-				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
+				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.TARGET))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(0.5)),
 					ConsumeItem.target()
@@ -880,7 +906,7 @@ public class ItemRegistry {
 			.rule(Rule.build()
                 .event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.BUG))
-				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
+				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.TARGET))
 				.effect(new EffectSequence(
 					Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(0.5)),
 					ConsumeItem.target()
@@ -1132,74 +1158,146 @@ public class ItemRegistry {
 		register(Item.build()
 			.id(FLORABURST)
 			.name("Floraburst")
+			.gate(Gate.build()
+				.event(GateForUserId.CAN_REMOVE_SELFS_ITEM)
+				.condition(new False())
+			)
 		);
 		register(Item.build()
 			.id(GASTROBURST)
 			.name("Gastroburst")
+			.gate(Gate.build()
+				.event(GateForUserId.CAN_REMOVE_SELFS_ITEM)
+				.condition(new False())
+			)
 		);
 		register(Item.build()
 			.id(ERUPTIBURST)
 			.name("Eruptiburst")
+			.gate(Gate.build()
+				.event(GateForUserId.CAN_REMOVE_SELFS_ITEM)
+				.condition(new False())
+			)
 		);
 		register(Item.build()
 			.id(KRAKABURST)
 			.name("Krakaburst")
+			.gate(Gate.build()
+				.event(GateForUserId.CAN_REMOVE_SELFS_ITEM)
+				.condition(new False())
+			)
 		);
 		register(Item.build()
 			.id(STRATBURST)
 			.name("Strataburst")
+			.gate(Gate.build()
+				.event(GateForUserId.CAN_REMOVE_SELFS_ITEM)
+				.condition(new False())
+			)
 		);
 		register(Item.build()
 			.id(DAKUBURST)
 			.name("Dakuburst")
+			.gate(Gate.build()
+				.event(GateForUserId.CAN_REMOVE_SELFS_ITEM)
+				.condition(new False())
+			)
 		);
 		register(Item.build()
 			.id(METROBURST)
 			.name("Metroburst")
+			.gate(Gate.build()
+				.event(GateForUserId.CAN_REMOVE_SELFS_ITEM)
+				.condition(new False())
+			)
 		);
 		register(Item.build()
 			.id(ICIBURST)
 			.name("Iciburst")
+			.gate(Gate.build()
+				.event(GateForUserId.CAN_REMOVE_SELFS_ITEM)
+				.condition(new False())
+			)
 		);
 		register(Item.build()
 			.id(SKELIBURST)
 			.name("Skeliburst")
+			.gate(Gate.build()
+				.event(GateForUserId.CAN_REMOVE_SELFS_ITEM)
+				.condition(new False())
+			)
 		);
 		register(Item.build()
 			.id(JOLTBURST)
 			.name("Joltburst")
+			.gate(Gate.build()
+				.event(GateForUserId.CAN_REMOVE_SELFS_ITEM)
+				.condition(new False())
+			)
 		);
 		register(Item.build()
 			.id(NOSHBURST)
 			.name("Noshburst")
+			.gate(Gate.build()
+				.event(GateForUserId.CAN_REMOVE_SELFS_ITEM)
+				.condition(new False())
+			)
 		);
 		register(Item.build()
 			.id(CELEBURST)
 			.name("Celeburst")
+			.gate(Gate.build()
+				.event(GateForUserId.CAN_REMOVE_SELFS_ITEM)
+				.condition(new False())
+			)
 		);
 		register(Item.build()
 			.id(DREGGOBURST)
 			.name("Dreggoburst")
+			.gate(Gate.build()
+				.event(GateForUserId.CAN_REMOVE_SELFS_ITEM)
+				.condition(new False())
+			)
 		);
 		register(Item.build()
 			.id(IMPERIBURST)
 			.name("Imperiburst")
+			.gate(Gate.build()
+				.event(GateForUserId.CAN_REMOVE_SELFS_ITEM)
+				.condition(new False())
+			)
 		);
 		register(Item.build()
 			.id(KRAMBURST)
 			.name("Kramburst")
+			.gate(Gate.build()
+				.event(GateForUserId.CAN_REMOVE_SELFS_ITEM)
+				.condition(new False())
+			)
 		);
 		register(Item.build()
 			.id(FENBURST_M)
 			.name("fenburst m")
+			.gate(Gate.build()
+				.event(GateForUserId.CAN_REMOVE_SELFS_ITEM)
+				.condition(new False())
+			)
 		);
 		register(Item.build()
 			.id(FENBURST_I)
 			.name("fenburst i")
+			.gate(Gate.build()
+				.event(GateForUserId.CAN_REMOVE_SELFS_ITEM)
+				.condition(new False())
+			)
 		);
 		register(Item.build()
 			.id(GLINTBURST)
 			.name("Glintburst")
+			.gate(Gate.build()
+				.event(GateForUserId.CAN_REMOVE_SELFS_ITEM)
+				.condition(new False())
+			)
 		);
 
 

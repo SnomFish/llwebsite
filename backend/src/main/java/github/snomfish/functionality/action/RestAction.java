@@ -11,23 +11,12 @@ import github.snomfish.functionality.context.BattleContext;
 import static github.snomfish.functionality.branch.BranchUtil.wrap;
 
 public class RestAction implements IAction {
-	
-
-	private int priority;
-    private boolean willSoulBurst;
 
 
-    public RestAction(
-        int priority
-    ) {
-        this.priority = priority;
-    }
+    public RestAction() {}
 
     
-    protected RestAction(RestAction copy) {
-        this.priority = copy.priority;
-        this.willSoulBurst = copy.willSoulBurst;
-    }
+    protected RestAction(RestAction copy) {}
     public RestAction deepCopy() {
         return new RestAction(this);
     }
@@ -35,16 +24,14 @@ public class RestAction implements IAction {
 
     // getter
     public ActionId id()            {return ActionId.SWITCH;}
-    public int priority()           {return priority;}
+    public int priority()           {return 8;}
     public Move move() 			    {throw new RuntimeException("Attempted to get move from a rest action");}
 	public int switchTarget() 	    {throw new RuntimeException("Attempted to get switchTarget from a rest action");}
-    public boolean willSoulBurst()  {return willSoulBurst;}
 
 
-	public void setPriority(int priority)               {this.priority = priority;}
-	public void setMove(Move move) 					    {throw new RuntimeException("Attempted to set move from a rest action");}
-	public void setSwitchTarget(int switchTarget) 	    {throw new RuntimeException("Attempted to set switchTarget from a rest action");}
-    public void setWillSoulBurst(boolean willSoulBurst) {this.willSoulBurst = willSoulBurst;}
+	public void setPriority(int priority)               {throw new RuntimeException("Attempted to set priority in a rest action");}
+	public void setMove(Move move) 					    {throw new RuntimeException("Attempted to set move in a rest action");}
+	public void setSwitchTarget(int switchTarget) 	    {throw new RuntimeException("Attempted to set switchTarget in a rest action");}
 
 
     public boolean isSelectable(BattleContext context) {

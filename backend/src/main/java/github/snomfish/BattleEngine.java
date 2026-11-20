@@ -1,8 +1,11 @@
-package github.snomfish.domain;
+package github.snomfish;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import github.snomfish.domain.Gamestate;
+import github.snomfish.domain.Side;
+import github.snomfish.domain.SideId;
 import github.snomfish.domain.modifiers.SideModifierId;
 import github.snomfish.domain.stats.StatChangesId;
 import github.snomfish.functionality.Value;

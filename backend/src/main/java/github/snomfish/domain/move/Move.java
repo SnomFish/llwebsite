@@ -43,7 +43,7 @@ public class Move implements DeepCopyable<Move> {
     private TypeId type;
     private CategoryId category;
     private INumber energyCost;
-    private INumber priority;
+    private int priority;
 
     private IMove onTurnStart;
     private IMove preMove;
@@ -72,7 +72,7 @@ public class Move implements DeepCopyable<Move> {
         this.type = 		TypeId.NULL;
         this.category = 	CategoryId.MELEE;
         this.energyCost = 	new Constant(0);
-        this.priority = 	new Constant(0);
+        this.priority = 	0;
 
         this.onTurnStart =  new NoMove();
         this.preMove = 		new NoMove();
@@ -101,7 +101,7 @@ public class Move implements DeepCopyable<Move> {
         this.type = 			copy.type;
         this.category = 		copy.category;
         this.energyCost = 		copy.energyCost.deepCopy();
-        this.priority = 		copy.priority.deepCopy();
+        this.priority = 		copy.priority;
 
         this.onTurnStart =      copy.onTurnStart.deepCopy();
         this.preMove =          copy.preMove.deepCopy();
@@ -135,7 +135,7 @@ public class Move implements DeepCopyable<Move> {
     public TypeId type() {return type;}
     public CategoryId category() {return category;}
     public INumber energyCost() {return energyCost;}
-    public INumber priority() {return priority;}
+    public int priority() {return priority;}
 
     public IMove onTurnStart() {return onTurnStart;}
     public IMove preMove() {return preMove;}
@@ -168,7 +168,7 @@ public class Move implements DeepCopyable<Move> {
     public Move type(TypeId type) {this.type = type; return this;}
     public Move category(CategoryId category) {this.category = category; return this;}
     public Move energyCost(INumber energyCost) {this.energyCost = energyCost; return this;}
-    public Move priority(INumber priority) {this.priority = priority; return this;}
+    public Move priority(int priority) {this.priority = priority; return this;}
 
 	public Move onTurnStart(IMove onTurnStart) {this.onTurnStart = onTurnStart; return this;}
     public Move preMove(IMove preMove) {this.preMove = preMove; return this;}
@@ -238,8 +238,8 @@ public class Move implements DeepCopyable<Move> {
         BattleContext outcome = context.deepCopy();
 
         MoveAction flailAction = new MoveAction(
-            outcome.user().activeLoomian().action().priority(),
             MoveRegistry.get(MoveId.FLAIL)
+                .priority(priority)
         );
         outcome.user().activeLoomian().setAction(flailAction);
         return wrap(outcome);

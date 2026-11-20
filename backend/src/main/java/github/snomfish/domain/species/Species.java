@@ -25,6 +25,7 @@ public class Species {
 
     private boolean canSoulBurst;
     private ItemId soulItemId;
+    private SpeciesId soulSpeciesId;
     private MoveId soulMoveId;
 
 
@@ -41,6 +42,7 @@ public class Species {
         this.canEvolve = false;
         this.canSoulBurst = false;
         this.soulItemId = ItemId.NO_ITEM;
+        this.soulSpeciesId = SpeciesId.NO_SPECIES;
         this.soulMoveId = MoveId.NO_MOVE;
     }
 
@@ -58,6 +60,7 @@ public class Species {
     public boolean canEvolve() {return canEvolve;}
     public boolean canSoulBurst() {return canSoulBurst;}
     public ItemId soulItemId() {return soulItemId;}
+    public SpeciesId soulSpeciesId() {return soulSpeciesId;}
     public MoveId soulMoveId() {return soulMoveId;}
 
 
@@ -111,6 +114,10 @@ public class Species {
     }
     public Species soulItem(ItemId itemId) {
         this.soulItemId = itemId;
+        return this;
+    }
+    public Species soulSpecies(SpeciesId speciesId) {
+        this.soulSpeciesId = speciesId;
         return this;
     }
     public Species soulMove(MoveId moveId) {
