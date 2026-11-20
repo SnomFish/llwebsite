@@ -8,7 +8,7 @@ import github.snomfish.domain.move.CategoryId;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality._schematics.Effects;
 import github.snomfish.functionality._schematics.Numbers;
-import github.snomfish.functionality.condition.Equals;
+import github.snomfish.functionality.condition.variable.Equals;
 import github.snomfish.functionality.effect.effects.RemoveHealth;
 import github.snomfish.functionality.event.Rule;
 import github.snomfish.functionality.event.ruleIds.ConstantRuleId;

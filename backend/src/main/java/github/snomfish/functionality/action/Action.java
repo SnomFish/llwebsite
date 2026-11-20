@@ -24,8 +24,8 @@ public class Action {
 	public static Action selectSwitch(int switchTarget) {
 		return new Action(new SwitchAction(switchTarget), false);
 	}
-	public static boolean canSelectSwitch(BattleContext context) {
-		return SwitchAction.isSelectable(context);
+	public static boolean canSelectSwitch(BattleContext context, int switchTarget) {
+		return SwitchAction.isSelectable(context, switchTarget);
 	} 
 
 

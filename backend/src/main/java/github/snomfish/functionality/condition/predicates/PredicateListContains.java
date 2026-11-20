@@ -1,25 +1,25 @@
-package github.snomfish.functionality.condition;
+package github.snomfish.functionality.condition.predicates;
 
 import java.util.List;
 
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.context.BattleContext;
 
-public class ListContains<T> implements ICondition {
-      
+public class PredicateListContains<T> implements IPredicate {
+	
 
     private Value<List<T>> list;
     private Object value;
 
 
-    public ListContains(
+    public PredicateListContains(
         Value<List<T>> list,
         T value
     ) {
         this.list = list;
         this.value = value;
     }
-    public ListContains(
+    public PredicateListContains(
         Value<List<T>> list,
         Value<T> value
     ) {
@@ -28,18 +28,17 @@ public class ListContains<T> implements ICondition {
     }
 
 
-    private ListContains(ListContains<T> copy) {
+    private PredicateListContains(PredicateListContains<T> copy) {
         this.list = copy.list;
         this.value = copy.value;
     }
-    public ListContains<T> deepCopy() {
-        return new ListContains<>(this);
+    public PredicateListContains<T> deepCopy() {
+        return new PredicateListContains<>(this);
     }
 
 
-    @Override 
-    public double execute(BattleContext context) {
+    public boolean execute(BattleContext context) {
         // does not need to be checked
-        return list.get(context).contains(Value.resolve(value, context)) ? 1 : 0;
+        return list.get(context).contains(Value.resolve(value, context));
     }
 }

@@ -14,7 +14,7 @@ import github.snomfish.functionality.Calculator;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality._schematics.Effects;
 import github.snomfish.functionality.branch.Branch;
-import github.snomfish.functionality.condition.GateCondition;
+import github.snomfish.functionality.condition.variable.GateCondition;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.effect.ConditionalEffect;

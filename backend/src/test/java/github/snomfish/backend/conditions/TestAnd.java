@@ -3,8 +3,8 @@ package github.snomfish.backend.conditions;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import github.snomfish.functionality.condition.And;
-import github.snomfish.functionality.condition.RandomCondition;
+import github.snomfish.functionality.condition.variable.And;
+import github.snomfish.functionality.condition.variable.RandomCondition;
 import github.snomfish.functionality.number.Constant;
 
 public class TestAnd {

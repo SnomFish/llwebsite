@@ -14,16 +14,18 @@ public abstract class Definition<A, B extends Definition<A, B>> {
     protected A id;
     protected String name = "definition";
     protected List<Rule> rules = new ArrayList<>();
-    protected List<Gate> gates = new ArrayList<>();
     protected List<Hook> hooks = new ArrayList<>();
+    protected List<Gate> gates = new ArrayList<>();
+    protected List<Door> doors = new ArrayList<>();
 
 
     // getters
     public A id() {return id;}
     public String name() {return name;}
     public List<Rule> rules() {return rules;}
-    public List<Gate> gates() {return gates;}
     public List<Hook> hooks() {return hooks;}
+    public List<Gate> gates() {return gates;}
+    public List<Door> doors() {return doors;}
 
 
     // builder functions
@@ -39,12 +41,16 @@ public abstract class Definition<A, B extends Definition<A, B>> {
         this.rules.add(rule);
         return (B) this;
     }
+    public B hook(Hook hook) {
+        this.hooks.add(hook);
+        return (B) this;
+    }
     public B gate(Gate gate) {
         this.gates.add(gate);
         return (B) this;
     }
-    public B hook(Hook hook) {
-        this.hooks.add(hook);
+    public B door(Door door) {
+        this.doors.add(door);
         return (B) this;
     }
 

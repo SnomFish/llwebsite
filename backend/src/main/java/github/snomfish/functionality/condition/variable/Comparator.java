@@ -1,4 +1,4 @@
-package github.snomfish.functionality.condition;
+package github.snomfish.functionality.condition.variable;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.INumber;
 
 import static github.snomfish.functionality._schematics.Conditions.checkProbability;
-import static github.snomfish.functionality.condition.ComparatorId.*;
+import static github.snomfish.functionality.condition.variable.ComparatorId.*;
 
 public class Comparator implements ICondition {
     

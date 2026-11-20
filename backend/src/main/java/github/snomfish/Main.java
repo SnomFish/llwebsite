@@ -12,7 +12,6 @@ import github.snomfish.domain.move.*;
 import github.snomfish.domain.species.*;
 import github.snomfish.domain.stats.*;
 import github.snomfish.domain.status.*;
-import github.snomfish.functionality.action.MoveAction;
 import github.snomfish.functionality.context.BattleContext;
 
 @SpringBootApplication
@@ -34,7 +33,6 @@ public class Main {
 		Side side = new Side(List.of(embit), 0);
 		Gamestate gamestate = new Gamestate(side, side);
 		BattleContext context = new BattleContext(gamestate, SideId.PLAYER);
-		context.user().activeLoomian().setAction(new MoveAction(0, MoveRegistry.get(MoveId.PARASITIZE)));
 
 		
 		

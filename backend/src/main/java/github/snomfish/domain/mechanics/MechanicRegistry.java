@@ -11,12 +11,13 @@ import github.snomfish.domain.type.TypeId;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality._schematics.Effects;
 import github.snomfish.functionality._schematics.Numbers;
-import github.snomfish.functionality.condition.And;
-import github.snomfish.functionality.condition.Equals;
-import github.snomfish.functionality.condition.False;
-import github.snomfish.functionality.condition.GateCondition;
-import github.snomfish.functionality.condition.ListContains;
-import github.snomfish.functionality.condition.Not;
+import github.snomfish.functionality.condition.predicates.PredicateFalse;
+import github.snomfish.functionality.condition.variable.And;
+import github.snomfish.functionality.condition.variable.Equals;
+import github.snomfish.functionality.condition.variable.False;
+import github.snomfish.functionality.condition.variable.GateCondition;
+import github.snomfish.functionality.condition.variable.ListContains;
+import github.snomfish.functionality.condition.variable.Not;
 import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.effect.EffectSequence;
 import github.snomfish.functionality.effect.effects.AddType;
@@ -27,6 +28,7 @@ import github.snomfish.functionality.effect.effects.RemoveHealth;
 import github.snomfish.functionality.effect.effects.RemoveMechanic;
 import github.snomfish.functionality.effect.effects.RestoreHealth;
 import github.snomfish.functionality.effect.effects.SetFieldMechanic;
+import github.snomfish.functionality.event.Door;
 import github.snomfish.functionality.event.Gate;
 import github.snomfish.functionality.event.Rule;
 import github.snomfish.functionality.event.gateIds.GateForAllId;
@@ -168,18 +170,81 @@ public class MechanicRegistry {
             )
         );
         register(new Mechanic()
+            .id(TRAPPED_BY_OATH)
+            .name("trapped by binding oath")
+            .door(Door.build()
+                .event(GateForUserId.CAN_SELF_SWITCH)
+                .predicate(new PredicateFalse())
+            )
+        );
+        register(new Mechanic()
+            .id(TRAPPED_BY_PESTILENCE)
+            .name("trapped by pestilence")
+            .door(Door.build()
+                .event(GateForUserId.CAN_SELF_SWITCH)
+                .predicate(new PredicateFalse())
+            )
+            .rule(Rule.build()
+                .event(ConstantRuleId.END_OF_TURN)
+                .effect(RemoveHealth.target(Numbers.eighthTargetMaxHealth()))
+            )
+        );
+        register(new Mechanic()
+            .id(TRAPPED_BY_PINCER_TRAP)
+            .name("trapped by pincer trap")
+            .door(Door.build()
+                .event(GateForUserId.CAN_SELF_SWITCH)
+                .predicate(new PredicateFalse())
+            )
+        );
+        register(new Mechanic()
+            .id(TRAPPED_BY_QUICKSAND)
+            .name("trapped by quicksand")
+            .door(Door.build()
+                .event(GateForUserId.CAN_SELF_SWITCH)
+                .predicate(new PredicateFalse())
+            )
+            .rule(Rule.build()
+                .event(ConstantRuleId.END_OF_TURN)
+                .effect(RemoveHealth.target(Numbers.eighthTargetMaxHealth()))
+            )
+        );
+        register(new Mechanic()
+            .id(TRAPPED_BY_ROOT)
+            .name("trapped by take root")
+            .door(Door.build()
+                .event(GateForUserId.CAN_SELF_SWITCH)
+                .predicate(new PredicateFalse())
+            )
+            .rule(Rule.build()
+                .event(ConstantRuleId.END_OF_TURN)
+                .effect(RestoreHealth.user(Numbers.eighthUserMaxHealth()))
+            )
+        );
+        register(new Mechanic()
+            .id(TRAPPED_BY_STEEL_TRAP)
+            .name("trapped by steel trap")
+            .door(Door.build()
+                .event(GateForUserId.CAN_SELF_SWITCH)
+                .predicate(new PredicateFalse())
+            )
+            .rule(Rule.build()
+                .event(ConstantRuleId.END_OF_TURN)
+                .effect(RemoveHealth.target(Numbers.eighthTargetMaxHealth()))
+            )
+        );
+        register(new Mechanic()
+            .id(TRAPPED_BY_SWEET_AROMA)
+            .name("trapped by sweet aroma")
+            .door(Door.build()
+                .event(GateForUserId.CAN_SELF_SWITCH)
+                .predicate(new PredicateFalse())
+            )
+        );
+        register(new Mechanic()
             .id(TEASE)
             .name("tease")
             // TODO implement tease mechanic
-        );
-        register(new Mechanic()
-            .id(WILL_SET_BOH)
-            .name("will set up bane of haste at end of turn")
-            .rule(Rule.build()
-                .event(ConstantRuleId.END_OF_TURN)
-                .effect(SetFieldMechanic.baneOfHaste().withMaxAge(5))
-                .effect(RemoveMechanic.fromUser(WILL_SET_BOH))
-            )
         );
 
         // mechanics caused by abilities

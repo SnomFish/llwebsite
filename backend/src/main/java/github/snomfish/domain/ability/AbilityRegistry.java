@@ -21,16 +21,16 @@ import github.snomfish.functionality.Value;
 import github.snomfish.functionality._schematics.Conditions;
 import github.snomfish.functionality._schematics.Effects;
 import github.snomfish.functionality._schematics.Numbers;
-import github.snomfish.functionality.condition.And;
-import github.snomfish.functionality.condition.Comparator;
-import github.snomfish.functionality.condition.Equals;
-import github.snomfish.functionality.condition.False;
-import github.snomfish.functionality.condition.GateCondition;
-import github.snomfish.functionality.condition.ListContains;
-import github.snomfish.functionality.condition.NoCondition;
-import github.snomfish.functionality.condition.Not;
-import github.snomfish.functionality.condition.Or;
-import github.snomfish.functionality.condition.RandomCondition;
+import github.snomfish.functionality.condition.variable.And;
+import github.snomfish.functionality.condition.variable.Comparator;
+import github.snomfish.functionality.condition.variable.Equals;
+import github.snomfish.functionality.condition.variable.False;
+import github.snomfish.functionality.condition.variable.GateCondition;
+import github.snomfish.functionality.condition.variable.ListContains;
+import github.snomfish.functionality.condition.variable.NoCondition;
+import github.snomfish.functionality.condition.variable.Not;
+import github.snomfish.functionality.condition.variable.Or;
+import github.snomfish.functionality.condition.variable.RandomCondition;
 import github.snomfish.functionality.effect.ConditionalEffect;
 import github.snomfish.functionality.effect.EffectSequence;
 import github.snomfish.functionality.effect.effects.AlterTypeChart;
@@ -1580,9 +1580,10 @@ public class AbilityRegistry {
 			.id(PARTY_TRICK)
 			.name("party trick")
 			.rule(Rule.build()
-				.event(RuleForUserId.SELF_SWAPPED_IN)
-				.effect(ApplyMechanic.toUser(LoomianMechanicId.WILL_SET_BOH))
+				.event(ConstantRuleId.END_OF_TURN)
+				.effect(SetFieldMechanic.baneOfHaste())
 			)
+			.setOncePerBattle()
 		);
 		register(Ability.build() // increases the lifespan of some side mechanics
 			.id(PERSISTENCE)

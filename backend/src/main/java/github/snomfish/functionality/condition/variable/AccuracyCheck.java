@@ -1,4 +1,4 @@
-package github.snomfish.functionality.condition;
+package github.snomfish.functionality.condition.variable;
 
 import java.util.List;
 

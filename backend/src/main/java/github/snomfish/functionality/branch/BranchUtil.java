@@ -9,8 +9,8 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 import github.snomfish.functionality._schematics.Conditions;
-import github.snomfish.functionality.condition.GateCondition;
-import github.snomfish.functionality.condition.ICondition;
+import github.snomfish.functionality.condition.variable.GateCondition;
+import github.snomfish.functionality.condition.variable.ICondition;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.effect.IEffect;

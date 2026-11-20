@@ -1,4 +1,4 @@
-package github.snomfish.functionality.condition;
+package github.snomfish.functionality.condition.variable;
 
 import github.snomfish.domain.mechanics.Mechanics;
 import github.snomfish.domain.mechanics.ids.SideMechanicId;

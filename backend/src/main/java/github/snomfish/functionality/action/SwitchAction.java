@@ -7,7 +7,7 @@ import github.snomfish.domain.ActiveLoomian;
 import github.snomfish.domain.Loomian;
 import github.snomfish.domain.move.Move;
 import github.snomfish.functionality.branch.Branch;
-import github.snomfish.functionality.condition.GateCondition;
+import github.snomfish.functionality.condition.variable.GateCondition;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.event.gateIds.GateForAllId;

@@ -1,4 +1,4 @@
-package github.snomfish.functionality.condition;
+package github.snomfish.functionality.condition.variable;
 
 import static github.snomfish.functionality._schematics.Conditions.checkProbability;
 

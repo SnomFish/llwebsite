@@ -1,4 +1,4 @@
-package github.snomfish.functionality.condition;
+package github.snomfish.functionality.condition.variable;
 
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.context.ContextSideId;

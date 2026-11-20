@@ -2,8 +2,8 @@ package github.snomfish.functionality._schematics;
 
 import github.snomfish.domain.mechanics.ids.LoomianMechanicId;
 import github.snomfish.functionality.Value;
-import github.snomfish.functionality.condition.GateCondition;
-import github.snomfish.functionality.condition.RandomCondition;
+import github.snomfish.functionality.condition.variable.GateCondition;
+import github.snomfish.functionality.condition.variable.RandomCondition;
 import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.effect.ConditionalEffect;
 import github.snomfish.functionality.effect.IEffect;
