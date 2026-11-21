@@ -44,7 +44,7 @@ public class HealthDrainEffect implements IEffect {
 
                 BattleContext outcome = contextBranch.value().deepCopy();
                 ActiveLoomian user	 = outcome.user().activeLoomian();
-                Move move			 = user.action().move();
+                Move move			 = user.action().mainAction().move();
                 int healthDrain		 = (int) (move.damage() * move.modifiers().get(MoveModifierId.HEALTH_DRAIN) * drainBranch.value());
     
 				healthDrain = Math.min(healthDrain, user.maxHealth() - user.currentHealth()); // prevents the drain from over healing

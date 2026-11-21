@@ -27,7 +27,6 @@ import github.snomfish.functionality.effect.effects.ApplyStatus;
 import github.snomfish.functionality.effect.effects.RemoveHealth;
 import github.snomfish.functionality.effect.effects.RemoveMechanic;
 import github.snomfish.functionality.effect.effects.RestoreHealth;
-import github.snomfish.functionality.effect.effects.SetFieldMechanic;
 import github.snomfish.functionality.event.Door;
 import github.snomfish.functionality.event.Gate;
 import github.snomfish.functionality.event.Rule;

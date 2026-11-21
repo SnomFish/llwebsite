@@ -3928,6 +3928,7 @@ public class MoveRegistry {
 			.onMove(SingleHit.build()
 				.condition(new AccuracyCheck(new Constant(1)))
 				.primary(new DealFormulaDamage())
+				.secondary(ApplyMechanic.toTarget(LoomianMechanicId.TRAPPED_BY_PESTILENCE))
 			)
 		);
 		register(Move.build()
@@ -4348,6 +4349,7 @@ public class MoveRegistry {
 			.onMove(SingleHit.build()
 				.condition(new AccuracyCheck(new Constant(1)))
 				.primary(new DealFormulaDamage())
+				.secondary(ApplyMechanic.toTarget(LoomianMechanicId.TRAPPED_BY_QUICKSAND))
 			)
 		);
 		register(Move.build()
@@ -5367,6 +5369,7 @@ public class MoveRegistry {
 			.onMove(SingleHit.build()
 				.condition(new AccuracyCheck(new Constant(1)))
 				.primary(new DealFormulaDamage())
+				.secondary(ApplyMechanic.toTarget(LoomianMechanicId.TRAPPED_BY_STEEL_TRAP))
 			)
 			.tag(CONTACT)
 		);

@@ -44,6 +44,11 @@ public class WaitAction implements IAction {
     }
 
 
+    public void calcPriority(BattleContext context) {
+        // priority for waiting is set at 8
+    }
+
+
     public List<Branch<BattleContext>> execute(BattleContext context) {
 		BattleContext outcome = context.deepCopy();
 

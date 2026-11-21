@@ -44,7 +44,7 @@ public class EnergyDrainEffect implements IEffect {
 
                 BattleContext outcome = contextBranch.value().deepCopy();
                 ActiveLoomian user	 = outcome.user().activeLoomian();
-                Move move			 = user.action().move();
+                Move move			 = user.action().mainAction().move();
                 int energyDrain      = (int) (move.damage() * move.modifiers().get(MoveModifierId.ENERGY_DRAIN) * drainBranch.value());
     
 				energyDrain = Math.min(energyDrain, user.maxEnergy() - user.currentEnergy()); // prevents the drain from over healing

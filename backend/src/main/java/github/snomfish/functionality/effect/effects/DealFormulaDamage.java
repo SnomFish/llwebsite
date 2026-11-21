@@ -71,14 +71,13 @@ public class DealFormulaDamage implements IEffect {
     private List<Branch<BattleContext>> basePowerModule(BattleContext context) {
         List<Branch<BattleContext>> outcomes = new ArrayList<>();
 
-        INumber basePowerINumber = context.user().activeLoomian().action().move().basePower();
+        INumber basePowerINumber = Value.USER().MOVE().BASE_POWER().get(context);
 
         for (Branch<Double> basePowerBranch : basePowerINumber.execute(context)) {
             BattleContext outcome = context.deepCopy();
             int basePower = basePowerBranch.value().intValue();
 
-            ActiveLoomian user = outcome.user().activeLoomian();
-            Move move = user.action().move();
+            Move move = Value.USER().MOVE().get(outcome);
             move.damage(basePower);
             outcomes.add(new Branch<>(
                 outcome,
@@ -100,7 +99,7 @@ public class DealFormulaDamage implements IEffect {
 
         if (canCritProbability > 0) { // can crit
             ActiveLoomian user = context.user().activeLoomian();
-            Move move = user.action().move();
+            Move move = Value.USER().MOVE().get(context);
             
             int critChance = user.statChanges().stage(StatChangesId.CRIT_CHANCE) + move.critChance();
             critChance = Math.clamp(critChance, 0, 3);
@@ -108,8 +107,8 @@ public class DealFormulaDamage implements IEffect {
             BattleContext outcome1 = context.deepCopy();
             BattleContext outcome2 = context.deepCopy();
 
-            outcome1.user().activeLoomian().action().move().hasCrit(true);
-            outcome2.user().activeLoomian().action().move().hasCrit(false);
+            Value.USER().MOVE().HAS_CRIT().set(outcome1, true);
+            Value.USER().MOVE().HAS_CRIT().set(outcome2, false);
 
             outcomes.add(new Branch<>(outcome1, CRIT_CHANCES[critChance]));
             outcomes.add(new Branch<>(outcome2, 1-CRIT_CHANCES[critChance]));
@@ -126,9 +125,9 @@ public class DealFormulaDamage implements IEffect {
     // sets the attacking and defending stat modifiers
     private List<Branch<BattleContext>> statModifierModule(BattleContext context) {
         BattleContext outcome = context.deepCopy();
-        ActiveLoomian user = outcome.user().activeLoomian();
-        ActiveLoomian target = outcome.target().activeLoomian();
-        Move move = user.action().move();
+        ActiveLoomian user	 = Value.USER().LOOMIAN().get(outcome);
+        ActiveLoomian target = Value.TARGET().LOOMIAN().get(outcome);
+        Move move			 = Value.USER().MOVE().get(outcome);
         
         StatId attackingStatId = move.attackingStatId();
         StatId defendingStatId = move.defendingStatId();
@@ -174,9 +173,9 @@ public class DealFormulaDamage implements IEffect {
     // calculates the damage of the move
     private List<Branch<BattleContext>> damageModule(BattleContext context) {
         BattleContext outcome = context.deepCopy();
-        ActiveLoomian user = outcome.user().activeLoomian();
-        ActiveLoomian target = outcome.target().activeLoomian();
-        Move move = user.action().move();
+        ActiveLoomian user	 = Value.USER().LOOMIAN().get(outcome);
+        ActiveLoomian target = Value.TARGET().LOOMIAN().get(outcome);
+        Move move			 = Value.USER().MOVE().get(outcome);
 
         StatId attackingStatId = move.attackingStatId();
         StatId defendingStatId = move.defendingStatId();
@@ -225,10 +224,9 @@ public class DealFormulaDamage implements IEffect {
         for (double damageRollModifier = 0.85; damageRollModifier <= 1.0; damageRollModifier += 0.01) {
 
             BattleContext outcome = context.deepCopy();
-            ActiveLoomian user = outcome.user().activeLoomian();
-            ActiveLoomian target = outcome.target().activeLoomian();
-            Move move = user.action().move();
-            int damage = move.damage();
+            ActiveLoomian target = Value.TARGET().LOOMIAN().get(context);
+            Move move			 = Value.USER().MOVE().get(context);
+            int damage			 = Value.USER().MOVE().DAMAGE().get(context);
 
             move.damage((int)Math.clamp((double)damage * damageRollModifier, 1, target.currentHealth()));
             outcome.gamestate().log("move dealt " + damage + " damage");

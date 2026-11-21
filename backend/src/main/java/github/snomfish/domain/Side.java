@@ -118,6 +118,16 @@ public class Side implements DeepCopyable<Side> {
     }
 
 
+    public void soulburst() {
+        if (usedSoulBurst) throw new RuntimeException("This side has already soulbursted");
+        if (!activeLoomian.species().canSoulBurst()) throw new RuntimeException("Attempted to soulburst a loomian \"" + activeLoomian.species().name() + "\" that could not soulburst");
+        
+        this.activeLoomian.setSpeciesId(activeLoomian.species().soulSpeciesId()); // sets the new soul burst species
+        this.usedSoulBurst = true;
+        
+    }
+
+
     public void incrementTurnNumber() {
         for (Loomian loomian : party) {
             loomian.incrementTurnNumber();

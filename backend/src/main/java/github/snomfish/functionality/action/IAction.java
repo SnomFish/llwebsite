@@ -14,9 +14,12 @@ public interface IAction extends DeepCopyable<IAction> {
     Move move();
     int switchTarget();
 
-    void setPriority(int priority);
     void setMove(Move move);
     void setSwitchTarget(int switchTarget);
+
+    boolean isSelectable(BattleContext context);
+
+    void calcPriority(BattleContext context);
 
     List<Branch<BattleContext>> execute(BattleContext context);
 }

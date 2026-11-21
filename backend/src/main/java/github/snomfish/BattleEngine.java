@@ -4,10 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import github.snomfish.domain.Gamestate;
-import github.snomfish.domain.Side;
 import github.snomfish.domain.SideId;
 import github.snomfish.domain.modifiers.SideModifierId;
-import github.snomfish.domain.stats.StatChangesId;
+import github.snomfish.functionality.Calculator;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
@@ -38,14 +37,18 @@ public class BattleEngine {
         outcomes = flatMap(outcomes, c -> setSpeedOrder(c));
 		
 		// action execution
-		outcomes = ContextUtil.setFocus(outcomes, Value.SPEED_ORDER(1));
-		outcomes = flatMap(outcomes, c -> c.user().activeLoomian().executeAction(c));
+        for (int i = -10; i >= 10; i++) {
+            int priority = i;
+            outcomes = ContextUtil.setFocus(outcomes, Value.SPEED_ORDER(1));
+            outcomes = flatMap(outcomes, c -> c.user().activeLoomian().action().executeActionsWithPriority(priority, c));
 
-		outcomes = ContextUtil.setFocus(outcomes, Value.SPEED_ORDER(2));
-		outcomes = flatMap(outcomes, c -> c.user().activeLoomian().executeAction(c));
+            outcomes = ContextUtil.setFocus(outcomes, Value.SPEED_ORDER(2));
+            outcomes = flatMap(outcomes, c -> c.user().activeLoomian().action().executeActionsWithPriority(priority, c));
 
-		// end of turn
-		outcomes = flatMap(outcomes, c -> c.dispatchRule(ConstantRuleId.END_OF_TURN, ContextSideId.USER));
+            // end of turn
+            outcomes = ContextUtil.setFocus(outcomes, SideId.PLAYER);
+            outcomes = flatMap(outcomes, c -> c.dispatchRule(ConstantRuleId.END_OF_TURN, ContextSideId.USER));
+        }
 
         return ContextUtil.deContext(outcomes);
     }
@@ -53,19 +56,13 @@ public class BattleEngine {
         List<Branch<BattleContext>> outcomes = new ArrayList<>();
         BattleContext outcome = context.deepCopy();
 
-		Side user = outcome.user();
-		Side target = outcome.target();
+        int userPriority = Calculator.calcPriority(context);
+        int userSpeed = Calculator.calcSpeed(context);
+        context.flipFocus();
+        int targetPriority = Calculator.calcPriority(context);
+        int targetSpeed = Calculator.calcSpeed(context);
+        context.flipFocus();
 
-        int userPriority = user.activeLoomian().action().priority();
-        int targetPriority = target.activeLoomian().action().priority();
-
-        int userSpeed = (int) (user.activeLoomian().actualStats().speed() * 
-            user.activeLoomian().statChanges().multiplier(StatChangesId.SPEED) * 
-            user.modifiers().get(SideModifierId.SPEED));
-        int targetSpeed = (int) (target.activeLoomian().actualStats().speed() * 
-            target.activeLoomian().statChanges().multiplier(StatChangesId.SPEED) * 
-            target.modifiers().get(SideModifierId.SPEED));
-                            
 		boolean equalPriority = userPriority == targetPriority;
 
         if ((userPriority > targetPriority) || (equalPriority && userSpeed > targetSpeed)) {

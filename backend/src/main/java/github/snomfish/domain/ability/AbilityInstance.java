@@ -6,7 +6,6 @@ import github.snomfish.functionality.Value;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.copy.DeepCopyable;
-import github.snomfish.functionality.event.HookReport;
 import github.snomfish.functionality.event.Rule;
 import github.snomfish.functionality.event.gateIds.IGateId;
 import github.snomfish.functionality.event.ruleIds.IRuleId;

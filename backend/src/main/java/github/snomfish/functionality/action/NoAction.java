@@ -26,14 +26,18 @@ public class NoAction implements IAction {
 	public int switchTarget() 	{throw new RuntimeException("Attempted to get switchTarget from a no_action");}
 
 
-	public void setPriority(int priority) 			{throw new RuntimeException("Attempted to set priority from a no_action");}
 	public void setMove(Move move) 					{throw new RuntimeException("Attempted to set move from a no_action");}
 	public void setSwitchTarget(int switchTarget) 	{throw new RuntimeException("Attempted to set switchTarget from a no_action");}
 
 
 	public boolean isSelectable(BattleContext context) {
-        return true;
+        return false;
     }
+
+
+	public void calcPriority(BattleContext context) {
+
+	}
 
 
 	public List<Branch<BattleContext>> execute(BattleContext context) {

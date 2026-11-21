@@ -49,7 +49,7 @@ public class RecoilEffect implements IEffect {
         for (Branch<Double> recoilBranch : recoilNumber.execute(context)) {
             BattleContext outcome =     context.deepCopy();
             ActiveLoomian user =        outcome.user().activeLoomian();
-            Move move =                 user.action().move();
+            Move move =                 user.action().mainAction().move();
             int recoil =                (int) (move.damage() * recoilBranch.value());
 
             recoil = Math.clamp(recoil, 1, user.currentHealth()); // clamps the recoil damage

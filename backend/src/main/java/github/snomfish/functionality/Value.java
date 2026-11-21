@@ -30,6 +30,7 @@ import github.snomfish.domain.type.TypeChart;
 import github.snomfish.domain.type.TypeId;
 import github.snomfish.domain.weather.WeatherId;
 import github.snomfish.domain.weather.WeatherInstance;
+import github.snomfish.functionality.action.Action;
 import github.snomfish.functionality.action.IAction;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.context.ContextSideId;
@@ -293,16 +294,21 @@ public class Value<T> {
 		(c, v) ->	((Side) c).activeLoomian().setSwappedInThisTurn(v)
 	);}
 	// ACTION
-	public Value<IAction> ACTION() {return update(
+	public Value<Action> ACTION() {return update(
+		Action.class,
+		c ->		((Side) c).activeLoomian().action(),
+		(c, v) ->	((Side) c).activeLoomian().setAction(v)
+	);}
+	public Value<IAction> MAIN_ACTION() {return update(
 		IAction.class,
-		c -> 		((Side) c).activeLoomian().action(),
-		(c, v) -> 	((Side) c).activeLoomian().setAction(v)
+		c ->		((Side) c).activeLoomian().action().mainAction(),
+		(c, v) ->	((Side) c).activeLoomian().action().setMainAction(v)
 	);}
 	// PRIORITY
 	public Value<Integer> PRIORITY() {return update(
 		Integer.class,
-		c -> 		((Side) c).activeLoomian().action().priority(),
-		(c, v) -> 	((Side) c).activeLoomian().action().setPriority(v)
+		c -> 		((Side) c).activeLoomian().action().mainAction().priority(),
+		null
 	);}
 	// MECHANICS
 	public Value<Mechanics> SIDE_MECHANICS() {return update(
@@ -505,8 +511,8 @@ public class Value<T> {
 
     public Value<Move> MOVE() {return update(
 		Move.class,
-		c -> 		((Side) c).activeLoomian().action().move(),
-		(c, v) -> 	((Side) c).activeLoomian().action().setMove((Move) v)
+		c -> 		((Side) c).activeLoomian().action().mainAction().move(),
+		(c, v) -> 	((Side) c).activeLoomian().action().mainAction().setMove((Move) v)
 	);}
 
 	public Value<TypeId> TYPE() {return update(
@@ -568,6 +574,11 @@ public class Value<T> {
 		Boolean.class,
 		c -> 		((Move) c).hasMoveFailed(),
 		(c, v) ->	((Move) c).setHasMoveFailed(v)
+	);}
+	public Value<Boolean> HAS_CRIT() {return update(
+		Boolean.class,
+		c -> 		((Move) c).hasCrit(),
+		(c, v) ->	((Move) c).setHasCrit(v)
 	);}
     
 }

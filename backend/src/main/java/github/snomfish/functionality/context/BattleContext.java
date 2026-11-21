@@ -73,6 +73,12 @@ public class BattleContext implements DeepCopyable<BattleContext> {
             case TARGET -> target;
         };
     }
+
+
+
+    public BattleContext flipFocus() {
+        return new BattleContext(gamestate, targetState);
+    }
     
 
 

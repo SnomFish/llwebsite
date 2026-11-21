@@ -1,7 +1,11 @@
 package github.snomfish.functionality;
 
 import github.snomfish.domain.Loomian;
+import github.snomfish.domain.SideId;
+import github.snomfish.domain.modifiers.SideModifierId;
+import github.snomfish.domain.stats.StatChangesId;
 import github.snomfish.domain.stats.Stats;
+import github.snomfish.functionality.context.BattleContext;
 
 public class Calculator {
     
@@ -26,5 +30,21 @@ public class Calculator {
         );
 
         return actual;
+    }
+
+
+    public static int calcPriority(BattleContext context) {
+        context.user().activeLoomian().action().calcPriority(context);
+        int priority = context.user().activeLoomian().action().mainAction().priority();
+        return priority;
+    }
+    public static int calcSpeed(BattleContext context) {
+        double speed = 1;
+        
+        speed *= context.user().activeLoomian().actualStats().speed();
+        speed *= context.user().activeLoomian().statChanges().multiplier(StatChangesId.SPEED);
+        speed *= context.user().modifiers().get(SideModifierId.SPEED);
+
+        return (int)speed;
     }
 }

@@ -188,7 +188,7 @@ public class Move implements DeepCopyable<Move> {
 
     public void setCanMoveFail(boolean canMoveFail) {this.canMoveFail = canMoveFail;}
     public void setHasMoveFailed(boolean hasMoveFailed) {this.hasMoveFailed = hasMoveFailed;}
-    public void hasCrit(boolean hasCrit) {this.hasCrit = hasCrit;}
+    public void setHasCrit(boolean hasCrit) {this.hasCrit = hasCrit;}
 
 
 
@@ -239,9 +239,13 @@ public class Move implements DeepCopyable<Move> {
 
         MoveAction flailAction = new MoveAction(
             MoveRegistry.get(MoveId.FLAIL)
-                .priority(priority)
+                .priority(priority) // copies over the priority of the last move
         );
-        outcome.user().activeLoomian().setAction(flailAction);
+        Value.USER().MAIN_ACTION().set(outcome, flailAction);
+
+        List<Branch<BattleContext>> outcomes = new ArrayList<>();
+        outcomes = outcome.user().activeLoomian().action().mainAction().execute(context); // bypasses other checks
+        // to get this far all the action is already registered as being used, so its all good to bypass
         return wrap(outcome);
     }
 

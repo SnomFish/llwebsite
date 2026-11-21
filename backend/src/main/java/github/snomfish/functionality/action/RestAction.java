@@ -39,6 +39,11 @@ public class RestAction implements IAction {
     }
 
 
+    public void calcPriority(BattleContext context) {
+        // priority for resting is set at 8
+    }
+
+
     public List<Branch<BattleContext>> execute(BattleContext context) {
 		BattleContext outcome = context.deepCopy();
 
