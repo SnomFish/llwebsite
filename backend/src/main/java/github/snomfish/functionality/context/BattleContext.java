@@ -134,9 +134,19 @@ public class BattleContext implements DeepCopyable<BattleContext> {
         context = ContextUtil.reverseFocus(context);
         probability *= target().dispatchGate(context, gateId.forTarget());
 
-        // outcomes is a boolean so dont fuck with the focus of the battle context rn (context is being discarded anyway so it doesnt matter)
-        // preach
         return probability;
+    }
+    public boolean dispatchDoor(GateForAllId gateId, ContextSideId sideId) {
+        boolean door = true;
+
+        BattleContext context = ContextUtil.setFocus(this, sideId);
+        door |= gamestate().weatherInstance().dispatchDoor(context, gateId);
+        door |= gamestate().mechanics().dispatchDoor(context, gateId);
+        door |= user().dispatchDoor(context, gateId.forUser());
+        context = ContextUtil.reverseFocus(context);
+        door |= target().dispatchDoor(context, gateId.forTarget());
+
+        return door;
     }
 
 

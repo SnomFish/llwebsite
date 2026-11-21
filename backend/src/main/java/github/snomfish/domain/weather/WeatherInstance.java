@@ -52,4 +52,7 @@ public class WeatherInstance implements DeepCopyable<WeatherInstance> {
     public double dispatchGate(BattleContext context, IGateId gateId) {
         return weather().handleGate(context, gateId);
     }
+    public boolean dispatchDoor(BattleContext context, IGateId gateId) {
+        return weather().handleDoor(context, gateId);
+    }
 }

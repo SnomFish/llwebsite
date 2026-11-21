@@ -118,6 +118,16 @@ public class ActiveLoomian extends Loomian {
 
         return probability;
     }
+    public boolean dispatchDoor(BattleContext context, IGateId gateId) {
+        boolean door = true;
+
+        door |= abilityInstance.handleDoor(context, gateId);
+        door |= item().handleDoor(context, gateId);
+        door |= status().handleDoor(context, gateId);
+        door |= mechanics().dispatchDoor(context, gateId);
+
+        return door;
+    }
 
 
     public List<Branch<BattleContext>> executeAction(BattleContext context) {

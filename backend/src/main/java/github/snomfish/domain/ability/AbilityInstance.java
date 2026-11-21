@@ -95,7 +95,7 @@ public class AbilityInstance implements DeepCopyable<AbilityInstance> {
     public double handleGate(BattleContext context, IGateId gateId) {
         return ability().handleGate(context, gateId);
     }
-    public HookReport handleInterceptor(BattleContext context, IRuleId ruleId, HookReport report) {
-        return ability().handleHook(context, ruleId, report);
+    public boolean handleDoor(BattleContext context, IGateId gateId) {
+        return ability().handleDoor(context, gateId);
     }
 }

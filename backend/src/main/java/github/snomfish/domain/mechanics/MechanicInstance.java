@@ -52,10 +52,13 @@ public class MechanicInstance implements DeepCopyable<MechanicInstance> {
     }
 
 
+    public HookReport handleHook(BattleContext context, IRuleId ruleId, HookReport report) {
+        return mechanic().handleHook(context, ruleId, report);
+    }
     public double handleGate(BattleContext context, IGateId gateId) {
         return mechanic().handleGate(context, gateId);
     }
-    public HookReport handleHook(BattleContext context, IRuleId ruleId, HookReport report) {
-        return mechanic().handleHook(context, ruleId, report);
+    public boolean handleDoor(BattleContext context, IGateId gateId) {
+        return mechanic().handleDoor(context, gateId);
     }
 }

@@ -55,19 +55,24 @@ public abstract class Definition<A, B extends Definition<A, B>> {
     }
 
 
-    public double handleGate(BattleContext context, IGateId gateId) {
-        double probability = 1;
-
-        for (Gate gate : gates) {
-            probability *= gate.execute(context, gateId);
-        }
-        
-        return probability;
-    }
     public HookReport handleHook(BattleContext context, IRuleId ruleId, HookReport report) {
 
         report.record(hooks, ruleId);
 
         return report;
     }
+    public double handleGate(BattleContext context, IGateId gateId) {
+        double probability = 1;
+        for (Gate gate : gates) {
+            probability *= gate.execute(context, gateId);
+        }
+        return probability;
+    }
+    public boolean handleDoor(BattleContext context, IGateId gateId) {
+        for (Door door : doors) {
+            if (!door.execute(context, gateId)) return false;
+        }
+        return true;
+    }
+    
 }

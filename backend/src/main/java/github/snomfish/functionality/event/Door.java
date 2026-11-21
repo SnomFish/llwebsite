@@ -3,8 +3,8 @@ package github.snomfish.functionality.event;
 import java.util.ArrayList;
 import java.util.List;
 
+import github.snomfish.functionality._schematics.Predicates;
 import github.snomfish.functionality.condition.predicates.IPredicate;
-import github.snomfish.functionality.condition.predicates.Predicates;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.event.gateIds.IGateId;
 

@@ -108,6 +108,14 @@ public class Side implements DeepCopyable<Side> {
 
         return probability;
     }
+    public boolean dispatchDoor(BattleContext context, IGateId gateId) {
+        boolean door = true;
+
+        door |= activeLoomian().dispatchDoor(context, gateId);
+        door |= mechanics.dispatchDoor(context, gateId);
+
+        return door;
+    }
 
 
     public void incrementTurnNumber() {

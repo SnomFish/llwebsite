@@ -64,11 +64,15 @@ public class Mechanics implements DeepCopyable<Mechanics> {
     }
     public double dispatchGate(BattleContext context, IGateId gateId) {
         double probability = 1;
-
         for (MechanicInstance instance : mechanics.values()) {
             probability *= instance.handleGate(context, gateId);
         }
-
         return probability;
+    }
+    public boolean dispatchDoor(BattleContext context, IGateId gateId) {
+        for (MechanicInstance instance : mechanics.values()) {
+            if (!instance.handleDoor(context, gateId)) return false;
+        }
+        return true;
     }
 }
