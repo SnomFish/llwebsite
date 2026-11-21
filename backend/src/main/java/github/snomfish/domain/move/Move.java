@@ -246,7 +246,7 @@ public class Move implements DeepCopyable<Move> {
         List<Branch<BattleContext>> outcomes = new ArrayList<>();
         outcomes = outcome.user().activeLoomian().action().mainAction().execute(context); // bypasses other checks
         // to get this far all the action is already registered as being used, so its all good to bypass
-        return wrap(outcome);
+        return outcomes;
     }
 
 

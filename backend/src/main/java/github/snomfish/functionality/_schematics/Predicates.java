@@ -1,12 +1,9 @@
 package github.snomfish.functionality._schematics;
 
 import java.util.List;
-import java.util.function.BiFunction;
-import java.util.function.Function;
 
 import github.snomfish.functionality.condition.predicates.IPredicate;
 import github.snomfish.functionality.context.BattleContext;
-import github.snomfish.functionality.event.gateIds.IGateId;
 
 public class Predicates {
 	
