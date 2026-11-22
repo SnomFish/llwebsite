@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import github.snomfish.domain.mechanics.ids.IMechanicId;
+import github.snomfish.domain.mechanics.ids.SideMechanicId;
 import github.snomfish.domain.modifiers.ids.MoveModifierId;
 import github.snomfish.domain.move.CategoryId;
 import github.snomfish.domain.status.StatusId;
@@ -304,7 +305,7 @@ public class MechanicRegistry {
             .id(ICICLE_TRAP)
             .name("icicle trap")
             .rule(Rule.build()
-                .event(RuleForUserId.SELF_SWAPPED_IN)
+                .event(RuleForUserId.SELF_SWAPS_IN)
                 .condition(new And(
                     new Not(new ListContains<>(Value.USER().TYPES(), TypeId.ICE)),
                     new GateCondition(GateForAllId.CAN_HAZARDS_AFFECT, ContextSideId.USER)
@@ -319,7 +320,7 @@ public class MechanicRegistry {
             .id(HALF_ICICLE_TRAP)
             .name("half icicle trap")
             .rule(Rule.build()
-                .event(RuleForUserId.SELF_SWAPPED_IN)
+                .event(RuleForUserId.SELF_SWAPS_IN)
                 .condition(new And(
                     new Not(new ListContains<>(Value.USER().TYPES(), TypeId.ICE)),
                     new GateCondition(GateForAllId.CAN_HAZARDS_AFFECT, ContextSideId.USER)
@@ -334,7 +335,7 @@ public class MechanicRegistry {
             .id(SINGLE_POISON_BARBS)
             .name("single poison barbs")
             .rule(Rule.build()
-                .event(RuleForUserId.SELF_SWAPPED_IN)
+                .event(RuleForUserId.SELF_SWAPS_IN)
                 .condition(new And(
                     new Not(new ListContains<>(Value.USER().TYPES(), TypeId.AIR)),
                     new Not(new ListContains<>(Value.USER().TYPES(), TypeId.TOXIC)),
@@ -343,7 +344,7 @@ public class MechanicRegistry {
                 .effect(ApplyStatus.toUser(StatusId.POISON))
             )
             .rule(Rule.build() // removes the poison barbs if a toxic type swaps in
-                .event(RuleForUserId.SELF_SWAPPED_IN)
+                .event(RuleForUserId.SELF_SWAPS_IN)
                 .condition(new ListContains<>(Value.USER().TYPES(), TypeId.TOXIC))
                 .effect(RemoveMechanic.fromUserSide(SINGLE_POISON_BARBS))
             )
@@ -353,7 +354,7 @@ public class MechanicRegistry {
             .id(DOUBLE_POISON_BARBS)
             .name("double poison barbs")
             .rule(Rule.build()
-                .event(RuleForUserId.SELF_SWAPPED_IN)
+                .event(RuleForUserId.SELF_SWAPS_IN)
                 .condition(new And(
                     new Not(new ListContains<>(Value.USER().TYPES(), TypeId.AIR)),
                     new Not(new ListContains<>(Value.USER().TYPES(), TypeId.TOXIC)),
@@ -362,7 +363,7 @@ public class MechanicRegistry {
                 .effect(ApplyStatus.toUser(StatusId.BAD_POISON))
             )
             .rule(Rule.build() // removes the poison barbs if a toxic type swaps in
-                .event(RuleForUserId.SELF_SWAPPED_IN)
+                .event(RuleForUserId.SELF_SWAPS_IN)
                 .condition(new ListContains<>(Value.USER().TYPES(), TypeId.TOXIC))
                 .effect(RemoveMechanic.fromUserSide(DOUBLE_POISON_BARBS))
             )
@@ -372,7 +373,7 @@ public class MechanicRegistry {
             .id(SINGLE_BARBS)
             .name("single barbs")
             .rule(Rule.build()
-                .event(RuleForUserId.SELF_SWAPPED_IN)
+                .event(RuleForUserId.SELF_SWAPS_IN)
                 .condition(new And(
                     new Not(new ListContains<>(Value.USER().TYPES(), TypeId.AIR)),
                     new GateCondition(GateForAllId.CAN_HAZARDS_AFFECT, ContextSideId.USER)
@@ -385,7 +386,7 @@ public class MechanicRegistry {
             .id(DOUBLE_BARBS)
             .name("double barbs")
             .rule(Rule.build()
-                .event(RuleForUserId.SELF_SWAPPED_IN)
+                .event(RuleForUserId.SELF_SWAPS_IN)
                 .condition(new And(
                     new Not(new ListContains<>(Value.USER().TYPES(), TypeId.AIR)),
                     new GateCondition(GateForAllId.CAN_HAZARDS_AFFECT, ContextSideId.USER)
@@ -398,7 +399,7 @@ public class MechanicRegistry {
             .id(TRIPLE_BARBS)
             .name("triple barbs")
             .rule(Rule.build()
-                .event(RuleForUserId.SELF_SWAPPED_IN)
+                .event(RuleForUserId.SELF_SWAPS_IN)
                 .condition(new And(
                     new Not(new ListContains<>(Value.USER().TYPES(), TypeId.AIR)),
                     new GateCondition(GateForAllId.CAN_HAZARDS_AFFECT, ContextSideId.USER)
@@ -411,7 +412,7 @@ public class MechanicRegistry {
             .id(BANANA_PEEL)
             .name("banana peel")
             .rule(Rule.build()
-                .event(RuleForUserId.SELF_SWAPPED_IN)
+                .event(RuleForUserId.SELF_SWAPS_IN)
                 .condition(new And(
                     new Not(new ListContains<>(Value.USER().TYPES(), TypeId.AIR)),
                     new GateCondition(GateForAllId.CAN_HAZARDS_AFFECT, ContextSideId.USER)
@@ -419,6 +420,14 @@ public class MechanicRegistry {
                 .effect(ApplyStatChanges.targetChangingUser().speed(new Constant(-1)))
             )
             .tag(HAZARD)
+        );
+        register(new Mechanic()
+            .id(MOTIVATED)
+            .name("motivated")
+            .rule(Rule.build()
+                .event(RuleForUserId.SELF_PRE_ENERGY_CALC)
+                .effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.ENERGY_COST), new Constant(0.9)))
+            )
         );
         register(new Mechanic()
             .id(AUGMENT)

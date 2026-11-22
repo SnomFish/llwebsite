@@ -10,6 +10,7 @@ public enum GateForAllId implements IGateId {
     CAN_FALL_ASLEEP                     (CAN_SELF_FALL_ASLEEP,                  CAN_OPP_FALL_ASLEEP),
     CAN_FLINCH                          (CAN_SELF_FLINCH,                       CAN_OPP_FLINCH),
     CAN_GET_STAT_CHANGES                (CAN_SELF_GET_STAT_CHANGES,             CAN_OPP_GET_STAT_CHANGES),
+    CAN_RECOVER_PASSIVE_ENERGY          (CAN_SELF_RECOVER_PASSIVE_ENERGY,       CAN_OPP_RECOVER_PASSIVE_ENERGY),
     CAN_SWITCH                          (CAN_SELF_SWITCH,                       CAN_OPP_SWITCH),
 	CAN_TAKE_RECOIL					    (CAN_SELF_TAKE_RECOIL,					CAN_OPP_TAKE_RECOIL),
     CAN_USE_ITEMS                       (CAN_SELF_USE_ITEMS,					CAN_OPP_USE_ITEMS),

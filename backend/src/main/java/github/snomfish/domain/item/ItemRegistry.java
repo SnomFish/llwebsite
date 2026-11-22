@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import github.snomfish.domain.mechanics.ids.LoomianMechanicId;
+import github.snomfish.domain.modifiers.ids.LoomModifierId;
 import github.snomfish.domain.modifiers.ids.MoveModifierId;
 import github.snomfish.domain.modifiers.ids.SideModifierId;
 import github.snomfish.domain.move.CategoryId;
@@ -27,6 +29,7 @@ import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.effect.EffectSequence;
 import github.snomfish.functionality.effect.effects.ApplyStatChanges;
 import github.snomfish.functionality.effect.effects.ApplyStatus;
+import github.snomfish.functionality.effect.effects.ClearStatus;
 import github.snomfish.functionality.effect.effects.ClutchEffect;
 import github.snomfish.functionality.effect.effects.ConsumeItem;
 import github.snomfish.functionality.effect.effects.RestoreHealth;
@@ -120,7 +123,8 @@ public class ItemRegistry {
 				.event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.OPP().CAN_SPECIES_EVOLVE(), true))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.TARGET))
-				.effect(Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DEFENDING_STAT), new Constant(1.5)))
+				.effect(Effects.multiplyValue(Value.OPP().LOOMIAN_MODIFIER(LoomModifierId.M_DEFENSE), new Constant(1.5)))
+				.effect(Effects.multiplyValue(Value.OPP().LOOMIAN_MODIFIER(LoomModifierId.R_DEFENSE), new Constant(1.5)))
 			)
 			.tag(PUNCTURABLE)
 		);
@@ -209,13 +213,18 @@ public class ItemRegistry {
 				.event(RuleForUserId.SELF_DAMAGED_BELOW_HALF)
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
 				.effect(RestoreHealth.user(Numbers.quarterUserMaxHealth()))
+				.effect(ConsumeItem.user())
 			)
 			.tag(CONSUMABLE)
 		);
 		register(Item.build()
 			.id(MYSTERIOUS_DUST)
 			.name("mysterious dust")
-			// TODO IMPLEMENT
+			.rule(Rule.build()
+				.event(ConstantRuleId.END_OF_TURN)
+				.condition(new RandomCondition(new Constant(1/3)))
+				.effect(ClearStatus.user())
+			)
 		);
 		register(Item.build()
 			.id(MYSTIC_WAND)
@@ -223,16 +232,14 @@ public class ItemRegistry {
 			.rule(Rule.build()
 				.event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.USER().SPECIES_ID(), SpeciesId.SHAWCHI))
-				.condition(new Equals<>(Value.USER().MOVE().CATEGORY(), CategoryId.RANGED))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
-				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.ATTACKING_STAT), new Constant(1.5)))
+				.effect(Effects.multiplyValue(Value.USER().LOOMIAN_MODIFIER(LoomModifierId.R_ATTACK), new Constant(1.5)))
 			)
 			.rule(Rule.build()
 				.event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
 				.condition(new Equals<>(Value.SELF().SPECIES_ID(), SpeciesId.SHAWCHI))
-				.condition(new Equals<>(Value.OPP().MOVE().CATEGORY(), CategoryId.RANGED))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.TARGET))
-				.effect(Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DEFENDING_STAT), new Constant(1.5)))
+				.effect(Effects.multiplyValue(Value.OPP().LOOMIAN_MODIFIER(LoomModifierId.R_ATTACK), new Constant(1.5)))
 			)
 		);
 		register(Item.build()
@@ -370,7 +377,7 @@ public class ItemRegistry {
 			.id(FOG_GLOBE)
 			.name("Fog Globe")
 			.rule(Rule.build()
-				.event(RuleForUserId.SELF_SWAPPED_IN)
+				.event(RuleForUserId.SELF_SWAPS_IN)
 				.condition(new Not(new Equals<>(Value.WEATHER_ID(), WeatherId.FOG)))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
 				.effect(new EffectSequence(
@@ -384,7 +391,7 @@ public class ItemRegistry {
 			.id(HEAT_GLOBE)
 			.name("Heat Globe")
 			.rule(Rule.build()
-				.event(RuleForUserId.SELF_SWAPPED_IN)
+				.event(RuleForUserId.SELF_SWAPS_IN)
 				.condition(new Not(new Equals<>(Value.WEATHER_ID(), WeatherId.HEATWAVE)))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
 				.effect(new EffectSequence(
@@ -398,7 +405,7 @@ public class ItemRegistry {
 			.id(RAIN_GLOBE)
 			.name("Rain Globe")
 			.rule(Rule.build()
-				.event(RuleForUserId.SELF_SWAPPED_IN)
+				.event(RuleForUserId.SELF_SWAPS_IN)
 				.condition(new Not(new Equals<>(Value.WEATHER_ID(), WeatherId.RAIN)))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
 				.effect(new EffectSequence(
@@ -412,7 +419,7 @@ public class ItemRegistry {
 			.id(STORM_GLOBE)
 			.name("Storm Globe")
 			.rule(Rule.build()
-				.event(RuleForUserId.SELF_SWAPPED_IN)
+				.event(RuleForUserId.SELF_SWAPS_IN)
 				.condition(new Not(new Equals<>(Value.WEATHER_ID(), WeatherId.THUNDERSTORM)))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
 				.effect(new EffectSequence(
@@ -426,7 +433,7 @@ public class ItemRegistry {
 			.id(WIND_GLOBE)
 			.name("Wind Globe")
 			.rule(Rule.build()
-				.event(RuleForUserId.SELF_SWAPPED_IN)
+				.event(RuleForUserId.SELF_SWAPS_IN)
 				.condition(new Not(new Equals<>(Value.WEATHER_ID(), WeatherId.STRONG_WINDS)))
 				.condition(new GateCondition(GateForAllId.CAN_USE_ITEMS, ContextSideId.USER))
 				.effect(new EffectSequence(
@@ -1337,7 +1344,7 @@ public class ItemRegistry {
 			.id(FLAME_CORE)
 			.name("flame core")
 			.rule(Rule.build()
-				.event(RuleForUserId.SELF_SWAPPED_IN)
+				.event(RuleForUserId.SELF_SWAPS_IN)
 				.condition(Conditions.or(
 					new Equals<>(Value.USER().SPECIES_ID(), SCORB),
 					new Equals<>(Value.USER().SPECIES_ID(), VEYLENS),
@@ -1364,7 +1371,7 @@ public class ItemRegistry {
 			.id(FREEZER_CORE)
 			.name("freezer core")
 			.rule(Rule.build()
-				.event(RuleForUserId.SELF_SWAPPED_IN)
+				.event(RuleForUserId.SELF_SWAPS_IN)
 				.condition(Conditions.or(
 					new Equals<>(Value.USER().SPECIES_ID(), SCORB),
 					new Equals<>(Value.USER().SPECIES_ID(), VEYLENS),
@@ -1389,7 +1396,7 @@ public class ItemRegistry {
 			.id(VOLTAIC_CORE)
 			.name("voltaic core")
 			.rule(Rule.build()
-				.event(RuleForUserId.SELF_SWAPPED_IN)
+				.event(RuleForUserId.SELF_SWAPS_IN)
 				.condition(Conditions.or(
 					new Equals<>(Value.USER().SPECIES_ID(), SCORB),
 					new Equals<>(Value.USER().SPECIES_ID(), VEYLENS),

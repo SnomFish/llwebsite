@@ -8,6 +8,7 @@ import github.snomfish.domain.item.ItemId;
 import github.snomfish.domain.mechanics.ids.FieldMechanicId;
 import github.snomfish.domain.mechanics.ids.LoomianMechanicId;
 import github.snomfish.domain.mechanics.ids.SideMechanicId;
+import github.snomfish.domain.modifiers.ids.LoomModifierId;
 import github.snomfish.domain.modifiers.ids.MoveModifierId;
 import github.snomfish.domain.modifiers.ids.SideModifierId;
 import github.snomfish.domain.move.CategoryId;
@@ -128,7 +129,7 @@ public class AbilityRegistry {
 			.name("adaptable")
 			.rule(Rule.build()
 				.event(RuleForAllId.LOOMIAN_SET_WEATHER)
-				.event(RuleForUserId.SELF_SWAPPED_IN)
+				.event(RuleForUserId.SELF_SWAPS_IN)
 				.effect(new EffectSequence(List.of(	
 					new ConditionalEffect(Conditions.clearWeather(), 		SetType.userPrimary(TypeId.SIMPLE)),
 					new ConditionalEffect(Conditions.fogActive(),			SetType.userPrimary(TypeId.SPIRIT)),
@@ -147,7 +148,7 @@ public class AbilityRegistry {
 			.id(ADORABLE)
 			.name("adorable")
 			.rule(Rule.build()
-				.event(RuleForUserId.SELF_SWAPPED_IN)
+				.event(RuleForUserId.SELF_SWAPS_IN)
 				.effect(ApplyStatChanges.userChangingTarget()
 					.mdefense(new Constant(-1))
 				)
@@ -179,7 +180,7 @@ public class AbilityRegistry {
 			.id(ANALYZE)
 			.name("analyze")
 			.rule(Rule.build()
-				.event(RuleForUserId.SELF_SWAPPED_IN)
+				.event(RuleForUserId.SELF_SWAPS_IN)
 				.effect(new ConditionalEffect(
 					new Or(
 						Comparator.greaterThan()
@@ -320,7 +321,7 @@ public class AbilityRegistry {
 			.id(BOAST)
 			.name("boast")
 			.rule(Rule.build()
-				.event(RuleForUserId.SELF_SWAPPED_IN)
+				.event(RuleForUserId.SELF_SWAPS_IN)
 				.effect(new ConditionalEffect(
 					Comparator.greaterThan()
 						.left(new ValueConstant(Value.USER().MATTACK()))
@@ -483,7 +484,7 @@ public class AbilityRegistry {
 			.id(CIRCADIAN)
 			.name("circadian")
 			.rule(Rule.build()
-				.event(RuleForUserId.SELF_SWAPPED_IN)
+				.event(RuleForUserId.SELF_SWAPS_IN)
 				.event(ConstantRuleId.START_OF_TURN)
 				.effect(new ConditionalEffect(
 					Conditions.isOdd(new ValueConstant(Value.TURN_NUMBER())),
@@ -624,7 +625,7 @@ public class AbilityRegistry {
 			.id(DEFENSIVE_PRIORITY)
 			.name("defensive priority")
 			.rule(Rule.build()
-				.event(RuleForUserId.SELF_SWAPPED_IN)
+				.event(RuleForUserId.SELF_SWAPS_IN)
 				.effect(ApplyStatChanges.userChangingUser()
 					.mdefense(new Constant(1))
 					.rdefense(new Constant(1))
@@ -894,7 +895,7 @@ public class AbilityRegistry {
 			.id(FOG_SUMMON)
 			.name("fog summon")
 			.rule(Rule.build()
-				.event(RuleForUserId.SELF_SWAPPED_IN)
+				.event(RuleForUserId.SELF_SWAPS_IN)
 				.effect(SetWeather.userSetting(WeatherId.FOG, new Constant(5)))
 			)
 		);
@@ -1050,7 +1051,7 @@ public class AbilityRegistry {
 			.id(HEAT_SUMMON)
 			.name("heat summon")
 			.rule(Rule.build()
-				.event(RuleForUserId.SELF_SWAPPED_IN)
+				.event(RuleForUserId.SELF_SWAPS_IN)
 				.effect(SetWeather.userSetting(WeatherId.HEATWAVE, new Constant(5)))
 			)
 		);
@@ -1383,7 +1384,7 @@ public class AbilityRegistry {
 			.id(MIMIC)
 			.name("mimic")
 			.rule(Rule.build()
-				.event(RuleForUserId.SELF_SWAPPED_IN)
+				.event(RuleForUserId.SELF_SWAPS_IN)
 				.effect(
 					ApplyStatChanges.userChangingUser()
 						.mattack(	new ValueConstant(Value.TARGET().MATTACK_STAGE_MODIFIER()))
@@ -1399,12 +1400,22 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(MOTIVATIONAL)
 			.name("motivational")
+			.rule(Rule.build()
+				.event(RuleForUserId.SELF_SWAPS_IN)
+				.effect(ApplyMechanic.toUserSide(SideMechanicId.MOTIVATED))
+			)
+            .rule(Rule.build()
+                .event(RuleForTargetId.OPP_FAINTED)
+                .event(RuleForTargetId.OPP_KNOCKED_OUT)
+                .effect(RemoveMechanic.fromTargetSide(SideMechanicId.MOTIVATED))
+            )
+			.setOncePerBattle()
 		);
 		register(Ability.build()
 			.id(MYCOTIC)
 			.name("mycotic")
 			.rule(Rule.build()
-				.event(RuleForUserId.SELF_SWAPPED_IN)
+				.event(RuleForUserId.SELF_SWAPS_IN)
 				.effect(SetFieldMechanic.fungusCurse().withMaxAge(5))
 			)
 		);
@@ -1563,7 +1574,7 @@ public class AbilityRegistry {
 					Conditions.rainActive(),
 					Conditions.strongWindsActive()
 				))
-				.effect(Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DEFENDING_STAT), new Constant(1.5)))
+				.effect(Effects.multiplyValue(Value.OPP().LOOMIAN_MODIFIER(LoomModifierId.R_DEFENSE), new Constant(1.5)))
 			)
 			.tag(PUNCTURABLE)
 		);
@@ -1625,7 +1636,7 @@ public class AbilityRegistry {
 			.id(PETRIFYING)
 			.name("petrifying")
 			.rule(Rule.build()
-				.event(RuleForUserId.SELF_SWAPPED_IN)
+				.event(RuleForUserId.SELF_SWAPS_IN)
 				.condition(new GateCondition(GateForAllId.CAN_BE_INTIMIDATED, TARGET))
 				.effect(ApplyStatChanges.userChangingTarget().mattack(new Constant(-1)))
 			)
@@ -1845,7 +1856,7 @@ public class AbilityRegistry {
 			.id(RAIN_SUMMON)
 			.name("rain summon")
 			.rule(Rule.build()
-				.event(RuleForUserId.SELF_SWAPPED_IN)
+				.event(RuleForUserId.SELF_SWAPS_IN)
 				.effect(SetWeather.userSetting(WeatherId.RAIN, new Constant(5)))
 			)
 		);
@@ -1960,7 +1971,7 @@ public class AbilityRegistry {
 			.id(REPLICATE)
 			.name("replicate")
 			.rule(Rule.build()
-				.event(RuleForUserId.SELF_SWAPPED_IN)
+				.event(RuleForUserId.SELF_SWAPS_IN)
 				.condition(new Equals<>(Value.TARGET().ABILITY_TAG(CANNOT_BE_REPLICATED), false))
 				.effect(SetAbility.user(Value.TARGET().ABILITY_ID()))
 			)
@@ -1969,6 +1980,16 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(REPUGNANT)
 			.name("repugnant")
+			.rule(Rule.build()
+				.event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
+				.condition(new Equals<>(Value.TARGET().MOVE().MOVE_TAG(MoveTagId.BITING), true))
+				.effect(Effects.multiplyValue(Value.TARGET().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(0.5)))
+			)
+			.rule(Rule.build()
+				.event(RuleForTargetId.RECEIVED_DAMAGE_FROM_MOVE)
+				.condition(new Equals<>(Value.TARGET().MOVE().MOVE_TAG(MoveTagId.BITING), true))
+				.effect(ApplyStatus.toUser(StatusId.POISON))
+			)
 		);
 		register(Ability.build()
 			.id(RESENTFUL)
@@ -2012,6 +2033,15 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(SAFETY_POT)
 			.name("safety pot")
+			.rule(Rule.build()
+				.event(RuleForAllId.PRE_DEAL_FORMULA_DAMAGE)
+				.effect(Effects.multiplyValue(Value.USER().LOOMIAN_MODIFIER(LoomModifierId.M_DEFENSE), new Constant(1.5)))
+				.effect(Effects.multiplyValue(Value.USER().LOOMIAN_MODIFIER(LoomModifierId.R_DEFENSE), new Constant(1.5)))
+			)
+			.rule(Rule.build()
+				.event(ConstantRuleId.PRE_CALC_SPEED_ORDER)
+				.effect(Effects.multiplyValue(Value.USER().LOOMIAN_MODIFIER(LoomModifierId.SPEED), new Constant(2/3)))
+			)
 			.tag(PUNCTURABLE)
 		);
 		register(Ability.build()
@@ -2124,7 +2154,7 @@ public class AbilityRegistry {
 			.id(SOB)
 			.name("sob")
 			.rule(Rule.build()
-				.event(RuleForUserId.SELF_SWAPPED_IN)
+				.event(RuleForUserId.SELF_SWAPS_IN)
 				.effect(ClearStatChanges.targetChanges())
 			)
 		);
@@ -2243,7 +2273,7 @@ public class AbilityRegistry {
 			.id(TERRIFYING)
 			.name("terrifying")
 			.rule(Rule.build()
-				.event(RuleForUserId.SELF_SWAPPED_IN)
+				.event(RuleForUserId.SELF_SWAPS_IN)
 				.condition(new GateCondition(GateForAllId.CAN_BE_INTIMIDATED, TARGET))
 				.effect(ApplyStatChanges.userChangingTarget().mattack(new Constant(-1)))
 			)
@@ -2264,7 +2294,7 @@ public class AbilityRegistry {
 			.id(THUNDER_SUMMON)
 			.name("thunder summon")
 			.rule(Rule.build()
-				.event(RuleForUserId.SELF_SWAPPED_IN)
+				.event(RuleForUserId.SELF_SWAPS_IN)
 				.effect(SetWeather.userSetting(WeatherId.THUNDERSTORM, new Constant(5)))
 			)
 		);
@@ -2492,7 +2522,7 @@ public class AbilityRegistry {
 			.id(WIND_SUMMON)
 			.name("wind summon")
 			.rule(Rule.build()
-				.event(RuleForUserId.SELF_SWAPPED_IN)
+				.event(RuleForUserId.SELF_SWAPS_IN)
 				.effect(SetWeather.userSetting(WeatherId.STRONG_WINDS, new Constant(5)))
 			)
 		);

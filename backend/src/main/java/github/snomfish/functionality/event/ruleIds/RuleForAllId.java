@@ -7,7 +7,7 @@ public enum RuleForAllId implements IRuleId {
     NULL_EVENT(), // should never be dispatched
 
     LOOMAIN_SWAPS_OUT                   (SELF_SWAPS_OUT,                        OPP_SWAPS_OUT),
-    LOOMIAN_SWAPS_IN					(SELF_SWAPPED_IN, 						WATCHES_OPP_SWAP_IN),
+    LOOMIAN_SWAPS_IN					(SELF_SWAPS_IN, 						OPP_SWAPS_IN),
 	LOOMIAN_DAMAGED_BELOW_HALF			(SELF_DAMAGED_BELOW_HALF,				OPP_DAMAGED_BELOW_HALF),
     LOOMIAN_FAINTED                     (SELF_FAINTED,                          OPP_FAINTED),
     LOOMIAN_KNOCKED_OUT_BY_OTHER		(SELF_KNOCKED_OUT_OPP, 					OPP_KNOCKED_OUT),

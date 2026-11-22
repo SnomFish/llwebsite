@@ -195,17 +195,17 @@ public class DealFormulaDamage implements IEffect {
             case MDEFENSE -> modifiers.get(LoomModifierId.M_DEFENSE);
             case RATTACK -> modifiers.get(LoomModifierId.R_ATTACK);
             case RDEFENSE -> modifiers.get(LoomModifierId.R_DEFENSE);
-            default -> 0;
+            default -> 1;
         };
     }
 
 
     // calculates the damage of the move
     private List<Branch<BattleContext>> damageModule(BattleContext context) {
-        BattleContext outcome = context.deepCopy();
-        ActiveLoomian user	 = Value.USER().LOOMIAN().get(outcome);
-        ActiveLoomian target = Value.TARGET().LOOMIAN().get(outcome);
-        Move move			 = Value.USER().MOVE().get(outcome);
+        BattleContext outcome    = context.deepCopy();
+        ActiveLoomian user	     = Value.USER().LOOMIAN().get(outcome);
+        ActiveLoomian target     = Value.TARGET().LOOMIAN().get(outcome);
+        Move move			     = Value.USER().MOVE().get(outcome);
 
         StatId attackingStatId = move.attackingStatId();
         StatId defendingStatId = move.defendingStatId();
