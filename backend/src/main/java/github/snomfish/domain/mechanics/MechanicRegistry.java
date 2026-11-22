@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import github.snomfish.domain.mechanics.ids.IMechanicId;
-import github.snomfish.domain.modifiers.MoveModifierId;
+import github.snomfish.domain.modifiers.ids.MoveModifierId;
 import github.snomfish.domain.move.CategoryId;
 import github.snomfish.domain.status.StatusId;
 import github.snomfish.domain.type.TypeId;

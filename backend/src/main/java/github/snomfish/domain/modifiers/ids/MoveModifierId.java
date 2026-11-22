@@ -1,4 +1,6 @@
-package github.snomfish.domain.modifiers;
+package github.snomfish.domain.modifiers.ids;
+
+import github.snomfish.domain.modifiers.IModifierId;
 
 public enum MoveModifierId implements IModifierId {
     ATTACKING_STAT,

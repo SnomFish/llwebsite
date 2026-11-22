@@ -15,8 +15,9 @@ import github.snomfish.domain.mechanics.Mechanics;
 import github.snomfish.domain.mechanics.ids.FieldMechanicId;
 import github.snomfish.domain.mechanics.ids.LoomianMechanicId;
 import github.snomfish.domain.mechanics.ids.SideMechanicId;
-import github.snomfish.domain.modifiers.MoveModifierId;
-import github.snomfish.domain.modifiers.SideModifierId;
+import github.snomfish.domain.modifiers.ids.LoomModifierId;
+import github.snomfish.domain.modifiers.ids.MoveModifierId;
+import github.snomfish.domain.modifiers.ids.SideModifierId;
 import github.snomfish.domain.move.CategoryId;
 import github.snomfish.domain.move.Move;
 import github.snomfish.domain.species.Species;
@@ -346,6 +347,11 @@ public class Value<T> {
 		c ->		((Side) c).activeLoomian().mechanics().has(id),
 		null
 	);}
+	public Value<Double> LOOMIAN_MODIFIER(LoomModifierId id) {return update(
+		Double.class,
+		c -> 		((Side) c).activeLoomian().modifiers().get(id),
+		(c, v) -> 	((Side) c).activeLoomian().modifiers().set(id, v)
+	);}
 	// MOVES
 	public Value<Integer> NUM_OF_MOVES() {return update(
 		Integer.class,
@@ -397,41 +403,6 @@ public class Value<T> {
 		Double.class,
 		c -> 		((Side) c).activeLoomian().species().baseStats().speed(),
 		(c, v) -> 	((Side) c).activeLoomian().species().baseStats().setSpeed(v)
-	);}
-	public Value<Double> ACTUAL_HEALTH() {return update(
-		Double.class,
-		c -> 		((Side) c).activeLoomian().actualStats().health(),
-		(c, v) -> 	((Side) c).activeLoomian().actualStats().setHealth(v)
-	);}
-	public Value<Double> ACTUAL_ENERGY() {return update(
-		Double.class,
-		c -> 		((Side) c).activeLoomian().actualStats().energy(),
-		(c, v) -> 	((Side) c).activeLoomian().actualStats().setEnergy(v)
-	);}
-	public Value<Double> ACTUAL_MATTACK() {return update(
-		Double.class,
-		c -> 		((Side) c).activeLoomian().actualStats().mattack(),
-		(c, v) -> 	((Side) c).activeLoomian().actualStats().setMattack(v)
-	);}
-	public Value<Double> ACTUAL_MDEFENSE() {return update(
-		Double.class,
-		c -> 		((Side) c).activeLoomian().actualStats().mdefense(),
-		(c, v) -> 	((Side) c).activeLoomian().actualStats().setMdefense(v)
-	);}
-	public Value<Double> ACTUAL_RATTACK() {return update(
-		Double.class,
-		c -> 		((Side) c).activeLoomian().actualStats().rattack(),
-		(c, v) -> 	((Side) c).activeLoomian().actualStats().setRattack(v)
-	);}
-	public Value<Double> ACTUAL_RDEFENSE() {return update(
-		Double.class,
-		c -> 		((Side) c).activeLoomian().actualStats().rdefense(),
-		(c, v) -> 	((Side) c).activeLoomian().actualStats().setRdefense(v)
-	);}
-	public Value<Double> ACTUAL_SPEED() {return update(
-		Double.class,
-		c -> 		((Side) c).activeLoomian().actualStats().speed(),
-		(c, v) -> 	((Side) c).activeLoomian().actualStats().setSpeed(v)
 	);}
 	public Value<Double> HEALTH() {return update(
 		Double.class,

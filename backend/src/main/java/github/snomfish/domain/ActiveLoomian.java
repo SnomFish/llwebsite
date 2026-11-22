@@ -5,13 +5,11 @@ import java.util.List;
 
 import github.snomfish.domain.ability.AbilityInstance;
 import github.snomfish.domain.mechanics.Mechanics;
+import github.snomfish.domain.modifiers.Modifiers;
+import github.snomfish.domain.modifiers.ids.LoomModifierId;
 import github.snomfish.domain.stats.StatChanges;
-import github.snomfish.domain.stats.Stats;
 import github.snomfish.domain.type.TypeId;
 import github.snomfish.functionality.action.Action;
-import github.snomfish.functionality.action.IAction;
-import github.snomfish.functionality.action.NoAction;
-import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.event.HookReport;
 import github.snomfish.functionality.event.RuleReport;
@@ -24,10 +22,10 @@ public class ActiveLoomian extends Loomian {
 
     private List<TypeId> types;
     private AbilityInstance abilityInstance;
-    private Stats stats;
     private StatChanges statChanges;
     private Action action;
     private Mechanics mechanics; // extra functionality that is temp added to an onfield loomian such as coursing venom being in effect
+    private Modifiers<LoomModifierId> modifiers;
     private int statusTurns;
 
     // eventually move to tags
@@ -40,7 +38,6 @@ public class ActiveLoomian extends Loomian {
     ) {
         super(loomian);
         this.types = new ArrayList<>(loomian.species().baseTypes());
-        this.stats = actualStats().deepCopy();
         this.statChanges = new StatChanges();
         this.action = Action.selectNoAction();
         this.mechanics = new Mechanics();
@@ -72,10 +69,10 @@ public class ActiveLoomian extends Loomian {
     public TypeId primaryType() {return types.get(0);}
     public TypeId secondaryType() {return types.get(1);}
     public AbilityInstance abilityInstance() {return abilityInstance;}
-    public Stats stats() {return stats;}
     public StatChanges statChanges() {return statChanges;}
     public Action action() {return action;}
     public Mechanics mechanics() {return mechanics;}
+    public Modifiers<LoomModifierId> modifiers() {return modifiers;}
     public int statusTurns() {return statusTurns;}
 
     public boolean hasActedThisTurn() {return hasActedThisTurn;}
@@ -87,10 +84,10 @@ public class ActiveLoomian extends Loomian {
     public void setPrimaryType(TypeId typeId) {this.types.set(0, typeId);}
     public void setSecondaryType(TypeId typeId) {this.types.set(1, typeId);}
     public void setAbilityInstance(AbilityInstance abilityInstance) {this.abilityInstance = abilityInstance;}
-    public void setStats(Stats stats) {this.stats = stats;}
     public void setStatChanges(StatChanges statChanges) {this.statChanges = statChanges;}
     public void setAction(Action action) {this.action = action;}
     public void setMechanics(Mechanics mechanics) {this.mechanics = mechanics;} 
+    public void setModifiers(Modifiers<LoomModifierId> modifiers) {this.modifiers = modifiers;}
     public void setStatusTurns(int statusTurns) {this.statusTurns = statusTurns;}
 
     public void setActedThisTurn(boolean hasActedThisTurn) {this.hasActedThisTurn = hasActedThisTurn;}

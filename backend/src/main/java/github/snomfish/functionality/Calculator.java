@@ -1,7 +1,8 @@
 package github.snomfish.functionality;
 
 import github.snomfish.domain.Loomian;
-import github.snomfish.domain.modifiers.SideModifierId;
+import github.snomfish.domain.modifiers.ids.LoomModifierId;
+import github.snomfish.domain.modifiers.ids.SideModifierId;
 import github.snomfish.domain.stats.StatChangesId;
 import github.snomfish.domain.stats.Stats;
 import github.snomfish.functionality.context.BattleContext;
@@ -40,8 +41,9 @@ public class Calculator {
     public static int calcSpeed(BattleContext context) {
         double speed = 1;
         
-        speed *= context.user().activeLoomian().actualStats().speed();
+        speed *= context.user().activeLoomian().stats().speed();
         speed *= context.user().activeLoomian().statChanges().multiplier(StatChangesId.SPEED);
+        speed *= context.user().activeLoomian().modifiers().get(LoomModifierId.SPEED);
         speed *= context.user().modifiers().get(SideModifierId.SPEED);
 
         return (int)speed;

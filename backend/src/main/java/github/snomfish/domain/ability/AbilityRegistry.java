@@ -8,8 +8,8 @@ import github.snomfish.domain.item.ItemId;
 import github.snomfish.domain.mechanics.ids.FieldMechanicId;
 import github.snomfish.domain.mechanics.ids.LoomianMechanicId;
 import github.snomfish.domain.mechanics.ids.SideMechanicId;
-import github.snomfish.domain.modifiers.MoveModifierId;
-import github.snomfish.domain.modifiers.SideModifierId;
+import github.snomfish.domain.modifiers.ids.MoveModifierId;
+import github.snomfish.domain.modifiers.ids.SideModifierId;
 import github.snomfish.domain.move.CategoryId;
 import github.snomfish.domain.status.StatusId;
 import github.snomfish.domain.tags.AbilityTagId;
@@ -1705,7 +1705,7 @@ public class AbilityRegistry {
 				.effect(RestoreHealth.user(Numbers.thirdOfUserMissingHealth()))
 			)
 		);
-		register(Ability.build()
+		register(Ability.build() // ass ability
 			.id(PREMONITION)
 			.name("premonition")
 		);

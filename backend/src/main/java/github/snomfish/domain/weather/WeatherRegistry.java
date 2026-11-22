@@ -3,7 +3,7 @@ package github.snomfish.domain.weather;
 import java.util.HashMap;
 import java.util.Map;
 
-import github.snomfish.domain.modifiers.MoveModifierId;
+import github.snomfish.domain.modifiers.ids.MoveModifierId;
 import github.snomfish.domain.status.StatusId;
 import github.snomfish.domain.type.TypeId;
 import github.snomfish.functionality.Value;

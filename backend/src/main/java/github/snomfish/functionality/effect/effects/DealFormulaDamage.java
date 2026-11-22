@@ -6,7 +6,8 @@ import java.util.List;
 import github.snomfish.domain.ActiveLoomian;
 import github.snomfish.domain.ability.AbilityId;
 import github.snomfish.domain.modifiers.Modifiers;
-import github.snomfish.domain.modifiers.MoveModifierId;
+import github.snomfish.domain.modifiers.ids.LoomModifierId;
+import github.snomfish.domain.modifiers.ids.MoveModifierId;
 import github.snomfish.domain.move.Move;
 import github.snomfish.domain.stats.StatChangesId;
 import github.snomfish.domain.stats.StatId;
@@ -24,7 +25,7 @@ import github.snomfish.functionality.event.ruleIds.RuleForAllId;
 import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.INumber;
 
-import static github.snomfish.domain.modifiers.MoveModifierId.*;
+import static github.snomfish.domain.modifiers.ids.MoveModifierId.*;
 import static github.snomfish.functionality.branch.BranchUtil.flatMap;
 
 // the move tricky tactics does not work with this attacking and defending stat implementation, will require probably a new enum or the use of Value
@@ -46,6 +47,24 @@ public class DealFormulaDamage implements IEffect {
         List<Branch<BattleContext>> outcomes = List.of(new Branch<>(context, 1.0));
         context.log("executing damage effect");
         
+        outcomes = flatMap(outcomes, c -> new ResetModifier()
+            .user(LoomModifierId.M_ATTACK)
+            .user(LoomModifierId.M_DEFENSE)
+            .user(LoomModifierId.R_ATTACK)
+            .user(LoomModifierId.R_DEFENSE)
+            .target(LoomModifierId.M_ATTACK)
+            .target(LoomModifierId.M_DEFENSE)
+            .target(LoomModifierId.R_ATTACK)
+            .target(LoomModifierId.R_DEFENSE)
+            .userMove(MoveModifierId.ATTACKING_STAT)
+            .userMove(MoveModifierId.DEFENDING_STAT)
+            .userMove(MoveModifierId.DAMAGE)
+            .userMove(MoveModifierId.TYPE)
+            .userMove(MoveModifierId.STAB)
+            .userMove(MoveModifierId.CRIT)
+            .userMove(MoveModifierId.HEALTH_DRAIN)
+            .userMove(MoveModifierId.ENERGY_DRAIN)
+            .execute(c));
         outcomes = flatMap(outcomes, c -> c.dispatchRule(RuleForAllId.PRE_DEAL_FORMULA_DAMAGE, ContextSideId.USER));
         outcomes = flatMap(outcomes, c -> basePowerModule(c));
         outcomes = flatMap(outcomes, c -> critChanceModule(c));
@@ -170,6 +189,17 @@ public class DealFormulaDamage implements IEffect {
     }
 
 
+    private double mapStatIdToModifier(StatId statId, Modifiers<LoomModifierId> modifiers) {
+        return switch(statId) {
+            case MATTACK -> modifiers.get(LoomModifierId.M_ATTACK);
+            case MDEFENSE -> modifiers.get(LoomModifierId.M_DEFENSE);
+            case RATTACK -> modifiers.get(LoomModifierId.R_ATTACK);
+            case RDEFENSE -> modifiers.get(LoomModifierId.R_DEFENSE);
+            default -> 0;
+        };
+    }
+
+
     // calculates the damage of the move
     private List<Branch<BattleContext>> damageModule(BattleContext context) {
         BattleContext outcome = context.deepCopy();
@@ -179,8 +209,9 @@ public class DealFormulaDamage implements IEffect {
 
         StatId attackingStatId = move.attackingStatId();
         StatId defendingStatId = move.defendingStatId();
-        double attackingStatModifier = move.modifiers().get(ATTACKING_STAT);
-        double defendingStatModifier = move.modifiers().get(DEFENDING_STAT);
+
+        double attackingStatModifier = move.modifiers().get(ATTACKING_STAT) * mapStatIdToModifier(attackingStatId, user.modifiers());
+        double defendingStatModifier = move.modifiers().get(DEFENDING_STAT) * mapStatIdToModifier(defendingStatId, target.modifiers());
         int attackingStat = (int)(user.stats().get(attackingStatId) * attackingStatModifier);
         int defendingStat = (int)(target.stats().get(defendingStatId) * defendingStatModifier);
 

@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import github.snomfish.domain.modifiers.MoveModifierId;
-import github.snomfish.domain.modifiers.SideModifierId;
+import github.snomfish.domain.modifiers.ids.MoveModifierId;
+import github.snomfish.domain.modifiers.ids.SideModifierId;
 import github.snomfish.domain.move.CategoryId;
 import github.snomfish.domain.species.SpeciesId;
 import github.snomfish.domain.status.StatusId;

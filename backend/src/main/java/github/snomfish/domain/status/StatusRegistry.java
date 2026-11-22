@@ -3,7 +3,7 @@ package github.snomfish.domain.status;
 import java.util.HashMap;
 import java.util.Map;
 
-import github.snomfish.domain.modifiers.MoveModifierId;
+import github.snomfish.domain.modifiers.ids.MoveModifierId;
 import github.snomfish.domain.move.CategoryId;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality._schematics.Effects;

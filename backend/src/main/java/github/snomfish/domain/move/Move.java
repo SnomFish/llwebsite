@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import github.snomfish.domain.modifiers.Modifiers;
-import github.snomfish.domain.modifiers.MoveModifierId;
+import github.snomfish.domain.modifiers.ids.MoveModifierId;
 import github.snomfish.domain.move.structures.IMove;
 import github.snomfish.domain.move.structures.NoMove;
 import github.snomfish.domain.stats.StatId;
@@ -221,7 +221,7 @@ public class Move implements DeepCopyable<Move> {
         );
 
         // resets the energy cost right before the pre energy calc effect
-        outcomes = flatMap(outcomes, c -> ResetModifier.userMove(MoveModifierId.ENERGY_COST).execute(c));
+        outcomes = flatMap(outcomes, c -> new ResetModifier().userMove(MoveModifierId.ENERGY_COST).execute(c));
         outcomes = flatMap(outcomes, c -> c.dispatchRule(RuleForAllId.PRE_ENERGY_CALC, ContextSideId.USER));
         outcomes = flatMap(outcomes, c -> calcEnergyCost.execute(c));
         outcomes = resolveConditions(context, hasEnoughEnergy,

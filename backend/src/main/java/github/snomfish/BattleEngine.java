@@ -5,7 +5,7 @@ import java.util.List;
 
 import github.snomfish.domain.Gamestate;
 import github.snomfish.domain.SideId;
-import github.snomfish.domain.modifiers.SideModifierId;
+import github.snomfish.domain.modifiers.ids.SideModifierId;
 import github.snomfish.functionality.Calculator;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.branch.Branch;
@@ -31,8 +31,8 @@ public class BattleEngine {
         
 		// start of turn
         outcomes = flatMap(outcomes, c -> c.dispatchRule(ConstantRuleId.START_OF_TURN, ContextSideId.USER));
-        outcomes = flatMap(outcomes, c -> ResetModifier.userSide(SideModifierId.SPEED).execute(c));
-        outcomes = flatMap(outcomes, c -> ResetModifier.targetSide(SideModifierId.SPEED).execute(c));
+        outcomes = flatMap(outcomes, c -> new ResetModifier().userSide(SideModifierId.SPEED).execute(c));
+        outcomes = flatMap(outcomes, c -> new ResetModifier().targetSide(SideModifierId.SPEED).execute(c));
         outcomes = flatMap(outcomes, c -> c.dispatchRule(ConstantRuleId.PRE_CALC_SPEED_ORDER, ContextSideId.USER));
         outcomes = flatMap(outcomes, c -> setSpeedOrder(c));
 		

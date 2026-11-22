@@ -5,7 +5,7 @@ import java.util.List;
 import github.snomfish.domain.item.ItemId;
 import github.snomfish.domain.mechanics.Mechanics;
 import github.snomfish.domain.modifiers.Modifiers;
-import github.snomfish.domain.modifiers.SideModifierId;
+import github.snomfish.domain.modifiers.ids.SideModifierId;
 import github.snomfish.domain.species.SpeciesId;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.copy.DeepCopyable;
