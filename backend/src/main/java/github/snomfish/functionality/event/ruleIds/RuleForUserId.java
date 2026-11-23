@@ -33,6 +33,10 @@ public enum RuleForUserId implements IRuleForSideId {
     // mechanics
     SELF_HAS_FLINCHED,
 
+    // drain
+    SELF_DRAINED_HEALTH,
+    SELF_DRAINED_ENERGY,
+
     // stat changes
     SELF_PRE_STATS_CHANGED,
     SELF_STATS_LOWERED_BY_OPP,

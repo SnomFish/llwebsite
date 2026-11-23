@@ -560,12 +560,22 @@ public class Value<T> {
     public Value<Integer> CALCED_ENERGY_COST() {return update(
 		Integer.class,
         c -> 		((Move) c).calcedEnergyCost(),
-        (c, v) -> 	((Move) c).calcedEnergyCost(v)
+        (c, v) -> 	((Move) c).setCalcedEnergyCost(v)
     );}
     public Value<Integer> DAMAGE() {return update(
 		Integer.class,
         c -> 		((Move) c).damage(),
-        (c, v) -> 	((Move) c).damage(v)
+        (c, v) -> 	((Move) c).setDamage(v)
+    );}
+    public Value<Integer> HEALTH_DRAIN() {return update(
+		Integer.class,
+        c -> 		((Move) c).healthDrained(),
+        (c, v) -> 	((Move) c).setHealthDrained(v)
+    );}
+    public Value<Integer> ENERGY_DRAIN() {return update(
+		Integer.class,
+        c -> 		((Move) c).energyDrained(),
+        (c, v) -> 	((Move) c).setHealthDrained(v)
     );}
 	public Value<Double> MOVE_MODIFIER(MoveModifierId id) {return update(
 		Double.class,

@@ -97,7 +97,7 @@ public class DealFormulaDamage implements IEffect {
             int basePower = basePowerBranch.value().intValue();
 
             Move move = Value.USER().MOVE().get(outcome);
-            move.damage(basePower);
+            move.setDamage(basePower);
             outcomes.add(new Branch<>(
                 outcome,
                 basePowerBranch.probability()
@@ -243,7 +243,7 @@ public class DealFormulaDamage implements IEffect {
         damage = Math.floor(damage * modifiers.get(TYPE)); 
         damage = Math.floor(damage * modifiers.get(DAMAGE)); 
 
-        move.damage((int)damage);
+        move.setDamage((int)damage);
         
         return List.of(new Branch<>(outcome, 1.0));
     }
@@ -258,8 +258,9 @@ public class DealFormulaDamage implements IEffect {
             ActiveLoomian target = Value.TARGET().LOOMIAN().get(context);
             Move move			 = Value.USER().MOVE().get(context);
             int damage			 = Value.USER().MOVE().DAMAGE().get(context);
+            damage = (int)Math.clamp((double)damage * damageRollModifier, 1, target.currentHealth());
 
-            move.damage((int)Math.clamp((double)damage * damageRollModifier, 1, target.currentHealth()));
+            move.setDamage(damage);
             outcome.gamestate().log("move dealt " + damage + " damage");
             target.addToCurrentHealth(-damage);
 

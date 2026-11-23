@@ -56,10 +56,12 @@ public class Move implements DeepCopyable<Move> {
     private Tags<MoveTagId> tags;
     private Modifiers<MoveModifierId> modifiers;
     private TypeChart typeChart;
+    private int critChance;
 
     private int calcedEnergyCost;
-    private int critChance;
     private int damage;
+    private int healthDrained;
+    private int energyDrained;
 
     private boolean canMoveFail;
     private boolean hasMoveFailed;
@@ -85,10 +87,12 @@ public class Move implements DeepCopyable<Move> {
         this.tags = 		new Tags<MoveTagId>();
         this.modifiers = 	new Modifiers<>();
         this.typeChart = 	TypeChart.get();
+        this.critChance = 0;
 
         this.calcedEnergyCost = 0;
-        this.critChance = 0;
         this.damage = 0;
+        this.healthDrained = 0;
+        this.energyDrained = 0;
 
         this.canMoveFail = false;
         this.hasMoveFailed = false;
@@ -114,10 +118,12 @@ public class Move implements DeepCopyable<Move> {
         this.tags = 			copy.tags.deepCopy();
         this.modifiers = 		copy.modifiers.deepCopy();
         this.typeChart = 		copy.typeChart.deepCopy();
+        this.critChance = 		copy.critChance;
 
         this.calcedEnergyCost = copy.calcedEnergyCost;
-        this.critChance = 		copy.critChance;
         this.damage = 			copy.damage;
+        this.healthDrained =    copy.healthDrained;
+        this.energyDrained =    copy.energyDrained;
 
         this.canMoveFail = 		copy.canMoveFail;
         this.hasMoveFailed = 	copy.hasMoveFailed;
@@ -148,10 +154,12 @@ public class Move implements DeepCopyable<Move> {
     public Tags<MoveTagId> tags() {return tags;}
     public Modifiers<MoveModifierId> modifiers() {return modifiers;}
     public TypeChart typeChart() {return typeChart;}
+    public int critChance() {return critChance;}
 
     public int calcedEnergyCost() {return calcedEnergyCost;}
-    public int critChance() {return critChance;}
     public int damage() {return damage;}
+    public int healthDrained() {return healthDrained;}
+    public int energyDrained() {return energyDrained;}
 
     public boolean canMoveFail() {return canMoveFail;}
     public boolean hasMoveFailed() {return hasMoveFailed;}
@@ -181,10 +189,12 @@ public class Move implements DeepCopyable<Move> {
     public Move tag(MoveTagId tag) {this.tags.set(tag, true); return this;}
     public Move modifiers(Modifiers<MoveModifierId> modifiers) {this.modifiers = modifiers; return this;}
     public Move typeChart(TypeChart typeChart) {this.typeChart = typeChart; return this;}
-
-    public Move calcedEnergyCost(int calcedEnergyCost) {this.calcedEnergyCost = calcedEnergyCost; return this;}
     public Move critChance(int critChance) {this.critChance = critChance; return this;}
-    public Move damage(int damage) {this.damage = damage; return this;}
+
+    public Move setCalcedEnergyCost(int calcedEnergyCost) {this.calcedEnergyCost = calcedEnergyCost; return this;}
+    public Move setDamage(int damage) {this.damage = damage; return this;}
+    public Move setHealthDrained(int healthDrained) {this.healthDrained = healthDrained; return this;}
+    public Move setEnergyDrained(int energyDrained) {this.energyDrained = energyDrained; return this;}
 
     public void setCanMoveFail(boolean canMoveFail) {this.canMoveFail = canMoveFail;}
     public void setHasMoveFailed(boolean hasMoveFailed) {this.hasMoveFailed = hasMoveFailed;}

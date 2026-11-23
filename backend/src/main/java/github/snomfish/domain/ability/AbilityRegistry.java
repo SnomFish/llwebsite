@@ -45,6 +45,7 @@ import github.snomfish.functionality.effect.effects.ClearStatus;
 import github.snomfish.functionality.effect.effects.ClutchEffect;
 import github.snomfish.functionality.effect.effects.DispatchEventEffect;
 import github.snomfish.functionality.effect.effects.DoubleStrikeEffect;
+import github.snomfish.functionality.effect.effects.EnergyDrainEffect;
 import github.snomfish.functionality.effect.effects.RemoveHealth;
 import github.snomfish.functionality.effect.effects.RemoveMechanic;
 import github.snomfish.functionality.effect.effects.RestoreEnergy;
@@ -746,6 +747,10 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(DRIVEN)
 			.name("driven")
+			.rule(Rule.build()
+				.event(RuleForUserId.SELF_HAS_FLINCHED)
+				.effect(ApplyStatChanges.userChangingUser().speed(new Constant(1)))
+			)
 		);
 		register(Ability.build()
 			.id(DUST_DEVIL)
@@ -833,6 +838,10 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(ENCHANT)
 			.name("enchant")
+			.rule(Rule.build()
+				.event(RuleForUserId.SELF_MOVE_DEALT_DAMAGE)
+				.effect(Effects.dazeChance(new Constant(0.1)))
+			)
 		);
 		register(Ability.build()
 			.id(ENCHANTED_COAT)
@@ -850,6 +859,10 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(ENERGY_FEEDING)
 			.name("Energy Feeding")
+			.rule(Rule.build()
+				.event(RuleForUserId.SELF_DRAINED_HEALTH)
+				.effect(new EnergyDrainEffect<>(Value.USER().MOVE().HEALTH_DRAIN(), 0.1))
+			)
 		);
 		register(Ability.build()
 			.id(EXPERTISE)

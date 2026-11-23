@@ -33,6 +33,10 @@ public enum RuleForTargetId implements IRuleForSideId {
     // mechanics
     OPP_HAS_FLINCHED,
 
+    // drain
+    OPP_DRAINED_HEALTH,
+    OPP_DRAINED_ENERGY,
+
     // stat changes
     OPP_PRE_STATS_CHANGED,
     LOWERED_OPP_STATS,
