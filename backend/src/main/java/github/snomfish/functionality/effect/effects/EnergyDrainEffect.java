@@ -1,6 +1,5 @@
 package github.snomfish.functionality.effect.effects;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import github.snomfish.domain.ActiveLoomian;
@@ -12,7 +11,6 @@ import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.effect.IEffect;
 import github.snomfish.functionality.event.ruleIds.RuleForAllId;
-import github.snomfish.functionality.number.INumber;
 
 import static github.snomfish.functionality.branch.BranchUtil.flatMap;
 import static github.snomfish.functionality.branch.BranchUtil.wrap;

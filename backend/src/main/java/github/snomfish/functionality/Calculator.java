@@ -1,6 +1,5 @@
 package github.snomfish.functionality;
 
-import github.snomfish.domain.Loomian;
 import github.snomfish.domain.modifiers.ids.LoomModifierId;
 import github.snomfish.domain.modifiers.ids.SideModifierId;
 import github.snomfish.domain.stats.StatChangesId;

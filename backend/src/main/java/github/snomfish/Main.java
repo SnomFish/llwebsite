@@ -32,7 +32,8 @@ public class Main {
 		);
 		Side side = new Side(List.of(embit), 0);
 		Gamestate gamestate = new Gamestate(side, side);
-		//BattleContext context = new BattleContext(gamestate, SideId.PLAYER);
+		BattleContext context = new BattleContext(gamestate, SideId.PLAYER);
+		System.out.println(context);
 
 		
 		
