@@ -8,7 +8,9 @@ import github.snomfish.domain.mechanics.Mechanics;
 import github.snomfish.domain.modifiers.Modifiers;
 import github.snomfish.domain.modifiers.ids.LoomModifierId;
 import github.snomfish.domain.stats.StatChanges;
+import github.snomfish.domain.stats.Stats;
 import github.snomfish.domain.type.TypeId;
+import github.snomfish.functionality.Calculator;
 import github.snomfish.functionality.action.Action;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.event.HookReport;
@@ -23,6 +25,8 @@ public class ActiveLoomian extends Loomian {
     private List<TypeId> types;
     private AbilityInstance abilityInstance;
     private StatChanges statChanges;
+    private Stats baseStats;
+    private Stats stats;
     private Action action;
     private Mechanics mechanics; // extra functionality that is temp added to an onfield loomian such as coursing venom being in effect
     private Modifiers<LoomModifierId> modifiers;
@@ -39,6 +43,8 @@ public class ActiveLoomian extends Loomian {
         super(loomian);
         this.types = new ArrayList<>(loomian.species().baseTypes());
         this.statChanges = new StatChanges();
+        this.baseStats = loomian.species().baseStats().deepCopy();
+        this.stats = loomian.actualStats().deepCopy();
         this.action = Action.selectNoAction();
         this.mechanics = new Mechanics();
         this.statusTurns = 0;
@@ -52,6 +58,8 @@ public class ActiveLoomian extends Loomian {
         super(copy);
         this.types = new ArrayList<>(copy.types);
         this.statChanges = copy.statChanges.deepCopy();
+        this.baseStats = copy.baseStats.deepCopy();
+        this.stats = copy.stats.deepCopy();
         this.action = copy.action.deepCopy();
         this.mechanics = copy.mechanics.deepCopy();
         this.statusTurns = copy.statusTurns;
@@ -70,6 +78,14 @@ public class ActiveLoomian extends Loomian {
     public TypeId secondaryType() {return types.get(1);}
     public AbilityInstance abilityInstance() {return abilityInstance;}
     public StatChanges statChanges() {return statChanges;}
+    public Stats baseStats() {return baseStats;}
+    public Stats stats() { // TODO have a dirty flag system that will check if a basestate, tp, up or nature has changed, then calcing
+        this.stats = Calculator.getActualStats(
+            species().baseStats(),
+            tps, ups, nature
+        );
+        return stats;
+    }
     public Action action() {return action;}
     public Mechanics mechanics() {return mechanics;}
     public Modifiers<LoomModifierId> modifiers() {return modifiers;}
@@ -85,6 +101,8 @@ public class ActiveLoomian extends Loomian {
     public void setSecondaryType(TypeId typeId) {this.types.set(1, typeId);}
     public void setAbilityInstance(AbilityInstance abilityInstance) {this.abilityInstance = abilityInstance;}
     public void setStatChanges(StatChanges statChanges) {this.statChanges = statChanges;}
+    public void setBaseStats(Stats baseStats) {this.baseStats = baseStats;}
+    public void setStats (Stats stats) {this.stats = stats;}
     public void setAction(Action action) {this.action = action;}
     public void setMechanics(Mechanics mechanics) {this.mechanics = mechanics;} 
     public void setModifiers(Modifiers<LoomModifierId> modifiers) {this.modifiers = modifiers;}

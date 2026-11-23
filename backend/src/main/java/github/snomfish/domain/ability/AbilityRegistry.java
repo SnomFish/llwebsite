@@ -32,6 +32,7 @@ import github.snomfish.functionality.condition.variable.NoCondition;
 import github.snomfish.functionality.condition.variable.Not;
 import github.snomfish.functionality.condition.variable.Or;
 import github.snomfish.functionality.condition.variable.RandomCondition;
+import github.snomfish.functionality.context.ContextSideId;
 import github.snomfish.functionality.effect.ConditionalEffect;
 import github.snomfish.functionality.effect.EffectSequence;
 import github.snomfish.functionality.effect.effects.AlterTypeChart;
@@ -43,6 +44,7 @@ import github.snomfish.functionality.effect.effects.ClearStatChanges;
 import github.snomfish.functionality.effect.effects.ClearStatus;
 import github.snomfish.functionality.effect.effects.ClutchEffect;
 import github.snomfish.functionality.effect.effects.DispatchEventEffect;
+import github.snomfish.functionality.effect.effects.DoubleStrikeEffect;
 import github.snomfish.functionality.effect.effects.RemoveHealth;
 import github.snomfish.functionality.effect.effects.RemoveMechanic;
 import github.snomfish.functionality.effect.effects.RestoreEnergy;
@@ -51,6 +53,7 @@ import github.snomfish.functionality.effect.effects.SetAbility;
 import github.snomfish.functionality.effect.effects.SetFieldMechanic;
 import github.snomfish.functionality.effect.effects.SetHazards;
 import github.snomfish.functionality.effect.effects.SetType;
+import github.snomfish.functionality.effect.effects.SetValue;
 import github.snomfish.functionality.effect.effects.SetValueIEffect;
 import github.snomfish.functionality.effect.effects.SetWeather;
 import github.snomfish.functionality.event.Gate;
@@ -303,6 +306,22 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(BLACK_HEART)
 			.name("Black Heart")
+			.rule(Rule.build()
+				.event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
+				.condition(new Or(
+					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.LIGHT),
+					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.DARK)
+				))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(0.5)))
+			)
+			.rule(Rule.build()
+				.event(RuleForTargetId.RECEIVED_DAMAGE_FROM_MOVE)
+				.condition(new Or(
+					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.LIGHT),
+					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.DARK)
+				))
+				.effect(ApplyStatChanges.userChangingUser().rattack(new Constant(1)))
+			)
 		);
 		register(Ability.build()
 			.id(BLISTERING_HEAT)
@@ -453,6 +472,16 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(CAVERNOUS)
 			.name("Cavernous")
+			.rule(Rule.build()
+				.event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
+				.condition(new Equals<>(Value.OPP().MOVE().MOVE_TAG(MoveTagId.SOUND), true))
+				.effect(Effects.multiplyValue(Value.OPP().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(0.5)))
+			)
+			.rule(Rule.build()
+				.event(RuleForTargetId.RECEIVED_DAMAGE_FROM_MOVE)
+				.condition(new Equals<>(Value.OPP().MOVE().MOVE_TAG(MoveTagId.SOUND), true))
+				.effect(RemoveHealth.target(new ValueConstant(Value.OPP().MOVE().DAMAGE())))
+			)
 		);
 		register(Ability.build()
 			.id(CHARGED_ARC)
@@ -679,6 +708,11 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(DISENCHANT)
 			.name("disenchant")
+			.rule(Rule.build()
+				.event(RuleForUserId.SELF_SWAPS_IN)
+				.effect(RemoveMechanic.fromTargetSide(SideMechanicId.NEAR_ENCHANTMENT))
+				.effect(RemoveMechanic.fromTargetSide(SideMechanicId.FAR_ENCHANTMENT))
+			)
 		);
 		register(Ability.build()
 			.id(DO_OR_DIE)
@@ -695,6 +729,11 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(DOUBLE_STRIKE)
 			.name("double strike")
+			.rule(Rule.build()
+				.event(RuleForUserId.SELF_PRE_MOVE)
+				.condition(new Not(new Equals<>(Value.USER().MOVE().CATEGORY(), CategoryId.STATUS)))
+				.effect(new DoubleStrikeEffect())
+			)
 		);
 		register(Ability.build()
             .id(DRAINAGE)
@@ -1150,6 +1189,13 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(IDIOSYNCRATIC)
 			.name("idiosyncratic")
+			.rule(Rule.build()
+				.event(RuleForUserId.SELF_SWAPS_IN)
+				.effect(new SetValue<>(Value.USER().BASE_MATTACK(), Value.USER().SPECIES_BASE_RATTACK()))
+				.effect(new SetValue<>(Value.USER().BASE_MDEFENSE(), Value.USER().SPECIES_BASE_RDEFENSE()))
+				.effect(new SetValue<>(Value.USER().BASE_RATTACK(), Value.USER().SPECIES_BASE_MATTACK()))
+				.effect(new SetValue<>(Value.USER().BASE_RDEFENSE(), Value.USER().SPECIES_BASE_MDEFENSE()))
+			)
 		);
 		register(Ability.build()
 			.id(IGNORANT)
@@ -1180,6 +1226,11 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(IMMUNIZED)
 			.name("immunized")
+			.rule(Rule.build()
+				.event(RuleForUserId.SELF_CHANGES_STATUS)
+				.condition(Conditions.userHasStatusAilment())
+				.effect(ClearStatus.user())
+			)
 		);
 		register(Ability.build()
 			.id(IMPOSE)
@@ -1188,10 +1239,25 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(INCANDESCENT)
 			.name("incandescent")
+			.rule(Rule.build()
+				.event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.LIGHT))
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.25)))
+			)
 		);
 		register(Ability.build()
 			.id(INFERNO)
 			.name("inferno")
+			.rule(Rule.build()
+				.event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.condition(Conditions.heatwaveActive())
+				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.5)))
+			)
+			.rule(Rule.build()
+				.event(ConstantRuleId.END_OF_TURN)
+				.condition(Conditions.heatwaveActive())
+				.effect(RemoveHealth.user(Numbers.eighthUserMaxHealth()))
+			)
 		);
 		register(Ability.build() // decreases the damage done by ice and fire attacks to the user by 50%
 			.id(INSULATED)
@@ -1583,15 +1649,14 @@ public class AbilityRegistry {
 			.name("packed punch")
 			.rule(Rule.build()
 				.event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
-				.effect(Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(2)))
+				.effect(Effects.multiplyValue(Value.USER().LOOMIAN_MODIFIER(LoomModifierId.M_ATTACK), new Constant(2)))
 			)
 		);
 		register(Ability.build()
 			.id(PARTING_GIFT)
 			.name("parting gift")
 		);
-		// doubles exclusive
-		register(Ability.build()
+		register(Ability.build() // doubles exclusive
 			.id(PARTNERSHIP)
 			.name("partnership")
 		);
@@ -1644,6 +1709,11 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(PINCER_TRAP)
 			.name("pincer trap")
+			.rule(Rule.build()
+				.event(RuleForUserId.SELF_MOVE_DEALT_DAMAGE)
+				.condition(new Equals<>(Value.USER().MOVE().MOVE_TAG(MoveTagId.BITING), true))
+				.effect(ApplyMechanic.toTarget(LoomianMechanicId.TRAPPED_BY_PINCER_TRAP).withMaxAge(2)) // goes away at the end of the next turn
+			)
 		);
 		register(Ability.build()
 			.id(PITCH_BLACK)
@@ -1908,8 +1978,9 @@ public class AbilityRegistry {
 			.id(RECRUIT)
 			.name("recruit")
 			.rule(Rule.build()
-				.event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
-				.effect(Effects.multiplyValue(Value.TARGET().MOVE().MOVE_MODIFIER(MoveModifierId.DEFENDING_STAT), new Constant(1.1)))
+				.event(RuleForAllId.PRE_DEAL_FORMULA_DAMAGE)
+				.effect(Effects.multiplyValue(Value.USER().LOOMIAN_MODIFIER(LoomModifierId.M_DEFENSE), new Constant(1.1)))
+				.effect(Effects.multiplyValue(Value.USER().LOOMIAN_MODIFIER(LoomModifierId.R_DEFENSE), new Constant(1.1)))
 			)
 		);
 		register(Ability.build()
@@ -2122,11 +2193,21 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(SLICK_SCALES)
 			.name("Slick Scales")
+			.rule(Rule.build()
+				.event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.condition(new GateCondition(GateForAllId.CAN_USE_DEFENSIVE_ABILITY, ContextSideId.USER))
+				.effect(Effects.multiplyValue(Value.USER().LOOMIAN_MODIFIER(LoomModifierId.R_DEFENSE), new Constant(2)))
+			)
 			.tag(PUNCTURABLE)
 		);
 		register(Ability.build()
 			.id(SLICK_SHELL)
 			.name("slick shell")
+			.rule(Rule.build()
+				.event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.condition(new GateCondition(GateForAllId.CAN_USE_DEFENSIVE_ABILITY, ContextSideId.USER))
+				.effect(Effects.multiplyValue(Value.USER().LOOMIAN_MODIFIER(LoomModifierId.R_DEFENSE), new Constant(2)))
+			)
 			.tag(PUNCTURABLE)
 		);
 		register(Ability.build()
@@ -2187,7 +2268,21 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(SPECIALIZATION)
 			.name("specialization")
-
+			.rule(Rule.build()
+				.event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.effect(new ConditionalEffect(
+					new Equals<>(Value.USER().NUM_OF_MOVES(), new Constant(3)),
+					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.25))
+				))
+				.effect(new ConditionalEffect(
+					new Equals<>(Value.USER().NUM_OF_MOVES(), new Constant(2)),
+					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(1.5))
+				))
+				.effect(new ConditionalEffect(
+					new Equals<>(Value.USER().NUM_OF_MOVES(), new Constant(1)),
+					Effects.multiplyValue(Value.USER().MOVE().MOVE_MODIFIER(MoveModifierId.DAMAGE), new Constant(2))
+				))
+			)
 		);
 		register(Ability.build()
 			.id(SPINE_BREAK)
@@ -2226,6 +2321,11 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(STICKY)
 			.name("Sticky")
+			.rule(Rule.build()	
+				.event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
+				.condition(new Equals<>(Value.USER().MOVE().TYPE(), TypeId.BUG))
+				.effect(ApplyStatChanges.userChangingTarget().speed(new Constant(-1)))
+			)
 		);
 		register(Ability.build()
 			.id(STOKED)
@@ -2405,6 +2505,13 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(VETERAN)
 			.name("Veteran")
+			.rule(Rule.build()
+				.event(RuleForAllId.PRE_DEAL_FORMULA_DAMAGE)
+				.effect(Effects.multiplyValue(Value.USER().LOOMIAN_MODIFIER(LoomModifierId.M_ATTACK), new Constant(1.1)))
+				.effect(Effects.multiplyValue(Value.USER().LOOMIAN_MODIFIER(LoomModifierId.M_DEFENSE), new Constant(1.1)))
+				.effect(Effects.multiplyValue(Value.USER().LOOMIAN_MODIFIER(LoomModifierId.R_ATTACK), new Constant(1.1)))
+				.effect(Effects.multiplyValue(Value.USER().LOOMIAN_MODIFIER(LoomModifierId.R_DEFENSE), new Constant(1.1)))
+			)
 		);
 		// increases the users damage when the user is poisoned
 		register(Ability.build() // build

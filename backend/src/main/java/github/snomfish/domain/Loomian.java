@@ -26,7 +26,7 @@ public class Loomian implements DeepCopyable<Loomian> {
     protected StatusId statusId;
     protected Stats nature;
 
-    protected Stats stats;
+    protected Stats actualStats;
     protected int currentHealth;
     protected int currentEnergy;
     protected Stats tps;
@@ -55,9 +55,12 @@ public class Loomian implements DeepCopyable<Loomian> {
 
         this.tps = tps;
         this.ups = ups;
-        this.stats = Calculator.getActualStats(this);
-        this.currentHealth = (int) stats.health();
-        this.currentEnergy = (int) stats.energy();
+        this.actualStats = Calculator.getActualStats(
+            species().baseStats(),
+            tps, ups, nature
+        );
+        this.currentHealth = (int) actualStats.health();
+        this.currentEnergy = (int) actualStats.energy();
 
         this.hasFainted = false;
     }
@@ -71,7 +74,7 @@ public class Loomian implements DeepCopyable<Loomian> {
         this.statusId = loomian.statusId;
         this.nature = loomian.nature;
 
-        this.stats = loomian.stats;
+        this.actualStats = loomian.actualStats;
         this.currentHealth = loomian.currentHealth;
         this.currentEnergy = loomian.currentEnergy;
         this.tps = loomian.tps;
@@ -102,9 +105,9 @@ public class Loomian implements DeepCopyable<Loomian> {
     public Status status() {return StatusRegistry.get(statusId);}
     public Stats nature() {return nature;}
 
-    public Stats stats() {return stats;}
-    public int maxHealth() {return (int) stats.health();}
-    public int maxEnergy() {return (int) stats.energy();}
+    public Stats actualStats() {return actualStats;}
+    public int maxHealth() {return (int) actualStats.health();}
+    public int maxEnergy() {return (int) actualStats.energy();}
     public int currentHealth() {return currentHealth;}
     public int currentEnergy() {return currentEnergy;}
     public Stats tps() {return tps;}
@@ -121,7 +124,7 @@ public class Loomian implements DeepCopyable<Loomian> {
     public void setStatusId(StatusId statusId) {this.statusId = statusId;} // this does not reset status turns
     public void setNature(Stats nature) {this.nature = nature;}
 
-    public void setStats(Stats stats) {this.stats = stats;}
+    public void setActualStats(Stats actualStats) {this.actualStats = actualStats;}
     public void setCurrentHealth(int currentHealth) {this.currentHealth = currentHealth;}
     public void setCurrentEnergy(int currentEnergy) {this.currentEnergy = currentEnergy;}
     public void setTps(Stats tps) {this.tps = tps;}

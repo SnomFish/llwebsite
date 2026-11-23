@@ -369,41 +369,82 @@ public class Value<T> {
 		c -> 		((Side) c).activeLoomian().currentEnergy(),
 		(c, v) -> 	((Side) c).activeLoomian().setCurrentEnergy(v)
 	);}
-	public Value<Double> BASE_HEALTH() {return update(
+
+
+	public Value<Double> SPECIES_BASE_HEALTH() {return update(
 		Double.class,
 		c -> 		((Side) c).activeLoomian().species().baseStats().health(),
 		(c, v) -> 	((Side) c).activeLoomian().species().baseStats().setHealth(v)
 	);}
-	public Value<Double> BASE_ENERGY() {return update(
+	public Value<Double> SPECIES_BASE_ENERGY() {return update(
 		Double.class,
 		c -> 		((Side) c).activeLoomian().species().baseStats().energy(),
 		(c, v) -> 	((Side) c).activeLoomian().species().baseStats().setEnergy(v)
 	);}
-	public Value<Double> BASE_MATTACK() {return update(
+	public Value<Double> SPECIES_BASE_MATTACK() {return update(
 		Double.class,
 		c -> 		((Side) c).activeLoomian().species().baseStats().mattack(),
 		(c, v) -> 	((Side) c).activeLoomian().species().baseStats().setMattack(v)
 	);}
-	public Value<Double> BASE_MDEFENSE() {return update(
+	public Value<Double> SPECIES_BASE_MDEFENSE() {return update(
 		Double.class,
 		c -> 		((Side) c).activeLoomian().species().baseStats().mdefense(),
 		(c, v) -> 	((Side) c).activeLoomian().species().baseStats().setMdefense(v)
 	);}
-	public Value<Double> BASE_RATTACK() {return update(
+	public Value<Double> SPECIES_BASE_RATTACK() {return update(
 		Double.class,
 		c -> 		((Side) c).activeLoomian().species().baseStats().rattack(),
 		(c, v) -> 	((Side) c).activeLoomian().species().baseStats().setRattack(v)
 	);}
-	public Value<Double> BASE_RDEFENSE() {return update(
+	public Value<Double> SPECIES_BASE_RDEFENSE() {return update(
 		Double.class,
 		c -> 		((Side) c).activeLoomian().species().baseStats().rdefense(),
 		(c, v) -> 	((Side) c).activeLoomian().species().baseStats().setRdefense(v)
 	);}
-	public Value<Double> BASE_SPEED() {return update(
+	public Value<Double> SPECIES_BASE_SPEED() {return update(
 		Double.class,
 		c -> 		((Side) c).activeLoomian().species().baseStats().speed(),
 		(c, v) -> 	((Side) c).activeLoomian().species().baseStats().setSpeed(v)
 	);}
+
+
+	public Value<Double> BASE_HEALTH() {return update(
+		Double.class,
+		c -> 		((Side) c).activeLoomian().baseStats().health(),
+		(c, v) -> 	((Side) c).activeLoomian().baseStats().setHealth(v)
+	);}
+	public Value<Double> BASE_ENERGY() {return update(
+		Double.class,
+		c -> 		((Side) c).activeLoomian().baseStats().energy(),
+		(c, v) -> 	((Side) c).activeLoomian().baseStats().setEnergy(v)
+	);}
+	public Value<Double> BASE_MATTACK() {return update(
+		Double.class,
+		c -> 		((Side) c).activeLoomian().baseStats().mattack(),
+		(c, v) -> 	((Side) c).activeLoomian().baseStats().setMattack(v)
+	);}
+	public Value<Double> BASE_MDEFENSE() {return update(
+		Double.class,
+		c -> 		((Side) c).activeLoomian().baseStats().mdefense(),
+		(c, v) -> 	((Side) c).activeLoomian().baseStats().setMdefense(v)
+	);}
+	public Value<Double> BASE_RATTACK() {return update(
+		Double.class,
+		c -> 		((Side) c).activeLoomian().baseStats().rattack(),
+		(c, v) -> 	((Side) c).activeLoomian().baseStats().setRattack(v)
+	);}
+	public Value<Double> BASE_RDEFENSE() {return update(
+		Double.class,
+		c -> 		((Side) c).activeLoomian().baseStats().rdefense(),
+		(c, v) -> 	((Side) c).activeLoomian().baseStats().setRdefense(v)
+	);}
+	public Value<Double> BASE_SPEED() {return update(
+		Double.class,
+		c -> 		((Side) c).activeLoomian().baseStats().speed(),
+		(c, v) -> 	((Side) c).activeLoomian().baseStats().setSpeed(v)
+	);}
+
+
 	public Value<Double> HEALTH() {return update(
 		Double.class,
 		c -> 		((Side) c).activeLoomian().stats().health(),

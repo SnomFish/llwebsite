@@ -12,13 +12,11 @@ public class Calculator {
     public static final int LEVEL = 50;
 
     public static Stats getActualStats(
-        Loomian loomian
+        Stats base,
+        Stats tps,
+        Stats ups,
+        Stats nature
     ) {
-        Stats base = loomian.species().baseStats();
-        Stats tps = loomian.tps();
-        Stats ups = loomian.ups();
-        Stats nature = loomian.nature();
-
         Stats actual = new Stats(
             Math.floor((2 * base.health() + ups.health() + tps.health() / 4)                     * LEVEL / 100) + LEVEL + 10,
             Math.floor(Math.floor((2 * base.energy() + ups.energy() + tps.energy() / 4)          * 50    / 65 + 80) * nature.energy()),

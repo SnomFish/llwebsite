@@ -9,6 +9,7 @@ import github.snomfish.functionality.effect.IEffect;
 
 import static github.snomfish.functionality.branch.BranchUtil.wrap;
 import static github.snomfish.functionality.copy.DeepCopy.resolveDeepCopy;
+import static github.snomfish.functionality.Value.resolve;
 
 public class SetValue<T> implements IEffect {
 	
@@ -23,6 +24,14 @@ public class SetValue<T> implements IEffect {
 	) {
 		this.value = value;
 		this.object = object;
+	}
+	@SuppressWarnings("unchecked")
+	public SetValue(
+		Value<T> value,
+		Value<T> object
+	) {
+		this.value = value;
+		this.object = (T) object;
 	}
 
 
@@ -39,7 +48,7 @@ public class SetValue<T> implements IEffect {
 	public List<Branch<BattleContext>> execute(BattleContext context) {
 		BattleContext outcome = context.deepCopy();
 
-		value.set(outcome, object);
+		value.set(outcome, resolve(object, outcome));
 
 		return wrap(outcome);
 	}

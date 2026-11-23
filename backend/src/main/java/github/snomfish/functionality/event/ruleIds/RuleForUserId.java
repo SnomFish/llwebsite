@@ -27,6 +27,12 @@ public enum RuleForUserId implements IRuleForSideId {
     SELF_CONSUMED_ITEM,
     SELF_LOSES_ITEM,
 
+    // status
+    SELF_CHANGES_STATUS,
+
+    // mechanics
+    SELF_HAS_FLINCHED,
+
     // stat changes
     SELF_PRE_STATS_CHANGED,
     SELF_STATS_LOWERED_BY_OPP,

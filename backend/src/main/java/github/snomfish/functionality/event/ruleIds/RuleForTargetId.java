@@ -27,6 +27,12 @@ public enum RuleForTargetId implements IRuleForSideId {
     SELF_WATCHES_OPP_CONSUME_ITEM,
     SELF_WATCHES_OPP_LOSE_ITEM,
 
+    // status
+    OPP_CHANGES_STATUS,
+
+    // mechanics
+    OPP_HAS_FLINCHED,
+
     // stat changes
     OPP_PRE_STATS_CHANGED,
     LOWERED_OPP_STATS,
