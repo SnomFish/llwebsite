@@ -195,10 +195,14 @@ public class Move implements DeepCopyable<Move> {
     public Move setHealthDrained(int healthDrained) {this.healthDrained = healthDrained; return this;}
     public Move setEnergyDrained(int energyDrained) {this.energyDrained = energyDrained; return this;}
 
+    public Move typeEffectiveness(TypeId defendingTypeId, double multiplier) {
+        this.typeChart.set(type, defendingTypeId, multiplier);
+        return this;
+    }
+
     public void setCanMoveFail(boolean canMoveFail) {this.canMoveFail = canMoveFail;}
     public void setHasMoveFailed(boolean hasMoveFailed) {this.hasMoveFailed = hasMoveFailed;}
     public void setHasCrit(boolean hasCrit) {this.hasCrit = hasCrit;}
-
 
 
 

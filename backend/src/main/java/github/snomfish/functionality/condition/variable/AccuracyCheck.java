@@ -7,6 +7,7 @@ import github.snomfish.functionality.Value;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.context.ContextSideId;
+import github.snomfish.functionality.event.gateIds.GateForAllId;
 import github.snomfish.functionality.event.ruleIds.RuleForAllId;
 import github.snomfish.functionality.number.INumber;
 
@@ -23,16 +24,25 @@ public class AccuracyCheck implements ICondition {
     }
 
 
-    @Override 
+    private AccuracyCheck(AccuracyCheck copy) {
+        this.accuracyNumber = copy.accuracyNumber.deepCopy();
+    }
     public AccuracyCheck deepCopy() {
-        return new AccuracyCheck(
-            accuracyNumber.deepCopy()
-        );
+        return new AccuracyCheck(this);
+    }
+
+    
+    public double execute(BattleContext context) {
+        double probability = 1;
+
+        probability *= executeAccuracyCheck(context);
+        probability *= context.dispatchGate(GateForAllId.CAN_MOVE_HIT_LOOMIAN, ContextSideId.USER);
+
+        return probability;
     }
 
 
-    @Override 
-    public double execute(BattleContext context) {
+    private double executeAccuracyCheck(BattleContext context) {
         List<Branch<Double>> accuracyBranches = accuracyNumber.execute(context);
         double probability = 0;
 

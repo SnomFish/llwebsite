@@ -24,13 +24,16 @@ import github.snomfish.functionality.effect.effects.AddType;
 import github.snomfish.functionality.effect.effects.AlterTypeChart;
 import github.snomfish.functionality.effect.effects.ApplyStatChanges;
 import github.snomfish.functionality.effect.effects.ApplyStatus;
+import github.snomfish.functionality.effect.effects.MultiplyINumberValue;
 import github.snomfish.functionality.effect.effects.RemoveHealth;
 import github.snomfish.functionality.effect.effects.RemoveMechanic;
 import github.snomfish.functionality.effect.effects.RestoreHealth;
+import github.snomfish.functionality.effect.effects.SetValue;
 import github.snomfish.functionality.event.Door;
 import github.snomfish.functionality.event.Gate;
 import github.snomfish.functionality.event.Rule;
 import github.snomfish.functionality.event.gateIds.GateForAllId;
+import github.snomfish.functionality.event.gateIds.GateForTargetId;
 import github.snomfish.functionality.event.gateIds.GateForUserId;
 import github.snomfish.functionality.event.ruleIds.ConstantRuleId;
 import github.snomfish.functionality.event.ruleIds.RuleForAllId;
@@ -94,6 +97,14 @@ public class MechanicRegistry {
             .id(FLINCH)
             .name("Flinch")
         );
+        register(new Mechanic()
+            .id(SEMI_INVUNRABLE)
+            .name("semi invunrable")
+            .gate(Gate.build()
+                .event(GateForTargetId.CAN_OPP_MOVE_HIT_SELF)
+                .condition(new False())
+            )
+        );
 
 
         // MOVE SPECIFIC
@@ -119,6 +130,15 @@ public class MechanicRegistry {
             .onRemoveEffect(ApplyStatChanges.userChangingUser()
                 .mdefense(new Constant(-1))
                 .rdefense(new Constant(-1))
+            )
+        );
+        register(new Mechanic()
+            .id(FOUNTAIN_BEAM_CHARGING)
+            .name("fountain beam charging")
+            .rule(Rule.build()
+                .event(RuleForTargetId.RECEIVED_DAMAGE_FROM_MOVE)
+                .effect(new MultiplyINumberValue(Value.USER().MOVE().BASE_POWER(), 0.5))
+                .effect(RemoveMechanic.fromUser(FOUNTAIN_BEAM_CHARGING))
             )
         );
         register(new Mechanic()

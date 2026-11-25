@@ -6,6 +6,8 @@ import java.util.Map;
 import github.snomfish.domain.mechanics.ids.LoomianMechanicId;
 import github.snomfish.domain.move.structures.Barrage;
 import github.snomfish.domain.move.structures.Cascade;
+import github.snomfish.domain.move.structures.MultiTurn;
+import github.snomfish.domain.move.structures.NoMove;
 import github.snomfish.domain.move.structures.SingleHit;
 import github.snomfish.domain.stats.StatId;
 import github.snomfish.domain.status.StatusId;
@@ -40,6 +42,7 @@ import github.snomfish.functionality.effect.effects.Pivot;
 import github.snomfish.functionality.effect.effects.RecoilEffect;
 import github.snomfish.functionality.effect.effects.RemoveEnergy;
 import github.snomfish.functionality.effect.effects.RemoveHealth;
+import github.snomfish.functionality.effect.effects.RemoveMechanic;
 import github.snomfish.functionality.effect.effects.RemoveType;
 import github.snomfish.functionality.effect.effects.SetType;
 import github.snomfish.functionality.effect.effects.SetValue;
@@ -377,10 +380,16 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(55))
 			.basePower(new Constant(90))
-			.onMove(SingleHit.build()
-				.primary(new DealFormulaDamage())
-				// TODO make it two turn
+			.onMove(MultiTurn.build()
+				.addTurn(SingleHit.build()
+					.primary(ApplyMechanic.toUser(LoomianMechanicId.SEMI_INVUNRABLE))
+				)
+				.addTurn(SingleHit.build()
+					.primary(RemoveMechanic.fromUser(LoomianMechanicId.SEMI_INVUNRABLE))
+					.primary(new DealFormulaDamage())
+				)
 			)
+			.typeEffectiveness(TypeId.DARK, 2)
 		);
 		register(Move.build()
 			.id(AQUA_JAWS)
@@ -821,6 +830,7 @@ public class MoveRegistry {
 				.condition(new AccuracyCheck(new Constant(1)))
 				.primary(new DealFormulaDamage())
 			)
+			.typeEffectiveness(TypeId.WATER, 2)
 			.tag(CONTACT)
 		);
 		register(Move.build()
@@ -904,6 +914,7 @@ public class MoveRegistry {
 				.condition(new AccuracyCheck(new Constant(1)))
 				.primary(new DealFormulaDamage())
 			)
+			.typeEffectiveness(TypeId.MIND, 2)
 		);
 		register(Move.build()
 			.id(BRAINWASH)
@@ -1297,9 +1308,12 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(150))
-			.onMove(SingleHit.build()
-				.condition(new AccuracyCheck(new Constant(1)))
-				.primary(new DealFormulaDamage())
+			.onMove(MultiTurn.build()
+				.addTurn(SingleHit.build()
+					.condition(new AccuracyCheck(new Constant(1)))
+					.primary(new DealFormulaDamage())
+				)
+				.addTurn(new NoMove()) // recharge turn
 			)
 			.tag(CONTACT)
 		);
@@ -1484,6 +1498,7 @@ public class MoveRegistry {
 				.condition(new AccuracyCheck(new Constant(1)))
 				.primary(new DealFormulaDamage())
 			)
+			.typeEffectiveness(TypeId.WATER, 2)
 		);
 		register(Move.build()
 			.id(DEJA_VU)
@@ -2191,6 +2206,7 @@ public class MoveRegistry {
 			.onMove(SingleHit.build()
 				.primary(new DealFormulaDamage())
 			)
+			.typeEffectiveness(TypeId.PLANT, 2)
 			.tag(SOUL_MOVE)
 		);
 		register(Move.build()
@@ -2276,6 +2292,19 @@ public class MoveRegistry {
 		register(Move.build()
 			.id(FOUNTAIN_BEAM)
 			.name("Fountain Beam")
+			.type(TypeId.WATER)
+			.category(RANGED)
+			.energyCost(new Constant(55))
+			.basePower(new Constant(200))
+			.onMove(MultiTurn.build()
+				.addTurn(SingleHit.build()
+					.primary(ApplyMechanic.toUser(LoomianMechanicId.FOUNTAIN_BEAM_CHARGING))
+				)
+				.addTurn(SingleHit.build()
+					.primary(RemoveMechanic.fromUser(LoomianMechanicId.FOUNTAIN_BEAM_CHARGING))
+					.primary(new DealFormulaDamage())
+				)
+			)
 		);
 		register(Move.build()
 			.id(FRIGHTFUL_SUPRISE)
@@ -3734,7 +3763,11 @@ public class MoveRegistry {
 			.type(TypeId.SPIRIT)
 			.category(RANGED)
 			.energyCost(new Constant(45))
-			.basePower(new Constant(60))
+			.basePower(new ConditionalNumber(
+				Conditions.targetHasStatusAilment(),
+				new Constant(120),
+				new Constant(60)
+			))
 			.onMove(SingleHit.build()
 				.condition(new AccuracyCheck(new Constant(1)))
 				.primary(new DealFormulaDamage())
@@ -4091,9 +4124,16 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(35))
 			.basePower(new Constant(90))
-			.onMove(SingleHit.build()
-				.condition(new AccuracyCheck(new Constant(1)))
-				.primary(new DealFormulaDamage())
+			.onMove(MultiTurn.build()
+				.addTurn(SingleHit.build()
+					.primary(ApplyMechanic.toUser(LoomianMechanicId.SEMI_INVUNRABLE))
+				)	
+				.addTurn(SingleHit.build()
+					// TODO ERROR HERE WHERE IF THE MOVE FAILS THE USER REMAINS SEMI INVUNRABLE
+					.condition(new AccuracyCheck(new Constant(1)))
+					.primary(RemoveMechanic.fromUser(LoomianMechanicId.SEMI_INVUNRABLE))
+					.primary(new DealFormulaDamage())
+				)
 			)
 			.tag(CONTACT)
 		);
@@ -4596,6 +4636,7 @@ public class MoveRegistry {
 				.condition(new AccuracyCheck(new Constant(1)))
 				.primary(new DealFormulaDamage())
 			)
+			.typeEffectiveness(TypeId.AIR, 2)
 		);
 		register(Move.build()
 			.id(ROCKET_JAB)
@@ -5080,9 +5121,14 @@ public class MoveRegistry {
 			.category(MELEE)
 			.energyCost(new Constant(50))
 			.basePower(new Constant(100))
-			.onMove(SingleHit.build()
-				.condition(new AccuracyCheck(new Constant(1)))
-				.primary(new DealFormulaDamage())
+			.onMove(MultiTurn.build()
+				.addTurn(SingleHit.build()
+					.primary(ApplyStatChanges.userChangingUser().mattack(new Constant(1)))
+				)	
+				.addTurn(SingleHit.build()
+					.condition(new AccuracyCheck(new Constant(1)))
+					.primary(new DealFormulaDamage())
+				)
 			)
 			.tag(CONTACT)
 		);
@@ -5228,7 +5274,11 @@ public class MoveRegistry {
 			.category(RANGED)
 			.priority(1)
 			.energyCost(new Constant(40))
-			.basePower(new Constant(70))
+			.basePower(new ConditionalNumber(
+				Conditions.userHasStatusAilment(),
+				new Constant(140),
+				new Constant(70)
+			))
 			.onMove(SingleHit.build()
 				.condition(new AccuracyCheck(new Constant(1)))
 				.primary(new DealFormulaDamage())
@@ -5493,9 +5543,16 @@ public class MoveRegistry {
 			.category(RANGED)
 			.energyCost(new Constant(30))
 			.basePower(new Constant(75))
-			.onMove(SingleHit.build()
-				.condition(new AccuracyCheck(new Constant(1)))
-				.primary(new DealFormulaDamage())
+			.onMove(MultiTurn.build()
+				.addTurn(SingleHit.build()
+					.primary(ApplyMechanic.toUser(LoomianMechanicId.SEMI_INVUNRABLE))
+				)	
+				.addTurn(SingleHit.build()
+					// TODO ERROR HERE WHERE IF THE MOVE FAILS THE USER REMAINS SEMI INVUNRABLE
+					.condition(new AccuracyCheck(new Constant(1)))
+					.primary(RemoveMechanic.fromUser(LoomianMechanicId.SEMI_INVUNRABLE))
+					.primary(new DealFormulaDamage())
+				)
 			)
 			.tag(CONTACT)
 		);

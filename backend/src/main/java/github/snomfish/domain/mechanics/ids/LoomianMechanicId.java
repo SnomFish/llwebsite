@@ -6,10 +6,12 @@ public enum LoomianMechanicId implements IMechanicId {
     
     DAZE,
     FLINCH,
+    SEMI_INVUNRABLE,
 
     // MOVE SPECIFIC
     ALL_OR_NOTHING_FOCUSING,
     BEASTS_SLUMBER,
+    FOUNTAIN_BEAM_CHARGING,
     PERCHING,
     REVIVING,
     PROVOKE,
