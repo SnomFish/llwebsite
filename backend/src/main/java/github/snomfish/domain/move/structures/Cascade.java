@@ -3,6 +3,7 @@ package github.snomfish.domain.move.structures;
 import java.util.ArrayList;
 import java.util.List;
 
+import github.snomfish.domain.move.IMove;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
@@ -11,7 +12,7 @@ import static github.snomfish.functionality.branch.BranchUtil.wrap;
 import static github.snomfish.functionality.branch.BranchUtil.flatMap;
 import static github.snomfish.functionality.copy.DeepCopy.deepCopyList;
 
-public class Cascade implements IMove {
+public class Cascade extends IMove {
 	
 
 	private List<IMove> moves;

@@ -7,6 +7,9 @@ import github.snomfish.domain.ability.AbilityInstance;
 import github.snomfish.domain.mechanics.Mechanics;
 import github.snomfish.domain.modifiers.Modifiers;
 import github.snomfish.domain.modifiers.ids.LoomModifierId;
+import github.snomfish.domain.move.Move;
+import github.snomfish.domain.move.MoveId;
+import github.snomfish.domain.move.MoveRegistry;
 import github.snomfish.domain.stats.StatChanges;
 import github.snomfish.domain.stats.Stats;
 import github.snomfish.domain.type.TypeId;
@@ -28,11 +31,13 @@ public class ActiveLoomian extends Loomian {
     private Stats baseStats;
     private Stats stats;
     private Action action;
+    private Action nextTurnAction; // for locking the user into an action
     private Mechanics mechanics; // extra functionality that is temp added to an onfield loomian such as coursing venom being in effect
     private Modifiers<LoomModifierId> modifiers;
     private int statusTurns;
 
     // eventually move to tags
+    private Move usingMove;
     private boolean hasActedThisTurn;
     private boolean hasSwappedInThisTurn;
     
@@ -46,9 +51,11 @@ public class ActiveLoomian extends Loomian {
         this.baseStats = loomian.species().baseStats().deepCopy();
         this.stats = loomian.actualStats().deepCopy();
         this.action = Action.selectNoAction();
+        this.nextTurnAction = Action.selectNoAction();
         this.mechanics = new Mechanics();
         this.statusTurns = 0;
 
+        this.usingMove = MoveRegistry.get(MoveId.NO_MOVE);
         this.hasActedThisTurn = false;
         this.hasSwappedInThisTurn = false;
     }
@@ -61,9 +68,11 @@ public class ActiveLoomian extends Loomian {
         this.baseStats = copy.baseStats.deepCopy();
         this.stats = copy.stats.deepCopy();
         this.action = copy.action.deepCopy();
+        this.nextTurnAction = copy.action.deepCopy();
         this.mechanics = copy.mechanics.deepCopy();
         this.statusTurns = copy.statusTurns;
 
+        this.usingMove = copy.usingMove.deepCopy();
         this.hasActedThisTurn = false;
         this.hasSwappedInThisTurn = false;
     }
@@ -87,10 +96,12 @@ public class ActiveLoomian extends Loomian {
         return stats;
     }
     public Action action() {return action;}
+    public Action nextTurnAction() {return nextTurnAction;}
     public Mechanics mechanics() {return mechanics;}
     public Modifiers<LoomModifierId> modifiers() {return modifiers;}
     public int statusTurns() {return statusTurns;}
 
+    public Move usingMove() {return usingMove;}
     public boolean hasActedThisTurn() {return hasActedThisTurn;}
     public boolean hasSwappedInThisTurn() {return hasSwappedInThisTurn;}
 
@@ -104,10 +115,12 @@ public class ActiveLoomian extends Loomian {
     public void setBaseStats(Stats baseStats) {this.baseStats = baseStats;}
     public void setStats (Stats stats) {this.stats = stats;}
     public void setAction(Action action) {this.action = action;}
+    public void setNextTurnAction(Action nextTurnAction) {this.nextTurnAction = nextTurnAction;}
     public void setMechanics(Mechanics mechanics) {this.mechanics = mechanics;} 
     public void setModifiers(Modifiers<LoomModifierId> modifiers) {this.modifiers = modifiers;}
     public void setStatusTurns(int statusTurns) {this.statusTurns = statusTurns;}
 
+    public void setUsingMove(Move usingMove) {this.usingMove = usingMove;}
     public void setActedThisTurn(boolean hasActedThisTurn) {this.hasActedThisTurn = hasActedThisTurn;}
     public void setSwappedInThisTurn(boolean hasSwappedInThisTurn) {this.hasSwappedInThisTurn = hasSwappedInThisTurn;}
 

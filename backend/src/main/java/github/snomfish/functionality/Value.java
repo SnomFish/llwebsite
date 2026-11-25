@@ -294,6 +294,8 @@ public class Value<T> {
 		c ->		((Side) c).activeLoomian().hasSwappedInThisTurn(),
 		(c, v) ->	((Side) c).activeLoomian().setSwappedInThisTurn(v)
 	);}
+
+
 	// ACTION
 	public Value<Action> ACTION() {return update(
 		Action.class,
@@ -305,6 +307,13 @@ public class Value<T> {
 		c ->		((Side) c).activeLoomian().action().mainAction(),
 		(c, v) ->	((Side) c).activeLoomian().action().setMainAction(v)
 	);}
+	public Value<Action> NEXT_TURN_ACTION() {return update(
+		Action.class,
+		c -> 		((Side) c).activeLoomian().nextTurnAction(),
+		(c, v) ->	((Side) c).activeLoomian().setNextTurnAction(v)
+	);}
+
+
 	// PRIORITY
 	public Value<Integer> PRIORITY() {return update(
 		Integer.class,
@@ -523,8 +532,8 @@ public class Value<T> {
 
     public Value<Move> MOVE() {return update(
 		Move.class,
-		c -> 		((Side) c).activeLoomian().action().mainAction().move(),
-		(c, v) -> 	((Side) c).activeLoomian().action().mainAction().setMove((Move) v)
+		c -> 		((Side) c).activeLoomian().usingMove(),
+		(c, v) -> 	((Side) c).activeLoomian().setUsingMove(v)
 	);}
 
 	public Value<TypeId> TYPE() {return update(
@@ -603,4 +612,9 @@ public class Value<T> {
 		(c, v) ->	((Move) c).setHasCrit(v)
 	);}
     
+	public Value<Integer> EXECUTION_STAGE() {return update(
+		Integer.class,
+		c -> 		((Move) c).onMove().executionStage(),
+		(c, v) -> 	((Move) c).onMove().setExecutionStage(v)
+	);}
 }

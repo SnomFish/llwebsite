@@ -3,6 +3,7 @@ package github.snomfish.domain.move.structures;
 import java.util.ArrayList;
 import java.util.List;
 
+import github.snomfish.domain.move.IMove;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.condition.variable.ICondition;
 import github.snomfish.functionality.context.BattleContext;
@@ -11,7 +12,7 @@ import github.snomfish.functionality.effect.IEffect;
 import static github.snomfish.functionality.copy.DeepCopy.deepCopyList;
 import static github.snomfish.functionality.branch.BranchUtil.resolveConditions;
 
-public class SingleHit implements IMove {
+public class SingleHit extends IMove {
 	
 
 	private List<ICondition> conditions;

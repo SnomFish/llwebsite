@@ -4,6 +4,7 @@ import java.util.List;
 
 import github.snomfish.domain.modifiers.ids.MoveModifierId;
 import github.snomfish.domain.move.Move;
+import github.snomfish.functionality.Value;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 
@@ -53,6 +54,7 @@ public class MoveAction implements IAction {
 
 
     public List<Branch<BattleContext>> execute(BattleContext context) {
-        return move.execute(context);
+        Value.USER().MOVE().set(context, move.deepCopy());
+        return Value.USER().MOVE().get(context).execute(context);
     }
 }

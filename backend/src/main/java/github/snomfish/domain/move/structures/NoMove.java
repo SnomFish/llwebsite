@@ -2,10 +2,13 @@ package github.snomfish.domain.move.structures;
 
 import java.util.List;
 
+import github.snomfish.domain.move.IMove;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;
 
-public class NoMove implements IMove {
+import static github.snomfish.functionality.branch.BranchUtil.wrap;
+
+public class NoMove extends IMove {
     
 
     public NoMove() {}
@@ -19,6 +22,6 @@ public class NoMove implements IMove {
 
     @Override 
     public List<Branch<BattleContext>> execute(BattleContext context) {
-        return List.of(new Branch<>(context, 1.0));
+        return wrap(context);
     }
 }

@@ -5,7 +5,6 @@ import java.util.List;
 
 import github.snomfish.domain.modifiers.Modifiers;
 import github.snomfish.domain.modifiers.ids.MoveModifierId;
-import github.snomfish.domain.move.structures.IMove;
 import github.snomfish.domain.move.structures.NoMove;
 import github.snomfish.domain.stats.StatId;
 import github.snomfish.domain.tags.MoveTagId;

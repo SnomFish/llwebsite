@@ -20,6 +20,7 @@ public class Action {
 	private boolean willSoulburst;
 
 
+	public Action() {}
 	private Action(
 		IAction mainAction,
 		boolean willSoulburst

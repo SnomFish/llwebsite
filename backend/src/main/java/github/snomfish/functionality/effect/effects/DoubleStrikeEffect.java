@@ -4,9 +4,9 @@ import static github.snomfish.functionality.branch.BranchUtil.wrap;
 
 import java.util.List;
 
+import github.snomfish.domain.move.IMove;
 import github.snomfish.domain.move.Move;
 import github.snomfish.domain.move.structures.Cascade;
-import github.snomfish.domain.move.structures.IMove;
 import github.snomfish.functionality.Value;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.context.BattleContext;

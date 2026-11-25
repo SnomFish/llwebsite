@@ -3,6 +3,7 @@ package github.snomfish.domain.move.structures;
 import java.util.ArrayList;
 import java.util.List;
 
+import github.snomfish.domain.move.IMove;
 import github.snomfish.functionality.branch.Branch;
 import github.snomfish.functionality.condition.variable.ICondition;
 import github.snomfish.functionality.context.BattleContext;
@@ -16,7 +17,7 @@ import static github.snomfish.functionality.branch.BranchUtil.resolveConditions;
 import static github.snomfish.functionality.branch.BranchUtil.wrap;
 
 // for a move who hits multiple times with the same move
-public class Barrage implements IMove {
+public class Barrage extends IMove {
 
 
     private List<ICondition> conditions;
