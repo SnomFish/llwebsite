@@ -17,7 +17,7 @@ import static github.snomfish.functionality.branch.BranchUtil.resolveConditions;
 import static github.snomfish.functionality.branch.BranchUtil.wrap;
 
 // for a move who hits multiple times with the same move
-public class Barrage extends IMove {
+public class MultiHit extends IMove {
 
 
     private List<ICondition> conditions;
@@ -25,40 +25,40 @@ public class Barrage extends IMove {
     private INumber range;
 
 
-    private Barrage() {
+    private MultiHit() {
         this.conditions = new ArrayList<>();
         this.perHit = new MoveEffect();
         this.range = new Constant(0);
     }
     
 
-    public static Barrage build() {
-        return new Barrage();
+    public static MultiHit build() {
+        return new MultiHit();
     }
-    public Barrage condition(ICondition condition) {
+    public MultiHit condition(ICondition condition) {
         this.conditions.add(condition);
         return this;
     }
-    public Barrage primary(IEffect primary) {
+    public MultiHit primary(IEffect primary) {
         this.perHit.addPrimary(primary);
         return this;
     }
-    public Barrage secondary(IEffect secondary) {
+    public MultiHit secondary(IEffect secondary) {
         this.perHit.addSecondary(secondary);
         return this;
     }
-    public Barrage range(INumber range) {
+    public MultiHit range(INumber range) {
         this.range = range;
         return this;
     }
 
 
-    private Barrage(Barrage copy) {
+    private MultiHit(MultiHit copy) {
         this.perHit = copy.perHit.deepCopy();
         this.range = copy.range.deepCopy();
     }
-    public Barrage deepCopy() {
-        return new Barrage(this);
+    public MultiHit deepCopy() {
+        return new MultiHit(this);
     }
 
     
