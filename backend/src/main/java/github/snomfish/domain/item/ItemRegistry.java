@@ -1257,7 +1257,7 @@ public class ItemRegistry {
 			.name("flame core")
 			.rule(Rule.build()
 				.event(RuleForUserId.SELF_SWAPS_IN)
-				.condition(Conditions.or(
+				.condition(new Or(
 					new Equals<>(Value.USER().SPECIES_ID(), SCORB),
 					new Equals<>(Value.USER().SPECIES_ID(), VEYLENS),
 					new Equals<>(Value.USER().SPECIES_ID(), GARDRONE)
@@ -1268,7 +1268,7 @@ public class ItemRegistry {
 			.rule(Rule.build()
 				.event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
 				.condition(new And(
-					Conditions.or(
+					new Or(
 						new Equals<>(Value.USER().SPECIES_ID(), SCORB),
 						new Equals<>(Value.USER().SPECIES_ID(), VEYLENS),
 						new Equals<>(Value.USER().SPECIES_ID(), GARDRONE)
@@ -1284,7 +1284,7 @@ public class ItemRegistry {
 			.name("freezer core")
 			.rule(Rule.build()
 				.event(RuleForUserId.SELF_SWAPS_IN)
-				.condition(Conditions.or(
+				.condition(new Or(
 					new Equals<>(Value.USER().SPECIES_ID(), SCORB),
 					new Equals<>(Value.USER().SPECIES_ID(), VEYLENS),
 					new Equals<>(Value.USER().SPECIES_ID(), GARDRONE)
@@ -1294,7 +1294,7 @@ public class ItemRegistry {
 			)
 			.rule(Rule.build()
 				.event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
-				.condition(Conditions.or(
+				.condition(new Or(
 					new Equals<>(Value.USER().SPECIES_ID(), SCORB),
 					new Equals<>(Value.USER().SPECIES_ID(), VEYLENS),
 					new Equals<>(Value.USER().SPECIES_ID(), GARDRONE)
@@ -1309,7 +1309,7 @@ public class ItemRegistry {
 			.name("voltaic core")
 			.rule(Rule.build()
 				.event(RuleForUserId.SELF_SWAPS_IN)
-				.condition(Conditions.or(
+				.condition(new Or(
 					new Equals<>(Value.USER().SPECIES_ID(), SCORB),
 					new Equals<>(Value.USER().SPECIES_ID(), VEYLENS),
 					new Equals<>(Value.USER().SPECIES_ID(), GARDRONE)
@@ -1319,7 +1319,7 @@ public class ItemRegistry {
 			)
 			.rule(Rule.build()
 				.event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
-				.condition(Conditions.or(
+				.condition(new Or(
 					new Equals<>(Value.USER().SPECIES_ID(), SCORB),
 					new Equals<>(Value.USER().SPECIES_ID(), VEYLENS),
 					new Equals<>(Value.USER().SPECIES_ID(), GARDRONE)
@@ -1334,7 +1334,7 @@ public class ItemRegistry {
 			.name("power core")
 			.rule(Rule.build()
 				.event(RuleForUserId.PRE_SELF_DEAL_FORMULA_DAMAGE)
-				.condition(Conditions.or(
+				.condition(new Or(
 					new Equals<>(Value.TARGET().SPECIES_ID(), SCORB),
 					new Equals<>(Value.TARGET().SPECIES_ID(), VEYLENS),
 					new Equals<>(Value.TARGET().SPECIES_ID(), GARDRONE)

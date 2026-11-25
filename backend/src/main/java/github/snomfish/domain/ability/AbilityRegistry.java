@@ -47,6 +47,7 @@ import github.snomfish.functionality.effect.effects.DispatchEventEffect;
 import github.snomfish.functionality.effect.effects.DoubleStrikeEffect;
 import github.snomfish.functionality.effect.effects.EnergyDrainEffect;
 import github.snomfish.functionality.effect.effects.RemoveHealth;
+import github.snomfish.functionality.effect.effects.RemoveItem;
 import github.snomfish.functionality.effect.effects.RemoveMechanic;
 import github.snomfish.functionality.effect.effects.RestoreEnergy;
 import github.snomfish.functionality.effect.effects.RestoreHealth;
@@ -366,7 +367,7 @@ public class AbilityRegistry {
 			.name("Brave Cub")
 			.rule(Rule.build()
 				.event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
-				.condition(Conditions.or(
+				.condition(new Or(
 					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.BUG),
 					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.DARK),
 					new Equals<>(Value.OPP().MOVE().TYPE(), TypeId.SPIRIT)
@@ -806,7 +807,7 @@ public class AbilityRegistry {
 			.name("Elder Mane")
 			.rule(Rule.build()
 				.event(RuleForTargetId.PRE_OPP_DEAL_FORMULA_DAMAGE)
-				.condition(Conditions.or(
+				.condition(new Or(
 					new Equals<>(Value.USER().MOVE().TYPE(), TypeId.BUG),
 					new Equals<>(Value.USER().MOVE().TYPE(), TypeId.DARK),
 					new Equals<>(Value.USER().MOVE().TYPE(), TypeId.SPIRIT)
@@ -1051,6 +1052,14 @@ public class AbilityRegistry {
 		register(Ability.build()
 			.id(GREED)
 			.name("greed")
+			.rule(Rule.build()
+				.event(ConstantRuleId.END_OF_TURN)
+				.condition(new Not(Conditions.userHasItem()))
+				.condition(new Equals<>(Value.TARGET().ITEM_TAG(ItemTagId.CONSUMABLE), true))
+				.condition(new GateCondition(GateForAllId.CAN_REMOVE_ITEM, ContextSideId.TARGET))
+				.effect(new SetValue<>(Value.USER().ITEM_ID(), Value.TARGET().ITEM_ID()))
+				.effect(RemoveItem.fromTarget())
+			)
 		);
 		register(Ability.build() // doubles exclusive ability
 			.id(GUARDIAN)

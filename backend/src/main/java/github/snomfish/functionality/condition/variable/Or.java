@@ -11,9 +11,13 @@ public class Or implements ICondition {
     private ICondition conditionB;
 
 
-    public Or(ICondition conditionA, ICondition conditionB) {
-        this.conditionA = conditionA;
-        this.conditionB = conditionB;
+    public Or(ICondition a, ICondition b) {
+        this.conditionA = a;
+        this.conditionB = b;
+    }
+    public Or(ICondition a, ICondition b, ICondition c) {
+        this.conditionA = a;
+        this.conditionB = new Or(b, c);
     }
 
 

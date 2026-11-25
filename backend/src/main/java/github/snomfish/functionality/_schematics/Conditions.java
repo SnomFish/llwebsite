@@ -2,14 +2,13 @@ package github.snomfish.functionality._schematics;
 
 import java.util.List;
 
+import github.snomfish.domain.item.ItemId;
 import github.snomfish.domain.status.StatusId;
 import github.snomfish.domain.weather.WeatherId;
 import github.snomfish.functionality.Value;
-import github.snomfish.functionality.condition.variable.And;
 import github.snomfish.functionality.condition.variable.Equals;
 import github.snomfish.functionality.condition.variable.ICondition;
 import github.snomfish.functionality.condition.variable.Not;
-import github.snomfish.functionality.condition.variable.Or;
 import github.snomfish.functionality.context.BattleContext;
 import github.snomfish.functionality.number.Constant;
 import github.snomfish.functionality.number.INumber;
@@ -33,14 +32,6 @@ public class Conditions {
             if (probability == 0) return 0.0; // returning early if the answer is no
         }
         return probability;
-    }
-
-
-    public static ICondition and(ICondition a, ICondition b, ICondition c) {
-        return new And(a, new And(b, c));
-    }
-    public static ICondition or(ICondition a, ICondition b, ICondition c) {
-        return new Or(a, new Or(b, c));
     }
 
 
@@ -78,6 +69,12 @@ public class Conditions {
     }
 
 
+    public static ICondition userHasItem() {
+        return new Equals<>(Value.USER().ITEM_ID(), ItemId.NO_ITEM);
+    }
+    public static ICondition targetHasItem() {
+        return new Equals<>(Value.TARGET().ITEM_ID(), ItemId.NO_ITEM);
+    }
     public static ICondition userHasStatusAilment() {
         return new Not(new Equals<>(Value.USER().STATUS_ID(), StatusId.NO_STATUS));
     }
